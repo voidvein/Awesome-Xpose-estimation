@@ -229,6 +229,16 @@
       "sourcePage": 44,
       "reason": "CCF 2026第七版期刊评级，不代表论文质量或历史评级。",
       "count": 1
+    },
+    "Neurocomputing": {
+      "rank": "C",
+      "count": 1,
+      "status": "verified",
+      "label": "CCF C",
+      "reason": "按 2026 第七版载体等级标注，不代表论文质量或发表时历史评级。",
+      "canonicalVenue": "Neurocomputing",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=56",
+      "sourcePage": 56
     }
   }
 }

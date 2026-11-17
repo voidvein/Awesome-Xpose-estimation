@@ -255,6 +255,7 @@ Serve the repository root with `python -m http.server 8000`.
 
 ### Human
 
+- **[Hierarchical language description knowledge base for LLM-based human pose estimation](https://doi.org/10.1016/j.neucom.2025.130336)** — Neurocomputing 2025 · Published · 2D. HLanD-Pose 将分层姿态语言知识库作为大语言模型的外部引导，用于图像中的人体关键点定位。
 - **[Egocentric Visibility-Aware Human Pose Estimation](https://openaccess.thecvf.com/content/CVPR2026/html/Dai_Egocentric_Visibility-Aware_Human_Pose_Estimation_CVPR_2026_paper.html)** — CVPR 2026 · Published · 3D. 第一人称视角下考虑可见性的人体姿态估计。
 - **[SMPLest-X: Ultimate Scaling for Expressive Human Pose and Shape Estimation](https://doi.org/10.1109/TPAMI.2025.3618174)** — TPAMI 2026 · Published · 3D. 大规模全身姿态与形状估计，覆盖身体、手与面部；2025 年接收，正式卷期为 2026 年 48(2)。 [Code](https://github.com/MotrixLab/SMPLest-X)
 - **[MetricPose: Flexible 3D Human Pose Estimation with Depth and Geometric Cues](https://arxiv.org/abs/2611.08954)** — arXiv 2026 · Preprint · 3D. 融合 RGB 先验、可选深度与环境几何，预测相机坐标系中有尺度的关节位置；2026-11-06 发布，ICRA 投稿，未核实接收。

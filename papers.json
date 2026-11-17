@@ -14124,5 +14124,62 @@
       "evidence_scope": "核对原始摘要与出版信息；未全文逐段复核、未复现，不将摘要中的优势外推为全面领先。",
       "verified_at": "2026-11-17"
     }
+  },
+  {
+    "id": "hland-pose",
+    "title": "Hierarchical language description knowledge base for LLM-based human pose estimation",
+    "year": 2025,
+    "category": "Human",
+    "dimensions": [
+      "2D"
+    ],
+    "venue": "Neurocomputing",
+    "status": "Published",
+    "authors": [
+      "Wenjie Chen",
+      "Xuemei Xie"
+    ],
+    "doi": "10.1016/j.neucom.2025.130336",
+    "volume": "642",
+    "article_number": "130336",
+    "publication_date": "2025-08-14",
+    "summary": "HLanD-Pose 将分层姿态语言知识库作为大语言模型的外部引导，用于图像中的人体关键点定位。",
+    "url": "https://doi.org/10.1016/j.neucom.2025.130336",
+    "tags": [
+      "LLM",
+      "Knowledge Base",
+      "Language-guided",
+      "Cross-dataset"
+    ],
+    "primary_sources": [
+      "https://www.sciencedirect.com/science/article/abs/pii/S0925231225010082"
+    ],
+    "analysis": {
+      "problem": "研究如何利用从整体到局部的姿态知识辅助人体关键点定位。",
+      "method": "以分层语言描述构建外部知识库，由视觉信息匹配相关知识，再引导大语言模型定位关键点。",
+      "inputs_outputs": "输入人体图像及匹配的姿态描述，输出二维人体关键点位置。",
+      "contribution": "将显式层级姿态知识与语言模型结合，并在 COCO、MPII 和自建 Medicine Ball 数据集上评估。",
+      "limitations": null,
+      "sources": [
+        "https://www.sciencedirect.com/science/article/abs/pii/S0925231225010082"
+      ],
+      "evidence_level": "primary_abstract",
+      "evidence_scope": "已核对出版方摘要、引言及章节片段；未取得完整正文，未独立核对实验配置或复现。",
+      "verified_at": "2026-11-17"
+    },
+    "ccf": {
+      "tier": "C",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=56",
+      "version": "2026 第七版（CCF 目录转载）",
+      "venue": "Neurocomputing"
+    },
+    "verification_notes": {
+      "catalog_count_checked": 366,
+      "duplicate_found": false,
+      "official_code": "未核实，不填入推测代码仓库。",
+      "metrics": "引言报告 COCO AP 78.0，并称比 LocLLM 高 0.6 AP；未核对完整实验设置，暂不写入性能结论。",
+      "ccf_location": "2026 CCF 目录人工智能期刊 C 类，序号 32，PDF 第 56 页。",
+      "figure": "未核实图片复用授权，不下载或嵌入论文插图。"
+    }
   }
 ]
