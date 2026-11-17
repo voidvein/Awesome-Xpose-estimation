@@ -1,0 +1,214 @@
+{
+  "generatedAt": "2026-11-17T15:32:50.005289+00:00",
+  "notes": "Stars measure repository attention, not paper quality. Citation counts are provider-specific. null means unverified/unavailable, never zero. Per-metric timestamps may be older than generation time.",
+  "papers": {
+    "facelift": {
+      "stars": null,
+      "citations": null
+    },
+    "trg": {
+      "stars": null,
+      "citations": null
+    },
+    "headdiff": {
+      "stars": null,
+      "citations": null
+    },
+    "wide-short-hpe": {
+      "stars": {
+        "value": 60,
+        "forks": 5,
+        "repository": "pcr-upm/opal23_headpose",
+        "source": "https://github.com/pcr-upm/opal23_headpose",
+        "api": "https://api.github.com/repos/pcr-upm/opal23_headpose",
+        "checkedAt": "2026-11-17T15:32:21.072779+00:00",
+        "scope": "repository"
+      },
+      "citations": null
+    },
+    "infinite-landmarks": {
+      "stars": null,
+      "citations": null
+    },
+    "uld-headpose": {
+      "stars": {
+        "value": 3,
+        "forks": 0,
+        "repository": "touranisatyajit/cvpr2025-uld-headpose",
+        "source": "https://github.com/touranisatyajit/cvpr2025-uld-headpose",
+        "api": "https://api.github.com/repos/touranisatyajit/cvpr2025-uld-headpose",
+        "checkedAt": "2026-11-17T15:32:23.851236+00:00",
+        "scope": "repository"
+      },
+      "citations": null
+    },
+    "facexformer": {
+      "stars": null,
+      "citations": null
+    },
+    "joint-unsup-landmarks": {
+      "stars": null,
+      "citations": null
+    },
+    "semiuhpe": {
+      "stars": {
+        "value": 23,
+        "forks": 3,
+        "repository": "hnuzhy/SemiUHPE",
+        "source": "https://github.com/hnuzhy/SemiUHPE",
+        "api": "https://api.github.com/repos/hnuzhy/SemiUHPE",
+        "checkedAt": "2026-11-17T15:32:26.562861+00:00",
+        "scope": "repository"
+      },
+      "citations": null
+    },
+    "vggt-hpe": {
+      "stars": null,
+      "citations": null
+    },
+    "reva-hpe": {
+      "stars": null,
+      "citations": null
+    },
+    "stag-net": {
+      "stars": null,
+      "citations": null
+    },
+    "hamer": {
+      "stars": null,
+      "citations": null
+    },
+    "handdiff": {
+      "stars": {
+        "value": 32,
+        "forks": 3,
+        "repository": "cwc1260/HandDiff",
+        "source": "https://github.com/cwc1260/HandDiff",
+        "api": "https://api.github.com/repos/cwc1260/HandDiff",
+        "checkedAt": "2026-11-17T15:32:29.453450+00:00",
+        "scope": "repository"
+      },
+      "citations": null
+    },
+    "evhandpose": {
+      "stars": {
+        "value": 20,
+        "forks": 0,
+        "repository": "AlanJiang98/EvHandPose",
+        "source": "https://github.com/AlanJiang98/EvHandPose",
+        "api": "https://api.github.com/repos/AlanJiang98/EvHandPose",
+        "checkedAt": "2026-11-17T15:32:38.188936+00:00",
+        "scope": "repository"
+      },
+      "citations": null
+    },
+    "wilor": {
+      "stars": null,
+      "citations": null
+    },
+    "handos": {
+      "stars": null,
+      "citations": null
+    },
+    "hawor": {
+      "stars": null,
+      "citations": null
+    },
+    "hand-motion-physics": {
+      "stars": null,
+      "citations": null
+    },
+    "a2j-transformer-plus": {
+      "stars": {
+        "value": 25,
+        "forks": 0,
+        "repository": "ChanglongJiangGit/A2J-Transformer-Plus",
+        "source": "https://github.com/ChanglongJiangGit/A2J-Transformer-Plus",
+        "api": "https://api.github.com/repos/ChanglongJiangGit/A2J-Transformer-Plus",
+        "checkedAt": "2026-11-17T15:32:40.941283+00:00",
+        "scope": "repository"
+      },
+      "citations": null
+    },
+    "reach": {
+      "stars": null,
+      "citations": null
+    },
+    "kad-net": {
+      "stars": null,
+      "citations": null
+    },
+    "hand-visibility": {
+      "stars": null,
+      "citations": null
+    },
+    "gesture-aware-hand": {
+      "stars": null,
+      "citations": null
+    },
+    "rtmo": {
+      "stars": null,
+      "citations": null
+    },
+    "sapiens": {
+      "stars": {
+        "value": 5443,
+        "forks": 324,
+        "repository": "facebookresearch/sapiens",
+        "source": "https://github.com/facebookresearch/sapiens",
+        "api": "https://api.github.com/repos/facebookresearch/sapiens",
+        "checkedAt": "2026-11-17T15:32:44.646913+00:00",
+        "scope": "repository"
+      },
+      "citations": null
+    },
+    "rtmw": {
+      "stars": {
+        "value": 8065,
+        "forks": 1545,
+        "repository": "open-mmlab/mmpose",
+        "source": "https://github.com/open-mmlab/mmpose",
+        "api": "https://api.github.com/repos/open-mmlab/mmpose",
+        "checkedAt": "2026-11-17T15:32:47.936806+00:00",
+        "scope": "repository"
+      },
+      "citations": null
+    },
+    "motionagformer": {
+      "stars": null,
+      "citations": null
+    },
+    "wham": {
+      "stars": null,
+      "citations": null
+    },
+    "gvhmr": {
+      "stars": null,
+      "citations": null
+    },
+    "probpose": {
+      "stars": null,
+      "citations": null
+    },
+    "dynpose": {
+      "stars": null,
+      "citations": null
+    },
+    "perspose": {
+      "stars": null,
+      "citations": null
+    },
+    "smplest-x": {
+      "stars": null,
+      "citations": null
+    },
+    "egocentric-visibility-aware": {
+      "stars": null,
+      "citations": null
+    },
+    "metricpose": {
+      "stars": null,
+      "citations": null
+    }
+  }
+}
