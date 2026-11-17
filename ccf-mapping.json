@@ -89,7 +89,7 @@
     },
     "arXiv; author reports TPAMI publication": {
       "rank": null,
-      "count": 1,
+      "count": 0,
       "status": "publication-unverified",
       "label": "待核验",
       "reason": "保留原有作者自述发表/录用状态；未独立核验正式发表载体，不据此赋 CCF 等级。"
@@ -168,7 +168,7 @@
     },
     "TPAMI": {
       "rank": "A",
-      "count": 8,
+      "count": 9,
       "status": "verified",
       "label": "CCF A",
       "reason": "按 2026 第七版载体等级标注，非论文质量评价；不是发表年份的历史评级。",

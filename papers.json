@@ -314,19 +314,18 @@
   {
     "id": "semiuhpe",
     "title": "Semi-Supervised Unconstrained Head Pose Estimation in the Wild",
-    "year": 2024,
+    "year": 2026,
     "category": "Head",
     "dimensions": [
       "3D"
     ],
-    "venue": "arXiv; author reports TPAMI publication",
-    "status": "Preprint",
-    "summary": "利用未标注野外头部图像进行半监督全范围旋转估计。按 arXiv 首发年收录；期刊正式卷期尚待出版社核验。",
-    "url": "https://arxiv.org/abs/2404.02544",
+    "venue": "TPAMI",
+    "status": "Published",
+    "summary": "利用未标注野外头部图像进行半监督全范围旋转估计；预印本首发于 2024 年，正式发表于 TPAMI 2026 年第 48 卷第 3 期。",
+    "url": "https://doi.org/10.1109/TPAMI.2025.3631642",
     "code": "https://github.com/hnuzhy/SemiUHPE",
     "tags": [
-      "semi-supervised",
-      "publication-metadata-pending"
+      "semi-supervised"
     ],
     "analysis": {
       "problem": "自然场景全角度头姿标注少，合成或受限采集数据又存在分布偏差。",
@@ -338,9 +337,35 @@
         "https://arxiv.org/abs/2404.02544"
       ],
       "evidence_level": "primary_abstract",
-      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verification_note": "方法分析依据预印本摘要；正式出版信息据作者机构及 PubMed 书目核对，未读取期刊全文或独立复现。",
       "verified_at": "2026-11-17"
-    }
+    },
+    "authors": [
+      "Huayi Zhou",
+      "Fei Jiang",
+      "Jin Yuan",
+      "Yong Rui",
+      "Hongtao Lu",
+      "Kui Jia"
+    ],
+    "doi": "10.1109/TPAMI.2025.3631642",
+    "volume": "48",
+    "issue": "3",
+    "pages": "3082–3099",
+    "publication_date": "2026-03",
+    "preprint_date": "2024-04-03",
+    "preprint_url": "https://arxiv.org/abs/2404.02544",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=51",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "TPAMI"
+    },
+    "primary_sources": [
+      "https://arxiv.org/abs/2404.02544",
+      "https://www.cs.sjtu.edu.cn/en/jiaoshiml/luhongtao.html",
+      "https://pubmed.ncbi.nlm.nih.gov/41217926/"
+    ]
   },
   {
     "id": "vggt-hpe",
