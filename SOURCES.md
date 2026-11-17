@@ -70,3 +70,7 @@ Labels refer to the 2026 seventh edition, not historical ratings at the time of 
 ## Expanded catalogue batch
 
 The additional 198 entries were discovered in conference proceedings and verified against primary bibliographic records and abstracts. Of these, 197 are CVF proceedings records and one is an IEEE TMM journal record. The batch is conference-heavy, with limited journal and recent-year coverage; it is not a systematic review. Analyses are abstract-level unless explicitly stated otherwise. Same-year ordering uses CCF 2026 seventh-edition A, B, C, then unmarked; an unmarked entry is not necessarily absent from CCF.
+
+## LLM, recent and journal gap batch
+
+This batch includes LocLLM and KptLLM with targeted source-text checks; related KptLLM++ is an extension, not a distinct research lineage. Further additions include 19 CVPR/ICCV 2025 papers and 13 journal plus two conference records. Most are abstract-level readings and not independently reproduced. For LocLLM/KptLLM architecture figures, the arXiv non-exclusive distribution licence does not establish third-party republication rights, so the site links to the original figures rather than embedding them. See the figure manifest.

@@ -105,5 +105,39 @@
     "license": "CC BY-NC-SA 4.0",
     "reason": "暂仅提供原文链接，未复制图片。许可限制需单独处理，不能由代码仓库许可推断论文图像许可。",
     "reviewed_at": "2026-11-18"
+  },
+  {
+    "paper_id": "locllm",
+    "status": "link_only",
+    "paper_title": "LocLLM: Exploiting Generalizable Human Keypoint Localization via Large Language Model",
+    "authors": "Dongkai Wang, Shiyu Xuan, Shiliang Zhang",
+    "figure_number": "Figure 2",
+    "paper_version": "2406.04659v1",
+    "source_url": "https://arxiv.org/html/2406.04659v1#S3.F2",
+    "license": "arXiv.org perpetual non-exclusive license",
+    "license_url": "https://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+    "license_evidence_url": "https://arxiv.org/abs/2406.04659v1",
+    "license_evidence": "arXiv 摘要页 Rights to this article / view license 链接指向 nonexclusive-distrib/1.0；未发现针对该原图的可核验再分发许可。",
+    "attribution": "Dongkai Wang, Shiyu Xuan, Shiliang Zhang. LocLLM: Exploiting Generalizable Human Keypoint Localization via Large Language Model. Figure 2, arXiv:2406.04659v1.",
+    "modifications": "未复制、未修改原图，仅提供原文图示定位链接。",
+    "reason": "该许可是作者授予 arXiv 的非独占分发许可，不能据此认定第三方网站获准转载论文图片；仅提供原文链接。",
+    "reviewed_at": "2026-11-17T17:15:13.798611+00:00"
+  },
+  {
+    "paper_id": "kptllm",
+    "status": "link_only",
+    "paper_title": "KptLLM: Unveiling the Power of Large Language Model for Keypoint Comprehension",
+    "authors": "Jie Yang, Wang Zeng, Sheng Jin, Lumin Xu, Wentao Liu, Chen Qian, Ruimao Zhang",
+    "figure_number": "Figure 2",
+    "paper_version": "2411.01846v1",
+    "source_url": "https://arxiv.org/html/2411.01846v1#S3.F2",
+    "license": "arXiv.org perpetual non-exclusive license",
+    "license_url": "https://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+    "license_evidence_url": "https://arxiv.org/abs/2411.01846v1",
+    "license_evidence": "arXiv 摘要页 Rights to this article / view license 链接指向 nonexclusive-distrib/1.0；未发现针对该原图的可核验再分发许可。",
+    "attribution": "Jie Yang, Wang Zeng, Sheng Jin, Lumin Xu, Wentao Liu, Chen Qian, Ruimao Zhang. KptLLM: Unveiling the Power of Large Language Model for Keypoint Comprehension. Figure 2, arXiv:2411.01846v1.",
+    "modifications": "未复制、未修改原图，仅提供原文图示定位链接。",
+    "reason": "该许可是作者授予 arXiv 的非独占分发许可，不能据此认定第三方网站获准转载论文图片；仅提供原文链接。",
+    "reviewed_at": "2026-11-17T17:15:13.798627+00:00"
   }
 ]

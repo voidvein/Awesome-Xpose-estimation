@@ -89,3 +89,15 @@ assert.deepEqual(filterPapers(ranked,{ccf:'A'}).map(p=>p.id),['a-a','a-z']);
 assert.deepEqual(yearCounts(ranked),yearCounts(filterPapers(ranked,{})));
 assert.equal(ranked[0].id,'none','Sorting does not mutate source data');
 console.log('PASS: within-year CCF A/B/C/unmarked priority, unsafe ranks, same-tier alphabetical order in all sort modes, chronology, filters and nonmutation.');
+
+// The chart reflects every active condition except year, keeping year choices visible.
+const {filteredYearCounts}=require(path.join(__dirname,root,'app.js'));
+for(const filters of [{},{category:'Head'},{category:'Hand'},{category:'Human'},{dimension:'2D'},{dimension:'3D'},{status:'Preprint'},{ccf:'A'},{ccf:'B'},{ccf:'C'},{ccf:'unmarked'},{code:true},{query:'transformer'},{venue:papers[0].venue},{category:'Human',dimension:'3D',ccf:'A',code:true},{query:'no-such-paper-absent-987'}]){
+ const expected=yearCounts(filterPapers(papers,filters));
+ assert.deepEqual(filteredYearCounts(papers,filters),expected);
+ assert.deepEqual(filteredYearCounts(papers,{...filters,year:'2024'}),expected,'Year selection must not collapse the histogram');
+ assert.equal(filteredYearCounts(papers,filters).reduce((sum,x)=>sum+x.count,0),filterPapers(papers,filters).length);
+}
+assert.deepEqual(filteredYearCounts([],{category:'Head'}),[]);
+const preservedFilters={category:'Hand',year:'2024'};filteredYearCounts(papers,preservedFilters);assert.equal(preservedFilters.year,'2024');
+console.log('PASS: chart follows category/dimension/status/CCF/code/query/venue and combined filters; ignores year without mutating filters; handles empty results.');
