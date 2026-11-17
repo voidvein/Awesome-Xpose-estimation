@@ -1,7 +1,9 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
-const {filterPapers} = require('../dist/app.js');
-const papers = JSON.parse(fs.readFileSync(require('node:path').join(__dirname,'../dist/papers.json')));
+const path = require('node:path');
+const root = fs.existsSync(path.join(__dirname, '../dist/app.js')) ? '../dist' : '..';
+const {filterPapers} = require(path.join(__dirname, root, 'app.js'));
+const papers = JSON.parse(fs.readFileSync(path.join(__dirname, root, 'papers.json')));
 assert.ok(papers.length>0);
 assert.equal(new Set(papers.map(p=>p.id)).size,papers.length,'Unique paper ids');
 for(const p of papers){for(const key of ['id','title','category','venue','status','summary','url'])assert.ok(typeof p[key]==='string'&&p[key],`${p.id}: ${key}`);assert.ok(['Head','Hand','Human'].includes(p.category));assert.ok(['Published','Preprint'].includes(p.status));assert.ok(p.year>=1990&&p.year<=new Date().getFullYear()+1);assert.ok(p.dimensions.length&&p.dimensions.every(d=>['2D','3D'].includes(d)));assert.equal(new URL(p.url).protocol,'https:');if(p.code)assert.equal(new URL(p.code).protocol,'https:');}
