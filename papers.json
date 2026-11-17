@@ -830,17 +830,18 @@
       "venue": "CVPR"
     },
     "analysis": {
-      "problem": "普通特征聚合忽略空间结构，借助关键点或深度的头姿流程又可能增加计算。",
-      "method": "学习细粒度结构映射，在聚合前对空间特征分组；结合软分阶段回归，并使用不同重要性评分形成互补模型。",
-      "inputs_outputs": "单张 RGB 图像到头部姿态。",
-      "contribution": "把部位空间信息保留在紧凑回归特征中，在模型开销与姿态误差之间建立实用折中。",
-      "limitations": null,
+      "problem": "面部关键点流程会增加头姿估计的计算与标注依赖；普通聚合把特征当作无序集合，容易丢失像素间的空间关系。FSA-Net针对单帧、轻量、无关键点的头部旋转回归，而非人脸形状或三维平移重建。",
+      "method": "在软分阶段回归框架中汇集多层特征，先以细粒度结构映射把像素级特征组合成带空间关系的区域特征，再用 Capsule 或 NetVLAD 聚合后回归角度。1×1卷积评分、方差评分及不使用映射的变体产生互补预测；FSA-Caps-Fusion以简单平均融合三种变体，不能与单模型开销混称。",
+      "inputs_outputs": "单张RGB人脸裁剪输入，输出yaw、pitch、roll三个角度，无需先预测面部关键点，也不以深度或时间序列作为姿态网络输入。实验仍用MTCNN获得人脸区域；BIWI第二协议的裁剪还使用跟踪辅助，因此“无关键点”不等于“无检测前处理”。",
+      "contribution": "协议1以300W-LP训练、AFLW2000与BIWI测试，Tables 1–2报告FSA-Caps-Fusion的MAE分别为5.07°与4.00°，模型5.1 MB；BIWI该协议不使用跟踪，并仅考虑角度在±99°内的样本。协议2在BIWI按16段视频训练、8段测试，Table 3报告3.60° MAE。核心意义是用可解释的空间分组及互补融合，在小模型中利用多尺度结构；两个协议的数字不宜混排为同一排行榜。",
+      "limitations": "原文§4.4指出可学习的1×1评分可能过拟合，因而并不总优于方差评分。§4.5和Table 3也明确显示：单RGB融合模型虽在该表的yaw项较好，整体MAE仍不及所比较的RGB+Depth或RGB+Time方法，不能概括成全面超过多模态。评测依赖人脸裁剪与特定角度/视频划分，不构成360°头姿或任意遮挡场景的验证。",
       "sources": [
-        "https://openaccess.thecvf.com/content_CVPR_2019/html/Yang_FSA-Net_Learning_Fine-Grained_Structure_Aggregation_for_Head_Pose_Estimation_From_CVPR_2019_paper.html"
+        "https://openaccess.thecvf.com/content_CVPR_2019/papers/Yang_FSA-Net_Learning_Fine-Grained_Structure_Aggregation_for_Head_Pose_Estimation_From_CVPR_2019_paper.pdf"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
-      "verified_at": "2026-11-17"
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verification_note": "已定向核对下列原文方法、实验与讨论；数值为作者报告，未独立复现，不代表全文逐段复核。",
+      "verified_at": "2026-11-17",
+      "evidence_scope": "CVPR 2019正式论文：§3方法；§4.1–4.5实现、数据、两种协议与结果；Tables 1–3。局限中的过拟合和多模态差距为作者明确讨论，其余为评测适用范围。"
     }
   },
   {
@@ -1077,17 +1078,18 @@
       "venue": "BMVC"
     },
     "analysis": {
-      "problem": "正面头姿模型无法充分覆盖背面和全范围 yaw 变化。",
-      "method": "在多损失头姿网络基础上修改损失与训练策略，使其适应宽范围旋转，并从 Panoptic 数据提取监督。",
-      "inputs_outputs": "单张 RGB 头部图像到欧拉角，重点覆盖完整 yaw 范围。",
-      "contribution": "将全视角覆盖与移动端紧凑部署结合；全 yaw 覆盖不应误写成含平移的6DoF。",
-      "limitations": null,
+      "problem": "多数单图头姿方法主要覆盖正面至侧面；当yaw跨越±180°边界时，相近姿态却可能获得极大的普通角度回归损失。WHENet目标是完整360° yaw下仍输出细粒度头部方向，而不是只给粗朝向类别。",
+      "method": "使用EfficientNet-B0骨干及分类/回归联合监督：yaw划分为120个3°区间，pitch与roll各66个3°区间；由概率期望得到角度。对yaw引入wrapped回归损失，使用绕回后较短的角差，避免±180°边界的虚假大误差。先在300W-LP训练窄范围WHENet-V，再用其权重训练全范围WHENet；后者混合300W-LP与经三维面部点、相机标定自动生成头姿标签的CMU Panoptic数据。",
+      "inputs_outputs": "单张RGB头部裁剪输入，输出yaw、pitch、roll。完整范围指yaw的(−180°,180°]；pitch、roll并非也覆盖360°。CMU的三维关键点和相机内外参用于离线构造训练标注，而非要求推理时同时输入。输出不包含头部三维平移。",
+      "contribution": "arXiv v1 Table 1报告全范围WHENet为4.4M参数，在BIWI/AFLW2000的MAE分别为3.814°/5.424°，混合宽范围数据的MAWE为7.655°；窄范围WHENet-V对应前两个测试集为3.475°/4.834°，应区分模型版本。§5与Figure 3的消融显示wrapped损失改善极端yaw边界附近误差。主要价值是把周期角度损失与可自动构造的宽视角监督配套设计，而非仅增加分类区间。",
+      "limitations": "作者明确指出Panoptic背景变化不足，因此不能单独用来训练；固定模板关键点标注也可能限制效果，提出未来按个体调整模板。§6承认欧拉角仍有万向节锁问题，yaw接近±90°时pitch/roll误差较大，wrapped损失并未解决这一表示缺陷。§5强调与两个既有全范围方法使用不同、非公开测试集的比较只能作定性参考，不支持严格的同协议领先结论。",
       "sources": [
-        "https://arxiv.org/abs/2005.10353"
+        "https://arxiv.org/pdf/2005.10353v1"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
-      "verified_at": "2026-11-17"
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verification_note": "已定向核对下列原文方法、实验与讨论；数值为作者报告，未独立复现，不代表全文逐段复核。",
+      "verified_at": "2026-11-17",
+      "evidence_scope": "明确核对2020-05-20 arXiv v1：§3–4损失、网络和数据构造；§5 Tables 1、3与Figure 3；§6局限及未来工作。未将此版本数值无条件等同后续版本。"
     }
   },
   {
@@ -1435,17 +1437,18 @@
       "venue": "CVPR"
     },
     "analysis": {
-      "problem": "极端头姿与严重遮挡下，需要捕捉不同面部区域间对朝向有用的关系。",
-      "method": "Transformer 中引入多个朝向 token 编码基本方向区域，并以 token 引导的多损失学习区域相似性和关键少数关系。",
-      "inputs_outputs": "头部图像到头部旋转估计。",
-      "contribution": "将朝向区域作为显式学习单元，把邻域相似性、明显面部变化及关键少数关系转为可学习约束。",
-      "limitations": null,
+      "problem": "极端头姿或遮挡让部分五官不可见，单纯依赖局部外观难以稳定推断方向。TokenHPE试图显式利用相邻朝向外观相似性、面部显著变化及少数可见部位之间的关系。",
+      "method": "图像视觉tokens与可学习的朝向tokens一起输入Transformer。作者设计9区和11区两种启发式朝向划分，后者在yaw方向更细；每个朝向token经6D表示及Gram–Schmidt转为中间旋转矩阵，再由MLP融合并生成最终旋转。训练同时约束最终旋转的测地距离，以及真实姿态所属区域的token预测；默认损失权重α=0.6，默认视觉特征提取器为ViT-B/16。",
+      "inputs_outputs": "单张头部RGB图像输入；训练中先缩放为240×240，再随机裁剪224×224。输出头部旋转矩阵，可转换为yaw、pitch、roll用于评测；没有关键点坐标或三维平移输出。训练使用姿态监督，但不额外要求面部关键点标注。",
+      "contribution": "CVPR 2023 Tables 1–2中，以300W-LP训练的11区TokenHPE-v2在AFLW2000的MAE为4.66°，在BIWI为3.72°；另一个BIWI按视频70%/30%训练测试协议在Table 3为2.49°。Table 4中无特征提取器、CNN、ViT三种选项的AFLW2000 MAE为5.38°、4.96°、4.66°，说明收益也受视觉骨干影响。该工作把方向区域作为可监督的中间表征，而不是仅用通用Transformer直接回归角度。",
+      "limitations": "证据边界：正文没有独立的局限章节。§4.1明确提醒极端角度下欧拉角MAE不可靠，因此同时给出旋转矩阵向量指标MAEV，二者不能当作同一指标混用。Table 2的跨数据集BIWI MAE为3.72°，并未优于同表6DRepNet的3.47°，不能写成所有协议/指标均领先。遮挡能力主要以Figure 5选择的热力图样例解释，不能据此推断已经完成所有遮挡程度的系统量化验证；以上是本文证据范围分析，并非作者列出的失败条件。",
       "sources": [
-        "https://scholars.cityu.edu.hk/en/publications/tokenhpe-learning-orientation-tokens-for-efficient-head-pose-esti/"
+        "https://openaccess.thecvf.com/content/CVPR2023/papers/Zhang_TokenHPE_Learning_Orientation_Tokens_for_Efficient_Head_Pose_Estimation_via_CVPR_2023_paper.pdf"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
-      "verified_at": "2026-11-17"
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verification_note": "已定向核对下列原文方法、实验与讨论；数值为作者报告，未独立复现，不代表全文逐段复核。",
+      "verified_at": "2026-11-17",
+      "evidence_scope": "CVPR 2023正式论文：§3.3–3.7朝向划分、旋转表示、损失与实现；§4.1–4.4指标、两种协议、Tables 1–4和Figure 5。未独立复现；显式区分作者指标提醒与编辑性证据边界。"
     }
   },
   {
@@ -2038,16 +2041,19 @@
       "venue": "CVPR"
     },
     "analysis": {
-      "problem": "把深度图当二维图像并直接回归三维坐标，会引入透视形变及难学习的非线性映射。",
-      "method": "将深度观测体素化，以三维 CNN 执行 voxel-to-voxel 预测，输出每个关节在体素网格中的位置似然。",
-      "inputs_outputs": "单幅深度图 → 手部或人体三维关键点。",
-      "contribution": "利用深度数据天然的三维几何结构，把坐标回归改为三维空间定位；该方法同时覆盖手部和人体，而非只适用于手。",
-      "limitations": null,
+      "problem": "单幅深度图包含三维几何，但将其当二维图像处理并直接回归关节坐标，会同时面对透视形变和图像到坐标的非线性映射。论文把研究问题拆为两个独立选择：输入是否保留三维空间结构，以及输出采用坐标回归还是空间热图定位。",
+      "method": "先将深度像素反投影到三维空间，在目标参考点周围裁出立方体并生成二值占据体素；参考点由额外的二维 CNN 预测偏移来修正。随后用含三维残差块、下采样、上采样和跳连的全卷积编码器—解码器预测逐关节三维热图，以高斯热图的平方误差监督，取峰值并变换回真实坐标。标准输入为 88³ 体素；该流程不是 RGB 网络，也不是手部网格恢复。",
+      "inputs_outputs": "输入：单幅深度图及其三维反投影、目标区域定位流程。输出：各手部或人体关节的三维坐标，不输出 MANO 参数或表面网格。单手 ICVL、NYU、MSRA 与人体 ITOP 是不同实验设置，不能把某一手部关节定义直接用于所有数据集。",
+      "contribution": "关键贡献是验证三维输入与三维热图输出的组合，而不只是扩大 CNN。NYU 表 1 在统一的 48³ 比较设置下，二维深度→坐标误差 18.85 mm，体素→坐标 16.78 mm，二维深度→热图 13.01 mm，体素→热图 10.37 mm。表 2 中定位修正把误差由 11.14 降至 9.22 mm，增加 epoch ensemble 后为 8.42 mm。论文还在 HANDS 2017 挑战报告 9.95 mm；这些数字分别来自不同对照设置，不应混为同一配置的结果。",
+      "limitations": "部署成本必须连同预处理与集成计算：§8.5 报告 10 模型 epoch ensemble 单 GPU 为 3.5 FPS；35 FPS 对应文中多 GPU 加速配置。作者也指出不做 ensemble 可在单 GPU 实时运行。单模型流程中输入生成约 23 ms，网络约 5 ms，取坐标约 0.5 ms，主要瓶颈是体素化而不是 CNN。本方法依赖深度与目标区域定位；§4、§8.3 明确显示错误参考点会影响裁剪及精度。不能据此宣称普通 RGB、双手交互或网格任务已经验证。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2018/html/Moon_V2V-PoseNet_Voxel-to-Voxel_Prediction_CVPR_2018_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2018/html/Moon_V2V-PoseNet_Voxel-to-Voxel_Prediction_CVPR_2018_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Moon_V2V-PoseNet_Voxel-to-Voxel_Prediction_CVPR_2018_paper.pdf"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已阅读 CVPR 2018 正文 §3–8.5，重点核对表示方式、参考点修正、表 1–3 与运行时条件；未复现训练或复核全部补充材料。",
+      "verified_at": "2026-11-17",
+      "verification_note": "已核对主源摘要及上述正文段落；指标保留原实验、数据划分和评价条件。评价范围分析与作者明确陈述分开，不代表完整精读或复现。"
     }
   },
   {
@@ -2199,16 +2205,19 @@
       "venue": "ICCV"
     },
     "analysis": {
-      "problem": "单目手部方法在本数据集表现好，却可能无法泛化到其他数据或自然图像。",
-      "method": "构建真实多视角数据，通过人工参与的迭代半自动标注和手模型拟合，获得三维姿态与形状标注。",
-      "inputs_outputs": "多视角采集与拟合 → 带三维姿态、形状标注的数据集；基线从单张 RGB 恢复手形。",
-      "contribution": "核心是数据与评价基础设施，不是单一网络模块；提供跨数据集泛化分析和关节化手形评价集，支持从关键点研究推进到完整网格恢复。",
-      "limitations": null,
+      "problem": "单目手部姿态网络在训练数据所属测试集上表现好，不等于能泛化到其他采集条件。另一方面，真实 RGB 图像的三维关节和完整手形标签难以直接获取。FreiHAND 同时研究跨数据集偏差和低成本、可扩展的真实手形标注，而不是仅提出一个回归网络。",
+      "method": "利用 8 台标定、同步 RGB 相机采集无标记手部图像。初始阶段人工标注少量指尖/手腕关键点并修正分割，将 MANO 拟合到多视角关键点与轮廓；随后训练 MVNet，将各视角二维特征反投影到统一三维体素空间并预测三维关节，再与 HandSegNet 的分割共同驱动新样本拟合。预测置信度、分割 IoU、关节一致性用于自动验收，其他样本交给人工接受、补标或丢弃，形成四轮自举。",
+      "inputs_outputs": "数据生成阶段：同步多视角 RGB、标定信息与少量人工标注 → 三维手部关节、MANO 姿态/形状及网格标签。下游基线阶段：单张 RGB → MANO 参数及三维手形。多相机用于标签生成，不代表评测时单目基线需要八个输入视角。",
+      "contribution": "提供从数据采集、人工参与标注到单目关节与网格评测的完整基础设施。§5.1 将绿幕采集用于训练，另有室内/室外场景评测；33k 唯一训练样本经背景与外观处理变为约 132k 图像，不能视为 132k 独立采集姿态。表 4 中随自举轮次增加，RHD 跨集 AUC 从 0.244 到 0.518，PAN 从 0.347 到 0.562。表 3 的 MANO CNN 在对齐后取得 F@5mm 0.484、F@15mm 0.925，优于表内平均形状及关节拟合基线。",
+      "limitations": "评价边界需明确：§5.1 的训练/评测分别包含 24/11 位受试者，但有 3 位重叠，不能描述为完全受试者独立划分；训练依赖绿幕及合成背景，评测覆盖的真实场景仍有限。§5.2 的网格指标先进行 Procrustes 对齐，因此不衡量未经对齐的全局姿态误差。标签来自 MANO 拟合与筛选，不是直接扫描的无模型表面真值；§5.3 明确说即便轻微拟合不准也会被丢弃。以上为正文设置及评价边界，不是声称作者给出了完整失败案例清单。",
       "sources": [
-        "https://openaccess.thecvf.com/content_ICCV_2019/html/Zimmermann_FreiHAND_A_Dataset_for_Markerless_Capture_of_Hand_Pose_and_ICCV_2019_paper.html"
+        "https://openaccess.thecvf.com/content_ICCV_2019/html/Zimmermann_FreiHAND_A_Dataset_for_Markerless_Capture_of_Hand_Pose_and_ICCV_2019_paper.html",
+        "https://openaccess.thecvf.com/content_ICCV_2019/papers/Zimmermann_FreiHAND_A_Dataset_for_Markerless_Capture_of_Hand_Pose_and_ICCV_2019_paper.pdf"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已阅读 ICCV 2019 正文 §3–5.3，重点核对八视角标注流程、数据划分、增强样本计数、表 3–4 与对齐协议；未复核补充材料中的全部实验或重新评测数据。",
+      "verified_at": "2026-11-17",
+      "verification_note": "已核对主源摘要及上述正文段落；指标保留原实验、数据划分和评价条件。评价范围分析与作者明确陈述分开，不代表完整精读或复现。"
     }
   },
   {
@@ -2524,16 +2533,19 @@
       "venue": "ICCV"
     },
     "analysis": {
-      "problem": "单用 Transformer 擅长全局关系但缺少显式局部网格邻接，图卷积则侧重局部拓扑。",
-      "method": "把图卷积融入 Transformer，联合利用自注意力的非局部关系和预设网格邻接的局部交互。",
-      "inputs_outputs": "单张图像 → 三维关节和网格；同时覆盖人体及手。",
-      "contribution": "提供局部几何归纳偏置与全局依赖相结合的架构，在人体基准及 FreiHAND 上验证；手部结果是通用网格方法的应用分支。",
-      "limitations": null,
+      "problem": "Transformer 可以建模远距离关节/顶点关系，但缺少显式局部网格邻接约束；纯图卷积侧重局部连接，又不易表达全局依赖。论文同时关注全局图像向量丢失局部细节的问题，研究图卷积、注意力与局部图像特征如何配合。",
+      "method": "CNN 提取全局图像特征和局部图像网格特征，将图像特征与关节、顶点查询一起送入逐层降维的 Graphormer。每个 Graphormer 单元结合多头自注意力与图残差块：前者负责非局部关系，后者利用预定义网格拓扑补充局部邻接。网络直接回归三维关节和顶点，并使用二维投影、三维位置及中间粗网格监督，训练还采用 Masked Vertex Modeling。正文架构图中的 14 关节、431 粗顶点是人体设置，不应照搬成手部尺寸。",
+      "inputs_outputs": "单张 RGB 图像 → 三维关节坐标和网格顶点；模型分别用于人体与手部。手部实验在 FreiHAND 训练并通过其在线服务器评测，不是双手交互、手物接触或时序跟踪实验。",
+      "contribution": "FreiHAND 表 2 报告 PA-MPVPE 5.9 mm、PA-MPJPE 6.0 mm、F@5mm 0.764、F@15mm 0.986；表内 METRO 对应为 6.7 mm、6.8 mm、0.717、0.981。这些手部结果使用了测试时增强。机制证据主要来自 Human3.6M 消融：表 8 基线 PA-MPJPE 36.7 mm，只加图像网格特征为 35.9，只加图残差块为 36.6，两者结合为 34.5，说明局部图像信息与拓扑建模可相互补充，而非图卷积单独带来全部收益。",
+      "limitations": "结果需按证据范围解读：FreiHAND 的 PA 指标经过对齐，不能直接代表绝对相机坐标下的手部定位精度；§5.1 明确采用测试时增强，不能将表 2 当成单次前向速度/精度结果。结构消融主要在 Human3.6M 上完成，不能把人体的每项数值增益都说成已在手部复现。所读正文没有专门的局限章节，也未给出双手/接触场景或实时部署结论；这些是评价覆盖边界，不伪称为作者报告的失败现象。",
       "sources": [
-        "https://openaccess.thecvf.com/content/ICCV2021/html/Lin_Mesh_Graphormer_ICCV_2021_paper.html"
+        "https://openaccess.thecvf.com/content/ICCV2021/html/Lin_Mesh_Graphormer_ICCV_2021_paper.html",
+        "https://openaccess.thecvf.com/content/ICCV2021/papers/Lin_Mesh_Graphormer_ICCV_2021_paper.pdf"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已阅读 ICCV 2021 正文 §3–5.3，核对架构、手部实验设置、表 2、表 8 与消融所用数据集；未复核补充材料或复现模型。",
+      "verified_at": "2026-11-17",
+      "verification_note": "已核对主源摘要及上述正文段落；指标保留原实验、数据划分和评价条件。评价范围分析与作者明确陈述分开，不代表完整精读或复现。"
     }
   },
   {
@@ -12692,19 +12704,20 @@
       "text-prompt"
     ],
     "analysis": {
-      "problem": "类别无关姿态估计依赖参考样本及关键点标注，跨物体建立对应关系仍困难。",
-      "method": "将 MLLM 应用于类别无关定位，配套指令与训练设计，并以推理机制处理未见关键点的空间分布和不确定性。",
-      "inputs_outputs": "查询图像及目标关键点的详细文字描述输入，输出二维位置；不要求输入带关键点标注的支持图像。",
-      "contribution": "在 MP-100 上与依赖支持样本的方法比较，突出免参考图的接口。适合作为人体关键点泛化相关方法收录，但不是仅面向人体的专用估计器。",
-      "limitations": null,
+      "problem": "类别无关关键点定位需要跨类别理解关键点含义；参考图质量和标注会影响传统匹配方法。CapeLLM 研究仅凭查询图与文字能否完成定位，而不是人体专用估计。",
+      "method": "§3：DINOv2 图像特征经线性投影送入 LLaMA3.1，以归一化小数文本生成二维坐标，并使用 LoRA 适配。人工设计详细关键点描述；固定轮按固定关键点组大小构造对话，动态轮改变每组关键点数；两者都覆盖每张图的全部关键点。§4.3 的累积推理将此前关键点提示加入后续上下文。",
+      "inputs_outputs": "输入查询图像与目标关键点的详细文字描述，输出二维坐标；无需带标注支持图或骨架连接信息，不等于无需训练标注。",
+      "contribution": "§4.1–4.2 在 MP-100 的五组类别互斥划分上报告 PCK@0.2；分别处理支持–查询配对和去重查询评估。表2均值为92.60%，是该基准结果而非任意类别泛化保证。§4.4展示采样坐标分布，区别于固定高斯假设。",
+      "limitations": "§3.2仍需人工细化语义描述。§4.3表3显示，累积推理对固定轮训练和 LocLLM 式训练反而降低精度，收益依赖训练策略；不能把该推理机制视为通用增益。本轮所读正文未设独立局限章节。",
       "sources": [
         "https://arxiv.org/abs/2411.06869",
-        "https://openaccess.thecvf.com/content/ICCV2025/papers/Kim_CapeLLM_Support-Free_Category-Agnostic_Pose_Estimation_with_Multimodal_Large_Language_Models_ICCV_2025_paper.pdf"
+        "https://openaccess.thecvf.com/content/ICCV2025/papers/Kim_CapeLLM_Support-Free_Category-Agnostic_Pose_Estimation_with_Multimodal_Large_Language_Models_ICCV_2025_paper.pdf",
+        "https://arxiv.org/html/2411.06869v2"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "核对原始论文摘要与出版信息；未逐段阅读全文或复现实验，未核实的局限留空。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "定向核读 arXiv v2 的§3.1–3.3、§4.1–4.4及表2–3；未逐段阅读全文、核验附录全部消融或复现实验。",
       "verified_at": "2026-11-17",
-      "verification_note": "2024 年首次预印，按正式 ICCV 2025 版本年份展示。代码仓库存在，但本轮未验证其运行完整性。"
+      "verification_note": "技术细节按2025-08-14 arXiv v2核读；目录保持正式 ICCV 2025 信息。指标为作者报告。"
     },
     "code": "https://github.com/Junhojuno/CapeLLM",
     "ccf": {
@@ -14214,18 +14227,20 @@
     "verified_at": "2026-11-17",
     "code": "https://github.com/sanjayss34/prosepose",
     "analysis": {
-      "problem": "人体相互接触或自接触时，仅靠视觉几何容易得到语义不合理的姿态。",
-      "method": "让多模态语言模型提取接触描述，再将描述转换为可计算损失，用于三维姿态优化。",
-      "inputs_outputs": "输入人体图像和初始三维姿态，输出满足接触约束的细化姿态。",
-      "contribution": "在同一框架内处理双人互动与自接触，利用语言先验减少对人工接触标注的依赖。",
-      "limitations": null,
+      "problem": "接触和遮挡使单张图像的人体重建容易出现悬空肢体或错误相对位置；目标是借助语言先验减少专门接触标注的依赖。",
+      "method": "§3：LMM 输出接触身体区域对，映射到 SMPL-X 顶点集合，以区域最小距离构造损失。多次采样、过滤低频约束并平均损失以抑制幻觉；仅在 LMM 未指明左右时枚举归属并选最小损失；已指明时沿用该侧。再联合二维关键点等损失优化初始人体参数；空约束过多时退回基线优化。",
+      "inputs_outputs": "输入图像、目标人物框及初始人体估计，输出细化三维姿态；支持单人自接触和双人接触。语言模型提供约束，不直接回归完整网格。",
+      "contribution": "§4采用 GPT-4V，默认20次采样；双人以 BEV 初始化，单人以 HMR2 初始化。§4.2在 MOYO 侧视角76个样本上测试，67个有自接触；接触标签由几何距离生成，43/76个样本退回不含 LMM 损失的基线优化。PCC衡量接触，PA-MPJPE衡量对齐后的关节误差，两者不可混为一个指标。",
+      "limitations": "作者§4.3明确指出左右肢体识别、粗粒度身体区域和相机视角敏感性。单人测试规模较小且使用几何伪接触标签，是实验范围而非大规模真实接触标注验证；改进接触不意味着每项关节误差都最优。",
       "sources": [
         "https://openaccess.thecvf.com/content/CVPR2025/html/Subramanian_Pose_Priors_from_Language_Models_CVPR_2025_paper.html",
-        "https://prosepose.github.io/"
+        "https://prosepose.github.io/",
+        "https://arxiv.org/html/2405.03689v2"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 正式论文页面的摘要与书目信息（原始页面及搜索索引交叉核对）；未全文核查实验协议或独立复现。另核对作者项目页与官方代码链接。",
-      "verified_at": "2026-11-17"
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "定向核读 arXiv v2 的§3.1–3.3、§4实验设置、§4.2–4.3及表3；未完整核验双人全部实验、附录或独立复现。",
+      "verified_at": "2026-11-17",
+      "verification_note": "CVF PDF直接访问失败，改读作者2025-05-15 arXiv v2全文HTML；未把旧预印版与正式版逐页比较。"
     },
     "ccf": {
       "tier": "A",
@@ -14268,17 +14283,19 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "problem": "深度歧义和遮挡使二维到三维提升不适定，单靠时空一致性不足以恢复复杂动作。",
-      "method": "预训练同时进行动作识别和遮挡、加噪二维姿态的三维重建；再用无动作标签的真实三维姿态数据微调。",
-      "inputs_outputs": "输入二维人体姿态序列，输出三维人体姿态；动作文本用于预训练对齐。",
-      "contribution": "结合身体部位和时间窗口掩码训练，促使模型利用动作语义；在 Human3.6M 与 MPI-INF-3DHP 上评估。",
-      "limitations": null,
+      "problem": "二维到三维提升在遮挡和复杂动作下存在深度歧义；LangPose用动作语义补充时空线索，属于语言对齐表示学习，并非生成式 LLM 坐标解码。",
+      "method": "§3采用 BERT 文本编码器和 MotionBERT 式姿态编码器，对齐全局动作与文本表示，同时重建三维姿态。身体部位和连续时间窗口掩码增加训练难度；结合 focal loss 与 KL 散度处理动作标签不均衡及多义性。",
+      "inputs_outputs": "输入二维骨架序列，输出逐帧三维关节。BABEL 动作文字用于预训练；§3.3与§4.2明确微调仅保留姿态分支、不再需要文本编码器。据此，论文的姿态提升流程不要求用户在测试时额外输入动作标签；本轮未运行代码核验部署接口。",
+      "contribution": "§4.1将 BABEL/AMASS 三维动作正交投影为二维预训练数据。§4.2分别在 Human3.6M 使用检测二维点、MPI-INF-3DHP 使用真值二维点，报告 MPJPE 为36.7和15.5毫米。两数输入条件不同，不可直接横比，也不代表未经目标数据微调的零样本跨域结果。",
+      "limitations": "作者§5指出语义学习需要大规模数据，预训练与目标动作类别不一致时收益可能下降。运动预测、补全、从含噪运动生成描述（motion captioning），以及从文字生成运动均属于潜在扩展或未来工作，不应当作已验证能力。",
       "sources": [
-        "https://openaccess.thecvf.com/content/WACV2026/html/Liao_LangPose_Language-Aligned_Motion_for_Robust_3D_Human_Pose_Estimation_WACV_2026_paper.html"
+        "https://openaccess.thecvf.com/content/WACV2026/html/Liao_LangPose_Language-Aligned_Motion_for_Robust_3D_Human_Pose_Estimation_WACV_2026_paper.html",
+        "https://arxiv.org/html/2409.00449v2"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 正式论文页面的摘要与书目信息（原始页面及搜索索引交叉核对）；未全文核查实验协议或独立复现。",
-      "verified_at": "2026-11-17"
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "定向核读 arXiv v2 的§3.1–3.3、§4.1–4.2、表1–2与§5；未完整核验补充材料或复现实验。",
+      "verified_at": "2026-11-17",
+      "verification_note": "CVF PDF直接访问失败，采用2025-11-12 arXiv v2核读方法及实验；发表信息仍按 WACV 2026。"
     },
     "verification_notes": {
       "catalog_count_checked": 367,
