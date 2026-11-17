@@ -29,7 +29,7 @@
   "venues": {
     "CVPR": {
       "rank": "A",
-      "count": 196,
+      "count": 197,
       "status": "verified",
       "label": "CCF A",
       "reason": "按 2026 第七版载体等级标注，非论文质量评价；不是发表年份的历史评级。",
@@ -161,7 +161,7 @@
     },
     "WACV": {
       "rank": null,
-      "count": 13,
+      "count": 16,
       "status": "not-listed",
       "label": "未收录",
       "reason": "2026 第七版完整 PDF 未找到 WACV 或 IEEE/CVF Winter Conference on Applications of Computer Vision 条目。未收录不表示低质量。"

@@ -123,6 +123,7 @@ Serve the repository root with `python -m http.server 8000`.
 
 ### Hand
 
+- **[Image-Free Domain Generalization via CLIP for 3D Hand Pose Estimation](https://openaccess.thecvf.com/content/WACV2023/html/Lee_Image-Free_Domain_Generalization_via_CLIP_for_3D_Hand_Pose_Estimation_WACV_2023_paper.html)** — WACV 2023 · Published · 3D. 用 CLIP 文本特征扰动手部图像特征，在不额外收集目标域图像的情况下训练三维手姿估计器。
 - **[3D Hand Pose Estimation via Articulated Anchor-to-Joint 3D Local Regressors](https://doi.org/10.1109/TPAMI.2025.3609907)** — TPAMI 2026 · Published · 3D. 采用 articulated anchors 与局部回归，覆盖 RGB 和深度输入。2025-09-16 在线发表，2026 年卷期。 [Code](https://github.com/ChanglongJiangGit/A2J-Transformer-Plus)
 - **[Affordance-Guided Diffusion Prior for 3D Hand Reconstruction](https://arxiv.org/abs/2510.00506)** — ECCV 2026 · Published · 3D. 利用视觉语言模型生成手物交互可供性描述，条件扩散先验修正严重遮挡下的三维手部姿态。 [Code](https://github.com/narusuzuki/AffHandGen)
 - **[Gesture-Aware Pretraining and Token Fusion for 3D Hand Pose Estimation](https://arxiv.org/abs/2603.17396)** — arXiv 2026 · Preprint · 3D. 手势标签预训练结合逐关节 token Transformer 回归 MANO 参数，在 InterHand2.6M 评测。
@@ -255,6 +256,9 @@ Serve the repository root with `python -m http.server 8000`.
 
 ### Human
 
+- **[Pose Priors from Language Models](https://openaccess.thecvf.com/content/CVPR2025/html/Subramanian_Pose_Priors_from_Language_Models_CVPR_2025_paper.html)** — CVPR 2025 · Published · 3D. ProsePose 将多模态语言模型描述的身体接触关系转成优化约束，细化三维人体姿态。 [Code](https://github.com/sanjayss34/prosepose)
+- **[LangPose: Language-Aligned Motion for Robust 3D Human Pose Estimation](https://openaccess.thecvf.com/content/WACV2026/html/Liao_LangPose_Language-Aligned_Motion_for_Robust_3D_Human_Pose_Estimation_WACV_2026_paper.html)** — WACV 2026 · Published · 3D. LangPose 将动作嵌入与细粒度动作标签的文本嵌入对齐，为二维到三维人体姿态提升提供语义信息。
+- **[DexAvatar: 3D Sign Language Reconstruction with Hand and Body Pose Priors](https://openaccess.thecvf.com/content/WACV2026/html/Kundu_DexAvatar_3D_Sign_Language_Reconstruction_with_Hand_and_Body_Pose_WACV_2026_paper.html)** — WACV 2026 · Published · 3D. DexAvatar 使用学习到的手部与身体三维姿态先验，从单目手语视频重建精细手指关节和身体运动。 [Code](https://github.com/kaustesseract/DexAvatar)
 - **[Hierarchical language description knowledge base for LLM-based human pose estimation](https://doi.org/10.1016/j.neucom.2025.130336)** — Neurocomputing 2025 · Published · 2D. HLanD-Pose 将分层姿态语言知识库作为大语言模型的外部引导，用于图像中的人体关键点定位。
 - **[Egocentric Visibility-Aware Human Pose Estimation](https://openaccess.thecvf.com/content/CVPR2026/html/Dai_Egocentric_Visibility-Aware_Human_Pose_Estimation_CVPR_2026_paper.html)** — CVPR 2026 · Published · 3D. 第一人称视角下考虑可见性的人体姿态估计。
 - **[SMPLest-X: Ultimate Scaling for Expressive Human Pose and Shape Estimation](https://doi.org/10.1109/TPAMI.2025.3618174)** — TPAMI 2026 · Published · 3D. 大规模全身姿态与形状估计，覆盖身体、手与面部；2025 年接收，正式卷期为 2026 年 48(2)。 [Code](https://github.com/MotrixLab/SMPLest-X)

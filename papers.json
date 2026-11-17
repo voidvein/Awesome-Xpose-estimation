@@ -14181,5 +14181,214 @@
       "ccf_location": "2026 CCF 目录人工智能期刊 C 类，序号 32，PDF 第 56 页。",
       "figure": "未核实图片复用授权，不下载或嵌入论文插图。"
     }
+  },
+  {
+    "id": "prosepose",
+    "title": "Pose Priors from Language Models",
+    "year": 2025,
+    "category": "Human",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "CVPR",
+    "status": "Published",
+    "authors": [
+      "Sanjay Subramanian",
+      "Evonne Ng",
+      "Lea Müller",
+      "Dan Klein",
+      "Shiry Ginosar",
+      "Trevor Darrell"
+    ],
+    "summary": "ProsePose 将多模态语言模型描述的身体接触关系转成优化约束，细化三维人体姿态。",
+    "url": "https://openaccess.thecvf.com/content/CVPR2025/html/Subramanian_Pose_Priors_from_Language_Models_CVPR_2025_paper.html",
+    "tags": [
+      "LMM",
+      "Language-guided",
+      "Contact",
+      "ProsePose"
+    ],
+    "primary_sources": [
+      "https://openaccess.thecvf.com/content/CVPR2025/html/Subramanian_Pose_Priors_from_Language_Models_CVPR_2025_paper.html"
+    ],
+    "verified_at": "2026-11-17",
+    "code": "https://github.com/sanjayss34/prosepose",
+    "analysis": {
+      "problem": "人体相互接触或自接触时，仅靠视觉几何容易得到语义不合理的姿态。",
+      "method": "让多模态语言模型提取接触描述，再将描述转换为可计算损失，用于三维姿态优化。",
+      "inputs_outputs": "输入人体图像和初始三维姿态，输出满足接触约束的细化姿态。",
+      "contribution": "在同一框架内处理双人互动与自接触，利用语言先验减少对人工接触标注的依赖。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/CVPR2025/html/Subramanian_Pose_Priors_from_Language_Models_CVPR_2025_paper.html",
+        "https://prosepose.github.io/"
+      ],
+      "evidence_level": "primary_abstract",
+      "evidence_scope": "已核对 CVF 正式论文页面的摘要与书目信息（原始页面及搜索索引交叉核对）；未全文核查实验协议或独立复现。另核对作者项目页与官方代码链接。",
+      "verified_at": "2026-11-17"
+    },
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（CCF 目录转载）",
+      "venue": "CVPR"
+    },
+    "verification_notes": {
+      "catalog_count_checked": 367,
+      "duplicate_found": false,
+      "ccf": "CVPR 为 2026 目录 A 类。",
+      "metrics": "未写入未经实验协议核对的数值比较。",
+      "figure": "未下载或复用论文插图。"
+    }
+  },
+  {
+    "id": "langpose",
+    "title": "LangPose: Language-Aligned Motion for Robust 3D Human Pose Estimation",
+    "year": 2026,
+    "category": "Human",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "WACV",
+    "status": "Published",
+    "authors": [
+      "Longyun Liao",
+      "Rong Zheng"
+    ],
+    "summary": "LangPose 将动作嵌入与细粒度动作标签的文本嵌入对齐，为二维到三维人体姿态提升提供语义信息。",
+    "url": "https://openaccess.thecvf.com/content/WACV2026/html/Liao_LangPose_Language-Aligned_Motion_for_Robust_3D_Human_Pose_Estimation_WACV_2026_paper.html",
+    "tags": [
+      "Language-guided",
+      "2D-to-3D",
+      "Motion",
+      "Masked Modeling"
+    ],
+    "primary_sources": [
+      "https://openaccess.thecvf.com/content/WACV2026/html/Liao_LangPose_Language-Aligned_Motion_for_Robust_3D_Human_Pose_Estimation_WACV_2026_paper.html"
+    ],
+    "verified_at": "2026-11-17",
+    "analysis": {
+      "problem": "深度歧义和遮挡使二维到三维提升不适定，单靠时空一致性不足以恢复复杂动作。",
+      "method": "预训练同时进行动作识别和遮挡、加噪二维姿态的三维重建；再用无动作标签的真实三维姿态数据微调。",
+      "inputs_outputs": "输入二维人体姿态序列，输出三维人体姿态；动作文本用于预训练对齐。",
+      "contribution": "结合身体部位和时间窗口掩码训练，促使模型利用动作语义；在 Human3.6M 与 MPI-INF-3DHP 上评估。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/WACV2026/html/Liao_LangPose_Language-Aligned_Motion_for_Robust_3D_Human_Pose_Estimation_WACV_2026_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "evidence_scope": "已核对 CVF 正式论文页面的摘要与书目信息（原始页面及搜索索引交叉核对）；未全文核查实验协议或独立复现。",
+      "verified_at": "2026-11-17"
+    },
+    "verification_notes": {
+      "catalog_count_checked": 367,
+      "duplicate_found": false,
+      "ccf": "WACV 在已核验的 2026 目录中未收录，不赋 A/B/C 等级。",
+      "metrics": "未写入未经实验协议核对的数值比较。",
+      "figure": "未下载或复用论文插图。"
+    }
+  },
+  {
+    "id": "clip-hand-domain-generalization",
+    "title": "Image-Free Domain Generalization via CLIP for 3D Hand Pose Estimation",
+    "year": 2023,
+    "category": "Hand",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "WACV",
+    "status": "Published",
+    "authors": [
+      "Seongyeong Lee",
+      "Hansoo Park",
+      "Dong Uk Kim",
+      "Jihyeon Kim",
+      "Muhammadjon Boboev",
+      "Seungryul Baek"
+    ],
+    "summary": "用 CLIP 文本特征扰动手部图像特征，在不额外收集目标域图像的情况下训练三维手姿估计器。",
+    "url": "https://openaccess.thecvf.com/content/WACV2023/html/Lee_Image-Free_Domain_Generalization_via_CLIP_for_3D_Hand_Pose_Estimation_WACV_2023_paper.html",
+    "tags": [
+      "CLIP",
+      "Domain Generalization",
+      "Contrastive Learning",
+      "Language-guided"
+    ],
+    "primary_sources": [
+      "https://openaccess.thecvf.com/content/WACV2023/html/Lee_Image-Free_Domain_Generalization_via_CLIP_for_3D_Hand_Pose_Estimation_WACV_2023_paper.html"
+    ],
+    "verified_at": "2026-11-17",
+    "analysis": {
+      "problem": "光照、相机视角和背景的域差异会降低 RGB 三维手姿估计的泛化能力。",
+      "method": "将 CLIP 编码的文本描述特征加入图像特征，以对比学习使用这些扰动特征训练姿态网络。",
+      "inputs_outputs": "推理输入 RGB 手部图像，输出三维手部姿态；训练使用源域图像和文本描述。",
+      "contribution": "将域变化引入特征空间，并在 STB、RHD 数据上评估；标题的 Image-Free 指无需额外域图像，不是完全无图像训练。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/WACV2023/html/Lee_Image-Free_Domain_Generalization_via_CLIP_for_3D_Hand_Pose_Estimation_WACV_2023_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "evidence_scope": "已核对 CVF 正式论文页面的摘要与书目信息（原始页面及搜索索引交叉核对）；未全文核查实验协议或独立复现。",
+      "verified_at": "2026-11-17"
+    },
+    "verification_notes": {
+      "catalog_count_checked": 367,
+      "duplicate_found": false,
+      "ccf": "WACV 在已核验的 2026 目录中未收录，不赋 A/B/C 等级。",
+      "metrics": "未写入未经实验协议核对的数值比较。",
+      "figure": "未下载或复用论文插图。"
+    }
+  },
+  {
+    "id": "dexavatar",
+    "title": "DexAvatar: 3D Sign Language Reconstruction with Hand and Body Pose Priors",
+    "year": 2026,
+    "category": "Human",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "WACV",
+    "status": "Published",
+    "authors": [
+      "Kaustubh Kundu",
+      "Hrishav Bakul Barua",
+      "Lucy Robertson-Bell",
+      "Zhixi Cai",
+      "Kalin Stefanov"
+    ],
+    "summary": "DexAvatar 使用学习到的手部与身体三维姿态先验，从单目手语视频重建精细手指关节和身体运动。",
+    "url": "https://openaccess.thecvf.com/content/WACV2026/html/Kundu_DexAvatar_3D_Sign_Language_Reconstruction_with_Hand_and_Body_Pose_WACV_2026_paper.html",
+    "tags": [
+      "Sign Language",
+      "Hand",
+      "Whole-body",
+      "Pose Prior",
+      "Monocular Video"
+    ],
+    "primary_sources": [
+      "https://openaccess.thecvf.com/content/WACV2026/html/Kundu_DexAvatar_3D_Sign_Language_Reconstruction_with_Hand_and_Body_Pose_WACV_2026_paper.html"
+    ],
+    "verified_at": "2026-11-17",
+    "code": "https://github.com/kaustesseract/DexAvatar",
+    "analysis": {
+      "problem": "手语视频中的自遮挡、噪声和运动模糊使自动三维重建困难，现有数据又常缺少准确三维姿态。",
+      "method": "以学习到的三维手部与身体先验引导单目视频重建，约束精细关节和身体动作。",
+      "inputs_outputs": "输入自然场景单目手语视频，输出三维手部及身体姿态。",
+      "contribution": "面向手语数据构建联合手部与身体重建流程，并在 SGNify 动捕基准上验证。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/WACV2026/html/Kundu_DexAvatar_3D_Sign_Language_Reconstruction_with_Hand_and_Body_Pose_WACV_2026_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "evidence_scope": "已核对 CVF 正式论文页面的摘要与书目信息（原始页面及搜索索引交叉核对）；未全文核查实验协议或独立复现。",
+      "verified_at": "2026-11-17"
+    },
+    "verification_notes": {
+      "catalog_count_checked": 367,
+      "duplicate_found": false,
+      "ccf": "WACV 在已核验的 2026 目录中未收录，不赋 A/B/C 等级。",
+      "metrics": "未写入未经实验协议核对的数值比较。",
+      "figure": "未下载或复用论文插图。"
+    }
   }
 ]
