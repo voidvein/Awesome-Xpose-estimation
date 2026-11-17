@@ -149,3 +149,7 @@ Serve the repository root with `python -m http.server 8000` and open `http://loc
 ## Contributing
 
 Please include an authoritative paper link, venue/year, appropriate task and modality labels, and verified code link. Separate preprints from peer-reviewed work and workshops from main conferences.
+
+## Data and figure organization
+
+`papers.json` holds catalog metadata, year, CCF mapping, sourced analysis, and optional figure references. `assets/figures/` stores only permitted figures with a manifest and attribution; image rights are independent of the site's code. `metrics.json` contains timestamped snapshots. For unavailable figure permissions, the detail page links to the original source rather than embedding an image.

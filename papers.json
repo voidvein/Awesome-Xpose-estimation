@@ -22,18 +22,31 @@
       "venue": "CVPR"
     },
     "analysis": {
-      "problem": "3DMM 配准生成的三维关键点与人工二维标注的语义定义不一致，妨碍三维关键点学习。",
-      "method": "直接提升可见的人工二维关键点到三维；使用具备三维结构的 GAN 学习多视图一致性，再利用自然视频学习跨帧约束。",
-      "inputs_outputs": "推理输入为单张人脸图像，输出三维人脸关键点及头部姿态；训练利用二维标注、合成多视图与自然视频。",
-      "contribution": "不依赖三维关键点训练集，重点解决二维与三维标注定义的对齐，而不仅是降低某个数据集上的回归误差。",
-      "limitations": "作者指出，效果依赖二维关键点检测器与 3D-aware GAN 的质量；不对称表情、生成模型覆盖有限的姿态与表情，以及遮挡可能限制三维提升效果。",
+      "problem": "三维关键点的 3DMM 顶点定义与人工二维标注存在局部语义偏差，直接比较误差也会混入标注差异。",
+      "method": "联合使用 CelebV-HQ 视频与 IDE-3D 合成多视图：二维检测结果生成伪标签，结合可见性掩码与置信度加权损失训练三维回归器；不需要真值三维关键点训练集。",
+      "inputs_outputs": "单张人脸图像输入，预测 98 个三维关键点及姿态；实验取对应的 68 点子集比较。",
+      "contribution": "在 DAD-3DHeads 与 Multiface 的六段序列上评估，并消融单独视频、单独多视图、骨干及样本规模。提出 NMLC 以减轻固定关键点定义偏差；阅读结果时不应将其与普通 NME 混用。",
+      "limitations": "极端不对称表情、噘嘴与遮挡仍会失败；二维检测器错误可传递至三维结果。评估采用了 DAD-3DHeads 训练集以获得细分类别，作者明确排除在这些样本上训练过的对手参与领先性结论。",
       "sources": [
-        "https://arxiv.org/abs/2405.19646",
-        "https://arxiv.org/html/2405.19646"
+        "https://arxiv.org/html/2405.19646v1#S4",
+        "https://arxiv.org/html/2405.19646v1#S5"
       ],
       "evidence_level": "primary_abstract_and_targeted_fulltext",
-      "verification_note": "已补查全文模型架构和局限章节；未独立复现。",
-      "verified_at": "2026-11-17"
+      "verification_note": "未复现；未将论文报告的优势解释为所有数据集、指标上的全面领先。",
+      "verified_at": "2026-11-17",
+      "evidence_scope": "定向核对原文 §4 的训练设置、评价指标、比较协议、消融与失败案例；不是全文逐段复核。"
+    },
+    "figure": {
+      "src": "assets/figures/facelift-architecture.png",
+      "caption": "多帧视频与多视角生成样本先经二维关键点预测和遮挡感知处理，再用于训练三维关键点回归器。",
+      "alt": "FaceLift：半监督三维人脸关键点学习流程",
+      "source": "https://arxiv.org/html/2405.19646v1#S1.F2",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "David Ferman, Pablo Garrido, Gaurav Bharaj. FaceLift: Semi-supervised 3D Facial Landmark Localization, Figure 2, arXiv:2405.19646v1. CC BY 4.0.",
+      "modifications": "原始 arXiv HTML 图片，未裁剪、未修改；页面按容器缩放显示。",
+      "figure_number": "Figure 2",
+      "version": "2405.19646v1"
     }
   },
   {
@@ -60,18 +73,20 @@
       "venue": "ECCV"
     },
     "analysis": {
-      "problem": "已有 6DoF 方法对头部平移和人脸几何之间的相互关系利用不足。",
-      "method": "TRG 显式双向交互平移、旋转和人脸几何，加入检测框校正参数估计与关键点到图像对齐。",
-      "inputs_outputs": "输入单目人脸图像；精确深度和三维平移需要相机内参。输出头部三维旋转与平移。",
-      "contribution": "将几何与位姿作为相互提供约束的任务，在 ARKitFace 和 BIWI 上验证，而非将旋转回归简单扩展为平移回归。",
-      "limitations": "作者指出，缺少相机内参时只能估计人脸之间的相对深度，不能可靠恢复精确深度与平移。",
+      "problem": "直接回归平移易受到训练、测试距离分布差异影响；人脸几何与头部位姿之间的约束也未充分利用。",
+      "method": "通过迭代几何—位姿交互与关键点到图像对齐更新预测；回归检测框校正参数而非直接回归绝对平移。",
+      "inputs_outputs": "单目人脸图像输入；精确平移需要相机内参。输出旋转、平移和稠密三维人脸几何。",
+      "contribution": "默认使用 ARKitFace 与 300W-LP 训练，另给出仅 ARKitFace 训练的公平比较；BIWI 只作测试且仅评估位姿。分别报告旋转、平移、ADD 与几何误差，消融迭代次数、校正参数、几何和采样方式；不能只用旋转误差概括六自由度质量。",
+      "limitations": "缺少内参时只能估计人脸间相对深度，无法可靠恢复精确平移。BIWI 没有逐帧真值网格，因此该测试不能证明其逐帧几何重建质量。",
       "sources": [
-        "https://arxiv.org/abs/2407.14136v1",
-        "https://arxiv.org/html/2407.14136v1"
+        "https://arxiv.org/html/2407.14136v1#S4.SS1",
+        "https://arxiv.org/html/2407.14136v1#S4.SS4",
+        "https://arxiv.org/html/2407.14136v1#S4.SS6"
       ],
       "evidence_level": "primary_abstract_and_targeted_fulltext",
-      "verification_note": "已补查 v1 全文 §4.6 的相机内参与深度限制；未独立复现。",
-      "verified_at": "2026-11-17"
+      "verification_note": "未复现；未混入后续 TRGv2 的结果。",
+      "verified_at": "2026-11-17",
+      "evidence_scope": "锁定 ECCV 对应 v1，核对 §4.1–4.4 实验协议、指标及消融；保留先前 §4.6 内参限制核验。"
     }
   },
   {
@@ -1544,15 +1559,21 @@
     },
     "analysis": {
       "problem": "解决单目图像中手部形态复杂、野外场景泛化不足的问题。",
-      "method": "采用全 Transformer 手部网格恢复架构，以大型视觉 Transformer 扩大模型容量，并联合使用含 2D 或 3D 手部标注的多个训练集。",
-      "inputs_outputs": "单目图像 → 三维手部重建。",
-      "contribution": "其价值在于展示数据规模与模型容量共同扩展的效果，而不只是替换骨干网络；另建立 HInt 野外二维关键点标注，用于检验受控数据集之外的泛化。",
-      "limitations": null,
+      "method": "ViT-H 编码图像、Transformer 解码 MANO 手形参数；联合 2D 重投影、3D 和对抗先验监督，整合约 270 万训练样本。",
+      "inputs_outputs": "单目手部图像 → MANO 姿态、形状与三维网格。",
+      "contribution": "消融分别增加训练数据与模型容量，组合后的收益最大，支持“数据与容量共同扩展”的设计判断。3D 在 FreiHAND、HO3Dv2 评价；HInt 则用 2D PCK 分开检验可见与遮挡关节，补足野外评测。",
+      "limitations": "评测边界：HInt 只有 2D 关键点，因此改进证明的是投影准确性，不能直接当作野外 3D 精度证据；主要 3D 基准仍来自受控采集。此处未核实其他作者明确列出的失败类型。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2024/html/Pavlakos_Reconstructing_Hands_in_3D_with_Transformers_CVPR_2024_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2024/html/Pavlakos_Reconstructing_Hands_in_3D_with_Transformers_CVPR_2024_paper.html",
+        "https://arxiv.org/html/2312.05251v1"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verification_notes": "核对 arXiv v1 正文 §3.5、§4、§5.1–5.3（数据、评测与消融）。未复现训练或独立验证性能；局限栏区分评测边界与失败案例。"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2312.05251v1#S2.F2",
+      "caption": "论文原文中的方法图",
+      "license": ""
     }
   },
   {
@@ -1591,6 +1612,11 @@
       ],
       "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_notes": "已核对摘要及正文相关方法/结论段落；局限来自作者原文，不代表已复现实验。"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2404.03159v1#S2.F2",
+      "caption": "论文原文中的方法图",
+      "license": ""
     }
   },
   {
@@ -1654,15 +1680,16 @@
     },
     "analysis": {
       "problem": "野外多手重建不仅依赖重建网络，还受手部检测不稳与检测效率影响。",
-      "method": "将实时全卷积手部定位与 Transformer 三维手部重建组合，另构建超过两百万张野外手部图像的数据以增强检测。",
+      "method": "先定位手及左右类别，再用 Transformer 回归粗 MANO；将网格投影到多尺度图像特征，预测姿态与形状残差来改善对齐。WHIM 检测数据通过集成检测和模型拟合自动标注。",
       "inputs_outputs": "单目图像或逐帧视频 → 多手定位与三维重建。",
-      "contribution": "把检测环节纳入完整系统，强调遮挡和光照多样性；作者展示未使用时序模块也能得到平滑视频跟踪，但这不等同于显式时序推理。",
-      "limitations": null,
+      "contribution": "把野外检测与网格精修连成完整系统。检测在 WHIM、COCO-WholeBody、Oxford-Hands 比较；论文中 130–175 FPS 是 RTX 4090 上的检测器速度，不应当作完整重建吞吐量。",
+      "limitations": "作者 §9 明确指出：极端指姿与拥挤场景的小手仍会失败；逐手重建不能充分约束双手接触；输出在相机空间，不是已解决世界坐标下的度量重建。无显式时序模块。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2025/html/Potamias_WiLoR_End-to-end_3D_Hand_Localization_and_Reconstruction_in-the-wild_CVPR_2025_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2025/papers/Potamias_WiLoR_End-to-end_3D_Hand_Localization_and_Reconstruction_in-the-wild_CVPR_2025_paper.pdf",
+        "https://arxiv.org/html/2409.12259v2"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verification_notes": "核对 arXiv v2 §3–5.1、补充 §9–11（自动标注、精修、速度测量和局限）。性能为作者报告，未独立复现。"
     }
   },
   {
@@ -1691,15 +1718,16 @@
     },
     "analysis": {
       "problem": "检测、左右手分类、姿态估计串行执行会造成重复计算和误差累积。",
-      "method": "在冻结检测器基础上加入交互式 2D–3D 解码器，从检测线索提取二维关节语义，再提升为三维表示；层级注意力联合建模关节、网格顶点与相机平移。",
+      "method": "冻结 Grounding DINO，以侧路调优和交互式 2D–3D 解码器联合预测关节、顶点和相机平移；左右手使用统一顶点表示，不需先做左右分类。",
       "inputs_outputs": "图像 → 手部检测、二维关节、三维网格和相机平移。",
-      "contribution": "把多个阶段整合为一阶段框架，避免将左右手类别作为前置条件；研究重点是检测与重建的联合结构，而非仅提升独立裁剪手部的重建器。",
-      "limitations": null,
+      "contribution": "整图推理的评测把漏检计入误差，不再假定检测框与左右类别完美。FreiHAND、HO3Dv3、DexYCB 分别训练；HInt 使用混合训练集，因此比较时必须核对数据协议。",
+      "limitations": "作者补充材料指出：缺少 MANO 式几何先验，可能出现网格伪影；获得旋转姿态需额外逆运动学；逐帧视频可能抖动。且“一阶段”不等于实时：报告的 RTX 3090 检测耗时约 0.5 秒，另加解码。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2025/html/Chen_HandOS_3D_Hand_Reconstruction_in_One_Stage_CVPR_2025_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2025/html/Chen_HandOS_3D_Hand_Reconstruction_in_One_Stage_CVPR_2025_paper.html",
+        "https://arxiv.org/html/2412.01537v2"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verification_notes": "核对 arXiv v2 §3、§4.1–4.2、补充 XII、XIII、XVI（方法、评测协议、效率、失败与局限）。未复现实验。"
     }
   },
   {
@@ -1738,6 +1766,11 @@
       ],
       "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_notes": "已核对摘要及正文相关方法/结论段落；局限来自作者原文，不代表已复现实验。"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2501.02973v1#S1.F2",
+      "caption": "论文原文中的方法图",
+      "license": ""
     }
   },
   {
@@ -3289,7 +3322,20 @@
       "sources": [
         "https://arxiv.org/abs/2312.07526"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
+    },
+    "figure": {
+      "src": "assets/figures/rtmo-architecture.png",
+      "caption": "骨干与多尺度特征进入预测头，动态坐标分类器利用边界框信息生成关键点的一维坐标分布。",
+      "alt": "RTMO：单阶段多人体姿态估计架构",
+      "source": "https://arxiv.org/html/2312.07526v1#S2.F2",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Peng Lu, Tao Jiang, Yining Li, Xiangtai Li, Kai Chen, Wenming Yang. RTMO: Towards High-Performance One-Stage Real-Time Multi-Person Pose Estimation, Figure 2, arXiv:2312.07526v1. CC BY 4.0.",
+      "modifications": "原始 arXiv HTML 图片，未裁剪、未修改；页面按容器缩放显示。",
+      "figure_number": "Figure 2",
+      "version": "2312.07526v1"
     }
   },
   {
@@ -3319,15 +3365,22 @@
       "venue": "ECCV"
     },
     "analysis": {
-      "problem": "人体关键点、部件分割、深度和法线等任务往往依赖各自的专用模型与标注。",
-      "method": "先在超过三亿张人体图像上进行自监督预训练，再针对四类任务微调，使用原生高分辨率输入并考察模型扩容效果。",
-      "inputs_outputs": "输入人体图像；不同任务模型分别预测二维姿态、人体部件分割、深度或表面法线。",
-      "contribution": "表明人体领域的大规模预训练能帮助多种视觉任务和标注稀缺场景；这里的深度预测不等同于完整三维关节或人体网格重建。",
-      "limitations": null,
+      "problem": "人体视觉任务缺少能兼顾高分辨率与跨场景泛化的共享预训练基础，且精细标注难以扩展。",
+      "method": "用 Humans-300M 做 MAE 自监督预训练，扩展 0.3B 至 2B 参数的 ViT，并以 1024 像素原生分辨率学习；随后为各任务分别微调编码器与轻量解码头。",
+      "inputs_outputs": "输入人体图像；不同微调模型分别输出二维姿态、部件分割、深度或表面法线，不直接输出完整三维人体网格。",
+      "contribution": "第 4.6 节控制预训练日程与迭代数，以 0.3B 模型比较通用图像和人体图像预训练；在 Humans-5K、Humans-2K、THuman2.0、Hi4D 的对应任务上，人体领域预训练更优。该实验比单纯扩大参数量更能支持数据领域匹配的价值。",
+      "limitations": "作者明确指出复杂或罕见姿态、拥挤和严重遮挡仍具挑战。数据来源消融采用早期微调检查点，不应把表 7 数值等同于最终完整训练模型的最佳成绩；四任务也不是一个无需微调的通用输出模型。",
       "sources": [
-        "https://www.ecva.net/papers/eccv_2024/papers_ECCV/html/529_ECCV_2024_paper.php"
+        "https://www.ecva.net/papers/eccv_2024/papers_ECCV/html/529_ECCV_2024_paper.php",
+        "https://arxiv.org/html/2408.12569v1"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对摘要、第 3 节预训练框架和第 4.6 节数据源消融及局限；未独立复现，未逐项审核四任务的全部实验。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2408.12569v3",
+      "caption": "论文原文中的方法图",
+      "license": ""
     }
   },
   {
@@ -3361,7 +3414,8 @@
       "sources": [
         "https://arxiv.org/abs/2407.08634"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -3425,15 +3479,17 @@
       "venue": "CVPR"
     },
     "analysis": {
-      "problem": "从视频恢复人体运动时，仅有相机坐标姿态不足以描述全局移动；世界坐标恢复还面临足部滑动和优化成本。",
-      "method": "用动捕数据学习二维关键点序列到三维运动的映射，融合视频特征与 SLAM 相机角速度，再进行接触感知的轨迹细化。",
-      "inputs_outputs": "输入视频及提取的关键点、图像特征和相机运动线索，输出世界坐标中的三维人体运动与全局轨迹。",
-      "contribution": "把运动先验、视觉信息与接触约束结合起来，不把恢复问题局限于平坦地面，论文展示了爬楼梯等情形。",
-      "limitations": null,
+      "problem": "移动相机下，人体自身运动与相机运动相互混淆；仅恢复相机坐标姿态，无法获得可信的世界轨迹与足地接触。",
+      "method": "先用 AMASS 投影序列预训练单向循环网络，再融合二维关键点运动特征与图像特征。轨迹解码器使用相机角速度，接触感知模块修正根部速度及朝向，不强制地面为平面。",
+      "inputs_outputs": "输入单目视频，预处理取得关键点、图像特征及 SLAM 或陀螺仪角速度；输出 SMPL 姿态、形状和世界坐标根部轨迹。",
+      "contribution": "在 3DPW、RICH、EMDB 评价局部姿态，并在 EMDB 2 单独评价全局轨迹。适合研究运动先验与视觉证据的融合，不能用局部关节误差替代全局运动质量。",
+      "limitations": "作者附录 G 指出：滑板、骑车等训练分布外移动方式会失败；接触只覆盖足部，手部支撑可能悬空或滑动。附录 F 的 A100 测试中，含预处理的在线速度约 9 fps，且不计 SLAM，不能将核心网络约 200 fps 当作端到端速度。",
       "sources": [
-        "https://arxiv.org/abs/2312.07531"
+        "https://arxiv.org/abs/2312.07531",
+        "https://arxiv.org/html/2312.07531v2"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对摘要、第 3 节方法、第 4 节评测设置及附录 F/G 的运行时间与失败场景；未独立复现，未逐表复核所有精度结果。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext"
     }
   },
   {
@@ -3503,7 +3559,8 @@
       "sources": [
         "https://arxiv.org/abs/2412.02254"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -3577,7 +3634,8 @@
       "sources": [
         "https://arxiv.org/abs/2508.17239"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -3617,7 +3675,8 @@
       "sources": [
         "https://arxiv.org/abs/2501.09782"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -3688,7 +3747,8 @@
       "sources": [
         "https://arxiv.org/abs/2611.08954"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -3726,7 +3786,8 @@
       "sources": [
         "https://arxiv.org/abs/1312.4659"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -3765,7 +3826,8 @@
       "sources": [
         "https://arxiv.org/abs/1602.00134"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -3804,7 +3866,8 @@
       "sources": [
         "https://arxiv.org/abs/1603.06937"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -3843,7 +3906,8 @@
       "sources": [
         "https://arxiv.org/abs/1611.08050"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -3921,7 +3985,8 @@
       "sources": [
         "https://arxiv.org/abs/1902.09212"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -3961,7 +4026,8 @@
       "sources": [
         "https://arxiv.org/abs/1908.10357"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -4001,7 +4067,8 @@
       "sources": [
         "https://arxiv.org/abs/2104.02300"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -4041,7 +4108,8 @@
       "sources": [
         "https://arxiv.org/abs/2104.03516"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -4082,7 +4150,8 @@
       "sources": [
         "https://arxiv.org/abs/2204.12484"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -4122,7 +4191,8 @@
       "sources": [
         "https://www.ecva.net/papers/eccv_2022/papers_ECCV/html/4591_ECCV_2022_paper.php"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -4158,6 +4228,18 @@
         "https://arxiv.org/html/2303.07399v2"
       ],
       "evidence_scope": "已核对原论文摘要与引言中的架构、输入流程及部署说明。"
+    },
+    "figure": {
+      "src": "assets/figures/rtmpose-architecture.png",
+      "caption": "用卷积、全连接层和 GAU 精炼关键点表示，再分别预测横、纵坐标。",
+      "alt": "RTMPose：骨干网络、坐标分类头与门控注意力单元",
+      "source": "https://arxiv.org/html/2303.07399v2#S2.F2",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Tao Jiang, Peng Lu, Li Zhang, Ningsheng Ma, Rui Han, Chengqi Lyu, Yining Li, Kai Chen. RTMPose: Real-Time Multi-Person Pose Estimation based on MMPose, Figure 2, arXiv:2303.07399v2. CC BY 4.0.",
+      "modifications": "原始 arXiv HTML 图片，未裁剪、未修改；页面按容器缩放显示。",
+      "figure_number": "Figure 2",
+      "version": "2303.07399v2"
     }
   },
   {
@@ -4198,7 +4280,8 @@
       "sources": [
         "https://arxiv.org/abs/1705.03098"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -4231,15 +4314,17 @@
       "venue": "CVPR"
     },
     "analysis": {
-      "problem": "单帧二维到三维恢复缺少运动上下文，且三维标注有限，难以利用大量未标注视频。",
-      "method": "在二维关键点序列上使用膨胀时间卷积；半监督分支将估计的三维姿态重新投影到二维，利用未标注视频训练。",
-      "inputs_outputs": "输入视频中的二维关节序列，输出三维人体姿态序列。",
-      "contribution": "结合时间建模与重投影监督，把序列信息和无三维标签的视频用于姿态 lifting，而非逐帧独立预测。",
-      "limitations": null,
+      "problem": "二维关节到三维的映射有歧义，而三维动捕标签有限；希望同时利用时间上下文及无三维标注的视频。",
+      "method": "对二维关键点轨迹施加膨胀时序卷积。半监督训练将预测三维姿态反投影回二维，并增加骨长约束，以避免仅满足投影但不合理的三维解。",
+      "inputs_outputs": "输入二维关键点序列，输出三维关节姿态；半监督反投影需要相机内参，不要求多视角外参。",
+      "contribution": "监督实验覆盖 Human3.6M 与 HumanEva-I。Human3.6M 少标注实验中，将剩余训练样本作为无标签数据；骨长消融及真实二维关键点对照分别检验几何约束和检测质量的影响。",
+      "limitations": "证据边界：半监督收益来自特定少标注划分，不是任意野外视频的保证；第 6.2 节显示二维检测质量仍限制性能。10 fps 的 Protocol 3 与全帧率 Protocol 1 使用不同感受野和误差协议，不宜直接比较数值；速度测试也假设二维姿态已经给出。",
       "sources": [
-        "https://arxiv.org/abs/1811.11742"
+        "https://arxiv.org/abs/1811.11742",
+        "https://arxiv.org/html/1811.11742v2"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对第 3/4 节方法、第 6.1 节计算成本及第 6.2 节少标注设置与消融；局限段为基于明确实验条件的证据边界归纳，非作者独立局限章节；未独立复现。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext"
     }
   },
   {
@@ -4320,7 +4405,8 @@
       "sources": [
         "https://arxiv.org/abs/2203.00859"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -4361,7 +4447,8 @@
       "sources": [
         "https://arxiv.org/abs/2303.17472"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -4402,7 +4489,8 @@
       "sources": [
         "https://arxiv.org/abs/2210.06551"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -4482,7 +4570,8 @@
       "sources": [
         "https://arxiv.org/abs/1712.06584"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -4523,7 +4612,8 @@
       "sources": [
         "https://arxiv.org/abs/1909.12828"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -4564,7 +4654,8 @@
       "sources": [
         "https://arxiv.org/abs/1912.05656"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -4595,15 +4686,17 @@
       "venue": "ICCV"
     },
     "analysis": {
-      "problem": "全局特征回归人体网格对局部遮挡敏感，即使多数身体可见也可能预测失真。",
-      "method": "学习身体部件引导的软注意力掩码，结合可见部件证据和相邻部件信息推断被遮挡区域。",
-      "inputs_outputs": "输入人体图像，输出三维身体姿态与形状。",
-      "contribution": "将部件可见性和局部证据融入参数回归；论文在遮挡专用及常规基准上评价，而非仅依靠无解释的全局特征。",
-      "limitations": null,
+      "problem": "以全局特征回归三维人体时，局部遮挡也可能污染整体预测；需要保留不同身体部件的空间证据。",
+      "method": "双分支提取部件注意力和三维特征，训练早期以部件分割引导注意力，随后撤除该监督，使遮挡部件可借助邻近区域。最终注意力图不必等同于语义分割。",
+      "inputs_outputs": "输入单人图像裁剪，输出 SMPL 关节旋转、形状及相机参数，生成三维身体网格。",
+      "contribution": "在 3DPW、3DPW-OCC、3DOH 测试。遮挡对照中，PARE 与 HMR-EFT 使用相同数据和增强，支持注意力本身的作用；但 SPIN 在该表中训练条件不同，仅作参考。",
+      "limitations": "补充材料列出多人挤入裁剪框、罕见极端姿态、儿童体型和极端遮挡等失败情形；儿童误差也与 SMPL 表达能力有关。3DPW 表格分别列出不同骨干及使用 3DPW 训练的版本，比较时不能混为一组。",
       "sources": [
-        "https://arxiv.org/abs/2104.08527"
+        "https://arxiv.org/abs/2104.08527",
+        "https://arxiv.org/html/2104.08527v2"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对第 4.1/4.2 节方法、第 5 节及表 1/2 的评测条件、补充材料 B.1 的失败场景；未独立复现。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext"
     }
   },
   {
@@ -4644,7 +4737,8 @@
       "sources": [
         "https://arxiv.org/abs/2011.14672"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -4685,7 +4779,8 @@
       "sources": [
         "https://arxiv.org/abs/2008.12272"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -4726,7 +4821,8 @@
       "sources": [
         "https://arxiv.org/abs/2305.20091"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -4807,7 +4903,8 @@
       "sources": [
         "https://arxiv.org/abs/2008.09062"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -4848,7 +4945,8 @@
       "sources": [
         "https://arxiv.org/abs/2105.05301"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -4889,7 +4987,8 @@
       "sources": [
         "https://www.ecva.net/papers/eccv_2020/papers_ECCV/html/768_ECCV_2020_paper.php"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   },
   {
@@ -4924,7 +5023,8 @@
       "sources": [
         "https://arxiv.org/abs/2309.17448"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
+      "evidence_level": "primary_abstract"
     }
   }
 ]
