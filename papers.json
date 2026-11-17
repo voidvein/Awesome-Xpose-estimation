@@ -14,7 +14,13 @@
     "tags": [
       "landmarks",
       "semi-supervised"
-    ]
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "trg",
@@ -32,7 +38,13 @@
     "tags": [
       "6DoF",
       "geometry"
-    ]
+    ],
+    "ccf": {
+      "tier": "B",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ECCV"
+    }
   },
   {
     "id": "headdiff",
@@ -49,7 +61,13 @@
     "tags": [
       "diffusion",
       "uncertainty"
-    ]
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=44",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "TIP"
+    }
   },
   {
     "id": "wide-short-hpe",
@@ -67,7 +85,13 @@
     "tags": [
       "rotation",
       "benchmark"
-    ]
+    ],
+    "ccf": {
+      "tier": "B",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=53",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "PR"
+    }
   },
   {
     "id": "infinite-landmarks",
@@ -84,7 +108,13 @@
     "url": "https://onlinelibrary.wiley.com/doi/10.1111/cgf.15126",
     "tags": [
       "landmarks"
-    ]
+    ],
+    "ccf": {
+      "tier": "B",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=45",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CGF"
+    }
   },
   {
     "id": "uld-headpose",
@@ -103,7 +133,13 @@
     "tags": [
       "unsupervised",
       "landmarks"
-    ]
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "facexformer",
@@ -121,7 +157,13 @@
     "tags": [
       "multitask",
       "transformer"
-    ]
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ICCV"
+    }
   },
   {
     "id": "joint-unsup-landmarks",
@@ -139,7 +181,13 @@
     "tags": [
       "unsupervised",
       "landmarks"
-    ]
+    ],
+    "ccf": {
+      "tier": "B",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=53",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "PR"
+    }
   },
   {
     "id": "semiuhpe",
@@ -230,7 +278,13 @@
     "primary_sources": [
       "https://openaccess.thecvf.com/content_cvpr_2013/html/Xiong_Supervised_Descent_Method_2013_CVPR_paper.html"
     ],
-    "verified_at": "2026-11-17"
+    "verified_at": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "ert",
@@ -253,7 +307,13 @@
     "primary_sources": [
       "https://openaccess.thecvf.com/content_cvpr_2014/html/Kazemi_One_Millisecond_Face_2014_CVPR_paper.html"
     ],
-    "verified_at": "2026-11-17"
+    "verified_at": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "lbf",
@@ -275,7 +335,13 @@
     "primary_sources": [
       "https://openaccess.thecvf.com/content_cvpr_2014/html/Ren_Face_Alignment_at_2014_CVPR_paper.html"
     ],
-    "verified_at": "2026-11-17"
+    "verified_at": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "3ddfa",
@@ -297,7 +363,13 @@
     "primary_sources": [
       "https://openaccess.thecvf.com/content_cvpr_2016/html/Zhu_Face_Alignment_Across_CVPR_2016_paper.html"
     ],
-    "verified_at": "2026-11-17"
+    "verified_at": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "fan",
@@ -322,7 +394,13 @@
       "https://openaccess.thecvf.com/content_iccv_2017/html/Bulat_How_Far_Are_ICCV_2017_paper.html"
     ],
     "verified_at": "2026-11-17",
-    "code": "https://github.com/1adrianb/face-alignment"
+    "code": "https://github.com/1adrianb/face-alignment",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ICCV"
+    }
   },
   {
     "id": "hopenet",
@@ -368,7 +446,13 @@
       "https://openaccess.thecvf.com/content_cvpr_2018/html/Wu_Look_at_Boundary_CVPR_2018_paper.html"
     ],
     "verified_at": "2026-11-17",
-    "code": "https://github.com/wywu/LAB"
+    "code": "https://github.com/wywu/LAB",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "wing-loss",
@@ -390,7 +474,13 @@
     "primary_sources": [
       "https://openaccess.thecvf.com/content_cvpr_2018/html/Feng_Wing_Loss_for_CVPR_2018_paper.html"
     ],
-    "verified_at": "2026-11-17"
+    "verified_at": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "prnet",
@@ -413,7 +503,13 @@
       "https://openaccess.thecvf.com/content_ECCV_2018/html/Yao_Feng_Joint_3D_Face_ECCV_2018_paper.html"
     ],
     "verified_at": "2026-11-17",
-    "code": "https://github.com/YadiraF/PRNet"
+    "code": "https://github.com/YadiraF/PRNet",
+    "ccf": {
+      "tier": "B",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ECCV"
+    }
   },
   {
     "id": "fsa-net",
@@ -435,7 +531,13 @@
     "primary_sources": [
       "https://openaccess.thecvf.com/content_CVPR_2019/html/Yang_FSA-Net_Learning_Fine-Grained_Structure_Aggregation_for_Head_Pose_Estimation_From_CVPR_2019_paper.html"
     ],
-    "verified_at": "2026-11-17"
+    "verified_at": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "adaptive-wing",
@@ -458,7 +560,13 @@
       "https://openaccess.thecvf.com/content_ICCV_2019/html/Wang_Adaptive_Wing_Loss_for_Robust_Face_Alignment_via_Heatmap_Regression_ICCV_2019_paper.html"
     ],
     "verified_at": "2026-11-17",
-    "code": "https://github.com/protossw512/AdaptiveWingLoss"
+    "code": "https://github.com/protossw512/AdaptiveWingLoss",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ICCV"
+    }
   },
   {
     "id": "decafa",
@@ -481,7 +589,13 @@
     "primary_sources": [
       "https://openaccess.thecvf.com/content_ICCV_2019/papers/Dapogny_DeCaFA_Deep_Convolutional_Cascade_for_Face_Alignment_in_the_Wild_ICCV_2019_paper.pdf"
     ],
-    "verified_at": "2026-11-17"
+    "verified_at": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ICCV"
+    }
   },
   {
     "id": "pfld",
@@ -527,7 +641,13 @@
     "primary_sources": [
       "https://openaccess.thecvf.com/content_CVPR_2020/html/Kumar_LUVLi_Face_Alignment_Estimating_Landmarks_Location_Uncertainty_and_Visibility_Likelihood_CVPR_2020_paper.html"
     ],
-    "verified_at": "2026-11-17"
+    "verified_at": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "3ddfa-v2",
@@ -551,7 +671,13 @@
       "https://github.com/cleardusk/3DDFA_V2"
     ],
     "verified_at": "2026-11-17",
-    "code": "https://github.com/cleardusk/3DDFA_V2"
+    "code": "https://github.com/cleardusk/3DDFA_V2",
+    "ccf": {
+      "tier": "B",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ECCV"
+    }
   },
   {
     "id": "whenet",
@@ -574,7 +700,13 @@
       "https://bmva-archive.org.uk/bmvc/2020/conference/papers/paper_0907.html"
     ],
     "verified_at": "2026-11-17",
-    "code": "https://github.com/Ascend-Research/HeadPoseEstimation-WHENet"
+    "code": "https://github.com/Ascend-Research/HeadPoseEstimation-WHENet",
+    "ccf": {
+      "tier": "C",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=59",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "BMVC"
+    }
   },
   {
     "id": "img2pose",
@@ -596,7 +728,13 @@
     "primary_sources": [
       "https://openaccess.thecvf.com/content/CVPR2021/html/Albiero_img2pose_Face_Alignment_and_Detection_via_6DoF_Face_Pose_Estimation_CVPR_2021_paper.html"
     ],
-    "verified_at": "2026-11-17"
+    "verified_at": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "pipnet",
@@ -621,7 +759,13 @@
       "https://github.com/jhb86253817/PIPNet"
     ],
     "verified_at": "2026-11-17",
-    "code": "https://github.com/jhb86253817/PIPNet"
+    "code": "https://github.com/jhb86253817/PIPNet",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=51",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "IJCV"
+    }
   },
   {
     "id": "adnet",
@@ -644,7 +788,13 @@
     "primary_sources": [
       "https://openaccess.thecvf.com/content/ICCV2021/papers/Huang_ADNet_Leveraging_Error-Bias_Towards_Normal_Direction_in_Face_Alignment_ICCV_2021_paper.pdf"
     ],
-    "verified_at": "2026-11-17"
+    "verified_at": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ICCV"
+    }
   },
   {
     "id": "hih",
@@ -691,7 +841,13 @@
       "https://github.com/thohemp/6DRepNet"
     ],
     "verified_at": "2026-11-17",
-    "code": "https://github.com/thohemp/6DRepNet"
+    "code": "https://github.com/thohemp/6DRepNet",
+    "ccf": {
+      "tier": "C",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=49",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ICIP"
+    }
   },
   {
     "id": "hhpnet",
@@ -757,7 +913,13 @@
     "primary_sources": [
       "https://openaccess.thecvf.com/content/CVPR2022/papers/Li_Towards_Accurate_Facial_Landmark_Detection_via_Cascaded_Transformers_CVPR_2022_paper.pdf"
     ],
-    "verified_at": "2026-11-17"
+    "verified_at": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "tokenhpe",
@@ -779,7 +941,13 @@
     "primary_sources": [
       "https://openaccess.thecvf.com/content/CVPR2023/html/Zhang_TokenHPE_Learning_Orientation_Tokens_for_Efficient_Head_Pose_Estimation_via_CVPR_2023_paper.html"
     ],
-    "verified_at": "2026-11-17"
+    "verified_at": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "star-loss",
@@ -802,7 +970,13 @@
       "https://openaccess.thecvf.com/content/CVPR2023/html/Zhou_STAR_Loss_Reducing_Semantic_Ambiguity_in_Facial_Landmark_Detection_CVPR_2023_paper.html"
     ],
     "verified_at": "2026-11-17",
-    "code": "https://github.com/ZhenglinZhou/STAR"
+    "code": "https://github.com/ZhenglinZhou/STAR",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "6drepnet360",
@@ -826,7 +1000,13 @@
       "https://github.com/thohemp/6DRepNet360"
     ],
     "verified_at": "2026-11-17",
-    "code": "https://github.com/thohemp/6DRepNet360"
+    "code": "https://github.com/thohemp/6DRepNet360",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=44",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "TIP"
+    }
   },
   {
     "id": "hamer",
@@ -844,7 +1024,13 @@
       "RGB",
       "mesh",
       "2D evaluation"
-    ]
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "handdiff",
@@ -863,7 +1049,13 @@
       "point cloud",
       "diffusion"
     ],
-    "code": "https://github.com/cwc1260/HandDiff"
+    "code": "https://github.com/cwc1260/HandDiff",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "evhandpose",
@@ -881,7 +1073,13 @@
       "event camera",
       "sparse supervision"
     ],
-    "code": "https://github.com/AlanJiang98/EvHandPose"
+    "code": "https://github.com/AlanJiang98/EvHandPose",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=51",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "TPAMI"
+    }
   },
   {
     "id": "wilor",
@@ -899,7 +1097,13 @@
       "RGB",
       "multi-hand",
       "mesh"
-    ]
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "handos",
@@ -918,7 +1122,13 @@
       "RGB",
       "one-stage",
       "mesh"
-    ]
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "hawor",
@@ -936,7 +1146,13 @@
       "egocentric",
       "video",
       "world-space"
-    ]
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "hand-motion-physics",
@@ -954,7 +1170,13 @@
       "video",
       "diffusion",
       "hand-object"
-    ]
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ICCV"
+    }
   },
   {
     "id": "a2j-transformer-plus",
@@ -973,7 +1195,13 @@
       "depth",
       "interacting-hands"
     ],
-    "code": "https://github.com/ChanglongJiangGit/A2J-Transformer-Plus"
+    "code": "https://github.com/ChanglongJiangGit/A2J-Transformer-Plus",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=51",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "TPAMI"
+    }
   },
   {
     "id": "reach",
@@ -1069,7 +1297,13 @@
       "https://openaccess.thecvf.com/content_iccv_2017/html/Zimmermann_Learning_to_Estimate_ICCV_2017_paper.html"
     ],
     "verifiedAt": "2026-11-17",
-    "code": "https://github.com/lmb-freiburg/hand3d"
+    "code": "https://github.com/lmb-freiburg/hand3d",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ICCV"
+    }
   },
   {
     "id": "v2v-posenet-hand",
@@ -1092,7 +1326,13 @@
       "https://openaccess.thecvf.com/content_cvpr_2018/html/Moon_V2V-PoseNet_Voxel-to-Voxel_Prediction_CVPR_2018_paper.html"
     ],
     "verifiedAt": "2026-11-17",
-    "code": "https://github.com/mks0601/V2V-PoseNet_RELEASE"
+    "code": "https://github.com/mks0601/V2V-PoseNet_RELEASE",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "hand-pointnet",
@@ -1114,7 +1354,13 @@
     "sources": [
       "https://openaccess.thecvf.com/content_cvpr_2018/html/Ge_Hand_PointNet_3D_CVPR_2018_paper.html"
     ],
-    "verifiedAt": "2026-11-17"
+    "verifiedAt": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "latent-25d-hand",
@@ -1136,7 +1382,13 @@
     "sources": [
       "https://openaccess.thecvf.com/content_ECCV_2018/html/Umar_Iqbal_Hand_Pose_Estimation_ECCV_2018_paper.html"
     ],
-    "verifiedAt": "2026-11-17"
+    "verifiedAt": "2026-11-17",
+    "ccf": {
+      "tier": "B",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ECCV"
+    }
   },
   {
     "id": "dense-hand-regression",
@@ -1158,7 +1410,13 @@
     "sources": [
       "https://openaccess.thecvf.com/content_cvpr_2018/html/Wan_Dense_3D_Regression_CVPR_2018_paper.html"
     ],
-    "verifiedAt": "2026-11-17"
+    "verifiedAt": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "freihand",
@@ -1181,7 +1439,13 @@
     "sources": [
       "https://openaccess.thecvf.com/content_ICCV_2019/html/Zimmermann_FreiHAND_A_Dataset_for_Markerless_Capture_of_Hand_Pose_and_ICCV_2019_paper.html"
     ],
-    "verifiedAt": "2026-11-17"
+    "verifiedAt": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ICCV"
+    }
   },
   {
     "id": "hand-graph-cnn",
@@ -1203,7 +1467,13 @@
     "sources": [
       "https://openaccess.thecvf.com/content_CVPR_2019/html/Ge_3D_Hand_Shape_and_Pose_Estimation_From_a_Single_RGB_CVPR_2019_paper.html"
     ],
-    "verifiedAt": "2026-11-17"
+    "verifiedAt": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "hand-wild-mano",
@@ -1225,7 +1495,13 @@
     "sources": [
       "https://openaccess.thecvf.com/content_CVPR_2019/html/Boukhayma_3D_Hand_Shape_and_Pose_From_Images_in_the_Wild_CVPR_2019_paper.html"
     ],
-    "verifiedAt": "2026-11-17"
+    "verifiedAt": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "honnotate",
@@ -1248,7 +1524,13 @@
     "sources": [
       "https://openaccess.thecvf.com/content_CVPR_2020/html/Hampali_HOnnotate_A_Method_for_3D_Annotation_of_Hand_and_Object_CVPR_2020_paper.html"
     ],
-    "verifiedAt": "2026-11-17"
+    "verifiedAt": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "youtube3d-hands",
@@ -1270,7 +1552,13 @@
     "sources": [
       "https://openaccess.thecvf.com/content_CVPR_2020/html/Kulon_Weakly-Supervised_Mesh-Convolutional_Hand_Reconstruction_in_the_Wild_CVPR_2020_paper.html"
     ],
-    "verifiedAt": "2026-11-17"
+    "verifiedAt": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "monocular-realtime-hand",
@@ -1293,7 +1581,13 @@
     "sources": [
       "https://openaccess.thecvf.com/content_CVPR_2020/html/Zhou_Monocular_Real-Time_Hand_Shape_and_Motion_Capture_Using_Multi-Modal_Data_CVPR_2020_paper.html"
     ],
-    "verifiedAt": "2026-11-17"
+    "verifiedAt": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "handfoldingnet",
@@ -1316,7 +1610,13 @@
       "https://openaccess.thecvf.com/content/ICCV2021/html/Cheng_HandFoldingNet_A_3D_Hand_Pose_Estimation_Network_Using_Multiscale-Feature_Guided_ICCV_2021_paper.html"
     ],
     "verifiedAt": "2026-11-17",
-    "code": "https://github.com/cwc1260/HandFold"
+    "code": "https://github.com/cwc1260/HandFold",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ICCV"
+    }
   },
   {
     "id": "i2uv-handnet",
@@ -1338,7 +1638,13 @@
     "sources": [
       "https://openaccess.thecvf.com/content/ICCV2021/html/Chen_I2UV-HandNet_Image-to-UV_Prediction_Network_for_Accurate_and_High-Fidelity_3D_Hand_ICCV_2021_paper.html"
     ],
-    "verifiedAt": "2026-11-17"
+    "verifiedAt": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ICCV"
+    }
   },
   {
     "id": "mesh-graphormer-hand",
@@ -1362,7 +1668,13 @@
       "https://openaccess.thecvf.com/content/ICCV2021/html/Lin_Mesh_Graphormer_ICCV_2021_paper.html"
     ],
     "verifiedAt": "2026-11-17",
-    "code": "https://github.com/microsoft/MeshGraphormer"
+    "code": "https://github.com/microsoft/MeshGraphormer",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ICCV"
+    }
   },
   {
     "id": "metro-hand",
@@ -1385,7 +1697,13 @@
     "sources": [
       "https://openaccess.thecvf.com/content/CVPR2021/html/Lin_End-to-End_Human_Pose_and_Mesh_Reconstruction_with_Transformers_CVPR_2021_paper.html"
     ],
-    "verifiedAt": "2026-11-17"
+    "verifiedAt": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "cmr-hand",
@@ -1408,7 +1726,13 @@
       "https://openaccess.thecvf.com/content/CVPR2021/html/Chen_Camera-Space_Hand_Mesh_Recovery_via_Semantic_Aggregation_and_Adaptive_2D-1D_CVPR_2021_paper.html"
     ],
     "verifiedAt": "2026-11-17",
-    "code": "https://github.com/SeanChenxy/HandMesh"
+    "code": "https://github.com/SeanChenxy/HandMesh",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "handoccnet",
@@ -1431,7 +1755,13 @@
       "https://openaccess.thecvf.com/content/CVPR2022/html/Park_HandOccNet_Occlusion-Robust_3D_Hand_Mesh_Estimation_Network_CVPR_2022_paper.html"
     ],
     "verifiedAt": "2026-11-17",
-    "code": "https://github.com/namepllet/HandOccNet"
+    "code": "https://github.com/namepllet/HandOccNet",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "mobrecon",
@@ -1455,7 +1785,13 @@
       "https://openaccess.thecvf.com/content/CVPR2022/html/Chen_MobRecon_Mobile-Friendly_Hand_Mesh_Reconstruction_From_Monocular_Image_CVPR_2022_paper.html"
     ],
     "verifiedAt": "2026-11-17",
-    "code": "https://github.com/SeanChenxy/HandMesh"
+    "code": "https://github.com/SeanChenxy/HandMesh",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "multiview-depth-hand",
@@ -1478,7 +1814,13 @@
     "sources": [
       "https://openaccess.thecvf.com/content/CVPR2022/html/Ren_Mining_Multi-View_Information_A_Strong_Self-Supervised_Framework_for_Depth-Based_3D_CVPR_2022_paper.html"
     ],
-    "verifiedAt": "2026-11-17"
+    "verifiedAt": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "handy",
@@ -1501,7 +1843,13 @@
     "sources": [
       "https://openaccess.thecvf.com/content/CVPR2023/html/Potamias_Handy_Towards_a_High_Fidelity_3D_Hand_Shape_and_Appearance_CVPR_2023_paper.html"
     ],
-    "verifiedAt": "2026-11-17"
+    "verifiedAt": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "deformer-hand",
@@ -1524,7 +1872,13 @@
     "sources": [
       "https://openaccess.thecvf.com/content/ICCV2023/html/Fu_Deformer_Dynamic_Fusion_Transformer_for_Robust_Hand_Pose_Estimation_ICCV_2023_paper.html"
     ],
-    "verifiedAt": "2026-11-17"
+    "verifiedAt": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ICCV"
+    }
   },
   {
     "id": "thor-net",
@@ -1616,7 +1970,13 @@
     "sources": [
       "https://openaccess.thecvf.com/content_cvpr_2017/html/Simon_Hand_Keypoint_Detection_CVPR_2017_paper.html"
     ],
-    "verifiedAt": "2026-11-17"
+    "verifiedAt": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "deepprior-plus",
@@ -1661,7 +2021,13 @@
     "sources": [
       "https://openaccess.thecvf.com/content_iccv_2015/html/Supancic_Depth-Based_Hand_Pose_ICCV_2015_paper.html"
     ],
-    "verifiedAt": "2026-11-17"
+    "verifiedAt": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ICCV"
+    }
   },
   {
     "id": "cascaded-hand-regression",
@@ -1684,7 +2050,13 @@
     "sources": [
       "https://openaccess.thecvf.com/content_cvpr_2015/html/Sun_Cascaded_Hand_Pose_2015_CVPR_paper.html"
     ],
-    "verifiedAt": "2026-11-17"
+    "verifiedAt": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "mano",
@@ -1707,7 +2079,13 @@
     "sources": [
       "https://mano.is.tue.mpg.de/"
     ],
-    "verifiedAt": "2026-11-17"
+    "verifiedAt": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=44",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "TOG"
+    }
   },
   {
     "id": "interhand26m",
@@ -1731,7 +2109,13 @@
       "https://arxiv.org/abs/2008.09309"
     ],
     "verifiedAt": "2026-11-17",
-    "code": "https://github.com/facebookresearch/InterHand2.6M"
+    "code": "https://github.com/facebookresearch/InterHand2.6M",
+    "ccf": {
+      "tier": "B",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ECCV"
+    }
   },
   {
     "id": "mediapipe-hands",
@@ -1779,7 +2163,13 @@
     "sources": [
       "https://openaccess.thecvf.com/content_cvpr_2018/html/Garcia-Hernando_First-Person_Hand_Action_CVPR_2018_paper.html"
     ],
-    "verifiedAt": "2026-11-17"
+    "verifiedAt": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "body2hands",
@@ -1801,7 +2191,13 @@
     "sources": [
       "https://openaccess.thecvf.com/content/CVPR2021/html/Ng_Body2Hands_Learning_To_Infer_3D_Hands_From_Conversational_Gesture_Body_CVPR_2021_paper.html"
     ],
-    "verifiedAt": "2026-11-17"
+    "verifiedAt": "2026-11-17",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "rtmo",
@@ -1822,7 +2218,13 @@
     "verified_at": "2026-11-17",
     "sources": [
       "https://openaccess.thecvf.com/content/CVPR2024/html/Lu_RTMO_Towards_High-Performance_One-Stage_Real-Time_Multi-Person_Pose_Estimation_CVPR_2024_paper.html"
-    ]
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "sapiens",
@@ -1843,7 +2245,13 @@
     "verified_at": "2026-11-17",
     "sources": [
       "https://www.ecva.net/papers/eccv_2024/papers_ECCV/html/529_ECCV_2024_paper.php"
-    ]
+    ],
+    "ccf": {
+      "tier": "B",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ECCV"
+    }
   },
   {
     "id": "rtmw",
@@ -1909,7 +2317,13 @@
     "verified_at": "2026-11-17",
     "sources": [
       "https://openaccess.thecvf.com/content/CVPR2024/html/Shin_WHAM_Reconstructing_World-grounded_Humans_with_Accurate_3D_Motion_CVPR_2024_paper.html"
-    ]
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "gvhmr",
@@ -1951,7 +2365,13 @@
     "verified_at": "2026-11-17",
     "sources": [
       "https://openaccess.thecvf.com/content/CVPR2025/html/Purkrabek_ProbPose_A_Probabilistic_Approach_to_2D_Human_Pose_Estimation_CVPR_2025_paper.html"
-    ]
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "dynpose",
@@ -1971,7 +2391,13 @@
     "verified_at": "2026-11-17",
     "sources": [
       "https://openaccess.thecvf.com/content/CVPR2025/html/Xu_DynPose_Largely_Improving_the_Efficiency_of_Human_Pose_Estimation_by_CVPR_2025_paper.html"
-    ]
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "perspose",
@@ -1991,7 +2417,13 @@
     "verified_at": "2026-11-17",
     "sources": [
       "https://openaccess.thecvf.com/content/ICCV2025/html/Hao_PersPose_3D_Human_Pose_Estimation_with_Perspective_Encoding_and_Perspective_ICCV_2025_paper.html"
-    ]
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ICCV"
+    }
   },
   {
     "id": "smplest-x",
@@ -2014,7 +2446,13 @@
     "verified_at": "2026-11-17",
     "sources": [
       "https://doi.org/10.1109/TPAMI.2025.3618174"
-    ]
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=51",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "TPAMI"
+    }
   },
   {
     "id": "egocentric-visibility-aware",
@@ -2035,7 +2473,13 @@
     "verified_at": "2026-11-17",
     "sources": [
       "https://openaccess.thecvf.com/content/CVPR2026/html/Dai_Egocentric_Visibility-Aware_Human_Pose_Estimation_CVPR_2026_paper.html"
-    ]
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "metricpose",
@@ -2077,7 +2521,13 @@
     "verified_at": "2026-11-17",
     "sources": [
       "https://arxiv.org/abs/1312.4659"
-    ]
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "cpm",
@@ -2099,7 +2549,13 @@
     "verified_at": "2026-11-17",
     "sources": [
       "https://arxiv.org/abs/1602.00134"
-    ]
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "hourglass",
@@ -2121,7 +2577,13 @@
     "verified_at": "2026-11-17",
     "sources": [
       "https://arxiv.org/abs/1603.06937"
-    ]
+    ],
+    "ccf": {
+      "tier": "B",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ECCV"
+    }
   },
   {
     "id": "openpose",
@@ -2143,7 +2605,13 @@
     "verified_at": "2026-11-17",
     "sources": [
       "https://arxiv.org/abs/1611.08050"
-    ]
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "simplebaseline2d",
@@ -2165,7 +2633,13 @@
     "verified_at": "2026-11-17",
     "sources": [
       "https://openaccess.thecvf.com/content_ECCV_2018/papers/Bin_Xiao_Simple_Baselines_for_ECCV_2018_paper.pdf"
-    ]
+    ],
+    "ccf": {
+      "tier": "B",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ECCV"
+    }
   },
   {
     "id": "hrnet",
@@ -2187,7 +2661,13 @@
     "verified_at": "2026-11-17",
     "sources": [
       "https://arxiv.org/abs/1902.09212"
-    ]
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "higherhrnet",
@@ -2210,7 +2690,13 @@
       "https://openaccess.thecvf.com/content_CVPR_2020/html/Cheng_HigherHRNet_Scale-Aware_Representation_Learning_for_Bottom-Up_Human_Pose_Estimation_CVPR_2020_paper.html",
       "https://github.com/HRNet/HigherHRNet-Human-Pose-Estimation"
     ],
-    "code": "https://github.com/HRNet/HigherHRNet-Human-Pose-Estimation"
+    "code": "https://github.com/HRNet/HigherHRNet-Human-Pose-Estimation",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "dekr",
@@ -2233,7 +2719,13 @@
       "https://openaccess.thecvf.com/content/CVPR2021/html/Geng_Bottom-Up_Human_Pose_Estimation_via_Disentangled_Keypoint_Regression_CVPR_2021_paper.html",
       "https://github.com/HRNet/DEKR"
     ],
-    "code": "https://github.com/HRNet/DEKR"
+    "code": "https://github.com/HRNet/DEKR",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "tokenpose",
@@ -2256,7 +2748,13 @@
       "https://openaccess.thecvf.com/content/ICCV2021/html/Li_TokenPose_Learning_Keypoint_Tokens_for_Human_Pose_Estimation_ICCV_2021_paper.html",
       "https://github.com/leeyegy/TokenPose"
     ],
-    "code": "https://github.com/leeyegy/TokenPose"
+    "code": "https://github.com/leeyegy/TokenPose",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ICCV"
+    }
   },
   {
     "id": "vitpose",
@@ -2280,7 +2778,13 @@
       "https://arxiv.org/abs/2204.12484",
       "https://github.com/ViTAE-Transformer/ViTPose"
     ],
-    "code": "https://github.com/ViTAE-Transformer/ViTPose"
+    "code": "https://github.com/ViTAE-Transformer/ViTPose",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "NeurIPS"
+    }
   },
   {
     "id": "simcc",
@@ -2303,7 +2807,13 @@
       "https://www.ecva.net/papers/eccv_2022/papers_ECCV/html/4591_ECCV_2022_paper.php",
       "https://github.com/leeyegy/SimCC"
     ],
-    "code": "https://github.com/leeyegy/SimCC"
+    "code": "https://github.com/leeyegy/SimCC",
+    "ccf": {
+      "tier": "B",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ECCV"
+    }
   },
   {
     "id": "rtmpose",
@@ -2351,7 +2861,13 @@
       "https://arxiv.org/abs/1705.03098",
       "https://github.com/una-dinosauria/3d-pose-baseline"
     ],
-    "code": "https://github.com/una-dinosauria/3d-pose-baseline"
+    "code": "https://github.com/una-dinosauria/3d-pose-baseline",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ICCV"
+    }
   },
   {
     "id": "videopose3d",
@@ -2375,7 +2891,13 @@
       "https://arxiv.org/abs/1811.11742",
       "https://github.com/facebookresearch/VideoPose3D"
     ],
-    "code": "https://github.com/facebookresearch/VideoPose3D"
+    "code": "https://github.com/facebookresearch/VideoPose3D",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "poseformer",
@@ -2399,7 +2921,13 @@
       "https://ieeexplore.ieee.org/abstract/document/9710244",
       "https://github.com/zczcwh/PoseFormer"
     ],
-    "code": "https://github.com/zczcwh/PoseFormer"
+    "code": "https://github.com/zczcwh/PoseFormer",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ICCV"
+    }
   },
   {
     "id": "mixste",
@@ -2421,7 +2949,13 @@
     "verified_at": "2026-11-17",
     "sources": [
       "https://openaccess.thecvf.com/content/CVPR2022/html/Zhang_MixSTE_Seq2seq_Mixed_Spatio-Temporal_Encoder_for_3D_Human_Pose_Estimation_CVPR_2022_paper.html"
-    ]
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "poseformerv2",
@@ -2445,7 +2979,13 @@
       "https://openaccess.thecvf.com/content/CVPR2023/html/Zhao_PoseFormerV2_Exploring_Frequency_Domain_for_Efficient_and_Robust_3D_Human_CVPR_2023_paper.html",
       "https://github.com/QitaoZhao/PoseFormerV2"
     ],
-    "code": "https://github.com/QitaoZhao/PoseFormerV2"
+    "code": "https://github.com/QitaoZhao/PoseFormerV2",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "motionbert",
@@ -2469,7 +3009,13 @@
       "https://openaccess.thecvf.com/content/ICCV2023/html/Zhu_MotionBERT_A_Unified_Perspective_on_Learning_Human_Motion_Representations_ICCV_2023_paper.html",
       "https://github.com/Walter0807/MotionBERT"
     ],
-    "code": "https://github.com/Walter0807/MotionBERT"
+    "code": "https://github.com/Walter0807/MotionBERT",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ICCV"
+    }
   },
   {
     "id": "smplify",
@@ -2492,7 +3038,13 @@
     "verified_at": "2026-11-17",
     "sources": [
       "https://smplify.is.tuebingen.mpg.de/"
-    ]
+    ],
+    "ccf": {
+      "tier": "B",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ECCV"
+    }
   },
   {
     "id": "hmr",
@@ -2515,7 +3067,13 @@
     "verified_at": "2026-11-17",
     "sources": [
       "https://openaccess.thecvf.com/content_cvpr_2018/html/Kanazawa_End-to-End_Recovery_of_CVPR_2018_paper.html"
-    ]
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "spin",
@@ -2539,7 +3097,13 @@
       "https://openaccess.thecvf.com/content_ICCV_2019/html/Kolotouros_Learning_to_Reconstruct_3D_Human_Pose_and_Shape_via_Model-Fitting_ICCV_2019_paper.html",
       "https://github.com/nkolot/SPIN"
     ],
-    "code": "https://github.com/nkolot/SPIN"
+    "code": "https://github.com/nkolot/SPIN",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ICCV"
+    }
   },
   {
     "id": "vibe",
@@ -2563,7 +3127,13 @@
       "https://openaccess.thecvf.com/content_CVPR_2020/html/Kocabas_VIBE_Video_Inference_for_Human_Body_Pose_and_Shape_Estimation_CVPR_2020_paper.html",
       "https://github.com/mkocabas/VIBE"
     ],
-    "code": "https://github.com/mkocabas/VIBE"
+    "code": "https://github.com/mkocabas/VIBE",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "pare",
@@ -2585,7 +3155,13 @@
     "verified_at": "2026-11-17",
     "sources": [
       "https://openaccess.thecvf.com/content/ICCV2021/papers/Kocabas_PARE_Part_Attention_Regressor_for_3D_Human_Body_Estimation_ICCV_2021_paper.pdf"
-    ]
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ICCV"
+    }
   },
   {
     "id": "hybrik",
@@ -2609,7 +3185,13 @@
       "https://openaccess.thecvf.com/content/CVPR2021/html/Li_HybrIK_A_Hybrid_Analytical-Neural_Inverse_Kinematics_Solution_for_3D_Human_CVPR_2021_paper.html",
       "https://github.com/jeffffffli/HybrIK"
     ],
-    "code": "https://github.com/jeffffffli/HybrIK"
+    "code": "https://github.com/jeffffffli/HybrIK",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "romp",
@@ -2633,7 +3215,13 @@
       "https://openaccess.thecvf.com/content/ICCV2021/html/Sun_Monocular_One-Stage_Regression_of_Multiple_3D_People_ICCV_2021_paper.html",
       "https://github.com/Arthur151/ROMP"
     ],
-    "code": "https://github.com/Arthur151/ROMP"
+    "code": "https://github.com/Arthur151/ROMP",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ICCV"
+    }
   },
   {
     "id": "4dhumans",
@@ -2657,7 +3245,13 @@
       "https://openaccess.thecvf.com/content/ICCV2023/html/Goel_Humans_in_4D_Reconstructing_and_Tracking_Humans_with_Transformers_ICCV_2023_paper.html",
       "https://github.com/shubham-goel/4D-Humans"
     ],
-    "code": "https://github.com/shubham-goel/4D-Humans"
+    "code": "https://github.com/shubham-goel/4D-Humans",
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ICCV"
+    }
   },
   {
     "id": "smplx",
@@ -2680,7 +3274,13 @@
     "verified_at": "2026-11-17",
     "sources": [
       "https://smpl-x.is.tuebingen.mpg.de/"
-    ]
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
   },
   {
     "id": "expose",
@@ -2704,7 +3304,13 @@
       "https://arxiv.org/abs/2008.09062",
       "https://github.com/vchoutas/expose"
     ],
-    "code": "https://github.com/vchoutas/expose"
+    "code": "https://github.com/vchoutas/expose",
+    "ccf": {
+      "tier": "B",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ECCV"
+    }
   },
   {
     "id": "pixie",
@@ -2728,7 +3334,13 @@
       "https://arxiv.org/abs/2105.05301",
       "https://github.com/yfeng95/PIXIE"
     ],
-    "code": "https://github.com/yfeng95/PIXIE"
+    "code": "https://github.com/yfeng95/PIXIE",
+    "ccf": {
+      "tier": "C",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=49",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "3DV"
+    }
   },
   {
     "id": "cocowholebody",
@@ -2752,7 +3364,13 @@
       "https://www.ecva.net/papers/eccv_2020/papers_ECCV/html/768_ECCV_2020_paper.php",
       "https://github.com/jin-s13/COCO-WholeBody"
     ],
-    "code": "https://github.com/jin-s13/COCO-WholeBody"
+    "code": "https://github.com/jin-s13/COCO-WholeBody",
+    "ccf": {
+      "tier": "B",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ECCV"
+    }
   },
   {
     "id": "smplerx",

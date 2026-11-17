@@ -62,3 +62,7 @@ Coverage: 2D top-down/bottom-up, heatmap/regression/coordinate classification, t
 Limits: no reproduction/benchmark runs; code links not present on every entry; older works selected from 2014 onward, not all historical approaches; DOI and complete author metadata not yet uniformly populated. Existing 2024–2026 records were retained from prior verified research. CVF direct pages can return 403, with official indexed BibTeX/title used when needed. PIXIE venue/year checked via author project, ExPose via author project and arXiv.
 
 
+
+## CCF labels
+
+Labels refer to the 2026 seventh edition, not historical ratings at the time of each publication. The [CCF release notice](https://www.ccf.org.cn/Academic_Evaluation/By_category/2026-03-31/870181.shtml) announces the edition; the [catalogue PDF reproduced by Lishui University](https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf) is the row-level source. See `ccf-mapping.json` for venue matching and exclusions. Labels describe a venue, not the quality of an individual paper. Workshops and preprints do not inherit main-conference ranks; unmatched entries are left unmarked.

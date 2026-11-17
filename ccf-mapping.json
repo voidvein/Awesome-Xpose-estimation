@@ -1,0 +1,225 @@
+{
+  "edition": "2026",
+  "editionName": "中国计算机学会推荐国际学术会议和期刊目录（2026年，第七版）",
+  "checkedAt": "2026-11-17",
+  "basis": "CCF authored final catalogue, university-hosted facsimile PDF; relevant rows cross-checked against CCF official category pages.",
+  "sources": [
+    {
+      "url": "https://www.ccf.org.cn/Academic_Evaluation/By_category/2026-03-31/870181.shtml",
+      "role": "CCF final release notice (direct fetch blocked 405)"
+    },
+    {
+      "url": "https://kyc.lsu.edu.cn/2026/0518/c2834a367789/page.htm",
+      "role": "University republication of final catalogue, identifies release date 2026-03-31"
+    },
+    {
+      "url": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf",
+      "role": "Downloaded and fully parsed 2026 final CCF-authored PDF; decisive ranking source"
+    },
+    {
+      "url": "https://www.ccf.org.cn/Academic_Evaluation/AI/",
+      "role": "Official category page, search-index readable but appears older: IJCAI A and ICLR absent. Do not describe this page as fully updated 2026."
+    },
+    {
+      "url": "https://www.ccf.org.cn/Academic_Evaluation/CGAndMT/",
+      "role": "Official category page, search-index readable but appears older; latest PDF takes priority."
+    }
+  ],
+  "policy": "按明确载体匹配，不用 substring 将 workshop 当主会；未收录、待核验、预印本分别处理；所有年份均展示当前 2026 目录等级，不宣称历史等级。",
+  "venues": {
+    "CVPR": {
+      "rank": "A",
+      "count": 55,
+      "status": "verified",
+      "label": "CCF A",
+      "reason": "按 2026 第七版载体等级标注，非论文质量评价；不是发表年份的历史评级。",
+      "canonicalVenue": "CVPR",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "sourcePage": 57
+    },
+    "ECCV": {
+      "rank": "B",
+      "count": 12,
+      "status": "verified",
+      "label": "CCF B",
+      "reason": "按 2026 第七版载体等级标注，非论文质量评价；不是发表年份的历史评级。",
+      "canonicalVenue": "ECCV",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
+      "sourcePage": 58
+    },
+    "IEEE TIP": {
+      "rank": "A",
+      "count": 2,
+      "status": "verified",
+      "label": "CCF A",
+      "reason": "按 2026 第七版载体等级标注，非论文质量评价；不是发表年份的历史评级。",
+      "canonicalVenue": "TIP",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=44",
+      "sourcePage": 44
+    },
+    "Pattern Recognition": {
+      "rank": "B",
+      "count": 2,
+      "status": "verified",
+      "label": "CCF B",
+      "reason": "按 2026 第七版载体等级标注，非论文质量评价；不是发表年份的历史评级。",
+      "canonicalVenue": "PR",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=53",
+      "sourcePage": 53
+    },
+    "Computer Graphics Forum": {
+      "rank": "B",
+      "count": 1,
+      "status": "verified",
+      "label": "CCF B",
+      "reason": "按 2026 第七版载体等级标注，非论文质量评价；不是发表年份的历史评级。",
+      "canonicalVenue": "CGF",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=45",
+      "sourcePage": 45
+    },
+    "ICCV": {
+      "rank": "A",
+      "count": 22,
+      "status": "verified",
+      "label": "CCF A",
+      "reason": "按 2026 第七版载体等级标注，非论文质量评价；不是发表年份的历史评级。",
+      "canonicalVenue": "ICCV",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "sourcePage": 57
+    },
+    "arXiv; author reports TPAMI publication": {
+      "rank": null,
+      "count": 1,
+      "status": "publication-unverified",
+      "label": "待核验",
+      "reason": "保留原有作者自述发表/录用状态；未独立核验正式发表载体，不据此赋 CCF 等级。"
+    },
+    "CVPR Workshops (author-reported)": {
+      "rank": null,
+      "count": 1,
+      "status": "workshop",
+      "label": "Workshop",
+      "reason": "Workshop 不自动继承同名主会等级；未找到该 workshop 的独立目录条目。"
+    },
+    "arXiv; accepted WACV 2027 (author-reported)": {
+      "rank": null,
+      "count": 1,
+      "status": "publication-unverified",
+      "label": "待核验",
+      "reason": "保留原有作者自述发表/录用状态；未独立核验正式发表载体，不据此赋 CCF 等级。"
+    },
+    "arXiv": {
+      "rank": null,
+      "count": 9,
+      "status": "preprint",
+      "label": "arXiv",
+      "reason": "预印本平台，不是 CCF 期刊或会议等级。"
+    },
+    "CVPR Workshops": {
+      "rank": null,
+      "count": 2,
+      "status": "workshop",
+      "label": "Workshop",
+      "reason": "Workshop 不自动继承同名主会等级；未找到该 workshop 的独立目录条目。"
+    },
+    "BMVC": {
+      "rank": "C",
+      "count": 1,
+      "status": "verified",
+      "label": "CCF C",
+      "reason": "按 2026 第七版载体等级标注，非论文质量评价；不是发表年份的历史评级。",
+      "canonicalVenue": "BMVC",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=59",
+      "sourcePage": 59
+    },
+    "IJCV": {
+      "rank": "A",
+      "count": 1,
+      "status": "verified",
+      "label": "CCF A",
+      "reason": "按 2026 第七版载体等级标注，非论文质量评价；不是发表年份的历史评级。",
+      "canonicalVenue": "IJCV",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=51",
+      "sourcePage": 51
+    },
+    "ICCV Workshops": {
+      "rank": null,
+      "count": 2,
+      "status": "workshop",
+      "label": "Workshop",
+      "reason": "Workshop 不自动继承同名主会等级；未找到该 workshop 的独立目录条目。"
+    },
+    "ICIP": {
+      "rank": "C",
+      "count": 1,
+      "status": "verified",
+      "label": "CCF C",
+      "reason": "按 2026 第七版载体等级标注，非论文质量评价；不是发表年份的历史评级。",
+      "canonicalVenue": "ICIP",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=49",
+      "sourcePage": 49
+    },
+    "WACV": {
+      "rank": null,
+      "count": 6,
+      "status": "not-listed",
+      "label": "未收录",
+      "reason": "2026 第七版完整 PDF 未找到 WACV 或 IEEE/CVF Winter Conference on Applications of Computer Vision 条目。未收录不表示低质量。"
+    },
+    "TPAMI": {
+      "rank": "A",
+      "count": 3,
+      "status": "verified",
+      "label": "CCF A",
+      "reason": "按 2026 第七版载体等级标注，非论文质量评价；不是发表年份的历史评级。",
+      "canonicalVenue": "TPAMI",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=51",
+      "sourcePage": 51
+    },
+    "ACM TOG / SIGGRAPH Asia": {
+      "rank": "A",
+      "count": 1,
+      "status": "verified",
+      "label": "CCF A",
+      "reason": "按条目中明确列出的 ACM TOG 期刊标注 A，不推定 SIGGRAPH Asia 会议本身为 A。",
+      "canonicalVenue": "TOG",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=44",
+      "sourcePage": 44
+    },
+    "SIGGRAPH Asia": {
+      "rank": null,
+      "count": 1,
+      "status": "not-listed",
+      "label": "未收录",
+      "reason": "2026 第七版仅明确列出 SIGGRAPH 和 TOG，没有 SIGGRAPH Asia 独立条目；不合并不同会议，不据此猜测论文是否为 TOG。"
+    },
+    "NeurIPS": {
+      "rank": "A",
+      "count": 1,
+      "status": "verified",
+      "label": "CCF A",
+      "reason": "按 2026 第七版载体等级标注，非论文质量评价；不是发表年份的历史评级。",
+      "canonicalVenue": "NeurIPS",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "sourcePage": 57
+    },
+    "3DV": {
+      "rank": "C",
+      "count": 1,
+      "status": "verified",
+      "label": "CCF C",
+      "reason": "按 2026 第七版载体等级标注，非论文质量评价；不是发表年份的历史评级。",
+      "canonicalVenue": "3DV",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=49",
+      "sourcePage": 49
+    },
+    "NeurIPS Datasets and Benchmarks": {
+      "rank": null,
+      "count": 1,
+      "status": "track-unverified",
+      "label": "分轨待核验",
+      "reason": "NeurIPS 主会为 A，但目录没有独立列出 Datasets and Benchmarks；当前采取保守策略，不在缺少分轨适用依据时自动继承。",
+      "parentVenueRank": "A"
+    }
+  }
+}
