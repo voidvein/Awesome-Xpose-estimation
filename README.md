@@ -4,7 +4,7 @@ A curated starting point for 2D/3D head, hand, and human pose estimation researc
 
 ## Browse the site
 
-Serve `dist/` using any static HTTP server, for example `python -m http.server --directory dist 8000`. Filter by subject, dimensionality, venue, year, and publication status.
+Serve the repository root using any static HTTP server, for example `python -m http.server 8000`. Filter by subject, dimensionality, venue, year, and publication status.
 
 ## Papers
 
