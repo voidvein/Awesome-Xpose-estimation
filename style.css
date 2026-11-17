@@ -8,3 +8,12 @@
 
 /* CCF venue tiers: explicit labels ensure color is never the only signal. */
 .ccf-badge{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;font:600 10px/1.5 var(--mono);letter-spacing:.15px;padding:2px 7px;border-radius:5px;border:1px solid;text-decoration:none;flex-shrink:0}.ccf-a{color:#6b264f;background:#f6e8f0;border-color:#d9aec6}.ccf-b{color:#234e78;background:#e8f0f8;border-color:#afc6de}.ccf-c{color:#28593b;background:#e8f2e9;border-color:#b0ccb5}.ccf-badge:hover{color:var(--ink);text-decoration:underline;border-color:currentColor}.card-meta{flex-wrap:wrap}.specrow .ccf-badge{align-self:center;font-size:11px}.facts .ccf-badge{font-size:11px}
+
+/* Evidence-backed paper notes: spacious reading without changing the catalog. */
+.paper-analysis{margin:36px 0;padding:26px 28px;border:1px solid var(--line,#e8ded8);border-radius:16px;background:rgba(255,255,255,.42)}
+.analysis-heading{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:14px}.detail-body .analysis-heading h2{margin:0}
+.analysis-status{font-size:11px;font-weight:700;letter-spacing:.04em;padding:5px 10px;border-radius:20px;background:#ece9df;color:#536346;white-space:nowrap}.analysis-status.pending{background:#f4e6df;color:#966c54}
+.detail-body .analysis-intro{font-size:13px;line-height:1.8;color:#85776d;margin:0 0 24px}.analysis-section{padding:19px 0;border-top:1px solid var(--line,#e8ded8)}.detail-body .analysis-section h3,.detail-body .analysis-evidence h3{font-size:16px;line-height:1.5;margin:0 0 10px}.detail-body .analysis-section p{font-size:15px;line-height:1.95;margin:0 0 12px;white-space:pre-line}.detail-body .analysis-section p:last-child{margin-bottom:0}.detail-body .analysis-missing{font-size:13px;line-height:1.85;color:#8d8075}.analysis-evidence{padding:18px 20px;margin-top:10px;background:#f5eee8;border-radius:10px}.analysis-sources{padding-left:21px;margin:0}.analysis-sources li{font-size:13px;line-height:1.8;margin:6px 0;overflow-wrap:anywhere}.analysis-sources a{color:var(--accent,#ae6465);text-underline-offset:3px}
+@media(max-width:640px){.paper-analysis{padding:20px 18px;margin:28px 0}.analysis-evidence{padding:15px}.detail-body .analysis-section p{font-size:14px}}
+
+.analysis-scope{border-left:3px solid #b78678;background:#f5eee8;padding:12px 16px;margin:18px 0;color:#766457}.analysis-scope strong{font-size:13px}.detail-body .analysis-scope p{font-size:13px;line-height:1.8;margin:6px 0 0;white-space:pre-line}

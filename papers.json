@@ -20,6 +20,20 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "3DMM 配准生成的三维关键点与人工二维标注的语义定义不一致，妨碍三维关键点学习。",
+      "method": "直接提升可见的人工二维关键点到三维；使用具备三维结构的 GAN 学习多视图一致性，再利用自然视频学习跨帧约束。",
+      "inputs_outputs": "推理输入为单张人脸图像，输出三维人脸关键点及头部姿态；训练利用二维标注、合成多视图与自然视频。",
+      "contribution": "不依赖三维关键点训练集，重点解决二维与三维标注定义的对齐，而不仅是降低某个数据集上的回归误差。",
+      "limitations": "作者指出，效果依赖二维关键点检测器与 3D-aware GAN 的质量；不对称表情、生成模型覆盖有限的姿态与表情，以及遮挡可能限制三维提升效果。",
+      "sources": [
+        "https://arxiv.org/abs/2405.19646",
+        "https://arxiv.org/html/2405.19646"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verification_note": "已补查全文模型架构和局限章节；未独立复现。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -44,6 +58,20 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ECCV"
+    },
+    "analysis": {
+      "problem": "已有 6DoF 方法对头部平移和人脸几何之间的相互关系利用不足。",
+      "method": "TRG 显式双向交互平移、旋转和人脸几何，加入检测框校正参数估计与关键点到图像对齐。",
+      "inputs_outputs": "输入单目人脸图像；精确深度和三维平移需要相机内参。输出头部三维旋转与平移。",
+      "contribution": "将几何与位姿作为相互提供约束的任务，在 ARKitFace 和 BIWI 上验证，而非将旋转回归简单扩展为平移回归。",
+      "limitations": "作者指出，缺少相机内参时只能估计人脸之间的相对深度，不能可靠恢复精确深度与平移。",
+      "sources": [
+        "https://arxiv.org/abs/2407.14136v1",
+        "https://arxiv.org/html/2407.14136v1"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verification_note": "已补查 v1 全文 §4.6 的相机内参与深度限制；未独立复现。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -67,6 +95,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=44",
       "version": "2026 第七版（目录原文转载）",
       "venue": "TIP"
+    },
+    "analysis": {
+      "problem": "自然场景头姿存在旋转不确定性，直接图像到姿态回归难以显式遵循旋转流形。",
+      "method": "把头姿预测建模为旋转流形上的反向扩散，逐步去噪和细化；使用各向同性高斯分布表达旋转表示中的不一致信息，并加入近邻面部关系的循环一致性。",
+      "inputs_outputs": "人脸图像到头部旋转估计；核心为概率式旋转回归。",
+      "contribution": "将一次性回归改为分步概率推断，并利用面部关系约束应对形状变化。",
+      "limitations": null,
+      "sources": [
+        "https://ieeexplore.ieee.org/abstract/document/10462910"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "读取到出版社搜索索引中的完整作者摘要；直接页面触发机器人验证，未声称已阅读全文。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -91,6 +132,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=53",
       "version": "2026 第七版（目录原文转载）",
       "venue": "PR"
+    },
+    "analysis": {
+      "problem": "窄角度与全旋转头姿估计需要不同表示；训练和测试数据坐标系不一致会污染跨数据集评估。",
+      "method": "比较旋转表示和度量，量化参考系不对齐；推广测地角距离构造损失，并建立 CMU Panoptic 宽范围评测。",
+      "inputs_outputs": "头部图像到旋转；另输出评测协议、参考系校正方法和宽范围基准。",
+      "contribution": "价值主要在表示、损失及评测方法的系统检查。论文指出欧拉角在极端旋转以及作为误差度量时的问题，提醒不能仅凭角度 MAE 比较模型。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2401.05807"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -114,6 +168,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=45",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CGF"
+    },
+    "analysis": {
+      "problem": "独立的人脸归一化、二维直接回归及跨数据集标注不一致会影响关键点精度和时序稳定性。",
+      "method": "联合训练空间变换网络；在规范三维空间预测关键点并估计相机内参与头姿进行投影；利用语义校正网络协调不同数据集。",
+      "inputs_outputs": "人脸图像输入；得到二维投影关键点，同时预测规范三维关键点、相机参数及头姿。",
+      "contribution": "把预处理、三维结构和标注语义对齐纳入统一学习，三维形状仅用二维关键点监督；在连续关键点检测器上验证模块作用。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2405.20117"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -139,6 +206,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "在缺乏人工关键点与头姿标注时，同时发现稳定的面部语义点和三维朝向。",
+      "method": "利用 Stable Diffusion 的语义信息进行一致关键点选择，学习图像感知文本嵌入；用关键点指导头姿估计，再借助三维渲染增强和按姿态组织训练批次细化关键点。",
+      "inputs_outputs": "无标注人脸图像；输出发现的面部关键点和三维头姿。",
+      "contribution": "使关键点发现与头姿估计相互改进，在 AFLW2000、MAFL、Cat-Heads、LS3D 及 300VW 等数据上报告验证。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/CVPR2025/html/Tourani_Unsupervised_Discovery_of_Facial_Landmarks_and_Head_Pose_CVPR_2025_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -163,6 +243,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "analysis": {
+      "problem": "各人脸分析任务使用独立网络和预处理，难以扩展和统一部署。",
+      "method": "Transformer 编码解码结构以可学习 token 表示不同任务；FaceX 轻量解码器通过双向交叉注意力联合处理人脸与任务 token。",
+      "inputs_outputs": "人脸图像输入；统一输出包括关键点、头姿、分割、表情及人脸识别在内的十类任务结果。",
+      "contribution": "把头姿与关键点放入共享人脸表示框架，比较专用模型与多任务模型，并评估野外鲁棒性及计算效率。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2403.12960v3"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "采用十任务的 v3/ICCV 版本；早期九任务摘要不可直接作为最终版本描述。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -187,6 +280,20 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=53",
       "version": "2026 第七版（目录原文转载）",
       "venue": "PR"
+    },
+    "analysis": {
+      "problem": "人工面部关键点和头姿标签成本高，需要从图像本身学习二者关系。",
+      "method": "共享编码器连接关键点与刚体姿态预测头，学习一组规范三维关键点；由目标图像的结构特征和增强源图像的外观特征重建目标图像。",
+      "inputs_outputs": "训练使用无标注人脸及其增强；输出面部关键点和头部姿态。",
+      "contribution": "用可学习三维规范结构连接关键点与姿态，再通过图像重建形成无需人工标签的训练信号。",
+      "limitations": null,
+      "sources": [
+        "https://www.sciencedirect.com/science/article/pii/S0031320325000536",
+        "https://www.cs.uic.edu/~tangw/files/2025_PR_ZhimingZou.pdf"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -205,7 +312,20 @@
     "tags": [
       "semi-supervised",
       "publication-metadata-pending"
-    ]
+    ],
+    "analysis": {
+      "problem": "自然场景全角度头姿标注少，合成或受限采集数据又存在分布偏差。",
+      "method": "半监督旋转回归使用保持宽高比的头部裁剪、动态熵阈值过滤伪标签，以及遮挡和旋转一致性两类面向头部的强增强。",
+      "inputs_outputs": "有标注和大量无标注头部图像参与训练；推理输出头部旋转。",
+      "contribution": "专门处理非正脸情况下关键点不可得和伪标签误差敏感的问题，在前向范围和全范围设置中进行对比。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2404.02544"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
+    }
   },
   {
     "id": "vggt-hpe",
@@ -222,7 +342,20 @@
     "tags": [
       "relative-pose",
       "workshop"
-    ]
+    ],
+    "analysis": {
+      "problem": "绝对姿态回归需要隐式学习数据集特有的规范参考系。",
+      "method": "基于几何基础模型预测锚点图像与查询图像之间的相对刚体变化，仅用合成人脸渲染微调。",
+      "inputs_outputs": "查询图像与具有已知位姿的锚点图像；输出相对位姿并结合锚点恢复查询位姿。",
+      "contribution": "将任务改成显式参考下的几何比较，锚点可在测试时选择；通过不同难度图像对检验相对预测的作用。",
+      "limitations": "推理依赖具有已知位姿的锚点图像；该条件由论文的任务定义明确给出。",
+      "sources": [
+        "https://arxiv.org/abs/2604.10106"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
+    }
   },
   {
     "id": "reva-hpe",
@@ -239,7 +372,20 @@
     "tags": [
       "6DoF",
       "relative-pose"
-    ]
+    ],
+    "analysis": {
+      "problem": "相对头姿方法依赖已知锚点姿态，且仍需扩展到包含平移的完整 6DoF。",
+      "method": "由无标注注册图像重建个性化头像并渲染已知姿态的虚拟锚点；多锚点共识估计旋转，真实锚点经关键点 PnP 提供平移参考，预测深度归一化相对平移。",
+      "inputs_outputs": "同一个人的注册图像及查询图像；输出相机坐标系中的旋转与度量平移。",
+      "contribution": "用合成位姿监督和个性化虚拟锚点消除真实锚点姿态真值要求，并提供将锚点库成本摊到注册阶段的高效变体。",
+      "limitations": "摘要明确说明 FaMoS 上的旋转结果以近正脸注册图像为条件；高效变体存在一定精度牺牲。",
+      "sources": [
+        "https://arxiv.org/abs/2611.03283"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
+    }
   },
   {
     "id": "stag-net",
@@ -256,7 +402,20 @@
     "tags": [
       "lightweight",
       "landmarks"
-    ]
+    ],
+    "analysis": {
+      "problem": "许多基于图像的头姿网络对资源受限设备过于昂贵。",
+      "method": "对面部关键点进行运动感知选择与空间分组，通过紧凑 DeepSet 编码器、自注意力及全局几何描述符回归头姿。",
+      "inputs_outputs": "FaceMesh 或 FAN 提取的面部关键点；输出头部旋转。",
+      "contribution": "将结构归纳偏置用于小型回归器，区分回归器本身成本与含关键点提取的整条流水线成本，并在跨数据集及独立被试协议下验证。",
+      "limitations": "摘要中 BIWI 的部分最佳结果仅统计关键点成功检测的帧；不能视为覆盖所有输入帧的结果。",
+      "sources": [
+        "https://arxiv.org/abs/2611.07828"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
+    }
   },
   {
     "id": "sdm",
@@ -284,6 +443,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "传统二阶非线性最小二乘优化可能需要不可用或昂贵的雅可比、Hessian。",
+      "method": "从训练样本学习一系列下降方向，推理时沿学到的方向迭代，不显式计算雅可比或 Hessian。",
+      "inputs_outputs": "人脸图像及初始化形状；输出迭代对齐后的面部关键点。",
+      "contribution": "将人脸对齐写成学习优化过程，是级联回归路线的重要实例；论文同时展示一般非线性最小二乘问题上的适用性。",
+      "limitations": null,
+      "sources": [
+        "https://www.cv-foundation.org/openaccess/content_cvpr_2013/html/Xiong_Supervised_Descent_Method_2013_CVPR_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -313,6 +485,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "单张图像的人脸关键点定位需要同时满足速度与预测质量。",
+      "method": "通过梯度提升训练回归树集成，直接使用稀疏像素强度特征最小化平方误差，并利用图像结构先验选择特征。",
+      "inputs_outputs": "单张人脸图像；输出二维关键点。",
+      "contribution": "无需深度卷积特征即可实现高速形状回归；框架支持缺失或部分标注，并分析正则化、样本数量和合成增强。",
+      "limitations": null,
+      "sources": [
+        "https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Kazemi_One_Millisecond_Face_2014_CVPR_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -341,6 +526,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "高速面部对齐需要廉价且有判别力的局部特征。",
+      "method": "独立学习各关键点的局部二值特征，再联合训练线性回归输出整体形状。",
+      "inputs_outputs": "人脸图像到二维面部关键点。",
+      "contribution": "把局部特征学习与全局形状回归结合；速度来自二值特征提取和回归计算简单，而非依赖复杂神经网络。",
+      "limitations": null,
+      "sources": [
+        "https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Ren_Face_Alignment_at_2014_CVPR_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -369,6 +567,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "大侧脸存在不可见关键点、强外观变化和难标注问题，传统二维形状模型难以统一处理。",
+      "method": "利用 CNN 拟合稠密三维人脸模型，并合成侧脸训练样本。",
+      "inputs_outputs": "二维人脸图像到稠密三维人脸对齐结果。",
+      "contribution": "用三维模型统一处理正脸与大姿态，而不是为不同视角分别训练二维形状模型；数据合成解决侧脸样本稀缺。",
+      "limitations": null,
+      "sources": [
+        "https://www.cv-foundation.org/openaccess/content_cvpr_2016/html/Zhu_Face_Alignment_Across_CVPR_2016_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -400,6 +611,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "analysis": {
+      "problem": "需要明确二维与三维人脸对齐在现有数据上的能力边界，并解决三维标注不足。",
+      "method": "结合关键点定位网络与残差模块建立强基线；以二维关键点引导转换三维标注，构造 LS3D-W 后训练三维对齐网络。",
+      "inputs_outputs": "人脸图像到二维或三维面部关键点；附带约23万图像的三维标注数据集。",
+      "contribution": "同时贡献网络、统一数据和诊断实验，分析姿态、初始化、分辨率及模型规模的影响，而不是只报告单一数据集成绩。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/1703.07332"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -423,7 +647,20 @@
     "primary_sources": [
       "https://openaccess.thecvf.com/content_cvpr_2018_workshops/w41/html/Ruiz_Fine-Grained_Head_Pose_CVPR_2018_paper.html"
     ],
-    "verified_at": "2026-11-17"
+    "verified_at": "2026-11-17",
+    "analysis": {
+      "problem": "先检测关键点再拟合通用三维头模型的流程易受关键点错误及拟合步骤影响。",
+      "method": "CNN 直接从图像联合学习角度分箱分类与连续回归，使用多损失监督。",
+      "inputs_outputs": "RGB 人脸图像到 yaw、pitch、roll 欧拉角，不要求输入面部关键点。",
+      "contribution": "建立无关键点头姿回归方案，并在300W-LP训练后验证自然场景与深度估计常用数据集上的效果。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/1710.00925"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
+    }
   },
   {
     "id": "lab",
@@ -452,6 +689,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "离散面部关键点定义有歧义，不同数据集的点配置难以直接共享。",
+      "method": "先估计面部边界线，再利用边界几何辅助定位关键点。",
+      "inputs_outputs": "人脸图像到边界表示和二维关键点。",
+      "contribution": "以边界作为跨关键点标注的几何中间表示；同时提出 WFLW 数据集，覆盖姿态、表情、照明、化妆、遮挡和模糊。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/1805.10483"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -480,6 +730,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "常用回归损失对中小定位误差的优化不充分，训练样本又偏向常见姿态。",
+      "method": "分段 Wing 损失在小误差区域采用修正对数形式放大影响；通过复制和扰动稀少大姿态样本做姿态均衡，并扩展为两阶段定位。",
+      "inputs_outputs": "人脸图像到二维关键点；核心产物是回归损失和训练数据均衡策略。",
+      "contribution": "将研究重点放在误差区间的优化权重，而非单纯增加模型规模。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/1711.06753"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -509,6 +772,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ECCV"
+    },
+    "analysis": {
+      "problem": "需要从单张二维图像同时恢复三维形状和稠密语义对应。",
+      "method": "用 UV 位置图记录完整人脸表面的三维坐标，以 CNN 直接回归该图，并在损失中加入位置权重。",
+      "inputs_outputs": "单张人脸图像到带语义对应的完整三维面部几何。",
+      "contribution": "把非规则三维表面变成可用二维卷积学习的表示，无需在推理中拟合预定义人脸形状模型。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/1803.07835"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -537,6 +813,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "普通特征聚合忽略空间结构，借助关键点或深度的头姿流程又可能增加计算。",
+      "method": "学习细粒度结构映射，在聚合前对空间特征分组；结合软分阶段回归，并使用不同重要性评分形成互补模型。",
+      "inputs_outputs": "单张 RGB 图像到头部姿态。",
+      "contribution": "把部位空间信息保留在紧凑回归特征中，在模型开销与姿态误差之间建立实用折中。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content_CVPR_2019/html/Yang_FSA-Net_Learning_Fine-Grained_Structure_Aggregation_for_Head_Pose_Estimation_From_CVPR_2019_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -566,6 +855,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "analysis": {
+      "problem": "关键点热图中前景稀少，常见损失不能有效区分前景与大量背景像素。",
+      "method": "根据目标热图像素值调整损失形状；加权损失图强调前景和困难背景，并辅以边界预测及坐标卷积。",
+      "inputs_outputs": "人脸图像到关键点热图及二维位置。",
+      "contribution": "针对热图回归而非直接坐标回归重新设计损失，使训练资源集中于影响定位的区域。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/1904.07399"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -595,6 +897,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "analysis": {
+      "problem": "直接端到端回归与逐步级联细化各有优势，不同数据集的关键点密度也不同。",
+      "method": "全卷积级联保持空间分辨率；以空间 softmax 产生逐关键点注意力图，结合阶段间融合和加权中间监督逐步精化。",
+      "inputs_outputs": "人脸图像到二维面部关键点，可联合使用不同粗细的标注任务。",
+      "contribution": "融合级联回归与端到端学习，并验证利用粗标注数据辅助少量精细标注的训练。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/1904.02549"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -618,7 +933,20 @@
     "primary_sources": [
       "https://arxiv.org/abs/1902.10859"
     ],
-    "verified_at": "2026-11-17"
+    "verified_at": "2026-11-17",
+    "analysis": {
+      "problem": "实际移动端需要同时满足精度、模型体积和推理速度。",
+      "method": "设计紧凑单阶段网络；训练阶段用旋转信息施加几何正则，按姿态、照明和遮挡状态重新加权样本。",
+      "inputs_outputs": "人脸图像到二维关键点；辅助旋转估计只参与训练，不在测试时使用。",
+      "contribution": "用训练期几何辅助与数据均衡改善轻量模型，而不把额外姿态分支成本带入推理。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/1902.10859"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
+    }
   },
   {
     "id": "luvli",
@@ -647,6 +975,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "仅提供关键点坐标无法说明预测可靠性，也不能区分可见和遮挡位置。",
+      "method": "将位置、位置不确定性和可见性建模为混合随机变量，以 LUVLi 似然损失联合训练。",
+      "inputs_outputs": "人脸图像到关键点位置、不确定性和可见概率。",
+      "contribution": "除联合估计外，重新标注包含约1.9万张图像的数据，区分可见、自遮挡和外部遮挡；不确定性可用于识别对齐失败。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2004.02980"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -677,6 +1018,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ECCV"
+    },
+    "analysis": {
+      "problem": "三维稠密对齐只追求单帧精度不足以满足实时视频应用。",
+      "method": "轻量骨干配合元联合优化回归少量3DMM参数；将静态图像合成为包含平面内外运动的短视频，以改善稳定性。",
+      "inputs_outputs": "人脸图像或视频帧到三维稠密对齐结果。",
+      "contribution": "把速度、精度与视频稳定性共同作为目标，提供可在CPU运行的实现。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2009.09960"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -706,6 +1060,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=59",
       "version": "2026 第七版（目录原文转载）",
       "venue": "BMVC"
+    },
+    "analysis": {
+      "problem": "正面头姿模型无法充分覆盖背面和全范围 yaw 变化。",
+      "method": "在多损失头姿网络基础上修改损失与训练策略，使其适应宽范围旋转，并从 Panoptic 数据提取监督。",
+      "inputs_outputs": "单张 RGB 头部图像到欧拉角，重点覆盖完整 yaw 范围。",
+      "contribution": "将全视角覆盖与移动端紧凑部署结合；全 yaw 覆盖不应误写成含平移的6DoF。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2005.10353"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -734,6 +1101,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "传统头姿估计依赖前置人脸检测或关键点定位，各阶段会带来额外依赖。",
+      "method": "以 Faster R-CNN 为基础直接回归图像内所有人脸的6DoF，处理任意图像裁剪下的位姿坐标转换，并从位姿生成检测结果。",
+      "inputs_outputs": "完整照片到多个人脸的三维旋转与平移，以及相应检测/对齐结果。",
+      "contribution": "把检测和刚体位姿统一起来，无需先运行独立人脸检测器；同时在头姿与 WIDER FACE 检测基准验证。",
+      "limitations": null,
+      "sources": [
+        "https://github.com/vitoralbiero/img2pose"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -765,6 +1145,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=51",
       "version": "2026 第七版（目录原文转载）",
       "venue": "IJCV"
+    },
+    "analysis": {
+      "problem": "高分辨率热图计算昂贵、缺少结构约束，跨域泛化也存在困难。",
+      "method": "低分辨率特征图同时预测分数与像素内偏移；邻居回归融合附近关键点预测；课程式自训练从跨域无标注图像逐步挖掘可靠伪标签。",
+      "inputs_outputs": "人脸图像到二维关键点；跨域训练可额外使用无标注图像。",
+      "contribution": "把低成本定位、关键点结构一致性及跨域学习放入同一框架，而非仅通过增大热图提升精度。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2003.03771"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -794,6 +1187,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "analysis": {
+      "problem": "关键点误差沿面部曲线切线方向更分散，统一对待各方向会忽略标注歧义。",
+      "method": "各向异性方向损失加强法线约束；各向异性注意力关注点及相邻边缘，对切线方向放宽约束。",
+      "inputs_outputs": "人脸图像到二维关键点，联合坐标回归和热图信息。",
+      "contribution": "显式利用方向性误差分布，把面部结构与局部纹理结合，而不是假设定位误差各向同性。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2109.05721"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -817,7 +1223,20 @@
     "primary_sources": [
       "https://openaccess.thecvf.com/content/ICCV2021W/MFR/html/Lan_Revisting_Quantization_Error_in_Face_Alignment_ICCVW_2021_paper.html"
     ],
-    "verified_at": "2026-11-17"
+    "verified_at": "2026-11-17",
+    "analysis": {
+      "problem": "低分辨率热图的下采样会产生坐标量化误差，限制定位精度。",
+      "method": "用两类嵌套热图编码坐标，其中细热图的完整范围对应粗热图的一个像素。",
+      "inputs_outputs": "人脸图像到粗细两层热图及精细二维关键点坐标。",
+      "contribution": "先量化下采样误差，再通过像素内位置表示降低该误差，针对的是表示精度而非单纯增加骨干网络能力。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/ICCV2021W/MFR/html/Lan_Revisting_Quantization_Error_in_Face_Alignment_ICCVW_2021_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
+    }
   },
   {
     "id": "6drepnet",
@@ -847,6 +1266,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=49",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICIP"
+    },
+    "analysis": {
+      "problem": "旋转标签歧义和不合适的表示会限制头姿回归范围与稳定性。",
+      "method": "用旋转矩阵表达监督，以连续6维旋转表示直接回归，并采用符合 SO(3) 几何的测地距离损失。",
+      "inputs_outputs": "头部图像到三维旋转；6D 指旋转表示维度，不包含三维平移。",
+      "contribution": "重点是连续旋转参数化与几何一致损失，避免把不连续角度标签直接当作普通向量回归。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2202.12555"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -869,7 +1301,20 @@
     "primary_sources": [
       "https://openaccess.thecvf.com/content/WACV2022/papers/Cantarini_HHP-Net_A_Light_Heteroscedastic_Neural_Network_for_Head_Pose_Estimation_WACV_2022_paper.pdf"
     ],
-    "verified_at": "2026-11-17"
+    "verified_at": "2026-11-17",
+    "analysis": {
+      "problem": "高开销图像模型难以轻量部署，头姿预测还需要可用的可靠性信息。",
+      "method": "使用二维姿态估计器产生的少量头部关键点进行多任务回归，通过专门损失同时估计各角度的异方差不确定性。",
+      "inputs_outputs": "少量二维头部关键点到 yaw、pitch、roll 及各角度不确定性。",
+      "contribution": "用低维几何输入替代重型图像处理，并分析误差与不确定性的关联，展示多人互动分析应用。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2111.01440"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
+    }
   },
   {
     "id": "lwposr",
@@ -891,7 +1336,20 @@
     "primary_sources": [
       "https://openaccess.thecvf.com/content/WACV2022/papers/Dhingra_LwPosr_Lightweight_Efficient_Fine_Grained_Head_Pose_Estimation_WACV_2022_paper.pdf"
     ],
-    "verified_at": "2026-11-17"
+    "verified_at": "2026-11-17",
+    "analysis": {
+      "problem": "移动端头姿估计需要减少参数量而保留细粒度回归能力。",
+      "method": "混合深度可分离卷积与 Transformer 编码器，以双分支、三阶段结构进行姿态回归。",
+      "inputs_outputs": "头部图像到头部旋转角度。",
+      "contribution": "通过局部卷积与注意力组合寻求轻量化，在300W-LP、AFLW2000和BIWI上做消融。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2202.03544"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
+    }
   },
   {
     "id": "cascaded-transformers",
@@ -919,6 +1377,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "大姿态与遮挡下，定位需要同时理解关键点间结构和目标点附近的图像线索。",
+      "method": "把任务作为端到端坐标回归：自注意力建模关键点关系，可变形注意力在级联过程中提取相关局部特征，并同时细化图像特征和坐标。",
+      "inputs_outputs": "人脸图像到二维面部关键点。",
+      "contribution": "不依赖高分辨率热图逐像素回归，通过结构关系与自适应局部取样实现迭代精化，并进行跨数据集验证。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2208.10808"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -947,6 +1418,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "极端头姿与严重遮挡下，需要捕捉不同面部区域间对朝向有用的关系。",
+      "method": "Transformer 中引入多个朝向 token 编码基本方向区域，并以 token 引导的多损失学习区域相似性和关键少数关系。",
+      "inputs_outputs": "头部图像到头部旋转估计。",
+      "contribution": "将朝向区域作为显式学习单元，把邻域相似性、明显面部变化及关键少数关系转为可学习约束。",
+      "limitations": null,
+      "sources": [
+        "https://scholars.cityu.edu.hk/en/publications/tokenhpe-learning-orientation-tokens-for-efficient-head-pose-esti/"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -976,6 +1460,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "面部关键点语义歧义导致标注不一致，影响模型收敛、精度与稳定性。",
+      "method": "根据预测分布的各向异性自适应降低歧义影响，使用特征值约束避免分布异常变化及过早收敛。",
+      "inputs_outputs": "用于人脸关键点检测训练的预测分布和标签；推理仍输出二维关键点。",
+      "contribution": "把语义歧义从固定统一惩罚改成由预测分布反映的适应性损失，不是单独建立新的人脸骨干。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2306.02763"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -1006,6 +1503,20 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=44",
       "version": "2026 第七版（目录原文转载）",
       "venue": "TIP"
+    },
+    "analysis": {
+      "problem": "头姿方法常偏向正面预测，需要覆盖更完整的旋转外观。",
+      "method": "结合连续6维旋转表示、旋转矩阵标签、测地损失，以及覆盖完整旋转范围的新增训练数据。",
+      "inputs_outputs": "头部图像到完整范围三维旋转，不输出三维平移。",
+      "contribution": "在6DRepNet表示路线之上扩展训练覆盖范围；必须区分表示支持全旋转与训练数据实际覆盖全旋转这两件事。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2309.07654",
+        "https://github.com/thohemp/6DRepNet360"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17"
     }
   },
   {
@@ -1030,6 +1541,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "解决单目图像中手部形态复杂、野外场景泛化不足的问题。",
+      "method": "采用全 Transformer 手部网格恢复架构，以大型视觉 Transformer 扩大模型容量，并联合使用含 2D 或 3D 手部标注的多个训练集。",
+      "inputs_outputs": "单目图像 → 三维手部重建。",
+      "contribution": "其价值在于展示数据规模与模型容量共同扩展的效果，而不只是替换骨干网络；另建立 HInt 野外二维关键点标注，用于检验受控数据集之外的泛化。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/CVPR2024/html/Pavlakos_Reconstructing_Hands_in_3D_with_Transformers_CVPR_2024_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1055,6 +1578,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "把三维手关节定位看作有条件的点集生成，同时处理关节身份对应和精确位置估计。",
+      "method": "以手部图像—点云为条件，通过扩散模型迭代去噪；加入逐关节条件与局部细节条件，分别帮助恢复关节对应关系和位置细节。 正文进一步通过运动学对应感知层和图卷积编码关节之间的运动学关系。",
+      "inputs_outputs": "单幅深度图及由其构建的手部点云 → 三维关节坐标。",
+      "contribution": "将扩散生成用于结构化手部姿态，而不是直接套用无序点云生成；作者在四个手部基准报告优于对照方法的结果。",
+      "limitations": "作者在结论中明确指出当前方法不能处理双手相互作用场景；单手及手—物交互结果不应外推为双手交互能力。",
+      "sources": [
+        "https://openaccess.thecvf.com/content/CVPR2024/html/Cheng_HandDiff_3D_Hand_Pose_Estimation_with_Diffusion_on_Image-Point_Cloud_CVPR_2024_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2024/papers/Cheng_HandDiff_3D_Hand_Pose_Estimation_with_Diffusion_on_Image-Point_Cloud_CVPR_2024_paper.pdf"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verification_notes": "已核对摘要及正文相关方法/结论段落；局限来自作者原文，不代表已复现实验。"
     }
   },
   {
@@ -1079,6 +1615,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=51",
       "version": "2026 第七版（目录原文转载）",
       "venue": "TPAMI"
+    },
+    "analysis": {
+      "problem": "事件相机适合高速运动和强光，但静止手部事件稀疏、运动存在歧义，且高时间分辨率标注代价高。",
+      "method": "Event-to-Pose 模块使用手部流表示；Pose-to-IWE 模块引入对比度最大化和手部边缘约束，在稀疏标注下进行弱监督学习。",
+      "inputs_outputs": "异步事件流 → 高时间分辨率三维手姿态。",
+      "contribution": "同时提出 EvRealHands 真实事件数据集，研究从合成到真实的差距，并在高速、强光、室外及另一型号事件相机上验证。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2303.02862"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1103,6 +1651,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "野外多手重建不仅依赖重建网络，还受手部检测不稳与检测效率影响。",
+      "method": "将实时全卷积手部定位与 Transformer 三维手部重建组合，另构建超过两百万张野外手部图像的数据以增强检测。",
+      "inputs_outputs": "单目图像或逐帧视频 → 多手定位与三维重建。",
+      "contribution": "把检测环节纳入完整系统，强调遮挡和光照多样性；作者展示未使用时序模块也能得到平滑视频跟踪，但这不等同于显式时序推理。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/CVPR2025/html/Potamias_WiLoR_End-to-end_3D_Hand_Localization_and_Reconstruction_in-the-wild_CVPR_2025_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1128,6 +1688,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "检测、左右手分类、姿态估计串行执行会造成重复计算和误差累积。",
+      "method": "在冻结检测器基础上加入交互式 2D–3D 解码器，从检测线索提取二维关节语义，再提升为三维表示；层级注意力联合建模关节、网格顶点与相机平移。",
+      "inputs_outputs": "图像 → 手部检测、二维关节、三维网格和相机平移。",
+      "contribution": "把多个阶段整合为一阶段框架，避免将左右手类别作为前置条件；研究重点是检测与重建的联合结构，而非仅提升独立裁剪手部的重建器。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/CVPR2025/html/Chen_HandOS_3D_Hand_Reconstruction_in_One_Stage_CVPR_2025_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1152,6 +1724,20 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "第一视角视频中手与相机同时运动，相机坐标下的逐帧重建无法直接表示手在真实世界中的运动。",
+      "method": "分别恢复相机空间手运动和世界坐标相机轨迹；采用自适应第一视角 SLAM，并用运动补全网络处理手离开视野造成的缺帧。",
+      "inputs_outputs": "第一视角视频 → 世界坐标系手部运动与相机轨迹。",
+      "contribution": "将评价对象从单帧局部姿态扩展到世界空间轨迹，尤其关注剧烈相机运动和手部暂时不可见的连续性。",
+      "limitations": "作者在结论中说明，尽管比已有方法更快，完整系统仍远未达到实时；不要把单个手运动模块的逐帧速度当作含 SLAM 的整套系统吞吐率。 作者还指出，结果依赖外部手部跟踪，左右手身份错误会传播；两手独立建模且无防穿透约束，交互时可能相互穿透。",
+      "sources": [
+        "https://openaccess.thecvf.com/content/CVPR2025/html/Zhang_HaWoR_World-Space_Hand_Motion_Reconstruction_from_Egocentric_Videos_CVPR_2025_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2025/papers/Zhang_HaWoR_World-Space_Hand_Motion_Reconstruction_from_Egocentric_Videos_CVPR_2025_paper.pdf",
+        "https://arxiv.org/html/2501.02973v1"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verification_notes": "已核对摘要及正文相关方法/结论段落；局限来自作者原文，不代表已复现实验。"
     }
   },
   {
@@ -1176,6 +1762,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "analysis": {
+      "problem": "逐帧单目重建难以保证视频动作的时间连贯性，手与物体交互时尤为明显。",
+      "method": "以已有逐帧估计为条件进行扩散式运动精修，训练仅使用不含图像的动作捕捉数据；将交互中的关键运动状态及对应运动约束融入模型。",
+      "inputs_outputs": "初始三维手运动序列 → 精修后的连续三维运动。",
+      "contribution": "可增强多种现有逐帧重建方法，减少对稀缺标注视频的训练依赖；物理信息服务于运动精修，不应将其描述为完整物理仿真器。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/ICCV2025/html/Zhang_Diffusion-based_3D_Hand_Motion_Recovery_with_Intuitive_Physics_ICCV_2025_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1201,6 +1799,19 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=51",
       "version": "2026 第七版（目录原文转载）",
       "venue": "TPAMI"
+    },
+    "analysis": {
+      "problem": "局部锚点回归需要同时兼顾手部细节与全局关节上下文，并缓解深度方向精度偏低的问题。",
+      "method": "以 Transformer 为三维锚点聚合局部和全局信息，预测锚点到关节偏移并加权汇总；第二阶段围绕初始关节在三个方向均匀设置锚点。",
+      "inputs_outputs": "单 RGB 或深度图 → 三维关节；覆盖单手、交互双手及手—物场景。",
+      "contribution": "两阶段自适应锚点使偏移更小并平衡三个坐标方向；作者在 RGB、深度手数据和 ITOP 人体数据检验跨场景适用性。",
+      "limitations": null,
+      "sources": [
+        "https://changlongjianggit.github.io/A2J-Transformer-Plus/",
+        "https://researchconnect.buffalo.edu/en/publications/3d-hand-pose-estimation-via-articulated-anchor-to-joint-3d-local-/"
+      ],
+      "evidence_level": "primary_project_and_author_institution_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1219,7 +1830,19 @@
       "multiview",
       "low-resolution",
       "dataset"
-    ]
+    ],
+    "analysis": {
+      "problem": "固定在房间角落的远距离摄像机中，手部像素少且常受遮挡，近距离手部方法难以直接适用。",
+      "method": "Transformer 用各视角视觉 token 建模手—身体相关性，并通过自回归建模时间协调，联合利用多视角观测。",
+      "inputs_outputs": "房间远距离多视角观测及身体线索 → 三维手形与手姿态。",
+      "contribution": "提出 REACH-Net 和包含 50 名参与者日常活动的 REACH 数据集；以隐蔽胸前相机辅助获取标注，让远距离自然活动的手部研究具备训练和评价数据。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2605.22231"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
+    }
   },
   {
     "id": "kad-net",
@@ -1237,7 +1860,19 @@
       "depth",
       "occlusion",
       "kinematics"
-    ]
+    ],
+    "analysis": {
+      "problem": "单幅深度图中的手指自遮挡与拓扑依赖难以建模；二维定位与深度回归共享特征还可能产生负迁移。",
+      "method": "指拓扑约束模块使用连续三个手指关节构建局部运动学表示，补强远端关节；解耦 UV 与深度特征，并为深度回归设置专门多任务学习策略。",
+      "inputs_outputs": "单幅深度图 → 三维手关节。",
+      "contribution": "同时针对结构遮挡和任务干扰两个来源设计模块，在 ICVL、NYU、MSRA 上报告结果；目前按 arXiv 预印本处理，不提升为已录用会议论文。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2609.12559"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
+    }
   },
   {
     "id": "hand-visibility",
@@ -1256,7 +1891,19 @@
       "visibility",
       "auxiliary task",
       "triangulation"
-    ]
+    ],
+    "analysis": {
+      "problem": "仅有关键点坐标不能说明关节是否真的可见，遮挡情况下下游系统难以判断定位可靠性。",
+      "method": "利用大规模手姿态预训练模型作为骨干，把逐关节可见性作为独立预测任务；在多视角三角化中使用可见性权重。",
+      "inputs_outputs": "手部图像 → 每个关节的可见性判断；可供二维关键点三维三角化使用。",
+      "contribution": "把可见性从姿态学习的附属信号提升为独立研究目标，展示其可降低三角化的重投影误差。这是姿态辅助模块，不是独立的三维网格重建器。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2608.11574"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
+    }
   },
   {
     "id": "gesture-aware-hand",
@@ -1274,7 +1921,19 @@
       "RGB",
       "MANO",
       "pretraining"
-    ]
+    ],
+    "analysis": {
+      "problem": "在存在离散手势标签时，探索如何把手势语义转化为单目三维姿态估计的先验。",
+      "method": "先以 InterHand2.6M 的粗细粒度手势标签预训练嵌入，再用受手势嵌入引导的逐关节 token Transformer 回归 MANO 参数，损失覆盖参数、关节和结构约束。",
+      "inputs_outputs": "单目 RGB 图像 → MANO 手模型参数及三维姿态。",
+      "contribution": "把语义预训练和关节级推理衔接起来，摘要报告在 InterHand2.6M 上改善 EANet 单手精度，并能跨架构迁移。",
+      "limitations": "论文设定明确依赖可用的离散手势标签；摘要验证集中在 InterHand2.6M，不能由此宣称任意野外手势均已验证。",
+      "sources": [
+        "https://arxiv.org/abs/2603.17396"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
+    }
   },
   {
     "id": "hand3d",
@@ -1303,6 +1962,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "analysis": {
+      "problem": "没有深度传感器时，单张 RGB 图像到三维手姿态存在明显深度歧义。",
+      "method": "以二维关键点为线索，训练隐式学习三维关节先验的深度网络，并构建基于合成手模型的大规模训练数据。",
+      "inputs_outputs": "单张 RGB 图像 → 三维手姿态。",
+      "contribution": "较早系统展示纯彩色图像三维手部估计的可行性；贡献包括学习式姿态先验和合成训练数据，且在多个测试集及手语识别相关数据上评估。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content_iccv_2017/html/Zimmermann_Learning_to_Estimate_ICCV_2017_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1332,6 +2003,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "把深度图当二维图像并直接回归三维坐标，会引入透视形变及难学习的非线性映射。",
+      "method": "将深度观测体素化，以三维 CNN 执行 voxel-to-voxel 预测，输出每个关节在体素网格中的位置似然。",
+      "inputs_outputs": "单幅深度图 → 手部或人体三维关键点。",
+      "contribution": "利用深度数据天然的三维几何结构，把坐标回归改为三维空间定位；该方法同时覆盖手部和人体，而非只适用于手。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content_cvpr_2018/html/Moon_V2V-PoseNet_Voxel-to-Voxel_Prediction_CVPR_2018_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1360,6 +2043,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "二维图像或规则体素不能直接保留可见手部表面的点集结构。",
+      "method": "直接处理归一化三维点云，回归低维手姿态表示；再利用预测指尖附近的局部点构建精修网络。",
+      "inputs_outputs": "手部表面点云（由深度观测获得） → 三维手姿态与精修指尖。",
+      "contribution": "展示无序点集作为手姿态输入的价值，并以局部指尖精修补充全局回归；在三个基准数据集上开展实验。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content_cvpr_2018/html/Ge_Hand_PointNet_3D_CVPR_2018_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1388,6 +2083,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ECCV"
+    },
+    "analysis": {
+      "problem": "单目 RGB 缺乏直接深度观测，使二维定位与三维恢复之间存在尺度和深度歧义。",
+      "method": "以新的 2.5D 姿态表示联合隐式学习深度图与热图分布，先估计相差一个尺度因子的姿态。",
+      "inputs_outputs": "单目图像 → 2.5D 表示及三维姿态；若给定手大小先验，可进一步估计尺度。",
+      "contribution": "通过中间表示连接二维热图定位和三维重建，在严重遮挡条件下检验二维与三维姿态表现。",
+      "limitations": "恢复绝对尺度需要额外手大小先验，不能把仅由 RGB 得到的相对尺度姿态等同于无条件公制重建。",
+      "sources": [
+        "https://openaccess.thecvf.com/content_ECCV_2018/html/Umar_Iqbal_Hand_Pose_Estimation_ECCV_2018_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1416,6 +2123,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "整体直接回归容易忽略深度图每个像素提供的局部三维线索。",
+      "method": "端到端级联网络预测二维与三维热图、三维单位方向场及关节偏移，将逐像素预测转为投票，再用 mean-shift 变体聚合。",
+      "inputs_outputs": "单幅深度图 → 三维手关节。",
+      "contribution": "以密集局部证据形成全局姿态共识，连接像素级学习与显式几何聚合，而不是只依赖全图单一向量；在 MSRA、NYU 和 ICVL 上评价。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content_cvpr_2018/html/Wan_Dense_3D_Regression_CVPR_2018_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1445,6 +2164,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "analysis": {
+      "problem": "单目手部方法在本数据集表现好，却可能无法泛化到其他数据或自然图像。",
+      "method": "构建真实多视角数据，通过人工参与的迭代半自动标注和手模型拟合，获得三维姿态与形状标注。",
+      "inputs_outputs": "多视角采集与拟合 → 带三维姿态、形状标注的数据集；基线从单张 RGB 恢复手形。",
+      "contribution": "核心是数据与评价基础设施，不是单一网络模块；提供跨数据集泛化分析和关节化手形评价集，支持从关键点研究推进到完整网格恢复。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content_ICCV_2019/html/Zimmermann_FreiHAND_A_Dataset_for_Markerless_Capture_of_Hand_Pose_and_ICCV_2019_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1473,6 +2204,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "关键点只能描述骨架，不能完整表示手部表面形状。",
+      "method": "利用图卷积网络重建完整手部网格；以带网格和关节真值的合成数据全监督训练，再在真实数据上利用深度图进行弱监督微调。",
+      "inputs_outputs": "单张 RGB 图像 → 三维手网格及关节姿态。",
+      "contribution": "将三维手研究从稀疏骨架拓展到表面几何，并针对真实数据缺乏网格真值的问题提供合成数据加弱监督的训练路径。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content_CVPR_2019/html/Ge_3D_Hand_Shape_and_Pose_Estimation_From_a_Single_RGB_CVPR_2019_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1501,6 +2244,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "野外 RGB 三维重建既缺少充分三维标注，也需要避免不合理手形。",
+      "method": "卷积编码器回归手部及视角参数，固定手模型解码器生成网格，重投影模块连接图像域监督；联合二维弱监督和有限三维监督。",
+      "inputs_outputs": "RGB 图像，可选外部二维关节检测 → 三维手形、姿态及重投影。",
+      "contribution": "把参数化手模型的形状与姿态先验放入端到端学习，使二维野外标注可参与三维重建训练；重点在几何可行性和野外泛化。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content_CVPR_2019/html/Boukhayma_3D_Hand_Shape_and_Pose_From_Images_in_the_Wild_CVPR_2019_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1530,6 +2285,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "手与物体相互遮挡使真实图像中两者的三维姿态标注困难。",
+      "method": "采集单台或多台 RGB-D 序列，同时优化整个序列的手和物体三维姿态，利用跨帧信息缓解单帧遮挡。",
+      "inputs_outputs": "RGB-D 交互序列 → 逐帧手与物体三维标注；另训练单 RGB 手姿态基线。",
+      "contribution": "提出标注系统并创建 HO-3D 无标记交互数据集，使严重遮挡条件下的手—物研究获得真实标注和基准。论文中给出的初始数据规模不应混同后续数据集版本。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content_CVPR_2020/html/Hampali_HOnnotate_A_Method_for_3D_Annotation_of_Hand_and_Object_CVPR_2020_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1558,6 +2325,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "自然场景中的三维手部标注稀缺，限制单目网格恢复训练。",
+      "method": "图像编码器连接网格卷积解码器，以直接三维网格重建损失训练，并从大量 YouTube 手动作视频收集弱监督数据。",
+      "inputs_outputs": "单目手部图像 → 三维手网格与姿态。",
+      "contribution": "贡献在于简单网格卷积架构与规模化野外弱监督结合；应将视频理解为训练数据来源，不能据此说推理时采用了时序模型。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content_CVPR_2020/html/Kulon_Weakly-Supervised_Mesh-Convolutional_Hand_Reconstruction_in_the_Wild_CVPR_2020_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1587,6 +2366,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "实际交互既需要快速三维关节定位，也需要能驱动动画的关节旋转，而训练数据的监督形式不统一。",
+      "method": "设计三维关节检测和逆运动学模块，一次前向传播将位置映射为旋转；共同利用二维/三维标注图像及没有图像对应的三维动画。",
+      "inputs_outputs": "单目图像 → 三维手部形状、关节位置和关节旋转。",
+      "contribution": "衔接视觉估计与图形动画表达，并利用多模态训练资料。论文报告 100 FPS，但该速度属于作者实验条件，不能直接当作任意设备性能。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content_CVPR_2020/html/Zhou_Monocular_Real-Time_Hand_Shape_and_Motion_Capture_Using_Multi-Modal_Data_CVPR_2020_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1616,6 +2407,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "analysis": {
+      "problem": "高精度点云手姿态方法常伴随复杂结构或额外计算。",
+      "method": "采用 folding 解码器，将给定二维手骨架折叠到三维关节位置；全局与关节级局部多尺度特征共同引导变形。",
+      "inputs_outputs": "归一化三维手点云 → 三维关节坐标。",
+      "contribution": "以结构化骨架作为解码起点，强调精度与参数量的平衡；在三个手部基准上验证，适合与直接点集回归比较表示与效率差异。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/ICCV2021/html/Cheng_HandFoldingNet_A_3D_Hand_Pose_Estimation_Network_Using_Multiscale-Feature_Guided_ICCV_2021_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1644,6 +2447,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "analysis": {
+      "problem": "彩色图像中的姿态变化和遮挡使高精度、高细节手网格恢复困难。",
+      "method": "把手部几何展开成 UV 位置图，AffineNet 用图像到图像预测恢复低分辨率 UV 图，SRNet 再对其超分辨率。",
+      "inputs_outputs": "RGB 图像 → UV 位置图 → 三维手姿态和高分辨率网格。",
+      "contribution": "将三维表面恢复转换到二维 UV 域处理，使图像式预测与超分辨率方法可以用于手网格；应区分增加表面采样细节与增加真实观测证据。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/ICCV2021/html/Chen_I2UV-HandNet_Image-to-UV_Prediction_Network_for_Accurate_and_High-Fidelity_3D_Hand_ICCV_2021_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1674,6 +2489,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "analysis": {
+      "problem": "单用 Transformer 擅长全局关系但缺少显式局部网格邻接，图卷积则侧重局部拓扑。",
+      "method": "把图卷积融入 Transformer，联合利用自注意力的非局部关系和预设网格邻接的局部交互。",
+      "inputs_outputs": "单张图像 → 三维关节和网格；同时覆盖人体及手。",
+      "contribution": "提供局部几何归纳偏置与全局依赖相结合的架构，在人体基准及 FreiHAND 上验证；手部结果是通用网格方法的应用分支。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/ICCV2021/html/Lin_Mesh_Graphormer_ICCV_2021_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1703,6 +2530,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "仅回归参数化模型参数会限制重建表达，需要直接建模关节与网格的长距离关系。",
+      "method": "Transformer 同时建模顶点—顶点、顶点—关节交互，直接输出坐标；掩码顶点建模用于提升遮挡处理能力。",
+      "inputs_outputs": "单张图像 → 三维关节坐标与网格顶点。",
+      "contribution": "无需以 SMPL 等参数化模型作为输出参数空间，能扩展到手部；在 FreiHAND 验证这一迁移。不要把“无参数化模型回归”误解为输出完全没有固定顶点结构。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/CVPR2021/html/Lin_End-to-End_Human_Pose_and_Mesh_Reconstruction_with_Transformers_CVPR_2021_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1732,6 +2571,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "只恢复以腕部为原点的网格并不等于恢复手在相机坐标系中的位置。",
+      "method": "分解为根相对网格恢复和根位置恢复；先提取二维关节与轮廓，利用关节语义关系恢复网格，再以二维线索和轮廓/网格的一维投影完成配准。",
+      "inputs_outputs": "单 RGB 图像 → 相机坐标中的三维手网格。",
+      "contribution": "明确区分局部形状与全局位置，并提出语义聚合和自适应二维到一维配准；对需要空间定位的交互应用比只报告对齐后网格误差更相关。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/CVPR2021/html/Chen_Camera-Space_Hand_Mesh_Recovery_via_Semantic_Aggregation_and_Adaptive_2D-1D_CVPR_2021_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1761,6 +2612,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "手—物相互遮挡使部分图像区域缺乏直接手部纹理，但遮挡区域仍与手结构相关。",
+      "method": "先以特征注入 Transformer（FIT）根据相关性把手信息注入遮挡区域，再用自增强 Transformer（SET）通过自注意力精修。",
+      "inputs_outputs": "含遮挡的手部图像 → 三维手网格。",
+      "contribution": "不是简单丢弃遮挡区域，而是把它们作为补充表示参与推理；在具有手—物遮挡的网格基准上检验。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/CVPR2022/html/Park_HandOccNet_Occlusion-Robust_3D_Hand_Mesh_Estimation_Network_CVPR_2022_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1791,6 +2654,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "移动设备需要同时兼顾手网格精度、推理成本和连续帧稳定性。",
+      "method": "采用轻量二维编码器、深度可分离螺旋图卷积解码器及特征提升模块；MapReg 结合热图和位置回归，再经 pose pooling 与 pose-to-vertex 提升到顶点特征。",
+      "inputs_outputs": "单目图像 → 三维手网格。",
+      "contribution": "系统性优化二维到三维的信息桥接和计算成本，作者报告 Apple A14 CPU 上 83 FPS，并在 FreiHAND、RHD、HO3Dv2 评价；该数字不应跨硬件直接比较。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/CVPR2022/html/Chen_MobRecon_Mobile-Friendly_Hand_Mesh_Reconstruction_From_Monocular_Image_CVPR_2022_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1820,6 +2695,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "手工规则生成多视角伪标签容易忽视各视角语义，以及不同区域之间的依赖。",
+      "method": "将各视角语义压缩为节点，用图卷积实现跨视角关系和信息融合；另设计伪多视角训练，使框架适用于仅有单视角训练数据的情况。",
+      "inputs_outputs": "深度图及训练时的多视角或伪多视角信息 → 三维手姿态和网格。",
+      "contribution": "把跨视角融合从手工规则变为可学习聚合，探索不依赖强三维标注的训练；摘要的主要定量验证来自 NYU，不能扩写为普遍跨场景结论。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/CVPR2022/html/Ren_Mining_Multi-View_Information_A_Strong_Self-Supervised_Framework_for_Depth-Based_3D_CVPR_2022_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1849,6 +2736,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "常用低面数手模型对形状多样性及外观细节的表达有限，手部纹理在重建研究中也常被忽略。",
+      "method": "基于超过 1200 名受试者的数据建立形状与外观模型，以 GAN 生成保留高频细节的高分辨率纹理；制作带纹理合成数据并训练单图重建网络。",
+      "inputs_outputs": "手形/外观模型及单张图像 → 手部三维形状、姿态与纹理。",
+      "contribution": "将重点从骨架或低细节网格扩展到人群形状多样性和外观建模，适合数字人及高保真手部渲染研究；应与纯关键点估计方法分开评价。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/CVPR2023/html/Potamias_Handy_Towards_a_High_Fidelity_3D_Hand_Shape_and_Appearance_CVPR_2023_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1878,6 +2777,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "analysis": {
+      "problem": "单帧遮挡和运动模糊会损伤视觉特征，使简单时序自注意力的查询和键也不可靠。",
+      "method": "联合建模空间和时间关系，动态融合模块预测手变形，将邻帧网格扭转对齐以支持当前帧；maxMSE 损失自适应提高困难顶点的权重。",
+      "inputs_outputs": "手部视频 → 三维手姿态和网格序列。",
+      "contribution": "显式利用前后帧的运动对齐补足不可见信息，并针对指尖误差往往更大的问题重新分配学习重点；不是单纯扩大时间窗口。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/ICCV2023/html/Fu_Deformer_Dynamic_Fusion_Transformer_for_Robust_Hand_Pose_Estimation_ICCV_2023_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1901,7 +2812,19 @@
     "sources": [
       "https://openaccess.thecvf.com/content/WACV2023/html/Aboukhadra_THOR-Net_End-to-End_Graformer-Based_Realistic_Two_Hands_and_Object_Reconstruction_With_WACV_2023_paper.html"
     ],
-    "verifiedAt": "2026-11-17"
+    "verifiedAt": "2026-11-17",
+    "analysis": {
+      "problem": "双手与物体共同出现时，需要同时恢复姿态、表面及手部外观，而不只估计孤立单手。",
+      "method": "Keypoint RCNN 提取二维姿态、热图、特征和边界框；以图结构传入两分支 GraFormer，分别预测形状与三维姿态，并用光度自监督回归手网格顶点纹理。",
+      "inputs_outputs": "单 RGB 图像 → 双手及物体的三维姿态、网格和手部纹理。",
+      "contribution": "把图卷积、Transformer 和光度自监督结合，覆盖 H2O 双手交互与 HO-3D 手物场景；相较单手网格方法，任务范围更完整。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/WACV2023/html/Aboukhadra_THOR-Net_End-to-End_Graformer-Based_Realistic_Two_Hands_and_Object_Reconstruction_With_WACV_2023_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
+    }
   },
   {
     "id": "dense-mutual-attention-hand",
@@ -1924,7 +2847,19 @@
     "sources": [
       "https://openaccess.thecvf.com/content/WACV2023/html/Wang_Interacting_Hand-Object_Pose_Estimation_via_Dense_Mutual_Attention_WACV_2023_paper.html"
     ],
-    "verifiedAt": "2026-11-17"
+    "verifiedAt": "2026-11-17",
+    "analysis": {
+      "problem": "手—物关系若只由稀疏关键点关联建模，会遗漏细粒度依赖；迭代交互约束优化则较昂贵。",
+      "method": "按手与物体网格拓扑分别建图，让每个手节点通过注意力聚合所有物体节点特征，物体节点反向聚合手特征。",
+      "inputs_outputs": "手—物视觉估计特征与网格结构 → 联合三维手—物姿态。",
+      "contribution": "以密集双向注意力替代稀疏交互关联，重点研究两类结构相互支持的推理；作者报告实时推理与更合理的交互姿态。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/WACV2023/html/Wang_Interacting_Hand-Object_Pose_Estimation_via_Dense_Mutual_Attention_WACV_2023_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
+    }
   },
   {
     "id": "hmp",
@@ -1946,7 +2881,19 @@
     "sources": [
       "https://openaccess.thecvf.com/content/WACV2024/html/Duran_HMP_Hand_Motion_Priors_for_Pose_and_Shape_Estimation_From_WACV_2024_paper.html"
     ],
-    "verifiedAt": "2026-11-17"
+    "verifiedAt": "2026-11-17",
+    "analysis": {
+      "problem": "手部视频标注不足以训练可泛化的直接回归网络，遮挡与快速运动又需要时序先验。",
+      "method": "从 AMASS 学习专门的生成式手运动先验，再通过潜空间优化将该先验用于视频三维手部估计。",
+      "inputs_outputs": "手部视频与预训练运动先验 → 时间连续的三维手姿态和形状。",
+      "contribution": "复用无对应图像的动作捕捉资源缓解视频监督不足，并重点验证遮挡情况下的稳定性；与直接前馈视频回归路线不同。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/WACV2024/html/Duran_HMP_Hand_Motion_Priors_for_Pose_and_Shape_Estimation_From_WACV_2024_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
+    }
   },
   {
     "id": "hand-multiview-bootstrap",
@@ -1976,6 +2923,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "手关节容易遮挡，逐帧人工标注细粒度关键点成本高。",
+      "method": "初始检测器在多视角产生噪声标签，利用三角化筛选并恢复三维，再重投影为新训练标签，反复迭代提升检测器。",
+      "inputs_outputs": "训练使用同步多摄像机观测；部署的单图检测器输出二维手关键点，多视角三角化可进一步恢复三维。",
+      "contribution": "把多视角几何变成自动扩大监督数据的工具，并分析视角数量与检测真假阳性关系；应区分多视角训练过程和单视角推理能力。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content_cvpr_2017/html/Simon_Hand_Keypoint_Detection_CVPR_2017_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -1999,7 +2958,19 @@
     "sources": [
       "https://openaccess.thecvf.com/content_ICCV_2017_workshops/w11/html/Oberweger_DeepPrior_Improving_Fast_ICCV_2017_paper.html"
     ],
-    "verifiedAt": "2026-11-17"
+    "verifiedAt": "2026-11-17",
+    "analysis": {
+      "problem": "检验简单深度手姿态基线是否必然落后于结构复杂的新方法。",
+      "method": "在 DeepPrior 上加入残差网络层、数据增强及更好的初始手部定位，保留简单的整体框架。",
+      "inputs_outputs": "深度图 → 三维手关节坐标。",
+      "contribution": "说明网络与训练流程中的基础改进可带来很强的基准表现，适合作为控制复杂度的实验基线；该作品属于 ICCV Workshops，不应标为 ICCV 主会。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content_ICCV_2017_workshops/w11/html/Oberweger_DeepPrior_Improving_Fast_ICCV_2017_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
+    }
   },
   {
     "id": "depth-hand-survey",
@@ -2027,6 +2998,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "analysis": {
+      "problem": "已有深度手姿态论文评价标准不统一，难以判断实际进展和泛化能力。",
+      "method": "实现并统一评价多种系统，以人类实验支持评价准则，引入复杂杂乱场景数据，并比较简单最近邻基线。",
+      "inputs_outputs": "单幅深度手姿态研究与基准数据 → 方法比较、评价标准和挑战分析。",
+      "contribution": "强调训练数据和场景复杂度的重要性，指出孤立手与物体交互场景难度不同；这是 2015 年的历史综述结论，不能直接当作今天领域现状。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content_iccv_2015/html/Supancic_Depth-Based_Hand_Pose_ICCV_2015_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -2056,6 +3039,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "二维级联姿态回归难以直接适应三维关节对象的空间变换和层级结构。",
+      "method": "提出三维姿态索引特征以增强对三维变换的不变性，结合适应关节结构的层级回归。",
+      "inputs_outputs": "用于三维手部估计的观测与初始姿态 → 逐级更新的三维手姿态；摘要未展开传感器和完整输入协议。",
+      "contribution": "将级联回归从二维对象推广到三维关节结构，强调准确率与效率；具体初始化和数据预处理需读全文后补充，不能从标题猜测。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content_cvpr_2015/html/Sun_Cascaded_Hand_Pose_2015_CVPR_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -2085,6 +3080,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=44",
       "version": "2026 第七版（目录原文转载）",
       "venue": "TOG"
+    },
+    "analysis": {
+      "problem": "全身扫描中手部尺寸小、易遮挡且噪声较大，同时身体与手的协调运动需要统一建模。",
+      "method": "从 31 人约一千次高分辨率手扫描学习低维可关节化模型，包含随姿态变化的非刚性形变修正和姿态协同空间；与 SMPL 相连形成 SMPL+H。",
+      "inputs_outputs": "形状及姿态参数 → 三维手表面；拟合全身 4D 扫描可恢复身体和手的协调运动。",
+      "contribution": "提供被大量后续研究复用的参数化手表示，是基础模型而非独立图像检测网络；模型与数据使用需遵守项目授权条件。",
+      "limitations": null,
+      "sources": [
+        "https://mano.is.tue.mpg.de/"
+      ],
+      "evidence_level": "primary_project_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -2115,6 +3122,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ECCV"
+    },
+    "analysis": {
+      "problem": "既有研究偏向孤立单手，缺少大量双手相互作用数据与统一基线。",
+      "method": "构建含 260 万标注单手和交互手帧的数据集，并提出同时处理单手和双手三维姿态的 InterNet。",
+      "inputs_outputs": "单张 RGB 图像 → 单手或交互双手三维姿态；数据集提供相应训练和评价标注。",
+      "contribution": "把双手交互作为系统化基准任务，通过使用交互训练数据的对照说明数据覆盖的重要性，而不仅是增加一个网络结构。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2008.09309"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -2140,7 +3159,19 @@
       "https://arxiv.org/abs/2006.10214"
     ],
     "verifiedAt": "2026-11-17",
-    "code": "https://github.com/google-ai-edge/mediapipe"
+    "code": "https://github.com/google-ai-edge/mediapipe",
+    "analysis": {
+      "problem": "AR/VR 需要能在移动设备上实时运行的单目手骨架跟踪流程。",
+      "method": "将掌部检测器与手部关键点模型组成流水线，通过 MediaPipe 构建跨平台实现。",
+      "inputs_outputs": "单 RGB 相机图像 → 手部骨架跟踪。",
+      "contribution": "强调端侧部署和完整工程流水线，摘要报告移动 GPU 实时性能；当前摘要未说明深度坐标定义，不能把其输出自动解释为准确公制三维坐标。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2006.10214"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
+    }
   },
   {
     "id": "fphab",
@@ -2169,6 +3200,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "研究第一视角手—物动作时，需要同时观察 RGB-D 外观、三维手姿态和物体交互。",
+      "method": "采集超过十万帧、45 类动作、26 种物体的数据；以六个磁传感器和逆运动学生成 21 关节标注，部分序列提供物体 6D 姿态与模型。",
+      "inputs_outputs": "第一视角 RGB-D 视频和动作捕捉 → 手部三维关节、动作标签及部分物体标注。",
+      "contribution": "以 18 种基线比较外观、姿态及其组合用于动作识别的效果，并研究物体遮挡下手姿态质量对下游识别的影响。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content_cvpr_2018/html/Garcia-Hernando_First-Person_Hand_Action_CVPR_2018_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -2197,6 +3240,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "对话中手势与手臂身体运动相关，可作为手部不可见或观测不足时的先验。",
+      "method": "从网络视频获得的三维姿态估计训练时间模型，仅以身体/手臂运动预测手形序列，并把学习先验用于单视角手姿态估计。",
+      "inputs_outputs": "三维手臂运动 → 随时间变化的三维手势；也可辅助单图手姿态恢复。",
+      "contribution": "将身体动态作为手部生成与估计的共同先验，验证从独白训练到多人对话的迁移；范围是对话手势，不应宣称覆盖任意精细操作动作。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/CVPR2021/html/Ng_Body2Hands_Learning_To_Infer_3D_Hands_From_Conversational_Gesture_Body_CVPR_2021_paper.html"
+      ],
+      "evidence_level": "primary_abstract",
+      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
     }
   },
   {
@@ -2224,6 +3279,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "实时多人姿态估计需要兼顾定位精度与速度；逐人运行的两阶段方案随人数增加而变慢。",
+      "method": "在 YOLO 式单阶段架构中用横、纵两组一维热图进行坐标分类，并设计动态坐标分类器和适配稠密预测的训练损失。",
+      "inputs_outputs": "输入图像，输出多人二维人体关键点。",
+      "contribution": "把高精度的坐标分类表示引入单阶段多人预测，研究重点是改变精度与吞吐量的权衡，而不是增加时序或三维建模。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2312.07526"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -2251,6 +3317,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ECCV"
+    },
+    "analysis": {
+      "problem": "人体关键点、部件分割、深度和法线等任务往往依赖各自的专用模型与标注。",
+      "method": "先在超过三亿张人体图像上进行自监督预训练，再针对四类任务微调，使用原生高分辨率输入并考察模型扩容效果。",
+      "inputs_outputs": "输入人体图像；不同任务模型分别预测二维姿态、人体部件分割、深度或表面法线。",
+      "contribution": "表明人体领域的大规模预训练能帮助多种视觉任务和标注稀缺场景；这里的深度预测不等同于完整三维关节或人体网格重建。",
+      "limitations": null,
+      "sources": [
+        "https://www.ecva.net/papers/eccv_2024/papers_ECCV/html/529_ECCV_2024_paper.php"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -2274,7 +3351,18 @@
     "verified_at": "2026-11-17",
     "sources": [
       "https://arxiv.org/abs/2407.08634"
-    ]
+    ],
+    "analysis": {
+      "problem": "全身姿态需要同时处理躯干、手、脸和脚，小部件与身体的尺度差异使精度和实时性难以兼得。",
+      "method": "在 RTMPose 上加入特征金字塔与层次编码模块，整合标注对齐的公开数据，并通过两阶段蒸馏训练；三维版本采用坐标分类。",
+      "inputs_outputs": "输入单目图像，输出二维或三维全身关键点，具体输出取决于选用的模型。",
+      "contribution": "把尺度建模、数据整合与蒸馏组合成可部署的全身模型系列，并提供不同模型规模以调节效率与精度。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2407.08634"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+    }
   },
   {
     "id": "motionagformer",
@@ -2296,7 +3384,19 @@
     "verified_at": "2026-11-17",
     "sources": [
       "https://openaccess.thecvf.com/content/WACV2024/html/Mehraban_MotionAGFormer_Enhancing_3D_Human_Pose_Estimation_With_a_Transformer-GCNFormer_Network_WACV_2024_paper.html"
-    ]
+    ],
+    "analysis": {
+      "problem": "仅用全局注意力建立关节关系，可能不足以精细描述相邻关节的局部依赖。",
+      "method": "AGFormer 将通道分到并行 Transformer 与 GCNFormer 分支，分别学习全局与局部关系，再自适应融合并堆叠。",
+      "inputs_outputs": "输入单目视频经二维检测器得到的关节序列，一次前向输出对应所有帧的三维姿态序列。",
+      "contribution": "重点不是单独扩大 Transformer，而是让图结构局部建模与注意力互补，并提供四种规模以权衡计算与精度。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2310.16288",
+        "https://arxiv.org/html/2310.16288v1"
+      ],
+      "evidence_scope": "已核对摘要、引言中的 lifting 输入与整段序列输出流程；尚未独立复现。"
+    }
   },
   {
     "id": "wham",
@@ -2323,6 +3423,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "从视频恢复人体运动时，仅有相机坐标姿态不足以描述全局移动；世界坐标恢复还面临足部滑动和优化成本。",
+      "method": "用动捕数据学习二维关键点序列到三维运动的映射，融合视频特征与 SLAM 相机角速度，再进行接触感知的轨迹细化。",
+      "inputs_outputs": "输入视频及提取的关键点、图像特征和相机运动线索，输出世界坐标中的三维人体运动与全局轨迹。",
+      "contribution": "把运动先验、视觉信息与接触约束结合起来，不把恢复问题局限于平坦地面，论文展示了爬楼梯等情形。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2312.07531"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -2345,7 +3456,18 @@
     "verified_at": "2026-11-17",
     "sources": [
       "https://zju3dv.github.io/gvhmr/"
-    ]
+    ],
+    "analysis": {
+      "problem": "不同视频的世界坐标定义不一致，逐帧累积相对运动又容易造成长序列误差积累。",
+      "method": "使用重力方向与相机观察方向定义 Gravity-View 坐标；融合跟踪框、二维点、图像特征和相机旋转，预测朝向、根速度与关节静止概率，再恢复世界轨迹。",
+      "inputs_outputs": "输入单目视频及预处理特征，输出相机坐标 SMPL 参数和世界坐标人体运动。",
+      "contribution": "关键贡献是降低图像到世界姿态映射的坐标歧义，而不是简单后处理平滑；项目公布的网络运行时间明确不含预处理。",
+      "limitations": null,
+      "sources": [
+        "https://zju3dv.github.io/gvhmr/"
+      ],
+      "evidence_scope": "已核对作者项目页中的摘要、流程与运行时间说明。"
+    }
   },
   {
     "id": "probpose",
@@ -2371,6 +3493,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "常见二维姿态热图未必具有校准后的概率含义，也容易忽略裁剪窗口之外的关节。",
+      "method": "分别建模窗口内位置概率、关节位于窗口外的概率及可见性，配合 CropCOCO 和扩展 OKS 评价窗口外关键点。",
+      "inputs_outputs": "输入人体图像区域，输出二维关键点位置分布、存在概率与可见性预测。",
+      "contribution": "将“是否在窗口内”“是否可见”和“位置在哪里”分开处理，使截断人体和图像边缘位置能被明确评价。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2412.02254"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -2397,6 +3530,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "自顶向下姿态模型把不同难度的人体框都交给同等规模网络，简单样本和冗余检测框会浪费计算。",
+      "method": "训练轻量路由器评分，再在已训练的小、大姿态网络之间选择推理路径；路由器与预测网络解耦。",
+      "inputs_outputs": "输入检测得到的人体图像区域，输出二维姿态；动态变化的是所调用预测网络。",
+      "contribution": "从样本差异而非单纯压缩骨干入手分配算力，能复用已有姿态模型。论文还区分大模型有收益的困难样本与两者都难处理的极难样本。",
+      "limitations": null,
+      "sources": [
+        "https://openaccess.thecvf.com/content/CVPR2025/html/Xu_DynPose_Largely_Improving_the_Efficiency_of_Human_Pose_Estimation_by_CVPR_2025_paper.html"
+      ],
+      "evidence_scope": "已核对 CVF 索引中的完整摘要及原论文方法片段；直连全文受限。"
     }
   },
   {
@@ -2423,6 +3567,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "analysis": {
+      "problem": "只给模型裁剪后的人体图像会丢失透视相关的相机内参；偏离画面中心还会产生额外透视畸变。",
+      "method": "PE 编码裁剪图像内参，PR 对原图进行透视旋转，使人物居中后再估计姿态。",
+      "inputs_outputs": "输入单目图像及对应内参信息，输出三维人体关节位置。",
+      "contribution": "把相机几何显式纳入三维姿态估计，针对的是裁剪引起的几何信息缺失与视角畸变，而不只是更换骨干网络。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2508.17239"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -2452,6 +3607,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=51",
       "version": "2026 第七版（目录原文转载）",
       "venue": "TPAMI"
+    },
+    "analysis": {
+      "problem": "表达性人体重建同时覆盖身体、手和脸，单一数据集和复杂专用结构可能限制跨场景泛化。",
+      "method": "系统研究 40 个数据集与不同 ViT 规模，以简化架构比较数据和模型扩容，并使用通用预训练后微调的策略。",
+      "inputs_outputs": "从人体图像估计包含身体、手与脸的表达性姿态和形状。",
+      "contribution": "在 SMPLer-X 基础上进一步简化结构，强调手部重建与跨数据集迁移，同时引入 SynHand 评价；应与早期 SMPLer-X 条目区分。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2501.09782"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -2479,6 +3645,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "头戴设备视角下许多关节不可见；把可见与不可见关节一视同仁可能损害可见关节的预测。",
+      "method": "用动捕预训练 VQ-VAE 姿态先验，联合预测三维关节和可见性，以可见性加权监督，再通过帧内双目与跨帧注意力细化姿态。",
+      "inputs_outputs": "输入头戴设备的双目自我中心视频及内置 SLAM 相机位姿，输出世界坐标中的人体三维关节序列。",
+      "contribution": "贡献同时包括数据与方法：提供带可见性标注的真实场景评价基础，实验证明可见性信息有助于自我中心姿态估计。",
+      "limitations": "作者指出训练依赖大规模高质量真值标签，真实开放场景采集困难；弱监督或自监督泛化仍是后续方向。",
+      "sources": [
+        "https://arxiv.org/abs/2602.23618",
+        "https://arxiv.org/html/2602.23618v1"
+      ],
+      "evidence_scope": "已核对摘要、方法第 4 节的输入输出与模块说明，以及结论中的局限；尚未独立复现。"
     }
   },
   {
@@ -2500,7 +3678,18 @@
     "verified_at": "2026-11-17",
     "sources": [
       "https://arxiv.org/abs/2611.08954"
-    ]
+    ],
+    "analysis": {
+      "problem": "单目图像中人体大小和相机距离耦合，仅评价骨盆相对误差无法体现人体在相机前的实际位置。",
+      "method": "在预训练全身估计器上加入可选深度和环境几何模块，结合 RGB 先验、测量深度与地面接触约束细化距离和身体预测。",
+      "inputs_outputs": "支持 RGB、RGB 加地面几何、RGB-D 三种输入模式，输出相机坐标系下具有实际尺度的三维关节位置。",
+      "contribution": "将评价重点从相对姿态推进到相机坐标中的绝对定位，并用共享参数兼容不同传感条件；当前来源标注为 ICRA 投稿而非已录用。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2611.08954"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+    }
   },
   {
     "id": "deeppose",
@@ -2527,6 +3716,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "从图像估计人体关节时，如何让模型利用全身上下文，而不只依赖局部部件检测？",
+      "method": "将关节定位直接写为深度神经网络回归问题，并用级联回归器逐步细化预测。",
+      "inputs_outputs": "输入人体图像，输出二维身体关节位置。",
+      "contribution": "提供一种整体推理、直接回归关节的早期深度学习方案；适合作为理解后续热图和坐标分类路线的历史起点。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/1312.4659"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -2555,6 +3755,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "局部图像证据不足以稳定定位所有关节，需要利用远距离身体部件之间的空间依赖。",
+      "method": "串联卷积网络，每一阶段读取前一阶段的置信图并细化位置；通过中间监督缓解多阶段训练中的梯度消失。",
+      "inputs_outputs": "输入人体图像，输出逐阶段改进的二维部件位置置信图及关节位置。",
+      "contribution": "把图像特征与空间约束学习纳入同一顺序网络，不再依赖显式图模型推断来传播关节关系。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/1602.00134"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -2583,6 +3794,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ECCV"
+    },
+    "analysis": {
+      "problem": "精细关节定位需要高分辨率局部信息，同时也依赖全身尺度的空间上下文。",
+      "method": "重复堆叠下采样与上采样组成的沙漏模块，在各尺度汇集特征，并在模块之间加入中间监督。",
+      "inputs_outputs": "输入人体图像，输出二维人体关节位置预测。",
+      "contribution": "核心是反复完成局部到全局再回到局部的多尺度推理；论文通过实验强调堆叠过程与中间监督的作用。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/1603.06937"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -2611,6 +3833,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "多人图像不仅要找到各个关节，还要判断哪些部件属于同一个人。",
+      "method": "联合预测部件位置和 Part Affinity Fields，用连续向量场表示肢体关联，再通过贪心的自底向上解析组成个体骨架。",
+      "inputs_outputs": "输入多人图像，输出每个人的二维人体骨架。",
+      "contribution": "将部件归属关系显式编码为空间场，避免为每个人单独执行完整姿态网络，是理解自底向上多人姿态的重要路线。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/1611.08050"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -2639,6 +3872,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ECCV"
+    },
+    "analysis": {
+      "problem": "复杂姿态系统的精度进步难以归因，需要简洁、可比较的强基线。",
+      "method": "在 ResNet 后接少量反卷积层预测关节热图；跟踪版本用光流传播关节位置，并结合姿态相似性进行贪心关联。",
+      "inputs_outputs": "单帧人体区域输入得到二维姿态；视频版本进一步关联跨帧人物。",
+      "contribution": "用简单结构和消融实验提供可靠基准，而不是主张结构复杂度越高越好。",
+      "limitations": "作者明确表示并未对所有既有方法进行完整公平比较，因此更好的基准结果不能直接解释为算法普遍优越。",
+      "sources": [
+        "https://arxiv.org/html/1804.06208v2"
+      ],
+      "evidence_scope": "已核对全文引言、姿态网络及跟踪方法说明。"
     }
   },
   {
@@ -2667,6 +3911,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "先压低分辨率再恢复细节的网络可能丢失关节精确定位所需的空间信息。",
+      "method": "始终保留高分辨率分支，逐步加入并行低分辨率分支，并反复进行跨尺度特征融合。",
+      "inputs_outputs": "输入人体图像区域，输出高分辨率二维关键点热图。",
+      "contribution": "将保持空间精度和融合语义上下文并行进行；不同于仅在网络末端上采样的结构。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/1902.09212"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -2696,6 +3951,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "自底向上多人姿态面对显著人体尺度变化，尤其难以定位小尺寸人物的关节。",
+      "method": "在 HRNet 输出上通过转置卷积形成更高分辨率特征金字塔，训练时多分辨率监督，推理时多分辨率聚合。",
+      "inputs_outputs": "输入多人图像，输出多人二维关节及姿态。",
+      "contribution": "把高分辨率表示用于尺度感知的多人预测；与 HRNet 的区别在于面向自底向上任务加入更高分辨率金字塔与聚合。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/1908.10357"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -2725,6 +3991,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "直接回归多人关节位置曾落后于先检测再分组，原因之一是共享表示未能聚焦各关节区域。",
+      "method": "通过像素级空间变换形成自适应卷积，并为不同关节设置独立分支，使每个分支从对应区域提取特征后回归。",
+      "inputs_outputs": "输入图像，输出自底向上的多人二维姿态。",
+      "contribution": "表明关节专属、空间对齐的表示可以增强直接回归，不必将高精度完全归因于额外的关键点分组流程。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2104.02300"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -2754,6 +4031,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "analysis": {
+      "problem": "定位关节同时需要外观证据与人体解剖关系，常规卷积表示不容易显式学习关节之间的约束。",
+      "method": "为每个关键点设置可学习 token，使其从图像吸收外观线索并学习其他关键点的关系。",
+      "inputs_outputs": "输入人体图像，输出二维关键点预测。",
+      "contribution": "将关键点本身作为表示单元，而不只把图像划成 token，提供了显式关节关系建模的 Transformer 路线。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2104.03516"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -2784,6 +4072,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "NeurIPS"
+    },
+    "analysis": {
+      "problem": "姿态模型常依赖复杂专用结构，尚需厘清普通视觉 Transformer 能达到怎样的效果。",
+      "method": "使用非层次化 ViT 提取单人图像特征，搭配轻量解码器；研究模型扩容、不同训练设置及大模型向小模型的知识迁移。",
+      "inputs_outputs": "输入单个人体图像区域，输出二维姿态。",
+      "contribution": "建立结构简洁、可扩展的 Transformer 基线，使研究者能把注意力转向模型规模、预训练与训练数据，而非只堆叠专用模块。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2204.12484"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -2813,6 +4112,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ECCV"
+    },
+    "analysis": {
+      "problem": "二维热图会引入离散化误差，提高热图分辨率又常需要昂贵的上采样和额外细化。",
+      "method": "把二维坐标定位拆成横向与纵向两个分类问题，并将像素划分成更细的 bins 以获得亚像素定位。",
+      "inputs_outputs": "输入人体图像特征，输出每个关节横、纵坐标的分类分布，再解码成二维位置。",
+      "contribution": "通过改变输出表示降低量化误差，在部分设置下可省去上采样与精化后处理，尤其针对低分辨率输入。",
+      "limitations": null,
+      "sources": [
+        "https://www.ecva.net/papers/eccv_2022/papers_ECCV/html/4591_ECCV_2022_paper.php"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -2837,7 +4147,18 @@
       "https://arxiv.org/abs/2303.07399",
       "https://github.com/open-mmlab/mmpose/tree/main/projects/rtmpose"
     ],
-    "code": "https://github.com/open-mmlab/mmpose/tree/main/projects/rtmpose"
+    "code": "https://github.com/open-mmlab/mmpose/tree/main/projects/rtmpose",
+    "analysis": {
+      "problem": "高分基准模型在 CPU、手机等设备上往往延迟较高，实际部署需要同时优化结构、训练与推理链路。",
+      "method": "采用检测后逐人估计的流程，以 CSPNeXt 和 SimCC 坐标分类为基础，联合优化训练策略、跳帧检测及部署后端。",
+      "inputs_outputs": "输入图像或视频中的人体检测区域，输出二维人体或全身关键点，取决于模型版本。",
+      "contribution": "提供跨 CPU、GPU 与移动芯片的模型系列，体现工程链路联合优化的价值；不应把单个姿态网络速度等同于完整多人系统速度。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/html/2303.07399v2"
+      ],
+      "evidence_scope": "已核对原论文摘要与引言中的架构、输入流程及部署说明。"
+    }
   },
   {
     "id": "simplebaseline3d",
@@ -2867,6 +4188,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "analysis": {
+      "problem": "端到端三维姿态误差混合了二维视觉定位误差和二维到三维映射误差，不容易分析瓶颈。",
+      "method": "把系统拆成二维检测与三维 lifting，用相对简单的深层前馈网络把二维关节映射到三维。",
+      "inputs_outputs": "输入二维人体关节坐标，输出三维关节位置；原始图像需先经过二维检测器。",
+      "contribution": "证明较简单的 lifting 网络也能形成强基线，并用真值与检测二维点的对比揭示视觉定位误差的重要性。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/1705.03098"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -2897,6 +4229,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "单帧二维到三维恢复缺少运动上下文，且三维标注有限，难以利用大量未标注视频。",
+      "method": "在二维关键点序列上使用膨胀时间卷积；半监督分支将估计的三维姿态重新投影到二维，利用未标注视频训练。",
+      "inputs_outputs": "输入视频中的二维关节序列，输出三维人体姿态序列。",
+      "contribution": "结合时间建模与重投影监督，把序列信息和无三维标签的视频用于姿态 lifting，而非逐帧独立预测。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/1811.11742"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -2927,6 +4270,18 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "analysis": {
+      "problem": "视频姿态恢复需要同时建模同帧关节关系与跨帧运动，而非仅依靠局部卷积。",
+      "method": "采用纯 Transformer 的空间、时间建模结构，先建立帧内关节关系，再利用序列上下文估计中心帧姿态。",
+      "inputs_outputs": "输入二维关节序列，输出中心帧三维人体姿态。",
+      "contribution": "展示了不依赖卷积的时空注意力在三维姿态 lifting 中的能力；中心帧输出方式也为后续序列到序列改进提供对照。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2103.10455",
+        "https://arxiv.org/html/2103.10455v3"
+      ],
+      "evidence_scope": "已核对摘要、引言和第 3 节输入输出定义；尚未独立复现。"
     }
   },
   {
@@ -2955,6 +4310,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "不同关节的运动规律不同，把全身和所有帧混在一起建模不一定能有效保留每个关节的跨帧对应。",
+      "method": "交替使用逐关节时间 Transformer 与帧内空间 Transformer，分别学习关节运动和关节之间的空间关联。",
+      "inputs_outputs": "输入二维关键点序列，输出与输入各帧对应的完整三维姿态序列，而不只预测中心帧。",
+      "contribution": "从中心帧估计推进到序列到序列估计，同时通过交替时空编码保留关节身份与运动差异。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2203.00859"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -2985,6 +4351,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "加长输入序列可以提供更多上下文，但逐帧注意力开销增加，二维检测噪声也会影响三维恢复。",
+      "method": "将长骨架序列压缩为频域表示，并融合时间域与频率域特征，以较小修改扩展 PoseFormer 的时间感受野。",
+      "inputs_outputs": "输入含噪二维人体关节序列，输出三维人体姿态。",
+      "contribution": "用紧凑频域表征同时处理长序列计算和二维检测噪声，重点在效率与稳健性，而非直接增加全帧注意力规模。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2303.17472"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -3015,6 +4392,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "analysis": {
+      "problem": "姿态、运动理解等任务分别训练会限制不同来源运动数据的共享利用。",
+      "method": "预训练 DSTformer，从带噪和缺失的二维观察恢复三维运动，再用轻量回归头微调到下游任务。",
+      "inputs_outputs": "预训练输入为部分受损二维骨架观察，目标为三维运动；迁移阶段输出依下游任务设置。",
+      "contribution": "把三维运动恢复作为统一表征学习目标，让时空关系、几何与运动规律能在多个任务间迁移，而不只优化单一基准。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2210.06551"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -3044,6 +4432,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ECCV"
+    },
+    "analysis": {
+      "problem": "单张图像的二维关节信息稀疏，但应用往往需要完整三维人体形状与姿态。",
+      "method": "先检测二维关节，再优化 SMPL 参数，使三维关节投影匹配二维检测，并利用人体形状先验和防穿透约束。",
+      "inputs_outputs": "输入单张人体图像及其二维关节检测，输出 SMPL 三维身体网格、姿态和形状。",
+      "contribution": "建立以二维证据拟合统计人体模型的优化路线，区分于直接从图像回归模型参数的方法。",
+      "limitations": null,
+      "sources": [
+        "https://smplify.is.tuebingen.mpg.de/"
+      ],
+      "evidence_scope": "已核对作者项目页的方法介绍。"
     }
   },
   {
@@ -3073,6 +4472,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "仅输出关节不足以描述人体表面；仅用二维重投影训练三维网格又存在严重欠约束。",
+      "method": "直接从人体图像回归形状与关节旋转，结合二维关键点重投影损失，以及用三维人体数据训练的对抗先验。",
+      "inputs_outputs": "输入单个人体框内的 RGB 图像，输出人体三维姿态、形状参数及完整网格。",
+      "contribution": "训练时可利用仅有二维标注的自然图像，推理时无需中间二维关键点检测，代表从优化拟合走向直接网格回归的路线。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/1712.06584"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -3103,6 +4513,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "analysis": {
+      "problem": "优化拟合容易对齐图像但慢且依赖初始化，直接回归快但可能缺少精确三维监督。",
+      "method": "在训练循环中用网络估计初始化 SMPL 优化，再用优化得到的拟合结果反过来监督网络。",
+      "inputs_outputs": "输入人体图像；训练额外利用二维关节进行拟合，网络输出三维人体姿态和形状。",
+      "contribution": "使回归与优化成为互相改善的组件，关键是把模型拟合放入训练监督流程，而非仅在最终推理结果后附加优化。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/1909.12828"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -3133,6 +4554,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "视频人体重建需要自然连贯的运动，但真实场景中成对的视频与三维运动标签不足。",
+      "method": "利用时序姿态与形状回归网络，并在序列层面进行对抗训练，让运动判别器借助 AMASS 区分真实与预测运动。",
+      "inputs_outputs": "输入人体运动视频，输出逐帧三维身体姿态和形状。",
+      "contribution": "把未配对的动捕运动作为序列先验引入训练，不要求所有自然视频都具备三维真值；与逐帧 HMR 的重点差异在运动层面的学习。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/1912.05656"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -3161,6 +4593,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "analysis": {
+      "problem": "全局特征回归人体网格对局部遮挡敏感，即使多数身体可见也可能预测失真。",
+      "method": "学习身体部件引导的软注意力掩码，结合可见部件证据和相邻部件信息推断被遮挡区域。",
+      "inputs_outputs": "输入人体图像，输出三维身体姿态与形状。",
+      "contribution": "将部件可见性和局部证据融入参数回归；论文在遮挡专用及常规基准上评价，而非仅依靠无解释的全局特征。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2104.08527"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -3191,6 +4634,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "三维关节定位可以精确对齐图像，却可能不符合人体结构；直接回归模型旋转又高度非线性。",
+      "method": "将关节旋转分为 swing 与 twist：由三维关节解析求解 swing，再由神经网络从图像预测 twist，形成混合逆运动学。",
+      "inputs_outputs": "从图像估计三维关节及相关参数，经逆运动学得到相对部件旋转与参数化人体网格。",
+      "contribution": "连接关节坐标估计和人体模型重建，兼顾图像对齐与合法骨架结构；并非完全用神经网络直接预测全部关节旋转。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2011.14672"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -3221,6 +4675,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "analysis": {
+      "problem": "逐人检测再分别回归网格的多阶段流程复杂，并容易受到遮挡和检测框质量影响。",
+      "method": "同时预测身体中心热图与网格参数图，再由身体中心位置采样各个人体的网格参数。",
+      "inputs_outputs": "输入单张多人 RGB 图像，无需先提供每个人的边界框，输出多个人体三维网格。",
+      "contribution": "将多人网格恢复写为像素级单阶段回归；需与同仓库中后来加入的 BEV、TRACE 等工作区分，不能把它们的能力全部归给 ROMP。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2008.12272"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -3251,6 +4716,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "analysis": {
+      "problem": "视频中既要恢复人体三维形状，也要在遮挡后保持人物身份，并处理难以重建的非常规姿态。",
+      "method": "先用全 Transformer 的 HMR 2.0 进行人体网格恢复，再将三维重建送入三维跟踪系统。",
+      "inputs_outputs": "单帧人体图像可输出三维网格；完整 4DHumans 系统输入单目视频并输出多人重建与跨帧身份关联。",
+      "contribution": "需要区分单帧重建器 HMR 2.0 和完整视频系统 4DHumans：前者提升重建，后者利用三维表示增强跟踪。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2305.20091"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -3280,6 +4756,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "analysis": {
+      "problem": "身体、手和脸分开建模难以统一表达人的动作与表情，且缺少成对图像与完整三维标注。",
+      "method": "学习统一的 SMPL-X 身体模型，并用 SMPLify-X 将脸、手、脚等二维特征联合拟合；引入学习式姿态先验与防穿透惩罚。",
+      "inputs_outputs": "输入单张 RGB 图像及检测出的二维特征，输出含手部姿态和面部表情的三维人体模型。",
+      "contribution": "同时贡献表达性人体表示与拟合方法；SMPL-X 是参数化模型，SMPLify-X 才是论文中的图像拟合流程。",
+      "limitations": null,
+      "sources": [
+        "https://smpl-x.is.tuebingen.mpg.de/"
+      ],
+      "evidence_scope": "已核对作者项目页的论文摘要与贡献说明。"
     }
   },
   {
@@ -3310,6 +4797,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ECCV"
+    },
+    "analysis": {
+      "problem": "基于优化的全身表达性捕捉较慢；把全身图像缩小后，手和脸的像素太少，又缺少足够训练标注。",
+      "method": "直接回归 SMPL-X，用身体估计引导原图中的脸、手高分辨率裁剪，再交给专门细化模块；结合全身拟合数据与部件数据训练。",
+      "inputs_outputs": "输入单张 RGB 图像，输出身体、双手和面部的表达性姿态及形状。",
+      "contribution": "将全局身体上下文和局部高分辨率证据结合，利用现有脸、手数据支持统一全身回归。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2008.09062"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -3340,6 +4838,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=49",
       "version": "2026 第七版（目录原文转载）",
       "venue": "3DV"
+    },
+    "analysis": {
+      "problem": "独立的身体、手和脸专家各有优势，简单等权合并难以兼顾整体稳健性与面部细节。",
+      "method": "使用 moderator 按置信度融合各部件专家特征，在 SMPL-X 共享形状空间中协作，同时估计面部细节。",
+      "inputs_outputs": "输入单张图像，输出可驱动的全身三维化身，包括身体姿态形状、表情、反照率、光照与面部表面位移。",
+      "contribution": "核心是专家置信度控制的协作而非简单拼接，兼顾全身体形和精细脸部；输出比单纯关节位置更丰富。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2105.05301"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -3370,6 +4879,17 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ECCV"
+    },
+    "analysis": {
+      "problem": "既有脸、手、身体数据分别标注，拼装多个独立模型会遭遇数据偏差和系统复杂度。",
+      "method": "在 COCO 上扩展统一全身标注，并设计 ZoomNet，利用身体层次结构处理同一人不同部件的尺度差异。",
+      "inputs_outputs": "数据集标注 133 个二维点：脸 68、双手 42、身体与脚 23；配套模型输入图像并预测全身二维关键点。",
+      "contribution": "提供统一评价基础和单网络基线，不只是提出一个估计器；也可作为脸、手等部件任务的预训练数据。",
+      "limitations": null,
+      "sources": [
+        "https://www.ecva.net/papers/eccv_2020/papers_ECCV/html/768_ECCV_2020_paper.php"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
     }
   },
   {
@@ -3394,6 +4914,17 @@
       "https://papers.nips.cc/paper_files/paper/2023/hash/2614947a25d7c435bcd56c51958ddcb1-Abstract-Datasets_and_Benchmarks.html",
       "https://github.com/MotrixLab/SMPLer-X"
     ],
-    "code": "https://github.com/MotrixLab/SMPLer-X"
+    "code": "https://github.com/MotrixLab/SMPLer-X",
+    "analysis": {
+      "problem": "表达性人体重建过度依赖少量训练数据，跨场景泛化能力可能受限。",
+      "method": "系统分析 32 个数据集，选择并组合多源训练样本，研究最高至 ViT-Huge 的模型扩容，并通过微调得到专用模型。",
+      "inputs_outputs": "输入人体图像，输出统一的身体、手、脸姿态与形状。",
+      "contribution": "把数据规模、数据组成和模型规模作为核心研究变量，构建通用表达性重建基础模型；与后续扩大至 40 个数据集的 SMPLest-X 不同。",
+      "limitations": null,
+      "sources": [
+        "https://arxiv.org/abs/2309.17448"
+      ],
+      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。"
+    }
   }
 ]

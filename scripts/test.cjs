@@ -24,3 +24,22 @@ assert.equal(ccfTier(fixture[3]),'');
 assert.equal(ccfTier({ccf:{tier:'D',source:'https://www.ccf.org.cn/'}}),'');
 assert.equal(filterPapers(fixture,{ccf:'A',category:'unmatched'}).length,0);
 console.log('PASS: CCF A/B/C filtering, missing/unsafe mapping, combined filters.');
+
+// Analysis is optional and never replaced with invented paper-specific content.
+const {paperAnalysis}=require(path.join(__dirname,root,'app.js'));
+assert.equal(paperAnalysis({}).available,false);
+assert.equal(paperAnalysis({analysis:null}).available,false);
+const note=paperAnalysis({analysis:{problem:'  研究问题  ',method:['步骤一','步骤二',null],limitations:null,sources:['https://arxiv.org/abs/example',{url:'https://example.org/paper',title:'论文原文'},{url:'javascript:alert(1)',label:'unsafe'},'https://arxiv.org/abs/example',null]}});
+assert.equal(note.available,true);assert.equal(note.problem,'研究问题');assert.equal(note.method,'步骤一\n\n步骤二');assert.equal(note.limitations,'');assert.equal(note.sources.length,2);assert.equal(note.sources[1].label,'论文原文');
+assert.equal(paperAnalysis({analysis:{problem:{invented:'unsupported'}}}).available,false);
+assert.equal(paperAnalysis({analysis:{problem:'<script>literal text</script>'}}).problem,'<script>literal text</script>');
+console.log('PASS: optional analysis, prose normalization, explicit missing data, source safety and deduplication.');
+
+const evidence=paperAnalysis({analysis:{problem:'问题',evidence_level:' primary_abstract ',evidence_scope:'仅核查摘要',verification_note:'未阅读全文',verification_notes:['不比较数值','<b>保留纯文本</b>']}});
+assert.equal(evidence.evidence_label,'摘要级核验');assert.equal(evidence.evidence_scope,'仅核查摘要');assert.equal(evidence.verification_notes,'未阅读全文\n\n不比较数值\n\n<b>保留纯文本</b>');assert.equal(paperAnalysis({analysis:{evidence_level:'primary_full_text'}}).evidence_label,'全文级核验');
+console.log('PASS: per-paper evidence scope, abstract/full-text labels and verification notes.');
+
+assert.equal(paperAnalysis({analysis:{evidence_level:'primary_abstract_and_targeted_fulltext'}}).evidence_label,'摘要与相关正文已核对');
+assert.equal(paperAnalysis({analysis:{evidence_level:'unknown_technical_enum'}}).evidence_label,'核验范围见说明');
+for(const paper of papers){const label=paperAnalysis(paper).evidence_label;assert.ok(!/[a-z_]/i.test(label),'Evidence labels must be human-readable Chinese');}
+console.log('PASS: all catalog evidence-level labels localized; unknown enum safely generalized.');
