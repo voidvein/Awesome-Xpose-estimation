@@ -50,7 +50,7 @@ assert.equal(yearGroups.reduce((sum,g)=>sum+g.items.length,0),papers.length);
 assert.ok(yearGroups.every((g,i)=>!i||yearGroups[i-1].year>g.year));
 assert.ok(groupPapersByYear(papers,'oldest').every((g,i,all)=>!i||all[i-1].year<g.year));
 assert.deepEqual(groupPapersByYear([]),[]);
-assert.ok(groupPapersByYear(papers,'title').every(g=>g.items.every((p,i)=>!i||g.items[i-1].title.localeCompare(p.title)<=0)));
+assert.ok(groupPapersByYear(papers,'title').every(g=>g.items.every((p,i)=>!i||ccfTier(g.items[i-1])!==ccfTier(p)||g.items[i-1].title.localeCompare(p.title)<=0)));
 assert.equal(yearCounts(papers).reduce((sum,g)=>sum+g.count,0),papers.length);
 assert.equal(paperFigure({}),null);
 assert.equal(paperFigure({figure:{src:'assets/figures/example.webp',source:'https://example.org'}}).src,'assets/figures/example.webp');
@@ -62,3 +62,30 @@ const licensed=paperFigure({figure:{src:'assets/figures/method.png',source:'http
 assert.equal(licensed.license_url,'https://creativecommons.org/licenses/by/4.0/');assert.equal(licensed.attribution,'<b>Author et al.</b>');assert.equal(licensed.authors,'Author A, Author B');assert.equal(licensed.figure_number,'Figure 2');assert.equal(licensed.version,'arXiv v2');assert.equal(licensed.alt,'方法的编码器和解码器流程');assert.ok(licensed.modifications);
 for(const url of ['javascript:alert(1)','http://example.org/license','https://','https://user:pass@example.org/license']){assert.equal(paperFigure({figure:{source:url,license_url:url}}).source,'');assert.equal(paperFigure({figure:{source:url,license_url:url}}).license_url,'');}
 console.log('PASS: figure attribution, version, modifications, alt and HTTPS license URL validation.');
+
+// Years remain primary; validated CCF A/B/C ranks precede unmarked records.
+const ranked = [
+ {id:'none',title:'A unmarked'},
+ {id:'unsafe',title:'B unsafe',ccf:{tier:'A',source:'javascript:alert(1)'}},
+ {id:'c',title:'C title',ccf:{tier:'C',source:'https://www.ccf.org.cn/'}},
+ {id:'b',title:'B title',ccf:{tier:'B',source:'https://www.ccf.org.cn/'}},
+ {id:'a-z',title:'Z title',ccf:{tier:'A',source:'https://www.ccf.org.cn/'}},
+ {id:'a-a',title:'A title',ccf:{tier:'A',source:'https://www.ccf.org.cn/'}}
+].map(p=>({...papers[0],year:2024,...p,ccf:p.ccf}));
+const expectedRank=['a-a','a-z','b','c','none','unsafe'];
+assert.deepEqual(filterPapers(ranked,{}).map(p=>p.id),expectedRank);
+assert.deepEqual(filterPapers(ranked,{sort:'oldest'}).map(p=>p.id),expectedRank);
+assert.deepEqual(filterPapers(ranked,{sort:'title'}).map(p=>p.id),expectedRank);
+assert.deepEqual(groupPapersByYear(ranked,'title')[0].items.map(p=>p.id),expectedRank);
+assert.deepEqual(groupPapersByYear(ranked)[0].items.map(p=>p.id),expectedRank);
+assert.deepEqual(groupPapersByYear(ranked,'oldest')[0].items.map(p=>p.id),expectedRank);
+const withYears=[...ranked,{...ranked[0],id:'new',year:2025},{...ranked[4],id:'old',year:2023}];
+assert.equal(filterPapers(withYears,{})[0].id,'new');
+assert.equal(filterPapers(withYears,{sort:'oldest'})[0].id,'old');
+const alphabetical=filterPapers(withYears,{sort:'title'});
+assert.equal(alphabetical[0].id,'new');
+assert.deepEqual(alphabetical.filter(p=>p.year===2024).map(p=>p.id),expectedRank);
+assert.deepEqual(filterPapers(ranked,{ccf:'A'}).map(p=>p.id),['a-a','a-z']);
+assert.deepEqual(yearCounts(ranked),yearCounts(filterPapers(ranked,{})));
+assert.equal(ranked[0].id,'none','Sorting does not mutate source data');
+console.log('PASS: within-year CCF A/B/C/unmarked priority, unsafe ranks, same-tier alphabetical order in all sort modes, chronology, filters and nonmutation.');

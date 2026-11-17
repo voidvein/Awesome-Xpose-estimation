@@ -66,3 +66,7 @@ Limits: no reproduction/benchmark runs; code links not present on every entry; o
 ## CCF labels
 
 Labels refer to the 2026 seventh edition, not historical ratings at the time of each publication. The [CCF release notice](https://www.ccf.org.cn/Academic_Evaluation/By_category/2026-03-31/870181.shtml) announces the edition; the [catalogue PDF reproduced by Lishui University](https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf) is the row-level source. See `ccf-mapping.json` for venue matching and exclusions. Labels describe a venue, not the quality of an individual paper. Workshops and preprints do not inherit main-conference ranks; unmatched entries are left unmarked.
+
+## Expanded catalogue batch
+
+The additional 198 entries were discovered in conference proceedings and verified against primary bibliographic records and abstracts. Of these, 197 are CVF proceedings records and one is an IEEE TMM journal record. The batch is conference-heavy, with limited journal and recent-year coverage; it is not a systematic review. Analyses are abstract-level unless explicitly stated otherwise. Same-year ordering uses CCF 2026 seventh-edition A, B, C, then unmarked; an unmarked entry is not necessarily absent from CCF.

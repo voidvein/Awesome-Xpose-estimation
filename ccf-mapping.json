@@ -29,7 +29,7 @@
   "venues": {
     "CVPR": {
       "rank": "A",
-      "count": 55,
+      "count": 182,
       "status": "verified",
       "label": "CCF A",
       "reason": "按 2026 第七版载体等级标注，非论文质量评价；不是发表年份的历史评级。",
@@ -39,7 +39,7 @@
     },
     "ECCV": {
       "rank": "B",
-      "count": 12,
+      "count": 21,
       "status": "verified",
       "label": "CCF B",
       "reason": "按 2026 第七版载体等级标注，非论文质量评价；不是发表年份的历史评级。",
@@ -79,7 +79,7 @@
     },
     "ICCV": {
       "rank": "A",
-      "count": 22,
+      "count": 76,
       "status": "verified",
       "label": "CCF A",
       "reason": "按 2026 第七版载体等级标注，非论文质量评价；不是发表年份的历史评级。",
@@ -161,7 +161,7 @@
     },
     "WACV": {
       "rank": null,
-      "count": 6,
+      "count": 13,
       "status": "not-listed",
       "label": "未收录",
       "reason": "2026 第七版完整 PDF 未找到 WACV 或 IEEE/CVF Winter Conference on Applications of Computer Vision 条目。未收录不表示低质量。"
@@ -220,6 +220,15 @@
       "label": "分轨待核验",
       "reason": "NeurIPS 主会为 A，但目录没有独立列出 Datasets and Benchmarks；当前采取保守策略，不在缺少分轨适用依据时自动继承。",
       "parentVenueRank": "A"
+    },
+    "IEEE TMM": {
+      "rank": "A",
+      "status": "verified",
+      "canonicalVenue": "TMM",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=44",
+      "sourcePage": 44,
+      "reason": "CCF 2026第七版期刊评级，不代表论文质量或历史评级。",
+      "count": 1
     }
   }
 }
