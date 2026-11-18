@@ -4633,19 +4633,107 @@
     },
     "analysis": {
       "problem": "局部锚点回归需要同时兼顾手部细节与全局关节上下文，并缓解深度方向精度偏低的问题。",
-      "method": "以 Transformer 为三维锚点聚合局部和全局信息，预测锚点到关节偏移并加权汇总；第二阶段围绕初始关节在三个方向均匀设置锚点。",
+      "method": "A2J-Transformer+ 在单张 RGB 或深度图上用三维锚点投票定位手关节。第二阶段围绕第一阶段的关节重新布设锚点，改善深度方向的覆盖。",
       "inputs_outputs": "单 RGB 或深度图 → 三维关节；覆盖单手、交互双手及手—物场景。",
       "contribution": "两阶段自适应锚点使偏移更小并平衡三个坐标方向；作者在 RGB、深度手数据和 ITOP 人体数据检验跨场景适用性。",
       "limitations": "RGB 与深度版本的观测条件不同，应分别比较；多阶段锚点精修的成本需计入整体推理。",
       "sources": [
         "https://changlongjianggit.github.io/A2J-Transformer-Plus/",
-        "https://researchconnect.buffalo.edu/en/publications/3d-hand-pose-estimation-via-articulated-anchor-to-joint-3d-local-/"
+        "https://researchconnect.buffalo.edu/en/publications/3d-hand-pose-estimation-via-articulated-anchor-to-joint-3d-local-/",
+        "https://changlongjianggit.github.io/A2J-Transformer-Plus/static/images/method_figure2.png",
+        "https://changlongjianggit.github.io/A2J-Transformer-Plus/static/images/method_figure3.png",
+        "https://github.com/ChanglongJiangGit/A2J-Transformer-Plus/blob/main/main/model.py#L188-L272",
+        "https://github.com/ChanglongJiangGit/A2J-Transformer-Plus"
       ],
-      "evidence_level": "primary_project_and_author_institution_abstract",
-      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。",
+      "evidence_level": "primary_project_and_implementation",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
-    }
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对正式发表记录、第一作者项目的 Method Overview 与图 3–4，以及作者实现的两阶段前向和损失。",
+      "verified_at": "2026-11-18",
+      "verification_note": "流程以列出的来源为准。实现及权重未经本站运行。"
+    },
+    "pipeline": {
+      "overview": "A2J-Transformer+ 在单张 RGB 或深度图上用三维锚点投票定位手关节。第二阶段围绕第一阶段的关节重新布设锚点，改善深度方向的覆盖。",
+      "steps": [
+        {
+          "title": "提取局部细节和尺度信息",
+          "description": "每阶段的特征增强模块处理图像特征，给锚点提供与手部各尺度相关的局部上下文。"
+        },
+        {
+          "title": "用固定锚点粗定位",
+          "description": "第一阶段在图像平面密、沿深度轴较疏地布设三维锚点。锚点通过 Transformer 自注意力交互，汇入整手的关节关系。"
+        },
+        {
+          "title": "按关节聚合第一次投票",
+          "description": "预测模块计算每个锚点到各关节的三维偏移，并为锚点预测关节相关的权重，形成第一次关节估计。"
+        },
+        {
+          "title": "围绕初估重排三维锚点",
+          "description": "第二阶段在每个粗关节附近按三个方向均衡布局，使锚点位于更小的有效空间，减少需要回归的偏移。"
+        },
+        {
+          "title": "做第二次关节回归",
+          "description": "再次用特征增强、锚点交互和预测模块，融合局部偏移及权重，细化三维关节。"
+        }
+      ],
+      "training": "作者实现给两级加上锚点与关节回归监督，以有效关节标记筛选参与监督的标签。两级共享从图像到关节的坐标定义。",
+      "inference": "一张手图先出粗关节，再据此分配更均衡的三维锚点和细化姿态。适用范围包括 RGB 与深度数据集。",
+      "figure_reading": "图 3 给出固定锚点和关节附近锚点的两级结构。图 4 展开 AIM 与 FEM，图 5 对比各版本锚点的空间分布。",
+      "sources": [
+        {
+          "label": "第一作者项目 · 两阶段方法",
+          "url": "https://changlongjianggit.github.io/A2J-Transformer-Plus/"
+        },
+        {
+          "label": "Figure 3 · 论文原图",
+          "url": "https://changlongjianggit.github.io/A2J-Transformer-Plus/static/images/method_figure2.png"
+        },
+        {
+          "label": "Figure 4 · 组件细节",
+          "url": "https://changlongjianggit.github.io/A2J-Transformer-Plus/static/images/method_figure3.png"
+        },
+        {
+          "label": "官方实现 · 两阶段回归和训练",
+          "url": "https://github.com/ChanglongJiangGit/A2J-Transformer-Plus/blob/main/main/model.py#L188-L272"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local"
+    },
+    "figure": {
+      "src": "assets/figures/a2j-transformer-plus-original.png",
+      "caption": "Figure 3 · 固定三维锚点与关节附近的自适应锚点",
+      "alt": "Figure 3 · 固定三维锚点与关节附近的自适应锚点",
+      "source": "https://changlongjianggit.github.io/A2J-Transformer-Plus/static/images/method_figure2.png",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "Changlong Jiang, Yang Xiao, Jinghong Zheng, Haohong Kuang, Cunlin Wu, Mingyang Zhang, Zhiguo Cao, Min Du, Joey Tianyi Zhou, Junsong Yuan. 3D Hand Pose Estimation via Articulated Anchor-to-Joint 3D Local Regressors, Figure 3, TPAMI 2026 作者项目原图. CC BY-SA 4.0.",
+      "authors": "Changlong Jiang, Yang Xiao, Jinghong Zheng, Haohong Kuang, Cunlin Wu, Mingyang Zhang, Zhiguo Cao, Min Du, Joey Tianyi Zhou, Junsong Yuan",
+      "figure_number": "Figure 3",
+      "version": "TPAMI 2026 作者项目原图",
+      "modifications": "下载作者项目发布的原始 PNG 文件，未做图像编辑。"
+    },
+    "code_provenance": {
+      "url": "https://github.com/ChanglongJiangGit/A2J-Transformer-Plus",
+      "verified_at": "2026-11-18",
+      "basis": "期刊版作者项目，含两阶段锚点生成、模型、训练和测试入口。"
+    },
+    "project": "https://changlongjianggit.github.io/A2J-Transformer-Plus/",
+    "figures": [
+      {
+        "src": "assets/figures/a2j-transformer-plus-modules-original.png",
+        "caption": "Figure 4 · 锚点交互和多尺度特征增强",
+        "alt": "Figure 4 · 锚点交互和多尺度特征增强",
+        "source": "https://changlongjianggit.github.io/A2J-Transformer-Plus/static/images/method_figure3.png",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "attribution": "Changlong Jiang, Yang Xiao, Jinghong Zheng, Haohong Kuang, Cunlin Wu, Mingyang Zhang, Zhiguo Cao, Min Du, Joey Tianyi Zhou, Junsong Yuan. 3D Hand Pose Estimation via Articulated Anchor-to-Joint 3D Local Regressors, Figure 4, TPAMI 2026 作者项目原图. CC BY-SA 4.0.",
+        "authors": "Changlong Jiang, Yang Xiao, Jinghong Zheng, Haohong Kuang, Cunlin Wu, Mingyang Zhang, Zhiguo Cao, Min Du, Joey Tianyi Zhou, Junsong Yuan",
+        "figure_number": "Figure 4",
+        "version": "TPAMI 2026 作者项目原图",
+        "modifications": "下载作者项目发布的原始 PNG 文件，未做图像编辑。"
+      }
+    ]
   },
   {
     "id": "reach",
@@ -6985,14 +7073,15 @@
       "sources": [
         "https://openaccess.thecvf.com/content/CVPR2023/html/Potamias_Handy_Towards_a_High_Fidelity_3D_Hand_Shape_and_Appearance_CVPR_2023_paper.html",
         "https://openaccess.thecvf.com/content/CVPR2023/papers/Potamias_Handy_Towards_a_High_Fidelity_3D_Hand_Shape_and_Appearance_CVPR_2023_paper.pdf#page=3",
-        "https://openaccess.thecvf.com/content/CVPR2023/papers/Potamias_Handy_Towards_a_High_Fidelity_3D_Hand_Shape_and_Appearance_CVPR_2023_paper.pdf#page=4"
+        "https://openaccess.thecvf.com/content/CVPR2023/papers/Potamias_Handy_Towards_a_High_Fidelity_3D_Hand_Shape_and_Appearance_CVPR_2023_paper.pdf#page=4",
+        "https://openaccess.thecvf.com/content/CVPR2023/supplemental/Potamias_Handy_Towards_a_CVPR_2023_supplemental.pdf#page=1"
       ],
       "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。",
       "limitations_kind": "editorial_scope",
       "scope_reviewed_at": "2026-11-18",
       "pipeline_reviewed_at": "2026-11-18",
-      "evidence_scope": "本轮定向核对 Official 2023 CVPR open-access paper 的PDF方法页 3, 4，补充模块数据流及训练/推理说明；未独立复现或全面复核实验。"
+      "evidence_scope": "已核对主文第 3 节以及会议补充材料第 1 页的单图重建架构。"
     },
     "pipeline": {
       "overview": "Handy构建手的形状与外观模型：扫描先密集配准并姿态规范化，形状用PCA描述，UV纹理由生成模型学习。",
@@ -7020,7 +7109,7 @@
       ],
       "training": "形状基与外观生成器分别学习；模型构建使用扫描，单图重建实验另外生成带纹理和物体的合成数据。",
       "inference": "给定形状/姿态参数和纹理代码可生成可动画手。RGB到参数的下游估计器与模型本身应分开理解。",
-      "figure_reading": "已核对§3模型构建正文；当前未定位到覆盖全部步骤的网络总图。图3是PCA形状变化示例，不冒充完整结构图。",
+      "figure_reading": "主文第 3 节说明高保真形状及外观模型如何构建。会议补充材料图 1 对应下游单图手重建的 ResNet、参数分支与渲染流程。",
       "sources": [
         {
           "label": "正式论文方法正文 · PDF第3页",
@@ -7029,17 +7118,21 @@
         {
           "label": "正式论文方法正文 · PDF第4页",
           "url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Potamias_Handy_Towards_a_High_Fidelity_3D_Hand_Shape_and_Appearance_CVPR_2023_paper.pdf#page=4"
+        },
+        {
+          "label": "会议补充材料 Figure 1 · 单图重建架构",
+          "url": "https://openaccess.thecvf.com/content/CVPR2023/supplemental/Potamias_Handy_Towards_a_CVPR_2023_supplemental.pdf#page=1"
         }
       ],
       "reviewed_at": "2026-11-18",
-      "figure_status": "architecture_not_located"
+      "figure_status": "original_link_only"
     },
     "figure": {
-      "source": "https://openaccess.thecvf.com/content/CVPR2023/papers/Potamias_Handy_Towards_a_High_Fidelity_3D_Hand_Shape_and_Appearance_CVPR_2023_paper.pdf#page=4",
-      "caption": "Handy: Towards a High Fidelity 3D Hand Shape and Appearance Model：模型构建正文",
-      "figure_number": "",
-      "version": "Official 2023 CVPR open-access paper",
-      "note": "已核对模型构建正文；当前未定位到完整网络总图，暂留正文链接。原文形状/纹理结果图不冒充结构图。"
+      "source": "https://openaccess.thecvf.com/content/CVPR2023/supplemental/Potamias_Handy_Towards_a_CVPR_2023_supplemental.pdf#page=1",
+      "caption": "Figure 1 · Handy 单图手重建架构",
+      "figure_number": "Figure 1",
+      "version": "CVPR 2023 Supplementary",
+      "note": "沿链接查看原图。转载许可尚未确认。主文第 3 节说明高保真形状及外观模型如何构建。会议补充材料图 1 对应下游单图手重建的 ResNet、参数分支与渲染流程。"
     }
   },
   {
@@ -31973,24 +32066,104 @@
     ],
     "analysis": {
       "problem": "噪声与遮挡使逐帧观察无法确定合理的连续三维运动。",
-      "method": "用条件变分自编码器学习每一步姿态变化分布，再作为运动先验参与序列优化。",
+      "method": "HuMoR 把人体动作表示成连续的隐变量转移。模型先从动作捕捉学习三维运动先验，再在测试时用它拟合视频、RGB-D 或不完整的三维观测。",
       "inputs_outputs": "三维关键点或 RGB／RGB-D 视频→三维姿态和形状序列。",
       "contribution": "将生成式运动先验与灵活观测优化分离，适配不同输入模态。",
       "limitations": "运动先验配合序列优化，RGB、RGB-D 和三维点输入条件不同；不能把不同观测模式的结果混用。",
       "sources": [
-        "https://openaccess.thecvf.com/content/ICCV2021/html/Rempe_HuMoR_3D_Human_Motion_Model_for_Robust_Pose_Estimation_ICCV_2021_paper.html"
+        "https://openaccess.thecvf.com/content/ICCV2021/html/Rempe_HuMoR_3D_Human_Motion_Model_for_Robust_Pose_Estimation_ICCV_2021_paper.html",
+        "https://arxiv.org/html/2105.04668v1#S3",
+        "https://arxiv.org/html/2105.04668v1#S3.SS1",
+        "https://arxiv.org/html/2105.04668v1#S4.SS1",
+        "https://arxiv.org/html/2105.04668v1#S4.SS2",
+        "https://arxiv.org/html/2105.04668v1#S5.SS5",
+        "https://arxiv.org/html/2105.04668v1#S2.F2",
+        "https://arxiv.org/html/2105.04668v1#S0.F1",
+        "https://github.com/davrempe/humor"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对作者预印本 arXiv:2105.04668v1 的 S3、S3.SS1、S4.SS1、S4.SS2、S5.SS5 章节。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以列出的来源为准。实现及权重未经本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "HuMoR 把人体动作表示成连续的隐变量转移。模型先从动作捕捉学习三维运动先验，再在测试时用它拟合视频、RGB-D 或不完整的三维观测。",
+      "steps": [
+        {
+          "title": "编码单步运动",
+          "description": "以身体状态、速度和关节为上下文，条件 VAE 的编码器比较前后动作状态，求出这一步转移的潜变量分布。"
+        },
+        {
+          "title": "解码动作与接触",
+          "description": "解码器用前一状态和采样的潜变量预测下一步状态变化及接触概率。条件先验由前一状态预测，可在缺失观测时约束运动。"
+        },
+        {
+          "title": "从初态展开整段",
+          "description": "测试优化变量包括初始状态、逐步潜变量、体型和地平面。每次解码使用上一步预测，逐段生成 SMPL 姿态和关节。"
+        },
+        {
+          "title": "按观测拟合",
+          "description": "根据输入使用二维重投影、三维关节或深度点与模型表面的误差。优化同时读取先验概率、关节一致性和接触约束。"
+        },
+        {
+          "title": "估计场景和身体",
+          "description": "动作、体型、地面与接触共同受约束，避免有接触的脚底在拟合中滑动或离开地面。"
+        }
+      ],
+      "training": "在 AMASS 动作序列上训练条件 VAE 与初始状态先验。重建、KL、SMPL 一致性和接触监督约束解码，训练时逐步增加用预测状态作下一步输入的机会。",
+      "inference": "对目标片段运行 TestOpt，多阶段调整初态、潜变量轨迹、体型和地平面。输出拟合后的 SMPL 运动及接触。",
+      "figure_reading": "图 2 标出识别后验、条件先验与共享解码器。结合图 1 阅读训练得到的动作先验如何接入测试期优化。",
+      "sources": [
+        {
+          "label": "3 HuMoR: 3D Human Dynamics Model",
+          "url": "https://arxiv.org/html/2105.04668v1#S3"
+        },
+        {
+          "label": "3.1 Training",
+          "url": "https://arxiv.org/html/2105.04668v1#S3.SS1"
+        },
+        {
+          "label": "4.1 Optimization Variables",
+          "url": "https://arxiv.org/html/2105.04668v1#S4.SS1"
+        },
+        {
+          "label": "4.2 Objective & Optimization",
+          "url": "https://arxiv.org/html/2105.04668v1#S4.SS2"
+        },
+        {
+          "label": "5.5 Estimation from RGB(-D) Observations",
+          "url": "https://arxiv.org/html/2105.04668v1#S5.SS5"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://arxiv.org/html/2105.04668v1#S2.F2"
+        },
+        {
+          "label": "Figure 1 · 训练到测试拟合",
+          "url": "https://arxiv.org/html/2105.04668v1#S0.F1"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2105.04668v1#S2.F2",
+      "caption": "Figure 2 · HuMoR: 3D Human Motion Model for Robust Pose Estimation",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 2 标出识别后验、条件先验与共享解码器。结合图 1 阅读训练得到的动作先验如何接入测试期优化。"
+    },
+    "code": "https://github.com/davrempe/humor",
+    "code_provenance": {
+      "url": "https://github.com/davrempe/humor",
+      "verified_at": "2026-11-18",
+      "basis": "Stanford 作者项目对应的官方训练、动作模型和测试期拟合实现。"
     }
   },
   {
@@ -32010,24 +32183,99 @@
     ],
     "analysis": {
       "problem": "复杂分层解码器和无效的跨实例异类交互增加优化难度。",
-      "method": "直接预测实例查询和各关节查询，把解码注意力分成实例内部与跨实例同类型两组。",
+      "method": "Group Pose 用每个人一组关节查询加一个实例查询，在 Transformer 中分别建模人体内部关系与同类型关节跨人的竞争，直接输出多人二维骨架集合。",
       "inputs_outputs": "多人图像→按实例组织的二维关键点集合。",
       "contribution": "仅保留有用查询交互，不依赖人体框监督，提供简洁的端到端多人基线。",
       "limitations": "分组注意力对应预设关键点类型和实例查询；人物数量覆盖及遮挡分组需在多人协议下评价。",
       "sources": [
-        "https://openaccess.thecvf.com/content/ICCV2023/html/Liu_Group_Pose_A_Simple_Baseline_for_End-to-End_Multi-Person_Pose_Estimation_ICCV_2023_paper.html"
+        "https://openaccess.thecvf.com/content/ICCV2023/html/Liu_Group_Pose_A_Simple_Baseline_for_End-to-End_Multi-Person_Pose_Estimation_ICCV_2023_paper.html",
+        "https://arxiv.org/html/2308.07313v1#S3.SS1",
+        "https://arxiv.org/html/2308.07313v1#S3.SS2",
+        "https://arxiv.org/html/2308.07313v1#S3.SS3",
+        "https://arxiv.org/html/2308.07313v1#S4.SS1",
+        "https://arxiv.org/html/2308.07313v1#S2.F2",
+        "https://arxiv.org/html/2308.07313v1#S3.F3",
+        "https://github.com/Michel-liu/GroupPose"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对作者预印本 arXiv:2308.07313v1 的 S3.SS1、S3.SS2、S3.SS3、S4.SS1 章节。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以列出的来源为准。实现及权重未经本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "Group Pose 用每个人一组关节查询加一个实例查询，在 Transformer 中分别建模人体内部关系与同类型关节跨人的竞争，直接输出多人二维骨架集合。",
+      "steps": [
+        {
+          "title": "编码全图特征",
+          "description": "骨干输出四个尺度的特征，变形 Transformer 编码器细化后交给姿态解码器。"
+        },
+        {
+          "title": "构造每人一组查询",
+          "description": "每个候选人持有 K 个关节查询和一个实例查询。关节查询回归各自位置，实例查询评分。"
+        },
+        {
+          "title": "先交互同一个人的关节",
+          "description": "解码层先在每个候选组内做自注意力，利用同一人的运动学关系并更新实例标记。"
+        },
+        {
+          "title": "再交互同类型查询",
+          "description": "在不同候选人之间只对同种关节或实例查询计算自注意力，帮助消解重复预测。变形交叉注意力从图像特征采样。"
+        },
+        {
+          "title": "解码多人集合",
+          "description": "从关节查询读出坐标，由实例查询给出候选人的置信度。多个实例并行输出。"
+        }
+      ],
+      "training": "用 Hungarian 匹配建立预测实例和标注人物的一对一对应，再用分类和关键点回归损失优化。",
+      "inference": "整张图走一次骨干、编码器和分组解码器，按实例分数读取多人骨架。",
+      "figure_reading": "图 2 给出骨干到两类输出的路径。图 3 逐项对比组内和同类型跨组的注意力范围。",
+      "sources": [
+        {
+          "label": "3.1 Overview",
+          "url": "https://arxiv.org/html/2308.07313v1#S3.SS1"
+        },
+        {
+          "label": "3.2 N × K N\\times K keypoint queries and N N instance queries",
+          "url": "https://arxiv.org/html/2308.07313v1#S3.SS2"
+        },
+        {
+          "label": "3.3 Group self-attentions",
+          "url": "https://arxiv.org/html/2308.07313v1#S3.SS3"
+        },
+        {
+          "label": "4.1 Settings",
+          "url": "https://arxiv.org/html/2308.07313v1#S4.SS1"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://arxiv.org/html/2308.07313v1#S2.F2"
+        },
+        {
+          "label": "Figure 3 · 注意力范围",
+          "url": "https://arxiv.org/html/2308.07313v1#S3.F3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2308.07313v1#S2.F2",
+      "caption": "Figure 2 · Group Pose: A Simple Baseline for End-to-End Multi-Person Pose Estimation",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 2 给出骨干到两类输出的路径。图 3 逐项对比组内和同类型跨组的注意力范围。"
+    },
+    "code": "https://github.com/Michel-liu/GroupPose",
+    "code_provenance": {
+      "url": "https://github.com/Michel-liu/GroupPose",
+      "verified_at": "2026-11-18",
+      "basis": "作者论文链接的 PyTorch 版本，含分组解码器、训练入口和数据处理。"
     }
   },
   {
@@ -32047,18 +32295,27 @@
     ],
     "analysis": {
       "problem": "单一三维解不能表示歧义，而多假设结果又需要转为实用输出。",
-      "method": "以二维关键点为条件扩散生成三维假设，再按逐关节二维重投影误差选择和聚合。",
+      "method": "D3DP 用二维关节序列作为条件，从不同初始噪声生成多组可信的三维姿态，再逐关节选择与二维证据最一致的候选。",
       "inputs_outputs": "二维姿态→多个三维假设及聚合后的单个姿态。",
       "contribution": "将扩散估计器 D3DP 与逐关节聚合 JPMA 分开，允许推理时调整效率和精度。",
       "limitations": "重投影聚合使用二维观测选择三维假设；投影吻合不能唯一确定三维，采样数量与步数需报告。",
       "sources": [
-        "https://openaccess.thecvf.com/content/ICCV2023/html/Shan_Diffusion-Based_3D_Human_Pose_Estimation_with_Multi-Hypothesis_Aggregation_ICCV_2023_paper.html"
+        "https://openaccess.thecvf.com/content/ICCV2023/html/Shan_Diffusion-Based_3D_Human_Pose_Estimation_with_Multi-Hypothesis_Aggregation_ICCV_2023_paper.html",
+        "https://arxiv.org/html/2303.11579v1#S3.SS1",
+        "https://arxiv.org/html/2303.11579v1#S3.SS2",
+        "https://arxiv.org/html/2303.11579v1#S3.SS3",
+        "https://arxiv.org/html/2303.11579v1#S4.SS2",
+        "https://arxiv.org/html/2303.11579v1#S2.F2",
+        "https://arxiv.org/html/2303.11579v1#S3.F3",
+        "https://arxiv.org/html/2303.11579v1#S4.F4",
+        "https://github.com/paTRICK-swk/D3DP"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对作者预印本 arXiv:2303.11579v1 的 S3.SS1、S3.SS2、S3.SS3、S4.SS2 章节。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以列出的来源为准。实现及权重未经本站运行。"
     },
     "code": "https://github.com/paTRICK-swk/D3DP",
     "ccf": {
@@ -32066,6 +32323,76 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "D3DP 用二维关节序列作为条件，从不同初始噪声生成多组可信的三维姿态，再逐关节选择与二维证据最一致的候选。",
+      "steps": [
+        {
+          "title": "准备二维条件",
+          "description": "从视频取得二维关键点序列，以同样的帧和关节排列输入去噪器。"
+        },
+        {
+          "title": "向真实三维姿态加噪",
+          "description": "训练从标注三维关节抽取扩散时间步并施加高斯扰动，去噪器学习以二维观测恢复干净三维姿态。"
+        },
+        {
+          "title": "用时空 Transformer 去噪",
+          "description": "将带噪三维姿态与二维关节按通道拼接，加入时间步编码，由修改后的 MixSTE 交替做空间、时间注意力。"
+        },
+        {
+          "title": "采样多组假设",
+          "description": "推理从多个独立噪声样本开始，重复以估计的干净姿态更新反向采样，得到同一视频的多组候选。"
+        },
+        {
+          "title": "按关节重投影聚合",
+          "description": "JPMA 将候选用已知或估计的相机参数投影回图像，按每个关节的二维误差选三维候选坐标，再组装最终骨架。"
+        }
+      ],
+      "training": "训练从干净三维姿态构造不同噪声强度的回归输入，监督去噪器直接恢复三维关节。",
+      "inference": "测试时可调整采样次数和候选数量。保留多条三维假设，或用 JPMA 得到一组用于下游预测的姿态。",
+      "figure_reading": "图 2 对照训练加噪与多假设测试。图 3 给出逐关节选择如何汇成一套三维姿态，图 4 展开去噪骨干。",
+      "sources": [
+        {
+          "label": "3.1 Diffusion-Based 3D Pose Estimation (D3DP)",
+          "url": "https://arxiv.org/html/2303.11579v1#S3.SS1"
+        },
+        {
+          "label": "3.2 Joint-Wise Reprojection-Based Multi-Hypothesis Aggregation (JPMA)",
+          "url": "https://arxiv.org/html/2303.11579v1#S3.SS2"
+        },
+        {
+          "label": "3.3 Architecture",
+          "url": "https://arxiv.org/html/2303.11579v1#S3.SS3"
+        },
+        {
+          "label": "4.2 Implementation Details",
+          "url": "https://arxiv.org/html/2303.11579v1#S4.SS2"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://arxiv.org/html/2303.11579v1#S2.F2"
+        },
+        {
+          "label": "Figure 3 · 逐关节聚合",
+          "url": "https://arxiv.org/html/2303.11579v1#S3.F3"
+        },
+        {
+          "label": "Figure 4 · 去噪器",
+          "url": "https://arxiv.org/html/2303.11579v1#S4.F4"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2303.11579v1#S2.F2",
+      "caption": "Figure 2 · Diffusion-Based 3D Human Pose Estimation with Multi-Hypothesis Aggregation",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 2 对照训练加噪与多假设测试。图 3 给出逐关节选择如何汇成一套三维姿态，图 4 展开去噪骨干。"
+    },
+    "code_provenance": {
+      "url": "https://github.com/paTRICK-swk/D3DP",
+      "verified_at": "2026-11-18",
+      "basis": "作者发布的 D3DP 实现，含训练、采样、评估和野外序列示例。"
     }
   },
   {
@@ -32085,24 +32412,104 @@
     ],
     "analysis": {
       "problem": "衣物、体型和视角变化使单图人体形状恢复困难。",
-      "method": "直接预测体素人体形状，联合三维体素、多视角重投影和二维／三维姿态等中间监督。",
+      "method": "BodyNet 用二维关节、人体部件和三维关节逐步提供证据，从单张 RGB 图预测完整人体占用体素。最终可以直接读出体积，也可以拟合可动画化的 SMPL。",
       "inputs_outputs": "单张人体图像→体素人体形状，也可进一步拟合 SMPL。",
       "contribution": "探索参数人体模型之外的体积表示，并同时支持体素部位分割。",
       "limitations": "体素形状与后续 SMPL 拟合是不同输出阶段；网格拟合误差不能全归因于体素预测。",
       "sources": [
-        "https://openaccess.thecvf.com/content_ECCV_2018/html/Gul_Varol_BodyNet_Volumetric_Inference_ECCV_2018_paper.html"
+        "https://openaccess.thecvf.com/content_ECCV_2018/html/Gul_Varol_BodyNet_Volumetric_Inference_ECCV_2018_paper.html",
+        "https://arxiv.org/html/1804.04875v1#S3.SS1",
+        "https://arxiv.org/html/1804.04875v1#S3.SS2",
+        "https://arxiv.org/html/1804.04875v1#S3.SS3",
+        "https://arxiv.org/html/1804.04875v1#S3.SS4",
+        "https://arxiv.org/html/1804.04875v1#S4.SS4",
+        "https://arxiv.org/html/1804.04875v1#S1.F2",
+        "https://arxiv.org/html/1804.04875v1#Pt0.A2.F9",
+        "https://github.com/gulvarol/bodynet"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对作者预印本 arXiv:1804.04875v1 的 S3.SS1、S3.SS2、S3.SS3、S3.SS4、S4.SS4 章节。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以列出的来源为准。实现及权重未经本站运行。"
     },
     "ccf": {
       "tier": "B",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ECCV"
+    },
+    "pipeline": {
+      "overview": "BodyNet 用二维关节、人体部件和三维关节逐步提供证据，从单张 RGB 图预测完整人体占用体素。最终可以直接读出体积，也可以拟合可动画化的 SMPL。",
+      "steps": [
+        {
+          "title": "估计二维关节",
+          "description": "第一子网从裁剪人体图预测关键点热图，保留所在图像坐标供后续网络使用。"
+        },
+        {
+          "title": "分割二维部件",
+          "description": "部件子网融合 RGB 和二维姿态特征，预测人体各部位的像素分割。"
+        },
+        {
+          "title": "恢复三维关节",
+          "description": "后续子网结合图像与二维预测，在三维空间用体积热图描述关节位置。"
+        },
+        {
+          "title": "预测体积占用",
+          "description": "形状子网融合图像及三类中间结果，逐体素输出人体占用概率。用视角轮廓投影补充体素边界监督。"
+        },
+        {
+          "title": "读取完整形状",
+          "description": "体素结果可直接构建表面，并以三维关节和体积支持 SMPL 拟合。论文另训练变体预测逐体素部件类别。"
+        }
+      ],
+      "training": "各子网先独立学习，再联合微调。中间任务保留监督，最终形状结合体素和不同视角的剪影重投影约束。",
+      "inference": "从一张人图产生二维、三维与体积输出。多视角剪影用于训练约束，测试输入仍是单视角。",
+      "figure_reading": "图 2 的四个子网按二维关节、部件、三维关节、体积输出排列。虚线监督说明哪些中间结果经过直接约束。",
+      "sources": [
+        {
+          "label": "3.1 Volumetric inference for 3D human shape",
+          "url": "https://arxiv.org/html/1804.04875v1#S3.SS1"
+        },
+        {
+          "label": "3.2 Multi-view re-projection loss on the silhouette",
+          "url": "https://arxiv.org/html/1804.04875v1#S3.SS2"
+        },
+        {
+          "label": "3.3 Multi-task learning with intermediate supervision",
+          "url": "https://arxiv.org/html/1804.04875v1#S3.SS3"
+        },
+        {
+          "label": "3.4 Fitting a parametric body model",
+          "url": "https://arxiv.org/html/1804.04875v1#S3.SS4"
+        },
+        {
+          "label": "4.4 Effect of re-projection error and end-to-end multi-task training",
+          "url": "https://arxiv.org/html/1804.04875v1#S4.SS4"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://arxiv.org/html/1804.04875v1#S1.F2"
+        },
+        {
+          "label": "Figure 9 · 体素子网",
+          "url": "https://arxiv.org/html/1804.04875v1#Pt0.A2.F9"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/1804.04875v1#S1.F2",
+      "caption": "Figure 2 · BodyNet: Volumetric Inference of 3D Human Body Shapes",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 2 的四个子网按二维关节、部件、三维关节、体积输出排列。虚线监督说明哪些中间结果经过直接约束。"
+    },
+    "code": "https://github.com/gulvarol/bodynet",
+    "code_provenance": {
+      "url": "https://github.com/gulvarol/bodynet",
+      "verified_at": "2026-11-18",
+      "basis": "第一作者仓库提供体素形状预测、训练与 SMPL 拟合代码。"
     }
   },
   {
@@ -32123,24 +32530,104 @@
     ],
     "analysis": {
       "problem": "自底向上多人估计需要有效解决关键点归属问题。",
-      "method": "用多任务网络检测人物和关键点，再由姿态残差网络将关键点分配给人物实例。",
+      "method": "MultiPoseNet 共享全图特征，并行检测人体框、关节和前景。Pose Residual Network 再对每个框里的多人关节响应做选择与修正。",
       "inputs_outputs": "多人图像→人物检测、分割与二维姿态。",
       "contribution": "把检测、分割和姿态任务共享计算，并以可学习残差网络执行实例分配。",
       "limitations": "关键点分配依赖人物检测与姿态残差网络；检测、分割和姿态需使用各自指标评估。",
       "sources": [
-        "https://openaccess.thecvf.com/content_ECCV_2018/html/Muhammed_Kocabas_MultiPoseNet_Fast_Multi-Person_ECCV_2018_paper.html"
+        "https://openaccess.thecvf.com/content_ECCV_2018/html/Muhammed_Kocabas_MultiPoseNet_Fast_Multi-Person_ECCV_2018_paper.html",
+        "https://arxiv.org/html/1807.04067v1#S3.SS1",
+        "https://arxiv.org/html/1807.04067v1#S3.SS2",
+        "https://arxiv.org/html/1807.04067v1#S3.SS3",
+        "https://arxiv.org/html/1807.04067v1#S3.SS4",
+        "https://arxiv.org/html/1807.04067v1#S3.SS5",
+        "https://arxiv.org/html/1807.04067v1#S1.F2",
+        "https://arxiv.org/html/1807.04067v1#S3.F3",
+        "https://github.com/mkocabas/pose-residual-network"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对作者预印本 arXiv:1807.04067v1 的 S3.SS1、S3.SS2、S3.SS3、S3.SS4、S3.SS5 章节。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以列出的来源为准。实现及权重未经本站运行。"
     },
     "ccf": {
       "tier": "B",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ECCV"
+    },
+    "pipeline": {
+      "overview": "MultiPoseNet 共享全图特征，并行检测人体框、关节和前景。Pose Residual Network 再对每个框里的多人关节响应做选择与修正。",
+      "steps": [
+        {
+          "title": "构建全图金字塔",
+          "description": "共享 ResNet 与特征金字塔，在一个前向中提供多尺度特征。"
+        },
+        {
+          "title": "预测关节与前景",
+          "description": "关节子网融合不同尺度，给出每种关节的全图热图，也预测合并所有人的前景掩码。"
+        },
+        {
+          "title": "检测人体框",
+          "description": "并行边框子网采用 RetinaNet 风格的分类和框回归，从共享特征获得实例候选。"
+        },
+        {
+          "title": "裁出每个人的候选热图",
+          "description": "根据该人边框裁取关节图并统一分辨率，框重叠时可保留其他人的干扰峰。"
+        },
+        {
+          "title": "通过残差分支选择关节",
+          "description": "PRN 用多层感知机从所有关节图预测残差，加回输入得到人物特有的热图，再读出关节。"
+        }
+      ],
+      "training": "先学习关键点和分割子网，再冻结骨干训练人体检测分支。PRN 独立学习框内正确关节的响应。",
+      "inference": "全图特征与预测共享一次，每个检测框运行轻量 PRN，映回图像坐标得到多人关键点。",
+      "figure_reading": "图 2 左侧展开 PRN 如何对重叠关节响应施加残差，右侧给出共享骨干与分支。图 3 展示多尺度关节子网。",
+      "sources": [
+        {
+          "label": "3.1 The Shared Backbone",
+          "url": "https://arxiv.org/html/1807.04067v1#S3.SS1"
+        },
+        {
+          "label": "3.2 Keypoint Estimation Subnet",
+          "url": "https://arxiv.org/html/1807.04067v1#S3.SS2"
+        },
+        {
+          "label": "3.3 Person Detection Subnet",
+          "url": "https://arxiv.org/html/1807.04067v1#S3.SS3"
+        },
+        {
+          "label": "3.4 Pose Residual Network (PRN)",
+          "url": "https://arxiv.org/html/1807.04067v1#S3.SS4"
+        },
+        {
+          "label": "3.5 Implementation Details",
+          "url": "https://arxiv.org/html/1807.04067v1#S3.SS5"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://arxiv.org/html/1807.04067v1#S1.F2"
+        },
+        {
+          "label": "Figure 3 · 关键点子网",
+          "url": "https://arxiv.org/html/1807.04067v1#S3.F3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/1807.04067v1#S1.F2",
+      "caption": "Figure 2 · MultiPoseNet: Fast Multi-Person Pose Estimation using Pose Residual Network",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 2 左侧展开 PRN 如何对重叠关节响应施加残差，右侧给出共享骨干与分支。图 3 展示多尺度关节子网。"
+    },
+    "code": "https://github.com/mkocabas/pose-residual-network",
+    "code_provenance": {
+      "url": "https://github.com/mkocabas/pose-residual-network",
+      "verified_at": "2026-11-18",
+      "basis": "论文指向的作者仓库，提供 MultiPoseNet 与 Pose Residual Network 的实现和运行入口。"
     }
   },
   {
@@ -32160,24 +32647,102 @@
     ],
     "analysis": {
       "problem": "无框多人估计既要定位关节，也要区分关节和像素所属实例。",
-      "method": "预测关键点及其相对位移构造人物姿态，再用部件诱导几何嵌入关联人体像素。",
+      "method": "PersonLab 从整张图同时预测关节和人前景。短、中、长三种距离的偏移分别用于精定位、关节组装和把前景像素分配给实例。",
       "inputs_outputs": "多人图像→二维人体姿态和人体实例分割。",
       "contribution": "以单次全卷积推理统一关键点分组和像素实例归属，减少逐人计算。",
       "limitations": "位移场及几何嵌入同时承担分组和实例分割；二维姿态成绩不能概括像素级分割质量。",
       "sources": [
-        "https://openaccess.thecvf.com/content_ECCV_2018/html/George_Papandreou_PersonLab_Person_Pose_ECCV_2018_paper.html"
+        "https://openaccess.thecvf.com/content_ECCV_2018/html/George_Papandreou_PersonLab_Person_Pose_ECCV_2018_paper.html",
+        "https://arxiv.org/html/1803.08225v1#S3.SS1",
+        "https://arxiv.org/html/1803.08225v1#S3.SS1.SSSx2",
+        "https://arxiv.org/html/1803.08225v1#S3.SS2",
+        "https://arxiv.org/html/1803.08225v1#S3.SS3",
+        "https://arxiv.org/html/1803.08225v1#S4.SS1",
+        "https://arxiv.org/html/1803.08225v1#S3.F1",
+        "https://arxiv.org/html/1803.08225v1#S3.F2",
+        "https://arxiv.org/html/1803.08225v1#S3.F4"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对作者预印本 arXiv:1803.08225v1 的 S3.SS1、S3.SS1.SSSx2、S3.SS2、S3.SS3、S4.SS1 章节。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以列出的来源为准。实现及权重未经本站运行。"
     },
     "ccf": {
       "tier": "B",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ECCV"
+    },
+    "pipeline": {
+      "overview": "PersonLab 从整张图同时预测关节和人前景。短、中、长三种距离的偏移分别用于精定位、关节组装和把前景像素分配给实例。",
+      "steps": [
+        {
+          "title": "估计关节响应与短偏移",
+          "description": "全图 CNN 预测各类关节的圆盘响应，以及圆盘内像素到真实关节的二维偏移。"
+        },
+        {
+          "title": "投票得到精确关节候选",
+          "description": "每个位置用响应置信度加权，将票投给短偏移指定坐标。对各关节的 Hough 得分图取局部峰。"
+        },
+        {
+          "title": "沿骨架组装多人",
+          "description": "由高分候选起步，沿人体骨架有向边使用中程偏移找相邻关节，并用短偏移迭代精化。贪心解码得到各人骨架。"
+        },
+        {
+          "title": "预测前景及长偏移",
+          "description": "语义分割标出所有人占据的像素。针对每个前景像素预测它到所属人物各个关节的长程向量。"
+        },
+        {
+          "title": "建立实例分割",
+          "description": "对每个前景像素比较投影关节与已解码骨架的匹配程度，将像素指派给最相符的实例，得到人与姿态对应的掩码。"
+        }
+      ],
+      "training": "训练用 COCO 关节和实例掩码，联合监督前景、关节响应和三类偏移。缺失的部分点可采用正文定义的填补机制。",
+      "inference": "全图前向后按短程投票、中程骨架遍历和长程几何匹配依次解码。输出二维骨架、置信度与实例掩码。",
+      "figure_reading": "图 1 可沿颜色追踪三类偏移。图 2 展示中程偏移细化，图 3 和图 4 解释长程偏移如何把区域与人关联。",
+      "sources": [
+        {
+          "label": "3.1 Person detection and pose estimation",
+          "url": "https://arxiv.org/html/1803.08225v1#S3.SS1"
+        },
+        {
+          "label": "Grouping keypoints into person detection instances",
+          "url": "https://arxiv.org/html/1803.08225v1#S3.SS1.SSSx2"
+        },
+        {
+          "label": "3.2 Instance-level person segmentation",
+          "url": "https://arxiv.org/html/1803.08225v1#S3.SS2"
+        },
+        {
+          "label": "3.3 Imputing missing keypoint annotations",
+          "url": "https://arxiv.org/html/1803.08225v1#S3.SS3"
+        },
+        {
+          "label": "4.1 Experimental Setup",
+          "url": "https://arxiv.org/html/1803.08225v1#S4.SS1"
+        },
+        {
+          "label": "Figure 1 · 原图",
+          "url": "https://arxiv.org/html/1803.08225v1#S3.F1"
+        },
+        {
+          "label": "Figure 2 · 中程偏移",
+          "url": "https://arxiv.org/html/1803.08225v1#S3.F2"
+        },
+        {
+          "label": "Figure 4 · 实例分割",
+          "url": "https://arxiv.org/html/1803.08225v1#S3.F4"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/1803.08225v1#S3.F1",
+      "caption": "Figure 1 · PersonLab: Person Pose Estimation and Instance Segmentation with a Bottom-Up, Part-Based, Geometric Embedding Model",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 1 可沿颜色追踪三类偏移。图 2 展示中程偏移细化，图 3 和图 4 解释长程偏移如何把区域与人关联。"
     }
   },
   {
@@ -32198,24 +32763,94 @@
     ],
     "analysis": {
       "problem": "热图峰值后处理不可微且受离散网格量化影响。",
-      "method": "用可微积分操作将热图概率转为关节坐标，连接热图表示与坐标回归。",
+      "method": "Integral Human Pose Regression 将关节热图的硬峰值读取换成可微的坐标期望，使定位的连续坐标损失可以直接更新热图网络。",
       "inputs_outputs": "关键点热图→连续二维或三维关节坐标。",
       "contribution": "提供可接入不同热图网络的统一读出方式，并通过三维姿态实验检验。",
       "limitations": "积分解码依赖热图概率分布，多峰分布的期望未必位于某个峰；二维和三维配置需分别说明。",
       "sources": [
-        "https://openaccess.thecvf.com/content_ECCV_2018/html/Xiao_Sun_Integral_Human_Pose_ECCV_2018_paper.html"
+        "https://openaccess.thecvf.com/content_ECCV_2018/html/Xiao_Sun_Integral_Human_Pose_ECCV_2018_paper.html",
+        "https://arxiv.org/html/1711.08229v1#S3",
+        "https://arxiv.org/html/1711.08229v1#S4",
+        "https://arxiv.org/html/1711.08229v1#S5",
+        "https://arxiv.org/html/1711.08229v1#S6",
+        "https://arxiv.org/html/1711.08229v1#S3.F1",
+        "https://github.com/JimmySuen/integral-human-pose"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对作者预印本 arXiv:1711.08229v1 的 S3、S4、S5、S6 章节。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以列出的来源为准。实现及权重未经本站运行。"
     },
     "ccf": {
       "tier": "B",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ECCV"
+    },
+    "pipeline": {
+      "overview": "Integral Human Pose Regression 将关节热图的硬峰值读取换成可微的坐标期望，使定位的连续坐标损失可以直接更新热图网络。",
+      "steps": [
+        {
+          "title": "从图像回归热图张量",
+          "description": "骨干输出每个关节的响应图。三维版本在横、纵和深度轴组织为每个关节的概率体。"
+        },
+        {
+          "title": "将响应归一化",
+          "description": "用空间 softmax 将每个关节的响应转换为所有位置质量之和为一的分布。"
+        },
+        {
+          "title": "按轴计算期望",
+          "description": "把三维体沿另两个方向求和得到边缘分布，分别对坐标加权求和，输出连续横纵深度。二维情形去掉深度轴。"
+        },
+        {
+          "title": "用坐标监督网络",
+          "description": "期望运算可反向传播，通过归一化后的连续点直接做 L1 回归。混合数据中的二维图可以监督横纵分量。"
+        },
+        {
+          "title": "在相同结构比较解码",
+          "description": "实验用相同 ResNet 子结构比较热图峰值、直接坐标回归和积分回归，也测试逐级细化模型。"
+        }
+      ],
+      "training": "有三维标注的数据监督三轴，有二维标注的样本可加入二维边缘监督。积分层无需另学参数。",
+      "inference": "测试按分布期望读出连续坐标，再依据裁剪与尺度转换回参照坐标系。过程不依赖整数峰值位置。",
+      "figure_reading": "图 1 展示多阶段热图网络接入积分输出的位置。第 5 节公式把概率体、轴向求和与坐标损失连起来。",
+      "sources": [
+        {
+          "label": "3 Heat Map Based Methods",
+          "url": "https://arxiv.org/html/1711.08229v1#S3"
+        },
+        {
+          "label": "4 Direct Joint Regression Methods",
+          "url": "https://arxiv.org/html/1711.08229v1#S4"
+        },
+        {
+          "label": "5 Integral Pose Regression",
+          "url": "https://arxiv.org/html/1711.08229v1#S5"
+        },
+        {
+          "label": "6 Experiments",
+          "url": "https://arxiv.org/html/1711.08229v1#S6"
+        },
+        {
+          "label": "Figure 1 · 原图",
+          "url": "https://arxiv.org/html/1711.08229v1#S3.F1"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/1711.08229v1#S3.F1",
+      "caption": "Figure 1 · Integral Human Pose Regression",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 1 展示多阶段热图网络接入积分输出的位置。第 5 节公式把概率体、轴向求和与坐标损失连起来。"
+    },
+    "code": "https://github.com/JimmySuen/integral-human-pose",
+    "code_provenance": {
+      "url": "https://github.com/JimmySuen/integral-human-pose",
+      "verified_at": "2026-11-18",
+      "basis": "第一作者仓库提供积分姿态回归的 PyTorch 项目与模型。"
     }
   },
   {
@@ -32235,24 +32870,114 @@
     ],
     "analysis": {
       "problem": "人体整体一致性与局部关键点细节需要不同粒度的上下文。",
-      "method": "在堆叠沙漏中融合多分辨率注意力，利用 CRF 表达邻域相关，并结合全身与部位注意力。",
+      "method": "Multi-Context Attention 在堆叠沙漏中同时学习全身和部件注意力。它结合多个尺度的上下文，让局部难以确定的关节借助全身布局定位。",
       "inputs_outputs": "单张人体图像→二维人体关键点。",
       "contribution": "同时设计扩大感受野的沙漏残差单元，研究多尺度语义和注意力的配合。",
       "limitations": "多尺度 CRF 和全身部位注意力增加推理组件；收益需与相同沙漏主干和分辨率比较。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2017/html/Chu_Multi-Context_Attention_for_CVPR_2017_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2017/html/Chu_Multi-Context_Attention_for_CVPR_2017_paper.html",
+        "https://arxiv.org/html/1702.07432v1#S3",
+        "https://arxiv.org/html/1702.07432v1#S4.SS1",
+        "https://arxiv.org/html/1702.07432v1#S5.SS2",
+        "https://arxiv.org/html/1702.07432v1#S5.SS2.SSS4",
+        "https://arxiv.org/html/1702.07432v1#S6",
+        "https://arxiv.org/html/1702.07432v1#S1.F2",
+        "https://arxiv.org/html/1702.07432v1#S4.F3",
+        "https://arxiv.org/html/1702.07432v1#S5.F5",
+        "https://arxiv.org/html/1702.07432v1#S5.F6",
+        "https://github.com/bearpaw/pose-attention"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对作者预印本 arXiv:1702.07432v1 的 S3、S4.SS1、S5.SS2、S5.SS2.SSS4、S6 章节。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以列出的来源为准。实现及权重未经本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "Multi-Context Attention 在堆叠沙漏中同时学习全身和部件注意力。它结合多个尺度的上下文，让局部难以确定的关节借助全身布局定位。",
+      "steps": [
+        {
+          "title": "增加单个残差单元的上下文",
+          "description": "Hourglass Residual Unit 在恒等和普通卷积分支外加入池化、卷积与上采样路径，以较低开销扩大感受野。"
+        },
+        {
+          "title": "堆叠多尺度沙漏",
+          "description": "每个沙漏依次降采样和恢复空间分辨率，在不同尺度产生局部细节和整个人的上下文。"
+        },
+        {
+          "title": "生成空间注意力",
+          "description": "各尺度特征经过空间 CRF 形式的注意力估计，整合像素邻域关系，再统一尺度，合并为全身注意力。"
+        },
+        {
+          "title": "将整体细化到部件",
+          "description": "在后续阶段从全身注意力特征生成不同关节部件的注意力，让相应局部热图读取各自特征。"
+        },
+        {
+          "title": "逐级输出关键点",
+          "description": "每个沙漏生成受注意力调制的热图并把信息流向后续沙漏，由最终响应得到像素坐标。"
+        }
+      ],
+      "training": "用标注关节生成目标热图，并在多个沙漏阶段施加监督。嵌套结构、注意力和热图网络可一起学习。",
+      "inference": "对单人图像运行堆叠网络，在最终关节热图上读出二维关键点。",
+      "figure_reading": "图 2 给出八个沙漏和整体到部件的注意力。图 3 展开 HRU，图 5、图 6 分别说明多分辨率注意力与部件细化。",
+      "sources": [
+        {
+          "label": "3 Framework",
+          "url": "https://arxiv.org/html/1702.07432v1#S3"
+        },
+        {
+          "label": "4.1 Hourglass Residual Units",
+          "url": "https://arxiv.org/html/1702.07432v1#S4.SS1"
+        },
+        {
+          "label": "5.2 Our Multi-Context Attention Model",
+          "url": "https://arxiv.org/html/1702.07432v1#S5.SS2"
+        },
+        {
+          "label": "5.2.4 Hierarchical Holistic-Part Attention",
+          "url": "https://arxiv.org/html/1702.07432v1#S5.SS2.SSS4"
+        },
+        {
+          "label": "6 Training the model",
+          "url": "https://arxiv.org/html/1702.07432v1#S6"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://arxiv.org/html/1702.07432v1#S1.F2"
+        },
+        {
+          "label": "Figure 3 · 沙漏残差单元",
+          "url": "https://arxiv.org/html/1702.07432v1#S4.F3"
+        },
+        {
+          "label": "Figure 5 · 多分辨率注意力",
+          "url": "https://arxiv.org/html/1702.07432v1#S5.F5"
+        },
+        {
+          "label": "Figure 6 · 部件注意力",
+          "url": "https://arxiv.org/html/1702.07432v1#S5.F6"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/1702.07432v1#S1.F2",
+      "caption": "Figure 2 · Multi-Context Attention for Human Pose Estimation",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 2 给出八个沙漏和整体到部件的注意力。图 3 展开 HRU，图 5、图 6 分别说明多分辨率注意力与部件细化。"
+    },
+    "code": "https://github.com/bearpaw/pose-attention",
+    "code_provenance": {
+      "url": "https://github.com/bearpaw/pose-attention",
+      "verified_at": "2026-11-18",
+      "basis": "作者 Wei Yang 发布的 CVPR 2017 实现，有独立训练和测试目录。"
     }
   },
   {
@@ -32273,24 +32998,104 @@
     ],
     "analysis": {
       "problem": "多人视频不仅要定位关节，还要在遮挡和截断下关联身份。",
-      "method": "以时空图表示视频关节检测，用整数线性规划将图划分成人物姿态轨迹。",
+      "method": "2017 年的 Pose-Track 把多人视频里关节点的帧内组装和跨帧跟踪建成同一个图划分任务，图的每个最终连通组形成一条人物轨迹。",
       "inputs_outputs": "多人视频→带跨帧身份的二维姿态轨迹。",
       "contribution": "联合处理估计和追踪，并提出 Multi-Person PoseTrack 数据与不预设人数位置的评测协议。",
       "limitations": "整数规划联合空间与时间关联，计算受图规模和窗口影响；跟踪身份指标不能由单帧点精度替代。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2017/html/Iqbal_PoseTrack_Joint_Multi-Person_CVPR_2017_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2017/html/Iqbal_PoseTrack_Joint_Multi-Person_CVPR_2017_paper.html",
+        "https://arxiv.org/html/1611.07727v1#S3.SS1",
+        "https://arxiv.org/html/1611.07727v1#S3.SS2",
+        "https://arxiv.org/html/1611.07727v1#S3.SS3",
+        "https://arxiv.org/html/1611.07727v1#S3.SS4",
+        "https://arxiv.org/html/1611.07727v1#S4.SS1",
+        "https://arxiv.org/html/1611.07727v1#S2.F2",
+        "https://arxiv.org/html/1611.07727v1#S3.F3",
+        "https://github.com/umariqb/PoseTrack-CVPR2017"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对作者预印本 arXiv:1611.07727v1 的 S3.SS1、S3.SS2、S3.SS3、S3.SS4、S4.SS1 章节。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以列出的来源为准。实现及权重未经本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "2017 年的 Pose-Track 把多人视频里关节点的帧内组装和跨帧跟踪建成同一个图划分任务，图的每个最终连通组形成一条人物轨迹。",
+      "steps": [
+        {
+          "title": "检测各帧关节候选",
+          "description": "每帧产生带有类别、位置、局部边框和置信度的二维检测，保留可参与图划分的多个候选。"
+        },
+        {
+          "title": "连接帧内关节",
+          "description": "在同一帧中连接候选，以重叠关系及预训练的部件几何关系评分，估计两点属于同一人的可能性。"
+        },
+        {
+          "title": "连接跨帧同类关节",
+          "description": "跨帧边只连接同一关节类别，可跨过短时漏检。用局部 DeepMatching 对应、位置差和检测分数计算匹配概率。"
+        },
+        {
+          "title": "用线性整数程序划分",
+          "description": "联合选择有效节点、帧内边与时序边，并约束图的连通关系满足传递性。求出人物组及轨迹身份。"
+        },
+        {
+          "title": "整理视频骨架",
+          "description": "在一个轨迹内按帧读取各类关节，合并近距离同类检测。输出每帧关键点和跨帧人物标签。"
+        }
+      ],
+      "training": "关节检测与空间关系以标注数据学习，时序匹配由有身份对应的候选学习。图划分和约束在测试片段上求解。",
+      "inference": "在视频帧窗口构图并求解，联合恢复各帧姿态与轨迹。数据集标注包括人 ID、头框、关节点及遮挡状态。",
+      "figure_reading": "图 2 上方是逐帧关节候选，中部区分帧内和跨帧边，下部是拆分得到的多个人物轨迹。图 3 对照空间与时间的传递约束。",
+      "sources": [
+        {
+          "label": "3.1 Spatio-Temporal Graph",
+          "url": "https://arxiv.org/html/1611.07727v1#S3.SS1"
+        },
+        {
+          "label": "3.2 Graph Partitioning",
+          "url": "https://arxiv.org/html/1611.07727v1#S3.SS2"
+        },
+        {
+          "label": "3.3 Optimization",
+          "url": "https://arxiv.org/html/1611.07727v1#S3.SS3"
+        },
+        {
+          "label": "3.4 Potentials",
+          "url": "https://arxiv.org/html/1611.07727v1#S3.SS4"
+        },
+        {
+          "label": "4.1 Annotations",
+          "url": "https://arxiv.org/html/1611.07727v1#S4.SS1"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://arxiv.org/html/1611.07727v1#S2.F2"
+        },
+        {
+          "label": "Figure 3 · 传递约束",
+          "url": "https://arxiv.org/html/1611.07727v1#S3.F3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/1611.07727v1#S2.F2",
+      "caption": "Figure 2 · PoseTrack: Joint Multi-Person Pose Estimation and Tracking",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 2 上方是逐帧关节候选，中部区分帧内和跨帧边，下部是拆分得到的多个人物轨迹。图 3 对照空间与时间的传递约束。"
+    },
+    "code": "https://github.com/umariqb/PoseTrack-CVPR2017",
+    "code_provenance": {
+      "url": "https://github.com/umariqb/PoseTrack-CVPR2017",
+      "verified_at": "2026-11-18",
+      "basis": "作者维护的 CVPR 2017 实现，包含时空图划分、DeepCut 依赖及 MATLAB 演示。"
     }
   },
   {
@@ -32310,24 +33115,97 @@
     ],
     "analysis": {
       "problem": "直接坐标回归未充分利用关节间距离结构，也难处理缺失观测。",
-      "method": "将二维和三维姿态都写成关节距离矩阵，学习二维到三维矩阵回归并约束正值和对称性。",
+      "method": "这项方法用关节之间的距离表示人体形状。从二维点的距离矩阵预测三维距离矩阵，再重构三维坐标，减少对图中位置和三维坐标系取向的依赖。",
       "inputs_outputs": "单图检测的二维关节→三维人体姿态。",
       "contribution": "使用距离表示替代笛卡尔坐标提升，能对未观测关节提出位置假设。",
       "limitations": "距离矩阵表达对刚体变换不敏感，恢复坐标还需处理对齐与可能的歧义；不是直接世界定位。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2017/html/Moreno-Noguer_3D_Human_Pose_CVPR_2017_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2017/html/Moreno-Noguer_3D_Human_Pose_CVPR_2017_paper.html",
+        "https://arxiv.org/html/1611.09010v1#S3.SS1",
+        "https://arxiv.org/html/1611.09010v1#S3.SS2",
+        "https://arxiv.org/html/1611.09010v1#S3.SS3",
+        "https://arxiv.org/html/1611.09010v1#S3.SS4",
+        "https://arxiv.org/html/1611.09010v1#S4.SS1",
+        "https://arxiv.org/html/1611.09010v1#S1.F1",
+        "https://arxiv.org/html/1611.09010v1#S3.F3"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对作者预印本 arXiv:1611.09010v1 的 S3.SS1、S3.SS2、S3.SS3、S3.SS4、S4.SS1 章节。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以列出的来源为准。实现及权重未经本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "这项方法用关节之间的距离表示人体形状。从二维点的距离矩阵预测三维距离矩阵，再重构三维坐标，减少对图中位置和三维坐标系取向的依赖。",
+      "steps": [
+        {
+          "title": "取得二维关节点",
+          "description": "在人体框上运行 CPM 得到二维姿态，按高度缩放坐标。被遮挡或未检测的点在输入表示里对应缺失条目。"
+        },
+        {
+          "title": "构造欧氏距离矩阵",
+          "description": "计算每对二维关节点之间的距离，用对称矩阵表示全身关节关系。训练目标是对应三维关节的距离矩阵。"
+        },
+        {
+          "title": "学习二维到三维距离",
+          "description": "全连接版本只回归对角线以上元素；全卷积版本以矩阵为输入，显式对称化输出，以适应缺失行列。"
+        },
+        {
+          "title": "用 MDS 重建位置",
+          "description": "用多维尺度分析找一组三维坐标，使其点间距离与网络预测相符，恢复整体相对形状。"
+        },
+        {
+          "title": "消除镜像歧义",
+          "description": "原姿态与镜像有相同距离。比较两种解的关节角度，按满足人体活动范围的程度选择。"
+        }
+      ],
+      "training": "以配对的二维和三维姿态训练距离回归，可使用真实二维投影和 CPM 检测作为输入，使网络接触估计误差。",
+      "inference": "从裁剪图估计点、预测距离、解出三维身体形状。结果评测按刚性对齐，距离表示本身不确定绝对位置和朝向。",
+      "figure_reading": "图 1 给出像素、二维距离、三维距离和空间骨架的转换。图 3 分别画出全连接和全卷积两类回归器。",
+      "sources": [
+        {
+          "label": "3.1 Problem Formulation",
+          "url": "https://arxiv.org/html/1611.09010v1#S3.SS1"
+        },
+        {
+          "label": "3.2 Representing Human Pose with EDMs",
+          "url": "https://arxiv.org/html/1611.09010v1#S3.SS2"
+        },
+        {
+          "label": "3.3 2D-to-3D Distance Matrix Regression",
+          "url": "https://arxiv.org/html/1611.09010v1#S3.SS3"
+        },
+        {
+          "label": "3.4 From Distance Matrices to 3D Pose",
+          "url": "https://arxiv.org/html/1611.09010v1#S3.SS4"
+        },
+        {
+          "label": "4.1 Evaluation on Humaneva-I",
+          "url": "https://arxiv.org/html/1611.09010v1#S4.SS1"
+        },
+        {
+          "label": "Figure 1 · 原图",
+          "url": "https://arxiv.org/html/1611.09010v1#S1.F1"
+        },
+        {
+          "label": "Figure 3 · 两类矩阵回归",
+          "url": "https://arxiv.org/html/1611.09010v1#S3.F3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/1611.09010v1#S1.F1",
+      "caption": "Figure 1 · 3D Human Pose Estimation From a Single Image via Distance Matrix Regression",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 1 给出像素、二维距离、三维距离和空间骨架的转换。图 3 分别画出全连接和全卷积两类回归器。"
     }
   },
   {
@@ -32348,24 +33226,89 @@
     ],
     "analysis": {
       "problem": "多人二维和三维姿态联合恢复不能依赖预先准确的人体定位。",
-      "method": "联合生成姿态候选、分类打分和二维／三维回归，再聚合邻近姿态假设。",
+      "method": "LCR-Net 在每张图中为多个人提出带锚姿态的候选区域，随后分类和回归，联合输出二维及三维人体姿态。",
       "inputs_outputs": "自然多人图像→每人的二维和三维姿态。",
       "contribution": "定位、分类与回归共享卷积特征并联合训练，以假设聚合替代简单 NMS。",
       "limitations": "候选姿态分类和聚合依赖锚姿态覆盖；二维定位和三维对齐误差应分别报告。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2017/html/Rogez_LCR-Net_Localization-Classification-Regression_for_CVPR_2017_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2017/html/Rogez_LCR-Net_Localization-Classification-Regression_for_CVPR_2017_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2017/papers/Rogez_LCR-Net_Localization-Classification-Regression_for_CVPR_2017_paper.pdf#page=2",
+        "https://openaccess.thecvf.com/content_cvpr_2017/papers/Rogez_LCR-Net_Localization-Classification-Regression_for_CVPR_2017_paper.pdf#page=3",
+        "https://openaccess.thecvf.com/content_cvpr_2017/papers/Rogez_LCR-Net_Localization-Classification-Regression_for_CVPR_2017_paper.pdf#page=4",
+        "https://openaccess.thecvf.com/content_cvpr_2017/papers/Rogez_LCR-Net_Localization-Classification-Regression_for_CVPR_2017_paper.pdf#page=5",
+        "https://thoth.inrialpes.fr/src/LCR-Net.html"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对Official CVPR 2017 open-access paper 的 PDF 第 2、3、4、5 页。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以列出的来源为准。实现及权重未经本站运行。 Inria 作者页的 Caffe v1.x 对应早期 LCR-Net。提供测试代码，页面随后列出新版实现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "LCR-Net 在每张图中为多个人提出带锚姿态的候选区域，随后分类和回归，联合输出二维及三维人体姿态。",
+      "steps": [
+        {
+          "title": "构造姿态锚点库",
+          "description": "对训练三维姿态聚类，每个代表姿态保留对应的二维与三维关节模板，作为分类与回归起点。"
+        },
+        {
+          "title": "定位可能的区域",
+          "description": "在全图卷积特征上用区域建议网络生成可能含人的框，读取每个区域的池化特征。"
+        },
+        {
+          "title": "选择锚姿态",
+          "description": "分类器为区域预测接近的锚姿态以及背景概率，得到带分数的初始姿态假设。"
+        },
+        {
+          "title": "回归二维和三维偏移",
+          "description": "每个锚姿态有相应的回归分支，预测相对模板的二维坐标修正和三维关节修正。"
+        },
+        {
+          "title": "整合同一人的候选",
+          "description": "Pose Proposal Integration 用二维重叠与三维姿态相似性聚类，按分数融合一个人对应的多个姿态。"
+        }
+      ],
+      "training": "联合优化区域定位、锚姿态分类与姿态回归。按与真实姿态的匹配为区域分配正例锚点。",
+      "inference": "整张图生成多个区域和三维假设，再融合重叠候选，得到逐人二维与三维骨架。",
+      "figure_reading": "图 2 对应定位、分类和回归三个阶段。图 3 展开锚点偏移，图 4 给出同人候选如何合并。",
+      "sources": [
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2017/papers/Rogez_LCR-Net_Localization-Classification-Regression_for_CVPR_2017_paper.pdf#page=2"
+        },
+        {
+          "label": "相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2017/papers/Rogez_LCR-Net_Localization-Classification-Regression_for_CVPR_2017_paper.pdf#page=3"
+        },
+        {
+          "label": "Figures 3–4 · 回归和候选融合",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2017/papers/Rogez_LCR-Net_Localization-Classification-Regression_for_CVPR_2017_paper.pdf#page=4"
+        },
+        {
+          "label": "相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2017/papers/Rogez_LCR-Net_Localization-Classification-Regression_for_CVPR_2017_paper.pdf#page=5"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2017/papers/Rogez_LCR-Net_Localization-Classification-Regression_for_CVPR_2017_paper.pdf#page=2",
+      "caption": "Figure 2 · LCR-Net: Localization-Classification-Regression for Human Pose",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 2 对应定位、分类和回归三个阶段。图 3 展开锚点偏移，图 4 给出同人候选如何合并。"
+    },
+    "code": "https://thoth.inrialpes.fr/src/LCR-Net.html",
+    "code_provenance": {
+      "url": "https://thoth.inrialpes.fr/src/LCR-Net.html",
+      "verified_at": "2026-11-18",
+      "basis": "Inria 作者页的 Caffe v1.x 对应早期 LCR-Net。提供测试代码，页面随后列出新版实现。"
     }
   },
   {
@@ -32386,24 +33329,102 @@
     ],
     "analysis": {
       "problem": "相机佩戴者的身体经常不在画面内，无法依赖可见肢体检测。",
-      "method": "从第一视角视频的场景动态与静态视点线索预测佩戴者姿态，再用长窗口动力学能量优化序列。",
+      "method": "Seeing Invisible Poses 从胸前单目相机的视频推断佩戴者三维动作。它用画面里环境的运动和静态构图，匹配训练视频中的动作片段。",
       "inputs_outputs": "单个第一视角视频→佩戴者逐帧全身三维关节。",
       "contribution": "把环境运动和相机视点作为间接身体证据，研究不可见全身姿态的恢复。",
       "limitations": "从佩戴者场景线索推断不可见身体，依赖第一视角视频和长窗口；不等同于直接观测全身关节。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2017/html/Jiang_Seeing_Invisible_Poses_CVPR_2017_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2017/html/Jiang_Seeing_Invisible_Poses_CVPR_2017_paper.html",
+        "https://arxiv.org/html/1603.07763v1#S3.SS1",
+        "https://arxiv.org/html/1603.07763v1#S3.SS2",
+        "https://arxiv.org/html/1603.07763v1#S3.SS3",
+        "https://arxiv.org/html/1603.07763v1#S3.SS3.SSSx5",
+        "https://arxiv.org/html/1603.07763v1#S4",
+        "https://arxiv.org/html/1603.07763v1#S3.F4",
+        "https://arxiv.org/html/1603.07763v1#S1.F1",
+        "https://arxiv.org/html/1603.07763v1#S3.F2"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对作者预印本 arXiv:1603.07763v1 的 S3.SS1、S3.SS2、S3.SS3、S3.SS3.SSSx5、S4 章节。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以列出的来源为准。实现及权重未经本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "Seeing Invisible Poses 从胸前单目相机的视频推断佩戴者三维动作。它用画面里环境的运动和静态构图，匹配训练视频中的动作片段。",
+      "steps": [
+        {
+          "title": "建立配对动作库",
+          "description": "同步采集胸前视频和三维身体真值，以动作姿态聚类，并保留训练片段中各姿态的原始先后顺序。"
+        },
+        {
+          "title": "提取动态线索",
+          "description": "从一段连续画面估计相邻帧单应性并编码其变化，训练动态分类器为可能的姿态簇打分。"
+        },
+        {
+          "title": "补充静态场景线索",
+          "description": "以卷积分类器从单帧判断场景中与站立或坐着相关的线索，和动态分数结合成候选姿态代价。"
+        },
+        {
+          "title": "构造隐式时序图",
+          "description": "将训练库中的候选姿态铺到各测试时刻，约束可连接的姿态簇。转移代价考虑步长、速度平滑和长时间重复同一姿势。"
+        },
+        {
+          "title": "用动态规划选择路径",
+          "description": "联合每时刻匹配和时序转移，选择一条累计代价最低的三维姿态序列。"
+        }
+      ],
+      "training": "用配对视频和身体姿态学习动态映射，用标注的场景帧训练静态分类器，再保存非参数训练动作库。",
+      "inference": "输入胸前视频并从画面估计线索，通过姿态图解码佩戴者的三维动作。相机视野内无需出现其完整身体。",
+      "figure_reading": "图 4 是动态规划格点相邻两层及其连边。图 1 解释可观测画面和不可见身体之间的关系，图 2 给出动态线索示例。",
+      "sources": [
+        {
+          "label": "3.1 Pose parameterization and data collection",
+          "url": "https://arxiv.org/html/1603.07763v1#S3.SS1"
+        },
+        {
+          "label": "3.2 Instantaneous pose estimation",
+          "url": "https://arxiv.org/html/1603.07763v1#S3.SS2"
+        },
+        {
+          "label": "3.3 Non-parametric prior on pose dynamics",
+          "url": "https://arxiv.org/html/1603.07763v1#S3.SS3"
+        },
+        {
+          "label": "Optimizing the pose path using DP",
+          "url": "https://arxiv.org/html/1603.07763v1#S3.SS3.SSSx5"
+        },
+        {
+          "label": "4 Experimentation",
+          "url": "https://arxiv.org/html/1603.07763v1#S4"
+        },
+        {
+          "label": "Figure 4 · 原图",
+          "url": "https://arxiv.org/html/1603.07763v1#S3.F4"
+        },
+        {
+          "label": "Figure 1 · 胸前视频输入",
+          "url": "https://arxiv.org/html/1603.07763v1#S1.F1"
+        },
+        {
+          "label": "Figure 2 · 动态特征",
+          "url": "https://arxiv.org/html/1603.07763v1#S3.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/1603.07763v1#S3.F4",
+      "caption": "Figure 4 · Seeing Invisible Poses: Estimating 3D Body Pose From Egocentric Video",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 4 是动态规划格点相邻两层及其连边。图 1 解释可观测画面和不可见身体之间的关系，图 2 给出动态线索示例。"
     }
   },
   {
@@ -32423,24 +33444,97 @@
     ],
     "analysis": {
       "problem": "检测框级评分和抑制不能充分反映人体关键点质量。",
-      "method": "先检测人体框，再以全卷积 ResNet 预测热图和偏移，并聚合得到精细关键点。",
+      "method": "Papandreou 等先找人体框，再在每个框内预测各关节的圆盘响应及局部偏移，将多个像素投票汇总成精确的二维坐标。",
       "inputs_outputs": "多人自然图像→二维人体姿态。",
       "contribution": "引入关键点层级的 NMS 和置信度估计，而不完全沿用检测框的评分策略。",
       "limitations": "自顶向下系统依赖人物检测框；比较热图与偏移预测时需统一检测器与输入分辨率。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2017/html/Papandreou_Towards_Accurate_Multi-Person_CVPR_2017_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2017/html/Papandreou_Towards_Accurate_Multi-Person_CVPR_2017_paper.html",
+        "https://arxiv.org/html/1701.01779v1#S3.SS1",
+        "https://arxiv.org/html/1701.01779v1#S3.SS2",
+        "https://arxiv.org/html/1701.01779v1#S4.SS1",
+        "https://arxiv.org/html/1701.01779v1#S4.SS3",
+        "https://arxiv.org/html/1701.01779v1#S3.F1",
+        "https://arxiv.org/html/1701.01779v1#S3.F2",
+        "https://arxiv.org/html/1701.01779v1#S3.F3"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对作者预印本 arXiv:1701.01779v1 的 S3.SS1、S3.SS2、S4.SS1、S4.SS3 章节。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以列出的来源为准。实现及权重未经本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "Papandreou 等先找人体框，再在每个框内预测各关节的圆盘响应及局部偏移，将多个像素投票汇总成精确的二维坐标。",
+      "steps": [
+        {
+          "title": "检测全图人体",
+          "description": "Faster R-CNN 风格系统生成候选框并对人体打分，阈值筛选后交给单人姿态模型。"
+        },
+        {
+          "title": "准备固定纵横比裁剪",
+          "description": "扩展边框以包含上下文，并缩放到姿态网络所需的尺寸，保留每个裁剪到图像的坐标变换。"
+        },
+        {
+          "title": "预测关节圆盘与向量",
+          "description": "全卷积 ResNet 为每类关节产生二值圆盘概率和二维偏移。圆盘内的偏移指向精确位置。"
+        },
+        {
+          "title": "用置信度做投票",
+          "description": "由各像素圆盘概率加权，沿偏移指向目标点汇总响应。Hough 峰值提供更精确的点位。"
+        },
+        {
+          "title": "合并多人输出",
+          "description": "把关键点映回全图并用关节可信度为姿态重评分，基于目标关键点相似度的抑制去除重复骨架。"
+        }
+      ],
+      "training": "检测分支用人体框训练。姿态网络以圆盘内外分类和圆盘内偏移回归联合监督。",
+      "inference": "实际推理按人体框运行单人模型，整合偏移和置信度得到全图二维骨架。",
+      "figure_reading": "图 1 表示框检测到单人估计的两阶段关系。图 2 和图 3 分别查看训练目标及偏移投票。",
+      "sources": [
+        {
+          "label": "3.1 Person Box Detection",
+          "url": "https://arxiv.org/html/1701.01779v1#S3.SS1"
+        },
+        {
+          "label": "3.2 Person Pose Estimation",
+          "url": "https://arxiv.org/html/1701.01779v1#S3.SS2"
+        },
+        {
+          "label": "4.1 Experimental Setup",
+          "url": "https://arxiv.org/html/1701.01779v1#S4.SS1"
+        },
+        {
+          "label": "4.3 OKS-based non maximum suppression",
+          "url": "https://arxiv.org/html/1701.01779v1#S4.SS3"
+        },
+        {
+          "label": "Figure 1 · 原图",
+          "url": "https://arxiv.org/html/1701.01779v1#S3.F1"
+        },
+        {
+          "label": "Figure 2 · 训练目标",
+          "url": "https://arxiv.org/html/1701.01779v1#S3.F2"
+        },
+        {
+          "label": "Figure 3 · 偏移投票",
+          "url": "https://arxiv.org/html/1701.01779v1#S3.F3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/1701.01779v1#S3.F1",
+      "caption": "Figure 1 · Towards Accurate Multi-Person Pose Estimation in the Wild",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 1 表示框检测到单人估计的两阶段关系。图 2 和图 3 分别查看训练目标及偏移投票。"
     }
   },
   {
@@ -32460,24 +33554,82 @@
     ],
     "analysis": {
       "problem": "姿态结构与语义部位边界各自有信息，但独立预测未利用互补约束。",
-      "method": "融合姿态和语义部位 FCN 的输出，通过全连接 CRF 细化关节，再用骨架特征约束部位分割。",
+      "method": "Xia 等让多人姿态和部件分割互相校正。第一阶段的部件分数支持人物关节组装，组装后的骨架又提供分割细化所需的结构先验。",
       "inputs_outputs": "多人图像→二维关节与语义人体部位分割。",
       "contribution": "构建关节－部位平滑项并补充联合标注数据，让两个任务互相提供结构监督。",
       "limitations": "语义部位与姿态联合约束，但输出仍为二维；关节误差、语义分割和人物实例区分需分别检验。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2017/html/Xia_Joint_Multi-Person_Pose_CVPR_2017_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2017/html/Xia_Joint_Multi-Person_Pose_CVPR_2017_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2017/papers/Xia_Joint_Multi-Person_Pose_CVPR_2017_paper.pdf#page=3",
+        "https://openaccess.thecvf.com/content_cvpr_2017/papers/Xia_Joint_Multi-Person_Pose_CVPR_2017_paper.pdf#page=4",
+        "https://openaccess.thecvf.com/content_cvpr_2017/papers/Xia_Joint_Multi-Person_Pose_CVPR_2017_paper.pdf#page=5",
+        "https://openaccess.thecvf.com/content_cvpr_2017/papers/Xia_Joint_Multi-Person_Pose_CVPR_2017_paper.pdf#page=6"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对Official CVPR 2017 open-access paper 的 PDF 第 3、4、5、6 页。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以列出的来源为准。实现及权重未经本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "Xia 等让多人姿态和部件分割互相校正。第一阶段的部件分数支持人物关节组装，组装后的骨架又提供分割细化所需的结构先验。",
+      "steps": [
+        {
+          "title": "提取关节候选",
+          "description": "Pose FCN 在全图预测逐关节响应和同一人物的关节位置线索，由局部热图产生候选。"
+        },
+        {
+          "title": "估计初始部件图",
+          "description": "第一阶段 Part FCN 输出身体语义部件和背景的像素分数，为候选周围提供人物部件形状。"
+        },
+        {
+          "title": "联合选择并分组",
+          "description": "全连接 CRF 融合点置信度、外观依赖的点对项与部件一致性。通过整数优化挑选并组装同人的关节。"
+        },
+        {
+          "title": "把骨架转成像素先验",
+          "description": "按组装结果在二维图中绘制关节点与骨架连线，产生关节图、骨架图两个输入通道。"
+        },
+        {
+          "title": "细化语义分割",
+          "description": "第二阶段 Part FCN 将两幅姿态图和原始部件分数拼接，卷积细化各像素类别后取最大分数。"
+        }
+      ],
+      "training": "分阶段先训练 Pose FCN 与第一阶段 Part FCN，再训练姿态分组，最后训练使用姿态先验的第二阶段分割模型。",
+      "inference": "整张图经过关键点、部件、分组、语义细化四段。输出多人二维姿态及整张图的语义部件分割。",
+      "figure_reading": "图 2 先看两种输出怎样送入全连接 CRF，再沿关节图和骨架图回到细化分割。",
+      "sources": [
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2017/papers/Xia_Joint_Multi-Person_Pose_CVPR_2017_paper.pdf#page=3"
+        },
+        {
+          "label": "相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2017/papers/Xia_Joint_Multi-Person_Pose_CVPR_2017_paper.pdf#page=4"
+        },
+        {
+          "label": "相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2017/papers/Xia_Joint_Multi-Person_Pose_CVPR_2017_paper.pdf#page=5"
+        },
+        {
+          "label": "相关正文 · PDF 第 6 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2017/papers/Xia_Joint_Multi-Person_Pose_CVPR_2017_paper.pdf#page=6"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2017/papers/Xia_Joint_Multi-Person_Pose_CVPR_2017_paper.pdf#page=3",
+      "caption": "Figure 2 · Joint Multi-Person Pose Estimation and Semantic Part Segmentation",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 2 先看两种输出怎样送入全连接 CRF，再沿关节图和骨架图回到细化分割。"
     }
   },
   {
@@ -32497,24 +33649,99 @@
     ],
     "analysis": {
       "problem": "直接从图像回归三维可能忽视成熟二维检测与大规模动作库的价值。",
-      "method": "先使用二维姿态检测器，再在三维动作捕捉库中检索匹配并将二维观测提升到三维。",
+      "method": "Chen 与 Ramanan 把单图三维人体估计拆为二维关节检测和动作捕捉样本匹配。同一三维动作可在多个相机下形成人体库的不同二维投影。",
       "inputs_outputs": "单张 RGB 图像→二维关键点→匹配得到的三维姿态。",
       "contribution": "把复杂任务拆成现成二维估计与近邻匹配，作为简单且可复用的三维恢复路线。",
       "limitations": "三维解来自动作捕捉库检索，受库内动作和视角覆盖影响；上游二维检测与检索成本应计入。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2017/html/Chen_3D_Human_Pose_CVPR_2017_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2017/html/Chen_3D_Human_Pose_CVPR_2017_paper.html",
+        "https://arxiv.org/html/1612.06524v1#S3.SS1",
+        "https://arxiv.org/html/1612.06524v1#S3.SS2",
+        "https://arxiv.org/html/1612.06524v1#S4.SS1",
+        "https://arxiv.org/html/1612.06524v1#S4.SS4",
+        "https://arxiv.org/html/1612.06524v1#S1.F1",
+        "https://arxiv.org/html/1612.06524v1#S4.F5",
+        "https://github.com/flyawaychase/3DHumanPose"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对作者预印本 arXiv:1612.06524v1 的 S3.SS1、S3.SS2、S4.SS1、S4.SS4 章节。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列原文为准。作者 Ching-Hang Chen 的 MATLAB 演示包含从已有二维关节检索三维姿态的代码，二维检测器可单独运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "Chen 与 Ramanan 把单图三维人体估计拆为二维关节检测和动作捕捉样本匹配。同一三维动作可在多个相机下形成人体库的不同二维投影。",
+      "steps": [
+        {
+          "title": "得到二维关节热图",
+          "description": "用 Convolutional Pose Machines 对单张人体图生成各关节的归一化热图，取得二维姿态观测。"
+        },
+        {
+          "title": "准备投影样本库",
+          "description": "保存动作捕捉的三维姿态和相机参数，将每个样本投影成相配套的二维点；可给一个样本附多个视角。"
+        },
+        {
+          "title": "用重投影误差匹配",
+          "description": "比较检测到的二维骨架与样本投影，选重投影距离小的候选。基本方案为一近邻。"
+        },
+        {
+          "title": "重排虚拟相机候选",
+          "description": "对排名靠前的样本细调相机参数再比较，可补偿样本库中已知相机视角之间的间隙。"
+        },
+        {
+          "title": "按观测修正输出",
+          "description": "可选的示例变形在相机系保留匹配样本的深度，将横纵坐标替换为按弱透视尺度换算的检测坐标。"
+        }
+      ],
+      "training": "二维 CPM 由 MPII 模型在 Human3.6M 上微调。三维部分由带相机的动作捕捉样本库提供先验，匹配时直接查询。",
+      "inference": "推理从二维点检索三维样本，按需要细化相机和姿态，输出与图中人对应的三维关节。",
+      "figure_reading": "图 1 将二维图像证据、动作捕捉候选与匹配串起来。图 5 对照虚拟相机和匹配后形变的效果。",
+      "sources": [
+        {
+          "label": "3.1 Image-Based 2D Pose Estimation",
+          "url": "https://arxiv.org/html/1612.06524v1#S3.SS1"
+        },
+        {
+          "label": "3.2 Nonparametric 3D shape model",
+          "url": "https://arxiv.org/html/1612.06524v1#S3.SS2"
+        },
+        {
+          "label": "4.1 Quantiative Evaluation Protocols",
+          "url": "https://arxiv.org/html/1612.06524v1#S4.SS1"
+        },
+        {
+          "label": "4.4 Diagnostics",
+          "url": "https://arxiv.org/html/1612.06524v1#S4.SS4"
+        },
+        {
+          "label": "Figure 1 · 原图",
+          "url": "https://arxiv.org/html/1612.06524v1#S1.F1"
+        },
+        {
+          "label": "Figure 5 · 变形与原始候选",
+          "url": "https://arxiv.org/html/1612.06524v1#S4.F5"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/1612.06524v1#S1.F1",
+      "caption": "Figure 1 · 3D Human Pose Estimation = 2D Pose Estimation + Matching",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 1 将二维图像证据、动作捕捉候选与匹配串起来。图 5 对照虚拟相机和匹配后形变的效果。"
+    },
+    "code": "https://github.com/flyawaychase/3DHumanPose",
+    "code_provenance": {
+      "url": "https://github.com/flyawaychase/3DHumanPose",
+      "verified_at": "2026-11-18",
+      "basis": "作者 Ching-Hang Chen 的 MATLAB 演示包含从已有二维关节检索三维姿态的代码，二维检测器可单独运行。"
     }
   },
   {
@@ -35746,25 +36973,98 @@
     ],
     "analysis": {
       "problem": "单目手跟踪具有深度歧义，自遮挡与光照变化削弱轮廓和纹理线索。",
-      "method": "逆问题目标联合估计姿态、纹理和光照；使用拟牛顿优化，并显式处理可见性边界的梯度项。",
+      "method": "de La Gorce 等把单目手部跟踪作为逆渲染问题，从连续 RGB 图像联合拟合三维手姿、表面纹理和照明。局部纹理随时间提供对应，遮挡边界进入求解梯度。",
       "inputs_outputs": "单目视频输入；输出随时间变化的三维手姿，同时估计纹理和照明。",
       "contribution": "展示利用明暗和时序纹理连续性进行生成式手跟踪的路径，强调遮挡边界项的重要性。",
       "limitations": "模型拟合联合估计纹理照明，依赖单目视频及优化初始化；拟合耗时不等同于神经网络一次前向。",
       "sources": [
         "https://www.cs.toronto.edu/~fleet/research/Papers/deLaGorcePAMI2011.pdf",
-        "https://doi.org/10.1109/TPAMI.2011.33"
+        "https://doi.org/10.1109/TPAMI.2011.33",
+        "https://www.cs.toronto.edu/~fleet/research/Papers/handTrackerPAMI.pdf#page=2",
+        "https://www.cs.toronto.edu/~fleet/research/Papers/handTrackerPAMI.pdf#page=3",
+        "https://www.cs.toronto.edu/~fleet/research/Papers/handTrackerPAMI.pdf#page=4",
+        "https://www.cs.toronto.edu/~fleet/research/Papers/handTrackerPAMI.pdf#page=5",
+        "https://www.cs.toronto.edu/~fleet/research/Papers/handTrackerPAMI.pdf#page=6",
+        "https://www.cs.toronto.edu/~fleet/research/Papers/handTrackerPAMI.pdf#page=7",
+        "https://www.cs.toronto.edu/~fleet/research/Papers/handTrackerPAMI.pdf#page=8"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "核对原始摘要与出版信息；未全文逐段复核、未复现，不将摘要中的优势外推为全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对Author-hosted IEEE TPAMI paper 的 PDF 第 2、3、4、5、6、7、8 页。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以列出的来源为准。实现及权重未经本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=51",
       "version": "2026 第七版（目录原文转载）",
       "venue": "TPAMI"
+    },
+    "pipeline": {
+      "overview": "de La Gorce 等把单目手部跟踪作为逆渲染问题，从连续 RGB 图像联合拟合三维手姿、表面纹理和照明。局部纹理随时间提供对应，遮挡边界进入求解梯度。",
+      "steps": [
+        {
+          "title": "初始化个体手模型",
+          "description": "用带关节骨架的三角网格描述手表面，第一帧拟合个体形态，再固定本视频的形态参数。"
+        },
+        {
+          "title": "按候选姿态渲染",
+          "description": "将关节变换传给网格顶点，在相机中确定可见的表面和背景，按纹理与光照预测像素颜色。"
+        },
+        {
+          "title": "建立观测误差",
+          "description": "利用手模型投影、表面纹理与估计的照明解释当前图像，并用背景模型处理不属于手表面的区域。"
+        },
+        {
+          "title": "考虑遮挡边界的变化",
+          "description": "求姿态改变时的误差梯度，除可见表面内的变化，还包含手轮廓和自遮挡边界移动引起的变化。"
+        },
+        {
+          "title": "逐帧拟合并更新外观",
+          "description": "用准牛顿方法细化姿态和光照，利用可见面更新纹理，供后续帧继续跟踪。"
+        }
+      ],
+      "training": "这是基于几何和光照的模型拟合。序列开始时校准个体手部形态和背景，随后在观测对应中更新纹理与照明。",
+      "inference": "在单目视频上以先前结果提供初值，对当前帧反复渲染、比较和优化，输出三维手的关节姿态及网格。",
+      "figure_reading": "图 2 展示关节骨架及变形后的三角网格，可对照第 3 节理解渲染误差和遮挡梯度如何作用于该模型。",
+      "sources": [
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://www.cs.toronto.edu/~fleet/research/Papers/handTrackerPAMI.pdf#page=2"
+        },
+        {
+          "label": "相关正文 · PDF 第 3 页",
+          "url": "https://www.cs.toronto.edu/~fleet/research/Papers/handTrackerPAMI.pdf#page=3"
+        },
+        {
+          "label": "Figure 4 · 渲染误差",
+          "url": "https://www.cs.toronto.edu/~fleet/research/Papers/handTrackerPAMI.pdf#page=4"
+        },
+        {
+          "label": "Figure 5 · 遮挡梯度",
+          "url": "https://www.cs.toronto.edu/~fleet/research/Papers/handTrackerPAMI.pdf#page=5"
+        },
+        {
+          "label": "相关正文 · PDF 第 6 页",
+          "url": "https://www.cs.toronto.edu/~fleet/research/Papers/handTrackerPAMI.pdf#page=6"
+        },
+        {
+          "label": "相关正文 · PDF 第 7 页",
+          "url": "https://www.cs.toronto.edu/~fleet/research/Papers/handTrackerPAMI.pdf#page=7"
+        },
+        {
+          "label": "相关正文 · PDF 第 8 页",
+          "url": "https://www.cs.toronto.edu/~fleet/research/Papers/handTrackerPAMI.pdf#page=8"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://www.cs.toronto.edu/~fleet/research/Papers/handTrackerPAMI.pdf#page=2",
+      "caption": "Figure 2 · Model-Based 3D Hand Pose Estimation from Monocular Video",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 2 展示关节骨架及变形后的三角网格，可对照第 3 节理解渲染误差和遮挡梯度如何作用于该模型。"
     }
   },
   {
@@ -35785,24 +37085,97 @@
     ],
     "analysis": {
       "problem": "单帧深度手姿估计需要同时兼顾定位精度与计算效率。",
-      "method": "两阶段回归森林：像素级森林先估计三维位置及平面内旋转，再由整体手部图块的森林完成姿态估计。",
+      "method": "DHand 把深度图中的手位置与平面旋转先估出来，再在校正后的手坐标系拟合剩余旋转和手指构型。森林的叶节点在推理时按样本外观调整投票。",
       "inputs_outputs": "单张手部深度图输入；输出手部姿态。",
       "contribution": "通过先定位和对齐、后整体回归的分工实现高效深度手姿估计。",
       "limitations": "两阶段森林需要深度与手部裁剪归一化；定位和旋转规范化的成本需计入整体效率。",
       "sources": [
-        "https://link.springer.com/article/10.1007/s11263-015-0826-9"
+        "https://link.springer.com/article/10.1007/s11263-015-0826-9",
+        "https://www.ece.ualberta.ca/~lcheng5/papers/XuEtAl_IJCV16.pdf#page=5",
+        "https://www.ece.ualberta.ca/~lcheng5/papers/XuEtAl_IJCV16.pdf#page=6",
+        "https://www.ece.ualberta.ca/~lcheng5/papers/XuEtAl_IJCV16.pdf#page=7",
+        "https://www.ece.ualberta.ca/~lcheng5/papers/XuEtAl_IJCV16.pdf#page=9",
+        "https://www.ece.ualberta.ca/~lcheng5/papers/XuEtAl_IJCV16.pdf#page=10",
+        "https://www.ece.ualberta.ca/~lcheng5/papers/XuEtAl_IJCV16.pdf#page=11",
+        "https://www.ece.ualberta.ca/~lcheng5/papers/XuEtAl_IJCV16.pdf#page=12"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "核对出版社摘要与卷期：2015 年在线，IJCV 116:21–45 的正式卷期为 2016；未全文复核。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对Author-hosted IJCV paper 的 PDF 第 5、6、7、9、10、11、12 页。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以列出的来源为准。实现及权重未经本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=51",
       "version": "2026 第七版（目录原文转载）",
       "venue": "IJCV"
+    },
+    "pipeline": {
+      "overview": "DHand 把深度图中的手位置与平面旋转先估出来，再在校正后的手坐标系拟合剩余旋转和手指构型。森林的叶节点在推理时按样本外观调整投票。",
+      "steps": [
+        {
+          "title": "准备深度手图",
+          "description": "以单手深度裁剪作为输入，用深度归一化的两个像素采样位置比较局部形状。"
+        },
+        {
+          "title": "先估计手的参照系",
+          "description": "第一阶段森林对手部像素投票，得到手根在三维的位置及绕图像法向的平面旋转。"
+        },
+        {
+          "title": "在参照系估计剩余参数",
+          "description": "第二阶段处理剩余 23 维表示，包括另外两种整体旋转和掌、指关节自由度。"
+        },
+        {
+          "title": "按局部外观调整叶节点权重",
+          "description": "把传到叶节点的局部观测与训练实例的深度方向模板匹配，动态改变样本投票权重。DOT 提供用于比较的方向表示。"
+        },
+        {
+          "title": "聚合手姿并重建",
+          "description": "从投票分布选出可信参数，拼接第一阶段的坐标与旋转，通过手部运动学得到完整关节。"
+        }
+      ],
+      "training": "训练使用合成深度图和对应参数。回归森林分别学习手根与平面旋转，以及校正后的内部手姿。DHand 的动态叶投票用于第二阶段。",
+      "inference": "单个前景深度手图先求参考变换，再做叶节点匹配与姿态投票，输出三维手运动学参数和关节。",
+      "figure_reading": "图 2 给出两步坐标变换及回归关系，图 3 对照方向模板匹配，图 4 标出运动学自由度。",
+      "sources": [
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://www.ece.ualberta.ca/~lcheng5/papers/XuEtAl_IJCV16.pdf#page=5"
+        },
+        {
+          "label": "相关正文 · PDF 第 6 页",
+          "url": "https://www.ece.ualberta.ca/~lcheng5/papers/XuEtAl_IJCV16.pdf#page=6"
+        },
+        {
+          "label": "相关正文 · PDF 第 7 页",
+          "url": "https://www.ece.ualberta.ca/~lcheng5/papers/XuEtAl_IJCV16.pdf#page=7"
+        },
+        {
+          "label": "相关正文 · PDF 第 9 页",
+          "url": "https://www.ece.ualberta.ca/~lcheng5/papers/XuEtAl_IJCV16.pdf#page=9"
+        },
+        {
+          "label": "Figure 4 · 运动学表示",
+          "url": "https://www.ece.ualberta.ca/~lcheng5/papers/XuEtAl_IJCV16.pdf#page=10"
+        },
+        {
+          "label": "相关正文 · PDF 第 11 页",
+          "url": "https://www.ece.ualberta.ca/~lcheng5/papers/XuEtAl_IJCV16.pdf#page=11"
+        },
+        {
+          "label": "相关正文 · PDF 第 12 页",
+          "url": "https://www.ece.ualberta.ca/~lcheng5/papers/XuEtAl_IJCV16.pdf#page=12"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://www.ece.ualberta.ca/~lcheng5/papers/XuEtAl_IJCV16.pdf#page=5",
+      "caption": "Figure 2 · Estimate Hand Poses Efficiently from Single Depth Images",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 2 给出两步坐标变换及回归关系，图 3 对照方向模板匹配，图 4 标出运动学自由度。"
     }
   },
   {
@@ -35824,25 +37197,132 @@
     ],
     "analysis": {
       "problem": "高质量三维手姿标注成本高，数据量和标注质量限制学习方法。",
-      "method": "分类梳理人工、合成、传感器与计算式标注，以及标注稀缺情况下的学习策略。",
+      "method": "Ohkawa 等将三维手姿估计拆成两个问题。先比较怎样获得可信的三维标签，再比较标注有限时如何借助无标签样本或跨域数据训练。",
       "inputs_outputs": "综述输入是既有手姿数据集、标注流程与学习研究，不是新的姿态预测器。",
       "contribution": "把标注获取与少标注学习放在同一框架内，并讨论跨域泛化和减少人工介入的方向。",
       "limitations": "综述比较标注与学习策略，不提供一个统一可运行预测器；所述数据规模和方法覆盖需按发表时间理解。",
       "sources": [
-        "https://link.springer.com/article/10.1007/s11263-023-01856-0"
+        "https://link.springer.com/article/10.1007/s11263-023-01856-0",
+        "https://link.springer.com/article/10.1007/s11263-023-01856-0#Sec2",
+        "https://link.springer.com/article/10.1007/s11263-023-01856-0#Sec3",
+        "https://link.springer.com/article/10.1007/s11263-023-01856-0#Sec4",
+        "https://link.springer.com/article/10.1007/s11263-023-01856-0#Sec8",
+        "https://link.springer.com/article/10.1007/s11263-023-01856-0#Sec9",
+        "https://link.springer.com/article/10.1007/s11263-023-01856-0#Sec12",
+        "https://link.springer.com/article/10.1007/s11263-023-01856-0#Sec13",
+        "https://link.springer.com/article/10.1007/s11263-023-01856-0#figure-2",
+        "https://link.springer.com/article/10.1007/s11263-023-01856-0#figure-13"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "核对原始摘要与出版信息；未全文逐段复核、未复现，不将摘要中的优势外推为全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对出版商正式版的 Sec2、Sec3、Sec4、Sec8、Sec9、Sec12、Sec13 章节。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "综述按其分类、设计取舍与比较框架组织。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=51",
       "version": "2026 第七版（目录原文转载）",
       "venue": "IJCV"
-    }
+    },
+    "pipeline": {
+      "overview": "Ohkawa 等将三维手姿估计拆成两个问题。先比较怎样获得可信的三维标签，再比较标注有限时如何借助无标签样本或跨域数据训练。",
+      "steps": [
+        {
+          "title": "确定输入与表示",
+          "description": "从裁剪 RGB 或深度手图出发，比较二维关节热图加深度、2.5D 热图以及直接三维坐标回归。"
+        },
+        {
+          "title": "盘点标注难点",
+          "description": "识别单视角深度歧义、手指与物体遮挡和姿态覆盖不足，明确哪些数据需要多视角或额外传感器。"
+        },
+        {
+          "title": "比较四类构建方案",
+          "description": "人工标注有较高的人力成本，合成模型易提供准确真值但存在域差异，手部标记会改变外观，计算标注依赖采集设备和估计流程。"
+        },
+        {
+          "title": "处理少标注训练",
+          "description": "自监督先从无标注样本学习表征；半监督再利用模型产生的伪标注或一致性约束；领域适应处理合成到真实或传感器转换。"
+        },
+        {
+          "title": "匹配实际部署条件",
+          "description": "核对标注时与推理时能使用的相机和模态。以 RGB 推理为例，只有训练时可用的深度可以被用作辅助信号。"
+        }
+      ],
+      "training": "综述以标签来源和少标签学习方式组织方法，同时比较采集开销、注释质量和适用场景。",
+      "inference": "比较两项研究时记录真实与合成比例、视角、采集成像方式和测试模态，并对照各自标签格式。",
+      "figure_reading": "图 2 对照三类单视角预测头及其输出。图 13 说明训练阶段可用 RGB 和深度、测试仅用 RGB 的模态转换设定。",
+      "sources": [
+        {
+          "label": "2 Overview of 3D Hand Pose Estimation",
+          "url": "https://link.springer.com/article/10.1007/s11263-023-01856-0#Sec2"
+        },
+        {
+          "label": "3 Challenges in Dataset Construction",
+          "url": "https://link.springer.com/article/10.1007/s11263-023-01856-0#Sec3"
+        },
+        {
+          "label": "4 Annotation Methods",
+          "url": "https://link.springer.com/article/10.1007/s11263-023-01856-0#Sec4"
+        },
+        {
+          "label": "4.4 Computational Annotation",
+          "url": "https://link.springer.com/article/10.1007/s11263-023-01856-0#Sec8"
+        },
+        {
+          "label": "5 Learning with Limited Labels",
+          "url": "https://link.springer.com/article/10.1007/s11263-023-01856-0#Sec9"
+        },
+        {
+          "label": "5.3 Domain Adaptation",
+          "url": "https://link.springer.com/article/10.1007/s11263-023-01856-0#Sec12"
+        },
+        {
+          "label": "6 Future Directions",
+          "url": "https://link.springer.com/article/10.1007/s11263-023-01856-0#Sec13"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://link.springer.com/article/10.1007/s11263-023-01856-0#figure-2"
+        },
+        {
+          "label": "Figure 13 · 跨模态训练和测试",
+          "url": "https://link.springer.com/article/10.1007/s11263-023-01856-0#figure-13"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local",
+      "kind": "survey"
+    },
+    "figure": {
+      "src": "assets/figures/hand-annotation-survey-original.png",
+      "caption": "Figure 2 · 三种单视角三维手姿输出",
+      "alt": "Figure 2 · 三种单视角三维手姿输出",
+      "source": "https://link.springer.com/article/10.1007/s11263-023-01856-0#figure-2",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Takehiko Ohkawa, Ryosuke Furuta, Yoichi Sato. Efficient Annotation and Learning for 3D Hand Pose Estimation: A Survey, Figure 2, Springer Nature Version of Record, 2023. CC BY 4.0.",
+      "authors": "Takehiko Ohkawa, Ryosuke Furuta, Yoichi Sato",
+      "figure_number": "Figure 2",
+      "version": "Springer Nature Version of Record, 2023",
+      "modifications": "下载出版商论文页面的原始全尺寸图像，未做图像编辑。"
+    },
+    "figures": [
+      {
+        "src": "assets/figures/hand-annotation-survey-modality-original.png",
+        "caption": "Figure 13 · 训练与推理可用模态的差别",
+        "alt": "Figure 13 · 训练与推理可用模态的差别",
+        "source": "https://link.springer.com/article/10.1007/s11263-023-01856-0#figure-13",
+        "license": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "attribution": "Takehiko Ohkawa, Ryosuke Furuta, Yoichi Sato. Efficient Annotation and Learning for 3D Hand Pose Estimation: A Survey, Figure 13, Springer Nature Version of Record, 2023. CC BY 4.0.",
+        "authors": "Takehiko Ohkawa, Ryosuke Furuta, Yoichi Sato",
+        "figure_number": "Figure 13",
+        "version": "Springer Nature Version of Record, 2023",
+        "modifications": "下载出版商论文页面的原始全尺寸图像，未做图像编辑。"
+      }
+    ]
   },
   {
     "id": "hand-black-box-2015",
@@ -35863,24 +37343,82 @@
     ],
     "analysis": {
       "problem": "将生成式手姿求解当作黑盒优化会浪费运动学结构信息，增加求解开销。",
-      "method": "按运动学层级逐层生成局部姿态样本，利用替代能量筛选，最终用完整能量选择整体假设。",
+      "method": "HSO 将单张深度图的手模型拟合拆为运动学层级。先用便宜的局部代价淘汰不合理的关节候选，再对少量完整候选做深度渲染对照。",
       "inputs_outputs": "手部深度观测输入；输出完整手部姿态参数。",
       "contribution": "把结构化预测与生成式优化结合，在有限计算预算场景中比较其效率。",
       "limitations": "分层采样优化依赖深度观测、运动学模型及候选预算；能量筛选的最优候选不保证全局真实最优。",
       "sources": [
-        "https://www.microsoft.com/en-us/research/publication/opening-the-black-box-hierarchical-sampling-optimization-for-estimating-human-hand-pose/"
+        "https://www.microsoft.com/en-us/research/publication/opening-the-black-box-hierarchical-sampling-optimization-for-estimating-human-hand-pose/",
+        "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/04/iccv_2015_camready.pdf#page=2",
+        "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/04/iccv_2015_camready.pdf#page=3",
+        "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/04/iccv_2015_camready.pdf#page=4",
+        "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/04/iccv_2015_camready.pdf#page=5"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "核对原始摘要与出版信息；未全文逐段复核、未复现，不将摘要中的优势外推为全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对Microsoft Research author-hosted ICCV paper 的 PDF 第 2、3、4、5 页。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以列出的来源为准。实现及权重未经本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "HSO 将单张深度图的手模型拟合拆为运动学层级。先用便宜的局部代价淘汰不合理的关节候选，再对少量完整候选做深度渲染对照。",
+      "steps": [
+        {
+          "title": "定义分层手姿",
+          "description": "先估计腕部三维位置和全局手掌方向，再分别处理每根手指的掌指关节与远端关节。"
+        },
+        {
+          "title": "在父姿态上取局部样本",
+          "description": "由已经确定的祖先变换预测当前关节的三维评估位置；在其投影位置查询回归森林，抽取部分姿态候选。"
+        },
+        {
+          "title": "用代理能量筛选",
+          "description": "以当前层的局部深度匹配近似完整渲染的代价，快速淘汰不合理的部分姿态。保留的参数生成子层候选的评估位置。"
+        },
+        {
+          "title": "沿手指树补全",
+          "description": "重复局部采样和筛选，以腕掌参数为公共上游，组成多个完整的手骨架配置。"
+        },
+        {
+          "title": "评估完整模型",
+          "description": "对选出的完整手姿渲染并计算精确的 golden energy，取最符合观测深度的配置。"
+        }
+      ],
+      "training": "各层的回归森林从对应的深度数据学习部分姿态，叶节点存储可采样的高斯混合。层级选择与精确能量在估计阶段执行。",
+      "inference": "输入已分割的深度手图，从全局变换到各指关节构造候选，可借前一帧结果补充候选，最后回传代价最低的三维手姿。",
+      "figure_reading": "图 3 对照分层采样、快速 silver 代价和完整 golden 评价。图 2 显示每层参数对应的关节。",
+      "sources": [
+        {
+          "label": "相关正文 · PDF 第 2 页",
+          "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/04/iccv_2015_camready.pdf#page=2"
+        },
+        {
+          "label": "Figure 2 · 运动学层级",
+          "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/04/iccv_2015_camready.pdf#page=3"
+        },
+        {
+          "label": "Figure 3 · 原图",
+          "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/04/iccv_2015_camready.pdf#page=4"
+        },
+        {
+          "label": "相关正文 · PDF 第 5 页",
+          "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/04/iccv_2015_camready.pdf#page=5"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/04/iccv_2015_camready.pdf#page=4",
+      "caption": "Figure 3 · Opening the Black Box: Hierarchical Sampling Optimization for Estimating Human Hand Pose",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 3 对照分层采样、快速 silver 代价和完整 golden 评价。图 2 显示每层参数对应的关节。"
     }
   },
   {
@@ -35902,24 +37440,72 @@
     ],
     "analysis": {
       "problem": "三维手姿研究需要同时理解相机能力、估计方法和评价数据。",
-      "method": "按传感器、算法、数据集及评价标准组织研究，并讨论深度相机跟踪精度评估。",
+      "method": "Li、Liu 与 Tan 将深度相机动态跟踪实验与手姿研究综述放在一起，关注相机采样、手模型表示和评测数据如何共同影响比较。",
       "inputs_outputs": "综述覆盖三维手姿估计的成像设备、方法和公开数据，不是单一网络。",
       "contribution": "连接传感器条件与算法研究路线，为选择数据集和理解评测条件提供入口。",
       "limitations": "按相机模态组织的历史综述不等于统一基准复现；不同设备和数据集的误差不能直接横排。",
       "sources": [
-        "https://www.sciencedirect.com/science/article/abs/pii/S0031320319301724"
+        "https://www.sciencedirect.com/science/article/abs/pii/S0031320319301724",
+        "https://doi.org/10.1016/j.patcog.2019.04.026"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "核对原始摘要与出版信息；未全文逐段复核、未复现，不将摘要中的优势外推为全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_publisher_preview",
+      "evidence_scope": "已核对Pattern Recognition 93 (2019), 251–272 出版商公开预览中的摘要、引言、相机动态实验概述和方法、数据集公开节选。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "图 2 在引言中用于区分手姿估计与相邻任务。方法和数据集表的全部内容以出版商正式正文为准。"
     },
     "ccf": {
       "tier": "B",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=53",
       "version": "2026 第七版（目录原文转载）",
       "venue": "PR"
+    },
+    "pipeline": {
+      "overview": "Li、Liu 与 Tan 将深度相机动态跟踪实验与手姿研究综述放在一起，关注相机采样、手模型表示和评测数据如何共同影响比较。",
+      "steps": [
+        {
+          "title": "界定三维输出和任务",
+          "description": "区分手关节角度、三维关节位置和网格或几何原语。二维手定位、手分割和手势类别对应不同目标。"
+        },
+        {
+          "title": "衡量动态深度观测",
+          "description": "以数控直线导轨产生有参照的运动，在无手部标记条件下考查深度相机的动态跟踪精度，补充静态规格。"
+        },
+        {
+          "title": "整理姿态估计路线",
+          "description": "按如何利用深度或 RGB-D 区分输入，并比较依赖帧序的跟踪和能处理单帧的估计，记录方法对视角和前景分割的依赖。"
+        },
+        {
+          "title": "检查数据与注释",
+          "description": "对照数据集的采集传感器、标注方式及是否含真实手部交互，识别合成训练与真实应用之间的差异。"
+        },
+        {
+          "title": "对齐比较条件",
+          "description": "比较方法表和数据集表时记录所用表示、测试子集和评价标准，避免由标注或传感差异得出错误排序。"
+        }
+      ],
+      "training": "综述汇总 101 项方法与 22 个数据集，重点覆盖 2010 年之后的深度或 RGB-D 手姿研究，并独立评估动态深度摄像。",
+      "inference": "按传感器、任务定义、姿态表示和评测协议筛选结果。时序跟踪、单帧估计和手势分类应分别核对其输出。",
+      "figure_reading": "图 2 区分手姿估计与手检测、分割及手势等相邻任务。导轨实验和方法表用于进一步对照硬件与算法条件。",
+      "sources": [
+        {
+          "label": "出版商预览 · 摘要、引言、相机动态实验概述和方法、数据集公开节选",
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0031320319301724"
+        },
+        {
+          "label": "正式论文 · Figure 2",
+          "url": "https://doi.org/10.1016/j.patcog.2019.04.026"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only",
+      "kind": "survey"
+    },
+    "figure": {
+      "source": "https://www.sciencedirect.com/science/article/abs/pii/S0031320319301724",
+      "caption": "Figure 2 · A survey on 3D hand pose estimation: Cameras, methods, and datasets",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 2 区分手姿估计与手检测、分割及手势等相邻任务。导轨实验和方法表用于进一步对照硬件与算法条件。"
     }
   },
   {
@@ -35940,24 +37526,99 @@
     ],
     "analysis": {
       "problem": "静态图像中的人体姿态变化使显式旋转和缩放的部件模板搜索复杂。",
-      "method": "使用小型非定向部件的混合模板表示关节变化，联合建模部件共现和空间关系。",
+      "method": "Yang 与 Ramanan 把人体看成由小部件组成的树。同一身体部位可以选择不同外观类型，父子类型共同决定相邻部位的位置兼容性。",
       "inputs_outputs": "静态图像输入；输出人体检测和二维关节化姿态。",
       "contribution": "将柔性部件混合表示用于人体检测及姿态估计，是深度网络之前的结构模型路线。",
       "limitations": "部件混合模型定位二维人体，依赖预设部件结构；检测效果不能直接代表三维或全身网格恢复。",
       "sources": [
-        "https://escholarship.org/content/qt7sk1s10g/qt7sk1s10g.pdf"
+        "https://escholarship.org/content/qt7sk1s10g/qt7sk1s10g.pdf",
+        "https://faculty.cc.gatech.edu/~hic/CS7616/Papers/Yang-Ramanan-2013.pdf#page=1",
+        "https://faculty.cc.gatech.edu/~hic/CS7616/Papers/Yang-Ramanan-2013.pdf#page=3",
+        "https://faculty.cc.gatech.edu/~hic/CS7616/Papers/Yang-Ramanan-2013.pdf#page=4",
+        "https://faculty.cc.gatech.edu/~hic/CS7616/Papers/Yang-Ramanan-2013.pdf#page=5",
+        "https://faculty.cc.gatech.edu/~hic/CS7616/Papers/Yang-Ramanan-2013.pdf#page=6",
+        "https://faculty.cc.gatech.edu/~hic/CS7616/Papers/Yang-Ramanan-2013.pdf#page=8",
+        "https://github.com/yangyi02/human-pose-estimation"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "核对原始摘要与出版信息；未全文逐段复核、未复现，不将摘要中的优势外推为全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对Georgia Tech faculty-hosted IEEE TPAMI paper 的 PDF 第 1、3、4、5、6、8 页。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以列出的来源为准。实现及权重未经本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=51",
       "version": "2026 第七版（目录原文转载）",
       "venue": "TPAMI"
+    },
+    "pipeline": {
+      "overview": "Yang 与 Ramanan 把人体看成由小部件组成的树。同一身体部位可以选择不同外观类型，父子类型共同决定相邻部位的位置兼容性。",
+      "steps": [
+        {
+          "title": "建立局部部件与类型",
+          "description": "用关节点及扩展部位描述身体。对每个部件设置多个从训练标注学习的类型，用于区分常见局部朝向和外观。"
+        },
+        {
+          "title": "在图像金字塔打分",
+          "description": "提取多尺度 HOG 特征，对每个位置运行各类型的局部滤波器，得到该部件在各位置与类型的外观分数。"
+        },
+        {
+          "title": "连接树上的部件",
+          "description": "父子部件的配对分数由类型兼容性以及相对位移代价组成。每一对类型可以带不同的典型空间关系。"
+        },
+        {
+          "title": "用树动态规划传递消息",
+          "description": "从叶子向根计算各子树的最优得分，使用距离变换加速位置搜索，再从高分的根回溯各部件位置和类型。"
+        },
+        {
+          "title": "合成姿态检测",
+          "description": "在多尺度上读取高分的完整树配置，筛选重复结果，输出人体检测及对应二维关节。"
+        }
+      ],
+      "training": "以部件标注和负样本学习 HOG 模板、形变和类型兼容权重。可由父子相对位置先聚类得到类型，正文比较不同监督程度。",
+      "inference": "整张测试图建立 HOG 金字塔，树推理同时确定人物位置和部件布局，适用于整图检测。",
+      "figure_reading": "图 6 展示从局部类型组合得到的不同人体树。图 1 对照经典可旋转的整体模板和本方法的小部件组合。",
+      "sources": [
+        {
+          "label": "Figure 1 · 部件模型",
+          "url": "https://faculty.cc.gatech.edu/~hic/CS7616/Papers/Yang-Ramanan-2013.pdf#page=1"
+        },
+        {
+          "label": "相关正文 · PDF 第 3 页",
+          "url": "https://faculty.cc.gatech.edu/~hic/CS7616/Papers/Yang-Ramanan-2013.pdf#page=3"
+        },
+        {
+          "label": "相关正文 · PDF 第 4 页",
+          "url": "https://faculty.cc.gatech.edu/~hic/CS7616/Papers/Yang-Ramanan-2013.pdf#page=4"
+        },
+        {
+          "label": "相关正文 · PDF 第 5 页",
+          "url": "https://faculty.cc.gatech.edu/~hic/CS7616/Papers/Yang-Ramanan-2013.pdf#page=5"
+        },
+        {
+          "label": "相关正文 · PDF 第 6 页",
+          "url": "https://faculty.cc.gatech.edu/~hic/CS7616/Papers/Yang-Ramanan-2013.pdf#page=6"
+        },
+        {
+          "label": "Figure 6 · 原图",
+          "url": "https://faculty.cc.gatech.edu/~hic/CS7616/Papers/Yang-Ramanan-2013.pdf#page=8"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://faculty.cc.gatech.edu/~hic/CS7616/Papers/Yang-Ramanan-2013.pdf#page=8",
+      "caption": "Figure 6 · Articulated Human Detection with Flexible Mixtures of Parts",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 6 展示从局部类型组合得到的不同人体树。图 1 对照经典可旋转的整体模板和本方法的小部件组合。"
+    },
+    "code": "https://github.com/yangyi02/human-pose-estimation",
+    "code_provenance": {
+      "url": "https://github.com/yangyi02/human-pose-estimation",
+      "verified_at": "2026-11-18",
+      "basis": "论文作者项目链接的实现，含局部部件、HOG、动态规划及预训练模型。"
     }
   },
   {
@@ -35979,25 +37640,100 @@
     ],
     "analysis": {
       "problem": "三维人体估计需要大规模、同步且具有准确姿态真值的数据支持。",
-      "method": "采集 11 名受试者、四视角的同步图像、动作捕捉与深度数据，提供三维体型扫描及预测基线。",
+      "method": "Human3.6M 是以标定相机和动作捕捉同步建立的三维人体数据集。论文既说明如何获取从图像到空间关节的真值，也给出大规模人体姿态回归方案。",
       "inputs_outputs": "数据集包含图像与三维姿态真值；同时提供相关学习及评估工具。",
       "contribution": "构建含 360 万姿态的 Human3.6M 基准，为受控采集条件下的三维人体估计研究提供共同基础。",
       "limitations": "受控采集的受试者、动作和相机覆盖有限；Protocol 1/2、对齐及训练测试划分必须明确，不能外推为野外泛化。",
       "sources": [
         "https://vision.imar.ro/human3.6m/human36m_techrep.pdf",
-        "https://vision.imar.ro/human3.6m/description.php"
+        "https://vision.imar.ro/human3.6m/description.php",
+        "https://vision.imar.ro/human3.6m/pami-h36m.pdf#page=3",
+        "https://vision.imar.ro/human3.6m/pami-h36m.pdf#page=4",
+        "https://vision.imar.ro/human3.6m/pami-h36m.pdf#page=6",
+        "https://vision.imar.ro/human3.6m/pami-h36m.pdf#page=7",
+        "https://vision.imar.ro/human3.6m/pami-h36m.pdf#page=8",
+        "https://vision.imar.ro/human3.6m/pami-h36m.pdf#page=9",
+        "https://vision.imar.ro/human3.6m/description.php#tabHeader_5"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "核对原始摘要与出版信息；未全文逐段复核、未复现，不将摘要中的优势外推为全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对Human3.6M authors official site manuscript 的 PDF 第 3、4、6、7、8、9 页。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列原文为准。官方 Code and Features 标签说明其可视化、基线姿态估计、特征及学习代码。部分下载需要项目登录。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=51",
       "version": "2026 第七版（目录原文转载）",
       "venue": "TPAMI"
+    },
+    "pipeline": {
+      "overview": "Human3.6M 是以标定相机和动作捕捉同步建立的三维人体数据集。论文既说明如何获取从图像到空间关节的真值，也给出大规模人体姿态回归方案。",
+      "steps": [
+        {
+          "title": "同步采集多种观测",
+          "description": "对 11 名参与者采集四视角 RGB、飞行时间深度、动作捕捉及人体扫描，记录多类室内动作。"
+        },
+        {
+          "title": "拟合三维真值",
+          "description": "追踪身体反光标记，借骨架模型估计人体关节和姿态参数。校正不同传感器的标定与时间关系。"
+        },
+        {
+          "title": "生成可配对数据",
+          "description": "将三维关节投影至标定的 RGB 相机，配套发布相机参数、二维标注及实验所用的附加观测。"
+        },
+        {
+          "title": "切分人和动作",
+          "description": "按参与者组织训练、验证与测试，并记录各动作样本量。混合现实评测另外改变背景和外观条件。"
+        },
+        {
+          "title": "学习基准预测器",
+          "description": "以图像描述子预测三维姿态，比较核岭回归和利用关节结构的核依赖估计，并通过近似核嵌入扩展规模。"
+        }
+      ],
+      "training": "使用训练划分与配对真值拟合论文基准。比较其他模型时应明确采用的受试者划分、相机坐标和对齐方式。",
+      "inference": "基准从图像特征回归关节或姿态参数，按指定协议检验三维误差。数据集本身也可供其他检测、提升与多视角方法使用。",
+      "figure_reading": "图 2 按动作列出样本数量及传感器布置。图 3 对照 RGB、分割、深度和关节等配对输出。",
+      "sources": [
+        {
+          "label": "相关正文 · PDF 第 3 页",
+          "url": "https://vision.imar.ro/human3.6m/pami-h36m.pdf#page=3"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://vision.imar.ro/human3.6m/pami-h36m.pdf#page=4"
+        },
+        {
+          "label": "相关正文 · PDF 第 6 页",
+          "url": "https://vision.imar.ro/human3.6m/pami-h36m.pdf#page=6"
+        },
+        {
+          "label": "相关正文 · PDF 第 7 页",
+          "url": "https://vision.imar.ro/human3.6m/pami-h36m.pdf#page=7"
+        },
+        {
+          "label": "相关正文 · PDF 第 8 页",
+          "url": "https://vision.imar.ro/human3.6m/pami-h36m.pdf#page=8"
+        },
+        {
+          "label": "相关正文 · PDF 第 9 页",
+          "url": "https://vision.imar.ro/human3.6m/pami-h36m.pdf#page=9"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://vision.imar.ro/human3.6m/pami-h36m.pdf#page=4",
+      "caption": "Figure 2 · Human3.6M: Large Scale Datasets and Predictive Methods for 3D Human Sensing in Natural Environments",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 2 按动作列出样本数量及传感器布置。图 3 对照 RGB、分割、深度和关节等配对输出。"
+    },
+    "code": "https://vision.imar.ro/human3.6m/description.php#tabHeader_5",
+    "code_provenance": {
+      "url": "https://vision.imar.ro/human3.6m/description.php#tabHeader_5",
+      "verified_at": "2026-11-18",
+      "basis": "官方 Code and Features 标签说明其可视化、基线姿态估计、特征及学习代码。部分下载需要项目登录。"
     }
   },
   {
@@ -36019,26 +37755,99 @@
     ],
     "analysis": {
       "problem": "积分回归的 softmax 与期望组合会引入偏差，且热图学习收敛较慢。",
-      "method": "分析解码偏差和梯度，提出偏差补偿积分回归，加入高斯先验损失改善训练。",
+      "method": "BCIR 分析了积分姿态回归中空间 softmax 给背景分配正质量后的偏差，并用闭式修正和空间先验提高坐标估计。",
       "inputs_outputs": "人体或手部图像经网络形成关键点热图，再解码为关节坐标。",
       "contribution": "把积分回归误差分解到解码与训练环节，并在人身和手部基准检验补偿策略。",
       "limitations": "补偿积分回归偏差仍基于热图表示；需控制分辨率、目标热图及坐标解码后比较收益。",
       "sources": [
         "https://arxiv.org/abs/2301.10431",
         "https://ieeexplore.ieee.org/ielx7/34/4359286/10093110.pdf",
-        "https://www.comp.nus.edu.sg/~keruigu/"
+        "https://www.comp.nus.edu.sg/~keruigu/",
+        "https://arxiv.org/html/2301.10431v1#S3.SS2",
+        "https://arxiv.org/html/2301.10431v1#S4.SS4",
+        "https://arxiv.org/html/2301.10431v1#S5.SS1",
+        "https://arxiv.org/html/2301.10431v1#S5.SS2",
+        "https://arxiv.org/html/2301.10431v1#S5.SS3",
+        "https://arxiv.org/html/2301.10431v1#S4.F2",
+        "https://arxiv.org/html/2301.10431v1#S3.F1"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "核对原始摘要与出版信息；未全文逐段复核、未复现，不将摘要中的优势外推为全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对作者预印本 arXiv:2301.10431v1 的 S3.SS2、S4.SS4、S5.SS1、S5.SS2、S5.SS3 章节。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以列出的来源为准。实现及权重未经本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=51",
       "version": "2026 第七版（目录原文转载）",
       "venue": "TPAMI"
+    },
+    "pipeline": {
+      "overview": "BCIR 分析了积分姿态回归中空间 softmax 给背景分配正质量后的偏差，并用闭式修正和空间先验提高坐标估计。",
+      "steps": [
+        {
+          "title": "预测未归一化热图",
+          "description": "网络为每个关节产生分数图。空间 softmax 后得到用于期望解码的概率分布。"
+        },
+        {
+          "title": "识别全域背景偏移",
+          "description": "即使远离关节峰，指数归一化后的背景仍有非零概率。其质量把积分坐标向热图中心拉动。"
+        },
+        {
+          "title": "由分数估计质量",
+          "description": "使用当前隐式热图的指数和等量估计背景贡献，结合未修正坐标计算偏差。无需用真实点作为推理输入。"
+        },
+        {
+          "title": "恢复校正坐标",
+          "description": "从观测的坐标期望中去除背景质量的贡献，保持积分解码可微。训练可以把校正放进坐标损失。"
+        },
+        {
+          "title": "利用先验加快学习",
+          "description": "在主要坐标损失外，引入 Gaussian prior loss，利用以真值为中心的空间先验改善早期热图学习。"
+        }
+      ],
+      "training": "训练以坐标和高斯空间先验约束积分热图。论文也讨论用热图收缩正则来控制分布形状。",
+      "inference": "输入图像后计算关节热图及未修正期望，再用同一热图的量得到校正坐标。所有输出映回测试坐标系。",
+      "figure_reading": "图 2 显示隐式热图、原始积分点与真值之间的偏移。图 1 对比硬峰值与期望解码，可结合第 V 节定位修正发生的位置。",
+      "sources": [
+        {
+          "label": "III-B Heatmap Decoding: Max vs Expected Value",
+          "url": "https://arxiv.org/html/2301.10431v1#S3.SS2"
+        },
+        {
+          "label": "IV-D Heatmap Shrinkage Regularization",
+          "url": "https://arxiv.org/html/2301.10431v1#S4.SS4"
+        },
+        {
+          "label": "V-A Bias Definition",
+          "url": "https://arxiv.org/html/2301.10431v1#S5.SS1"
+        },
+        {
+          "label": "V-B Bias Compensation",
+          "url": "https://arxiv.org/html/2301.10431v1#S5.SS2"
+        },
+        {
+          "label": "V-C Bias Compensated Integral Regression (BCIR)",
+          "url": "https://arxiv.org/html/2301.10431v1#S5.SS3"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://arxiv.org/html/2301.10431v1#S4.F2"
+        },
+        {
+          "label": "Figure 1 · 两种解码过程",
+          "url": "https://arxiv.org/html/2301.10431v1#S3.F1"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2301.10431v1#S4.F2",
+      "caption": "Figure 2 · Bias-Compensated Integral Regression for Human Pose Estimation",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 2 显示隐式热图、原始积分点与真值之间的偏移。图 1 对比硬峰值与期望解码，可结合第 V 节定位修正发生的位置。"
     }
   },
   {
@@ -36060,24 +37869,105 @@
     ],
     "analysis": {
       "problem": "视觉和惯性传感器误差互补，需要在时空上下文中融合以估计人体姿态。",
-      "method": "多通道三维 CNN 从视觉占据及二维语义姿态学习体积特征，结合 IMU 正运动学、LSTM 与最终全连接融合。",
+      "method": "Gilbert 等将多视角视频和穿戴惯性传感器建立在同一三维坐标系内。视觉读取人体形状和关节语义，惯性分支提供连续的肢体运动证据，两路最后合并。",
       "inputs_outputs": "多视角视频和 IMU 数据输入；输出三维人体关节位置。",
       "contribution": "将视觉语义、体积结构和惯性信息联合用于无光学标记的三维姿态恢复。",
       "limitations": "需要多视角视觉与 IMU，同步、标定和传感器布置属于条件；不宜与纯单目 RGB 成绩直接比较。",
       "sources": [
-        "https://link.springer.com/article/10.1007/s11263-018-1118-y"
+        "https://link.springer.com/article/10.1007/s11263-018-1118-y",
+        "https://collomosse.com/pubs/Gilbert-IJCV-2019.pdf#page=3",
+        "https://collomosse.com/pubs/Gilbert-IJCV-2019.pdf#page=4",
+        "https://collomosse.com/pubs/Gilbert-IJCV-2019.pdf#page=5",
+        "https://collomosse.com/pubs/Gilbert-IJCV-2019.pdf#page=6",
+        "https://collomosse.com/pubs/Gilbert-IJCV-2019.pdf#page=7",
+        "https://collomosse.com/pubs/Gilbert-IJCV-2019.pdf#page=8",
+        "https://link.springer.com/article/10.1007/s11263-018-1118-y#figure-3"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "核对出版社摘要与卷期：2018 年在线，IJCV 127:381–397 的卷期为 2019；未复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对Author-hosted IJCV paper 的 PDF 第 3、4、5、6、7、8 页。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以列出的来源为准。实现及权重未经本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=51",
       "version": "2026 第七版（目录原文转载）",
       "venue": "IJCV"
+    },
+    "pipeline": {
+      "overview": "Gilbert 等将多视角视频和穿戴惯性传感器建立在同一三维坐标系内。视觉读取人体形状和关节语义，惯性分支提供连续的肢体运动证据，两路最后合并。",
+      "steps": [
+        {
+          "title": "构造多视角视觉体",
+          "description": "在同步相机上提取人体前景和二维关节热图，用相机标定把概率累积到三维网格，生成多通道概率视觉外壳。"
+        },
+        {
+          "title": "从体积回归姿态",
+          "description": "三维卷积网络处理占用与部件通道，估计人体关节。时序循环模型利用上下文改善连续帧的估计。"
+        },
+        {
+          "title": "校准并解算惯性姿态",
+          "description": "把骨段 IMU 的方向变换到统一世界坐标，经骨骼正向运动学得到关节，并用加速度及姿态先验限制解算。"
+        },
+        {
+          "title": "学习惯性时间一致性",
+          "description": "将逐时刻惯性估计进入时序网络，减小不平滑和传感误差。"
+        },
+        {
+          "title": "融合两路关节",
+          "description": "拼接由视觉与惯性得到的关节位置，用额外的全连接层学习最终三维姿态。"
+        }
+      ],
+      "training": "以同步真值关节训练视觉和时序模型，以及结合两路预测的融合层。TotalCapture 提供视频、惯性和动作捕捉配对数据。",
+      "inference": "给定标定相机及身体 IMU 的同步序列，可运行双流获得世界坐标下的三维关节。视觉流也可单独使用。",
+      "figure_reading": "图 3 画出体积 CNN、双流时序处理与全连接融合。图 2 说明两种输入来自多视角与穿戴传感器。",
+      "sources": [
+        {
+          "label": "Figure 2 · 两种采集模态",
+          "url": "https://collomosse.com/pubs/Gilbert-IJCV-2019.pdf#page=3"
+        },
+        {
+          "label": "Figure 3 · 原图",
+          "url": "https://collomosse.com/pubs/Gilbert-IJCV-2019.pdf#page=4"
+        },
+        {
+          "label": "相关正文 · PDF 第 5 页",
+          "url": "https://collomosse.com/pubs/Gilbert-IJCV-2019.pdf#page=5"
+        },
+        {
+          "label": "相关正文 · PDF 第 6 页",
+          "url": "https://collomosse.com/pubs/Gilbert-IJCV-2019.pdf#page=6"
+        },
+        {
+          "label": "相关正文 · PDF 第 7 页",
+          "url": "https://collomosse.com/pubs/Gilbert-IJCV-2019.pdf#page=7"
+        },
+        {
+          "label": "相关正文 · PDF 第 8 页",
+          "url": "https://collomosse.com/pubs/Gilbert-IJCV-2019.pdf#page=8"
+        },
+        {
+          "label": "Figure 3 · 出版商原图",
+          "url": "https://link.springer.com/article/10.1007/s11263-018-1118-y#figure-3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local"
+    },
+    "figure": {
+      "src": "assets/figures/visual-inertial-semantics-original.png",
+      "caption": "Figure 3 · 视觉体积特征与 IMU 的双流融合",
+      "alt": "Figure 3 · 视觉体积特征与 IMU 的双流融合",
+      "source": "https://link.springer.com/article/10.1007/s11263-018-1118-y#figure-3",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Andrew Gilbert, Matthew Trumble, Charles Malleson, Adrian Hilton, John Collomosse. Fusing Visual and Inertial Sensors with Semantics for 3D Human Pose Estimation, Figure 3, Springer Nature Version of Record, 2019. CC BY 4.0.",
+      "authors": "Andrew Gilbert, Matthew Trumble, Charles Malleson, Adrian Hilton, John Collomosse",
+      "figure_number": "Figure 3",
+      "version": "Springer Nature Version of Record, 2019",
+      "modifications": "下载出版商论文页面的原始全尺寸图像，未做图像编辑。"
     }
   },
   {
@@ -36099,25 +37989,88 @@
     ],
     "analysis": {
       "problem": "实时人体姿态估计需避免高维整体骨架搜索，并能逐帧重新定位。",
-      "method": "随机决策森林将深度像素分类为身体部件，再反投影并寻找空间模态，生成带置信度的关节候选。",
+      "method": "Shotton 等将三维人体姿态分解为深度图的像素级部件识别和三维关节聚合。森林能让大量像素独立提供局部部件证据。",
       "inputs_outputs": "单张深度图输入；输出三维身体关节候选位置，不依赖时间信息。",
       "contribution": "以身体部件分类作为中间表示，将三维关节定位转化为高效的像素识别与聚合问题。",
       "limitations": "深度像素分类聚合为三维关节候选，每帧独立；不包含跨帧身份和完整人体表面重建。",
       "sources": [
         "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/BodyPartRecognition.pdf",
-        "https://www.microsoft.com/en-us/research/video/real-time-human-pose-recognition-in-parts-from-single-depth-images-video/"
+        "https://www.microsoft.com/en-us/research/video/real-time-human-pose-recognition-in-parts-from-single-depth-images-video/",
+        "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/BodyPartRecognition.pdf#page=1",
+        "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/BodyPartRecognition.pdf#page=2",
+        "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/BodyPartRecognition.pdf#page=3",
+        "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/BodyPartRecognition.pdf#page=4",
+        "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/BodyPartRecognition.pdf#page=5"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "核对原始摘要与出版信息；未全文逐段复核、未复现，不将摘要中的优势外推为全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对Microsoft Research author-hosted CVPR paper 的 PDF 第 1、2、3、4、5 页。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以列出的来源为准。实现及权重未经本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "Shotton 等将三维人体姿态分解为深度图的像素级部件识别和三维关节聚合。森林能让大量像素独立提供局部部件证据。",
+      "steps": [
+        {
+          "title": "渲染配对训练图",
+          "description": "把动作捕捉姿态施加到不同体型的人体网格，渲染深度图和带颜色编码的部件标签，保留遮挡后的可见表面。"
+        },
+        {
+          "title": "计算深度比较特征",
+          "description": "对给定像素按该点深度缩放两个相对偏移，比较两个位置的深度，使局部特征适应人与相机距离。"
+        },
+        {
+          "title": "输出逐像素部件概率",
+          "description": "多棵随机决策树各自将像素送至叶节点，平均叶节点的类别分布，得到每点属于各部件的概率。"
+        },
+        {
+          "title": "用标定重投影到三维",
+          "description": "根据深度和相机参数将图像像素还原成空间点，并为属于某个部件的点按分类置信度和距离因素赋权。"
+        },
+        {
+          "title": "按部件寻找模式",
+          "description": "在加权三维点上用均值漂移找集中区域，再按学习的偏移从身体表面移动到关节内部，得到带分数的候选。"
+        }
+      ],
+      "training": "随机森林使用带逐像素标签的大规模合成深度图训练。部件的均值漂移和位置偏移参数由训练或验证数据估计。",
+      "inference": "给定一张已分离前景的深度图，独立输出人体部件和三维关节候选。连续跟踪可用这些候选初始化或恢复。",
+      "figure_reading": "图 1 自左向右示意深度输入、像素部件和三维关节。图 3、图 4 可进一步查看深度比较及森林预测。",
+      "sources": [
+        {
+          "label": "Figure 1 · 原图",
+          "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/BodyPartRecognition.pdf#page=1"
+        },
+        {
+          "label": "相关正文 · PDF 第 2 页",
+          "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/BodyPartRecognition.pdf#page=2"
+        },
+        {
+          "label": "相关正文 · PDF 第 3 页",
+          "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/BodyPartRecognition.pdf#page=3"
+        },
+        {
+          "label": "Figures 3–4 · 深度特征与随机森林",
+          "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/BodyPartRecognition.pdf#page=4"
+        },
+        {
+          "label": "相关正文 · PDF 第 5 页",
+          "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/BodyPartRecognition.pdf#page=5"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/BodyPartRecognition.pdf#page=1",
+      "caption": "Figure 1 · Real-Time Human Pose Recognition in Parts from Single Depth Images",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 1 自左向右示意深度输入、像素部件和三维关节。图 3、图 4 可进一步查看深度比较及森林预测。"
     }
   },
   {
@@ -36379,18 +38332,20 @@
     ],
     "analysis": {
       "problem": "研究如何利用从整体到局部的姿态知识辅助人体关键点定位。",
-      "method": "以分层语言描述构建外部知识库，由视觉信息匹配相关知识，再引导大语言模型定位关键点。",
+      "method": "HLanD-Pose 用外部层级语言知识辅助人体关键点定位。论文先表示整个人的姿态，再描述各身体部件，让匹配到的知识给多模态模型提供局部定位线索。",
       "inputs_outputs": "输入人体图像及匹配的姿态描述，输出二维人体关键点位置。",
       "contribution": "将显式层级姿态知识与语言模型结合，并在 COCO、MPII 和自建 Medicine Ball 数据集上评估。",
       "limitations": "关键点定位使用匹配的外部姿态描述，知识库构建与检索属于方法条件；不能把定位精度全部归因于语言模型本身。",
       "sources": [
-        "https://www.sciencedirect.com/science/article/abs/pii/S0925231225010082"
+        "https://www.sciencedirect.com/science/article/abs/pii/S0925231225010082",
+        "https://doi.org/10.1016/j.neucom.2025.130336"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对出版方摘要、引言及章节片段；未取得完整正文，未独立核对实验配置或复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_publisher_preview",
+      "evidence_scope": "已核对Neurocomputing 642 (2025), 130336 出版商公开预览中的摘要、引言、方法预览和实验数据章节片段。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "出版商的公开预览支持层级知识、图像匹配与关键点定位流程。具体训练损失、微调方式和实验配置有待核对全文。"
     },
     "ccf": {
       "tier": "C",
@@ -36405,6 +38360,51 @@
       "metrics": "引言报告 COCO AP 78.0，并称比 LocLLM 高 0.6 AP；未核对完整实验设置，暂不写入性能结论。",
       "ccf_location": "2026 CCF 目录人工智能期刊 C 类，序号 32，PDF 第 56 页。",
       "figure": "未核实图片复用授权，不下载或嵌入论文插图。"
+    },
+    "pipeline": {
+      "overview": "HLanD-Pose 用外部层级语言知识辅助人体关键点定位。论文先表示整个人的姿态，再描述各身体部件，让匹配到的知识给多模态模型提供局部定位线索。",
+      "steps": [
+        {
+          "title": "建立姿态层级",
+          "description": "把人体姿态组织为整体动作与身体部件的描述，保留从全身到局部的关系。"
+        },
+        {
+          "title": "构建场景姿态知识库",
+          "description": "为场景中的姿态保存分层描述，使视觉输入可以对应到候选的语言知识。"
+        },
+        {
+          "title": "从图像选择相关知识",
+          "description": "用输入图像中的可见信息激活知识库，取得与当前人体状态匹配的层级描述。"
+        },
+        {
+          "title": "用全身语义指导部件",
+          "description": "将检索的描述作为多模态大模型的语义条件，从整体姿态推断相关部件的配置，辅助定位指定的解剖关键点。"
+        },
+        {
+          "title": "输出并评测二维地标",
+          "description": "用 COCO、MPII 和作者的药球投掷数据评测二维定位。药球数据从 6 名参与者的视频抽帧得到 790 张图并标注骨架，可检验场景化语言知识的适用性。"
+        }
+      ],
+      "training": "准备阶段构建场景姿态和部件的语言知识；出版商预览说明知识提取与定位框架，具体微调目标和监督格式仍需对照正式正文。",
+      "inference": "推理以待估图像为输入，匹配姿态描述后由多模态模型读取部件关键点位置。预览中的主要结果面向二维定位。",
+      "figure_reading": "正式论文引言指向图 1 的从整体到部件的人体姿态语言描述。结合图与方法章节区分知识表示、知识匹配和最后的定位。",
+      "sources": [
+        {
+          "label": "出版商预览 · 摘要、引言、方法预览和实验数据章节片段",
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0925231225010082"
+        },
+        {
+          "label": "正式论文 · Figure 1",
+          "url": "https://doi.org/10.1016/j.neucom.2025.130336"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://www.sciencedirect.com/science/article/abs/pii/S0925231225010082",
+      "caption": "Figure 1 · Hierarchical language description knowledge base for LLM-based human pose estimation",
+      "note": "沿链接查看论文原图。转载许可尚未确认。正式论文引言指向图 1 的从整体到部件的人体姿态语言描述。结合图与方法章节区分知识表示、知识匹配和最后的定位。"
     }
   },
   {

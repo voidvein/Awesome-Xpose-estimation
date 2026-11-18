@@ -14,26 +14,27 @@ for p in papers:
     illustrated=any(f and f.get('src') in verified for f in figures)
     detailed=all(pipeline.get(k) for k in ['overview','steps','training','inference','figure_reading','sources'])
     status='complete' if detailed and illustrated else 'figure_pending' if detailed else 'pending'
+    figure_status='verified_local' if illustrated else pipeline.get('figure_status', 'not_yet_verified')
     entries.append({'id':p['id'],'category':p['category'],'title':p['title'],'status':status,
                     'paper_url':p['url'],'reading_level':p.get('analysis',{}).get('evidence_level',''),
-                    'figure_status':'verified_local' if illustrated else 'not_yet_verified',
+                    'figure_status':figure_status,
                     'reviewed_at':pipeline.get('reviewed_at'),
                     'figure_note':next((f.get('note','') for f in figures if f and f.get('note')),'')})
 counts={status:sum(e['status']==status for e in entries) for status in ['complete','figure_pending','pending']}
 out={'updated_at':datetime.now(timezone(timedelta(hours=8))).date().isoformat(),'total':len(entries),'counts':counts,
-     'completion_standard':'Source-checked module-level pipeline, separate training/inference, figure guide, and a verified local architecture/process figure. Summaries and applicability notes do not count.',
+     'completion_standard':'Source-checked module-level pipeline or survey classification, separate use contexts, and a figure guide. Embed paper originals when reuse permission is clear, otherwise link to the original figure or method section. Summaries alone do not count.',
      'entries':entries}
 (ROOT/'curation-progress.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 lines=['# 详情页构建进度','',
- f"更新：{out['updated_at']}。共 {len(entries)} 篇；流程说明已完成 {counts['complete']+counts['figure_pending']} 篇，其中原图已收录 {counts['complete']} 篇；待开展 {counts['pending']} 篇。",'',
- '每篇按原文核对模块顺序、数据流、训练与推理、图号及版本。只使用论文原图；转载许可未明确时只保留原图链接，不重绘。摘要与适用边界笔记不计为流程精读完成。','',
+ f"更新于 {out['updated_at']}。共 {len(entries)} 篇，已展开 {counts['complete']+counts['figure_pending']} 篇，其中 {counts['complete']} 篇嵌入原图。待展开 {counts['pending']} 篇。",'',
+ '方法页按原文说明数据流、模块、训练与推理。数据集和综述分别说明采集与评测或分类与比较。原图按许可收录，未确认许可的保留原图链接。论文无独立结构图时，链接至对应的算法或方法正文。已在各页注明可核对的原文范围。','',
  '全量逐篇队列见 [curation-progress.json](curation-progress.json)。本表可用 `python scripts/curation_progress.py` 从当前数据重新生成。','']
-for status,label in [('complete','流程与原图均已完成'),('figure_pending','流程已完成，原图待收录')]:
+for status,label in [('complete','已展开并嵌入原图'),('figure_pending','已展开并提供原文链接')]:
  lines.extend(['## '+label,''])
  for e in entries:
   if e['status']==status:lines.append('- ['+e['title']+'](https://voidvein.github.io/Awesome-Xpose-estimation/#paper='+e['id']+')')
  lines.append('')
-lines.extend(['## 后续队列','',
- '其余条目保留在全量 JSON 队列中。优先复用已取得正文的条目，再按 Head、Hand、Human 分批推进。数据集与综述按实际数据构建/研究分类流程组织，不虚构不存在的网络结构。',''])
+if counts['pending']:
+ lines.extend(['## 待展开条目','','查看全量 JSON 队列中的待展开条目。',''])
 (ROOT/'CURATION.md').write_text('\n'.join(lines),encoding='utf-8')
 print(json.dumps({'total':len(entries),**counts}))

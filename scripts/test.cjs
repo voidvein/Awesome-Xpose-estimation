@@ -54,6 +54,8 @@ assert.equal(evidence.evidence_label,'摘要级核验');assert.equal(evidence.ev
 console.log('PASS: per-paper evidence scope, abstract/full-text labels and verification notes.');
 
 assert.equal(paperAnalysis({analysis:{evidence_level:'primary_abstract_and_targeted_fulltext'}}).evidence_label,'摘要与相关正文已核对');
+assert.equal(paperAnalysis({analysis:{evidence_level:'primary_publisher_preview'}}).evidence_label,'出版商预览已核对');
+assert.equal(paperAnalysis({analysis:{evidence_level:'primary_project_and_implementation'}}).evidence_label,'作者项目与实现已核对');
 assert.equal(paperAnalysis({analysis:{evidence_level:'unknown_technical_enum'}}).evidence_label,'核验范围见说明');
 for(const paper of papers){const label=paperAnalysis(paper).evidence_label;assert.ok(!/[a-z_]/i.test(label),'Evidence labels must be human-readable Chinese');}
 console.log('PASS: all catalog evidence-level labels localized; unknown enum safely generalized.');
@@ -137,6 +139,11 @@ assert.equal(paperPipeline({pipeline:{kind:'survey'}}).kind,'survey');
 assert.equal(paperPipeline({pipeline:{steps:[{title:'one',description:'text'}],sources:[{url:'https://example.org'}]}}).available,false);
 assert.equal(paperPipeline({pipeline:{steps:[{title:'one',description:'text'},{title:'two',description:'text'}],sources:[{url:'javascript:alert(1)'}]}}).available,false);
 const pipelinePapers=papers.filter(p=>p.pipeline);
+const verifiedAuthorPdf=/^https:\/\/(?:faculty\.cc\.gatech\.edu\/~hic\/CS7616\/Papers\/Yang-Ramanan-2013|www\.cs\.toronto\.edu\/~fleet\/research\/Papers\/handTrackerPAMI|www\.ece\.ualberta\.ca\/~lcheng5\/papers\/XuEtAl_IJCV16|collomosse\.com\/pubs\/Gilbert-IJCV-2019|vision\.imar\.ro\/human3\.6m\/pami-h36m|www\.microsoft\.com\/en-us\/research\/wp-content\/uploads\/2016\/(?:02\/BodyPartRecognition|04\/iccv_2015_camready))\.pdf#page=\d+$/;
+const publisherPreviews=new Map([
+ ['hland-pose',new Set(['https://www.sciencedirect.com/science/article/abs/pii/S0925231225010082','https://doi.org/10.1016/j.neucom.2025.130336'])],
+ ['hand-survey-cameras-2019',new Set(['https://www.sciencedirect.com/science/article/abs/pii/S0031320319301724','https://doi.org/10.1016/j.patcog.2019.04.026'])],
+]);
 for(const p of pipelinePapers){
  const pipeline=paperPipeline(p);
  assert.ok(pipeline.available&&pipeline.overview&&pipeline.training&&pipeline.inference&&pipeline.figure_reading,`${p.id}: complete pipeline`);
@@ -145,12 +152,15 @@ for(const p of pipelinePapers){
  assert.ok(pipeline.sources.every(s=>
   /^https:\/\/arxiv\.org\/html\/\d{4}\.\d{4,5}v\d+#\S+$/.test(s.url)||
   /^https:\/\/openaccess\.thecvf\.com\/content[^#]+\/papers\/[^#]+\.pdf#page=\d+$/.test(s.url)||
+  (p.id==='handy'&&s.url==='https://openaccess.thecvf.com/content/CVPR2023/supplemental/Potamias_Handy_Towards_a_CVPR_2023_supplemental.pdf#page=1')||
   /^https:\/\/www\.cs\.uic\.edu\/~tangw\/files\/2025_PR_ZhimingZou\.pdf#page=\d+$/.test(s.url)||
-  /^https:\/\/link\.springer\.com\/article\/10\.1007\/(?:s42979-023-01796-z|s10462-024-10936-7)#(?:Sec\d+|figure-\d+)$/.test(s.url)||
+  /^https:\/\/link\.springer\.com\/article\/10\.1007\/(?:s42979-023-01796-z|s10462-024-10936-7|s11263-023-01856-0|s11263-018-1118-y)#(?:Sec\d+|figure-\d+)$/.test(s.url)||
   /^https:\/\/link\.springer\.com\/content\/pdf\/10\.1007\/s11263-012-0549-0\.pdf#page=\d+$/.test(s.url)||
   /^https:\/\/people\.ict\.usc\.edu\/~gratch\/CSCI534\/Old-Readings\/Head%20Pose%20estimation\.pdf#page=\d+$/.test(s.url)||
   (p.id==='headdiff'&&/^https:\/\/(?:ieeexplore\.ieee\.org\/document\/10462910|www\.nxu\.edu\.cn\/(?:info\/1590\/31709\.htm|__local\/3\/AF\/BD\/10E5B14A0EC54DD6CA74765A293_AF945962_61CB5\.png\?e=\.png))$/.test(s.url))||
-  (p.id==='quatnet'&&/^https:\/\/(?:ieeexplore\.ieee\.org\/document\/8444061(?:\/figures#fig3)?|scholar\.nycu\.edu\.tw\/zh\/publications\/quatnet-quaternion-based-head-pose-estimation-with-multiregressio\/)$/.test(s.url))
+  (p.id==='quatnet'&&/^https:\/\/(?:ieeexplore\.ieee\.org\/document\/8444061(?:\/figures#fig3)?|scholar\.nycu\.edu\.tw\/zh\/publications\/quatnet-quaternion-based-head-pose-estimation-with-multiregressio\/)$/.test(s.url))||
+  verifiedAuthorPdf.test(s.url)||publisherPreviews.get(p.id)?.has(s.url)||
+  (p.id==='a2j-transformer-plus'&&/^https:\/\/(?:changlongjianggit\.github\.io\/A2J-Transformer-Plus\/(?:static\/images\/method_figure[23]\.png)?|github\.com\/ChanglongJiangGit\/A2J-Transformer-Plus\/blob\/main\/main\/model\.py#L188-L272)$/.test(s.url))
  ),`${p.id}: versioned section or primary PDF page anchors`);
 }
 assert.ok(pipelinePapers.length>=6);
@@ -173,8 +183,8 @@ assert.equal(progress.counts.complete+progress.counts.figure_pending,pipelinePap
 assert.equal(Object.values(progress.counts).reduce((a,b)=>a+b,0),papers.length);
 for(const entry of progress.entries){
  const p=papers.find(p=>p.id===entry.id);assert.ok(p);
- if(entry.status==='complete')assert.ok(p.pipeline&&paperFigures(p).some(f=>f.src));
- if(entry.status==='figure_pending')assert.ok(p.pipeline&&!paperFigures(p).some(f=>f.src));
+ if(entry.status==='complete')assert.ok(p.pipeline&&entry.figure_status==='verified_local'&&paperFigures(p).some(f=>f.src));
+ if(entry.status==='figure_pending')assert.ok(p.pipeline&&entry.figure_status===p.pipeline.figure_status&&!paperFigures(p).some(f=>f.src));
  if(entry.status==='pending')assert.ok(!p.pipeline);
 }
 console.log('PASS: full catalogue queue matches actual pipeline and original-figure completion; pending pages are never counted as complete.');

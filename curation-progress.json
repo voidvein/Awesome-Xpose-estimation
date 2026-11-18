@@ -2,11 +2,11 @@
   "updated_at": "2026-11-18",
   "total": 371,
   "counts": {
-    "complete": 63,
-    "figure_pending": 281,
-    "pending": 27
+    "complete": 66,
+    "figure_pending": 305,
+    "pending": 0
   },
-  "completion_standard": "Source-checked module-level pipeline, separate training/inference, figure guide, and a verified local architecture/process figure. Summaries and applicability notes do not count.",
+  "completion_standard": "Source-checked module-level pipeline or survey classification, separate use contexts, and a figure guide. Embed paper originals when reuse permission is clear, otherwise link to the original figure or method section. Summaries alone do not count.",
   "entries": [
     {
       "id": "facelift",
@@ -37,7 +37,7 @@
       "status": "figure_pending",
       "paper_url": "https://doi.org/10.1109/TIP.2024.3372457",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "沿链接查看论文原图。转载许可尚未确认。论文图 2 并列展示训练时的加噪、循环近邻条件和反向去噪，并给出测试时的直接采样路径。"
     },
@@ -59,7 +59,7 @@
       "status": "figure_pending",
       "paper_url": "https://onlinelibrary.wiley.com/doi/10.1111/cgf.15126",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
@@ -70,7 +70,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2025/html/Tourani_Unsupervised_Discovery_of_Facial_Landmarks_and_Head_Pose_CVPR_2025_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
@@ -81,7 +81,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2025/html/Narayan_FaceXFormer_A_Unified_Transformer_for_Facial_Analysis_ICCV_2025_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
@@ -92,7 +92,7 @@
       "status": "figure_pending",
       "paper_url": "https://www.sciencedirect.com/science/article/pii/S0031320325000536",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 的上方是条件重建，下方是规范点变换，多任务网络把两条监督连接起来。图中头部轮廓是规范点示意。"
     },
@@ -103,7 +103,7 @@
       "status": "figure_pending",
       "paper_url": "https://doi.org/10.1109/TPAMI.2025.3631642",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
@@ -114,7 +114,7 @@
       "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2604.10106",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
@@ -125,7 +125,7 @@
       "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2611.03283",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
@@ -147,7 +147,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2013/html/Xiong_Supervised_Descent_Method_2013_CVPR_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
@@ -158,7 +158,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2014/html/Kazemi_One_Millisecond_Face_2014_CVPR_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "architecture_not_located",
       "reviewed_at": "2026-11-18",
       "figure_note": "主文未提供独立完整结构图，保留原始算法流程链接；阶段结果图不作为树结构图。"
     },
@@ -169,7 +169,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2014/html/Ren_Face_Alignment_at_2014_CVPR_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
@@ -180,7 +180,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2016/html/Zhu_Face_Alignment_Across_CVPR_2016_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
@@ -191,7 +191,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2017/html/Bulat_How_Far_Are_ICCV_2017_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
@@ -202,7 +202,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2018_workshops/w41/html/Ruiz_Fine-Grained_Head_Pose_CVPR_2018_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
@@ -213,7 +213,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Wu_Look_at_Boundary_CVPR_2018_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原论文图2位于PDF第3页；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -224,7 +224,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Feng_Wing_Loss_for_CVPR_2018_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
@@ -246,7 +246,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2019/html/Yang_FSA-Net_Learning_Fine-Grained_Structure_Aggregation_for_Head_Pose_Estimation_From_CVPR_2019_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
@@ -257,7 +257,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ICCV_2019/html/Wang_Adaptive_Wing_Loss_for_Robust_Face_Alignment_via_Heatmap_Regression_ICCV_2019_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
@@ -268,7 +268,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Dapogny_DeCaFA_Deep_Convolutional_Cascade_for_Face_Alignment_in_the_Wild_ICCV_2019_paper.pdf",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
@@ -279,7 +279,7 @@
       "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/1902.10859",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
@@ -290,7 +290,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2020/html/Kumar_LUVLi_Face_Alignment_Estimating_Landmarks_Location_Uncertainty_and_Visibility_Likelihood_CVPR_2020_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
@@ -301,7 +301,7 @@
       "status": "figure_pending",
       "paper_url": "https://github.com/cleardusk/3DDFA_V2",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
@@ -312,7 +312,7 @@
       "status": "figure_pending",
       "paper_url": "https://bmva-archive.org.uk/bmvc/2020/conference/papers/paper_0907.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
@@ -323,7 +323,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Albiero_img2pose_Face_Alignment_and_Detection_via_6DoF_Face_Pose_Estimation_CVPR_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
@@ -334,7 +334,7 @@
       "status": "figure_pending",
       "paper_url": "https://doi.org/10.1007/s11263-021-01521-4",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
@@ -345,7 +345,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Huang_ADNet_Leveraging_Error-Bias_Towards_Normal_Direction_in_Face_Alignment_ICCV_2021_paper.pdf",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
@@ -356,7 +356,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021W/MFR/html/Lan_Revisting_Quantization_Error_in_Face_Alignment_ICCVW_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
@@ -378,7 +378,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/WACV2022/papers/Cantarini_HHP-Net_A_Light_Heteroscedastic_Neural_Network_for_Head_Pose_Estimation_WACV_2022_paper.pdf",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
@@ -411,7 +411,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Zhang_TokenHPE_Learning_Orientation_Tokens_for_Efficient_Head_Pose_Estimation_via_CVPR_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
@@ -455,7 +455,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Cheng_HandDiff_3D_Hand_Pose_Estimation_with_Diffusion_on_Image-Point_Cloud_CVPR_2024_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位原论文图示；当前未核实可再分发许可，按要求仅保留原图链接，不复制、不重绘。"
     },
@@ -466,7 +466,7 @@
       "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2303.02862",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -488,7 +488,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2025/html/Chen_HandOS_3D_Hand_Reconstruction_in_One_Stage_CVPR_2025_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位原论文图示；当前未核实可再分发许可，按要求仅保留原图链接，不复制、不重绘。"
     },
@@ -499,7 +499,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2025/papers/Zhang_HaWoR_World-Space_Hand_Motion_Reconstruction_from_Egocentric_Videos_CVPR_2025_paper.pdf",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位原论文图示；当前未核实可再分发许可，按要求仅保留原图链接，不复制、不重绘。"
     },
@@ -510,7 +510,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2025/html/Zhang_Diffusion-based_3D_Hand_Motion_Recovery_with_Intuitive_Physics_ICCV_2025_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -518,11 +518,11 @@
       "id": "a2j-transformer-plus",
       "category": "Hand",
       "title": "3D Hand Pose Estimation via Articulated Anchor-to-Joint 3D Local Regressors",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://doi.org/10.1109/TPAMI.2025.3609907",
-      "reading_level": "primary_project_and_author_institution_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_project_and_implementation",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
@@ -543,7 +543,7 @@
       "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2609.12559",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -576,7 +576,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2017/html/Zimmermann_Learning_to_Estimate_ICCV_2017_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -587,7 +587,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Moon_V2V-PoseNet_Voxel-to-Voxel_Prediction_CVPR_2018_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -598,7 +598,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Ge_Hand_PointNet_3D_CVPR_2018_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -609,7 +609,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ECCV_2018/html/Umar_Iqbal_Hand_Pose_Estimation_ECCV_2018_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -620,7 +620,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Wan_Dense_3D_Regression_CVPR_2018_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -631,7 +631,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ICCV_2019/html/Zimmermann_FreiHAND_A_Dataset_for_Markerless_Capture_of_Hand_Pose_and_ICCV_2019_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -642,7 +642,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2019/html/Ge_3D_Hand_Shape_and_Pose_Estimation_From_a_Single_RGB_CVPR_2019_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -653,7 +653,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2019/html/Boukhayma_3D_Hand_Shape_and_Pose_From_Images_in_the_Wild_CVPR_2019_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -664,7 +664,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2020/html/Hampali_HOnnotate_A_Method_for_3D_Annotation_of_Hand_and_Object_CVPR_2020_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -675,7 +675,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2020/html/Kulon_Weakly-Supervised_Mesh-Convolutional_Hand_Reconstruction_in_the_Wild_CVPR_2020_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -686,7 +686,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2020/html/Zhou_Monocular_Real-Time_Hand_Shape_and_Motion_Capture_Using_Multi-Modal_Data_CVPR_2020_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -697,7 +697,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Cheng_HandFoldingNet_A_3D_Hand_Pose_Estimation_Network_Using_Multiscale-Feature_Guided_ICCV_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -708,7 +708,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Chen_I2UV-HandNet_Image-to-UV_Prediction_Network_for_Accurate_and_High-Fidelity_3D_Hand_ICCV_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -719,7 +719,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Lin_Mesh_Graphormer_ICCV_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -730,7 +730,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Lin_End-to-End_Human_Pose_and_Mesh_Reconstruction_with_Transformers_CVPR_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -752,7 +752,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Park_HandOccNet_Occlusion-Robust_3D_Hand_Mesh_Estimation_Network_CVPR_2022_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -774,7 +774,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Ren_Mining_Multi-View_Information_A_Strong_Self-Supervised_Framework_for_Depth-Based_3D_CVPR_2022_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -785,9 +785,9 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Potamias_Handy_Towards_a_High_Fidelity_3D_Hand_Shape_and_Appearance_CVPR_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
-      "figure_note": "已核对模型构建正文；当前未定位到完整网络总图，暂留正文链接。原文形状/纹理结果图不冒充结构图。"
+      "figure_note": "沿链接查看原图。转载许可尚未确认。主文第 3 节说明高保真形状及外观模型如何构建。会议补充材料图 1 对应下游单图手重建的 ResNet、参数分支与渲染流程。"
     },
     {
       "id": "deformer-hand",
@@ -796,7 +796,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Fu_Deformer_Dynamic_Fusion_Transformer_for_Robust_Hand_Pose_Estimation_ICCV_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -807,7 +807,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/WACV2023/html/Aboukhadra_THOR-Net_End-to-End_Graformer-Based_Realistic_Two_Hands_and_Object_Reconstruction_With_WACV_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -818,7 +818,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/WACV2023/html/Wang_Interacting_Hand-Object_Pose_Estimation_via_Dense_Mutual_Attention_WACV_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -829,7 +829,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/WACV2024/html/Duran_HMP_Hand_Motion_Priors_for_Pose_and_Shape_Estimation_From_WACV_2024_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -840,7 +840,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2017/html/Simon_Hand_Keypoint_Detection_CVPR_2017_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -851,7 +851,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ICCV_2017_workshops/w11/html/Oberweger_DeepPrior_Improving_Fast_ICCV_2017_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -862,7 +862,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2015/html/Supancic_Depth-Based_Hand_Pose_ICCV_2015_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文（PDF 第 5 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 4 解释体素 Hamming 距离如何转为二维投影距离；同页图 5 比较二维窗口与三维体积。两图是基线原理示意，整篇的核心还包括数据与评测协议。"
     },
@@ -873,7 +873,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2015/html/Sun_Cascaded_Hand_Pose_2015_CVPR_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -884,7 +884,7 @@
       "status": "figure_pending",
       "paper_url": "https://mano.is.tue.mpg.de/",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -895,7 +895,7 @@
       "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2008.09309",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -906,7 +906,7 @@
       "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2006.10214",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
@@ -917,7 +917,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Garcia-Hernando_First-Person_Hand_Action_CVPR_2018_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -928,7 +928,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Ng_Body2Hands_Learning_To_Infer_3D_Hands_From_Conversational_Gesture_Body_CVPR_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -950,7 +950,7 @@
       "status": "figure_pending",
       "paper_url": "https://www.ecva.net/papers/eccv_2024/papers_ECCV/html/529_ECCV_2024_paper.php",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "architecture_not_located",
       "reviewed_at": "2026-11-18",
       "figure_note": "该版本未定位单独的完整网络架构原图；先提供方法正文，未以结果图或标注图替代。"
     },
@@ -961,7 +961,7 @@
       "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2407.08634",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位原论文图示；当前未核实可再分发许可，按要求仅保留原图链接，不复制、不重绘。"
     },
@@ -972,7 +972,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/WACV2024/html/Mehraban_MotionAGFormer_Enhancing_3D_Human_Pose_Estimation_With_a_Transformer-GCNFormer_Network_WACV_2024_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位原论文图示；当前未核实可再分发许可，按要求仅保留原图链接，不复制、不重绘。"
     },
@@ -1005,7 +1005,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2025/html/Purkrabek_ProbPose_A_Probabilistic_Approach_to_2D_Human_Pose_Estimation_CVPR_2025_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原文版本明确标记 CC BY-NC-SA 4.0；本次先保留图 4 的双窗口表示示意链接，尚未收录本地图像。它不是完整骨干网络结构图。"
     },
@@ -1016,7 +1016,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2025/html/Xu_DynPose_Largely_Improving_the_Efficiency_of_Human_Pose_Estimation_by_CVPR_2025_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
@@ -1027,7 +1027,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2025/html/Hao_PersPose_3D_Human_Pose_Estimation_with_Perspective_Encoding_and_Perspective_ICCV_2025_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
@@ -1049,7 +1049,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2026/html/Dai_Egocentric_Visibility-Aware_Human_Pose_Estimation_CVPR_2026_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
@@ -1060,7 +1060,7 @@
       "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2611.08954",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
@@ -1071,7 +1071,7 @@
       "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/1312.4659",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
@@ -1082,7 +1082,7 @@
       "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/1602.00134",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
@@ -1093,7 +1093,7 @@
       "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/1603.06937",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
@@ -1104,7 +1104,7 @@
       "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/1611.08050",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
@@ -1115,7 +1115,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ECCV_2018/papers/Bin_Xiao_Simple_Baselines_for_ECCV_2018_paper.pdf",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
@@ -1126,7 +1126,7 @@
       "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/1902.09212",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位原论文图示；当前未核实可再分发许可，按要求仅保留原图链接，不复制、不重绘。"
     },
@@ -1137,7 +1137,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2020/html/Cheng_HigherHRNet_Scale-Aware_Representation_Learning_for_Bottom-Up_Human_Pose_Estimation_CVPR_2020_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
@@ -1148,7 +1148,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Geng_Bottom-Up_Human_Pose_Estimation_via_Disentangled_Keypoint_Regression_CVPR_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
@@ -1159,7 +1159,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Li_TokenPose_Learning_Keypoint_Tokens_for_Human_Pose_Estimation_ICCV_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
@@ -1170,7 +1170,7 @@
       "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2204.12484",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位原论文图示；当前未核实可再分发许可，按要求仅保留原图链接，不复制、不重绘。"
     },
@@ -1181,7 +1181,7 @@
       "status": "figure_pending",
       "paper_url": "https://www.ecva.net/papers/eccv_2022/papers_ECCV/html/4591_ECCV_2022_paper.php",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位原论文图示；当前未核实可再分发许可，按要求仅保留原图链接，不复制、不重绘。"
     },
@@ -1203,7 +1203,7 @@
       "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/1705.03098",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
@@ -1214,7 +1214,7 @@
       "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/1811.11742",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位原论文图示；当前未核实可再分发许可，按要求仅保留原图链接，不复制、不重绘。"
     },
@@ -1225,7 +1225,7 @@
       "status": "figure_pending",
       "paper_url": "https://ieeexplore.ieee.org/abstract/document/9710244",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位原论文图示；当前未核实可再分发许可，按要求仅保留原图链接，不复制、不重绘。"
     },
@@ -1236,7 +1236,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Zhang_MixSTE_Seq2seq_Mixed_Spatio-Temporal_Encoder_for_3D_Human_Pose_Estimation_CVPR_2022_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
@@ -1247,7 +1247,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Zhao_PoseFormerV2_Exploring_Frequency_Domain_for_Efficient_and_Robust_3D_Human_CVPR_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
@@ -1269,7 +1269,7 @@
       "status": "figure_pending",
       "paper_url": "https://smplify.is.tuebingen.mpg.de/",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
@@ -1280,7 +1280,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Kanazawa_End-to-End_Recovery_of_CVPR_2018_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
@@ -1291,7 +1291,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ICCV_2019/html/Kolotouros_Learning_to_Reconstruct_3D_Human_Pose_and_Shape_via_Model-Fitting_ICCV_2019_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
@@ -1302,7 +1302,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2020/html/Kocabas_VIBE_Video_Inference_for_Human_Body_Pose_and_Shape_Estimation_CVPR_2020_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
@@ -1313,7 +1313,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Kocabas_PARE_Part_Attention_Regressor_for_3D_Human_Body_Estimation_ICCV_2021_paper.pdf",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位原论文图示；当前未核实可再分发许可，按要求仅保留原图链接，不复制、不重绘。"
     },
@@ -1324,7 +1324,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Li_HybrIK_A_Hybrid_Analytical-Neural_Inverse_Kinematics_Solution_for_3D_Human_CVPR_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
@@ -1335,7 +1335,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Sun_Monocular_One-Stage_Regression_of_Multiple_3D_People_ICCV_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
@@ -1357,7 +1357,7 @@
       "status": "figure_pending",
       "paper_url": "https://smpl-x.is.tuebingen.mpg.de/",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "architecture_not_located",
       "reviewed_at": "2026-11-18",
       "figure_note": "本次未定位可准确代表整体流程的独立架构图，保留原文方法章节链接。"
     },
@@ -1368,7 +1368,7 @@
       "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2008.09062",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
@@ -1379,7 +1379,7 @@
       "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2105.05301",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
@@ -1390,7 +1390,7 @@
       "status": "figure_pending",
       "paper_url": "https://www.ecva.net/papers/eccv_2020/papers_ECCV/html/768_ECCV_2020_paper.php",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
@@ -1412,7 +1412,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2014/html/Smith_Nonparametric_Context_Modeling_2014_CVPR_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
@@ -1423,7 +1423,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2014/html/Xing_Towards_Multi-view_and_2014_CVPR_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
@@ -1434,7 +1434,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2014/html/Geng_Head_Pose_Estimation_2014_CVPR_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
@@ -1445,7 +1445,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2014/html/Tzimiropoulos_Gauss-Newton_Deformable_Part_2014_CVPR_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
@@ -1456,7 +1456,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2014/html/Asthana_Incremental_Face_Alignment_2014_CVPR_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
@@ -1467,7 +1467,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2015/html/Tzimiropoulos_Project-Out_Cascaded_Regression_2015_CVPR_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
@@ -1478,7 +1478,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2015/html/Lee_Face_Alignment_Using_2015_CVPR_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
@@ -1489,7 +1489,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2015/html/Gilani_Shape-Based_Automatic_Detection_2015_CVPR_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
@@ -1500,7 +1500,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2015/html/Papazov_Real-Time_3D_Head_2015_CVPR_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
@@ -1511,7 +1511,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2015/html/Zhu_Face_Alignment_by_2015_CVPR_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
@@ -1522,7 +1522,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2016/html/Wu_Constrained_Joint_Cascade_CVPR_2016_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
@@ -1533,7 +1533,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2016/html/Zhu_Unconstrained_Face_Alignment_CVPR_2016_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
@@ -1544,7 +1544,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2016/html/Zhang_Occlusion-Free_Face_Alignment_CVPR_2016_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图（PDF 第 2 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 读整体交替流程，PDF 第 4 页图 2 读部件重建。这里的 deep regression 主要处理 SIFT，不能把它画成从整幅像素直接回归的现代 CNN。"
     },
@@ -1555,7 +1555,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2016/html/Trigeorgis_Mnemonic_Descent_Method_CVPR_2016_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图（PDF 第 4 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 中反复出现的局部图像块来自同一张图的不同形状估计；横向箭头表示下降历史，而非视频时序。"
     },
@@ -1566,7 +1566,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2016/html/Jourabloo_Large-Pose_Face_Alignment_CVPR_2016_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 展示三维模型、特征与级联拟合闭环；PDF 第 4 页图 3 给出 CNN。观察输入块如何依赖当前三维估计，而不只是查看网络层数。"
     },
@@ -1577,7 +1577,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2017/html/Lv_A_Deep_Regression_CVPR_2017_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图（PDF 第 2 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 按全局重初始化、全局回归、局部重初始化、局部回归阅读；特别注意输出需要逆变换，轮廓也没有独立局部支路。"
     },
@@ -1588,7 +1588,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2017/html/Wu_Simultaneous_Facial_Landmark_CVPR_2017_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 3 对应单轮的三个环节，PDF 第 4 页算法 1 给出循环；可见性先影响二维回归，再影响三维拟合。"
     },
@@ -1599,7 +1599,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2013/html/Yu_Pose-Free_Facial_Landmark_2013_ICCV_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 展示三维参考形状的初始化，不是完整网络结构图；完整方法需连同 §3–4 的部件检测、均值漂移和主动轮廓顺序阅读。"
     },
@@ -1610,7 +1610,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2013/html/Yan_No_Matter_Where_2013_ICCV_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 依次对应跟踪、外观特征、任务关系和分类，PDF 第 5 页算法 1 是训练求解器；训练迭代不是每次预测都要重新运行。"
     },
@@ -1621,7 +1621,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2013/html/Zhao_Cascaded_Shape_Space_2013_ICCV_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图（PDF 第 2 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 是级联形状空间裁剪的整体流程，第 4 页图 4 进一步解释单轮裁剪；收缩的是关键点搜索邻域，不是深度网络参数。"
     },
@@ -1632,7 +1632,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2013/html/Zhou_Exemplar-Based_Graph_Matching_2013_ICCV_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 明确区分 Offline 的局部检测器训练与在线 Learning/Matching；后两项才是 EGM 的主要新增部分。"
     },
@@ -1643,7 +1643,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2013/html/Burgos-Artizzu_Robust_Face_Landmark_2013_ICCV_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图（PDF 第 4 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 3 对照两种形状索引方式，属于关键特征示意；PDF 第 2 页算法 1 给出级联基本循环，第 4 页图 4 展示重启依据。论文未提供现代 CNN 式架构图。"
     },
@@ -1654,7 +1654,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2015/html/Lee_Fast_and_Accurate_ICCV_2015_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图（PDF 第 1 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 读滤波、压缩与森林的总体联系，PDF 第 3 页图 2 看滤波器，第 4 页图 3 看单个节点如何组合颜色和梯度证据。"
     },
@@ -1665,7 +1665,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2015/html/Meyer_Robust_Model-Based_3D_ICCV_2015_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 仅展示深度头部检测，不是完整配准架构图；PSO、ICP 和形状适配流程应对照 §3.2（PDF 第 3–4 页）阅读，暂不把检测结果图冒充网络结构。"
     },
@@ -1676,7 +1676,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2015/html/Wu_Robust_Facial_Landmark_ICCV_2015_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 3 是单轮可见性—点位更新；第 5 页图 4 是遮挡标签自编码器。应与重建人脸外观的去污染自编码器方法区分。"
     },
@@ -1687,7 +1687,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2015/html/Jourabloo_Pose-Invariant_3D_Face_ICCV_2015_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 的三维扫描位于离线建模部分，投影回归器与形状回归器才是级联推理主体；绿色与红色法向箭头解释可见性的计算。"
     },
@@ -1698,7 +1698,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2015/html/Zhang_Leveraging_Datasets_With_ICCV_2015_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图（PDF 第 1 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 展示不同标注规范如何参与统一学习，第 4 页图 2 解释稀疏补全。deep regression 的输入为 SIFT，不能直接改写成整图 CNN 训练。"
     },
@@ -1709,7 +1709,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2015/html/Hsu_Regressive_Tree_Structured_ICCV_2015_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图（PDF 第 4 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 标明粗模型、精模型与回归点的分工，属于点集配置示意；第 4 页图 3 进一步标出反向回归的参考点，没有现代神经网络层结构。"
     },
@@ -1720,7 +1720,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2015/html/Peng_PIEFA_Personalized_Incremental_ICCV_2015_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 的 a–f 对应采样、并行定位、分解、恢复、评价和个性化；低秩约束发生在同帧候选及可信历史编码之间，不是简单对所有历史图像求平均。"
     },
@@ -1731,7 +1731,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2017/html/Xiao_Recurrent_3D-2D_Dual_ICCV_2017_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 上方是三维初始化，下方为 PE-LSTM/C-LSTM 循环；沿投影、补偿、重新取特征的闭环阅读，注意两个模块并非重复预测相同变量。"
     },
@@ -1742,7 +1742,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2017/html/Jourabloo_Pose-Invariant_Face_Alignment_ICCV_2017_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 展示连接的 visualization blocks，第 4 页图 3 展示块内的特征与参数两条路径。single CNN 仍含多次参数更新，并不表示一次线性回归。"
     },
@@ -1753,7 +1753,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2017/html/Bulat_Binarized_Convolutional_Landmark_ICCV_2017_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图（PDF 第 6 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。第 6 页图 4 依次比较原 bottleneck 与若干变体，最终设计见子图 e；正文 §4.5 解释层级多尺度及梯度路径，图并非多个独立阶段必须顺序执行。"
     },
@@ -1764,7 +1764,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2017/html/Khan_Synergy_Between_Face_ICCV_2017_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图（PDF 第 1 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 展示检测与跟踪如何迭代达成共识；§3.3 是解析推导，§3.4 是判别式实现，不能把前者每轮重算 Jacobian 的全部成本套到最终模型上。"
     },
@@ -1775,7 +1775,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Xia_Sparse_Local_Patch_Transformer_for_Robust_Face_Alignment_and_Landmarks_CVPR_2022_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 左侧是局部块采样，中部为查询和结构编码，右侧关系层按自注意力、交叉注意力、前馈网络阅读；局部位置必须映回支持块的全局坐标。"
     },
@@ -1786,7 +1786,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Zhu_Occlusion-Robust_Face_Alignment_Using_a_Viewpoint-Invariant_Hierarchical_Network_Architecture_CVPR_2022_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 3 读 PHM 向上组合与 WHM 向下解析，第 4 页图 4 解释五级语义层级。跳接还会传递对应低层特征，不能只画成单条全连接链。"
     },
@@ -1797,7 +1797,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Li_DSFNet_Dual_Space_Fusion_Network_for_Occlusion-Robust_3D_Dense_Face_CVPR_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 3 的 a、b、c 是模型空间、图像空间及融合三部分；第 5 页图 5 补充采样与 PointNet 后处理。四类图中深度是预测的相对深度，不是输入扫描。"
     },
@@ -1808,7 +1808,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Zeng_3D-Aware_Facial_Landmark_Detection_via_Multi-View_Consistent_Training_on_Synthetic_CVPR_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 4 的不同颜色区分直接预测、三角化点和其他视角上的重投影。图 3 给出训练多视图及其伪标签的生成顺序。"
     },
@@ -1819,7 +1819,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Liang_Generalizable_Face_Landmarking_Guided_by_Conditional_Face_Warping_CVPR_2024_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 显示 SLPT 如何参与构造条件变形。Algorithm 1 给出交替优化步骤，图 3 对照真实照片、目标风格脸和变形后的形状。"
     },
@@ -1841,7 +1841,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Zhu_Improving_Robustness_of_Facial_Landmark_Detection_by_Defending_Against_Adversarial_ICCV_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 2 展示训练分支怎样把变体及质量权重送到检测器，并由检测反馈形成闭环。"
     },
@@ -1852,7 +1852,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2025/html/Zhu_PossLoss_A_Reliable_and_Sensitive_Facial_Landmark_Detection_Loss_Function_ICCV_2025_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 4 展示各级沙漏怎样接入 PossLoss，以及最后一级怎样解码点位。图 2、3 分别展示损失三项和匹配热图示例。"
     },
@@ -1874,7 +1874,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_WACV_2020/html/Iranmanesh_Robust_Facial_Landmark_Detection_via_Aggregation_on_Geometrically_Manipulated_Faces_WACV_2020_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 2 自左向右串起生成变体、共享沙漏、逆变换、逐点聚合。图中不同形状的检测结果先对齐到同一个参照。"
     },
@@ -1885,7 +1885,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/WACV2021/html/Chu_A_Vector-Based_Representation_to_Enhance_Head_Pose_Estimation_WACV_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 3 展示共享骨干和三条向量分支，图 4 放大逐级预测，图 5 解释矩阵细化的距离。"
     },
@@ -1896,7 +1896,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/WACV2025/html/Dang_Cascaded_Dual_Vision_Transformer_for_Accurate_Facial_Landmark_Detection_WACV_2025_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 1 上方的黑线把同一底层特征分发到多级。图 2 用 1×1 卷积解释每个热图如何由通道基底组合。"
     },
@@ -1918,7 +1918,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Bulat_Super-FAN_Integrated_Facial_CVPR_2018_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 2 的生成器输出同时通向 FAN 和判别器。顺着 FAN 热图路径读，可以理解几何监督如何进入超分支路。"
     },
@@ -1929,7 +1929,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Dong_Supervision-by-Registration_An_Unsupervised_CVPR_2018_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 3 将标注监督和无标注配准接到同一定位器。图 5 则区分前向跟踪用于监督、反向跟踪用于可靠性判断。"
     },
@@ -1940,7 +1940,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Dong_Style_Aggregated_Network_CVPR_2018_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 3 展示原图和聚合图如何汇合到最后预测阶段，图 4 展开训练时的风格特征、聚类和 CycleGAN。"
     },
@@ -1951,7 +1951,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Kumar_Disentangling_3D_Pose_CVPR_2018_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 2 展示姿态特征怎样调制关键点网络及进入细化，图 3 放大树中单个反卷积模块。"
     },
@@ -1962,7 +1962,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Merget_Robust_Facial_Landmark_CVPR_2018_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 1 对照局部预测、固定核、全局空洞卷积和回归损失。图 3 可查看全局信息如何压低错误的局部峰。"
     },
@@ -1973,7 +1973,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Miao_Direct_Shape_Regression_CVPR_2018_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 1 给出端到端管线。图 2 可看元滤波器如何共享参数，图 3 显示逐位置的余弦映射及拼接。"
     },
@@ -1984,7 +1984,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2019/html/Liu_Semantic_Alignment_Finding_Semantically_Consistent_Ground-Truth_for_Facial_Landmark_Detection_CVPR_2019_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 5 显示原始热图中的离群关键点怎样被全局校正模块修正。图 3、图 4 分别说明训练时的局部搜索和连续迭代。"
     },
@@ -1995,7 +1995,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2019/html/Zhu_Robust_Facial_Landmark_Detection_via_Occlusion-Adaptive_Deep_Networks_CVPR_2019_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 1 分别追踪 A/B 路径的几何外积、C/D 路径的权重蒸馏，以及下游低秩回归。图 2 解释外积捕捉长程关系。"
     },
@@ -2006,7 +2006,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2020/html/Browatzki_3FabRec_Fast_Few-Shot_Face_Alignment_by_Reconstruction_CVPR_2020_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 2 区分无标注重建、插层学习和可选微调，标清各阶段哪些模块更新。"
     },
@@ -2017,7 +2017,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2020/html/Chandran_Attention-Driven_Cropping_for_Very_High_Resolution_Facial_Landmark_Detection_CVPR_2020_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 1 追踪低分辨代理如何选择原图的局部，及局部结果如何回填。图 2 展示区域覆盖的地标，图 3 对比两级热图。"
     },
@@ -2028,7 +2028,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ICCV_2019/html/Zou_Learning_Robust_Facial_Landmark_Detection_via_Hierarchical_Structured_Ensemble_ICCV_2019_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 2 上半展示覆盖结构发现，下半展示基础热图和结构约束合并。图 3 用小图说明为什么部分节点缺失时仍有子结构可工作。"
     },
@@ -2039,7 +2039,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ICCV_2019/html/Dong_Teacher_Supervises_Students_How_to_Learn_From_Partially_Labeled_Images_ICCV_2019_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 3 展示教师如何把 RGB 和热图变成分数，并用检测损失监督。图 2 是两个学生检测器并行结构。"
     },
@@ -2050,7 +2050,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ICCV_2019/html/Qian_Aggregation_via_Separation_Boosting_Facial_Landmark_Detector_With_Semi-Supervised_Style_ICCV_2019_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 2 左侧是拆分并重建，右侧是交叉取样后训练检测器。PDF 第 4 页的图 3 可核对哪些点在风格变化中保持固定。"
     },
@@ -2061,7 +2061,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ICCV_2019/html/Sun_FAB_A_Robust_Facial_Landmark_Detection_Framework_for_Motion-Blurred_Videos_ICCV_2019_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 2 区分三种张量，历史边界图连到光流和变形，三帧图像连到去模糊，清晰输出再连到检测器和反馈回路。"
     },
@@ -2072,7 +2072,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ICCV_2019/html/Chen_Face_Alignment_With_Kernel_Density_Deep_Neural_Network_ICCV_2019_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 1 同时标出 256×256 输入、64×64 分布和级间拼接。对照图 6 可看各级不确定性及定位偏差怎样变化。"
     },
@@ -2083,7 +2083,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ICCV_2019/html/Kuhnke_Deep_Head_Pose_Estimation_Using_Synthetic_Images_and_Partial_Adversarial_ICCV_2019_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 2 先看连续源样本筛选，再跟踪三支模块 F、R 和 D，以及源域的角度监督怎样保留。"
     },
@@ -2105,7 +2105,7 @@
       "status": "figure_pending",
       "paper_url": "https://doi.org/10.1109/TMM.2018.2866770",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "沿出版商链接查看论文图 3。核对的 IEEE 接收稿要求获得许可后再发布原图。论文图 3 给出同一池化层后的彩色分支，单独追踪四个回归值如何经非线性变换汇聚成四元数。"
     },
@@ -2116,7 +2116,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Qu_Novel-View_Synthesis_and_Pose_Estimation_for_Hand-Object_Interaction_from_Sparse_ICCV_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -2127,7 +2127,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Ye_Diffusion-Guided_Reconstruction_of_Everyday_Hand-Object_Interaction_Clips_ICCV_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -2138,7 +2138,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Cheng_HandR2N2_Iterative_3D_Hand_Pose_Estimation_Using_a_Residual_Recurrent_ICCV_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -2149,7 +2149,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Zheng_HaMuCo_Hand_Pose_Estimation_via_Multiview_Collaborative_Self-Supervised_Learning_ICCV_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -2160,7 +2160,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Huang_PHRIT_Parametric_Hand_Representation_with_Implicit_Template_ICCV_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -2171,7 +2171,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Tse_Spectral_Graphormer_Spectral_Graph-Based_Transformer_for_Egocentric_Two-Hand_Reconstruction_using_ICCV_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -2182,7 +2182,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Zuo_Reconstructing_Interacting_Hands_with_Interaction_Prior_from_Monocular_Images_ICCV_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -2193,7 +2193,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Zhang_OCHID-Fi_Occlusion-Robust_Hand_Pose_Estimation_in_3D_via_RF-Vision_ICCV_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -2204,7 +2204,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Leng_Dynamic_Hyperbolic_Attention_Network_for_Fine_Hand-object_Reconstruction_ICCV_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -2215,7 +2215,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Ren_Decoupled_Iterative_Refinement_Framework_for_Interacting_Hands_Reconstruction_from_a_ICCV_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -2226,7 +2226,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Li_RenderIH_A_Large-Scale_Synthetic_Dataset_for_3D_Interacting_Hand_Pose_ICCV_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -2237,7 +2237,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Tse_Collaborative_Learning_for_Hand_and_Object_Reconstruction_With_Attention-Guided_Graph_CVPR_2022_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -2248,7 +2248,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Chen_Self-Supervised_Transfer_Learning_for_Hand_Mesh_Recovery_From_Binocular_Images_ICCV_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -2259,7 +2259,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Kim_End-to-End_Detection_and_Pose_Estimation_of_Two_Interacting_Hands_ICCV_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -2270,7 +2270,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Zhang_Interacting_Two-Hand_3D_Pose_and_Shape_Reconstruction_From_Single_Color_ICCV_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -2281,7 +2281,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2020/html/Baek_Weakly-Supervised_Domain_Adaptation_via_GAN_and_Mesh_Model_for_Estimating_CVPR_2020_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文（PDF 第 3 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 的绿色箭头是数据处理，蓝色箭头是监督；不要把训练标签当部署输入，也不要漏掉 §3.5 延续至第 6 页的测试优化。"
     },
@@ -2292,7 +2292,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2020/html/Doosti_HOPE-Net_A_Graph-Based_Model_for_Hand-Object_Pose_Estimation_CVPR_2020_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文（PDF 第 3 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 是整图到二维再到三维的总体结构，第 4 页图 3 展开图 U-Net；池化发生在节点维，不是在原始 RGB 图像上裁去手指。"
     },
@@ -2303,7 +2303,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_WACV_2020/html/Gu_3D_Hand_Pose_Estimation_with_Disentangled_Cross-Modal_Latent_Space_WACV_2020_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文（PDF 第 3 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 中两路 VAE 负责模态重建，姿态对齐与上下文翻译是两种不同连接；最终三维预测同时使用共享因素和翻译后的特有因素。"
     },
@@ -2314,7 +2314,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_WACV_2020/html/Chen_DGGAN_Depth-image_Guided_Generative_Adversarial_Networks_forDisentangling_RGB_and_Depth_WACV_2020_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文（PDF 第 3 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 看两模块关系，第 4 页图 3 是 GAN 深度生成器，第 5 页图 4 是姿态及深度正则器；判别器与重建误差表示训练监督，不是额外测量。"
     },
@@ -2325,7 +2325,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_WACV_2020/html/Kong_Rotation-invariant_Mixed_Graphical_Model_Network_for_2D_Hand_Pose_Estimation_WACV_2020_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文（PDF 第 3 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 的两条并行支路分别负责热图/图模型和混合权重，最后才逆旋转；第 5 页图 4 说明树拓扑，不是另一套骨干网络。"
     },
@@ -2336,7 +2336,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2019/html/Yang_Disentangling_Latent_Hands_for_Image_Synthesis_and_Pose_Estimation_CVPR_2019_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文（PDF 第 5 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 3 左/中对应可控合成，右对应手姿推断；第 3 页图 2 是三种概率模型，区分观测节点、潜节点及编码/生成方向后再对照网络阅读。"
     },
@@ -2347,7 +2347,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2019/html/Tekin_HO_Unified_Egocentric_Recognition_of_3D_Hand-Object_Poses_and_Interactions_CVPR_2019_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文（PDF 第 4 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 的三维网格是输出参数化，输入并非深度体素；高置信姿态先经关系 MLP，再送入 interaction RNN。"
     },
@@ -2358,7 +2358,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2019/html/Wan_Self-Supervised_3D_Hand_Pose_Estimation_Through_Training_by_Fitting_CVPR_2019_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文（PDF 第 1 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 对照合成初始化和真实数据微调，PDF 第 3 页图 2 展示 41 球模型及渲染结果；training by fitting 不能误写成部署时逐帧拟合。"
     },
@@ -2369,7 +2369,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2019/html/Du_CrossInfoNet_Multi-Task_Information_Sharing_Based_Hand_Pose_Estimation_CVPR_2019_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文（PDF 第 3 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 是整体结构，第 5 页图 5 和算法 1 解释减法、交叉拼接和回归；“attention mask”是特征残差的比喻，不是额外人工分割标签。"
     },
@@ -2380,7 +2380,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2019/html/Baek_Pushing_the_Envelope_for_RGB-Based_Dense_3D_Hand_Pose_Estimation_CVPR_2019_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文（PDF 第 3 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 中虚线的 testing refinement 是推理实际步骤；训练中的真实轮廓监督与测试中的渲染掩码自一致性应分开读，不应把所有监督箭头作为输入。"
     },
@@ -2391,7 +2391,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ECCV_2018/html/Xiaokun_Wu_HandMap_Robust_Hand_ECCV_2018_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文（PDF 第 2 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 表示主回归路径和中间监督侧支路，第 7–8 页图 2、3 比较引导图；手部距离场用于中间特征监督，不是最后通过投票解码全部点。"
     },
@@ -2402,7 +2402,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ECCV_2018/html/Yidan_Zhou_HBE_Hand_Branch_ECCV_2018_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文（PDF 第 3 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 上、中、下分支分别对应拇指、食指、其余三指，右侧还包含融合和 PCA 瓶颈；第 6 页图 2 是各分支内部层结构。"
     },
@@ -2413,7 +2413,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ECCV_2018/html/Liuhao_Ge_Point-to-Point_Regression_PointNet_ECCV_2018_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文（PDF 第 3 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 是点云到关节的全流程，第 7 页图 3 和第 8 页图 4 展开单模块及两模块连接；第 9 页图 5 是投票分散时的回退支路。"
     },
@@ -2424,7 +2424,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ECCV_2018/html/Yujun_Cai_Weakly-supervised_3D_Hand_ECCV_2018_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文（PDF 第 6 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 3 虚线框内是测试路径，外侧 depth regularizer 属于训练；第 8 页图 4 展开它的结构，不应将其当成必须输入深度的双模态部署网络。"
     },
@@ -2435,7 +2435,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ECCV_2018/html/Qi_Ye_Occlusion-aware_Hand_Pose_ECCV_2018_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文（PDF 第 7 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 5 的三条输出分别是可见性、单高斯与多高斯；球模型图 4 用于产生训练可见性，不是每次预测都要求先完成球体拟合。"
     },
@@ -2446,7 +2446,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2017/html/Wan_Crossing_Nets_Combining_CVPR_2017_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文（PDF 第 4 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 的彩色路线分别表示生成、潜变量估计和训练任务；GAN 的判别特征被复用于后验学习，不能简单删掉整个判别网络后声称仅用生成器估计姿态。"
     },
@@ -2457,7 +2457,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2017/html/Ge_3D_Convolutional_Neural_CVPR_2017_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文（PDF 第 4 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 3 左侧给出三层三维卷积和全连接，右侧显示特征体积；第 3 页图 2 对比准确 TSDF 与投影近似，第 5 页图 4 是训练增强。"
     },
@@ -2468,7 +2468,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2016/html/Ge_Robust_3D_Hand_CVPR_2016_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文（PDF 第 2 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 展示多视图融合总体关系，第 3 页图 3 解释三个正交投影，第 4 页图 4 展开单视图 CNN；“multi-view”在此指虚拟投影视图。"
     },
@@ -2479,7 +2479,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2016/html/Sinha_DeepHand_Robust_Hand_CVPR_2016_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文（PDF 第 3 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 的 MC 是矩阵补全、PQnn 是近邻检索；阶段 1 回归整体方向，阶段 2 分指细化。文中低秩补全不是对缺失深度像素作图像修复。"
     },
@@ -2490,7 +2490,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2015/html/Li_3D_Hand_Pose_ICCV_2015_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文（PDF 第 1 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 看逐步定位关节的过程，第 3 页图 2 对比固定拓扑与 SIP，第 4 页图 3 区分只选一路的 split 和同时展开两路的 division 节点。"
     },
@@ -2501,7 +2501,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2014/html/Oikonomidis_Evolutionary_Quasi-random_Search_2014_CVPR_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "architecture_not_located",
       "reviewed_at": "2026-11-18",
       "figure_note": "原文以算法描述搜索流程，未提供网络结构图。仅链接原文（PDF 第 4 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。PDF 第 4 页算法 1 是完整进化搜索循环，图 2（第 3 页）仅展示手模型，图 3（第 5 页）展示收缩系数。论文没有神经网络结构图，保留真实算法页链接。"
     },
@@ -2512,7 +2512,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Qi_HOISDF_Constraining_3D_Hand-Object_Pose_Estimation_with_Global_Signed_Distance_CVPR_2024_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文（PDF 第 3 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 左侧是双 SDF 学习，右侧是场引导姿态回归；注意自身距离增强和跨场交互是两种用途，且训练真值采样与测试预测场采样不同。"
     },
@@ -2545,7 +2545,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Jiang_Complementing_Event_Streams_and_RGB_Frames_for_Hand_Mesh_Reconstruction_CVPR_2024_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 分开画训练数据退化和重建主干。图 3 放大融合模块，便于跟踪两个传感器特征如何生成加权表示。"
     },
@@ -2556,7 +2556,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Li_HHMR_Holistic_Hand_Mesh_Recovery_by_Enhancing_the_Multimodal_Controllability_CVPR_2024_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 显示不同条件进入共享图 U-Net 的位置，以及观测一致性如何影响逆扩散。"
     },
@@ -2578,7 +2578,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Fan_HOLD_Category-agnostic_3D_Reconstruction_of_Interacting_Hands_and_Objects_from_CVPR_2024_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 展示粗拟合、姿态更新和完整训练。图 3 从一条射线解释手、物体和背景采样怎样进入不同规范空间再合成。"
     },
@@ -2611,7 +2611,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Lin_Harmonious_Feature_Learning_for_Interactive_Hand-Object_Pose_Estimation_CVPR_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 标出共享与独立的骨干层，以及手物区域如何进入两个方向的交互。图 4 放大自注意力和交叉注意力的差别。"
     },
@@ -2622,7 +2622,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Fan_ARCTIC_A_Dataset_for_Dexterous_Bimanual_Hand-Object_Manipulation_CVPR_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 4 展开 ArcticNet 的三路参数解码，图 6 展开 InterField 的逐点距离回归，图 3 对应数据采集的相机视角。"
     },
@@ -2688,7 +2688,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Wen_Hierarchical_Temporal_Transformer_for_3D_Hand_Pose_Estimation_and_Action_CVPR_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 从短时姿态和物体分类追到长时动作聚合，图 3 展开长视频切段和训练偏移的设置。"
     },
@@ -2699,7 +2699,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Lin_Cross-Domain_3D_Hand_Pose_Estimation_With_Dual_Modalities_CVPR_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 对照带真实深度的合成预训练与以预测深度进行第二遍的真实域微调。图 3 解释三类特征如何参与对比。"
     },
@@ -2710,7 +2710,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Huang_Neural_Voting_Field_for_Camera-Space_3D_Hand_Pose_Estimation_CVPR_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 从像素对齐特征追到 SDF、四维投票向量与最后的三维关节。浅色网格示意查询空间。"
     },
@@ -2721,7 +2721,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Xu_H2ONet_Hand-Occlusion-and-Orientation-Aware_Network_for_Real-Time_3D_Hand_Mesh_Reconstruction_CVPR_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 展示去除全局朝向后的规范网格支路和全局旋转支路。图 3 放大逐指遮挡标注与分类。"
     },
@@ -2732,7 +2732,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Jiang_A2J-Transformer_Anchor-to-Joint_Transformer_Network_for_3D_Interacting_Hand_Pose_Estimation_CVPR_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 串联金字塔、锚点交互和偏移加权。图 4 解释每层解码器，图 5 展示平面网格与三层深度。"
     },
@@ -2754,7 +2754,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Chen_gSDF_Geometry-Driven_Signed_Distance_Functions_for_3D_Hand-Object_Reconstruction_CVPR_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 对照单帧全流程，图 3 展示各关节都有自身规范坐标，图 4 比较三种图像骨干共享方式。"
     },
@@ -2765,7 +2765,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Yang_ArtiBoost_Boosting_Articulated_3D_Hand-Object_Pose_Estimation_via_Online_Exploration_CVPR_2022_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 的反馈箭头表示预测误差回到采样权重。图 1 展示组合空间，图 6 展示实际渲染的图像。"
     },
@@ -2776,7 +2776,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Yang_OakInk_A_Large-Scale_Knowledge_Repository_for_Understanding_Hand-Object_Interaction_CVPR_2022_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 5 对照直接复制和沿形状过渡迁移。图 2 是物体图谱，图 3、4 标明数据采集和接触标注。"
     },
@@ -2787,7 +2787,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Li_Interacting_Attention_Graph_for_Single_Image_Two-Hand_Reconstruction_CVPR_2022_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 是图像分支接入三层网格分支的整体结构。图 3 拆解一层图卷积、金字塔图像注意和对称跨手注意。"
     },
@@ -2798,7 +2798,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Hampali_Keypoint_Transformer_Solving_Joint_Identification_in_Challenging_Hands_and_Object_CVPR_2022_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 对照候选点编码和带身份的关节查询。图 3 展示手候选从热图提取、物体候选从分割掩码提取。"
     },
@@ -2809,7 +2809,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Liu_Semi-Supervised_3D_Hand-Object_Poses_Estimation_With_Interactions_in_Time_CVPR_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 展示手物网络，图 3 展开物体如何读取交叠区域，图 5 说明视频伪标签的空间和时间筛选。"
     },
@@ -2820,7 +2820,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Chen_Model-Based_3D_Hand_Reconstruction_via_Self-Supervised_Learning_CVPR_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 的两条编码支路分别输出几何和外观，渲染与投影把输出接回二维监督。图 3 说明骨骼角度正则。"
     },
@@ -2831,7 +2831,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Rudnev_EventHands_Real-Time_Neural_3D_Hand_Pose_Estimation_From_an_Event_ICCV_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 依次展示异步事件、极性时间表面、ResNet 回归和 Kalman 滤波。"
     },
@@ -2842,7 +2842,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Yang_SemiHand_Semi-Supervised_Hand_Pose_Estimation_With_Consistency_ICCV_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 连起有标签合成图、真实图一致性和伪标签校正。图 3、5 分别展开视图一致性和骨架到掩码的一致性。"
     },
@@ -2864,7 +2864,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Yang_CPF_Learning_a_Contact_Potential_Field_To_Model_the_Hand-Object_ICCV_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 3 串联 HoNet、PiCR 和 GeO。图 4 展开接触三个预测量，图 1 对照吸引与排斥的几何作用。"
     },
@@ -2897,7 +2897,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Zhang_Body_Meshes_as_Points_CVPR_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -2908,7 +2908,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Choi_Beyond_Static_Features_for_Temporally_Consistent_3D_Human_Pose_and_CVPR_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -2919,7 +2919,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Reddy_TesseTrack_End-to-End_Learnable_Multi-Person_Articulated_3D_Pose_Tracking_CVPR_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -2941,7 +2941,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Lin_Multi-View_Multi-Person_3D_Pose_Estimation_With_Plane_Sweep_Stereo_CVPR_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -2963,7 +2963,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Ma_Context_Modeling_in_3D_Human_Pose_Estimation_A_Unified_Perspective_CVPR_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -2974,7 +2974,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Gong_PoseAug_A_Differentiable_Pose_Augmentation_Framework_for_3D_Human_Pose_CVPR_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -2985,7 +2985,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Cheng_Monocular_3D_Multi-Person_Pose_Estimation_by_Integrating_Top-Down_and_Bottom-Up_CVPR_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -2996,7 +2996,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Yuan_SimPoE_Simulated_Character_Control_for_3D_Human_Pose_Estimation_CVPR_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -3007,7 +3007,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Guan_Bilevel_Online_Adaptation_for_Out-of-Domain_Human_Mesh_Reconstruction_CVPR_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -3018,7 +3018,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Xu_Graph_Stacked_Hourglass_Networks_for_3D_Human_Pose_Estimation_CVPR_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -3029,7 +3029,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Zanfir_Neural_Descent_for_Visual_3D_Human_Pose_and_Shape_CVPR_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -3040,7 +3040,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Wandt_CanonPose_Self-Supervised_Monocular_3D_Human_Pose_Estimation_in_the_Wild_CVPR_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -3084,7 +3084,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Shi_End-to-End_Multi-Person_Pose_Estimation_With_Transformers_CVPR_2022_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -3095,7 +3095,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Wandt_ElePose_Unsupervised_3D_Human_Pose_Estimation_by_Predicting_Camera_Elevation_CVPR_2022_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -3106,7 +3106,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Li_MHFormer_Multi-Hypothesis_Transformer_for_3D_Human_Pose_Estimation_CVPR_2022_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -3117,7 +3117,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Yuan_GLAMR_Global_Occlusion-Aware_Human_Mesh_Recovery_With_Dynamic_Cameras_CVPR_2022_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -3128,7 +3128,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Wang_Contextual_Instance_Decoupling_for_Robust_Multi-Person_Pose_Estimation_CVPR_2022_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -3139,7 +3139,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Jin_Single-Stage_Is_Enough_Multi-Person_Absolute_3D_Pose_Estimation_CVPR_2022_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -3150,7 +3150,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Bartol_Generalizable_Human_Pose_Triangulation_CVPR_2022_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
@@ -3161,7 +3161,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Wei_Capturing_Humans_in_Motion_Temporal-Attentive_3D_Human_Pose_and_Shape_CVPR_2022_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文；本次未确认支持本站转载的明确许可，暂不复制或重绘。Figure 3 是整体结构，Figure 4 展开 MoCA 的双相似矩阵校准，Figure 5 展开 HAFI 的分层融合。NSSM 来自当前视频特征，并非外部动作标签。"
     },
@@ -3183,7 +3183,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Gong_PoseTriplet_Co-Evolving_3D_Human_Pose_Estimation_Imitation_and_Hallucination_Under_CVPR_2022_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文；本次未确认支持本站转载的明确许可，暂不复制或重绘。Figure 2 按估计器 P → 模仿器 I → 生成器 H → 再次模仿 I → 投影训练对阅读，注意两次物理修正的位置以及最后回到 P 的训练箭头。"
     },
@@ -3194,7 +3194,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Ci_GFPose_Learning_3D_Human_Pose_Prior_With_Gradient_Fields_CVPR_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文；本次未确认支持本站转载的明确许可，暂不复制或重绘。Figure 2 展示噪声姿态沿梯度场逐步变成有效姿态；附录 Figure 4 展开全连接分数网络。采样时间是扩散变量，不是视频时间轴。"
     },
@@ -3205,7 +3205,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Tang_3D_Human_Pose_Estimation_With_Spatio-Temporal_Criss-Cross_Attention_CVPR_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文；本次未确认支持本站转载的明确许可，暂不复制或重绘。Figure 2(a) 是堆叠结构，(b) 展开通道拆分的空间/时间并行路径及 SPE；第 5 页 Algorithm 1 给出两分支加入部位嵌入、卷积再拼接的顺序。"
     },
@@ -3216,7 +3216,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Shen_Global-to-Local_Modeling_for_Video-Based_3D_Human_Pose_and_Shape_Estimation_CVPR_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文；本次未确认支持本站转载的明确许可，暂不复制或重绘。Figure 3 分别跟随 GMM 全局初始化与 LPC 局部修正两条分支；Figure 4 解释为什么修正一个子关节时要输入其祖先关节。图中的遮蔽与 SMPL padding 对应训练策略。"
     },
@@ -3238,7 +3238,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Qiu_PSVT_End-to-End_Multi-Person_3D_Pose_and_Shape_Estimation_With_Progressive_CVPR_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文；本次未确认支持本站转载的明确许可，暂不复制或重绘。Figure 2(a) 是分离姿态/形状解码的基线，(b) 才是 PSVT；关注跨帧更新箭头、TA 对齐和姿态流到形状分支的路径。Figure 3 的 STPD/STSD 展开窗口注意力与 PGA。"
     },
@@ -3249,7 +3249,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Li_NIKI_Neural_Inverse_Kinematics_With_Invertible_Neural_Networks_for_3D_CVPR_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文；本次未确认支持本站转载的明确许可，暂不复制或重绘。Figure 3 看图像预测观测再进入 NIKI 的串联过程；Figure 2 对比传统解析 IK、普通 MLP 与双向误差解耦。误差潜变量不是额外测量输入。"
     },
@@ -3260,7 +3260,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Geng_Human_Pose_As_Compositional_Tokens_CVPR_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文；本次未确认支持本站转载的明确许可，暂不复制或重绘。Figure 3(a) 是姿态表示学习，(b) 是图像到 token 再到姿态，(c) 展开组合编码器。不要把第一阶段输入的真实姿态理解为第二阶段测试时的输入。"
     },
@@ -3271,7 +3271,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Sengupta_HuManiFlow_Ancestor-Conditioned_Normalising_Flows_on_SO3_Manifolds_for_Human_Pose_CVPR_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文；本次未确认支持本站转载的明确许可，暂不复制或重绘。Figure 2 依次看代理编码、体形高斯、祖先条件关节 flow 和 SMPL；条件使用祖先旋转样本而非祖先分布参数，二者包含的信息不同。"
     },
@@ -3282,7 +3282,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Yoshiyasu_Deformable_Mesh_Transformer_for_3D_Human_Mesh_Recovery_CVPR_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文；本次未确认支持本站转载的明确许可，暂不复制或重绘。Figure 2 展示多尺度骨干、稀疏自注意力、DMA 和尺度恢复；Figure 3 解释四块人体稀疏连接及 AMD 重排。DMA 的参考位置随网格迭代变化，并非固定图像采样网格。"
     },
@@ -3293,7 +3293,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Zheng_POTTER_Pooling_Attention_Transformer_for_Efficient_Human_Mesh_Recovery_CVPR_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文；本次未确认支持本站转载的明确许可，暂不复制或重绘。Figure 4 看基础流的逐级降采样与 HR 流的恒定分辨率，以及 patch split 的横向连接；Figure 5、6 展开 PAT 和两种池化交互。正文第 7 页明确 HMR head 使用 HybrIK。"
     },
@@ -3304,7 +3304,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Zhu_DPMesh_Exploiting_Diffusion_Prior_for_Occluded_Human_Mesh_Recovery_CVPR_2024_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文；本次未确认支持本站转载的明确许可，暂不复制或重绘。Figure 3(a) 看热图经 ControlNet、坐标提示经 cross-attention 的双条件路径，以及注意力图与特征的拼接；(b) 是训练时的教师—学生鲁棒性学习，不是测试时增加的一条预测支路。"
     },
@@ -3326,7 +3326,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Xu_FinePOSE_Fine-Grained_Prompt-Driven_3D_Human_Pose_Estimation_via_Diffusion_Models_CVPR_2024_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文；本次未确认支持本站转载的明确许可，暂不复制或重绘。Figure 2 将 FPP 提示学习、FPC 提示—姿态通信和 PTS 时间调制分开展示；同时对照 §3.3 的 DDIM 迭代与 JPMA，不能把输出误写成一次回归或按三维真值选择。"
     },
@@ -3337,7 +3337,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Dwivedi_TokenHMR_Advancing_Human_Mesh_Recovery_with_a_Tokenized_Pose_Representation_CVPR_2024_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文；本次未确认支持本站转载的明确许可，暂不复制或重绘。Figure 3(a) 是 tokenizer 学习，(b) 是图像到码本再到姿态。Figure 2 解释相机/姿态偏差的动机；TALS 降低低误差监督的权重，并非自动修复相机内参。"
     },
@@ -3348,7 +3348,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Li_Hourglass_Tokenizer_for_Efficient_Transformer-Based_3D_Human_Pose_Estimation_CVPR_2024_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文；本次未确认支持本站转载的明确许可，暂不复制或重绘。Figure 3 是先收窄时间长度再恢复的总体结构；Figure 4 展示聚类选帧，Figure 5 展示 TRA。Figure 6 对应只预测中心帧的另一配置，不应与全序列恢复流程混写。"
     },
@@ -3359,7 +3359,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Peng_KTPFormer_Kinematics_and_Trajectory_Prior_Knowledge-Enhanced_Transformer_for_3D_Human_CVPR_2024_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文；本次未确认支持本站转载的明确许可，暂不复制或重绘。Figure 2 从左到右看 KPA→空间 MHSA→TPA→时间 MHSA→交替编码器→回归；下方展开固定邻接与可学习邻接的融合。KPA/TPA 在 Q/K/V 形成前调制 token。"
     },
@@ -3370,7 +3370,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2017/html/Fang_RMPE_Regional_Multi-Person_ICCV_2017_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文；本次未确认支持本站转载的明确许可，暂不复制或重绘。Figure 3 中分清测试主路、训练用 Parallel SPPE 和 PGPG；Figure 4 中 STN 与 SDTN 是前后对称的坐标变换，不是两个无关的检测网络。"
     },
@@ -3381,7 +3381,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Zou_Modulated_Graph_Convolutional_Network_for_3D_Human_Pose_Estimation_ICCV_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文；本次未确认支持本站转载的明确许可，暂不复制或重绘。Figure 3 看残差图卷积堆叠，Figure 2 对比共享权重、独立权重与逐节点调制；先特征变换及节点缩放，再按修正亲和关系聚合。"
     },
@@ -3403,7 +3403,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Li_Human_Pose_Regression_With_Residual_Log-Likelihood_Estimation_ICCV_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文；本次未确认支持本站转载的明确许可，暂不复制或重绘。Figure 2(c) 才是 RLE：对比 (a) 直接变换坐标分布、(b) 归一化后的直接似然，注意 Q 与残差 G 的分工。该图主要解释训练目标，不表示测试时必须从 flow 采样关键点。"
     },
@@ -3414,7 +3414,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Zhang_PyMAF_3D_Human_Pose_and_Shape_Regression_With_Pyramidal_Mesh_ICCV_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "仅链接原文；本次未确认支持本站转载的明确许可，暂不复制或重绘。Figure 2 先看初始 Grid Features，再看 Projection→Mesh-aligned Features→Regressor 的闭环及分辨率提升。第 5 页说明 IUV 辅助支路仅在训练使用。"
     },
@@ -3422,166 +3422,166 @@
       "id": "humor",
       "category": "Human",
       "title": "HuMoR: 3D Human Motion Model for Robust Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Rempe_HuMoR_3D_Human_Motion_Model_for_Robust_Pose_Estimation_ICCV_2021_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-18",
+      "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 2 标出识别后验、条件先验与共享解码器。结合图 1 阅读训练得到的动作先验如何接入测试期优化。"
     },
     {
       "id": "group-pose",
       "category": "Human",
       "title": "Group Pose: A Simple Baseline for End-to-End Multi-Person Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Liu_Group_Pose_A_Simple_Baseline_for_End-to-End_Multi-Person_Pose_Estimation_ICCV_2023_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-18",
+      "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 2 给出骨干到两类输出的路径。图 3 逐项对比组内和同类型跨组的注意力范围。"
     },
     {
       "id": "d3dp",
       "category": "Human",
       "title": "Diffusion-Based 3D Human Pose Estimation with Multi-Hypothesis Aggregation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Shan_Diffusion-Based_3D_Human_Pose_Estimation_with_Multi-Hypothesis_Aggregation_ICCV_2023_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-18",
+      "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 2 对照训练加噪与多假设测试。图 3 给出逐关节选择如何汇成一套三维姿态，图 4 展开去噪骨干。"
     },
     {
       "id": "bodynet",
       "category": "Human",
       "title": "BodyNet: Volumetric Inference of 3D Human Body Shapes",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ECCV_2018/html/Gul_Varol_BodyNet_Volumetric_Inference_ECCV_2018_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-18",
+      "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 2 的四个子网按二维关节、部件、三维关节、体积输出排列。虚线监督说明哪些中间结果经过直接约束。"
     },
     {
       "id": "multiposenet",
       "category": "Human",
       "title": "MultiPoseNet: Fast Multi-Person Pose Estimation using Pose Residual Network",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ECCV_2018/html/Muhammed_Kocabas_MultiPoseNet_Fast_Multi-Person_ECCV_2018_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-18",
+      "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 2 左侧展开 PRN 如何对重叠关节响应施加残差，右侧给出共享骨干与分支。图 3 展示多尺度关节子网。"
     },
     {
       "id": "personlab",
       "category": "Human",
       "title": "PersonLab: Person Pose Estimation and Instance Segmentation with a Bottom-Up, Part-Based, Geometric Embedding Model",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ECCV_2018/html/George_Papandreou_PersonLab_Person_Pose_ECCV_2018_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-18",
+      "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 1 可沿颜色追踪三类偏移。图 2 展示中程偏移细化，图 3 和图 4 解释长程偏移如何把区域与人关联。"
     },
     {
       "id": "integral-pose",
       "category": "Human",
       "title": "Integral Human Pose Regression",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ECCV_2018/html/Xiao_Sun_Integral_Human_Pose_ECCV_2018_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-18",
+      "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 1 展示多阶段热图网络接入积分输出的位置。第 5 节公式把概率体、轴向求和与坐标损失连起来。"
     },
     {
       "id": "multicontext-attention",
       "category": "Human",
       "title": "Multi-Context Attention for Human Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2017/html/Chu_Multi-Context_Attention_for_CVPR_2017_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-18",
+      "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 2 给出八个沙漏和整体到部件的注意力。图 3 展开 HRU，图 5、图 6 分别说明多分辨率注意力与部件细化。"
     },
     {
       "id": "posetrack-joint",
       "category": "Human",
       "title": "PoseTrack: Joint Multi-Person Pose Estimation and Tracking",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2017/html/Iqbal_PoseTrack_Joint_Multi-Person_CVPR_2017_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-18",
+      "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 2 上方是逐帧关节候选，中部区分帧内和跨帧边，下部是拆分得到的多个人物轨迹。图 3 对照空间与时间的传递约束。"
     },
     {
       "id": "distance-matrix-pose",
       "category": "Human",
       "title": "3D Human Pose Estimation From a Single Image via Distance Matrix Regression",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2017/html/Moreno-Noguer_3D_Human_Pose_CVPR_2017_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-18",
+      "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 1 给出像素、二维距离、三维距离和空间骨架的转换。图 3 分别画出全连接和全卷积两类回归器。"
     },
     {
       "id": "lcrnet",
       "category": "Human",
       "title": "LCR-Net: Localization-Classification-Regression for Human Pose",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2017/html/Rogez_LCR-Net_Localization-Classification-Regression_for_CVPR_2017_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-18",
+      "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 2 对应定位、分类和回归三个阶段。图 3 展开锚点偏移，图 4 给出同人候选如何合并。"
     },
     {
       "id": "seeing-invisible-poses",
       "category": "Human",
       "title": "Seeing Invisible Poses: Estimating 3D Body Pose From Egocentric Video",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2017/html/Jiang_Seeing_Invisible_Poses_CVPR_2017_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-18",
+      "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 4 是动态规划格点相邻两层及其连边。图 1 解释可观测画面和不可见身体之间的关系，图 2 给出动态线索示例。"
     },
     {
       "id": "accurate-multiperson-wild",
       "category": "Human",
       "title": "Towards Accurate Multi-Person Pose Estimation in the Wild",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2017/html/Papandreou_Towards_Accurate_Multi-Person_CVPR_2017_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-18",
+      "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 1 表示框检测到单人估计的两阶段关系。图 2 和图 3 分别查看训练目标及偏移投票。"
     },
     {
       "id": "joint-pose-part-segmentation",
       "category": "Human",
       "title": "Joint Multi-Person Pose Estimation and Semantic Part Segmentation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2017/html/Xia_Joint_Multi-Person_Pose_CVPR_2017_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-18",
+      "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 2 先看两种输出怎样送入全连接 CRF，再沿关节图和骨架图回到细化分割。"
     },
     {
       "id": "pose-plus-matching",
       "category": "Human",
       "title": "3D Human Pose Estimation = 2D Pose Estimation + Matching",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2017/html/Chen_3D_Human_Pose_CVPR_2017_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-18",
+      "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 1 将二维图像证据、动作捕捉候选与匹配串起来。图 5 对照虚拟相机和匹配后形变的效果。"
     },
     {
       "id": "locllm",
@@ -3590,7 +3590,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2024/papers/Wang_LocLLM_Exploiting_Generalizable_Human_Keypoint_Localization_via_Large_Language_Model_CVPR_2024_paper.pdf",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位原论文图示；当前未核实可再分发许可，按要求仅保留原图链接，不复制、不重绘。"
     },
@@ -3601,7 +3601,7 @@
       "status": "figure_pending",
       "paper_url": "https://papers.nips.cc/paper_files/paper/2024/hash/fe692980c5d9732cf153ce27947653a7-Abstract-Conference.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位原论文图示；当前未核实可再分发许可，按要求仅保留原图链接，不复制、不重绘。"
     },
@@ -3612,7 +3612,7 @@
       "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2507.11102",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 对照三种任务实际启用的输入，注意参考图经过交叉注意力压缩为点提示，坐标最终由语言模型生成。"
     },
@@ -3634,7 +3634,7 @@
       "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2411.06869",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位原论文图示；当前未核实可再分发许可，按要求仅保留原图链接，不复制、不重绘。"
     },
@@ -3656,7 +3656,7 @@
       "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2510.00506",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 左边是文字生成，右边是条件扩散训练。图 3 展示怎样从 HaMeR 初值出发，对遮挡和可见关节区别处理。"
     },
@@ -3678,7 +3678,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2025/html/Fiche_MEGA_Masked_Generative_Autoencoder_for_Human_Mesh_Recovery_CVPR_2025_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。Figure 2 展示网格 token 流及图像条件。全局旋转和相机预测由正文 §3.2 补充，图中未画出这条支路。"
     },
@@ -3689,7 +3689,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2025/html/Chharia_MV-SSM_Multi-View_State_Space_Modeling_for_3D_Human_Pose_Estimation_CVPR_2025_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。Figure 2 从特征到下一层关节位置看反复投影和三角化。Figure 3 比较 PSS、常规 Mamba 与视觉状态空间块。"
     },
@@ -3733,7 +3733,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2025/html/Matsubara_HeatFormer_A_Neural_Optimizer_for_Multiview_Human_Mesh_Recovery_CVPR_2025_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。Figure 2 对照图像观测的键值与当前投影产生的查询。Figure 3 展示迭代中网格逐步更新。"
     },
@@ -3744,7 +3744,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2025/html/Su_SAT-HMR_Real-Time_Multi-Person_3D_Mesh_Estimation_via_Scale-Adaptive_Tokens_CVPR_2025_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。Figure 3 上部给出统一高分辨率基线，下部展示背景汇聚、小人图块替换和大人图块保留如何送入同一解码流程。"
     },
@@ -3755,7 +3755,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2025/html/Zhao_EgoPressure_A_Dataset_for_Hand_Pressure_and_Pose_Estimation_in_CVPR_2025_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。Figure 6 对照多视图姿态初值、渲染优化与虚拟压力投影。§5.1 的压力估计与生成数据标注的优化是两项独立流程。"
     },
@@ -3766,7 +3766,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2025/html/Fan_Pose-Guided_Temporal_Enhancement_for_Robust_Low-Resolution_Hand_Reconstruction_CVPR_2025_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。Figure 2 的三部分依次对应历史关节、当前帧和三平面编码。Figure 3 展开中间特征的多次时间融合。"
     },
@@ -3777,7 +3777,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2025/html/Zhao_Analyzing_the_Synthetic-to-Real_Domain_Gap_in_3D_Hand_Pose_Estimation_CVPR_2025_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。Figure 3 给出原论文的渲染流程。Figure 1 对照各组件的合成与评测设置，Figure 7 展开遮挡先验的独立细化分支。"
     },
@@ -3788,7 +3788,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2025/html/Ren_Prior-aware_Dynamic_Temporal_Modeling_Framework_for_Sequential_3D_Hand_Pose_ICCV_2025_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。Figure 2 对照并行动态时空块、整手时间块与记忆的写入和注入方向。末端手形由记忆回归，局部姿态随帧变化。"
     },
@@ -3810,7 +3810,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2025/html/Kim_PoseAnchor_Robust_Root_Position_Estimation_for_3D_Human_Pose_Estimation_ICCV_2025_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "architecture_not_located",
       "reviewed_at": "2026-11-18",
       "figure_note": "原文以投影方程和算法伪代码描述方法。第 4 页 Algorithm 2 是完整迭代流程，第 5 页 §3.3 对照零样本和训练内集成两种用法。第 8 页 Figure 2 展示支持集可视化。"
     },
@@ -3843,7 +3843,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2025/html/Yang_PoseSyn_Synthesizing_Diverse_3D_Pose_Data_from_In-the-Wild_2D_Data_ICCV_2025_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。Figure 2 串联难例发现、运动扩展、图像合成和回训。Figure 4 展开文本与初始动作索引如何共同控制生成。"
     },
@@ -3854,7 +3854,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2025/html/Lu_A_Structure-aware_and_Motion-adaptive_Framework_for_3D_Human_Pose_Estimation_ICCV_2025_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。Figure 3(a) 是总体网络，(b) 对照空间状态的两次邻接融合，(c) 对照运动信息调节时间尺度。"
     },
@@ -3865,7 +3865,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2025/html/Ying_LDPose_Towards_Inclusive_Human_Pose_Estimation_for_Limb-Deficient_Individuals_in_ICCV_2025_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。第 4 页 Figure 2 给出 25 点定义。第 6 页 Figure 4 解释成对置信度监督，Figure 5 展示 ViTPose 微调的效果。"
     },
@@ -3876,7 +3876,7 @@
       "status": "figure_pending",
       "paper_url": "https://doi.org/10.1109/TPAMI.2008.106",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "沿链接查看论文原图。转载许可尚未确认。PDF 第 3 页的图 3 列举多个方法族的示意，可与同页分类表以及第 2 页图 1 的角度定义一起读。"
     },
@@ -3887,7 +3887,7 @@
       "status": "figure_pending",
       "paper_url": "https://doi.org/10.1007/s11263-012-0549-0",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 1 展示深度块沿各树走到有多变量分布的叶子。图 2 给出矩形测试与鼻尖偏移，图 3 显示多块投票如何汇聚到位姿。"
     },
@@ -3898,7 +3898,7 @@
       "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/1603.09732",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
@@ -3906,111 +3906,111 @@
       "id": "hand-model-monocular-2011",
       "category": "Hand",
       "title": "Model-Based 3D Hand Pose Estimation from Monocular Video",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://doi.org/10.1109/TPAMI.2011.33",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-18",
+      "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 2 展示关节骨架及变形后的三角网格，可对照第 3 节理解渲染误差和遮挡梯度如何作用于该模型。"
     },
     {
       "id": "hand-efficient-forest",
       "category": "Hand",
       "title": "Estimate Hand Poses Efficiently from Single Depth Images",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://link.springer.com/article/10.1007/s11263-015-0826-9",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-18",
+      "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 2 给出两步坐标变换及回归关系，图 3 对照方向模板匹配，图 4 标出运动学自由度。"
     },
     {
       "id": "hand-annotation-survey",
       "category": "Hand",
       "title": "Efficient Annotation and Learning for 3D Hand Pose Estimation: A Survey",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://link.springer.com/article/10.1007/s11263-023-01856-0",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
       "id": "hand-black-box-2015",
       "category": "Hand",
       "title": "Opening the Black Box: Hierarchical Sampling Optimization for Estimating Human Hand Pose",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://www.microsoft.com/en-us/research/publication/opening-the-black-box-hierarchical-sampling-optimization-for-estimating-human-hand-pose/",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-18",
+      "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 3 对照分层采样、快速 silver 代价和完整 golden 评价。图 2 显示每层参数对应的关节。"
     },
     {
       "id": "hand-survey-cameras-2019",
       "category": "Hand",
       "title": "A survey on 3D hand pose estimation: Cameras, methods, and datasets",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://www.sciencedirect.com/science/article/abs/pii/S0031320319301724",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reading_level": "primary_publisher_preview",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-18",
+      "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 2 区分手姿估计与手检测、分割及手势等相邻任务。导轨实验和方法表用于进一步对照硬件与算法条件。"
     },
     {
       "id": "flexible-parts-2013",
       "category": "Human",
       "title": "Articulated Human Detection with Flexible Mixtures of Parts",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://doi.org/10.1109/TPAMI.2012.261",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-18",
+      "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 6 展示从局部类型组合得到的不同人体树。图 1 对照经典可旋转的整体模板和本方法的小部件组合。"
     },
     {
       "id": "human36m",
       "category": "Human",
       "title": "Human3.6M: Large Scale Datasets and Predictive Methods for 3D Human Sensing in Natural Environments",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://vision.imar.ro/human3.6m/description.php",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-18",
+      "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 2 按动作列出样本数量及传感器布置。图 3 对照 RGB、分割、深度和关节等配对输出。"
     },
     {
       "id": "bcir",
       "category": "Human",
       "title": "Bias-Compensated Integral Regression for Human Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2301.10431",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-18",
+      "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 2 显示隐式热图、原始积分点与真值之间的偏移。图 1 对比硬峰值与期望解码，可结合第 V 节定位修正发生的位置。"
     },
     {
       "id": "visual-inertial-semantics",
       "category": "Human",
       "title": "Fusing Visual and Inertial Sensors with Semantics for 3D Human Pose Estimation",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://link.springer.com/article/10.1007/s11263-018-1118-y",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
       "id": "kinect-parts-2011",
       "category": "Human",
       "title": "Real-Time Human Pose Recognition in Parts from Single Depth Images",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/BodyPartRecognition.pdf",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-18",
+      "figure_note": "沿链接查看论文原图。转载许可尚未确认。图 1 自左向右示意深度输入、像素部件和三维关节。图 3、图 4 可进一步查看深度比较及森林预测。"
     },
     {
       "id": "hpe-deep-survey-2023",
@@ -4038,12 +4038,12 @@
       "id": "hland-pose",
       "category": "Human",
       "title": "Hierarchical language description knowledge base for LLM-based human pose estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://doi.org/10.1016/j.neucom.2025.130336",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reading_level": "primary_publisher_preview",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-18",
+      "figure_note": "沿链接查看论文原图。转载许可尚未确认。正式论文引言指向图 1 的从整体到部件的人体姿态语言描述。结合图与方法章节区分知识表示、知识匹配和最后的定位。"
     },
     {
       "id": "prosepose",
@@ -4052,7 +4052,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2025/html/Subramanian_Pose_Priors_from_Language_Models_CVPR_2025_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位原论文图示；当前未核实可再分发许可，按要求仅保留原图链接，不复制、不重绘。"
     },
@@ -4063,7 +4063,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/WACV2026/html/Liao_LangPose_Language-Aligned_Motion_for_Robust_3D_Human_Pose_Estimation_WACV_2026_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "已定位原论文图示；当前未核实可再分发许可，按要求仅保留原图链接，不复制、不重绘。"
     },
@@ -4074,7 +4074,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/WACV2023/html/Lee_Image-Free_Domain_Generalization_via_CLIP_for_3D_Hand_Pose_Estimation_WACV_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 上半部展示冻结 CLIP 如何构造特征增强，下半部显示姿态路径和对比支路。"
     },
@@ -4085,7 +4085,7 @@
       "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/WACV2026/html/Kundu_DexAvatar_3D_Sign_Language_Reconstruction_with_Hand_and_Body_Pose_WACV_2026_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
+      "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
       "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 连接预训练估计器、双手及身体潜变量与优化项。图 3、4 分别解释训练先验前如何筛选身体姿态和校正手指。"
     }

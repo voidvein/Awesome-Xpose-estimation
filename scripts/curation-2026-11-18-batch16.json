@@ -1,0 +1,793 @@
+{
+  "reviewed_at": "2026-11-18",
+  "updated_pipelines": 27,
+  "original_figures": 5,
+  "new_code_badges": [
+    "humor",
+    "group-pose",
+    "bodynet",
+    "multiposenet",
+    "integral-pose",
+    "posetrack-joint",
+    "lcrnet",
+    "flexible-parts-2013",
+    "multicontext-attention",
+    "pose-plus-matching",
+    "human36m"
+  ],
+  "entries": [
+    {
+      "id": "humor",
+      "version": "arXiv:2105.04668v1",
+      "format": "arxiv_html",
+      "method_sections_or_pages": [
+        "S3",
+        "S3.SS1",
+        "S4.SS1",
+        "S4.SS2",
+        "S5.SS5"
+      ],
+      "figure_anchor": [
+        "S2.F2",
+        "Figure 2"
+      ],
+      "source_url": "https://arxiv.org/html/2105.04668v1",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2105.04668v1",
+        "title": "HuMoR: 3D Human Motion Model for Robust Pose Estimation",
+        "url": "https://arxiv.org/abs/2105.04668v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Rempe, Davis",
+          "Birdal, Tolga",
+          "Hertzmann, Aaron",
+          "Yang, Jimei",
+          "Sridhar, Srinath",
+          "Guibas, Leonidas J."
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/davrempe/humor",
+        "verified_at": "2026-11-18",
+        "basis": "Stanford 作者项目对应的官方训练、动作模型和测试期拟合实现。"
+      }
+    },
+    {
+      "id": "group-pose",
+      "version": "arXiv:2308.07313v1",
+      "format": "arxiv_html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S4.SS1"
+      ],
+      "figure_anchor": [
+        "S2.F2",
+        "Figure 2"
+      ],
+      "source_url": "https://arxiv.org/html/2308.07313v1",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2308.07313v1",
+        "title": "Group Pose: A Simple Baseline for End-to-End Multi-person Pose Estimation",
+        "url": "https://arxiv.org/abs/2308.07313v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Liu, Huan",
+          "Chen, Qiang",
+          "Tan, Zichang",
+          "Liu, Jiang-Jiang",
+          "Wang, Jian",
+          "Su, Xiangbo",
+          "Li, Xiaolong",
+          "Yao, Kun",
+          "Han, Junyu",
+          "Ding, Errui",
+          "Zhao, Yao",
+          "Wang, Jingdong"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/Michel-liu/GroupPose",
+        "verified_at": "2026-11-18",
+        "basis": "作者论文链接的 PyTorch 版本，含分组解码器、训练入口和数据处理。"
+      }
+    },
+    {
+      "id": "d3dp",
+      "version": "arXiv:2303.11579v1",
+      "format": "arxiv_html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S4.SS2"
+      ],
+      "figure_anchor": [
+        "S2.F2",
+        "Figure 2"
+      ],
+      "source_url": "https://arxiv.org/html/2303.11579v1",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2303.11579v1",
+        "title": "Diffusion-Based 3D Human Pose Estimation with Multi-Hypothesis Aggregation",
+        "url": "https://arxiv.org/abs/2303.11579v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Shan, Wenkang",
+          "Liu, Zhenhua",
+          "Zhang, Xinfeng",
+          "Wang, Zhao",
+          "Han, Kai",
+          "Wang, Shanshe",
+          "Ma, Siwei",
+          "Gao, Wen"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/paTRICK-swk/D3DP",
+        "verified_at": "2026-11-18",
+        "basis": "作者发布的 D3DP 实现，含训练、采样、评估和野外序列示例。"
+      }
+    },
+    {
+      "id": "bodynet",
+      "version": "arXiv:1804.04875v1",
+      "format": "arxiv_html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4",
+        "S4.SS4"
+      ],
+      "figure_anchor": [
+        "S1.F2",
+        "Figure 2"
+      ],
+      "source_url": "https://arxiv.org/html/1804.04875v1",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "1804.04875v1",
+        "title": "BodyNet: Volumetric Inference of 3D Human Body Shapes",
+        "url": "https://arxiv.org/abs/1804.04875v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Varol, Gül",
+          "Ceylan, Duygu",
+          "Russell, Bryan",
+          "Yang, Jimei",
+          "Yumer, Ersin",
+          "Laptev, Ivan",
+          "Schmid, Cordelia"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/gulvarol/bodynet",
+        "verified_at": "2026-11-18",
+        "basis": "第一作者仓库提供体素形状预测、训练与 SMPL 拟合代码。"
+      }
+    },
+    {
+      "id": "multiposenet",
+      "version": "arXiv:1807.04067v1",
+      "format": "arxiv_html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4",
+        "S3.SS5"
+      ],
+      "figure_anchor": [
+        "S1.F2",
+        "Figure 2"
+      ],
+      "source_url": "https://arxiv.org/html/1807.04067v1",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "1807.04067v1",
+        "title": "MultiPoseNet: Fast Multi-Person Pose Estimation using Pose Residual Network",
+        "url": "https://arxiv.org/abs/1807.04067v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Kocabas, Muhammed",
+          "Karagoz, Salih",
+          "Akbas, Emre"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/mkocabas/pose-residual-network",
+        "verified_at": "2026-11-18",
+        "basis": "论文指向的作者仓库，提供 MultiPoseNet 与 Pose Residual Network 的实现和运行入口。"
+      }
+    },
+    {
+      "id": "personlab",
+      "version": "arXiv:1803.08225v1",
+      "format": "arxiv_html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS1.SSSx2",
+        "S3.SS2",
+        "S3.SS3",
+        "S4.SS1"
+      ],
+      "figure_anchor": [
+        "S3.F1",
+        "Figure 1"
+      ],
+      "source_url": "https://arxiv.org/html/1803.08225v1",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "1803.08225v1",
+        "title": "PersonLab: Person Pose Estimation and Instance Segmentation with a Bottom-Up, Part-Based, Geometric Embedding Model",
+        "url": "https://arxiv.org/abs/1803.08225v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Papandreou, George",
+          "Zhu, Tyler",
+          "Chen, Liang-Chieh",
+          "Gidaris, Spyros",
+          "Tompson, Jonathan",
+          "Murphy, Kevin"
+        ]
+      }
+    },
+    {
+      "id": "integral-pose",
+      "version": "arXiv:1711.08229v1",
+      "format": "arxiv_html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4",
+        "S5",
+        "S6"
+      ],
+      "figure_anchor": [
+        "S3.F1",
+        "Figure 1"
+      ],
+      "source_url": "https://arxiv.org/html/1711.08229v1",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "1711.08229v1",
+        "title": "Integral Human Pose Regression",
+        "url": "https://arxiv.org/abs/1711.08229v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Sun, Xiao",
+          "Xiao, Bin",
+          "Liang, Shuang",
+          "Wei, Yichen"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/JimmySuen/integral-human-pose",
+        "verified_at": "2026-11-18",
+        "basis": "第一作者仓库提供积分姿态回归的 PyTorch 项目与模型。"
+      }
+    },
+    {
+      "id": "bcir",
+      "version": "arXiv:2301.10431v1",
+      "format": "arxiv_html",
+      "method_sections_or_pages": [
+        "S3.SS2",
+        "S4.SS4",
+        "S5.SS1",
+        "S5.SS2",
+        "S5.SS3"
+      ],
+      "figure_anchor": [
+        "S4.F2",
+        "Figure 2"
+      ],
+      "source_url": "https://arxiv.org/html/2301.10431v1",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2301.10431v1",
+        "title": "Bias-Compensated Integral Regression for Human Pose Estimation",
+        "url": "https://arxiv.org/abs/2301.10431v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Gu, Kerui",
+          "Yang, Linlin",
+          "Mi, Michael Bi",
+          "Yao, Angela"
+        ]
+      }
+    },
+    {
+      "id": "multicontext-attention",
+      "version": "arXiv:1702.07432v1",
+      "format": "arxiv_html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4.SS1",
+        "S5.SS2",
+        "S5.SS2.SSS4",
+        "S6"
+      ],
+      "figure_anchor": [
+        "S1.F2",
+        "Figure 2"
+      ],
+      "source_url": "https://arxiv.org/html/1702.07432v1",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "1702.07432v1",
+        "title": "Multi-Context Attention for Human Pose Estimation",
+        "url": "https://arxiv.org/abs/1702.07432v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Chu, Xiao",
+          "Yang, Wei",
+          "Ouyang, Wanli",
+          "Ma, Cheng",
+          "Yuille, Alan L.",
+          "Wang, Xiaogang"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/bearpaw/pose-attention",
+        "verified_at": "2026-11-18",
+        "basis": "作者 Wei Yang 发布的 CVPR 2017 实现，有独立训练和测试目录。"
+      }
+    },
+    {
+      "id": "posetrack-joint",
+      "version": "arXiv:1611.07727v1",
+      "format": "arxiv_html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4",
+        "S4.SS1"
+      ],
+      "figure_anchor": [
+        "S2.F2",
+        "Figure 2"
+      ],
+      "source_url": "https://arxiv.org/html/1611.07727v1",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "1611.07727v1",
+        "title": "Pose-Track: Joint Multi-Person Pose Estimation and Tracking",
+        "url": "https://arxiv.org/abs/1611.07727v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Iqbal, Umar",
+          "Milan, Anton",
+          "Gall, Juergen"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/umariqb/PoseTrack-CVPR2017",
+        "verified_at": "2026-11-18",
+        "basis": "作者维护的 CVPR 2017 实现，包含时空图划分、DeepCut 依赖及 MATLAB 演示。"
+      }
+    },
+    {
+      "id": "distance-matrix-pose",
+      "version": "arXiv:1611.09010v1",
+      "format": "arxiv_html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4",
+        "S4.SS1"
+      ],
+      "figure_anchor": [
+        "S1.F1",
+        "Figure 1"
+      ],
+      "source_url": "https://arxiv.org/html/1611.09010v1",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "1611.09010v1",
+        "title": "3D Human Pose Estimation from a Single Image via Distance Matrix Regression",
+        "url": "https://arxiv.org/abs/1611.09010v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Moreno-Noguer, Francesc"
+        ]
+      }
+    },
+    {
+      "id": "seeing-invisible-poses",
+      "version": "arXiv:1603.07763v1",
+      "format": "arxiv_html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS3.SSSx5",
+        "S4"
+      ],
+      "figure_anchor": [
+        "S3.F4",
+        "Figure 4"
+      ],
+      "source_url": "https://arxiv.org/html/1603.07763v1",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "1603.07763v1",
+        "title": "Seeing Invisible Poses: Estimating 3D Body Pose from Egocentric Video",
+        "url": "https://arxiv.org/abs/1603.07763v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Jiang, Hao",
+          "Grauman, Kristen"
+        ]
+      }
+    },
+    {
+      "id": "accurate-multiperson-wild",
+      "version": "arXiv:1701.01779v1",
+      "format": "arxiv_html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S4.SS1",
+        "S4.SS3"
+      ],
+      "figure_anchor": [
+        "S3.F1",
+        "Figure 1"
+      ],
+      "source_url": "https://arxiv.org/html/1701.01779v1",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "1701.01779v1",
+        "title": "Towards Accurate Multi-person Pose Estimation in the Wild",
+        "url": "https://arxiv.org/abs/1701.01779v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Papandreou, George",
+          "Zhu, Tyler",
+          "Kanazawa, Nori",
+          "Toshev, Alexander",
+          "Tompson, Jonathan",
+          "Bregler, Chris",
+          "Murphy, Kevin"
+        ]
+      }
+    },
+    {
+      "id": "pose-plus-matching",
+      "version": "arXiv:1612.06524v1",
+      "format": "arxiv_html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S4.SS1",
+        "S4.SS4"
+      ],
+      "figure_anchor": [
+        "S1.F1",
+        "Figure 1"
+      ],
+      "source_url": "https://arxiv.org/html/1612.06524v1",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "1612.06524v1",
+        "title": "3D Human Pose Estimation = 2D Pose Estimation + Matching",
+        "url": "https://arxiv.org/abs/1612.06524v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Chen, Ching-Hang",
+          "Ramanan, Deva"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/flyawaychase/3DHumanPose",
+        "verified_at": "2026-11-18",
+        "basis": "作者 Ching-Hang Chen 的 MATLAB 演示包含从已有二维关节检索三维姿态的代码，二维检测器可单独运行。"
+      }
+    },
+    {
+      "id": "lcrnet",
+      "version": "Official CVPR 2017 open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        2,
+        "Figure 2"
+      ],
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2017/papers/Rogez_LCR-Net_Localization-Classification-Regression_for_CVPR_2017_paper.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "implementation_check": {
+        "url": "https://thoth.inrialpes.fr/src/LCR-Net.html",
+        "verified_at": "2026-11-18",
+        "basis": "Inria 作者页的 Caffe v1.x 对应早期 LCR-Net。提供测试代码，页面随后列出新版实现。"
+      }
+    },
+    {
+      "id": "joint-pose-part-segmentation",
+      "version": "Official CVPR 2017 open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2017/papers/Xia_Joint_Multi-Person_Pose_CVPR_2017_paper.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "visual-inertial-semantics",
+      "version": "Author-hosted IJCV paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 3"
+      ],
+      "source_url": "https://collomosse.com/pubs/Gilbert-IJCV-2019.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "verified_local_original",
+      "original_figure_sources": [
+        "https://link.springer.com/article/10.1007/s11263-018-1118-y#figure-3"
+      ]
+    },
+    {
+      "id": "hand-black-box-2015",
+      "version": "Microsoft Research author-hosted ICCV paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 3"
+      ],
+      "source_url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/04/iccv_2015_camready.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "hand-efficient-forest",
+      "version": "Author-hosted IJCV paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        5,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12
+      ],
+      "figure_anchor": [
+        5,
+        "Figure 2"
+      ],
+      "source_url": "https://www.ece.ualberta.ca/~lcheng5/papers/XuEtAl_IJCV16.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "human36m",
+      "version": "Human3.6M authors official site manuscript",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        6,
+        7,
+        8,
+        9
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "source_url": "https://vision.imar.ro/human3.6m/pami-h36m.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "implementation_check": {
+        "url": "https://vision.imar.ro/human3.6m/description.php#tabHeader_5",
+        "verified_at": "2026-11-18",
+        "basis": "官方 Code and Features 标签说明其可视化、基线姿态估计、特征及学习代码。部分下载需要项目登录。"
+      }
+    },
+    {
+      "id": "kinect-parts-2011",
+      "version": "Microsoft Research author-hosted CVPR paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        1,
+        "Figure 1"
+      ],
+      "source_url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/BodyPartRecognition.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "flexible-parts-2013",
+      "version": "Georgia Tech faculty-hosted IEEE TPAMI paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        8
+      ],
+      "figure_anchor": [
+        8,
+        "Figure 6"
+      ],
+      "source_url": "https://faculty.cc.gatech.edu/~hic/CS7616/Papers/Yang-Ramanan-2013.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "implementation_check": {
+        "url": "https://github.com/yangyi02/human-pose-estimation",
+        "verified_at": "2026-11-18",
+        "basis": "论文作者项目链接的实现，含局部部件、HOG、动态规划及预训练模型。"
+      }
+    },
+    {
+      "id": "hand-model-monocular-2011",
+      "version": "Author-hosted IEEE TPAMI paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "figure_anchor": [
+        2,
+        "Figure 2"
+      ],
+      "source_url": "https://www.cs.toronto.edu/~fleet/research/Papers/handTrackerPAMI.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "hand-annotation-survey",
+      "version": "Springer Nature Version of Record, IJCV 2023",
+      "format": "publisher_html",
+      "method_sections_or_pages": [
+        "Sec2",
+        "Sec3",
+        "Sec4",
+        "Sec8",
+        "Sec9",
+        "Sec12",
+        "Sec13"
+      ],
+      "figure_anchor": [
+        "figure-2",
+        "Figure 2"
+      ],
+      "source_url": "https://link.springer.com/article/10.1007/s11263-023-01856-0",
+      "reading_scope": "targeted_survey_reading",
+      "figure_reuse": "verified_local_original",
+      "original_figure_sources": [
+        "https://link.springer.com/article/10.1007/s11263-023-01856-0#figure-2",
+        "https://link.springer.com/article/10.1007/s11263-023-01856-0#figure-13"
+      ]
+    },
+    {
+      "id": "hand-survey-cameras-2019",
+      "version": "Pattern Recognition 93 (2019), 251–272",
+      "format": "publisher_preview",
+      "method_sections_or_pages": [
+        "Introduction",
+        "Camera evaluation",
+        "Methods and datasets"
+      ],
+      "figure_anchor": [
+        "publisher-figure",
+        "Figure 2"
+      ],
+      "source_url": "https://www.sciencedirect.com/science/article/abs/pii/S0031320319301724",
+      "reading_scope": "publisher_public_preview",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "public_reading_scope": "Pattern Recognition 93 (2019), 251–272 出版商公开预览中的摘要、引言、相机动态实验概述和方法、数据集公开节选"
+    },
+    {
+      "id": "hland-pose",
+      "version": "Neurocomputing 642 (2025), 130336",
+      "format": "publisher_preview",
+      "method_sections_or_pages": [
+        "Introduction",
+        "Method preview",
+        "Datasets and evaluation metrics"
+      ],
+      "figure_anchor": [
+        "publisher-figure",
+        "Figure 1"
+      ],
+      "source_url": "https://www.sciencedirect.com/science/article/abs/pii/S0925231225010082",
+      "reading_scope": "publisher_public_preview",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "public_reading_scope": "Neurocomputing 642 (2025), 130336 出版商公开预览中的摘要、引言、方法预览和实验数据章节片段"
+    },
+    {
+      "id": "a2j-transformer-plus",
+      "version": "TPAMI 2026 author project linked from DOI 10.1109/TPAMI.2025.3609907",
+      "format": "author_project_and_code",
+      "method_sections_or_pages": [
+        "Method Overview",
+        "Official implementation"
+      ],
+      "figure_anchor": [
+        "project-figure",
+        "Figure 3"
+      ],
+      "source_url": "https://changlongjianggit.github.io/A2J-Transformer-Plus/",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "verified_local_original",
+      "implementation_check": {
+        "url": "https://github.com/ChanglongJiangGit/A2J-Transformer-Plus",
+        "verified_at": "2026-11-18",
+        "basis": "期刊版作者项目，含两阶段锚点生成、模型、训练和测试入口。"
+      },
+      "original_figure_sources": [
+        "https://changlongjianggit.github.io/A2J-Transformer-Plus/static/images/method_figure2.png",
+        "https://changlongjianggit.github.io/A2J-Transformer-Plus/static/images/method_figure3.png"
+      ]
+    }
+  ],
+  "earlier_page_figure_update": {
+    "id": "handy",
+    "source_url": "https://openaccess.thecvf.com/content/CVPR2023/supplemental/Potamias_Handy_Towards_a_CVPR_2023_supplemental.pdf#page=1",
+    "figure_reuse": "link_only_no_confirmed_republication_license"
+  }
+}
