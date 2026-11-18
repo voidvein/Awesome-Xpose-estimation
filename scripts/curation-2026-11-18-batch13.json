@@ -1,0 +1,652 @@
+{
+  "review_date": "2026-11-18",
+  "expanded_records": 19,
+  "new_code_links": [
+    "head-cascaded-dual-vision-transformer-for-accurate-facial-landmark-detection-2025",
+    "head-orformer-occlusion-robust-transformer-for-accurate-facial-landmark-detection-2025",
+    "head-heatmap-regression-without-soft-argmax-for-facial-landmark-detection-2025",
+    "hand-complementing-event-streams-and-rgb-frames-for-hand-mesh-reconstruction",
+    "head-t-fake-synthesizing-thermal-images-for-facial-landmarking-2025",
+    "head-generalizable-face-landmarking-guided-by-conditional-face-warping-2024",
+    "hand-g-hop-generative-hand-object-prior-for-interaction-reconstruction-and-grasp-synthesis",
+    "hand-ms-mano-enabling-hand-pose-tracking-with-biomechanical-constraints",
+    "joint-unsup-landmarks"
+  ],
+  "records": [
+    {
+      "id": "posellm-mlp",
+      "version": "arXiv:2507.09139v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4",
+        "S4"
+      ],
+      "figure_anchor": [
+        "S3.F1",
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2507.09139v1",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2507.09139v1",
+        "title": "PoseLLM: Enhancing Language-Guided Human Pose Estimation with MLP Alignment",
+        "url": "https://arxiv.org/abs/2507.09139v1",
+        "license_url": "http://creativecommons.org/licenses/by/4.0/",
+        "authors": [
+          "Zhang, Dewen",
+          "Hussain, Tahir",
+          "An, Wangpeng",
+          "Shouno, Hayaru"
+        ]
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2507.09139v1#S3.F1"
+      ]
+    },
+    {
+      "id": "head-cascaded-dual-vision-transformer-for-accurate-facial-landmark-detection-2025",
+      "version": "arXiv:2411.07167v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S4.SS1"
+      ],
+      "figure_anchor": [
+        "S2.F1",
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2411.07167v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2411.07167v1",
+        "url": "https://arxiv.org/abs/2411.07167v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Dang, Ziqiang",
+          "Li, Jianfang",
+          "Liu, Lin"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/Human3DAIGC/AccurateFacialLandmarkDetection",
+        "verified_at": "2026-11-18",
+        "basis": "项目 README 对应 WACV 论文，包含 Net.py、Vit.py、TrainHeatmapStageFP16.py 及评估入口。"
+      }
+    },
+    {
+      "id": "head-orformer-occlusion-robust-transformer-for-accurate-facial-landmark-detection-2025",
+      "version": "arXiv:2412.13174v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S4.SS1"
+      ],
+      "figure_anchor": [
+        "S2.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2412.13174v1",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2412.13174v1",
+        "url": "https://arxiv.org/abs/2412.13174v1",
+        "license_url": "http://creativecommons.org/licenses/by/4.0/",
+        "authors": [
+          "Chiang, Jui-Che",
+          "Hu, Hou-Ning",
+          "Hou, Bo-Syuan",
+          "Tseng, Chia-Yu",
+          "Liu, Yu-Lun",
+          "Chen, Min-Hung",
+          "Lin, Yen-Yu"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/ben0919/ORFormer",
+        "verified_at": "2026-11-18",
+        "basis": "作者项目页链接此仓库，包含 Model 以及分别训练热图生成器、ORFormer 和下游检测器的入口。"
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2412.13174v1#S2.F2",
+        "https://arxiv.org/html/2412.13174v1#S3.F4"
+      ]
+    },
+    {
+      "id": "head-heatmap-regression-without-soft-argmax-for-facial-landmark-detection-2025",
+      "version": "arXiv:2508.14929v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4.SS1",
+        "S4.SS2",
+        "S5.SS1"
+      ],
+      "figure_anchor": [
+        "S4.F1",
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2508.14929v1",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2508.14929v1",
+        "title": "Heatmap Regression without Soft-Argmax for Facial Landmark Detection",
+        "url": "https://arxiv.org/abs/2508.14929v1",
+        "license_url": "http://creativecommons.org/licenses/by/4.0/",
+        "authors": [
+          "Yang, Chiao-An",
+          "Yeh, Raymond A."
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/ca-joe-yang/regression-without-softarg",
+        "verified_at": "2026-11-18",
+        "basis": "作者论文指向此仓库，含 models、trainers、配置、训练入口和 demo。"
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2508.14929v1#S4.F1"
+      ]
+    },
+    {
+      "id": "unipose-multimodal-llm",
+      "version": "arXiv:2411.16781v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3"
+      ],
+      "figure_anchor": [
+        "S2.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2411.16781v1",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2411.16781v1",
+        "title": "UniPose: A Unified Multimodal Framework for Human Pose Comprehension, Generation and Editing",
+        "url": "https://arxiv.org/abs/2411.16781v1",
+        "license_url": "http://creativecommons.org/licenses/by/4.0/",
+        "authors": [
+          "Li, Yiheng",
+          "Hou, Ruibing",
+          "Chang, Hong",
+          "Shan, Shiguang",
+          "Chen, Xilin"
+        ]
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2411.16781v1#S2.F2"
+      ]
+    },
+    {
+      "id": "kptllm-plus-plus",
+      "version": "arXiv:2507.11102v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4",
+        "S3.SS5",
+        "S3.SS6",
+        "S3.SS7"
+      ],
+      "figure_anchor": [
+        "S3.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2507.11102v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2507.11102v1",
+        "title": "KptLLM++: Towards Generic Keypoint Comprehension with Large Language Model",
+        "url": "https://arxiv.org/abs/2507.11102v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Yang, Jie",
+          "Zeng, Wang",
+          "Jin, Sheng",
+          "Xu, Lumin",
+          "Liu, Wentao",
+          "Qian, Chen",
+          "Li, Zhen",
+          "Zhang, Ruimao"
+        ]
+      }
+    },
+    {
+      "id": "affhandgen",
+      "version": "arXiv:2510.00506v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S2.SS1",
+        "S2.SS2",
+        "S3"
+      ],
+      "figure_anchor": [
+        "S1.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2510.00506v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2510.00506v1",
+        "title": "Affordance-Guided Diffusion Prior for 3D Hand Reconstruction",
+        "url": "https://arxiv.org/abs/2510.00506v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Suzuki, Naru",
+          "Ohkawa, Takehiko",
+          "Banno, Tatsuro",
+          "Lee, Jihyun",
+          "Furuta, Ryosuke",
+          "Sato, Yoichi"
+        ]
+      }
+    },
+    {
+      "id": "dexavatar",
+      "version": "arXiv:2512.21054v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4"
+      ],
+      "figure_anchor": [
+        "S3.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2512.21054v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2512.21054v1",
+        "title": "DexAvatar: 3D Sign Language Reconstruction with Hand and Body Pose Priors",
+        "url": "https://arxiv.org/abs/2512.21054v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Kundu, Kaustubh",
+          "Barua, Hrishav Bakul",
+          "Robertson-Bell, Lucy",
+          "Cai, Zhixi",
+          "Stefanov, Kalin"
+        ]
+      }
+    },
+    {
+      "id": "hand-handbooster-boosting-3d-hand-mesh-reconstruction-by-conditional-synthesis-and-sampling-of-hand-object-interact",
+      "version": "arXiv:2403.18575v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4"
+      ],
+      "figure_anchor": [
+        "S2.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2403.18575v1",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2403.18575v1",
+        "url": "https://arxiv.org/abs/2403.18575v1",
+        "license_url": "http://creativecommons.org/licenses/by/4.0/",
+        "authors": [
+          "Xu, Hao",
+          "Li, Haipeng",
+          "Wang, Yinqiao",
+          "Liu, Shuaicheng",
+          "Fu, Chi-Wing"
+        ]
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2403.18575v1#S2.F2"
+      ]
+    },
+    {
+      "id": "hand-complementing-event-streams-and-rgb-frames-for-hand-mesh-reconstruction",
+      "version": "arXiv:2403.07346v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4"
+      ],
+      "figure_anchor": [
+        "S2.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2403.07346v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2403.07346v1",
+        "url": "https://arxiv.org/abs/2403.07346v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Jiang, Jianping",
+          "Zhou, Xinyu",
+          "Wang, Bingxuan",
+          "Deng, Xiaoming",
+          "Xu, Chao",
+          "Shi, Boxin"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/AlanJiang98/EvRGBHand",
+        "verified_at": "2026-11-18",
+        "basis": "作者项目页链接此实现，仓库包含 src、train.py、环境及数据说明。"
+      }
+    },
+    {
+      "id": "hand-hold-category-agnostic-3d-reconstruction-of-interacting-hands-and-objects-from-video",
+      "version": "arXiv:2311.18448v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4"
+      ],
+      "figure_anchor": [
+        "S1.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2311.18448v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2311.18448v1",
+        "url": "https://arxiv.org/abs/2311.18448v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Fan, Zicong",
+          "Parelli, Maria",
+          "Kadoglou, Maria Eleni",
+          "Kocabas, Muhammed",
+          "Chen, Xu",
+          "Black, Michael J.",
+          "Hilliges, Otmar"
+        ]
+      }
+    },
+    {
+      "id": "hand-single-to-dual-view-adaptation-for-egocentric-3d-hand-pose-estimation",
+      "version": "arXiv:2403.04381v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4.SS1",
+        "S4.SS2",
+        "S4.SS3",
+        "S4.SS4"
+      ],
+      "figure_anchor": [
+        "S4.F4",
+        "Figure 4"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2403.04381v1",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2403.04381v1",
+        "url": "https://arxiv.org/abs/2403.04381v1",
+        "license_url": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "authors": [
+          "Liu, Ruicong",
+          "Ohkawa, Takehiko",
+          "Zhang, Mingfang",
+          "Sato, Yoichi"
+        ]
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2403.04381v1#S4.F4"
+      ]
+    },
+    {
+      "id": "head-t-fake-synthesizing-thermal-images-for-facial-landmarking-2025",
+      "version": "arXiv:2408.15127v2",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S4.SS1",
+        "S4.SS2"
+      ],
+      "figure_anchor": [
+        "S2.F3",
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2408.15127v2",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2408.15127v2",
+        "title": "T-FAKE: Synthesizing Thermal Images for Facial Landmarking",
+        "url": "https://arxiv.org/abs/2408.15127v2",
+        "license_url": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "authors": [
+          "Flotho, Philipp",
+          "Piening, Moritz",
+          "Kukleva, Anna",
+          "Steidl, Gabriele"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/phflot/tfake",
+        "verified_at": "2026-11-18",
+        "basis": "作者论文链接此仓库，分别提供 ThermalizationCode 与 LandmarkerCode。"
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2408.15127v2#S2.F3"
+      ]
+    },
+    {
+      "id": "head-generalizable-face-landmarking-guided-by-conditional-face-warping-2024",
+      "version": "arXiv:2404.12322v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S4.SS1",
+        "S4.SS2"
+      ],
+      "figure_anchor": [
+        "S1.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2404.12322v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2404.12322v1",
+        "title": "Generalizable Face Landmarking Guided by Conditional Face Warping",
+        "url": "https://arxiv.org/abs/2404.12322v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Liang, Jiayi",
+          "Liu, Haotian",
+          "Xu, Hongteng",
+          "Luo, Dixin"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/plustwo0/generalized-face-landmarker",
+        "verified_at": "2026-11-18",
+        "basis": "作者项目页标注官方 PyTorch 实现，仓库有 warp.py、train.py、test.py 和关键点模型。"
+      }
+    },
+    {
+      "id": "hand-hhmr-holistic-hand-mesh-recovery-by-enhancing-the-multimodal-controllability-of-graph-diffusion-models",
+      "version": "arXiv:2406.01334v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S4.SS1",
+        "S4.SS2",
+        "S4.SS3",
+        "S4.SS4"
+      ],
+      "figure_anchor": [
+        "S4.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2406.01334v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2406.01334v1",
+        "title": "HHMR: Holistic Hand Mesh Recovery by Enhancing the Multimodal Controllability of Graph Diffusion Models",
+        "url": "https://arxiv.org/abs/2406.01334v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Li, Mengcheng",
+          "Zhang, Hongwen",
+          "Zhang, Yuxiang",
+          "Shao, Ruizhi",
+          "Yu, Tao",
+          "Liu, Yebin"
+        ]
+      }
+    },
+    {
+      "id": "hand-g-hop-generative-hand-object-prior-for-interaction-reconstruction-and-grasp-synthesis",
+      "version": "arXiv:2404.12383v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S4.SS1",
+        "S4.SS2",
+        "S4.SS3"
+      ],
+      "figure_anchor": [
+        "S2.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2404.12383v1",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2404.12383v1",
+        "title": "G-HOP: Generative Hand-Object Prior for Interaction Reconstruction and Grasp Synthesis",
+        "url": "https://arxiv.org/abs/2404.12383v1",
+        "license_url": "http://creativecommons.org/licenses/by/4.0/",
+        "authors": [
+          "Ye, Yufei",
+          "Gupta, Abhinav",
+          "Kitani, Kris",
+          "Tulsiani, Shubham"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/JudyYe/ghop",
+        "verified_at": "2026-11-18",
+        "basis": "第一作者项目页链接此实现，包含 ddpm3d、train.py、generate.py 和 grasp_syn.py。"
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2404.12383v1#S2.F2",
+        "https://arxiv.org/html/2404.12383v1#S3.F3"
+      ]
+    },
+    {
+      "id": "hand-ms-mano-enabling-hand-pose-tracking-with-biomechanical-constraints",
+      "version": "arXiv:2404.10227v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S4.SS1",
+        "S4.SS2"
+      ],
+      "figure_anchor": [
+        "S3.F4",
+        "Figure 4"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2404.10227v1",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2404.10227v1",
+        "title": "MS-MANO: Enabling Hand Pose Tracking with Biomechanical Constraints",
+        "url": "https://arxiv.org/abs/2404.10227v1",
+        "license_url": "http://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "authors": [
+          "Xie, Pengfei",
+          "Xu, Wenqiang",
+          "Tang, Tutian",
+          "Yu, Zhenjun",
+          "Lu, Cewu"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/panoanx/ms-mano-dynamics",
+        "verified_at": "2026-11-18",
+        "basis": "作者项目列出的 Dynamics 实现，包含 envs、models、train 与配置。Unity 交互演示另由作者项目提供。"
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2404.10227v1#S3.F4"
+      ]
+    },
+    {
+      "id": "head-possloss-a-reliable-and-sensitive-facial-landmark-detection-loss-function-2025",
+      "version": "Official ICCV 2025 open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        5,
+        "Figure 4"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2025/papers/Zhu_PossLoss_A_Reliable_and_Sensitive_Facial_Landmark_Detection_Loss_Function_ICCV_2025_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "joint-unsup-landmarks",
+      "version": "Pattern Recognition 162 (2025) 111393 · author-hosted version",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        2,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://www.cs.uic.edu/~tangw/files/2025_PR_ZhimingZou.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "implementation_check": {
+        "url": "https://github.com/ZhimingZo/unsup-face-analysis",
+        "verified_at": "2026-11-18",
+        "basis": "作者论文链接此实现，包含 network、train、eval 和 checkpoint。"
+      }
+    }
+  ]
+}

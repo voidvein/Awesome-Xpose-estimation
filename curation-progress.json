@@ -2,9 +2,9 @@
   "updated_at": "2026-11-18",
   "total": 371,
   "counts": {
-    "complete": 42,
-    "figure_pending": 229,
-    "pending": 100
+    "complete": 51,
+    "figure_pending": 239,
+    "pending": 81
   },
   "completion_standard": "Source-checked module-level pipeline, separate training/inference, figure guide, and a verified local architecture/process figure. Summaries and applicability notes do not count.",
   "entries": [
@@ -89,12 +89,12 @@
       "id": "joint-unsup-landmarks",
       "category": "Head",
       "title": "Towards unsupervised learning of joint facial landmark detection and head pose estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://www.sciencedirect.com/science/article/pii/S0031320325000536",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 的上方是条件重建，下方是规范点变换，多任务网络把两条监督连接起来。图中头部轮廓是规范点示意。"
     },
     {
       "id": "semiuhpe",
@@ -1816,22 +1816,22 @@
       "id": "head-generalizable-face-landmarking-guided-by-conditional-face-warping-2024",
       "category": "Head",
       "title": "Generalizable Face Landmarking Guided by Conditional Face Warping",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Liang_Generalizable_Face_Landmarking_Guided_by_Conditional_Face_Warping_CVPR_2024_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 显示 SLPT 如何参与构造条件变形。Algorithm 1 给出交替优化步骤，图 3 对照真实照片、目标风格脸和变形后的形状。"
     },
     {
       "id": "head-t-fake-synthesizing-thermal-images-for-facial-landmarking-2025",
       "category": "Head",
       "title": "T-FAKE: Synthesizing Thermal Images for Facial Landmarking",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2025/html/Flotho_T-FAKE_Synthesizing_Thermal_Images_for_Facial_Landmarking_CVPR_2025_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
@@ -1849,22 +1849,22 @@
       "id": "head-possloss-a-reliable-and-sensitive-facial-landmark-detection-loss-function-2025",
       "category": "Head",
       "title": "PossLoss: A Reliable and Sensitive Facial Landmark Detection Loss Function",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2025/html/Zhu_PossLoss_A_Reliable_and_Sensitive_Facial_Landmark_Detection_Loss_Function_ICCV_2025_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "原图转载许可尚未明确，请沿链接查看。图 4 展示各级沙漏怎样接入 PossLoss，以及最后一级怎样解码点位。图 2、3 分别展示损失三项和匹配热图示例。"
     },
     {
       "id": "head-heatmap-regression-without-soft-argmax-for-facial-landmark-detection-2025",
       "category": "Head",
       "title": "Heatmap Regression without Soft-Argmax for Facial Landmark Detection",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2025/html/Yang_Heatmap_Regression_without_Soft-Argmax_for_Facial_Landmark_Detection_ICCV_2025_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
@@ -1893,22 +1893,22 @@
       "id": "head-cascaded-dual-vision-transformer-for-accurate-facial-landmark-detection-2025",
       "category": "Head",
       "title": "Cascaded Dual Vision Transformer for Accurate Facial Landmark Detection",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/WACV2025/html/Dang_Cascaded_Dual_Vision_Transformer_for_Accurate_Facial_Landmark_Detection_WACV_2025_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "原图转载许可尚未明确，请沿链接查看。图 1 上方的黑线把同一底层特征分发到多级。图 2 用 1×1 卷积解释每个热图如何由通道基底组合。"
     },
     {
       "id": "head-orformer-occlusion-robust-transformer-for-accurate-facial-landmark-detection-2025",
       "category": "Head",
       "title": "ORFormer: Occlusion-Robust Transformer for Accurate Facial Landmark Detection",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://openaccess.thecvf.com/content/WACV2025/html/Chiang_ORFormer_Occlusion-Robust_Transformer_for_Accurate_Facial_Landmark_Detection_WACV_2025_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
@@ -2531,77 +2531,77 @@
       "id": "hand-handbooster-boosting-3d-hand-mesh-reconstruction-by-conditional-synthesis-and-sampling-of-hand-object-interact",
       "category": "Hand",
       "title": "HandBooster: Boosting 3D Hand-Mesh Reconstruction by Conditional Synthesis and Sampling of Hand-Object Interactions",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Xu_HandBooster_Boosting_3D_Hand-Mesh_Reconstruction_by_Conditional_Synthesis_and_Sampling_CVPR_2024_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
       "id": "hand-complementing-event-streams-and-rgb-frames-for-hand-mesh-reconstruction",
       "category": "Hand",
       "title": "Complementing Event Streams and RGB Frames for Hand Mesh Reconstruction",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Jiang_Complementing_Event_Streams_and_RGB_Frames_for_Hand_Mesh_Reconstruction_CVPR_2024_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 分开画训练数据退化和重建主干。图 3 放大融合模块，便于跟踪两个传感器特征如何生成加权表示。"
     },
     {
       "id": "hand-hhmr-holistic-hand-mesh-recovery-by-enhancing-the-multimodal-controllability-of-graph-diffusion-models",
       "category": "Hand",
       "title": "HHMR: Holistic Hand Mesh Recovery by Enhancing the Multimodal Controllability of Graph Diffusion Models",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Li_HHMR_Holistic_Hand_Mesh_Recovery_by_Enhancing_the_Multimodal_Controllability_CVPR_2024_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 显示不同条件进入共享图 U-Net 的位置，以及观测一致性如何影响逆扩散。"
     },
     {
       "id": "hand-single-to-dual-view-adaptation-for-egocentric-3d-hand-pose-estimation",
       "category": "Hand",
       "title": "Single-to-Dual-View Adaptation for Egocentric 3D Hand Pose Estimation",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Liu_Single-to-Dual-View_Adaptation_for_Egocentric_3D_Hand_Pose_Estimation_CVPR_2024_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
       "id": "hand-hold-category-agnostic-3d-reconstruction-of-interacting-hands-and-objects-from-video",
       "category": "Hand",
       "title": "HOLD: Category-agnostic 3D Reconstruction of Interacting Hands and Objects from Video",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Fan_HOLD_Category-agnostic_3D_Reconstruction_of_Interacting_Hands_and_Objects_from_CVPR_2024_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 展示粗拟合、姿态更新和完整训练。图 3 从一条射线解释手、物体和背景采样怎样进入不同规范空间再合成。"
     },
     {
       "id": "hand-g-hop-generative-hand-object-prior-for-interaction-reconstruction-and-grasp-synthesis",
       "category": "Hand",
       "title": "G-HOP: Generative Hand-Object Prior for Interaction Reconstruction and Grasp Synthesis",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Ye_G-HOP_Generative_Hand-Object_Prior_for_Interaction_Reconstruction_and_Grasp_Synthesis_CVPR_2024_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
       "id": "hand-ms-mano-enabling-hand-pose-tracking-with-biomechanical-constraints",
       "category": "Hand",
       "title": "MS-MANO: Enabling Hand Pose Tracking with Biomechanical Constraints",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Xie_MS-MANO_Enabling_Hand_Pose_Tracking_with_Biomechanical_Constraints_CVPR_2024_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
@@ -3609,22 +3609,22 @@
       "id": "kptllm-plus-plus",
       "category": "Human",
       "title": "KptLLM++: Towards Generic Keypoint Comprehension with Large Language Model",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2507.11102",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 对照三种任务实际启用的输入，注意参考图经过交叉注意力压缩为点提示，坐标最终由语言模型生成。"
     },
     {
       "id": "posellm-mlp",
       "category": "Human",
       "title": "PoseLLM: Enhancing Language-Guided Human Pose Estimation with MLP Alignment",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://arxiv.org/abs/2507.09139",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
@@ -3642,23 +3642,23 @@
       "id": "unipose-multimodal-llm",
       "category": "Human",
       "title": "UniPose: A Unified Multimodal Framework for Human Pose Comprehension, Generation and Editing",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://arxiv.org/abs/2411.16781",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
       "id": "affhandgen",
       "category": "Hand",
       "title": "Affordance-Guided Diffusion Prior for 3D Hand Reconstruction",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2510.00506",
-      "reading_level": "primary_abstract_and_project",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 左边是文字生成，右边是条件扩散训练。图 3 展示怎样从 HaMeR 初值出发，对遮挡和可见关节区别处理。"
     },
     {
       "id": "hipart-hierarchical-pose-autoregressive-transformer-for-occluded-3d-human-pose-estimation",
@@ -4082,12 +4082,12 @@
       "id": "dexavatar",
       "category": "Human",
       "title": "DexAvatar: 3D Sign Language Reconstruction with Hand and Body Pose Priors",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/WACV2026/html/Kundu_DexAvatar_3D_Sign_Language_Reconstruction_with_Hand_and_Body_Pose_WACV_2026_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "原图转载许可尚未明确，请沿链接查看。图 2 连接预训练估计器、双手及身体潜变量与优化项。图 3、4 分别解释训练先验前如何筛选身体姿态和校正手指。"
     }
   ]
 }

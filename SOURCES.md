@@ -192,3 +192,10 @@ Four code links were added after inspecting corresponding READMEs and public imp
 
 - 7 篇论文收录 9 张原图。HiPART、PromptHMR、UniHOPE、MaskHand、Dyn-HaMR、GLSMamba 和 Fish2Mesh 的版本、作者、图号、授权依据和源文件校验值见 `assets/figures/manifest.json`。12 篇保留原文图或算法链接。Fish2Mesh 原图作者署名以 arXiv v1 署名为准。
 - 新增 10 个红色 `code` 入口。EgoPressure 指向作者团队的数据工具包，Fish2Mesh 指向团队实现，LDPose 指向注明来源的第三方推理实现。MV-SSM 当前公开仓库仅提供说明和示例。核对范围为项目说明和公开文件，未运行实现或复现实验。
+
+## 2026-11-18：第 13 批手部、头部与人体方法详情
+
+本批补充 19 篇现有论文的方法流程、训练、推理与原图导读。阅读范围记录在 `scripts/curation-2026-11-18-batch13.json`。HandBooster 和 T-FAKE 的数据合成与下游预测分开说明，HOLD 与 G-HOP 的每视频优化保留各自的初始化和监督。ORFormer 的热图码本预训练、推理时的软遮挡权重和下游人脸定位分别对应原文模块。
+
+- 9 篇论文收录 11 张未经修改的原图，另有 10 篇保留原图链接。全部图号、版本、许可依据和源文件散列值可在图像清单中核对。结构化热图回归收录原文的标签平滑图，网络与训练目标另在正文解释。
+- 新增 9 个经 README 与实现入口核对的代码链接。其中 MS-MANO 按钮直达作者 Dynamics 实现，项目页另列 Unity 演示。代码和权重未经运行验证。

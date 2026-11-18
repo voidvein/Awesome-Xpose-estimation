@@ -592,3 +592,115 @@ David C. Jeong, Aditya Puranik, James Vong, Vrushabh Abhijit Deogirikar, Ryan Fe
 - License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 - License evidence: https://arxiv.org/abs/2503.06089v1
 - SHA-256: `28a67a24f93b3c45e3979993b4ce59fe6646e7d17f23e88de80623e4ce85bb6f`
+
+## Original figures from Hand, Head and Human methods, batch 13
+
+### assets/figures/posellm-original.png
+
+Dewen Zhang, Tahir Hussain, Wangpeng An, Hayaru Shouno. PoseLLM: Enhancing Language-Guided Human Pose Estimation with MLP Alignment, Figure 1, arXiv:2507.09139v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2507.09139v1#S3.F1
+- Original file: https://arxiv.org/html/2507.09139v1/architecture_posellm.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2507.09139v1
+- SHA-256: `55d44c3788bbc22eb1542de353761cbfc041881ac7f6a16e7120e39e31c8c0b4`
+
+### assets/figures/orformer-original.png
+
+Jui-Che Chiang, Hou-Ning Hu, Bo-Syuan Hou, Chia-Yu Tseng, Yu-Lun Liu, Min-Hung Chen, Yen-Yu Lin. ORFormer: Occlusion-Robust Transformer for Accurate Facial Landmark Detection, Figure 2, arXiv:2412.13174v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2412.13174v1#S2.F2
+- Original file: https://arxiv.org/html/2412.13174v1/overview.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2412.13174v1
+- SHA-256: `02c836aa51eb4163b7cc1c08fb540f2bb45e3fcbd92230aa8c889142e203dec6`
+
+### assets/figures/orformer-integration-original.png
+
+Jui-Che Chiang, Hou-Ning Hu, Bo-Syuan Hou, Chia-Yu Tseng, Yu-Lun Liu, Min-Hung Chen, Yen-Yu Lin. ORFormer: Occlusion-Robust Transformer for Accurate Facial Landmark Detection, Figure 4, arXiv:2412.13174v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2412.13174v1#S3.F4
+- Original file: https://arxiv.org/html/2412.13174v1/integration2.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2412.13174v1
+- SHA-256: `f2528bf49b4532892f2d55aaa61261f8cd4cf5d42fbe48e70d07e0f90aa6e73d`
+
+### assets/figures/structured-landmarks-smoothing-original.png
+
+Chiao-An Yang, Raymond A. Yeh. Heatmap Regression without Soft-Argmax for Facial Landmark Detection, Figure 1, arXiv:2508.14929v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2508.14929v1#S4.F1
+- Original file: https://arxiv.org/html/2508.14929v1/label_smooth.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2508.14929v1
+- SHA-256: `f87588d973c98528b1477fbf30d6d45cb7e63b70b1c9bc69605bb388c115214a`
+
+### assets/figures/unipose-original.png
+
+Yiheng Li, Ruibing Hou, Hong Chang, Shiguang Shan, Xilin Chen. UniPose: A Unified Multimodal Framework for Human Pose Comprehension, Generation and Editing, Figure 2, arXiv:2411.16781v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2411.16781v1#S2.F2
+- Original file: https://arxiv.org/html/2411.16781v1/framework.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2411.16781v1
+- SHA-256: `04bd040791adf67617832396c074c1f75ec52a5daa8baabc4347b47ba204070f`
+
+### assets/figures/handbooster-original.png
+
+Hao Xu, Haipeng Li, Yinqiao Wang, Shuaicheng Liu, Chi-Wing Fu. HandBooster: Boosting 3D Hand-Mesh Reconstruction by Conditional Synthesis and Sampling of Hand-Object Interactions, Figure 2, arXiv:2403.18575v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2403.18575v1#S2.F2
+- Original file: https://arxiv.org/html/2403.18575v1/ppl.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2403.18575v1
+- SHA-256: `833c88d21eb596eb653dfd5aaa520e4b508edf99dce3cf36689f3194113e40ed`
+
+### assets/figures/s2dhand-original.png
+
+Ruicong Liu, Takehiko Ohkawa, Mingfang Zhang, Yoichi Sato. Single-to-Dual-View Adaptation for Egocentric 3D Hand Pose Estimation, Figure 4, arXiv:2403.04381v1. CC BY-NC-SA 4.0.
+
+- Original source: https://arxiv.org/html/2403.04381v1#S4.F4
+- Original file: https://arxiv.org/html/2403.04381v1/overview-wo_edge-v2.png
+- License: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+- License evidence: https://arxiv.org/abs/2403.04381v1
+- SHA-256: `98f693dc397ea7ff292c3cf27266e980a69bf4a9ef07ae6e08af103af1c52489`
+
+### assets/figures/tfake-original.png
+
+Philipp Flotho, Moritz Piening, Anna Kukleva, Gabriele Steidl. T-FAKE: Synthesizing Thermal Images for Facial Landmarking, Figure 3, arXiv:2408.15127v2. CC BY-NC-SA 4.0.
+
+- Original source: https://arxiv.org/html/2408.15127v2#S2.F3
+- Original file: https://arxiv.org/html/2408.15127v2/LandmarkViz.png
+- License: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+- License evidence: https://arxiv.org/abs/2408.15127v2
+- SHA-256: `4a4e65df626a60b0445c6f011c8a0195409f82ad56ef38a067d2ecffa92bb34e`
+
+### assets/figures/ghop-original.png
+
+Yufei Ye, Abhinav Gupta, Kris Kitani, Shubham Tulsiani. G-HOP: Generative Hand-Object Prior for Interaction Reconstruction and Grasp Synthesis, Figure 2, arXiv:2404.12383v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2404.12383v1#S2.F2
+- Original file: https://arxiv.org/html/2404.12383v1/method_diffusion_grid.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2404.12383v1
+- SHA-256: `e48c0486219415439d79e1034d11ccfd8cd6c63cbc3c492cb016335a5ac88ccf`
+
+### assets/figures/ghop-reconstruction-original.png
+
+Yufei Ye, Abhinav Gupta, Kris Kitani, Shubham Tulsiani. G-HOP: Generative Hand-Object Prior for Interaction Reconstruction and Grasp Synthesis, Figure 3, arXiv:2404.12383v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2404.12383v1#S3.F3
+- Original file: https://arxiv.org/html/2404.12383v1/method_recon.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2404.12383v1
+- SHA-256: `8486b2d987d245c7d907569db06eb448bec54a6f3f5ef69f76334678f323e1e3`
+
+### assets/figures/ms-mano-biopr-original.png
+
+Pengfei Xie, Wenqiang Xu, Tutian Tang, Zhenjun Yu, Cewu Lu. MS-MANO: Enabling Hand Pose Tracking with Biomechanical Constraints, Figure 4, arXiv:2404.10227v1. CC BY-NC-ND 4.0.
+
+- Original source: https://arxiv.org/html/2404.10227v1#S3.F4
+- Original file: https://arxiv.org/html/2404.10227v1/pipeline_0330.png
+- License: [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+- License evidence: https://arxiv.org/abs/2404.10227v1
+- SHA-256: `f1259f3114a17a7b7c9052d070f6e3f1eb9104ec32b9fe0b165edd8fc493c2a7`

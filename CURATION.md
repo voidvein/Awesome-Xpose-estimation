@@ -1,6 +1,6 @@
 # 详情页构建进度
 
-更新：2026-11-18。共 371 篇；流程说明已完成 271 篇，其中原图已收录 42 篇；待开展 100 篇。
+更新：2026-11-18。共 371 篇；流程说明已完成 290 篇，其中原图已收录 51 篇；待开展 81 篇。
 
 每篇按原文核对模块顺序、数据流、训练与推理、图号及版本。只使用论文原图；转载许可未明确时只保留原图链接，不重绘。摘要与适用边界笔记不计为流程精读完成。
 
@@ -33,7 +33,14 @@
 - [MotionBERT: A Unified Perspective on Learning Human Motion Representations](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=motionbert)
 - [Humans in 4D: Reconstructing and Tracking Humans with Transformers](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=4dhumans)
 - [SMPLer-X: Scaling Up Expressive Human Pose and Shape Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=smplerx)
+- [T-FAKE: Synthesizing Thermal Images for Facial Landmarking](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-t-fake-synthesizing-thermal-images-for-facial-landmarking-2025)
+- [Heatmap Regression without Soft-Argmax for Facial Landmark Detection](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-heatmap-regression-without-soft-argmax-for-facial-landmark-detection-2025)
+- [ORFormer: Occlusion-Robust Transformer for Accurate Facial Landmark Detection](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-orformer-occlusion-robust-transformer-for-accurate-facial-landmark-detection-2025)
 - [A Simple Baseline for Efficient Hand Mesh Reconstruction](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-a-simple-baseline-for-efficient-hand-mesh-reconstruction)
+- [HandBooster: Boosting 3D Hand-Mesh Reconstruction by Conditional Synthesis and Sampling of Hand-Object Interactions](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-handbooster-boosting-3d-hand-mesh-reconstruction-by-conditional-synthesis-and-sampling-of-hand-object-interact)
+- [Single-to-Dual-View Adaptation for Egocentric 3D Hand Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-single-to-dual-view-adaptation-for-egocentric-3d-hand-pose-estimation)
+- [G-HOP: Generative Hand-Object Prior for Interaction Reconstruction and Grasp Synthesis](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-g-hop-generative-hand-object-prior-for-interaction-reconstruction-and-grasp-synthesis)
+- [MS-MANO: Enabling Hand Pose Tracking with Biomechanical Constraints](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-ms-mano-enabling-hand-pose-tracking-with-biomechanical-constraints)
 - [Rethinking the Heatmap Regression for Bottom-Up Human Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=swahr)
 - [Reconstructing 3D Human Pose by Watching Humans in the Mirror](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=mirrored-human)
 - [FCPose: Fully Convolutional Multi-Person Pose Estimation With Dynamic Instance-Aware Convolutions](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=fcpose)
@@ -43,6 +50,8 @@
 - [One-Stage 3D Whole-Body Mesh Recovery With Component Aware Transformer](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=osx)
 - [AiOS: All-in-One-Stage Expressive Human Pose and Shape Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=aios)
 - [Probabilistic Monocular 3D Human Pose Estimation With Normalizing Flows](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=normalizing-flow-pose)
+- [PoseLLM: Enhancing Language-Guided Human Pose Estimation with MLP Alignment](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=posellm-mlp)
+- [UniPose: A Unified Multimodal Framework for Human Pose Comprehension, Generation and Editing](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=unipose-multimodal-llm)
 - [HiPART: Hierarchical Pose AutoRegressive Transformer for Occluded 3D Human Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hipart-hierarchical-pose-autoregressive-transformer-for-occluded-3d-human-pose-estimation)
 - [Dyn-HaMR: Recovering 4D Interacting Hand Motion from a Dynamic Camera](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=dyn-hamr-recovering-4d-interacting-hand-motion-from-a-dynamic-camera)
 - [PromptHMR: Promptable Human Mesh Recovery](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=prompthmr-promptable-human-mesh-recovery)
@@ -56,6 +65,7 @@
 - [Infinite 3D Landmarks: Improving Continuous 2D Facial Landmark Detection](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=infinite-landmarks)
 - [Unsupervised Discovery of Facial Landmarks and Head Pose](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=uld-headpose)
 - [FaceXFormer: A Unified Transformer for Facial Analysis](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=facexformer)
+- [Towards unsupervised learning of joint facial landmark detection and head pose estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=joint-unsup-landmarks)
 - [Semi-Supervised Unconstrained Head Pose Estimation in the Wild](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=semiuhpe)
 - [VGGT-HPE: Reframing Head Pose Estimation as Relative Pose Prediction](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=vggt-hpe)
 - [ReVA-HPE: Relative 6DoF Head Pose Estimation with Synthetic Pose Supervision and Personalized Virtual Anchors](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=reva-hpe)
@@ -188,6 +198,9 @@
 - [Sparse Local Patch Transformer for Robust Face Alignment and Landmarks Inherent Relation Learning](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-sparse-local-patch-transformer-for-robust-face-alignment-and-landmarks-inherent-relation-learning-2022)
 - [Occlusion-Robust Face Alignment Using a Viewpoint-Invariant Hierarchical Network Architecture](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-occlusion-robust-face-alignment-using-a-viewpoint-invariant-hierarchical-network-architecture-2022)
 - [DSFNet: Dual Space Fusion Network for Occlusion-Robust 3D Dense Face Alignment](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-dsfnet-dual-space-fusion-network-for-occlusion-robust-3d-dense-face-alignment-2023)
+- [Generalizable Face Landmarking Guided by Conditional Face Warping](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-generalizable-face-landmarking-guided-by-conditional-face-warping-2024)
+- [PossLoss: A Reliable and Sensitive Facial Landmark Detection Loss Function](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-possloss-a-reliable-and-sensitive-facial-landmark-detection-loss-function-2025)
+- [Cascaded Dual Vision Transformer for Accurate Facial Landmark Detection](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-cascaded-dual-vision-transformer-for-accurate-facial-landmark-detection-2025)
 - [Novel-View Synthesis and Pose Estimation for Hand-Object Interaction from Sparse Views](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-novel-view-synthesis-and-pose-estimation-for-hand-object-interaction-from-sparse-views)
 - [Diffusion-Guided Reconstruction of Everyday Hand-Object Interaction Clips](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-diffusion-guided-reconstruction-of-everyday-hand-object-interaction-clips)
 - [HandR2N2: Iterative 3D Hand Pose Estimation Using a Residual Recurrent Neural Network](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-handr2n2-iterative-3d-hand-pose-estimation-using-a-residual-recurrent-neural-network)
@@ -225,6 +238,9 @@
 - [3D Hand Pose Estimation Using Randomized Decision Forest With Segmentation Index Points](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-3d-hand-pose-estimation-using-randomized-decision-forest-with-segmentation-index-points)
 - [Evolutionary Quasi-random Search for Hand Articulations Tracking](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-evolutionary-quasi-random-search-for-hand-articulations-tracking)
 - [HOISDF: Constraining 3D Hand-Object Pose Estimation with Global Signed Distance Fields](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-hoisdf-constraining-3d-hand-object-pose-estimation-with-global-signed-distance-fields)
+- [Complementing Event Streams and RGB Frames for Hand Mesh Reconstruction](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-complementing-event-streams-and-rgb-frames-for-hand-mesh-reconstruction)
+- [HHMR: Holistic Hand Mesh Recovery by Enhancing the Multimodal Controllability of Graph Diffusion Models](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-hhmr-holistic-hand-mesh-recovery-by-enhancing-the-multimodal-controllability-of-graph-diffusion-models)
+- [HOLD: Category-agnostic 3D Reconstruction of Interacting Hands and Objects from Video](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-hold-category-agnostic-3d-reconstruction-of-interacting-hands-and-objects-from-video)
 - [Body Meshes as Points](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=bmp)
 - [Beyond Static Features for Temporally Consistent 3D Human Pose and Shape From a Video](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=tcmr)
 - [TesseTrack: End-to-End Learnable Multi-Person Articulated 3D Pose Tracking](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=tessetrack)
@@ -266,7 +282,9 @@
 - [PyMAF: 3D Human Pose and Shape Regression With Pyramidal Mesh Alignment Feedback Loop](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=pymaf)
 - [LocLLM: Exploiting Generalizable Human Keypoint Localization via Large Language Model](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=locllm)
 - [KptLLM: Unveiling the Power of Large Language Model for Keypoint Comprehension](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=kptllm)
+- [KptLLM++: Towards Generic Keypoint Comprehension with Large Language Model](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=kptllm-plus-plus)
 - [CapeLLM: Support-Free Category-Agnostic Pose Estimation with Multimodal Large Language Models](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=capellm)
+- [Affordance-Guided Diffusion Prior for 3D Hand Reconstruction](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=affhandgen)
 - [MEGA: Masked Generative Autoencoder for Human Mesh Recovery](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=mega-masked-generative-autoencoder-for-human-mesh-recovery)
 - [MV-SSM: Multi-View State Space Modeling for 3D Human Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=mv-ssm-multi-view-state-space-modeling-for-3d-human-pose-estimation)
 - [HeatFormer: A Neural Optimizer for Multiview Human Mesh Recovery](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=heatformer-a-neural-optimizer-for-multiview-human-mesh-recovery)
@@ -282,6 +300,7 @@
 - [Robust Head-Pose Estimation Based on Partially-Latent Mixture of Linear Regressions](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hpe-partially-latent)
 - [Pose Priors from Language Models](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=prosepose)
 - [LangPose: Language-Aligned Motion for Robust 3D Human Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=langpose)
+- [DexAvatar: 3D Sign Language Reconstruction with Hand and Body Pose Priors](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=dexavatar)
 
 ## 后续队列
 

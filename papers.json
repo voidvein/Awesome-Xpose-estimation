@@ -649,19 +649,89 @@
     },
     "analysis": {
       "problem": "人工面部关键点和头姿标签成本高，需要从图像本身学习二者关系。",
-      "method": "共享编码器连接关键点与刚体姿态预测头，学习一组规范三维关键点；由目标图像的结构特征和增强源图像的外观特征重建目标图像。",
+      "method": "方法从无标注脸图联合学习二维关键点和刚体头姿。训练时用图像重建学习关键点，再用可学习的规范三维点给头姿分支提供几何一致性监督。",
       "inputs_outputs": "训练使用无标注人脸及其增强；输出面部关键点和头部姿态。",
       "contribution": "用可学习三维规范结构连接关键点与姿态，再通过图像重建形成无需人工标签的训练信号。",
       "limitations": "重建监督约束关键点与姿态，但不直接提供人工关键点的语义对应；规范形状与姿态的解耦需单独检查。",
       "sources": [
         "https://www.sciencedirect.com/science/article/pii/S0031320325000536",
-        "https://www.cs.uic.edu/~tangw/files/2025_PR_ZhimingZou.pdf"
+        "https://www.cs.uic.edu/~tangw/files/2025_PR_ZhimingZou.pdf",
+        "https://www.cs.uic.edu/~tangw/files/2025_PR_ZhimingZou.pdf#page=2",
+        "https://www.cs.uic.edu/~tangw/files/2025_PR_ZhimingZou.pdf#page=3",
+        "https://www.cs.uic.edu/~tangw/files/2025_PR_ZhimingZou.pdf#page=4",
+        "https://www.cs.uic.edu/~tangw/files/2025_PR_ZhimingZou.pdf#page=5",
+        "https://www.cs.uic.edu/~tangw/files/2025_PR_ZhimingZou.pdf#page=6",
+        "https://github.com/ZhimingZo/unsup-face-analysis"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未经本页运行验证。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对正式记录或预印本摘要，并定向阅读Pattern Recognition 162 (2025) 111393 · author-hosted version 的 PDF 第 2、3、4、5、6 页，核对方法、训练、推理和图示。"
+    },
+    "pipeline": {
+      "overview": "方法从无标注脸图联合学习二维关键点和刚体头姿。训练时用图像重建学习关键点，再用可学习的规范三维点给头姿分支提供几何一致性监督。",
+      "steps": [
+        {
+          "title": "共享嵌入预测两类量",
+          "description": "共享编码器提取人脸特征。关键点头生成归一化热图并按期望读出坐标，姿态头回归平移和连续 6D 旋转表示，再转换为旋转矩阵。"
+        },
+        {
+          "title": "把二维预测用作结构条件",
+          "description": "对同张脸构造不同增强，保留一侧的外观特征，从目标侧二维点生成代表关键点结构的热图，两路合并重建目标图。"
+        },
+        {
+          "title": "学习规范三维关键点",
+          "description": "训练中维护一组可学习的三维规范点，经估计的旋转和平移变到当前姿态，再透视投影到图像坐标。"
+        },
+        {
+          "title": "用投影对齐赋予头姿监督",
+          "description": "将投影点与二维检测点对齐。默认配置在二维点处停止这个损失的梯度，避免刚体模板与真实表情或个体脸形的差异牵动关键点头。"
+        },
+        {
+          "title": "单张脸同时输出两类预测",
+          "description": "推理仅运行共享编码器及两个预测头，输出二维点和相对规范姿态的刚体变换。图像生成器与规范点投影用于训练。"
+        }
+      ],
+      "training": "在无标注 CelebA 图像上联合优化。感知重建比较深层图像特征，几何一致性经旋转、平移及规范点更新三维分支。",
+      "inference": "给定一张新的人脸图即可前向得到发现的关键点和头姿。如需对齐某套有名关键点定义，论文评测另用线性回归映射。",
+      "figure_reading": "图 2 的上方是条件重建，下方是规范点变换，多任务网络把两条监督连接起来。图中头部轮廓是规范点示意。",
+      "sources": [
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://www.cs.uic.edu/~tangw/files/2025_PR_ZhimingZou.pdf#page=2"
+        },
+        {
+          "label": "方法正文 · PDF 第 3 页",
+          "url": "https://www.cs.uic.edu/~tangw/files/2025_PR_ZhimingZou.pdf#page=3"
+        },
+        {
+          "label": "方法正文 · PDF 第 4 页",
+          "url": "https://www.cs.uic.edu/~tangw/files/2025_PR_ZhimingZou.pdf#page=4"
+        },
+        {
+          "label": "方法正文 · PDF 第 5 页",
+          "url": "https://www.cs.uic.edu/~tangw/files/2025_PR_ZhimingZou.pdf#page=5"
+        },
+        {
+          "label": "方法正文 · PDF 第 6 页",
+          "url": "https://www.cs.uic.edu/~tangw/files/2025_PR_ZhimingZou.pdf#page=6"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://www.cs.uic.edu/~tangw/files/2025_PR_ZhimingZou.pdf#page=2",
+      "caption": "Figure 2 · Towards unsupervised learning of joint facial landmark detection and head pose estimation",
+      "note": "原图转载许可尚未明确，请沿链接查看。图 2 的上方是条件重建，下方是规范点变换，多任务网络把两条监督连接起来。图中头部轮廓是规范点示意。"
+    },
+    "code": "https://github.com/ZhimingZo/unsup-face-analysis",
+    "code_provenance": {
+      "url": "https://github.com/ZhimingZo/unsup-face-analysis",
+      "verified_at": "2026-11-18",
+      "basis": "作者论文链接此实现，包含 network、train、eval 和 checkpoint。"
     }
   },
   {
@@ -16034,25 +16104,105 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "将关键点预测嵌入条件人脸变形器，结合带标注真实脸与无标注风格化人脸生成伪关键点，交替优化以提高跨风格泛化。",
+      "method": "方法让风格化脸的关键点同时作为标注预测和几何变形锚点。真实脸变形后要匹配目标脸结构，再用由此获得的伪标注训练可跨风格使用的 SLPT。",
       "limitations": "无标注风格化脸通过变形器获得伪关键点；跨风格结果需明确目标域数据是否参与训练。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2024/html/Liang_Generalizable_Face_Landmarking_Guided_by_Conditional_Face_Warping_CVPR_2024_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2024/html/Liang_Generalizable_Face_Landmarking_Guided_by_Conditional_Face_Warping_CVPR_2024_paper.html",
+        "https://arxiv.org/html/2404.12322v1#S3.SS1",
+        "https://arxiv.org/html/2404.12322v1#S3.SS2",
+        "https://arxiv.org/html/2404.12322v1#S4.SS1",
+        "https://arxiv.org/html/2404.12322v1#S4.SS2",
+        "https://arxiv.org/html/2404.12322v1#S1.F2",
+        "https://arxiv.org/html/2404.12322v1#alg1",
+        "https://arxiv.org/html/2404.12322v1#S3.F3",
+        "https://github.com/plustwo0/generalized-face-landmarker"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录或预印本摘要，并定向阅读作者预印本 arXiv:2404.12322v1 的 S3.SS1, S3.SS2, S4.SS1, S4.SS2 章节，核对方法、训练、推理和图示。",
+      "verified_at": "2026-11-18",
       "problem": "风格化人脸差异大且标注少，使真实人脸训练的关键点模型泛化受限。",
       "inputs_outputs": "有标注真实脸和无标注风格化脸用于训练，输出跨风格人脸关键点。",
       "contribution": "通过条件变形场构造风格化伪关键点，交替优化图像匹配和关键点监督。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未经本页运行验证。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "方法让风格化脸的关键点同时作为标注预测和几何变形锚点。真实脸变形后要匹配目标脸结构，再用由此获得的伪标注训练可跨风格使用的 SLPT。",
+      "steps": [
+        {
+          "title": "配对真实脸和风格脸",
+          "description": "训练时采样带真实关键点的照片和无标注风格脸。SLPT 对风格脸预测点位，真实照片的标注提供变形的另一端。"
+        },
+        {
+          "title": "由对应锚点构造稠密变形",
+          "description": "用薄板样条加线性项表示逆向坐标映射，将目标脸每个像素映回真实脸，借助网格采样得到形变后的照片。"
+        },
+        {
+          "title": "以图像梯度约束结构",
+          "description": "用 Sobel 梯度比较形变照片和目标风格脸，同时把预测关键点映回真实脸坐标，与真实标注比较。"
+        },
+        {
+          "title": "从当前变形估计产生伪标注",
+          "description": "在变形优化阶段一起更新形变参数和关键点模型，得到可使照片对齐风格脸结构的目标点预测，固定这些点作为下一阶段的伪标签。"
+        },
+        {
+          "title": "交替更新通用关键点模型",
+          "description": "在真实标注和固定的风格脸伪标注上更新 SLPT，随后重新优化变形并更新伪标注，反复迭代。"
+        }
+      ],
+      "training": "使用带标注真实脸和无标注风格脸。变形优化看图像梯度与关键点变形误差，关键点模型优化看真实监督和伪标注一致性。",
+      "inference": "测试时单张真实或风格脸直接进入训练好的面部关键点模型，输出二维坐标。配对照片和变形采样属于训练环节。",
+      "figure_reading": "图 2 显示 SLPT 如何参与构造条件变形。Algorithm 1 给出交替优化步骤，图 3 对照真实照片、目标风格脸和变形后的形状。",
+      "sources": [
+        {
+          "label": "3.1 Face Landmarking Guided by Face Warping",
+          "url": "https://arxiv.org/html/2404.12322v1#S3.SS1"
+        },
+        {
+          "label": "3.2 Alternating Optimization Strategy",
+          "url": "https://arxiv.org/html/2404.12322v1#S3.SS2"
+        },
+        {
+          "label": "4.1 Dataset",
+          "url": "https://arxiv.org/html/2404.12322v1#S4.SS1"
+        },
+        {
+          "label": "4.2 Learning Paradigms and Baselines",
+          "url": "https://arxiv.org/html/2404.12322v1#S4.SS2"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://arxiv.org/html/2404.12322v1#S1.F2"
+        },
+        {
+          "label": "Algorithm 1 · 交替优化",
+          "url": "https://arxiv.org/html/2404.12322v1#alg1"
+        },
+        {
+          "label": "Figure 3 · 条件形变示例",
+          "url": "https://arxiv.org/html/2404.12322v1#S3.F3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2404.12322v1#S1.F2",
+      "caption": "Figure 2 · Generalizable Face Landmarking Guided by Conditional Face Warping",
+      "note": "原图转载许可尚未明确，请沿链接查看。图 2 显示 SLPT 如何参与构造条件变形。Algorithm 1 给出交替优化步骤，图 3 对照真实照片、目标风格脸和变形后的形状。"
+    },
+    "code": "https://github.com/plustwo0/generalized-face-landmarker",
+    "code_provenance": {
+      "url": "https://github.com/plustwo0/generalized-face-landmarker",
+      "verified_at": "2026-11-18",
+      "basis": "作者项目页标注官方 PyTorch 实现，仓库有 warp.py、train.py、test.py 和关键点模型。"
     }
   },
   {
@@ -16075,25 +16225,103 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "T-FAKE 使用 RGB2Thermal 损失合成带稀疏与稠密关键点的热红外人脸，结合概率关键点预测和标注适配，面向不同标注规范的热成像定位。",
+      "method": "T-FAKE 将已标注的合成人脸转成热红外风格，再用同一套二维标注训练概率关键点检测器。遇到新的关键点定义，可另训练小型坐标映射。",
       "limitations": "热风格合成用于训练，不是热传感器物理模拟的完整证明；稀疏与稠密标注及真实热图像测试需分别说明。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2025/html/Flotho_T-FAKE_Synthesizing_Thermal_Images_for_Facial_Landmarking_CVPR_2025_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2025/html/Flotho_T-FAKE_Synthesizing_Thermal_Images_for_Facial_Landmarking_CVPR_2025_paper.html",
+        "https://arxiv.org/html/2408.15127v2#S3.SS1",
+        "https://arxiv.org/html/2408.15127v2#S3.SS2",
+        "https://arxiv.org/html/2408.15127v2#S4.SS1",
+        "https://arxiv.org/html/2408.15127v2#S4.SS2",
+        "https://arxiv.org/html/2408.15127v2#S2.F3",
+        "https://github.com/phflot/tfake"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录或预印本摘要，并定向阅读作者预印本 arXiv:2408.15127v2 的 S3.SS1, S3.SS2, S4.SS1, S4.SS2 章节，核对方法、训练、推理和图示。",
+      "verified_at": "2026-11-18",
       "problem": "热红外人脸数据及关键点标注稀缺，并存在不同标注规范。",
       "inputs_outputs": "RGB 人脸经热风格合成形成训练数据，模型输出热红外图像上的稀疏或稠密关键点。",
       "contribution": "引入 RGB2Thermal 损失与 T-FAKE 合成数据集，结合概率预测和标注适配。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未经本页运行验证。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "T-FAKE 将已标注的合成人脸转成热红外风格，再用同一套二维标注训练概率关键点检测器。遇到新的关键点定义，可另训练小型坐标映射。",
+      "steps": [
+        {
+          "title": "准备配对及未配对数据",
+          "description": "SEJONG 提供真实 RGB 与热红外配对用于重建监督；FAKE 提供带关键点和脸部区域分割的合成 RGB，用于扩大姿态、表情和光照覆盖。"
+        },
+        {
+          "title": "学习热红外变换",
+          "description": "U-Net 在配对图像上匹配目标热图。对合成图，用多尺度图块 Wasserstein 距离匹配真实热红外纹理，再通过区域温度正则约束眼、鼻、头发等区域的相对温度。"
+        },
+        {
+          "title": "生成带标注热红外数据",
+          "description": "在暖、冷两组参考温度下训练变换器，分别转换 FAKE 图像并沿用其稀疏及稠密点标注，两种条件共生成约二十万张图。"
+        },
+        {
+          "title": "回归位置及不确定性",
+          "description": "MobileNet V2 基于热红外或热红外加 RGB 的训练集合预测关键点。每个点输出二维各向同性高斯的均值及方差，均值用于定位。"
+        },
+        {
+          "title": "学习目标标注映射",
+          "description": "如果预训练预测和目标标注的点数或位置定义不同，用小型全连接网络从预测坐标向量映射到目标规范。"
+        }
+      ],
+      "training": "半监督训练热风格变换，其中配对图用于重建损失，未配对合成图用于纹理和区域温度约束。随后监督训练关键点模型，坐标适配器用目标标注对单独训练。",
+      "inference": "实际热红外输入由关键点模型直接前向估计均值及方差，需要时再套用目标标注映射。RGB 到热图的变换用于先前的数据构建。",
+      "figure_reading": "图 3 分三部分显示热风格合成、概率关键点预测、标签适配。额头附近黑白点位置的变化对应不同标注定义。",
+      "sources": [
+        {
+          "label": "3.1 Thermalization",
+          "url": "https://arxiv.org/html/2408.15127v2#S3.SS1"
+        },
+        {
+          "label": "3.2 The Dataset",
+          "url": "https://arxiv.org/html/2408.15127v2#S3.SS2"
+        },
+        {
+          "label": "4.1 Landmark Prediction",
+          "url": "https://arxiv.org/html/2408.15127v2#S4.SS1"
+        },
+        {
+          "label": "4.2 Label Adaptation",
+          "url": "https://arxiv.org/html/2408.15127v2#S4.SS2"
+        },
+        {
+          "label": "Figure 3 · 原图",
+          "url": "https://arxiv.org/html/2408.15127v2#S2.F3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local"
+    },
+    "figure": {
+      "src": "assets/figures/tfake-original.png",
+      "caption": "T-FAKE 的热风格变换、关键点预测和标签适配。",
+      "alt": "T-FAKE 的热风格变换、关键点预测和标签适配。",
+      "source": "https://arxiv.org/html/2408.15127v2#S2.F3",
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "attribution": "Philipp Flotho, Moritz Piening, Anna Kukleva, Gabriele Steidl. T-FAKE: Synthesizing Thermal Images for Facial Landmarking, Figure 3, arXiv:2408.15127v2. CC BY-NC-SA 4.0.",
+      "authors": "Philipp Flotho, Moritz Piening, Anna Kukleva, Gabriele Steidl",
+      "figure_number": "Figure 3",
+      "version": "2408.15127v2",
+      "modifications": "原始 arXiv HTML 图片，按原文件保留。"
+    },
+    "code": "https://github.com/phflot/tfake",
+    "code_provenance": {
+      "url": "https://github.com/phflot/tfake",
+      "verified_at": "2026-11-18",
+      "basis": "作者论文链接此仓库，分别提供 ThermalizationCode 与 LandmarkerCode。"
     }
   },
   {
@@ -16158,25 +16386,78 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "PossLoss 面向关键点热图的前景背景不均衡与峰值偏差，采用自加权和样本敏感机制，将学习重点自适应分配到较难定位的关键点。",
+      "method": "PossLoss 改进的是面部关键点热图的训练损失。它把目标热图权重、预测和标注的局部差异以及预测概率的对数项相乘，突出峰值错位附近的有效梯度。",
       "limitations": "损失作用于热图训练，不能独立于骨干和热图分辨率评价；损失收益与推理速度没有直接等价关系。",
       "sources": [
-        "https://openaccess.thecvf.com/content/ICCV2025/html/Zhu_PossLoss_A_Reliable_and_Sensitive_Facial_Landmark_Detection_Loss_Function_ICCV_2025_paper.html"
+        "https://openaccess.thecvf.com/content/ICCV2025/html/Zhu_PossLoss_A_Reliable_and_Sensitive_Facial_Landmark_Detection_Loss_Function_ICCV_2025_paper.html",
+        "https://openaccess.thecvf.com/content/ICCV2025/papers/Zhu_PossLoss_A_Reliable_and_Sensitive_Facial_Landmark_Detection_Loss_Function_ICCV_2025_paper.pdf#page=3",
+        "https://openaccess.thecvf.com/content/ICCV2025/papers/Zhu_PossLoss_A_Reliable_and_Sensitive_Facial_Landmark_Detection_Loss_Function_ICCV_2025_paper.pdf#page=4",
+        "https://openaccess.thecvf.com/content/ICCV2025/papers/Zhu_PossLoss_A_Reliable_and_Sensitive_Facial_Landmark_Detection_Loss_Function_ICCV_2025_paper.pdf#page=5"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "CVF 官方页面摘要开头存在截断；仅据可读取段落概括自加权、难点敏感和热图峰值问题。标题与 ICCV 2025 元数据已确认，全文细节待复核。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录或预印本摘要，并定向阅读Official ICCV 2025 open-access paper 的 PDF 第 3、4、5 页，核对方法、训练、推理和图示。",
+      "verified_at": "2026-11-18",
       "problem": "热图中关键点与背景极不均衡，难点和细小峰值偏差难以有效优化。",
       "inputs_outputs": "训练时的关键点热图与监督目标输入，输出用于优化检测器的损失值。",
       "contribution": "以自加权和样本敏感机制分配前景背景及难易关键点的学习权重。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未经本页运行验证。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "PossLoss 改进的是面部关键点热图的训练损失。它把目标热图权重、预测和标注的局部差异以及预测概率的对数项相乘，突出峰值错位附近的有效梯度。",
+      "steps": [
+        {
+          "title": "用标注生成逐点热图",
+          "description": "根据每个二维标志点的位置构造高斯目标热图。现有检测网络为各点预测一个对应的概率热图。"
+        },
+        {
+          "title": "给标记邻域更高权重",
+          "description": "直接以目标热图值作为自权重。离关键点中心越近，目标权重越高，背景大面积低值处对梯度贡献较小。"
+        },
+        {
+          "title": "按预测误差调节损失",
+          "description": "计算预测和目标在每个像素的绝对差，用温度参数归一化并取幂，让偏差大的候选像素得到更强的更新信号。"
+        },
+        {
+          "title": "叠加概率项并训练",
+          "description": "将上述权重与负对数预测概率相乘，在各像素和关键点上汇总。对大于零的误差幂指数，预测与目标完全一致时调节因子为零。"
+        },
+        {
+          "title": "用原检测器输出点位",
+          "description": "四级堆叠沙漏依次预测热图，最终一级热图经 soft-argmax 得到二维点位。"
+        }
+      ],
+      "training": "四级沙漏在各级以 PossLoss 监督热图，整体训练同时使用 Smooth L1。论文在 WFLW、COFW 和 300W 比较不同检测器，并固定沙漏骨干比较损失。",
+      "inference": "在输入图像上运行训练后的检测器，沿用其热图定位过程。无需目标热图或逐图拟合。",
+      "figure_reading": "图 4 展示各级沙漏怎样接入 PossLoss，以及最后一级怎样解码点位。图 2、3 分别展示损失三项和匹配热图示例。",
+      "sources": [
+        {
+          "label": "Figure 2 · 损失三项与峰值",
+          "url": "https://openaccess.thecvf.com/content/ICCV2025/papers/Zhu_PossLoss_A_Reliable_and_Sensitive_Facial_Landmark_Detection_Loss_Function_ICCV_2025_paper.pdf#page=3"
+        },
+        {
+          "label": "Figure 3 · 热图匹配时的损失",
+          "url": "https://openaccess.thecvf.com/content/ICCV2025/papers/Zhu_PossLoss_A_Reliable_and_Sensitive_Facial_Landmark_Detection_Loss_Function_ICCV_2025_paper.pdf#page=4"
+        },
+        {
+          "label": "Figure 4 · 原图",
+          "url": "https://openaccess.thecvf.com/content/ICCV2025/papers/Zhu_PossLoss_A_Reliable_and_Sensitive_Facial_Landmark_Detection_Loss_Function_ICCV_2025_paper.pdf#page=5"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/ICCV2025/papers/Zhu_PossLoss_A_Reliable_and_Sensitive_Facial_Landmark_Detection_Loss_Function_ICCV_2025_paper.pdf#page=5",
+      "caption": "Figure 4 · PossLoss: A Reliable and Sensitive Facial Landmark Detection Loss Function",
+      "note": "原图转载许可尚未明确，请沿链接查看。图 4 展示各级沙漏怎样接入 PossLoss，以及最后一级怎样解码点位。图 2、3 分别展示损失三项和匹配热图示例。"
     }
   },
   {
@@ -16199,25 +16480,108 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "重新审视热图关键点检测中 Soft-argmax 的必要性，以经典结构化预测目标替代该近似，在保持热图建模的同时改变训练方式。",
+      "method": "作者保留堆叠沙漏网络生成每个关键点的二维热图，将训练目标改为带位置代价的结构化评分，并按局部脸部边缘平滑标注。",
       "limitations": "移除 Soft-argmax 改变训练目标及解码条件；需控制分辨率、骨干和后处理再比较定位结果。",
       "sources": [
-        "https://openaccess.thecvf.com/content/ICCV2025/html/Yang_Heatmap_Regression_without_Soft-Argmax_for_Facial_Landmark_Detection_ICCV_2025_paper.html"
+        "https://openaccess.thecvf.com/content/ICCV2025/html/Yang_Heatmap_Regression_without_Soft-Argmax_for_Facial_Landmark_Detection_ICCV_2025_paper.html",
+        "https://arxiv.org/html/2508.14929v1#S3",
+        "https://arxiv.org/html/2508.14929v1#S4.SS1",
+        "https://arxiv.org/html/2508.14929v1#S4.SS2",
+        "https://arxiv.org/html/2508.14929v1#S5.SS1",
+        "https://arxiv.org/html/2508.14929v1#S4.F1",
+        "https://arxiv.org/html/2508.14929v1#S4.F2",
+        "https://github.com/ca-joe-yang/regression-without-softarg"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录或预印本摘要，并定向阅读作者预印本 arXiv:2508.14929v1 的 S3, S4.SS1, S4.SS2, S5.SS1 章节，核对方法、训练、推理和图示。",
+      "verified_at": "2026-11-18",
       "problem": "热图定位通常以 Soft-argmax 近似不可微 argmax，其必要性需要重新检验。",
       "inputs_outputs": "人脸图像输入，输出热图及关键点位置；训练采用结构化预测目标。",
       "contribution": "用结构化预测目标替代 Soft-argmax 路径，并在 WFLW、COFW、300W 上比较收敛和精度。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未经本页运行验证。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "作者保留堆叠沙漏网络生成每个关键点的二维热图，将训练目标改为带位置代价的结构化评分，并按局部脸部边缘平滑标注。",
+      "steps": [
+        {
+          "title": "为每个候选点打分",
+          "description": "每个关键点占一个热图通道，候选坐标处的热图值就是该点的评分。整组标志点的得分可分解成各点之和。"
+        },
+        {
+          "title": "定义位置代价",
+          "description": "比较候选坐标与真实坐标，按 Smooth L1 距离给偏离标注的候选增加训练时的边际代价。结构化目标要求真实位置评分高于这些带代价的竞争位置。"
+        },
+        {
+          "title": "优化热图得分",
+          "description": "以可微的对数求和指数放松最大值目标，将梯度传到候选格点的热图评分，促进目标格点成为峰值。"
+        },
+        {
+          "title": "按边缘平滑监督",
+          "description": "从人工标注插值得到脸部边缘，做距离变换并处理伪边缘热图，结合以标注为中心的高斯估计局部协方差，采样用于构造训练目标。"
+        },
+        {
+          "title": "读出每个关键点",
+          "description": "前向输出热图后，对每个通道取最大得分格点，得到二维面部坐标。"
+        }
+      ],
+      "training": "训练最小化结构化评分损失，图内伪边缘由现有标注生成。平滑目标用蒙特卡洛样本近似，位置边际项以固定候选位置计算。",
+      "inference": "测试仅以图像生成热图并做 argmax，边缘标注平滑是训练步骤。",
+      "figure_reading": "图 1 显示训练中的标签平滑步骤。图 2 用一维双峰示例展示结构化损失如何提高标注位置的评分。",
+      "sources": [
+        {
+          "label": "3 Background",
+          "url": "https://arxiv.org/html/2508.14929v1#S3"
+        },
+        {
+          "label": "4.1 Limitation of Soft-argmax",
+          "url": "https://arxiv.org/html/2508.14929v1#S4.SS1"
+        },
+        {
+          "label": "4.2 Deep Structured Landmark Detection",
+          "url": "https://arxiv.org/html/2508.14929v1#S4.SS2"
+        },
+        {
+          "label": "5.1 Analysis on a simplified model",
+          "url": "https://arxiv.org/html/2508.14929v1#S5.SS1"
+        },
+        {
+          "label": "Figure 1 · 原图",
+          "url": "https://arxiv.org/html/2508.14929v1#S4.F1"
+        },
+        {
+          "label": "Figure 2 · 双峰热图实验",
+          "url": "https://arxiv.org/html/2508.14929v1#S4.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local"
+    },
+    "figure": {
+      "src": "assets/figures/structured-landmarks-smoothing-original.png",
+      "caption": "结构化热图回归的局部边缘标签平滑流程。",
+      "alt": "结构化热图回归的局部边缘标签平滑流程。",
+      "source": "https://arxiv.org/html/2508.14929v1#S4.F1",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Chiao-An Yang, Raymond A. Yeh. Heatmap Regression without Soft-Argmax for Facial Landmark Detection, Figure 1, arXiv:2508.14929v1. CC BY 4.0.",
+      "authors": "Chiao-An Yang, Raymond A. Yeh",
+      "figure_number": "Figure 1",
+      "version": "2508.14929v1",
+      "modifications": "原始 arXiv HTML 图片，按原文件保留。"
+    },
+    "code": "https://github.com/ca-joe-yang/regression-without-softarg",
+    "code_provenance": {
+      "url": "https://github.com/ca-joe-yang/regression-without-softarg",
+      "verified_at": "2026-11-18",
+      "basis": "作者论文指向此仓库，含 models、trainers、配置、训练入口和 demo。"
     }
   },
   {
@@ -16310,19 +16674,94 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "将通道分割 Transformer 与空间分割 Transformer 结合，以建模关键点间几何关系；长跳跃连接把低层图像特征传递到各级预测模块。",
+      "method": "模型在级联预测块中并行处理空间图块和通道特征。ResNet 的底层图像特征通过长跳接送到每级，以便后续模块仍能利用早期纹理信息。",
       "limitations": "通道和空间 Transformer 级联细化共同影响结果；比较时需控制级数、跳跃连接与输入分辨率。",
       "sources": [
-        "https://openaccess.thecvf.com/content/WACV2025/html/Dang_Cascaded_Dual_Vision_Transformer_for_Accurate_Facial_Landmark_Detection_WACV_2025_paper.html"
+        "https://openaccess.thecvf.com/content/WACV2025/html/Dang_Cascaded_Dual_Vision_Transformer_for_Accurate_Facial_Landmark_Detection_WACV_2025_paper.html",
+        "https://arxiv.org/html/2411.07167v1#S3.SS1",
+        "https://arxiv.org/html/2411.07167v1#S3.SS2",
+        "https://arxiv.org/html/2411.07167v1#S3.SS3",
+        "https://arxiv.org/html/2411.07167v1#S4.SS1",
+        "https://arxiv.org/html/2411.07167v1#S2.F1",
+        "https://arxiv.org/html/2411.07167v1#S3.F2",
+        "https://github.com/Human3DAIGC/AccurateFacialLandmarkDetection"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录或预印本摘要，并定向阅读作者预印本 arXiv:2411.07167v1 的 S3.SS1, S3.SS2, S3.SS3, S4.SS1 章节，核对方法、训练、推理和图示。",
+      "verified_at": "2026-11-18",
       "problem": "关键点几何关系及低层图像信息需要在多级热图预测中被充分保留。",
       "inputs_outputs": "人脸图像输入，输出级联细化的关键点热图与位置。",
       "contribution": "结合空间分割和通道分割 Transformer，并通过长跳跃连接向所有预测块传递低层特征。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未经本页运行验证。"
+    },
+    "pipeline": {
+      "overview": "模型在级联预测块中并行处理空间图块和通道特征。ResNet 的底层图像特征通过长跳接送到每级，以便后续模块仍能利用早期纹理信息。",
+      "steps": [
+        {
+          "title": "提取底层特征",
+          "description": "ResNet 对裁好的人脸编码，所得特征作为首级输入，同时沿长跳接送往后续预测块。"
+        },
+        {
+          "title": "沿空间切分",
+          "description": "把当前特征图切成图块送入空间 Transformer，以图块自注意力在局部外观和全局脸形之间交换信息。"
+        },
+        {
+          "title": "沿通道切分",
+          "description": "把各通道图当作热图空间的基底，用通道自注意力建模基底关系。一个关键点热图可由这些通道经 1×1 卷积线性组合得到。"
+        },
+        {
+          "title": "合并并逐级更新",
+          "description": "沿通道拼接两条分支，经残差卷积块融合。每个后续预测块同时接收前级输出和一直保留的底层特征。"
+        },
+        {
+          "title": "生成热图与坐标",
+          "description": "各级把特征映射为逐点热图，soft-argmax 按热图权重求坐标，深层预测继续细化定位。"
+        }
+      ],
+      "training": "各级同时监督高斯目标热图和坐标。热图用 Adaptive Wing，坐标用 Smooth L1，加权系数组合各级损失。",
+      "inference": "人脸图像按顺序通过多级双路预测块，由热图解码二维关键点。通道分支操作中间特征，不要求先检测一组显式关键点。",
+      "figure_reading": "图 1 上方的黑线把同一底层特征分发到多级。图 2 用 1×1 卷积解释每个热图如何由通道基底组合。",
+      "sources": [
+        {
+          "label": "3.1 Dual Vision Transformer",
+          "url": "https://arxiv.org/html/2411.07167v1#S3.SS1"
+        },
+        {
+          "label": "3.2 Long Skip Connection",
+          "url": "https://arxiv.org/html/2411.07167v1#S3.SS2"
+        },
+        {
+          "label": "3.3 Training Loss",
+          "url": "https://arxiv.org/html/2411.07167v1#S3.SS3"
+        },
+        {
+          "label": "4.1 Experimental Setup",
+          "url": "https://arxiv.org/html/2411.07167v1#S4.SS1"
+        },
+        {
+          "label": "Figure 1 · 原图",
+          "url": "https://arxiv.org/html/2411.07167v1#S2.F1"
+        },
+        {
+          "label": "Figure 2 · 通道特征与热图",
+          "url": "https://arxiv.org/html/2411.07167v1#S3.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2411.07167v1#S2.F1",
+      "caption": "Figure 1 · Cascaded Dual Vision Transformer for Accurate Facial Landmark Detection",
+      "note": "原图转载许可尚未明确，请沿链接查看。图 1 上方的黑线把同一底层特征分发到多级。图 2 用 1×1 卷积解释每个热图如何由通道基底组合。"
+    },
+    "code": "https://github.com/Human3DAIGC/AccurateFacialLandmarkDetection",
+    "code_provenance": {
+      "url": "https://github.com/Human3DAIGC/AccurateFacialLandmarkDetection",
+      "verified_at": "2026-11-18",
+      "basis": "项目 README 对应 WACV 论文，包含 Net.py、Vit.py、TrainHeatmapStageFP16.py 及评估入口。"
     }
   },
   {
@@ -16345,20 +16784,123 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "ORFormer 为图块配置额外 messenger token，从其他图块聚合信息；通过局部与外部表示的一致性识别不可见区域，并恢复缺失特征用于热图预测。",
+      "method": "ORFormer 从无遮挡脸学习一套边缘热图码本。遇到遮挡时，它比较每个图块自身特征与由其他图块补出的特征，形成软遮挡图，并混合两路码本表示来引导二维关键点定位。",
       "limitations": "不可见图块的特征由其他图块推断，需检验遮挡检测及恢复各自效果；不能将补全视作真实观测。",
       "sources": [
-        "https://openaccess.thecvf.com/content/WACV2025/html/Chiang_ORFormer_Occlusion-Robust_Transformer_for_Accurate_Facial_Landmark_Detection_WACV_2025_paper.html"
+        "https://openaccess.thecvf.com/content/WACV2025/html/Chiang_ORFormer_Occlusion-Robust_Transformer_for_Accurate_Facial_Landmark_Detection_WACV_2025_paper.html",
+        "https://arxiv.org/html/2412.13174v1#S3.SS1",
+        "https://arxiv.org/html/2412.13174v1#S3.SS2",
+        "https://arxiv.org/html/2412.13174v1#S3.SS3",
+        "https://arxiv.org/html/2412.13174v1#S4.SS1",
+        "https://arxiv.org/html/2412.13174v1#S2.F2",
+        "https://arxiv.org/html/2412.13174v1#S3.F3",
+        "https://github.com/ben0919/ORFormer",
+        "https://arxiv.org/html/2412.13174v1#S3.F4"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录或预印本摘要，并定向阅读作者预印本 arXiv:2412.13174v1 的 S3.SS1, S3.SS2, S3.SS3, S4.SS1 章节，核对方法、训练、推理和图示。",
+      "verified_at": "2026-11-18",
       "problem": "遮挡、极端光照和姿态导致部分区域不可见，损害关键点定位。",
       "inputs_outputs": "部分不可见的人脸图像输入，输出恢复特征后的关键点热图。",
       "contribution": "用 messenger token 聚合其他区域信息，通过表示一致性定位缺失区域并修复特征。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
-    }
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未经本页运行验证。"
+    },
+    "pipeline": {
+      "overview": "ORFormer 从无遮挡脸学习一套边缘热图码本。遇到遮挡时，它比较每个图块自身特征与由其他图块补出的特征，形成软遮挡图，并混合两路码本表示来引导二维关键点定位。",
+      "steps": [
+        {
+          "title": "学习干净脸部的码本",
+          "description": "用编码器提取无遮挡脸特征，将每个位置指派到最近的可学习码字，从量化特征解码鼻、嘴等脸部轮廓边缘热图。"
+        },
+        {
+          "title": "并行维护两类 token",
+          "description": "编码待测脸后，图块 token 使用常规自注意力。每个图块另有一个 messenger token，通过交叉注意力从其他图块取信息，排除同位置图块。"
+        },
+        {
+          "title": "估计并回传遮挡权重",
+          "description": "对同位置两类表示的逐维平方差做线性变换及 sigmoid，得到遮挡概率。下一层用一减遮挡概率压低来自可疑图块的信息。"
+        },
+        {
+          "title": "按图块恢复特征",
+          "description": "最后一层对两路表示分别检索预训练码本，按遮挡图在原图块量化特征与 messenger 量化特征之间软混合。预训练解码器将融合表示生成边缘热图。"
+        },
+        {
+          "title": "向下游传入轮廓引导",
+          "description": "在现有关键点检测器早期把边缘热图和图像特征拼接，由轻量 CNN 融合；检测器在恢复后的结构提示下继续预测面部点位。"
+        }
+      ],
+      "training": "先用无遮挡脸的目标边缘热图及潜空间损失训练量化生成器。然后固定码本与解码器，在模拟遮挡图像上训练 ORFormer 并微调编码器，使用两路码字交叉熵和恢复热图损失。",
+      "inference": "输入裁剪的人脸即可生成软遮挡图及恢复边缘热图，后续面部关键点模型据此输出二维点位。",
+      "figure_reading": "图 2 把无遮挡预训练和遮挡特征恢复分为两阶段。图 3 放大 messenger 排除本图块、下一层抑制遮挡图块及两路码字预测的结构。",
+      "sources": [
+        {
+          "label": "3.1 Quantized Heatmap Generator",
+          "url": "https://arxiv.org/html/2412.13174v1#S3.SS1"
+        },
+        {
+          "label": "3.2 ORFormer",
+          "url": "https://arxiv.org/html/2412.13174v1#S3.SS2"
+        },
+        {
+          "label": "3.3 Integration with FLD Methods",
+          "url": "https://arxiv.org/html/2412.13174v1#S3.SS3"
+        },
+        {
+          "label": "4.1 Experimental Settings",
+          "url": "https://arxiv.org/html/2412.13174v1#S4.SS1"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://arxiv.org/html/2412.13174v1#S2.F2"
+        },
+        {
+          "label": "Figure 3 · ORFormer 内部结构",
+          "url": "https://arxiv.org/html/2412.13174v1#S3.F3"
+        },
+        {
+          "label": "Figure 4 · 原图",
+          "url": "https://arxiv.org/html/2412.13174v1#S3.F4"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local"
+    },
+    "figure": {
+      "src": "assets/figures/orformer-original.png",
+      "caption": "ORFormer 的量化热图预训练和遮挡特征恢复。",
+      "alt": "ORFormer 的量化热图预训练和遮挡特征恢复。",
+      "source": "https://arxiv.org/html/2412.13174v1#S2.F2",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Jui-Che Chiang, Hou-Ning Hu, Bo-Syuan Hou, Chia-Yu Tseng, Yu-Lun Liu, Min-Hung Chen, Yen-Yu Lin. ORFormer: Occlusion-Robust Transformer for Accurate Facial Landmark Detection, Figure 2, arXiv:2412.13174v1. CC BY 4.0.",
+      "authors": "Jui-Che Chiang, Hou-Ning Hu, Bo-Syuan Hou, Chia-Yu Tseng, Yu-Lun Liu, Min-Hung Chen, Yen-Yu Lin",
+      "figure_number": "Figure 2",
+      "version": "2412.13174v1",
+      "modifications": "原始 arXiv HTML 图片，按原文件保留。"
+    },
+    "code": "https://github.com/ben0919/ORFormer",
+    "code_provenance": {
+      "url": "https://github.com/ben0919/ORFormer",
+      "verified_at": "2026-11-18",
+      "basis": "作者项目页链接此仓库，包含 Model 以及分别训练热图生成器、ORFormer 和下游检测器的入口。"
+    },
+    "figures": [
+      {
+        "src": "assets/figures/orformer-integration-original.png",
+        "caption": "ORFormer 的边缘热图与现有面部关键点检测器融合。",
+        "alt": "ORFormer 的边缘热图与现有面部关键点检测器融合。",
+        "source": "https://arxiv.org/html/2412.13174v1#S3.F4",
+        "license": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "attribution": "Jui-Che Chiang, Hou-Ning Hu, Bo-Syuan Hou, Chia-Yu Tseng, Yu-Lun Liu, Min-Hung Chen, Yen-Yu Lin. ORFormer: Occlusion-Robust Transformer for Accurate Facial Landmark Detection, Figure 4, arXiv:2412.13174v1. CC BY 4.0.",
+        "authors": "Jui-Che Chiang, Hou-Ning Hu, Bo-Syuan Hou, Chia-Yu Tseng, Yu-Lun Liu, Min-Hung Chen, Yen-Yu Lin",
+        "figure_number": "Figure 4",
+        "version": "2412.13174v1",
+        "modifications": "原始 arXiv HTML 图片，按原文件保留。"
+      }
+    ]
   },
   {
     "id": "head-super-fan-integrated-facial-landmark-localization-and-super-resolution-of-real-world-low-resolution-faces-2018",
@@ -21079,18 +21621,26 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "通过手物交互条件扩散与相似度感知采样扩展训练数据。合成具有三维标注的多姿态、多视角图像，提升已有单图手网格重建基线。",
+      "method": "HandBooster 离线合成带三维手网格标注的手物交互图像，用来扩充单图估计器的训练集。它先扩展抓握姿态覆盖，再通过渲染条件控制 RGB 合成。",
       "limitations": "属于合成数据增强，效果需在相同基线和训练预算下比较；条件生成不等于真实接触分布完整覆盖。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2024/html/Xu_HandBooster_Boosting_3D_Hand-Mesh_Reconstruction_by_Conditional_Synthesis_and_Sampling_CVPR_2024_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2024/html/Xu_HandBooster_Boosting_3D_Hand-Mesh_Reconstruction_by_Conditional_Synthesis_and_Sampling_CVPR_2024_paper.html",
+        "https://arxiv.org/html/2403.18575v1#S3.SS1",
+        "https://arxiv.org/html/2403.18575v1#S3.SS2",
+        "https://arxiv.org/html/2403.18575v1#S3.SS3",
+        "https://arxiv.org/html/2403.18575v1#S3.SS4",
+        "https://arxiv.org/html/2403.18575v1#S2.F2",
+        "https://arxiv.org/html/2403.18575v1#S3.F3"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_notes": "已核对CVF正式论文页的标题、年份、会议信息及摘要。问题、方法、输入输出和贡献为摘要级解读；尚未复核正文实验、失败案例与作者局限，不代表全文精读或复现。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "problem": "真实手物数据多样性有限，合成到真实仍有域差。",
       "inputs_outputs": "交互条件→带三维标注的合成图像，用于训练重建器。",
       "contribution": "结合条件扩散与相似度感知分布采样选择新交互状态。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对正式记录或预印本摘要，并定向阅读作者预印本 arXiv:2403.18575v1 的 S3.SS1, S3.SS2, S3.SS3, S3.SS4 章节，核对方法、训练、推理和图示。",
+      "verified_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未经本页运行验证。"
     },
     "code": "https://github.com/hxwork/HandBooster_Pytorch",
     "ccf": {
@@ -21098,6 +21648,75 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "HandBooster 离线合成带三维手网格标注的手物交互图像，用来扩充单图估计器的训练集。它先扩展抓握姿态覆盖，再通过渲染条件控制 RGB 合成。",
+      "steps": [
+        {
+          "title": "构建真实抓握候选",
+          "description": "根据某帧物体相对初始帧的旋转和平移变化筛出抓持帧，仅扰动这部分的朝向以获得新视角。"
+        },
+        {
+          "title": "模拟新抓握并采样",
+          "description": "对 YCB 物体模拟落地与抓握，按接触、穿插等几何条件筛选。按物体类别对真实和合成集合分别最远点采样，再降低与真实抓握过于相似的合成样本入选概率。"
+        },
+        {
+          "title": "把三维网格转成条件",
+          "description": "将手物网格渲染为法线图和纹理图，并加入手的方向四元数。图和姿态条件共同指定待生成样本的投影和外观。"
+        },
+        {
+          "title": "用条件扩散生成 RGB",
+          "description": "U-Net 去噪器依据两张条件图、手方向及时间步，从噪声恢复图像。生成图沿用输入网格作为三维监督，用预训练重建器误差筛去明显不一致的样本。"
+        },
+        {
+          "title": "训练下游网格估计",
+          "description": "将通过筛选的图像与真实图混合，送给 HandOccNet、MobRecon 或 H2ONet 等基线，覆盖参数回归和直接顶点回归。"
+        }
+      ],
+      "training": "先用训练集真实图和对应渲染条件训练合成器，前景像素获得更高权重。然后将离线产出的 RGB 与三维网格配对，用于训练下游估计器。",
+      "inference": "目标图像进入已经训练好的单图重建模型。抓握模拟、扩散合成和样本筛选都发生在训练数据准备阶段。",
+      "figure_reading": "图 2 从构造抓握、渲染条件、扩散生图一路连到下游重建。图 3 比较为什么选法线图与纹理图。",
+      "sources": [
+        {
+          "label": "3.1 Overview",
+          "url": "https://arxiv.org/html/2403.18575v1#S3.SS1"
+        },
+        {
+          "label": "3.2 Hand-Object Image Synthesizer",
+          "url": "https://arxiv.org/html/2403.18575v1#S3.SS2"
+        },
+        {
+          "label": "3.3 Novel Condition Creator",
+          "url": "https://arxiv.org/html/2403.18575v1#S3.SS3"
+        },
+        {
+          "label": "3.4 Hand Mesh Reconstruction",
+          "url": "https://arxiv.org/html/2403.18575v1#S3.SS4"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://arxiv.org/html/2403.18575v1#S2.F2"
+        },
+        {
+          "label": "Figure 3 · 渲染条件",
+          "url": "https://arxiv.org/html/2403.18575v1#S3.F3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local"
+    },
+    "figure": {
+      "src": "assets/figures/handbooster-original.png",
+      "caption": "HandBooster 的抓握条件生成、图像合成和下游训练。",
+      "alt": "HandBooster 的抓握条件生成、图像合成和下游训练。",
+      "source": "https://arxiv.org/html/2403.18575v1#S2.F2",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Hao Xu, Haipeng Li, Yinqiao Wang, Shuaicheng Liu, Chi-Wing Fu. HandBooster: Boosting 3D Hand-Mesh Reconstruction by Conditional Synthesis and Sampling of Hand-Object Interactions, Figure 2, arXiv:2403.18575v1. CC BY 4.0.",
+      "authors": "Hao Xu, Haipeng Li, Yinqiao Wang, Shuaicheng Liu, Chi-Wing Fu",
+      "figure_number": "Figure 2",
+      "version": "2403.18575v1",
+      "modifications": "原始 arXiv HTML 图片，按原文件保留。"
     }
   },
   {
@@ -21120,24 +21739,100 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "融合事件流与RGB帧重建三维手网格，在时间、空间和信息层面互补。针对RGB过曝/模糊及事件稀疏问题设计融合和数据退化策略。",
+      "method": "EvRGBHand 将事件流和 RGB 的特征在空间上对齐，再按局部观察质量融合并在时间上交流，最终恢复序列手部关节与网格。",
       "limitations": "需要事件与 RGB 的对齐融合；RGB-only、事件-only 与融合版本的成绩应分开报告。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2024/html/Jiang_Complementing_Event_Streams_and_RGB_Frames_for_Hand_Mesh_Reconstruction_CVPR_2024_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2024/html/Jiang_Complementing_Event_Streams_and_RGB_Frames_for_Hand_Mesh_Reconstruction_CVPR_2024_paper.html",
+        "https://arxiv.org/html/2403.07346v1#S3.SS1",
+        "https://arxiv.org/html/2403.07346v1#S3.SS2",
+        "https://arxiv.org/html/2403.07346v1#S3.SS3",
+        "https://arxiv.org/html/2403.07346v1#S3.SS4",
+        "https://arxiv.org/html/2403.07346v1#S2.F2",
+        "https://arxiv.org/html/2403.07346v1#S3.F3",
+        "https://github.com/AlanJiang98/EvRGBHand"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_notes": "已核对CVF正式论文页的标题、年份、会议信息及摘要。问题、方法、输入输出和贡献为摘要级解读；尚未复核正文实验、失败案例与作者局限，不代表全文精读或复现。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "problem": "RGB易过曝和模糊，事件流又缺少纹理且可能稀疏。",
       "inputs_outputs": "同步事件流与RGB→三维手网格。",
       "contribution": "跨时间/空间/信息融合及退化增强提高模态互补。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对正式记录或预印本摘要，并定向阅读作者预印本 arXiv:2403.07346v1 的 S3.SS1, S3.SS2, S3.SS3, S3.SS4 章节，核对方法、训练、推理和图示。",
+      "verified_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未经本页运行验证。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "EvRGBHand 将事件流和 RGB 的特征在空间上对齐，再按局部观察质量融合并在时间上交流，最终恢复序列手部关节与网格。",
+      "steps": [
+        {
+          "title": "将事件流整理为双通道帧",
+          "description": "在目标时刻之前取固定数量的事件，按明暗变化的正负极性写入双通道时间表面，较近事件得到较高权重。RGB 帧和事件帧进入浅层 CNN。"
+        },
+        {
+          "title": "在特征域对齐模态",
+          "description": "依据事件与 RGB 特征关联估计空间偏移，用 ConvLSTM 抑制帧间偏移抖动，随后用可变形卷积对齐。对齐不要求事先求出两传感器外参。"
+        },
+        {
+          "title": "学习互补信息权重",
+          "description": "融合模块从两种模态特征学习局部组合权重，得到图块特征。空间 Transformer 编码块交换远距离手部信息。"
+        },
+        {
+          "title": "在各事件时刻汇集运动",
+          "description": "对一段序列中同位置的特征 token 做带相对位置编码的时序注意力，利用邻近事件观测弥补当前缺失。"
+        },
+        {
+          "title": "解码关节和网格",
+          "description": "以 21 个关节查询和 195 个粗网格顶点查询读取时空特征，由坐标回归器预测三维点并上采样到完整手网格。"
+        }
+      ],
+      "training": "EvRGBDegrader 对 RGB 模拟过曝与光流运动模糊，对事件数据加椒盐噪声模拟背景事件溢出。训练同时监督 RGB 时刻和多个事件时刻的关节与顶点。",
+      "inference": "从同步的 RGB 与事件序列构建输入，用空间对齐、互补融合与时序注意力，在事件时间步输出三维手。退化器用于生成训练数据。",
+      "figure_reading": "图 2 分开画训练数据退化和重建主干。图 3 放大融合模块，便于跟踪两个传感器特征如何生成加权表示。",
+      "sources": [
+        {
+          "label": "3.1 Preliminaries",
+          "url": "https://arxiv.org/html/2403.07346v1#S3.SS1"
+        },
+        {
+          "label": "3.2 EvImHandNet",
+          "url": "https://arxiv.org/html/2403.07346v1#S3.SS2"
+        },
+        {
+          "label": "3.3 EvRGBDegrader",
+          "url": "https://arxiv.org/html/2403.07346v1#S3.SS3"
+        },
+        {
+          "label": "3.4 Training",
+          "url": "https://arxiv.org/html/2403.07346v1#S3.SS4"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://arxiv.org/html/2403.07346v1#S2.F2"
+        },
+        {
+          "label": "Figure 3 · 互补融合模块",
+          "url": "https://arxiv.org/html/2403.07346v1#S3.F3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2403.07346v1#S2.F2",
+      "caption": "Figure 2 · Complementing Event Streams and RGB Frames for Hand Mesh Reconstruction",
+      "note": "原图转载许可尚未明确，请沿链接查看。图 2 分开画训练数据退化和重建主干。图 3 放大融合模块，便于跟踪两个传感器特征如何生成加权表示。"
+    },
+    "code": "https://github.com/AlanJiang98/EvRGBHand",
+    "code_provenance": {
+      "url": "https://github.com/AlanJiang98/EvRGBHand",
+      "verified_at": "2026-11-18",
+      "basis": "作者项目页链接此实现，仓库包含 src、train.py、环境及数据说明。"
     }
   },
   {
@@ -21161,24 +21856,88 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "以图扩散框架统一手网格生成、补全、重建和拟合。通过多模态条件、跨尺度随机掩码及条件对齐梯度引导增强输入与生成网格的一致性。",
+      "method": "HHMR 直接对手网格顶点加噪和去噪，在一套图扩散网络中接受单图、二维骨架、部分三维骨架，也可无条件生成。",
       "limitations": "生成、补全和拟合的条件模态不同；推理采样步数与梯度引导开销须对应具体任务记录。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2024/html/Li_HHMR_Holistic_Hand_Mesh_Recovery_by_Enhancing_the_Multimodal_Controllability_CVPR_2024_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2024/html/Li_HHMR_Holistic_Hand_Mesh_Recovery_by_Enhancing_the_Multimodal_Controllability_CVPR_2024_paper.html",
+        "https://arxiv.org/html/2406.01334v1#S4.SS1",
+        "https://arxiv.org/html/2406.01334v1#S4.SS2",
+        "https://arxiv.org/html/2406.01334v1#S4.SS3",
+        "https://arxiv.org/html/2406.01334v1#S4.SS4",
+        "https://arxiv.org/html/2406.01334v1#S4.F2"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_notes": "已核对CVF正式论文页的标题、年份、会议信息及摘要。问题、方法、输入输出和贡献为摘要级解读；尚未复核正文实验、失败案例与作者局限，不代表全文精读或复现。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "problem": "不同手网格恢复任务和条件类型通常分开建模。",
       "inputs_outputs": "多模态条件或部分网格→生成、补全、拟合或重建手网格。",
       "contribution": "单一图扩散框架结合跨尺度掩码及条件对齐梯度引导。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对正式记录或预印本摘要，并定向阅读作者预印本 arXiv:2406.01334v1 的 S4.SS1, S4.SS2, S4.SS3, S4.SS4 章节，核对方法、训练、推理和图示。",
+      "verified_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未经本页运行验证。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "HHMR 直接对手网格顶点加噪和去噪，在一套图扩散网络中接受单图、二维骨架、部分三维骨架，也可无条件生成。",
+      "steps": [
+        {
+          "title": "编码可用模态",
+          "description": "二维和三维关节分别经 MLP 编码。RGB 图像先经 CNN，再通过图块 ViT 提取局部和全局 token，三种条件对齐到同一特征宽度。"
+        },
+        {
+          "title": "用图 U-Net 建模网格",
+          "description": "在各级以图卷积聚合网格邻域，自注意力连接远处顶点，交叉注意力注入已提供的条件。降采样、上采样和跳接传递多尺度特征。"
+        },
+        {
+          "title": "训练网络应对条件缺失",
+          "description": "随机屏蔽单个模态或全部模态，同时在特征级随机遮住图块，对骨架加噪并屏蔽部分手指，使各种任务可选择不同输入。"
+        },
+        {
+          "title": "按任务运行逆扩散",
+          "description": "随机噪声顶点经多个扩散步成为完整网格。只提供图像做单目重建，只提供二维或部分三维骨架分别做拟合或补全。"
+        },
+        {
+          "title": "用观测梯度细化网格",
+          "description": "用关节回归矩阵、可见关节或顶点掩码等任务算子衡量去噪网格与已知观测的误差，以梯度引导下一步去噪。"
+        }
+      ],
+      "training": "使用带网格的样本学习直接恢复无噪顶点，损失监督扩散输出、顶点和关节，并约束网格法向和边长。只有姿态的数据参与骨架条件训练。",
+      "inference": "按任务提供条件，从噪声进行迭代去噪。已知顶点或关节还可以在采样中约束相应部分，条件梯度在测试时计算。",
+      "figure_reading": "图 2 显示不同条件进入共享图 U-Net 的位置，以及观测一致性如何影响逆扩散。",
+      "sources": [
+        {
+          "label": "4.1 Problem Statement",
+          "url": "https://arxiv.org/html/2406.01334v1#S4.SS1"
+        },
+        {
+          "label": "4.2 Graph Diffusion Network",
+          "url": "https://arxiv.org/html/2406.01334v1#S4.SS2"
+        },
+        {
+          "label": "4.3 Condition-aligned Gradient Guidance",
+          "url": "https://arxiv.org/html/2406.01334v1#S4.SS3"
+        },
+        {
+          "label": "4.4 Loss Functions",
+          "url": "https://arxiv.org/html/2406.01334v1#S4.SS4"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://arxiv.org/html/2406.01334v1#S4.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2406.01334v1#S4.F2",
+      "caption": "Figure 2 · HHMR: Holistic Hand Mesh Recovery by Enhancing the Multimodal Controllability of Graph Diffusion Models",
+      "note": "原图转载许可尚未明确，请沿链接查看。图 2 显示不同条件进入共享图 U-Net 的位置，以及观测一致性如何影响逆扩散。"
     }
   },
   {
@@ -21202,18 +21961,28 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "把预训练单视角手姿态模型无监督适配到双视角。利用跨视角一致性及视角间变换不变性生成伪标签，允许未知相机参数和不同相机组合。",
+      "method": "S2DHand 用固定双相机采集的无标注配对图像适配已有单视角手姿估计器。它利用腕部对齐后的跨视角一致性和固定相机间旋转，生成训练伪标签。",
       "limitations": "适配需要双视角一致性与预训练单视角模型；未知相机参数不等于没有任何跨视角几何假设。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2024/html/Liu_Single-to-Dual-View_Adaptation_for_Egocentric_3D_Hand_Pose_Estimation_CVPR_2024_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2024/html/Liu_Single-to-Dual-View_Adaptation_for_Egocentric_3D_Hand_Pose_Estimation_CVPR_2024_paper.html",
+        "https://arxiv.org/html/2403.04381v1#S3",
+        "https://arxiv.org/html/2403.04381v1#S4.SS1",
+        "https://arxiv.org/html/2403.04381v1#S4.SS2",
+        "https://arxiv.org/html/2403.04381v1#S4.SS3",
+        "https://arxiv.org/html/2403.04381v1#S4.SS4",
+        "https://arxiv.org/html/2403.04381v1#S4.F4",
+        "https://arxiv.org/html/2403.04381v1#S4.F5",
+        "https://arxiv.org/html/2403.04381v1#S4.F6"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_notes": "已核对CVF正式论文页的标题、年份、会议信息及摘要。问题、方法、输入输出和贡献为摘要级解读；尚未复核正文实验、失败案例与作者局限，不代表全文精读或复现。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "problem": "双视角训练标注昂贵，固定相机布局限制迁移。",
       "inputs_outputs": "任意双视角图像→三维手姿态。",
       "contribution": "以立体一致性伪标签无监督适配单视角模型。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对正式记录或预印本摘要，并定向阅读作者预印本 arXiv:2403.04381v1 的 S3, S4.SS1, S4.SS2, S4.SS3, S4.SS4 章节，核对方法、训练、推理和图示。",
+      "verified_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未经本页运行验证。"
     },
     "code": "https://github.com/ut-vision/S2DHand",
     "ccf": {
@@ -21221,6 +21990,83 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "S2DHand 用固定双相机采集的无标注配对图像适配已有单视角手姿估计器。它利用腕部对齐后的跨视角一致性和固定相机间旋转，生成训练伪标签。",
+      "steps": [
+        {
+          "title": "从预训练模型估计相对旋转",
+          "description": "把同步图像对分别送进单视角基线，从两组腕部相对关节配准出旋转矩阵，并在多对样本的旋转空间取平均。根相对设置下无需相机间平移。"
+        },
+        {
+          "title": "维护一个动量教师",
+          "description": "准备训练分支和参数指数滑动平均得到的教师。教师逐视角输出 DetNet 风格的热图和三维手骨架，用于生成伪标签。"
+        },
+        {
+          "title": "合并跨视角关节",
+          "description": "先用旋转把预测变到同一坐标系。根据每个点的二维热图峰值构造置信，按点融合该点在两个视角的预测。"
+        },
+        {
+          "title": "约束固定旋转并更新学生",
+          "description": "用 BFGS 修正两组关节，使由它们配准得到的旋转接近固定相机间旋转。将此结果与置信融合结果加权，回到热图监督更新学生。旋转也用滑动平均缓慢更新。"
+        },
+        {
+          "title": "在双视角下输出姿态",
+          "description": "适配后的估计器分别输出两个视角的 21 个根相对三维点，可把结果变到共同坐标系再平均。"
+        }
+      ],
+      "training": "从有监督单视角模型起步，在目标双相机的无标注、同步图像对上适配。每组固定相机配置对应独立适配的模型。",
+      "inference": "对目标相机组合输入同步图像对，用适配后的模型逐视角预测。输出保留两个视角的根相对关节，也可在同一坐标系合并。",
+      "figure_reading": "图 4 从输入和预估旋转追到动量教师、伪标签和学生更新。图 5、6 分别放大按点置信融合和旋转一致性优化。",
+      "sources": [
+        {
+          "label": "3 Problem Setting",
+          "url": "https://arxiv.org/html/2403.04381v1#S3"
+        },
+        {
+          "label": "4.1 Initialization",
+          "url": "https://arxiv.org/html/2403.04381v1#S4.SS1"
+        },
+        {
+          "label": "4.2 Single-to-dual-view adaptation",
+          "url": "https://arxiv.org/html/2403.04381v1#S4.SS2"
+        },
+        {
+          "label": "4.3 Pseudo-labeling: attention-based merging",
+          "url": "https://arxiv.org/html/2403.04381v1#S4.SS3"
+        },
+        {
+          "label": "4.4 Pseudo-labeling: rotation-guided refinement",
+          "url": "https://arxiv.org/html/2403.04381v1#S4.SS4"
+        },
+        {
+          "label": "Figure 4 · 原图",
+          "url": "https://arxiv.org/html/2403.04381v1#S4.F4"
+        },
+        {
+          "label": "Figure 5 · 跨视角合并",
+          "url": "https://arxiv.org/html/2403.04381v1#S4.F5"
+        },
+        {
+          "label": "Figure 6 · 旋转约束",
+          "url": "https://arxiv.org/html/2403.04381v1#S4.F6"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local"
+    },
+    "figure": {
+      "src": "assets/figures/s2dhand-original.png",
+      "caption": "S2DHand 的双视角伪标签和动量教师适配。",
+      "alt": "S2DHand 的双视角伪标签和动量教师适配。",
+      "source": "https://arxiv.org/html/2403.04381v1#S4.F4",
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "attribution": "Ruicong Liu, Takehiko Ohkawa, Mingfang Zhang, Yoichi Sato. Single-to-Dual-View Adaptation for Egocentric 3D Hand Pose Estimation, Figure 4, arXiv:2403.04381v1. CC BY-NC-SA 4.0.",
+      "authors": "Ruicong Liu, Takehiko Ohkawa, Mingfang Zhang, Yoichi Sato",
+      "figure_number": "Figure 4",
+      "version": "2403.04381v1",
+      "modifications": "原始 arXiv HTML 图片，按原文件保留。"
     }
   },
   {
@@ -21243,18 +22089,26 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "从单目交互视频联合重建手和物体，不依赖预扫描物体模板。组合式关节隐式模型分离两者几何，并用手物约束改进姿态和重建。",
+      "method": "HOLD 对一条单目 RGB 视频拟合手、未知物体与背景的隐式表示。它从粗姿态开始学习形状，用接触和掩码修正姿态后再重新拟合几何。",
       "limitations": "不需预扫描物体模板，但仍依赖视频与联合隐式优化；不能将其理解为孤立单图即时重建。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2024/html/Fan_HOLD_Category-agnostic_3D_Reconstruction_of_Interacting_Hands_and_Objects_from_CVPR_2024_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2024/html/Fan_HOLD_Category-agnostic_3D_Reconstruction_of_Interacting_Hands_and_Objects_from_CVPR_2024_paper.html",
+        "https://arxiv.org/html/2311.18448v1#S3.SS1",
+        "https://arxiv.org/html/2311.18448v1#S3.SS2",
+        "https://arxiv.org/html/2311.18448v1#S3.SS3",
+        "https://arxiv.org/html/2311.18448v1#S3.SS4",
+        "https://arxiv.org/html/2311.18448v1#S1.F2",
+        "https://arxiv.org/html/2311.18448v1#S3.F3"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_notes": "已核对CVF正式论文页的标题、年份、会议信息及摘要。问题、方法、输入输出和贡献为摘要级解读；尚未复核正文实验、失败案例与作者局限，不代表全文精读或复现。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "problem": "预扫描物体模板和有限三维交互标签限制类别泛化。",
       "inputs_outputs": "单目交互视频→手与物体三维形状和姿态。",
       "contribution": "组合关节隐式表示，无三维手物标注地联合重建。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对正式记录或预印本摘要，并定向阅读作者预印本 arXiv:2311.18448v1 的 S3.SS1, S3.SS2, S3.SS3, S3.SS4 章节，核对方法、训练、推理和图示。",
+      "verified_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未经本页运行验证。"
     },
     "code": "https://github.com/zc-alexfan/hold",
     "ccf": {
@@ -21262,6 +22116,67 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "HOLD 对一条单目 RGB 视频拟合手、未知物体与背景的隐式表示。它从粗姿态开始学习形状，用接触和掩码修正姿态后再重新拟合几何。",
+      "steps": [
+        {
+          "title": "初始化手物运动",
+          "description": "逐帧运行现成手姿估计器得到 MANO 初值。分割物体区域后用 HLoc 做运动恢复结构，得到物体点云和相对运动初值。"
+        },
+        {
+          "title": "建立单独的规范空间",
+          "description": "手查询点通过逆线性混合蒙皮回到规范手。物体查询点经刚体变换和尺度对齐到规范物体。两套 MLP 各自预测带符号距离与颜色，另设随时间变化的背景分支。"
+        },
+        {
+          "title": "用合成渲染学习粗表面",
+          "description": "沿像素射线对手、物体和背景取样、查场和合成，以图像颜色、语义掩码、SDF 正则和手部 MANO 先验学习初步形状。"
+        },
+        {
+          "title": "用交互约束细化跟踪",
+          "description": "提取粗物体表面，鼓励常接触的手部顶点靠近物体，在可微光栅化下对齐分割掩码，细化手物位姿与尺度。"
+        },
+        {
+          "title": "用细化后的初值完整拟合",
+          "description": "以更新后的姿态重新训练场和外观隐变量，提取手物表面并按每帧变换恢复它们的运动。"
+        }
+      ],
+      "training": "训练指针对当前视频拟合隐式场与姿态。先做短程粗拟合，再更新位姿，最终重新初始化场网络并完整训练，从视频本身取得渲染监督。",
+      "inference": "输入新视频需重新初始化并优化该视频的隐式场。物体几何由视频恢复，手使用已有 MANO 表示提供约束。",
+      "figure_reading": "图 2 展示粗拟合、姿态更新和完整训练。图 3 从一条射线解释手、物体和背景采样怎样进入不同规范空间再合成。",
+      "sources": [
+        {
+          "label": "3.1 Pose initialization",
+          "url": "https://arxiv.org/html/2311.18448v1#S3.SS1"
+        },
+        {
+          "label": "3.2 HOLD-Net training",
+          "url": "https://arxiv.org/html/2311.18448v1#S3.SS2"
+        },
+        {
+          "label": "3.3 Pose refinement",
+          "url": "https://arxiv.org/html/2311.18448v1#S3.SS3"
+        },
+        {
+          "label": "3.4 Final training",
+          "url": "https://arxiv.org/html/2311.18448v1#S3.SS4"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://arxiv.org/html/2311.18448v1#S1.F2"
+        },
+        {
+          "label": "Figure 3 · 体渲染结构",
+          "url": "https://arxiv.org/html/2311.18448v1#S3.F3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2311.18448v1#S1.F2",
+      "caption": "Figure 2 · HOLD: Category-agnostic 3D Reconstruction of Interacting Hands and Objects from Video",
+      "note": "原图转载许可尚未明确，请沿链接查看。图 2 展示粗拟合、姿态更新和完整训练。图 3 从一条射线解释手、物体和背景采样怎样进入不同规范空间再合成。"
     }
   },
   {
@@ -21284,25 +22199,134 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "学习联合手物三维扩散先验，以手骨架距离场对齐物体隐式表示。该先验不仅用于抓取生成，也用于引导交互视频中的三维重建。",
+      "method": "G-HOP 在手掌坐标中联合学习手和物体的三维扩散先验。重建视频或为给定物体合成抓握时，去噪后的交互网格为测试时优化提供约束。",
       "limitations": "抓取生成和视频重建采用不同条件与指标；生成可行抓取不直接证明观测中交互的准确恢复。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2024/html/Ye_G-HOP_Generative_Hand-Object_Prior_for_Interaction_Reconstruction_and_Grasp_Synthesis_CVPR_2024_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2024/html/Ye_G-HOP_Generative_Hand-Object_Prior_for_Interaction_Reconstruction_and_Grasp_Synthesis_CVPR_2024_paper.html",
+        "https://arxiv.org/html/2404.12383v1#S3.SS1",
+        "https://arxiv.org/html/2404.12383v1#S3.SS2",
+        "https://arxiv.org/html/2404.12383v1#S4.SS1",
+        "https://arxiv.org/html/2404.12383v1#S4.SS2",
+        "https://arxiv.org/html/2404.12383v1#S4.SS3",
+        "https://arxiv.org/html/2404.12383v1#S2.F2",
+        "https://arxiv.org/html/2404.12383v1#S3.F4",
+        "https://github.com/JudyYe/ghop",
+        "https://arxiv.org/html/2404.12383v1#S3.F3"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_notes": "已核对CVF正式论文页的标题、年份、会议信息及摘要。问题、方法、输入输出和贡献为摘要级解读；尚未复核正文实验、失败案例与作者局限，不代表全文精读或复现。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "problem": "手物联合三维分布先验不足以支持多种交互任务。",
       "inputs_outputs": "物体类别条件或交互视频→联合手物表示/重建。",
       "contribution": "对齐手骨架距离场与物体SDF，学习可迁移扩散先验。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对正式记录或预印本摘要，并定向阅读作者预印本 arXiv:2404.12383v1 的 S3.SS1, S3.SS2, S4.SS1, S4.SS2, S4.SS3 章节，核对方法、训练、推理和图示。",
+      "verified_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未经本页运行验证。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
-    }
+    },
+    "pipeline": {
+      "overview": "G-HOP 在手掌坐标中联合学习手和物体的三维扩散先验。重建视频或为给定物体合成抓握时，去噪后的交互网格为测试时优化提供约束。",
+      "steps": [
+        {
+          "title": "统一手物空间",
+          "description": "把交互变换到手掌朝上的规范坐标。物体用带符号距离场表示，VQ-VAE 将高分辨率物体场压缩到较低分辨率潜网格。"
+        },
+        {
+          "title": "编码手的骨架距离场",
+          "description": "在同一空间为 15 个关节记录每个体素到关节的平方距离，与物体潜网格沿通道拼接。手和物体因而可以在同一体素位置交互。"
+        },
+        {
+          "title": "学习条件扩散",
+          "description": "用 CLIP 编码物体类别文字，三维 U-Net 在各级交叉注意力中接收它，从加噪交互网格预测干净网格。"
+        },
+        {
+          "title": "用先验重建交互视频",
+          "description": "为单目序列保留跨帧物体 SDF，同时估计逐帧手姿态和手物相对变换。用可微渲染匹配二维掩码，并用 SDS 引导手和物体的三维估计。"
+        },
+        {
+          "title": "适配到固定物体抓握",
+          "description": "把给定物体网格转成 SDF 并固定其形状，对手关节和相对变换用 SDS 优化。再用原网格鼓励接触、抑制穿插，并用不同初值得到多种抓握。"
+        }
+      ],
+      "training": "从多个带三维手物标注的数据集学习物体自编码器及联合去噪先验，整理同义物体标签后作为文字条件。",
+      "inference": "视频重建和给定物体抓握都在测试时迭代优化，用已训练先验评分和引导更新。联合生成示例还可从噪声采样后解码出物体和手。",
+      "figure_reading": "图 2 解释两种距离场怎样在体素空间拼接。图 3 追踪重建中的掩码重投影和 SDS 两条约束，图 4 给出固定物体的抓握优化。",
+      "sources": [
+        {
+          "label": "3.1 Generative Hand-Object Prior",
+          "url": "https://arxiv.org/html/2404.12383v1#S3.SS1"
+        },
+        {
+          "label": "3.2 Prior-guided Reconstruction and Generation",
+          "url": "https://arxiv.org/html/2404.12383v1#S3.SS2"
+        },
+        {
+          "label": "4.1 Visualizing Data-Driven Prior",
+          "url": "https://arxiv.org/html/2404.12383v1#S4.SS1"
+        },
+        {
+          "label": "4.2 Reconstructing Interaction clips",
+          "url": "https://arxiv.org/html/2404.12383v1#S4.SS2"
+        },
+        {
+          "label": "4.3 Synthesizing Plausible Grasps",
+          "url": "https://arxiv.org/html/2404.12383v1#S4.SS3"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://arxiv.org/html/2404.12383v1#S2.F2"
+        },
+        {
+          "label": "Figure 4 · 固定物体抓握",
+          "url": "https://arxiv.org/html/2404.12383v1#S3.F4"
+        },
+        {
+          "label": "Figure 3 · 原图",
+          "url": "https://arxiv.org/html/2404.12383v1#S3.F3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local"
+    },
+    "figure": {
+      "src": "assets/figures/ghop-original.png",
+      "caption": "G-HOP 的手物体素表示和联合扩散先验。",
+      "alt": "G-HOP 的手物体素表示和联合扩散先验。",
+      "source": "https://arxiv.org/html/2404.12383v1#S2.F2",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Yufei Ye, Abhinav Gupta, Kris Kitani, Shubham Tulsiani. G-HOP: Generative Hand-Object Prior for Interaction Reconstruction and Grasp Synthesis, Figure 2, arXiv:2404.12383v1. CC BY 4.0.",
+      "authors": "Yufei Ye, Abhinav Gupta, Kris Kitani, Shubham Tulsiani",
+      "figure_number": "Figure 2",
+      "version": "2404.12383v1",
+      "modifications": "原始 arXiv HTML 图片，按原文件保留。"
+    },
+    "code": "https://github.com/JudyYe/ghop",
+    "code_provenance": {
+      "url": "https://github.com/JudyYe/ghop",
+      "verified_at": "2026-11-18",
+      "basis": "第一作者项目页链接此实现，包含 ddpm3d、train.py、generate.py 和 grasp_syn.py。"
+    },
+    "figures": [
+      {
+        "src": "assets/figures/ghop-reconstruction-original.png",
+        "caption": "G-HOP 以生成先验引导交互视频重建。",
+        "alt": "G-HOP 以生成先验引导交互视频重建。",
+        "source": "https://arxiv.org/html/2404.12383v1#S3.F3",
+        "license": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "attribution": "Yufei Ye, Abhinav Gupta, Kris Kitani, Shubham Tulsiani. G-HOP: Generative Hand-Object Prior for Interaction Reconstruction and Grasp Synthesis, Figure 3, arXiv:2404.12383v1. CC BY 4.0.",
+        "authors": "Yufei Ye, Abhinav Gupta, Kris Kitani, Shubham Tulsiani",
+        "figure_number": "Figure 3",
+        "version": "2404.12383v1",
+        "modifications": "原始 arXiv HTML 图片，按原文件保留。"
+      }
+    ]
   },
   {
     "id": "hand-ms-mano-enabling-hand-pose-tracking-with-biomechanical-constraints",
@@ -21325,24 +22349,103 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "将肌肉骨骼系统与MANO结合，利用肌肉和肌腱动力学约束手运动。通过仿真参与的姿态细化框架改进已有视觉手跟踪结果。",
+      "method": "MS-MANO 将肌肉执行器适配到 MANO 的关节和形状上，供 BioPR 用来细化现有手姿估计器的逐帧结果。肌肉激励驱动仿真，生成的参考姿态再和视觉观测融合。",
       "limitations": "仿真细化作用于已有视觉跟踪，输出合理性受肌肉骨骼模型约束；不直接替代图像到姿态检测。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2024/html/Xie_MS-MANO_Enabling_Hand_Pose_Tracking_with_Biomechanical_Constraints_CVPR_2024_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2024/html/Xie_MS-MANO_Enabling_Hand_Pose_Tracking_with_Biomechanical_Constraints_CVPR_2024_paper.html",
+        "https://arxiv.org/html/2404.10227v1#S3.SS1",
+        "https://arxiv.org/html/2404.10227v1#S3.SS2",
+        "https://arxiv.org/html/2404.10227v1#S4.SS1",
+        "https://arxiv.org/html/2404.10227v1#S4.SS2",
+        "https://arxiv.org/html/2404.10227v1#S3.F4",
+        "https://github.com/panoanx/ms-mano-dynamics"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_notes": "已核对CVF正式论文页的标题、年份、会议信息及摘要。问题、方法、输入输出和贡献为摘要级解读；尚未复核正文实验、失败案例与作者局限，不代表全文精读或复现。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "problem": "简化关节驱动模型可能产生不符合生理机制的手运动。",
       "inputs_outputs": "初始视觉姿态→生物力学约束后的手运动轨迹。",
       "contribution": "肌肉骨骼MANO模型与仿真参与的姿态细化结合。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对正式记录或预印本摘要，并定向阅读作者预印本 arXiv:2404.10227v1 的 S3.SS1, S3.SS2, S4.SS1, S4.SS2 章节，核对方法、训练、推理和图示。",
+      "verified_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未经本页运行验证。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "MS-MANO 将肌肉执行器适配到 MANO 的关节和形状上，供 BioPR 用来细化现有手姿估计器的逐帧结果。肌肉激励驱动仿真，生成的参考姿态再和视觉观测融合。",
+      "steps": [
+        {
+          "title": "构造可变形的肌骨模型",
+          "description": "将 MyoHand 的骨和肌肉连接关系映射到 MANO 关节，在不同手形下调整肌肉附着点，用 Hill 型模型根据肌肉状态计算力矩。"
+        },
+        {
+          "title": "从视频估计角速度",
+          "description": "逐帧估计 MANO 形状与关节姿态，插值和有限差分得到 15 个局部关节的角速度。腕部全局运动不进入这组局部角速度。"
+        },
+        {
+          "title": "预测肌肉激励",
+          "description": "IDNet 读取相邻帧的姿态及角速度，估计从当前状态到下一状态的肌肉激励。"
+        },
+        {
+          "title": "在仿真中推进一步",
+          "description": "把状态和激励送入物理仿真，使用肌肉力和关节约束计算下一时刻参考姿态。"
+        },
+        {
+          "title": "融合参考与视觉观测",
+          "description": "小型 MLP 接收仿真参考和视觉姿态信息，输出细化结果。下一步仿真可使用前一步细化姿态作为反馈。"
+        }
+      ],
+      "training": "用带补偿的 PD 控制器生成参考力矩，通过 PPO 训练 IDNet，比较产生的肌肉力矩与参考力矩。细化 MLP 由真实姿态监督。",
+      "inference": "对新视频使用已训练的 IDNet 和细化网络。物理引擎由预测肌肉激励驱动，PD 控制器只在训练提供参考。",
+      "figure_reading": "图 4 从 RGB 初估、差分速度和 IDNet 一直连到仿真与细化，并用反馈线表示前一帧结果怎样参与下一时刻。",
+      "sources": [
+        {
+          "label": "3.1 Hill-type Muscle Model",
+          "url": "https://arxiv.org/html/2404.10227v1#S3.SS1"
+        },
+        {
+          "label": "3.2 Joint-centric Muscle Adaptation",
+          "url": "https://arxiv.org/html/2404.10227v1#S3.SS2"
+        },
+        {
+          "label": "4.1 Muscle Inverse Dynamics and IDNet",
+          "url": "https://arxiv.org/html/2404.10227v1#S4.SS1"
+        },
+        {
+          "label": "4.2 Simulation in the Loop",
+          "url": "https://arxiv.org/html/2404.10227v1#S4.SS2"
+        },
+        {
+          "label": "Figure 4 · 原图",
+          "url": "https://arxiv.org/html/2404.10227v1#S3.F4"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local"
+    },
+    "figure": {
+      "src": "assets/figures/ms-mano-biopr-original.png",
+      "caption": "MS-MANO 的 BioPR 反动力学预测和闭环仿真。",
+      "alt": "MS-MANO 的 BioPR 反动力学预测和闭环仿真。",
+      "source": "https://arxiv.org/html/2404.10227v1#S3.F4",
+      "license": "CC BY-NC-ND 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+      "attribution": "Pengfei Xie, Wenqiang Xu, Tutian Tang, Zhenjun Yu, Cewu Lu. MS-MANO: Enabling Hand Pose Tracking with Biomechanical Constraints, Figure 4, arXiv:2404.10227v1. CC BY-NC-ND 4.0.",
+      "authors": "Pengfei Xie, Wenqiang Xu, Tutian Tang, Zhenjun Yu, Cewu Lu",
+      "figure_number": "Figure 4",
+      "version": "2404.10227v1",
+      "modifications": "原始 arXiv HTML 图片，按原文件保留。"
+    },
+    "code": "https://github.com/panoanx/ms-mano-dynamics",
+    "code_provenance": {
+      "url": "https://github.com/panoanx/ms-mano-dynamics",
+      "verified_at": "2026-11-18",
+      "basis": "作者项目列出的 Dynamics 实现，包含 envs、models、train 与配置。Unity 交互演示另由作者项目提供。"
     }
   },
   {
@@ -28025,19 +29128,96 @@
     ],
     "analysis": {
       "problem": "通用多模态模型对精细关键点语义与定位仍不充分，训练对象、姿态和遮挡情景的覆盖影响泛化。",
-      "method": "延续 identify-then-detect 流程，以用户指令整合多种模态，先解释关键点含义再定位；扩大训练样本在物体、关键点类别、图像风格和复杂遮挡上的覆盖。",
+      "method": "KptLLM++ 将关键点语义解释、视觉示例定位和纯文字提示定位合到同一多模态模型。它用文字输出归一化坐标，也可将目标点的解释作为定位上下文。",
       "inputs_outputs": "图像与用户定义的文本或视觉提示输入，输出关键点语义及图像位置。",
       "contribution": "重点是扩展训练规模与通用场景覆盖。原始记录明确标注为 KptLLM 扩展版，应与 2024 版建立阅读关联，不能当作完全独立研究路线。",
       "limitations": "与 KptLLM 属于同一方法扩展脉络；通用性仍需依据未见对象、关键点和提示划分评价。",
       "sources": [
-        "https://arxiv.org/abs/2507.11102"
+        "https://arxiv.org/abs/2507.11102",
+        "https://arxiv.org/html/2507.11102v1#S3.SS1",
+        "https://arxiv.org/html/2507.11102v1#S3.SS2",
+        "https://arxiv.org/html/2507.11102v1#S3.SS3",
+        "https://arxiv.org/html/2507.11102v1#S3.SS4",
+        "https://arxiv.org/html/2507.11102v1#S3.SS5",
+        "https://arxiv.org/html/2507.11102v1#S3.SS6",
+        "https://arxiv.org/html/2507.11102v1#S3.SS7",
+        "https://arxiv.org/html/2507.11102v1#S3.F2"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "核对原始论文摘要与出版信息；未逐段阅读全文或复现实验，未核实的局限留空。",
-      "verified_at": "2026-11-17",
-      "verification_note": "原始 arXiv 记录未提供已核实期刊/会议；保持预印本身份，不继承 KptLLM 的 NeurIPS 标签。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录或预印本摘要，并定向阅读作者预印本 arXiv:2507.11102v1 的 S3.SS1, S3.SS2, S3.SS3, S3.SS4, S3.SS5, S3.SS6, S3.SS7 章节，核对方法、训练、推理和图示。",
+      "verified_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未经本页运行验证。",
       "limitations_kind": "editorial_scope",
       "scope_reviewed_at": "2026-11-18"
+    },
+    "pipeline": {
+      "overview": "KptLLM++ 将关键点语义解释、视觉示例定位和纯文字提示定位合到同一多模态模型。它用文字输出归一化坐标，也可将目标点的解释作为定位上下文。",
+      "steps": [
+        {
+          "title": "编码查询和参考图",
+          "description": "DINOv2 ViT-L 分别编码待定位图与可选参考图。查询图特征逐位置投影到语言模型空间，参考图特征留给提示提取器。"
+        },
+        {
+          "title": "编码参考点位置",
+          "description": "如果有视觉示例，用正余弦位置嵌入和 MLP 表示参考图上的二维坐标，形成点提示查询。"
+        },
+        {
+          "title": "从参考图抽取提示特征",
+          "description": "两层 Transformer 交叉注意力以点提示为查询，以参考图特征为键和值，得到包含目标点和周围语境的视觉提示向量。"
+        },
+        {
+          "title": "按任务组合多模态输入",
+          "description": "依据任务把待定位图 token、参考点提示及文字指令送入语言模型。解释任务生成点的语义，视觉或文字提示定位任务可先说明目标再生成位置。"
+        },
+        {
+          "title": "用文本表示点坐标",
+          "description": "将横纵坐标分别映射到图像尺寸归一化的 0 到 1 范围并保留三位小数，由模型输出坐标文本，解析后可还原到图像坐标。"
+        }
+      ],
+      "training": "在多类对象数据上联合训练，数据覆盖人体、动物及车辆等关键点，扩展集合超过 50 万样本。论文使用 LoRA 适配语言模型，其余模块按正文做完整微调。",
+      "inference": "参考图与点坐标可用于解释或匹配；文字提示可直接查询目标图。多目标应用另接 Grounding DINO 先检测及裁剪各实例，再逐实例运行 KptLLM++。",
+      "figure_reading": "图 2 对照三种任务实际启用的输入，注意参考图经过交叉注意力压缩为点提示，坐标最终由语言模型生成。",
+      "sources": [
+        {
+          "label": "3.1 Visual Encoder",
+          "url": "https://arxiv.org/html/2507.11102v1#S3.SS1"
+        },
+        {
+          "label": "3.2 Prompt Encoder",
+          "url": "https://arxiv.org/html/2507.11102v1#S3.SS2"
+        },
+        {
+          "label": "3.3 Prompt Feature Extractor",
+          "url": "https://arxiv.org/html/2507.11102v1#S3.SS3"
+        },
+        {
+          "label": "3.4 Multimodal LLM for Keypoint Comprehension",
+          "url": "https://arxiv.org/html/2507.11102v1#S3.SS4"
+        },
+        {
+          "label": "3.5 Training and Inference Details",
+          "url": "https://arxiv.org/html/2507.11102v1#S3.SS5"
+        },
+        {
+          "label": "3.6 User Guideline for Keypoint Comprehension",
+          "url": "https://arxiv.org/html/2507.11102v1#S3.SS6"
+        },
+        {
+          "label": "3.7 Real-World Application",
+          "url": "https://arxiv.org/html/2507.11102v1#S3.SS7"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://arxiv.org/html/2507.11102v1#S3.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2507.11102v1#S3.F2",
+      "caption": "Figure 2 · KptLLM++: Towards Generic Keypoint Comprehension with Large Language Model",
+      "note": "原图转载许可尚未明确，请沿链接查看。图 2 对照三种任务实际启用的输入，注意参考图经过交叉注意力压缩为点提示，坐标最终由语言模型生成。"
     }
   },
   {
@@ -28059,20 +29239,96 @@
     ],
     "analysis": {
       "problem": "线性图文连接器难以充分表达定位所需的复杂空间与文字关系。",
-      "method": "采用带 GELU 的两层 MLP 做视觉 patch 与关键点文本的非线性对齐，保留语言引导定位范式。",
+      "method": "PoseLLM 接收一张图像和针对某个身体关键点的自然语言问题。它在 LocLLM 的问答式定位框架中加入带 GELU 的两层视觉语言连接器，再由 Vicuna 生成坐标。",
       "inputs_outputs": "人体图像与关键点文字说明输入，输出二维人体关键点位置。",
       "contribution": "摘要报告仅用 COCO 训练，在 COCO 验证集获得 77.8 AP，并测试 Human-Art 与 MPII 的零样本迁移。此处为作者报告，尚未独立复现，也不意味着所有协议全面领先。",
       "limitations": "MLP 对齐面向语言引导的二维人体定位，不直接提供三维重建；提示文本与训练点集需明确。",
       "sources": [
-        "https://arxiv.org/abs/2507.09139"
+        "https://arxiv.org/abs/2507.09139",
+        "https://arxiv.org/html/2507.09139v1#S3.SS1",
+        "https://arxiv.org/html/2507.09139v1#S3.SS2",
+        "https://arxiv.org/html/2507.09139v1#S3.SS3",
+        "https://arxiv.org/html/2507.09139v1#S3.SS4",
+        "https://arxiv.org/html/2507.09139v1#S4",
+        "https://arxiv.org/html/2507.09139v1#S3.F1"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "核对原始论文摘要与出版信息；未逐段阅读全文或复现实验，未核实的局限留空。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录或预印本摘要，并定向阅读作者预印本 arXiv:2507.09139v1 的 S3.SS1, S3.SS2, S3.SS3, S3.SS4, S4 章节，核对方法、训练、推理和图示。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未经本页运行验证。"
     },
-    "code": "https://github.com/Ody-trek/PoseLLM"
+    "code": "https://github.com/Ody-trek/PoseLLM",
+    "pipeline": {
+      "overview": "PoseLLM 接收一张图像和针对某个身体关键点的自然语言问题。它在 LocLLM 的问答式定位框架中加入带 GELU 的两层视觉语言连接器，再由 Vicuna 生成坐标。",
+      "steps": [
+        {
+          "title": "提取图块表示",
+          "description": "以 DINOv2 ViT-L/14 编码输入图像，保留每个图块的 1024 维特征，供后面的语言模型访问不同空间位置。"
+        },
+        {
+          "title": "编码单点问题",
+          "description": "将关键点的解剖或空间描述，与询问该点位置的问题拼接。Vicuna 分词器及嵌入层把它们转成文本 token，实验沿用 LocLLM 的 17 点描述。"
+        },
+        {
+          "title": "非线性模态对接",
+          "description": "先将每个图块从 1024 维映射到 4096 维，经过 GELU，再做 4096 到 4096 的投影，使视觉和文本 token 进入同一语言模型宽度。"
+        },
+        {
+          "title": "串接图文序列",
+          "description": "将投影的视觉 token 放在文本嵌入之前，Vicuna-7B 根据图像和当前指定关键点一起更新上下文。"
+        },
+        {
+          "title": "解码坐标回答",
+          "description": "语言模型自回归输出被问到的关键点坐标。不同关键点由各自的描述和提问指定。"
+        }
+      ],
+      "training": "以 COCO Keypoint 训练，使用真实坐标回答进行教师强制，交叉熵只计算答案 token。Human-Art 和 MPII 用于跨数据集评估。",
+      "inference": "输入图像和要查找的关键点问题，视觉表示经两层连接器送入 Vicuna，生成该点的坐标。需要多点时按目标关键点构造相应问题。",
+      "figure_reading": "图 1 重点看 DINOv2 图块与文字问题的两条支路，它们在 4096 维嵌入空间拼接，MLP 位于视觉支路。",
+      "sources": [
+        {
+          "label": "3.1 Vision Encoder",
+          "url": "https://arxiv.org/html/2507.09139v1#S3.SS1"
+        },
+        {
+          "label": "3.2 Text Encoding",
+          "url": "https://arxiv.org/html/2507.09139v1#S3.SS2"
+        },
+        {
+          "label": "3.3 Nonlinear Vision-Language Connector (MLP)",
+          "url": "https://arxiv.org/html/2507.09139v1#S3.SS3"
+        },
+        {
+          "label": "3.4 Large Language Model and Output",
+          "url": "https://arxiv.org/html/2507.09139v1#S3.SS4"
+        },
+        {
+          "label": "4 Experiments",
+          "url": "https://arxiv.org/html/2507.09139v1#S4"
+        },
+        {
+          "label": "Figure 1 · 原图",
+          "url": "https://arxiv.org/html/2507.09139v1#S3.F1"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local"
+    },
+    "figure": {
+      "src": "assets/figures/posellm-original.png",
+      "caption": "PoseLLM 的图块编码、MLP 连接和坐标生成。",
+      "alt": "PoseLLM 的图块编码、MLP 连接和坐标生成。",
+      "source": "https://arxiv.org/html/2507.09139v1#S3.F1",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Dewen Zhang, Tahir Hussain, Wangpeng An, Hayaru Shouno. PoseLLM: Enhancing Language-Guided Human Pose Estimation with MLP Alignment, Figure 1, arXiv:2507.09139v1. CC BY 4.0.",
+      "authors": "Dewen Zhang, Tahir Hussain, Wangpeng An, Hayaru Shouno",
+      "figure_number": "Figure 1",
+      "version": "2507.09139v1",
+      "modifications": "原始 arXiv HTML 图片，按原文件保留。"
+    }
   },
   {
     "id": "capellm",
@@ -28189,18 +29445,23 @@
     ],
     "analysis": {
       "problem": "既有姿态任务常独立训练且只接受单一控制模态，难以组合图像、文本与三维姿态条件。",
-      "method": "姿态 tokenizer 将 SMPL 姿态转为离散 token 并扩充统一词表；混合视觉编码器包含姿态专用分支，以统一学习实现任务间知识迁移。",
+      "method": "UniPose 为三维人体姿态定义离散词表，并统一接收图像、文字或已有姿态。文字输出按序生成，三维姿态输出则用一组可互相注意的查询并行预测。",
       "inputs_outputs": "按任务接收图像、文字或三维 SMPL 姿态，输出姿态理解文本或生成/编辑后的三维姿态。",
       "contribution": "研究多任务统一及未见任务迁移，不应把其生成或编辑性能等同于专用图像姿态估计性能。可作为语言引导三维姿态路线与 LocLLM 对照阅读。",
       "limitations": "姿态词表采用 SMPL token，生成编辑的表示范围受量化模型限制；不应将所有输入输出任务视为同一指标。",
       "sources": [
         "https://arxiv.org/abs/2411.16781",
-        "https://openaccess.thecvf.com/content/CVPR2025/papers/Li_UniPose_A_Unified_Multimodal_Framework_for_Human_Pose_Comprehension_Generation_CVPR_2025_paper.pdf"
+        "https://openaccess.thecvf.com/content/CVPR2025/papers/Li_UniPose_A_Unified_Multimodal_Framework_for_Human_Pose_Comprehension_Generation_CVPR_2025_paper.pdf",
+        "https://arxiv.org/html/2411.16781v1#S3.SS1",
+        "https://arxiv.org/html/2411.16781v1#S3.SS2",
+        "https://arxiv.org/html/2411.16781v1#S3.SS3",
+        "https://arxiv.org/html/2411.16781v1#S2.F2",
+        "https://arxiv.org/html/2411.16781v1#S3.F3"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "核对原始论文摘要与出版信息；未逐段阅读全文或复现实验，未核实的局限留空。",
-      "verified_at": "2026-11-17",
-      "verification_note": "2024 年首次预印，按正式 CVPR 2025 版本年份展示；勿与同名的其他 UniPose 方法混淆。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录或预印本摘要，并定向阅读作者预印本 arXiv:2411.16781v1 的 S3.SS1, S3.SS2, S3.SS3 章节，核对方法、训练、推理和图示。",
+      "verified_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未经本页运行验证。",
       "limitations_kind": "editorial_scope",
       "scope_reviewed_at": "2026-11-18"
     },
@@ -28210,6 +29471,71 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "UniPose 为三维人体姿态定义离散词表，并统一接收图像、文字或已有姿态。文字输出按序生成，三维姿态输出则用一组可互相注意的查询并行预测。",
+      "steps": [
+        {
+          "title": "量化 SMPL 旋转",
+          "description": "以 VQ-VAE 将根方向与关节旋转编码为离散码本索引。解码器从索引恢复连续旋转参数，姿态起止符把这一序列放进语言模型词表。"
+        },
+        {
+          "title": "提取两种视觉信息",
+          "description": "CLIP 提供图像语义，姿态任务预训练的视觉 Transformer 给出精细姿态特征。两路图块嵌入经视觉投影器进入语言模型。"
+        },
+        {
+          "title": "把任务写成统一指令",
+          "description": "对单姿态、图像或图像对生成描述，对文字或图像生成三维姿态，对已有姿态与修改指令生成新旋转。"
+        },
+        {
+          "title": "使用混合注意力",
+          "description": "文字位置保持因果注意力。生成或编辑姿态时，以可学习姿态查询替代待生成的 token，查询之间允许双向注意，在同一次前向中协调关节。"
+        },
+        {
+          "title": "还原三维姿态",
+          "description": "将预测码字送入姿态解码器恢复 SMPL 旋转；理解类任务保留模型生成的文本描述。"
+        }
+      ],
+      "training": "依次训练姿态分词器、用 LoRA 做姿态与文本对齐、预训练视觉投影器、联合指令微调。分词器在后三阶段冻结。任务损失覆盖单姿态理解、成对理解、生成和编辑。",
+      "inference": "理解类请求自回归输出描述。生成或编辑请求先预测姿态起始符，随后放入全部姿态查询并行预测码字，最后恢复连续关节旋转。",
+      "figure_reading": "图 2 从左到右连接分词器、双视觉编码和语言模型。图 3 对应姿态与文本对齐、视觉投影预训练和联合指令微调三个阶段。",
+      "sources": [
+        {
+          "label": "3.1 Pose Tokenizer",
+          "url": "https://arxiv.org/html/2411.16781v1#S3.SS1"
+        },
+        {
+          "label": "3.2 Pose-aware Vision-Language Model",
+          "url": "https://arxiv.org/html/2411.16781v1#S3.SS2"
+        },
+        {
+          "label": "3.3 Training and Inference Paradigm",
+          "url": "https://arxiv.org/html/2411.16781v1#S3.SS3"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://arxiv.org/html/2411.16781v1#S2.F2"
+        },
+        {
+          "label": "Figure 3 · 后续训练阶段",
+          "url": "https://arxiv.org/html/2411.16781v1#S3.F3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local"
+    },
+    "figure": {
+      "src": "assets/figures/unipose-original.png",
+      "caption": "UniPose 的姿态分词、视觉编码和语言模型。",
+      "alt": "UniPose 的姿态分词、视觉编码和语言模型。",
+      "source": "https://arxiv.org/html/2411.16781v1#S2.F2",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Yiheng Li, Ruibing Hou, Hong Chang, Shiguang Shan, Xilin Chen. UniPose: A Unified Multimodal Framework for Human Pose Comprehension, Generation and Editing, Figure 2, arXiv:2411.16781v1. CC BY 4.0.",
+      "authors": "Yiheng Li, Ruibing Hou, Hong Chang, Shiguang Shan, Xilin Chen",
+      "figure_number": "Figure 2",
+      "version": "2411.16781v1",
+      "modifications": "原始 arXiv HTML 图片，按原文件保留。"
     }
   },
   {
@@ -28233,7 +29559,7 @@
     ],
     "analysis": {
       "problem": "自遮挡或物体遮挡会使可见图像不足以确定手部姿态，而物体用途与抓取方式提供额外约束。",
-      "method": "VLM 提取物体与交互信息，抓取分类器提供抓取类型，LLM 汇总可供性描述。文本与图像特征条件化 Transformer 扩散先验，使用遮挡感知引导采样修正初始手姿。",
+      "method": "方法把手与物体交互的可供性写成文字，用条件扩散先验修正单图初值中被遮挡的手部关节。",
       "inputs_outputs": "初始手部重建、输入图像特征、可供性描述及二维关键点等条件输入，输出细化的三维手姿；是可叠加在现有重建器之上的测试时修正模块。",
       "contribution": "作者项目页补充 HOGraspNet 与 HO3D 评估，强调严重遮挡下的几何消歧。将物体功能语义、可见图像证据与扩散先验结合，而不是用文字替代全部几何约束。",
       "limitations": "模块修正已有重建，依赖初始姿态及可供性生成流程；多模型调用与扩散采样成本需纳入部署评估。",
@@ -28241,12 +29567,17 @@
         "https://arxiv.org/abs/2510.00506",
         "https://narusuzuki.github.io/projects/26-affhandgen/",
         "https://github.com/narusuzuki/AffHandGen",
-        "https://link.springer.com/chapter/10.1007/978-3-032-37098-3_14"
+        "https://link.springer.com/chapter/10.1007/978-3-032-37098-3_14",
+        "https://arxiv.org/html/2510.00506v1#S2.SS1",
+        "https://arxiv.org/html/2510.00506v1#S2.SS2",
+        "https://arxiv.org/html/2510.00506v1#S3",
+        "https://arxiv.org/html/2510.00506v1#S1.F2",
+        "https://arxiv.org/html/2510.00506v1#S2.F3"
       ],
-      "evidence_level": "primary_abstract_and_project",
-      "evidence_scope": "核对 arXiv 和 Springer 正式论文摘要/出版记录、作者项目页方法说明与官方仓库 README；未逐段阅读论文正文或复现。",
-      "verified_at": "2026-11-17",
-      "verification_note": "2025 年首次预印；已核实 Springer 正式 ECCV 2026 论文集出版记录：2026-09-10 在线发表，LNCS 17062，页 241–260，DOI 10.1007/978-3-032-37098-3_14。按正式出版年份展示。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录或预印本摘要，并定向阅读作者预印本 arXiv:2510.00506v1 的 S2.SS1, S2.SS2, S3 章节，核对方法、训练、推理和图示。",
+      "verified_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未经本页运行验证。",
       "limitations_kind": "editorial_scope",
       "scope_reviewed_at": "2026-11-18"
     },
@@ -28256,6 +29587,63 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ECCV"
+    },
+    "pipeline": {
+      "overview": "方法把手与物体交互的可供性写成文字，用条件扩散先验修正单图初值中被遮挡的手部关节。",
+      "steps": [
+        {
+          "title": "提取交互描述元素",
+          "description": "用手和物体框提示 Qwen2.5-VL，抽取物体种类、形状、尺寸、交互动作与意图等信息。论文实验中的抓握分类使用 HOGraspNet 标注。"
+        },
+        {
+          "title": "构造文字条件",
+          "description": "用 Mistral-7B 将元素合并为自然语言描述。CLIP 文本编码作为姿态去噪网络的条件。"
+        },
+        {
+          "title": "学习 MANO 旋转先验",
+          "description": "将干净的 15 个 MANO 局部旋转参数加噪，训练网络根据噪声姿态、扩散步和文本预测干净姿态。"
+        },
+        {
+          "title": "定位被遮挡关节",
+          "description": "用 HaMeR 预测初始手姿与网格。通过从关节向相机投射射线检测自遮挡，再用二维投影是否落在 SAM2 手部掩码内判断物体遮挡。"
+        },
+        {
+          "title": "用条件去噪细化",
+          "description": "对初值加噪后逆扩散，遮挡越多可用的加噪步越多。用可见二维关键点做拟合约束，并保留可见关节的初始信息，仅细化遮挡关节。"
+        }
+      ],
+      "training": "在 HOGraspNet 的文字与 MANO 姿态对上学习条件先验。实验按受试者划分，抓握类别信息取自数据集标注。",
+      "inference": "需要初始重建、手物可供性描述和可见性判定。用学好的去噪先验逐步细化被遮挡旋转，并由 MANO 还原手部形状。",
+      "figure_reading": "图 2 左边是文字生成，右边是条件扩散训练。图 3 展示怎样从 HaMeR 初值出发，对遮挡和可见关节区别处理。",
+      "sources": [
+        {
+          "label": "2.1 Affordance description generation with VLM",
+          "url": "https://arxiv.org/html/2510.00506v1#S2.SS1"
+        },
+        {
+          "label": "2.2 Affordance-guided diffusion prior",
+          "url": "https://arxiv.org/html/2510.00506v1#S2.SS2"
+        },
+        {
+          "label": "3 Experiments",
+          "url": "https://arxiv.org/html/2510.00506v1#S3"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://arxiv.org/html/2510.00506v1#S1.F2"
+        },
+        {
+          "label": "Figure 3 · 单视角细化",
+          "url": "https://arxiv.org/html/2510.00506v1#S2.F3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2510.00506v1#S1.F2",
+      "caption": "Figure 2 · Affordance-Guided Diffusion Prior for 3D Hand Reconstruction",
+      "note": "原图转载许可尚未明确，请沿链接查看。图 2 左边是文字生成，右边是条件扩散训练。图 3 展示怎样从 HaMeR 初值出发，对遮挡和可见关节区别处理。"
     }
   },
   {
@@ -31392,18 +32780,26 @@
     "code": "https://github.com/kaustesseract/DexAvatar",
     "analysis": {
       "problem": "手语视频中的自遮挡、噪声和运动模糊使自动三维重建困难，现有数据又常缺少准确三维姿态。",
-      "method": "以学习到的三维手部与身体先验引导单目视频重建，约束精细关节和身体动作。",
+      "method": "DexAvatar 从单目手语视频拟合 SMPL-X。身体和双手分别由针对手语训练的姿态先验约束，二维重投影、时间连续性与关节活动范围共同引导细化。",
       "inputs_outputs": "输入自然场景单目手语视频，输出三维手部及身体姿态。",
       "contribution": "面向手语数据构建联合手部与身体重建流程，并在 SGNify 动捕基准上验证。",
       "limitations": "面向单目手语视频的联合先验，需说明时序窗口及手语动作覆盖；手指与身体误差应分别评价，不能直接外推到手物抓取。",
       "sources": [
-        "https://openaccess.thecvf.com/content/WACV2026/html/Kundu_DexAvatar_3D_Sign_Language_Reconstruction_with_Hand_and_Body_Pose_WACV_2026_paper.html"
+        "https://openaccess.thecvf.com/content/WACV2026/html/Kundu_DexAvatar_3D_Sign_Language_Reconstruction_with_Hand_and_Body_Pose_WACV_2026_paper.html",
+        "https://arxiv.org/html/2512.21054v1#S3.SS1",
+        "https://arxiv.org/html/2512.21054v1#S3.SS2",
+        "https://arxiv.org/html/2512.21054v1#S3.SS3",
+        "https://arxiv.org/html/2512.21054v1#S3.SS4",
+        "https://arxiv.org/html/2512.21054v1#S3.F2",
+        "https://arxiv.org/html/2512.21054v1#S3.F3",
+        "https://arxiv.org/html/2512.21054v1#S3.F4"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 正式论文页面的摘要与书目信息（原始页面及搜索索引交叉核对）；未全文核查实验协议或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录或预印本摘要，并定向阅读作者预印本 arXiv:2512.21054v1 的 S3.SS1, S3.SS2, S3.SS3, S3.SS4 章节，核对方法、训练、推理和图示。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未经本页运行验证。"
     },
     "verification_notes": {
       "catalog_count_checked": 367,
@@ -31411,6 +32807,71 @@
       "ccf": "WACV 在已核验的 2026 目录中未收录，不赋 A/B/C 等级。",
       "metrics": "未写入未经实验协议核对的数值比较。",
       "figure": "未下载或复用论文插图。"
+    },
+    "pipeline": {
+      "overview": "DexAvatar 从单目手语视频拟合 SMPL-X。身体和双手分别由针对手语训练的姿态先验约束，二维重投影、时间连续性与关节活动范围共同引导细化。",
+      "steps": [
+        {
+          "title": "准备手语姿态样本",
+          "description": "在 SignAvatars 身体数据中，用关节活动范围和签语空间过滤不合理的上肢姿势。手指样本来自手套与多相机动捕，重定向到 SMPL-X 后按屈伸、外展和扭转约束校正。"
+        },
+        {
+          "title": "训练身体与手部先验",
+          "description": "分别用 VAE 训练 SignBPoser 和 SignHPoser，学习从紧凑潜变量恢复适合手语的关节旋转。左、右手在拟合时使用独立潜变量。"
+        },
+        {
+          "title": "建立每帧初值和二维约束",
+          "description": "SMPLer-X 和 HaMeR 分别给出人体、手姿态初估。Sapiens 身体点和 HaMeR 手部点进入带置信权重的重投影项。"
+        },
+        {
+          "title": "选择参与优化的关节",
+          "description": "对下肢重投影关节置零权重。根据手语类别判定单手动作，单手情况下将非主要手臂和该手的重投影权重置零。"
+        },
+        {
+          "title": "拟合连续全身网格",
+          "description": "用双手和身体姿态先验、二维重投影、自交与生物力学惩罚联合细化姿态，并利用上一帧加入时序一致性后恢复 SMPL-X。"
+        }
+      ],
+      "training": "离线训练两个 VAE 先验，损失包含潜变量 KL、旋转及网格重建、旋转合法性与关节范围约束。SignHPoser 的训练手指数据来自作者采集的手语动捕。",
+      "inference": "对目标视频提取逐帧初值，在已训练的手语先验约束下数值优化姿态。每帧以二维投影和前帧姿态约束更新，最终得到三维关节与全身网格。",
+      "figure_reading": "图 2 连接预训练估计器、双手及身体潜变量与优化项。图 3、4 分别解释训练先验前如何筛选身体姿态和校正手指。",
+      "sources": [
+        {
+          "label": "3.1 Preliminaries",
+          "url": "https://arxiv.org/html/2512.21054v1#S3.SS1"
+        },
+        {
+          "label": "3.2 Data Preprocessing",
+          "url": "https://arxiv.org/html/2512.21054v1#S3.SS2"
+        },
+        {
+          "label": "3.3 Body and Hand Pose Priors",
+          "url": "https://arxiv.org/html/2512.21054v1#S3.SS3"
+        },
+        {
+          "label": "3.4 Optimization",
+          "url": "https://arxiv.org/html/2512.21054v1#S3.SS4"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://arxiv.org/html/2512.21054v1#S3.F2"
+        },
+        {
+          "label": "Figure 3 · 身体数据筛选",
+          "url": "https://arxiv.org/html/2512.21054v1#S3.F3"
+        },
+        {
+          "label": "Figure 4 · 手部数据校正",
+          "url": "https://arxiv.org/html/2512.21054v1#S3.F4"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2512.21054v1#S3.F2",
+      "caption": "Figure 2 · DexAvatar: 3D Sign Language Reconstruction with Hand and Body Pose Priors",
+      "note": "原图转载许可尚未明确，请沿链接查看。图 2 连接预训练估计器、双手及身体潜变量与优化项。图 3、4 分别解释训练先验前如何筛选身体姿态和校正手指。"
     }
   }
 ]
