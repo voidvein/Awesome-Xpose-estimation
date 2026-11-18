@@ -1,6 +1,6 @@
 # 详情页构建进度
 
-更新于 2026-11-18。共 371 篇，已展开 371 篇，其中 66 篇嵌入原图。待展开 0 篇。
+更新于 2026-11-18。共 374 篇，已展开 371 篇，其中 66 篇嵌入原图。待展开 3 篇。
 
 方法页按原文说明数据流、模块、训练与推理。数据集和综述分别说明采集与评测或分类与比较。原图按许可收录，未确认许可的保留原图链接。论文无独立结构图时，链接至对应的算法或方法正文。已在各页注明可核对的原文范围。
 
@@ -382,3 +382,7 @@
 - [LangPose: Language-Aligned Motion for Robust 3D Human Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=langpose)
 - [Image-Free Domain Generalization via CLIP for 3D Hand Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=clip-hand-domain-generalization)
 - [DexAvatar: 3D Sign Language Reconstruction with Hand and Body Pose Priors](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=dexavatar)
+
+## 待展开条目
+
+查看全量 JSON 队列中的待展开条目。

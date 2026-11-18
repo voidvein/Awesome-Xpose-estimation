@@ -38858,5 +38858,130 @@
       "caption": "Figure 2 · DexAvatar: 3D Sign Language Reconstruction with Hand and Body Pose Priors",
       "note": "原图转载许可尚未明确，请沿链接查看。图 2 连接预训练估计器、双手及身体潜变量与优化项。图 3、4 分别解释训练先验前如何筛选身体姿态和校正手指。"
     }
+  },
+  {
+    "id": "handrsi",
+    "title": "HandRSI: Recursive Self-Improvement for Hand Pose Estimation",
+    "authors": [
+      "Zhekai Wang",
+      "Luqing Luo",
+      "Wenhao Yao",
+      "Junjie Lu",
+      "Huanan Zhu",
+      "Feifei Gao",
+      "Yuhua Jiang"
+    ],
+    "year": 2026,
+    "category": "Hand",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "arXiv",
+    "status": "Preprint",
+    "summary": "将推理代码改进与模型蒸馏交替进行，缓解第一人称手部跟踪的漏检、遮挡误差与抖动。",
+    "url": "https://arxiv.org/abs/2611.22164",
+    "tags": [
+      "video",
+      "3D pose"
+    ],
+    "submitted_at": "2026-11-17",
+    "version": "2611.22164v1",
+    "code": "https://github.com/GinKenneth/Hand_RSI",
+    "analysis": {
+      "problem": "将推理代码改进与模型蒸馏交替进行，缓解第一人称手部跟踪的漏检、遮挡误差与抖动。",
+      "method": "编码代理改写推理流程，以十项指标的验证门控筛选；再按信息来源选择蒸馏信号，更新网络并重新验证推理流程。",
+      "inputs_outputs": "第一人称视频及已有 ACE-Ego-Hand 估计器；输出手部存在性与三维姿态。",
+      "contribution": "把代码层面的后处理和网络更新置于同一循环，在 HOT3D、ARCTIC 上进行多轮系统级比较。",
+      "limitations": "反复查询验证集存在自适应过拟合风险；作者限制查询并封存测试集。不同推理档位的速度不能脱离硬件与协议比较。",
+      "sources": [
+        "https://arxiv.org/abs/2611.22164",
+        "https://arxiv.org/html/2611.22164v1",
+        "https://github.com/GinKenneth/Hand_RSI"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "arXiv v1 摘要、方法 3.2–3.3 与验证集复用说明，作者代码入口；未运行代码或逐表复核",
+      "verification_note": "仅确认 arXiv 预印本状态，不赋予会议或期刊 CCF 评级；结果为作者报告，未独立复现。",
+      "verified_at": "2026-11-18"
+    }
+  },
+  {
+    "id": "body-of-evidence",
+    "title": "Body of Evidence: Triangulating 3D Human Pose with Geometry-Conditioned Depth",
+    "authors": [
+      "Erik Brorsson",
+      "Kilian Freitag",
+      "Josef Bengtson",
+      "Kristofer Bengtsson",
+      "Lars Hammarstrand",
+      "Knut Åkesson",
+      "Fredrik Kahl"
+    ],
+    "year": 2026,
+    "category": "Human",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "arXiv",
+    "status": "Preprint",
+    "summary": "在稀疏多相机和关节遮挡条件下，将预测深度加入三角化以补足单个有效视图的几何约束。",
+    "url": "https://arxiv.org/abs/2611.21044",
+    "tags": [
+      "3D pose"
+    ],
+    "submitted_at": "2026-11-16",
+    "version": "2611.21044v1",
+    "analysis": {
+      "problem": "在稀疏多相机和关节遮挡条件下，将预测深度加入三角化以补足单个有效视图的几何约束。",
+      "method": "以当前三维身体几何为条件预测各视图关节深度；可学习深度感知三角化 LDAT 融合二维点、深度和相机参数，并迭代更新三维姿态。",
+      "inputs_outputs": "同步且标定的多视图图像；输出公共世界坐标系中的多人三维关节。",
+      "contribution": "在保留多视图几何约束的同时处理部分关节仅有单视图证据的情况，评估覆盖 CMU Panoptic 相机子集及跨场景。",
+      "limitations": "仍依赖相机标定；附录 Campus 示例显示深度低估会使关节投影离开其他相机视野，导致错误重建。单关节可由一个视图贡献不等同于无标定通用单目方法。",
+      "sources": [
+        "https://arxiv.org/abs/2611.21044",
+        "https://arxiv.org/html/2611.21044v1"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "arXiv v1 摘要、3.1–3.4 方法与附录 Shelf/Campus 失败案例；未独立复现",
+      "verification_note": "仅确认 arXiv 预印本状态，不赋予会议或期刊 CCF 评级；结果为作者报告，未独立复现。",
+      "verified_at": "2026-11-18"
+    }
+  },
+  {
+    "id": "structure-guided-multi-granularity-transformer",
+    "title": "Structure-Guided Multi-Granularity Spatiotemporal Transformer for Efficient Monocular 3D Human Pose Estimation",
+    "authors": [
+      "Sheng Xu",
+      "Aoduo Li",
+      "Rongli He"
+    ],
+    "year": 2026,
+    "category": "Human",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "arXiv",
+    "status": "Preprint",
+    "summary": "利用关节、骨骼、肢体多粒度结构和关键帧选择，提高二维序列提升到三维姿态的效率。",
+    "url": "https://arxiv.org/abs/2611.20361",
+    "tags": [
+      "3D pose"
+    ],
+    "submitted_at": "2026-11-16",
+    "version": "2611.20361v1",
+    "analysis": {
+      "problem": "利用关节、骨骼、肢体多粒度结构和关键帧选择，提高二维序列提升到三维姿态的效率。",
+      "method": "空间分支结合结构门控注意力与层级聚合，时间分支融合分段上下文并选择关键片段，跨层注意力对齐不同粒度。",
+      "inputs_outputs": "单目视频的二维关键点序列；输出三维人体关节。",
+      "contribution": "作者在 CPN 二维检测、27 帧 Human3.6M Protocol 1 设置报告 46.0 mm MPJPE，并提供模块消融。",
+      "limitations": "量化实验主要为 Human3.6M 与 HumanEva-I，不能把野外定性例子当作全面泛化证明；其表中部分其他方法误差低于本方法，不宜复述为无条件全局最优。",
+      "sources": [
+        "https://arxiv.org/abs/2611.20361",
+        "https://arxiv.org/html/2611.20361v1"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "arXiv v1 摘要、方法概览、4.1–4.3 实验设置与表格、Discussion；未独立复现",
+      "verification_note": "仅确认 arXiv 预印本状态，不赋予会议或期刊 CCF 评级；结果为作者报告，未独立复现。",
+      "verified_at": "2026-11-18"
+    }
   }
 ]

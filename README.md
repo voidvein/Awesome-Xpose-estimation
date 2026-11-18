@@ -123,6 +123,8 @@ Serve the repository root with `python -m http.server 8000`.
 
 ### Hand
 
+- [code](https://github.com/GinKenneth/Hand_RSI) **[HandRSI: Recursive Self-Improvement for Hand Pose Estimation](https://arxiv.org/abs/2611.22164)** — arXiv 2026 · Preprint · 3D. 将推理代码改进与模型蒸馏交替进行，缓解第一人称手部跟踪的漏检、遮挡误差与抖动。
+
 - **[Image-Free Domain Generalization via CLIP for 3D Hand Pose Estimation](https://openaccess.thecvf.com/content/WACV2023/html/Lee_Image-Free_Domain_Generalization_via_CLIP_for_3D_Hand_Pose_Estimation_WACV_2023_paper.html)** — WACV 2023 · Published · 3D. 用 CLIP 文本特征扰动手部图像特征，在不额外收集目标域图像的情况下训练三维手姿估计器。
 - [code](https://github.com/ChanglongJiangGit/A2J-Transformer-Plus) **[3D Hand Pose Estimation via Articulated Anchor-to-Joint 3D Local Regressors](https://doi.org/10.1109/TPAMI.2025.3609907)** — TPAMI 2026 · Published · 3D. 采用 articulated anchors 与局部回归，覆盖 RGB 和深度输入。2025-09-16 在线发表，2026 年卷期。
 - [code](https://github.com/narusuzuki/AffHandGen) **[Affordance-Guided Diffusion Prior for 3D Hand Reconstruction](https://arxiv.org/abs/2510.00506)** — ECCV 2026 · Published · 3D. 利用视觉语言模型生成手物交互可供性描述，条件扩散先验修正严重遮挡下的三维手部姿态。
@@ -255,6 +257,9 @@ Serve the repository root with `python -m http.server 8000`.
 - **[Model-Based 3D Hand Pose Estimation from Monocular Video](https://doi.org/10.1109/TPAMI.2011.33)** — TPAMI 2011 · Published · 3D. 展示利用明暗和时序纹理连续性进行生成式手跟踪的路径，强调遮挡边界项的重要性。
 
 ### Human
+
+- **[Body of Evidence: Triangulating 3D Human Pose with Geometry-Conditioned Depth](https://arxiv.org/abs/2611.21044)** — arXiv 2026 · Preprint · 3D. 在稀疏多相机和关节遮挡条件下，将预测深度加入三角化以补足单个有效视图的几何约束。
+- **[Structure-Guided Multi-Granularity Spatiotemporal Transformer for Efficient Monocular 3D Human Pose Estimation](https://arxiv.org/abs/2611.20361)** — arXiv 2026 · Preprint · 3D. 利用关节、骨骼、肢体多粒度结构和关键帧选择，提高二维序列提升到三维姿态的效率。
 
 - [code](https://github.com/sanjayss34/prosepose) **[Pose Priors from Language Models](https://openaccess.thecvf.com/content/CVPR2025/html/Subramanian_Pose_Priors_from_Language_Models_CVPR_2025_paper.html)** — CVPR 2025 · Published · 3D. ProsePose 将多模态语言模型描述的身体接触关系转成优化约束，细化三维人体姿态。
 - **[LangPose: Language-Aligned Motion for Robust 3D Human Pose Estimation](https://openaccess.thecvf.com/content/WACV2026/html/Liao_LangPose_Language-Aligned_Motion_for_Robust_3D_Human_Pose_Estimation_WACV_2026_paper.html)** — WACV 2026 · Published · 3D. LangPose 将动作嵌入与细粒度动作标签的文本嵌入对齐，为二维到三维人体姿态提升提供语义信息。
