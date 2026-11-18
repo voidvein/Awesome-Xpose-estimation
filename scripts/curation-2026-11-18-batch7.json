@@ -1,0 +1,373 @@
+{
+  "review_date": "2026-11-18",
+  "expanded_records": 24,
+  "records": [
+    {
+      "id": "hand-motion-physics",
+      "version": "Official 2025 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2025/papers/Zhang_Diffusion-based_3D_Hand_Motion_Recovery_with_Intuitive_Physics_ICCV_2025_paper.pdf"
+    },
+    {
+      "id": "reach",
+      "version": "2605.22231v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4"
+      ],
+      "figure_anchor": "S4.F4",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2605.22231v1"
+    },
+    {
+      "id": "kad-net",
+      "version": "2609.12559v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S2.F1",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2609.12559v1"
+    },
+    {
+      "id": "hand-visibility",
+      "version": "2608.11574v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S3.F2",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2608.11574v1"
+    },
+    {
+      "id": "gesture-aware-hand",
+      "version": "2603.17396v3",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S3.F3",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2603.17396v3"
+    },
+    {
+      "id": "cascaded-hand-regression",
+      "version": "Official 2015 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        2,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Sun_Cascaded_Hand_Pose_2015_CVPR_paper.pdf"
+    },
+    {
+      "id": "mano",
+      "version": "2201.02610v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4"
+      ],
+      "figure_anchor": "S3.F9",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2201.02610v1"
+    },
+    {
+      "id": "fphab",
+      "version": "Official 2018 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Garcia-Hernando_First-Person_Hand_Action_CVPR_2018_paper.pdf"
+    },
+    {
+      "id": "body2hands",
+      "version": "Official 2021 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Ng_Body2Hands_Learning_To_Infer_3D_Hands_From_Conversational_Gesture_Body_CVPR_2021_paper.pdf"
+    },
+    {
+      "id": "hand-novel-view-synthesis-and-pose-estimation-for-hand-object-interaction-from-sparse-views",
+      "version": "Official 2023 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Qu_Novel-View_Synthesis_and_Pose_Estimation_for_Hand-Object_Interaction_from_Sparse_ICCV_2023_paper.pdf"
+    },
+    {
+      "id": "hand-diffusion-guided-reconstruction-of-everyday-hand-object-interaction-clips",
+      "version": "Official 2023 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Ye_Diffusion-Guided_Reconstruction_of_Everyday_Hand-Object_Interaction_Clips_ICCV_2023_paper.pdf"
+    },
+    {
+      "id": "hand-handr2n2-iterative-3d-hand-pose-estimation-using-a-residual-recurrent-neural-network",
+      "version": "Official 2023 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Cheng_HandR2N2_Iterative_3D_Hand_Pose_Estimation_Using_a_Residual_Recurrent_ICCV_2023_paper.pdf"
+    },
+    {
+      "id": "hand-hamuco-hand-pose-estimation-via-multiview-collaborative-self-supervised-learning",
+      "version": "Official 2023 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Zheng_HaMuCo_Hand_Pose_Estimation_via_Multiview_Collaborative_Self-Supervised_Learning_ICCV_2023_paper.pdf"
+    },
+    {
+      "id": "hand-phrit-parametric-hand-representation-with-implicit-template",
+      "version": "Official 2023 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Huang_PHRIT_Parametric_Hand_Representation_with_Implicit_Template_ICCV_2023_paper.pdf"
+    },
+    {
+      "id": "hand-spectral-graphormer-spectral-graph-based-transformer-for-egocentric-two-hand-reconstruction-using-multi-view-c",
+      "version": "Official 2023 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Tse_Spectral_Graphormer_Spectral_Graph-Based_Transformer_for_Egocentric_Two-Hand_Reconstruction_using_ICCV_2023_paper.pdf"
+    },
+    {
+      "id": "hand-reconstructing-interacting-hands-with-interaction-prior-from-monocular-images",
+      "version": "Official 2023 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Zuo_Reconstructing_Interacting_Hands_with_Interaction_Prior_from_Monocular_Images_ICCV_2023_paper.pdf"
+    },
+    {
+      "id": "hand-ochid-fi-occlusion-robust-hand-pose-estimation-in-3d-via-rf-vision",
+      "version": "Official 2023 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Zhang_OCHID-Fi_Occlusion-Robust_Hand_Pose_Estimation_in_3D_via_RF-Vision_ICCV_2023_paper.pdf"
+    },
+    {
+      "id": "hand-dynamic-hyperbolic-attention-network-for-fine-hand-object-reconstruction",
+      "version": "Official 2023 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Leng_Dynamic_Hyperbolic_Attention_Network_for_Fine_Hand-object_Reconstruction_ICCV_2023_paper.pdf"
+    },
+    {
+      "id": "hand-decoupled-iterative-refinement-framework-for-interacting-hands-reconstruction-from-a-single-rgb-image",
+      "version": "Official 2023 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Ren_Decoupled_Iterative_Refinement_Framework_for_Interacting_Hands_Reconstruction_from_a_ICCV_2023_paper.pdf"
+    },
+    {
+      "id": "hand-renderih-a-large-scale-synthetic-dataset-for-3d-interacting-hand-pose-estimation",
+      "version": "Official 2023 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        6,
+        "Figure 8"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Li_RenderIH_A_Large-Scale_Synthetic_Dataset_for_3D_Interacting_Hand_Pose_ICCV_2023_paper.pdf"
+    },
+    {
+      "id": "hand-collaborative-learning-for-hand-and-object-reconstruction-with-attention-guided-graph-convolution",
+      "version": "Official 2022 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Tse_Collaborative_Learning_for_Hand_and_Object_Reconstruction_With_Attention-Guided_Graph_CVPR_2022_paper.pdf"
+    },
+    {
+      "id": "hand-self-supervised-transfer-learning-for-hand-mesh-recovery-from-binocular-images",
+      "version": "Official 2021 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Chen_Self-Supervised_Transfer_Learning_for_Hand_Mesh_Recovery_From_Binocular_Images_ICCV_2021_paper.pdf"
+    },
+    {
+      "id": "hand-end-to-end-detection-and-pose-estimation-of-two-interacting-hands",
+      "version": "Official 2021 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Kim_End-to-End_Detection_and_Pose_Estimation_of_Two_Interacting_Hands_ICCV_2021_paper.pdf"
+    },
+    {
+      "id": "hand-interacting-two-hand-3d-pose-and-shape-reconstruction-from-single-color-image",
+      "version": "Official 2021 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Zhang_Interacting_Two-Hand_3D_Pose_and_Shape_Reconstruction_From_Single_Color_ICCV_2021_paper.pdf"
+    }
+  ]
+}

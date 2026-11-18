@@ -4419,12 +4419,69 @@
       "contribution": "可增强多种现有逐帧重建方法，减少对稀缺标注视频的训练依赖；物理信息服务于运动精修，不应将其描述为完整物理仿真器。",
       "limitations": "该模块精修已有三维手运动，不直接从原始图像完成重建；物理约束效果与初始序列和训练动作覆盖相关。",
       "sources": [
-        "https://openaccess.thecvf.com/content/ICCV2025/html/Zhang_Diffusion-based_3D_Hand_Motion_Recovery_with_Intuitive_Physics_ICCV_2025_paper.html"
+        "https://openaccess.thecvf.com/content/ICCV2025/html/Zhang_Diffusion-based_3D_Hand_Motion_Recovery_with_Intuitive_Physics_ICCV_2025_paper.html",
+        "https://openaccess.thecvf.com/content/ICCV2025/papers/Zhang_Diffusion-based_3D_Hand_Motion_Recovery_with_Intuitive_Physics_ICCV_2025_paper.pdf",
+        "https://openaccess.thecvf.com/content/ICCV2025/papers/Zhang_Diffusion-based_3D_Hand_Motion_Recovery_with_Intuitive_Physics_ICCV_2025_paper.pdf#page=3"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2025 ICCV open-access paper 的方法相关正文（3, 4, 5）、图号及流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
+    },
+    "pipeline": {
+      "overview": "逐帧 MANO 初估 → 残差条件扩散 → MeshCNN/时序 Transformer 去噪 → 状态相关运动约束 → 精化手部运动。",
+      "steps": [
+        {
+          "title": "先生成逐帧手部初估",
+          "description": "外部重建器从图像序列预测每帧 MANO 姿态和形状，形成带抖动或遮挡误差的初始运动；精化框架不限定一种图像回归骨干。"
+        },
+        {
+          "title": "围绕初估构造扩散过程",
+          "description": "训练的正向过程沿干净运动到初估的残差逐渐移动并加噪，末端分布以初估为中心。推理从这个条件分布开始，而不是无条件生成任意手势。"
+        },
+        {
+          "title": "用几何与时间特征预测干净运动",
+          "description": "将当前噪声样本及初估解码为手网格，MeshCNN 提取空间特征；扩散步经 MLP 编码，加时间位置表示后由 Transformer 自回归预测干净序列。"
+        },
+        {
+          "title": "学习状态相关的直觉物理",
+          "description": "同时预测 reaching、stable grasping、manipulation、releasing 状态，借助可微 Gumbel-Softmax参与训练。接近/离开阶段抑制不必要的方向变化，稳定抓持阶段抑制手指姿态波动。"
+        },
+        {
+          "title": "反向采样逐步精化",
+          "description": "每个扩散步以预测的干净运动参数化下一步转移，再采样更新，最后得到精化 MANO 运动。时间自回归和扩散步迭代是不同维度。"
+        }
+      ],
+      "training": "组合运动重建、状态交叉熵及状态相关运动损失；以随机扰动真值模拟初估误差。状态标注用于训练，物理约束是损失设计，不是调用刚体仿真器解接触。",
+      "inference": "先运行逐帧重建器，再执行多步条件采样。精化器输出运动及状态估计，不自动恢复未知物体几何；其时序成本应与单帧网络分开报告。",
+      "figure_reading": "图 2 区分初估与运动精化，图 3 展开一次反向扩散的 MeshCNN/Transformer，图 4 解释状态；不应把四种状态当成四套独立网格网络。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2025/papers/Zhang_Diffusion-based_3D_Hand_Motion_Recovery_with_Intuitive_Physics_ICCV_2025_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2025/papers/Zhang_Diffusion-based_3D_Hand_Motion_Recovery_with_Intuitive_Physics_ICCV_2025_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2025/papers/Zhang_Diffusion-based_3D_Hand_Motion_Recovery_with_Intuitive_Physics_ICCV_2025_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content/ICCV2025/papers/Zhang_Diffusion-based_3D_Hand_Motion_Recovery_with_Intuitive_Physics_ICCV_2025_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/ICCV2025/papers/Zhang_Diffusion-based_3D_Hand_Motion_Recovery_with_Intuitive_Physics_ICCV_2025_paper.pdf#page=3",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -4494,14 +4551,17 @@
         "https://arxiv.org/abs/2605.22231",
         "https://vision.ist.i.kyoto-u.ac.jp/research/reach/",
         "https://vision.ist.i.kyoto-u.ac.jp/publication/",
-        "https://vision.is.kit.ac.jp/bibliography/nakamura2026reach/"
+        "https://vision.is.kit.ac.jp/bibliography/nakamura2026reach/",
+        "https://arxiv.org/html/2605.22231v1",
+        "https://arxiv.org/html/2605.22231v1#S4.F4"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_notes": "方法分析仍依据主源摘要，未据此声称全文精读或独立复现。正式发表信息据作者实验室项目页和 KIT 书目核对；oral 据京都大学实验室 publication 列表。CCF C 据 2026 第七版目录第 59 页，属载体评级而非单篇论文质量评价。",
-      "evidence_scope": "方法、输入输出和贡献为摘要级核验；另核对作者机构的会议书目与 oral 标注。不将发表状态核验等同于全文精读。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verification_notes": "正式发表信息据作者实验室项目页和 KIT 书目核对；oral 据京都大学实验室 publication 列表。CCF C 据 2026 第七版目录第 59 页，属载体评级而非单篇论文质量评价。",
+      "evidence_scope": "已核对摘要及 2605.22231v1 的方法相关正文（S3, S4）、图号及流程；未完成全文逐节精读或独立复现。",
       "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "project": "https://vision.ist.i.kyoto-u.ac.jp/research/reach/",
     "preprint_url": "https://arxiv.org/abs/2605.22231",
@@ -4520,6 +4580,63 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=59",
       "version": "2026 第七版（目录原文转载）",
       "venue": "FG"
+    },
+    "pipeline": {
+      "overview": "远距离多视角视频 → 手部与身体特征 → 相对相机编码 → 共享 MANO/逐视角位置解码 → 自回归更新。",
+      "steps": [
+        {
+          "title": "从房间相机提取手身线索",
+          "description": "输入来自房间角落等远视点的已标定视频。手部裁剪经 HaMeR 骨干提取外观，ResNet 图像特征在 ViTPose 身体点处 RoIAlign，并编码关节位置和身份。"
+        },
+        {
+          "title": "Pose Encoder 汇总身体",
+          "description": "轻量 Transformer 从各身体关节的特征及位置表示中输出 CLS 身体特征，与手部外观拼接，利用身体动作辅助低分辨率或受遮挡的手。"
+        },
+        {
+          "title": "以相对视向编码多视图",
+          "description": "由各相机到双手的射线方向构造位置编码，并消去第一相机的绝对旋转；编码器与查询因此利用相机之间的相对几何。"
+        },
+        {
+          "title": "分开解码姿态形状和位置",
+          "description": "共享 CLS 查询预测 MANO 关节角及形状，各相机查询预测对应视角的旋转和平移；Multiview Unification 用预测置信度整合旋转，减少受遮挡视角的影响。"
+        },
+        {
+          "title": "前帧输出初始化下一帧查询",
+          "description": "将上帧解码 token 作为下帧查询起点，依据当前观测更新手姿；多视角融合和时间自回归共同缓解暂时不可见。"
+        }
+      ],
+      "training": "监督旋转、平移、形状、关节角、二维投影及旋转置信度，分阶段减少训练相机数。数据集的胸前鱼眼相机用于准确标注，不是部署模型的额外输入。",
+      "inference": "需要多视角视频及相对相机标定，输出共享手部配置和各视角位置。身体关键点与手裁剪也是前置流程；不能把胸前相机标注装置当作测试传感器。",
+      "figure_reading": "原图 4 展示手部/身体特征、Pose Encoder、多视图 Transformer、MVU 及自回归连接。图 3 的胸前相机服装属于采集方案，不是网络输入结构。",
+      "figure_status": "verified_local",
+      "sources": [
+        {
+          "label": "方法正文 S3",
+          "url": "https://arxiv.org/html/2605.22231v1#S3"
+        },
+        {
+          "label": "方法正文 S4",
+          "url": "https://arxiv.org/html/2605.22231v1#S4"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://arxiv.org/html/2605.22231v1#S4.F4"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "src": "assets/figures/reach-architecture.png",
+      "source": "https://arxiv.org/html/2605.22231v1#S4.F4",
+      "caption": "REACH-Net 原图：手部与身体编码、多视角融合及自回归查询。",
+      "alt": "REACH-Net 原图：手部与身体编码、多视角融合及自回归查询。",
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "attribution": "Shu Nakamura, Ryo Kawahara, Genki Kinoshita, Ryosuke Hirai, Yasutomo Kawanishi, Shohei Nobuhara, Ko Nishino. REACH: Hand Pose Estimation from Room Corners, Figure 4, arXiv:2605.22231v1. CC BY-NC-SA 4.0.",
+      "authors": "Shu Nakamura, Ryo Kawahara, Genki Kinoshita, Ryosuke Hirai, Yasutomo Kawanishi, Shohei Nobuhara, Ko Nishino",
+      "figure_number": "Figure 4",
+      "version": "2605.22231v1",
+      "modifications": "论文 HTML 原始图像，未裁剪、未修改；页面仅等比例缩放显示。"
     }
   },
   {
@@ -4546,12 +4663,61 @@
       "contribution": "同时针对结构遮挡和任务干扰两个来源设计模块，在 ICVL、NYU、MSRA 上报告结果；目前按 arXiv 预印本处理，不提升为已录用会议论文。",
       "limitations": "需要可用深度观测，UV 与深度解耦不意味着单 RGB 推理；指拓扑表示也限定了关节定义。",
       "sources": [
-        "https://arxiv.org/abs/2609.12559"
+        "https://arxiv.org/abs/2609.12559",
+        "https://arxiv.org/html/2609.12559v1",
+        "https://arxiv.org/html/2609.12559v1#S2.F1"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 2609.12559v1 的方法相关正文（S3）、图号及流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
+    },
+    "pipeline": {
+      "overview": "单张深度 → Hourglass → UV 拓扑图精化 + 注意力增强 → 手指/手掌深度子任务 → 整体三维关节。",
+      "steps": [
+        {
+          "title": "共享骨干后解耦任务",
+          "description": "以 Hourglass 提取多尺度深度图特征，再分为 UV、注意力增强和深度三路，避免将平面定位与更困难的深度估计完全混成一个回归头。"
+        },
+        {
+          "title": "FTC 将图像特征映到关节图",
+          "description": "空间注意力把二维特征聚合成图节点，经全连接关系推理及手骨架邻接传播；节点还通过 UV 预测得到直接监督。"
+        },
+        {
+          "title": "补充远端手指运动学信息",
+          "description": "按手指组合节点，用一维卷积与 MLP 提取局部协同表示，修正指尖及相邻关节特征，再映回二维特征图形成拓扑感知 UV 热图。"
+        },
+        {
+          "title": "融合深度注意力证据",
+          "description": "UV 热图与无独立监督的注意力增强图按可学习权重融合，为各关节选择深度分支的空间证据；UV 坐标由积分回归读出。"
+        },
+        {
+          "title": "局部深度再到全局深度",
+          "description": "五指及手掌六个子任务分别产生局部深度特征与预测，再拼接精化特征回归全手深度。分组随数据集的关节标注布局调整。"
+        }
+      ],
+      "training": "FTC 节点 UV、最终 UV、各深度子任务及全局深度均采用 L1 监督；注意力增强分支没有独立目标图监督，但会通过整体损失学习。",
+      "inference": "输入单张深度图，输出平面位置与对应深度组成的三维关节。FTC 是特征约束模块，不能理解为最终坐标必须满足严格解析运动学的后处理求解器。",
+      "figure_reading": "图 1 是三分支总架构，图 2 展开二维—图—二维映射和指端约束，图 3 是各数据集子任务分组。注意无监督 attention enhancement 与有 UV 监督的 FTC 不是同一路。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法正文 S3",
+          "url": "https://arxiv.org/html/2609.12559v1#S3"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://arxiv.org/html/2609.12559v1#S2.F1"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2609.12559v1#S2.F1",
+      "caption": "S2.F1 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -4579,18 +4745,75 @@
       "contribution": "把可见性从姿态学习的附属信号提升为独立研究目标，展示其可降低三角化的重投影误差。这是姿态辅助模块，不是独立的三维网格重建器。",
       "limitations": "主要输出是逐关节可见性，三维姿态仍由检测与三角化等下游流程产生；可见性应与遮挡定位质量分开评价。",
       "sources": [
-        "https://arxiv.org/abs/2608.11574"
+        "https://arxiv.org/abs/2608.11574",
+        "https://arxiv.org/html/2608.11574v1",
+        "https://arxiv.org/html/2608.11574v1#S3.F2"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 2608.11574v1 的方法相关正文（S3）、图号及流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "code": "https://github.com/ryhara/hand_visibility_detector",
     "code_provenance": {
       "url": "https://github.com/ryhara/hand_visibility_detector",
       "verified_at": "2026-11-18",
       "basis": "作者仓库 README 的对应论文标题、引用或实现说明；项目目录已公开，未运行代码。"
+    },
+    "pipeline": {
+      "overview": "手部裁剪 → 冻结 HaMeR/WiLoR ViT → 轻量 GAU 可见性头 → 21 个关节可见概率。",
+      "steps": [
+        {
+          "title": "只把可见性作为预测目标",
+          "description": "输入手部裁剪，输出 MANO 布局下每个关节的可见性概率；图中用于展示的关节位置来自真值或其他估计器，不是本模型预测。"
+        },
+        {
+          "title": "使用冻结的手部视觉先验",
+          "description": "选择预训练 HaMeR 或 WiLoR 的 ViT 作为编码器，将输出 token 重排为空间特征，保留大规模姿态训练学到的整体手结构知识。"
+        },
+        {
+          "title": "压缩并建立全局依赖",
+          "description": "轻量卷积压缩通道，展平成序列并经全连接层后，使用 Gated Attention Unit 结合注意力与门控，推理遮挡及不同手指区域的关系。"
+        },
+        {
+          "title": "逐关节生成概率",
+          "description": "投影到关节对应通道，经空间平均池化得到 logits，Sigmoid 输出 0 到 1 的逐关节可见概率。"
+        },
+        {
+          "title": "为下游筛选可靠观测",
+          "description": "概率可以用于多视角三角化等下游任务筛掉受遮挡观测，但坐标仍由独立关键点估计流程提供。出画面关节在本文定义中同样不可见。"
+        }
+      ],
+      "training": "冻结视觉主干，仅用二元交叉熵训练可见性头。主实验使用数据集真值手框，下游实验使用 WiLoR 检测框；这些输入框条件影响结果。",
+      "inference": "执行编码与轻量头即可得到可见性；若需要三维姿态，必须另接坐标预测与几何流程。不要把绿色/红色地标可视化误认为本模型输出了地标坐标。",
+      "figure_reading": "原图 2(a) 明确只输出 visibility，(b) 展开冻结编码器与可见性头；图内关节位置是演示条件。本文没有自身的 MANO 网格参数回归头。",
+      "figure_status": "verified_local",
+      "sources": [
+        {
+          "label": "方法正文 S3",
+          "url": "https://arxiv.org/html/2608.11574v1#S3"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://arxiv.org/html/2608.11574v1#S3.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "src": "assets/figures/hand-visibility-architecture.png",
+      "source": "https://arxiv.org/html/2608.11574v1#S3.F2",
+      "caption": "Hand Visibility Detector 原图：冻结手部主干与逐关节可见性头。",
+      "alt": "Hand Visibility Detector 原图：冻结手部主干与逐关节可见性头。",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "Ryosei Hara, Masashi Hatano, Rintaro Yanagi, Atsushi Hashimoto, Takuma Yagi, Mariko Isogawa. Hand Visibility Detector: Per-Keypoint Visibility Estimation for Hands, Figure 2, arXiv:2608.11574v1. CC BY-SA 4.0.",
+      "authors": "Ryosei Hara, Masashi Hatano, Rintaro Yanagi, Atsushi Hashimoto, Takuma Yagi, Mariko Isogawa",
+      "figure_number": "Figure 2",
+      "version": "2608.11574v1",
+      "modifications": "论文 HTML 原始图像，未裁剪、未修改；页面仅等比例缩放显示。"
     }
   },
   {
@@ -4617,11 +4840,83 @@
       "contribution": "把语义预训练和关节级推理衔接起来，摘要报告在 InterHand2.6M 上改善 EANet 单手精度，并能跨架构迁移。",
       "limitations": "论文设定明确依赖可用的离散手势标签；摘要验证集中在 InterHand2.6M，不能由此宣称任意野外手势均已验证。",
       "sources": [
-        "https://arxiv.org/abs/2603.17396"
+        "https://arxiv.org/abs/2603.17396",
+        "https://arxiv.org/html/2603.17396v3",
+        "https://arxiv.org/html/2603.17396v3#S3.F3"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
-    }
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 2603.17396v3 的方法相关正文（S3）、图号及流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
+    },
+    "pipeline": {
+      "overview": "手势层级分类预训练 → 多尺度 HRNet → 2.5D 体积定位与关节采样 → 手势 token 引导 → MANO 回归。",
+      "steps": [
+        {
+          "title": "先注入粗细手势语义",
+          "description": "HRNet 全局池化特征经两个分类头预测粗/细手势，逐步增加细粒度目标权重。InterHand2.6M 序列经人工归并为两层手势标签。"
+        },
+        {
+          "title": "融合多尺度局部与全局证据",
+          "description": "第二阶段复用预训练特征和手势 logits；两个尺度特征投影拼接，再经轻量 Transformer 编码为空间特征图。"
+        },
+        {
+          "title": "体积热图产生关节 token",
+          "description": "每关节三维热图经 soft-argmax 得到图像平面位置与腕相对深度，再在视觉特征图采样各关节表示。热图的 z 轴不是绝对公制深度。"
+        },
+        {
+          "title": "手势引导关节特征交互",
+          "description": "把粗/细手势 logits 映成引导 token，与关节 token、位置/类型编码及近零初始化门控一起进入 Transformer；保留关节输出并残差融合。"
+        },
+        {
+          "title": "回归参数化手网格",
+          "description": "两个 MLP 分别预测连续 6D 关节旋转和形状，经 MANO 生成手网格及关节，结合体积定位结果接受多层次监督。"
+        }
+      ],
+      "training": "第一阶段使用粗细手势交叉熵；第二阶段组合参数、关节坐标、2.5D、二维重投影及相邻旋转连续性损失。手势 logits 在第二阶段作为中间语义表示，而非外部真值输入。",
+      "inference": "输入手图后运行已训练的编码、手势引导和 MANO 头。2.5D 中间表示与最终三维模型输出不同；手势预训练类别也不是最终需要输出的唯一任务。",
+      "figure_reading": "原图 3 是三维姿态阶段，另附图 1 为手势预训练。前者的 per-joint tokenization 与 gesture guidance 是两路输入，不能将手势标签当成逐关节坐标。",
+      "figure_status": "verified_local",
+      "sources": [
+        {
+          "label": "方法正文 S3",
+          "url": "https://arxiv.org/html/2603.17396v3#S3"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://arxiv.org/html/2603.17396v3#S3.F3"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "src": "assets/figures/gesture-aware-hand-architecture.png",
+      "source": "https://arxiv.org/html/2603.17396v3#S3.F3",
+      "caption": "Gesture-aware Hand 原图：关节 token、手势引导及 MANO 解码。",
+      "alt": "Gesture-aware Hand 原图：关节 token、手势引导及 MANO 解码。",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Rui Hong, Jana Košecká. Gesture-Aware Pretraining and Token Fusion for 3D Hand Pose Estimation, Figure 3, arXiv:2603.17396v3. CC BY 4.0.",
+      "authors": "Rui Hong, Jana Košecká",
+      "figure_number": "Figure 3",
+      "version": "2603.17396v3",
+      "modifications": "论文 HTML 原始图像，未裁剪、未修改；页面仅等比例缩放显示。"
+    },
+    "figures": [
+      {
+        "src": "assets/figures/gesture-aware-hand-pretraining.png",
+        "source": "https://arxiv.org/html/2603.17396v3#S3.F1",
+        "caption": "Gesture-aware Hand 原图：粗细两级手势分类预训练。",
+        "alt": "Gesture-aware Hand 原图：粗细两级手势分类预训练。",
+        "license": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "attribution": "Rui Hong, Jana Košecká. Gesture-Aware Pretraining and Token Fusion for 3D Hand Pose Estimation, Figure 1, arXiv:2603.17396v3. CC BY 4.0.",
+        "authors": "Rui Hong, Jana Košecká",
+        "figure_number": "Figure 1",
+        "version": "2603.17396v3",
+        "modifications": "论文 HTML 原始图像，未裁剪、未修改；页面仅等比例缩放显示。"
+      }
+    ]
   },
   {
     "id": "hand3d",
@@ -7284,12 +7579,73 @@
       "contribution": "将级联回归从二维对象推广到三维关节结构，强调准确率与效率；具体初始化和数据预处理需读全文后补充，不能从标题猜测。",
       "limitations": "摘要未交代完整传感器协议，当前不推断可用于任意 RGB 输入；层级回归需遵循既定关节结构。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2015/html/Sun_Cascaded_Hand_Pose_2015_CVPR_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2015/html/Sun_Cascaded_Hand_Pose_2015_CVPR_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2015/papers/Sun_Cascaded_Hand_Pose_2015_CVPR_paper.pdf",
+        "https://openaccess.thecvf.com/content_cvpr_2015/papers/Sun_Cascaded_Hand_Pose_2015_CVPR_paper.pdf#page=2"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2015 CVPR open-access paper 的方法相关正文（3, 4, 5, 6）、图号及流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
+    },
+    "pipeline": {
+      "overview": "深度点云粗初始化 → 手掌规范系回归 → 固定手掌 → 各指局部规范系回归 → 三维关节。",
+      "steps": [
+        {
+          "title": "从手部点云获得粗姿态",
+          "description": "点云中心与 PCA 方向提供位置和朝向初始化，放置规范手形；输入是深度而非 RGB，初始化本身可能存在方向歧义。"
+        },
+        {
+          "title": "在三维规范系定义特征",
+          "description": "随机三维偏移先由当前手掌或手指坐标系变换到相机，再投影到深度图读像素差，使特征更能适应三维旋转。"
+        },
+        {
+          "title": "先级联估计稳定的手掌",
+          "description": "随机森林在规范系回归手掌残差，变回相机系更新。分层版本优先处理自由度与变化较少的根部。"
+        },
+        {
+          "title": "固定手掌后分别估计手指",
+          "description": "以最终手掌初始化五指，各指按自己的局部坐标系提取特征并使用独立级联回归器，减少手掌旋转传来的变化。"
+        },
+        {
+          "title": "组合全手关节结果",
+          "description": "将固定手掌和精化后的手指组成三维姿态。论文也有整体回归对照，需与最终的层级策略区分。"
+        }
+      ],
+      "training": "各阶段森林拟合规范系真值残差，以方差减少选择像素差分裂，叶节点存平均残差。实验中的个人手尺寸被假定已知并手工指定，不能忽略该输入条件。",
+      "inference": "每张深度图独立初始化并逐级回归，不要求上一视频帧。二维深度观测仍有遮挡与投影，文中三维索引并不实现严格完整的三维不变性。",
+      "figure_reading": "图 1 展示先掌后指的层级流程，图 2 定义坐标系；第 5 页 Algorithm 2 才是层级测试步骤，Algorithm 3 是训练。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Sun_Cascaded_Hand_Pose_2015_CVPR_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Sun_Cascaded_Hand_Pose_2015_CVPR_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Sun_Cascaded_Hand_Pose_2015_CVPR_paper.pdf#page=5"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 6 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Sun_Cascaded_Hand_Pose_2015_CVPR_paper.pdf#page=6"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Sun_Cascaded_Hand_Pose_2015_CVPR_paper.pdf#page=2"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Sun_Cascaded_Hand_Pose_2015_CVPR_paper.pdf#page=2",
+      "caption": "Figure 1 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -7327,12 +7683,65 @@
       "contribution": "提供被大量后续研究复用的参数化手表示，是基础模型而非独立图像检测网络；模型与数据使用需遵守项目授权条件。",
       "limitations": "MANO 是低维参数化手模型，并非独立图像预测器；使用需要另行选择拟合或回归方法及对应模型许可。",
       "sources": [
-        "https://mano.is.tue.mpg.de/"
+        "https://mano.is.tue.mpg.de/",
+        "https://arxiv.org/html/2201.02610v1",
+        "https://arxiv.org/html/2201.02610v1#S3.F9"
       ],
-      "evidence_level": "primary_project_abstract",
-      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 2201.02610v1 的方法相关正文（S3, S4）、图号及流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
+    },
+    "pipeline": {
+      "overview": "高精手扫描注册 → 学习形状与姿态修正 → 低维手姿嵌入 → MANO 蒙皮；整合 SMPL+H 后拟合四维扫描。",
+      "steps": [
+        {
+          "title": "先把手扫描注册为统一拓扑",
+          "description": "由初始手模型拟合不同身份和姿态的扫描，经人工筛选较好注册，再迭代改进模型；左右手通过镜像共享训练数据。"
+        },
+        {
+          "title": "学习形状与姿态相关形变",
+          "description": "形状 PCA 表示身份差异，关节位置随形状回归。由旋转矩阵元素驱动姿态 corrective blend shapes，修正普通线性混合蒙皮的关节塌缩。"
+        },
+        {
+          "title": "局部正则与低维姿态空间",
+          "description": "对远离关节的顶点形变施加更强正则，减少过拟合；从已注册姿态学习 PCA 协同空间，使含噪扫描的拟合更稳健。"
+        },
+        {
+          "title": "输入参数生成手网格",
+          "description": "给定形状与关节姿态，先调整模板并加入姿态修正，再按运动链及 LBS 生成网格。MANO 本身是可微几何模型，不包含 RGB 编码器。"
+        },
+        {
+          "title": "整合身体并跟踪扫描序列",
+          "description": "SMPL+H 合并身体和双手关节/形变，在身体形状空间中保留手身比例联系；先估个人模板，再逐帧拟合四维扫描，使用手姿先验与时间平滑。"
+        }
+      ],
+      "training": "模型参数从注册的三维手扫描交替学习；SMPL+H 的动作捕捉另在测试扫描上做优化。手模型学习、参数到网格解码与扫描拟合是三个层次。",
+      "inference": "若已有 MANO 参数，可直接生成网格；从图像恢复这些参数需要另一个估计器。论文展示的扫描捕捉采用两阶段个体模板与序列注册，不能称为单图前馈网络。",
+      "figure_reading": "主文图 9 对比姿态修正对手部弯曲的作用，图 10 展示手姿 PCA；它们是模型组件示意，不是 RGB 到网格的网络架构。§4 给出 SMPL+H 扫描拟合过程。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法正文 S3",
+          "url": "https://arxiv.org/html/2201.02610v1#S3"
+        },
+        {
+          "label": "方法正文 S4",
+          "url": "https://arxiv.org/html/2201.02610v1#S4"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://arxiv.org/html/2201.02610v1#S3.F9"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2201.02610v1#S3.F9",
+      "caption": "S3.F9 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -7565,12 +7974,77 @@
       "contribution": "以 18 种基线比较外观、姿态及其组合用于动作识别的效果，并研究物体遮挡下手姿态质量对下游识别的影响。",
       "limitations": "动作种类、受试者与传感器采集范围限定基准覆盖；仅部分序列含对象模型和物体六维姿态。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2018/html/Garcia-Hernando_First-Person_Hand_Action_CVPR_2018_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2018/html/Garcia-Hernando_First-Person_Hand_Action_CVPR_2018_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Garcia-Hernando_First-Person_Hand_Action_CVPR_2018_paper.pdf",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Garcia-Hernando_First-Person_Hand_Action_CVPR_2018_paper.pdf#page=3"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2018 CVPR open-access paper 的方法相关正文（3, 4, 5, 6, 7）、图号及流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
+    },
+    "pipeline": {
+      "overview": "肩部 RGB-D 采集 + 磁传感器标注 → IK 三维手骨架/动作标签 → 标准划分 → 姿态与动作识别基准。",
+      "steps": [
+        {
+          "title": "先区分数据集与预测网络",
+          "description": "FPHAB 是第一视角手物动作基准，同时比较多个算法，不提供一套统一的新网络。下面描述采集、标注和评测的数据流程。"
+        },
+        {
+          "title": "同步记录日常手物动作",
+          "description": "肩部 RGB-D 相机记录厨房、办公和社交场景的动作序列，包含多种物体、抓握和遮挡；动作类别由人工标记。"
+        },
+        {
+          "title": "传感器与 IK 产生手姿标签",
+          "description": "五个指尖和手腕的磁传感器提供 6DoF 位姿，逆运动学恢复 21 点手骨架；部分物体另有传感器和模型用于 6DoF 标注。"
+        },
+        {
+          "title": "分别测试姿态与动作任务",
+          "description": "姿态基线逐帧从图像估计手姿，动作基线可读取归一化骨架、RGB 或深度；骨架动作基线采用 LSTM 等时序方法。"
+        },
+        {
+          "title": "明确真值和估计骨架条件",
+          "description": "动作实验区分传感器真值骨架与预测骨架，并比较动作、被试和物体划分。不同输入与划分的分数不能视为同一端到端设置。"
+        }
+      ],
+      "training": "基准算法按所选划分分别训练；姿态回归比较含物体样本与无物体样本训练的差异。采集用传感器负责生成标签，不是所有部署算法的必需测试输入。",
+      "inference": "姿态任务对每帧预测，动作任务对序列分类。真值骨架动作识别使用额外标签条件；RGB 中可见的传感器与胶带也会影响数据外观，需纳入使用边界。",
+      "figure_reading": "图 2 展示 RGB-D/动作与手姿标注，图 3 是动作分类树，均属基准说明而非网络架构；§4/5 介绍和评估不同基线。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Garcia-Hernando_First-Person_Hand_Action_CVPR_2018_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Garcia-Hernando_First-Person_Hand_Action_CVPR_2018_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Garcia-Hernando_First-Person_Hand_Action_CVPR_2018_paper.pdf#page=5"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 6 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Garcia-Hernando_First-Person_Hand_Action_CVPR_2018_paper.pdf#page=6"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 7 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Garcia-Hernando_First-Person_Hand_Action_CVPR_2018_paper.pdf#page=7"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Garcia-Hernando_First-Person_Hand_Action_CVPR_2018_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Garcia-Hernando_First-Person_Hand_Action_CVPR_2018_paper.pdf#page=3",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -7607,12 +8081,65 @@
       "contribution": "将身体动态作为手部生成与估计的共同先验，验证从独白训练到多人对话的迁移；范围是对话手势，不应宣称覆盖任意精细操作动作。",
       "limitations": "身体动态提供手势先验，不能唯一确定每个手指动作；谈话手势分布不直接代表精细抓取或手物接触。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2021/html/Ng_Body2Hands_Learning_To_Infer_3D_Hands_From_Conversational_Gesture_Body_CVPR_2021_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2021/html/Ng_Body2Hands_Learning_To_Infer_3D_Hands_From_Conversational_Gesture_Body_CVPR_2021_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Ng_Body2Hands_Learning_To_Infer_3D_Hands_From_Conversational_Gesture_Body_CVPR_2021_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Ng_Body2Hands_Learning_To_Infer_3D_Hands_From_Conversational_Gesture_Body_CVPR_2021_paper.pdf#page=3"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2021 CVPR open-access paper 的方法相关正文（3, 4）、图号及流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
+    },
+    "pipeline": {
+      "overview": "三维上肢旋转序列 → 身体编码 → 一维时序 UNet → 手部解码；可选手图特征辅助重建。",
+      "steps": [
+        {
+          "title": "输入是身体动作而非手图",
+          "description": "基本任务根据上肢三维旋转序列生成相应的沟通手势；去除形状和相机参数，以运动学姿态表示跨人物动作。"
+        },
+        {
+          "title": "身体编码器学习关节关系",
+          "description": "将每帧身体旋转映射为嵌入，保留时间轴。该输入可来自外部人体重建器，不等于网络自己完成整图身体检测。"
+        },
+        {
+          "title": "时序 UNet 汇总动作上下文",
+          "description": "一维卷积编码解码器以时间瓶颈读取过去和未来，跳接保留较快变化，得到每帧的身体动态表示。"
+        },
+        {
+          "title": "手解码器恢复双手运动",
+          "description": "将动态特征映为双手的关节旋转序列，用运动差分判别器在训练中鼓励自然动态，避免回归平均化。"
+        },
+        {
+          "title": "可选图像分支补充证据",
+          "description": "手部图像可用时，以固定 ResNet-50 和线性层提取外观，先与身体嵌入拼接，再经过相同 UNet 与手解码器。"
+        }
+      ],
+      "training": "用身体/手参数的伪三维重建数据学习，结合手姿 L1 和对相邻帧旋转变化的对抗损失；测试人物与训练人物分开。判别器只参与训练。",
+      "inference": "无手图时输出与身体动作协调的合理手势，不保证唯一还原真实不可见手指。图像辅助版仍需要身体序列；UNet 使用双向时间上下文，不能直接当作严格因果预测器。",
+      "figure_reading": "图 2 主路是身体编码—UNet—手解码，ResNet 是可选输入，判别器为训练分支。下游图像重建版与无手图生成版应分别理解。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Ng_Body2Hands_Learning_To_Infer_3D_Hands_From_Conversational_Gesture_Body_CVPR_2021_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Ng_Body2Hands_Learning_To_Infer_3D_Hands_From_Conversational_Gesture_Body_CVPR_2021_paper.pdf#page=4"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Ng_Body2Hands_Learning_To_Infer_3D_Hands_From_Conversational_Gesture_Body_CVPR_2021_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2021/papers/Ng_Body2Hands_Learning_To_Infer_3D_Hands_From_Conversational_Gesture_Body_CVPR_2021_paper.pdf#page=3",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -15110,21 +15637,86 @@
       "method": "从稀疏视角重建手物交互并估计姿态。先学习手与物体的神经形状/外观先验，再以渲染拟合和稳定接触损失约束动态交互。",
       "limitations": "稀疏视角渲染拟合需要相应图像与先验；新视角视觉质量和手物姿态精度应分别评价。",
       "sources": [
-        "https://openaccess.thecvf.com/content/ICCV2023/html/Qu_Novel-View_Synthesis_and_Pose_Estimation_for_Hand-Object_Interaction_from_Sparse_ICCV_2023_paper.html"
+        "https://openaccess.thecvf.com/content/ICCV2023/html/Qu_Novel-View_Synthesis_and_Pose_Estimation_for_Hand-Object_Interaction_from_Sparse_ICCV_2023_paper.html",
+        "https://openaccess.thecvf.com/content/ICCV2023/papers/Qu_Novel-View_Synthesis_and_Pose_Estimation_for_Hand-Object_Interaction_from_Sparse_ICCV_2023_paper.pdf",
+        "https://openaccess.thecvf.com/content/ICCV2023/papers/Qu_Novel-View_Synthesis_and_Pose_Estimation_for_Hand-Object_Interaction_from_Sparse_ICCV_2023_paper.pdf#page=4",
+        "https://github.com/iscas3dv/HO-NeRF"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_notes": "已核对CVF正式论文页的标题、年份、会议信息及摘要。问题、方法、输入输出和贡献为摘要级解读；尚未复核正文实验、失败案例与作者局限，不代表全文精读或复现。",
       "problem": "稀疏视角下手形变及手物遮挡使姿态恢复困难。",
       "inputs_outputs": "稀疏视角图像→动态手物姿态、三维表示及新视角图像。",
       "contribution": "离线独立先验与在线联合拟合结合，加入稳定接触约束。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2023 ICCV open-access paper 的方法相关正文（3, 4, 5）、图号及流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "离线稀疏视角学习手/物体隐式场 → 在线初始位姿 → 联合可微渲染优化 → 时序接触稳定 → 新视角合成。",
+      "steps": [
+        {
+          "title": "离线建立特定手物体模型",
+          "description": "从预采集的稀疏视角图像学习手和物体的 SDF/颜色场；手部查询点转到各骨骼局部坐标，物体查询点经逆刚体变换进入物体系。"
+        },
+        {
+          "title": "用渲染监督几何与外观",
+          "description": "采用基于 SDF 的体积渲染，以图像颜色、掩膜、感知与 Eikonal 损失学习隐式模型；这里学习的是预采集对象的场，不是通用类别形状回归器。"
+        },
+        {
+          "title": "在线从外部估计初始化",
+          "description": "冻结学到的隐式场，由已有多视角手姿/物体位姿估计器提供初值；待优化变量是手姿和物体刚体位姿。"
+        },
+        {
+          "title": "联合渲染对齐与接触约束",
+          "description": "将手物体场共同渲染，与输入颜色和掩膜对齐，并加入初值偏移、穿透及接触约束，修正遮挡下的不准确初估。"
+        },
+        {
+          "title": "在视频中传播稳定接触",
+          "description": "相邻帧位置平滑之外，还传播稳定接触物体顶点，约束接触/非接触状态不要随意改变；精化后的场可在目标视角渲染。"
+        }
+      ],
+      "training": "离线优化 SDF/颜色网络，在线固定网络优化每帧位姿。视频增加时间平滑和稳定接触能量；两阶段的学习变量与可用观测不同。",
+      "inference": "需要稀疏多视角、预先学好的特定手/物体模型及位姿初始化；不是输入任意未知物体的一张 RGB 即直接输出三维模型。",
+      "figure_reading": "第 3 页图 2 是离线学习，第 4 页图 3 是在线位姿估计；应先看冻结隐式场，再看渲染损失如何更新位姿。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Qu_Novel-View_Synthesis_and_Pose_Estimation_for_Hand-Object_Interaction_from_Sparse_ICCV_2023_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Qu_Novel-View_Synthesis_and_Pose_Estimation_for_Hand-Object_Interaction_from_Sparse_ICCV_2023_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Qu_Novel-View_Synthesis_and_Pose_Estimation_for_Hand-Object_Interaction_from_Sparse_ICCV_2023_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Qu_Novel-View_Synthesis_and_Pose_Estimation_for_Hand-Object_Interaction_from_Sparse_ICCV_2023_paper.pdf#page=4"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/ICCV2023/papers/Qu_Novel-View_Synthesis_and_Pose_Estimation_for_Hand-Object_Interaction_from_Sparse_ICCV_2023_paper.pdf#page=4",
+      "caption": "Figure 3 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
+    },
+    "code": "https://github.com/iscas3dv/HO-NeRF",
+    "code_provenance": {
+      "url": "https://github.com/iscas3dv/HO-NeRF",
+      "verified_at": "2026-11-18",
+      "basis": "论文或作者项目页给出的仓库；已核对 README 对应论文标题和公开实现目录，未运行代码。"
     }
   },
   {
@@ -15150,21 +15742,79 @@
       "method": "从短视频联合恢复物体形状、运动和手部关节。逐视频优化结合多视角线索与手势/物体类别条件扩散先验，缓解遮挡和视角不足。",
       "limitations": "逐视频优化使用整段交互与类别条件先验；不能用作单帧无优化方法的同成本比较。",
       "sources": [
-        "https://openaccess.thecvf.com/content/ICCV2023/html/Ye_Diffusion-Guided_Reconstruction_of_Everyday_Hand-Object_Interaction_Clips_ICCV_2023_paper.html"
+        "https://openaccess.thecvf.com/content/ICCV2023/html/Ye_Diffusion-Guided_Reconstruction_of_Everyday_Hand-Object_Interaction_Clips_ICCV_2023_paper.html",
+        "https://openaccess.thecvf.com/content/ICCV2023/papers/Ye_Diffusion-Guided_Reconstruction_of_Everyday_Hand-Object_Interaction_Clips_ICCV_2023_paper.pdf",
+        "https://openaccess.thecvf.com/content/ICCV2023/papers/Ye_Diffusion-Guided_Reconstruction_of_Everyday_Hand-Object_Interaction_Clips_ICCV_2023_paper.pdf#page=3"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_notes": "已核对CVF正式论文页的标题、年份、会议信息及摘要。问题、方法、输入输出和贡献为摘要级解读；尚未复核正文实验、失败案例与作者局限，不代表全文精读或复现。",
       "problem": "短视频视角变化不足、遮挡严重，单靠多视角几何不充分。",
       "inputs_outputs": "交互视频→物体形状、运动和手部关节状态。",
       "contribution": "以条件扩散提供可用于逐视频优化的几何先验。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2023 ICCV open-access paper 的方法相关正文（3, 4, 5）、图号及流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "单目视频/语义掩膜/类别文本 → MANO+物体 SDF 初始化 → 几何扩散先验 → 新视角 SDS 与观测约束 → 联合优化。",
+      "steps": [
+        {
+          "title": "用显式手与隐式物体表示视频",
+          "description": "手由 MANO 表示，形状跨帧共享，姿态逐帧变化；物体是跨帧共享的刚性 SDF 网络，另估计手物体相对位姿、相机及内参。"
+        },
+        {
+          "title": "从粗初值开始重建",
+          "description": "用 FrankMocap 初始化手并先平滑腕轨迹，物体从球体初始化。输入还包括手物体语义掩膜与物体类别文本，未要求已知物体 CAD。"
+        },
+        {
+          "title": "预训练条件几何扩散模型",
+          "description": "在三维交互数据上渲染几何图，扩散模型去噪物体法线、掩膜和深度；条件包括类别文本、手几何及 MANO UV 对应。"
+        },
+        {
+          "title": "让新视角先验指导三维优化",
+          "description": "从当前三维表示渲染随机新视角，固定的扩散模型产生 SDS 梯度，更新物体几何与交互；不是直接从扩散模型一次采样三维网格。"
+        },
+        {
+          "title": "同时满足原视频证据",
+          "description": "原视角语义掩膜重投影按遮挡合成，结合新视角先验、Eikonal 和时间正则联合优化，获得一致的手物体几何与运动。"
+        }
+      ],
+      "training": "几何扩散先验在已有三维交互样本上训练；重建新视频时冻结先验，对该视频的 SDF、手姿、相对变换及相机做优化。",
+      "inference": "需要类别文本、分割和手初估，且有逐视频迭代开销。物体几何可不依赖预置 CAD，但分割或初始手姿误差仍会影响重建。",
+      "figure_reading": "图 2 区分视频观测分支和随机新视角先验分支，图 3 展开几何扩散训练；两者不是同一个阶段的前馈路径。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Ye_Diffusion-Guided_Reconstruction_of_Everyday_Hand-Object_Interaction_Clips_ICCV_2023_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Ye_Diffusion-Guided_Reconstruction_of_Everyday_Hand-Object_Interaction_Clips_ICCV_2023_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Ye_Diffusion-Guided_Reconstruction_of_Everyday_Hand-Object_Interaction_Clips_ICCV_2023_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Ye_Diffusion-Guided_Reconstruction_of_Everyday_Hand-Object_Interaction_Clips_ICCV_2023_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/ICCV2023/papers/Ye_Diffusion-Guided_Reconstruction_of_Everyday_Hand-Object_Interaction_Clips_ICCV_2023_paper.pdf#page=3",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -15191,15 +15841,20 @@
       "method": "以残差循环单元迭代修正三维手关节，复用网络层减少参数冗余；结合图推理编码关节运动学依赖，关注精度与计算效率。",
       "limitations": "摘要未明确传感器模态，当前不推断 RGB-only 能力；迭代次数需作为精度与效率条件报告。",
       "sources": [
-        "https://openaccess.thecvf.com/content/ICCV2023/html/Cheng_HandR2N2_Iterative_3D_Hand_Pose_Estimation_Using_a_Residual_Recurrent_ICCV_2023_paper.html"
+        "https://openaccess.thecvf.com/content/ICCV2023/html/Cheng_HandR2N2_Iterative_3D_Hand_Pose_Estimation_Using_a_Residual_Recurrent_ICCV_2023_paper.html",
+        "https://openaccess.thecvf.com/content/ICCV2023/papers/Cheng_HandR2N2_Iterative_3D_Hand_Pose_Estimation_Using_a_Residual_Recurrent_ICCV_2023_paper.pdf",
+        "https://openaccess.thecvf.com/content/ICCV2023/papers/Cheng_HandR2N2_Iterative_3D_Hand_Pose_Estimation_Using_a_Residual_Recurrent_ICCV_2023_paper.pdf#page=3"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_notes": "已核对CVF正式论文页的标题、年份、会议信息及摘要。问题、方法、输入输出和贡献为摘要级解读；尚未复核正文实验、失败案例与作者局限，不代表全文精读或复现。",
       "problem": "非循环估计器可能依赖复杂结构和冗余参数。",
       "inputs_outputs": "手部观测→迭代细化的三维关节；摘要未明确传感器模态。",
       "contribution": "残差循环复用层与关节图推理结合，关注容量和效率。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2023 ICCV open-access paper 的方法相关正文（3, 4, 5）、图号及流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "code": "https://github.com/cwc1260/HandR2N2",
     "ccf": {
@@ -15207,6 +15862,59 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "深度点云 → PointNet++ 局部编码 → 初始关节状态 → 共享残差循环单元反复更新 → 三维手姿。",
+      "steps": [
+        {
+          "title": "从深度形成点云特征",
+          "description": "利用相机内参反投影并归一化手点云，以 PointNet++ 式采样、分组和集合卷积提取局部几何。"
+        },
+        {
+          "title": "生成初始姿态与隐藏状态",
+          "description": "进一步集合卷积形成全局表示，复制到各关节并结合可学习关节嵌入，回归初始三维关节及循环隐藏表示。"
+        },
+        {
+          "title": "围绕当前关节重新取证",
+          "description": "每轮在当前预测关节附近执行 KNN，读取相对点坐标与特征；因此更新后的关节会在下一轮查询不同的局部证据。"
+        },
+        {
+          "title": "用图推理及门控更新状态",
+          "description": "通道相关邻接 GCN 传递关节关系，集合卷积 GRU 的更新/重置门结合点级注意力，修正受遮挡或不准确的隐藏状态。"
+        },
+        {
+          "title": "以状态差回归关节残差",
+          "description": "从新旧隐藏状态差预测坐标偏移并加到当前关节，重复共享参数的单元，最后输出三维关节。这里循环的是同一帧的精化步骤。"
+        }
+      ],
+      "training": "初始姿态和各次迭代均有 smooth L1 监督，按迭代权重组合。单元共享参数，训练与测试可采用不同迭代次数。",
+      "inference": "输入单帧深度及反投影所需内参；迭代次数影响开销。模型没有把上一视频帧当作必需输入，也不输出 MANO 网格。",
+      "figure_reading": "图 3 是总流程，图 4 展开 Residual Recurrent Unit；区分点云邻域重采样、隐藏状态循环与最终坐标残差。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Cheng_HandR2N2_Iterative_3D_Hand_Pose_Estimation_Using_a_Residual_Recurrent_ICCV_2023_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Cheng_HandR2N2_Iterative_3D_Hand_Pose_Estimation_Using_a_Residual_Recurrent_ICCV_2023_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Cheng_HandR2N2_Iterative_3D_Hand_Pose_Estimation_Using_a_Residual_Recurrent_ICCV_2023_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Cheng_HandR2N2_Iterative_3D_Hand_Pose_Estimation_Using_a_Residual_Recurrent_ICCV_2023_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/ICCV2023/papers/Cheng_HandR2N2_Iterative_3D_Hand_Pose_Estimation_Using_a_Residual_Recurrent_ICCV_2023_paper.pdf#page=3",
+      "caption": "Figure 3 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -15233,21 +15941,79 @@
       "method": "通过多视角伪二维标签学习单视角三维手姿态。跨视角交互网络与估计器联合训练，通过特征关联及一致性约束抑制噪声伪标签。",
       "limitations": "伪二维标签来自多视角训练，单视角部署不等于单视角监督；伪标签与人工真值应区分。",
       "sources": [
-        "https://openaccess.thecvf.com/content/ICCV2023/html/Zheng_HaMuCo_Hand_Pose_Estimation_via_Multiview_Collaborative_Self-Supervised_Learning_ICCV_2023_paper.html"
+        "https://openaccess.thecvf.com/content/ICCV2023/html/Zheng_HaMuCo_Hand_Pose_Estimation_via_Multiview_Collaborative_Self-Supervised_Learning_ICCV_2023_paper.html",
+        "https://openaccess.thecvf.com/content/ICCV2023/papers/Zheng_HaMuCo_Hand_Pose_Estimation_via_Multiview_Collaborative_Self-Supervised_Learning_ICCV_2023_paper.pdf",
+        "https://openaccess.thecvf.com/content/ICCV2023/papers/Zheng_HaMuCo_Hand_Pose_Estimation_via_Multiview_Collaborative_Self-Supervised_Learning_ICCV_2023_paper.pdf#page=4"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_notes": "已核对CVF正式论文页的标题、年份、会议信息及摘要。问题、方法、输入输出和贡献为摘要级解读；尚未复核正文实验、失败案例与作者局限，不代表全文精读或复现。",
       "problem": "三维标注昂贵，多视角伪标签又有噪声与群体偏差。",
       "inputs_outputs": "训练用多视角伪二维标签；推理可用单视角或多视角输出三维手姿态。",
       "contribution": "跨视角交互与单视角估计器联合学习和蒸馏。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2023 ICCV open-access paper 的方法相关正文（3, 4, 5）、图号及流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "多视角无三维标签训练 → 单视图 MANO 初估 → 跨视图图/Transformer 精化 → 融合网格 → 蒸馏回单视图。",
+      "steps": [
+        {
+          "title": "各视图共享单视图估计器",
+          "description": "CNN 与 MLP 预测 MANO 姿态、形状及弱透视相机，同时输出全局和多尺度局部视觉特征；二维伪标签提供基础监督。"
+        },
+        {
+          "title": "构造关节级跨视图输入",
+          "description": "把三维关节/姿态嵌入、全局图像特征和投影位置处采样的局部特征结合，形成具有几何与外观的每视图关节节点。"
+        },
+        {
+          "title": "协同模块交流视图信息",
+          "description": "DCVI 用跨视图 Transformer 与 canonical adaptive GCN，跨视图池化并广播共享信息，通过残差更新特征，再精化 MANO 姿态。"
+        },
+        {
+          "title": "对齐并融合为教师网格",
+          "description": "将各视图网格旋转到统一系再平均；有外参时使用相机旋转，无外参时以 Procrustes 估计相对旋转。二维跨视图与融合一致性约束协同结果。"
+        },
+        {
+          "title": "把协同收益传给单视图",
+          "description": "以融合网格蒸馏最初的单视图预测器，使其从多视角训练受益；部署可移除协同模块，仅保留单视图网络。"
+        }
+      ],
+      "training": "先用二维伪标签热身，再进行多视角协同学习、姿态/形状正则和自蒸馏。无人工三维标注不等于完全没有二维检测器或监督信号。",
+      "inference": "主目标是多视角训练、单视角测试；正常单视图部署不需要同步其他相机。协同网络生成的融合教师与最终部署分支应分清。",
+      "figure_reading": "图 2 上部是各视图 MANO 初估和视觉特征，下部是协同精化/融合；蒸馏箭头指回单视图估计器，不是让测试必须保留多相机。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Zheng_HaMuCo_Hand_Pose_Estimation_via_Multiview_Collaborative_Self-Supervised_Learning_ICCV_2023_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Zheng_HaMuCo_Hand_Pose_Estimation_via_Multiview_Collaborative_Self-Supervised_Learning_ICCV_2023_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Zheng_HaMuCo_Hand_Pose_Estimation_via_Multiview_Collaborative_Self-Supervised_Learning_ICCV_2023_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Zheng_HaMuCo_Hand_Pose_Estimation_via_Multiview_Collaborative_Self-Supervised_Learning_ICCV_2023_paper.pdf#page=4"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/ICCV2023/papers/Zheng_HaMuCo_Hand_Pose_Estimation_via_Multiview_Collaborative_Self-Supervised_Learning_ICCV_2023_paper.pdf#page=4",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -15274,21 +16040,79 @@
       "method": "用分部位形状先验、符号距离场和形变场构建可微参数化手模型。支持骨架驱动、点云拟合和单视角三维重建，不只是关节回归器。",
       "limitations": "隐式手模型、点云拟合与图像重建是不同使用路径；不可把模型表示能力直接当作端到端估计精度。",
       "sources": [
-        "https://openaccess.thecvf.com/content/ICCV2023/html/Huang_PHRIT_Parametric_Hand_Representation_with_Implicit_Template_ICCV_2023_paper.html"
+        "https://openaccess.thecvf.com/content/ICCV2023/html/Huang_PHRIT_Parametric_Hand_Representation_with_Implicit_Template_ICCV_2023_paper.html",
+        "https://openaccess.thecvf.com/content/ICCV2023/papers/Huang_PHRIT_Parametric_Hand_Representation_with_Implicit_Template_ICCV_2023_paper.pdf",
+        "https://openaccess.thecvf.com/content/ICCV2023/papers/Huang_PHRIT_Parametric_Hand_Representation_with_Implicit_Template_ICCV_2023_paper.pdf#page=3"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_notes": "已核对CVF正式论文页的标题、年份、会议信息及摘要。问题、方法、输入输出和贡献为摘要级解读；尚未复核正文实验、失败案例与作者局限，不代表全文精读或复现。",
       "problem": "参数网格与隐式形状表示各有建模优势，需要统一。",
       "inputs_outputs": "骨架/形状编码、点云或单视图→可形变手表面。",
       "contribution": "部位SDF先验与形变场组合为可微手表示。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2023 ICCV open-access paper 的方法相关正文（3, 4, 5）、图号及流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "三维骨架/身份形状 → 局部变形场与规范 SDF 共同学习 → 一次规范网格提取 → 前向变形融合 → 手表面。",
+      "steps": [
+        {
+          "title": "输入是骨架而非 RGB",
+          "description": "以 21 点三维手骨架及身份形状隐变量控制表面，目标是构造可参数控制的手表示，不负责从图像检测骨架。"
+        },
+        {
+          "title": "用局部骨骼坐标分解变形",
+          "description": "16 个局部部件使用骨架导出的坐标变换、关节角、骨长及全局骨特征，分别学习局部神经变形。"
+        },
+        {
+          "title": "共同学习规范模板及双向映射",
+          "description": "RefNet 表示规范手 SDF，前向与逆向 DeformNet 学习姿态表面和规范空间的对应，残差式变形逐步修正；形状隐变量表达身份差异。"
+        },
+        {
+          "title": "只对规范模板提取一次网格",
+          "description": "对学好的规范 SDF 执行 Marching Cubes，并赋予由上采样 MANO 得到的蒙皮权重；不需为每个姿态重新运行等值面提取。"
+        },
+        {
+          "title": "前向变形再加权融合",
+          "description": "给定新骨架，将规范网格各部件前向变形、转换到共同坐标并混合，快速生成可微的姿态相关手表面。"
+        }
+      ],
+      "training": "用手扫描监督表面 SDF、法线，结合循环一致性、稀疏 MANO 对应、Eikonal/离面及形状先验约束，共同训练模板和变形网络。",
+      "inference": "需要三维骨架与形状表示；若应用于 RGB 重建，应另接骨架估计器。一次网格提取的效率收益来自固定规范模板。",
+      "figure_reading": "图 2 左侧是骨架条件和局部变形，右侧为规范隐式模板；训练中的逆映射与部署时的前向网格变形有不同作用。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Huang_PHRIT_Parametric_Hand_Representation_with_Implicit_Template_ICCV_2023_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Huang_PHRIT_Parametric_Hand_Representation_with_Implicit_Template_ICCV_2023_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Huang_PHRIT_Parametric_Hand_Representation_with_Implicit_Template_ICCV_2023_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Huang_PHRIT_Parametric_Hand_Representation_with_Implicit_Template_ICCV_2023_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/ICCV2023/papers/Huang_PHRIT_Parametric_Hand_Representation_with_Implicit_Template_ICCV_2023_paper.pdf#page=3",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -15314,21 +16138,79 @@
       "method": "从第一人称多视角彩色图像恢复包含前臂的双手及绝对根姿态。以频谱图卷积解码和推理阶段优化分别改善网格平滑度与自穿透。",
       "limitations": "需要第一人称多视角图像，推理阶段还有优化；与单 RGB 单帧方法比较时需统一观测及计算预算。",
       "sources": [
-        "https://openaccess.thecvf.com/content/ICCV2023/html/Tse_Spectral_Graphormer_Spectral_Graph-Based_Transformer_for_Egocentric_Two-Hand_Reconstruction_using_ICCV_2023_paper.html"
+        "https://openaccess.thecvf.com/content/ICCV2023/html/Tse_Spectral_Graphormer_Spectral_Graph-Based_Transformer_for_Egocentric_Two-Hand_Reconstruction_using_ICCV_2023_paper.html",
+        "https://openaccess.thecvf.com/content/ICCV2023/papers/Tse_Spectral_Graphormer_Spectral_Graph-Based_Transformer_for_Egocentric_Two-Hand_Reconstruction_using_ICCV_2023_paper.pdf",
+        "https://openaccess.thecvf.com/content/ICCV2023/papers/Tse_Spectral_Graphormer_Spectral_Graph-Based_Transformer_for_Egocentric_Two-Hand_Reconstruction_using_ICCV_2023_paper.pdf#page=3"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_notes": "已核对CVF正式论文页的标题、年份、会议信息及摘要。问题、方法、输入输出和贡献为摘要级解读；尚未复核正文实验、失败案例与作者局限，不代表全文精读或复现。",
       "problem": "第一人称双手全局定位与高精细网格受到遮挡及数据限制。",
       "inputs_outputs": "第一人称多视角RGB→含前臂的双手网格和绝对根姿态。",
       "contribution": "多视角特征融合、频谱图解码与防穿透优化结合。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2023 ICCV open-access paper 的方法相关正文（3, 4, 5）、图号及流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "多视角 RGB → 软注意力区域特征 → 频谱模板分区 → Transformer 粗网格 → 谱图卷积上采样与碰撞精化。",
+      "steps": [
+        {
+          "title": "按区域融合多个视角",
+          "description": "共享 CNN 提取每视角空间特征，软注意力聚合为 K 个区域表示，再跨视角 max-pooling，保留不同视点的可见信息。"
+        },
+        {
+          "title": "把视觉区域匹配模板区域",
+          "description": "对模板图 Laplacian 特征向量进行 k-means，得到谱聚类区域；将对应区域特征和降采样模板顶点坐标拼成顶点查询。"
+        },
+        {
+          "title": "Transformer 建立全局网格表示",
+          "description": "Transformer 逐渐降低特征通道，交互各粗网格顶点的视觉与空间信息，形成可送入几何解码器的三维表示。"
+        },
+        {
+          "title": "谱图卷积逐级恢复网格",
+          "description": "全连接上采样配合 Chebyshev Laplacian 图滤波逐层恢复顶点，最终每只手为 4023 点网格；不是默认 MANO 的 778 点头。"
+        },
+        {
+          "title": "另行优化双手穿透",
+          "description": "测试时可用射线求交识别穿透顶点，最近表面距离碰撞能量与 ARAP 正则联合精化，保持局部网格结构。"
+        }
+      ],
+      "training": "以网格 L1、相机二维重投影与边长正则端到端训练。最终碰撞优化是测试精化过程，应与前馈网格解码的计算量区分。",
+      "inference": "读取多视角彩色图并输出双手高分辨率网格；输入特征融合不能被描述为单图方法。报告速度时说明是否包含后续碰撞优化。",
+      "figure_reading": "图 2 是全流程，图 3 展示谱聚类与网格分区；模板区域聚类和解码器的谱图卷积是频谱信息的两种不同用途。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Tse_Spectral_Graphormer_Spectral_Graph-Based_Transformer_for_Egocentric_Two-Hand_Reconstruction_using_ICCV_2023_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Tse_Spectral_Graphormer_Spectral_Graph-Based_Transformer_for_Egocentric_Two-Hand_Reconstruction_using_ICCV_2023_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Tse_Spectral_Graphormer_Spectral_Graph-Based_Transformer_for_Egocentric_Two-Hand_Reconstruction_using_ICCV_2023_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Tse_Spectral_Graphormer_Spectral_Graph-Based_Transformer_for_Egocentric_Two-Hand_Reconstruction_using_ICCV_2023_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/ICCV2023/papers/Tse_Spectral_Graphormer_Spectral_Graph-Based_Transformer_for_Egocentric_Two-Hand_Reconstruction_using_ICCV_2023_paper.pdf#page=3",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -15354,15 +16236,20 @@
       "method": "将单目交互双手恢复转为交互先验的条件采样。VAE压缩交互姿态，交互邻接热图提供遮挡关节线索，再用ViT关联图像和先验编码。",
       "limitations": "交互先验条件采样用于补全遮挡姿态；样本多样性与单一预测准确度需分别衡量。",
       "sources": [
-        "https://openaccess.thecvf.com/content/ICCV2023/html/Zuo_Reconstructing_Interacting_Hands_with_Interaction_Prior_from_Monocular_Images_ICCV_2023_paper.html"
+        "https://openaccess.thecvf.com/content/ICCV2023/html/Zuo_Reconstructing_Interacting_Hands_with_Interaction_Prior_from_Monocular_Images_ICCV_2023_paper.html",
+        "https://openaccess.thecvf.com/content/ICCV2023/papers/Zuo_Reconstructing_Interacting_Hands_with_Interaction_Prior_from_Monocular_Images_ICCV_2023_paper.pdf",
+        "https://openaccess.thecvf.com/content/ICCV2023/papers/Zuo_Reconstructing_Interacting_Hands_with_Interaction_Prior_from_Monocular_Images_ICCV_2023_paper.pdf#page=3"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_notes": "已核对CVF正式论文页的标题、年份、会议信息及摘要。问题、方法、输入输出和贡献为摘要级解读；尚未复核正文实验、失败案例与作者局限，不代表全文精读或复现。",
       "problem": "交互双手严重遮挡时逐关节定位不可靠。",
       "inputs_outputs": "单目图像→交互双手三维重建。",
       "contribution": "先学习交互分布，再以交互邻接热图条件化采样。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2023 ICCV open-access paper 的方法相关正文（3, 4, 5）、图号及流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "code": "https://github.com/binghui-z/InterPrior_pytorch",
     "ccf": {
@@ -15370,6 +16257,59 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "多模态交互数据学习 VAE 先验 → RGB 交互特征 → ViT 融合 → 固定先验解码器 → 双手重建。",
+      "steps": [
+        {
+          "title": "先独立构建交互先验",
+          "description": "Two-hand 500K 汇总动捕与单手数据组合，经物理优化提高合理性；无需每个先验姿态都配对 RGB，以 VAE 学习双手联合潜空间。"
+        },
+        {
+          "title": "从图像估计多种交互线索",
+          "description": "ResNet-50 及对称解码器预测左右可见区域、交互邻接热图 IAH；另一路池化 MLP 估计左右相对平移。"
+        },
+        {
+          "title": "IAH 不只强调目标关节峰值",
+          "description": "每通道以 Laplace 混合分布同时表示目标关节与图像邻近关节，让不可见关节也能利用附近可见结构，而非仅做精确点定位。"
+        },
+        {
+          "title": "ViT 融合并对齐潜空间",
+          "description": "拼接低层视觉特征、IAH 和实例显著图，分块加入位置编码，经 Transformer 及线性对齐输出与先验兼容的交互代码。"
+        },
+        {
+          "title": "固定解码器还原交互",
+          "description": "丢弃 VAE 编码器，冻结解码器将图像条件代码变成双手表示，再使用预测平移组合。论文比较关节、顶点和 MANO 三种表示。"
+        }
+      ],
+      "training": "先训练图像特征提取器和独立 VAE，再固定 VAE 解码器，训练融合模块并微调图像分支；包含二维线索、三维重建及适用的法线/穿透损失。",
+      "inference": "单目交互手裁剪进入图像分支与固定先验解码器；物理引擎主要服务数据构建，并非每张测试图必需运行的模拟器。实验使用标注顶点确定裁剪。",
+      "figure_reading": "图 2(c) 是先验数据与 VAE，(a)(b) 是图像条件路径；IAH 的多峰不是多个候选手，而是同通道的邻接线索。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Zuo_Reconstructing_Interacting_Hands_with_Interaction_Prior_from_Monocular_Images_ICCV_2023_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Zuo_Reconstructing_Interacting_Hands_with_Interaction_Prior_from_Monocular_Images_ICCV_2023_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Zuo_Reconstructing_Interacting_Hands_with_Interaction_Prior_from_Monocular_Images_ICCV_2023_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Zuo_Reconstructing_Interacting_Hands_with_Interaction_Prior_from_Monocular_Images_ICCV_2023_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/ICCV2023/papers/Zuo_Reconstructing_Interacting_Hands_with_Interaction_Prior_from_Monocular_Images_ICCV_2023_paper.pdf#page=3",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -15396,21 +16336,90 @@
       "method": "利用射频成像恢复障碍物遮挡下的三维手骨架。训练阶段借助同步相机/射频数据进行跨模态监督，再以对抗适应迁移至遮挡场景。",
       "limitations": "推理依赖射频设备，训练使用同步视觉监督；遮挡穿透能力不能转移到仅有 RGB 相机的设置。",
       "sources": [
-        "https://openaccess.thecvf.com/content/ICCV2023/html/Zhang_OCHID-Fi_Occlusion-Robust_Hand_Pose_Estimation_in_3D_via_RF-Vision_ICCV_2023_paper.html"
+        "https://openaccess.thecvf.com/content/ICCV2023/html/Zhang_OCHID-Fi_Occlusion-Robust_Hand_Pose_Estimation_in_3D_via_RF-Vision_ICCV_2023_paper.html",
+        "https://openaccess.thecvf.com/content/ICCV2023/papers/Zhang_OCHID-Fi_Occlusion-Robust_Hand_Pose_Estimation_in_3D_via_RF-Vision_ICCV_2023_paper.pdf",
+        "https://openaccess.thecvf.com/content/ICCV2023/papers/Zhang_OCHID-Fi_Occlusion-Robust_Hand_Pose_Estimation_in_3D_via_RF-Vision_ICCV_2023_paper.pdf#page=3",
+        "https://github.com/DeepWiSe888/OCHID-Fi"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_notes": "已核对CVF正式论文页的标题、年份、会议信息及摘要。问题、方法、输入输出和贡献为摘要级解读；尚未复核正文实验、失败案例与作者局限，不代表全文精读或复现。",
       "problem": "普通相机无法观察障碍物后被遮挡的手。",
       "inputs_outputs": "射频观测→三维手骨架；训练使用同步相机/射频数据。",
       "contribution": "跨模态监督与跨域对抗迁移扩展到遮挡环境。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2023 ICCV open-access paper 的方法相关正文（2, 3, 4, 5）、图号及流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "视线无遮挡视觉教师 → RF 学生蒸馏 → 复值编码解码 → 跨遮挡域对抗适应 → RF 三维手姿。",
+      "steps": [
+        {
+          "title": "收集同步视觉与 RF 信号",
+          "description": "训练时相机/RF 外参标定并同步，OptiTrack 提供三维标签；RF 经平滑与带通滤波，组成天线对、时间及距离维的复数张量。"
+        },
+        {
+          "title": "在无遮挡域做跨模态蒸馏",
+          "description": "先训练视觉手姿教师，再用真实坐标与教师坐标共同监督 RF 学生；attentive imitation 按教师误差降低不可靠样本的权重。"
+        },
+        {
+          "title": "复值网络保留 I/Q 关系",
+          "description": "OCH-Net 用实/虚交叉组合的复值卷积，编码解码器配跳接，分别处理激活、归一化及采样，利用相位所含位移信息。"
+        },
+        {
+          "title": "解耦平面坐标与深度回归",
+          "description": "解码特征送入二维关键点和深度分支，再合成三维关节；输出是手骨架，不是手势类别或 MANO 表面。"
+        },
+        {
+          "title": "用未标注遮挡域适应",
+          "description": "OCH-AL 加入对抗回归器，与主回归器交替最大/最小化域间差异；以错误关键点分布约束输出空间，使无遮挡知识迁移到遮挡域。"
+        }
+      ],
+      "training": "阶段一有无遮挡域的视觉/动捕监督，阶段二结合有标签无遮挡 RF 和无标签遮挡 RF 做域适应；后者无标签不代表整个方法从未使用三维标签。",
+      "inference": "部署读取 RF 即可，不必让视觉教师看到遮挡后的手。实验以多天线 IR-UWB 雷达模拟 RF 传感器，不能把普通 RGB 图或任意手机 Wi-Fi 当作等价输入。",
+      "figure_reading": "图 2 标明跨模态与跨域两个训练过程，图 3 展示复值操作；教师和对抗回归器都是训练组件，应与部署主干区分。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 2 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Zhang_OCHID-Fi_Occlusion-Robust_Hand_Pose_Estimation_in_3D_via_RF-Vision_ICCV_2023_paper.pdf#page=2"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Zhang_OCHID-Fi_Occlusion-Robust_Hand_Pose_Estimation_in_3D_via_RF-Vision_ICCV_2023_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Zhang_OCHID-Fi_Occlusion-Robust_Hand_Pose_Estimation_in_3D_via_RF-Vision_ICCV_2023_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Zhang_OCHID-Fi_Occlusion-Robust_Hand_Pose_Estimation_in_3D_via_RF-Vision_ICCV_2023_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Zhang_OCHID-Fi_Occlusion-Robust_Hand_Pose_Estimation_in_3D_via_RF-Vision_ICCV_2023_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/ICCV2023/papers/Zhang_OCHID-Fi_Occlusion-Robust_Hand_Pose_Estimation_in_3D_via_RF-Vision_ICCV_2023_paper.pdf#page=3",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
+    },
+    "code": "https://github.com/DeepWiSe888/OCHID-Fi",
+    "code_provenance": {
+      "url": "https://github.com/DeepWiSe888/OCHID-Fi",
+      "verified_at": "2026-11-18",
+      "basis": "论文或作者项目页给出的仓库；已核对 README 对应论文标题和公开实现目录，未运行代码。"
     }
   },
   {
@@ -15436,21 +16445,83 @@
       "method": "从单张RGB图像联合重建手与物体。将网格和图像特征映射到双曲空间，通过动态图卷积及图像注意力建模交互几何。",
       "limitations": "手物图结构与双曲特征共同作用，需明确对象类别及形状先验；手网格精度不能概括物体重建质量。",
       "sources": [
-        "https://openaccess.thecvf.com/content/ICCV2023/html/Leng_Dynamic_Hyperbolic_Attention_Network_for_Fine_Hand-object_Reconstruction_ICCV_2023_paper.html"
+        "https://openaccess.thecvf.com/content/ICCV2023/html/Leng_Dynamic_Hyperbolic_Attention_Network_for_Fine_Hand-object_Reconstruction_ICCV_2023_paper.html",
+        "https://openaccess.thecvf.com/content/ICCV2023/papers/Leng_Dynamic_Hyperbolic_Attention_Network_for_Fine_Hand-object_Reconstruction_ICCV_2023_paper.pdf",
+        "https://openaccess.thecvf.com/content/ICCV2023/papers/Leng_Dynamic_Hyperbolic_Attention_Network_for_Fine_Hand-object_Reconstruction_ICCV_2023_paper.pdf#page=3"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_notes": "已核对CVF正式论文页的标题、年份、会议信息及摘要。问题、方法、输入输出和贡献为摘要级解读；尚未复核正文实验、失败案例与作者局限，不代表全文精读或复现。",
       "problem": "欧氏空间的手物约束与特征学习不足以处理细致交互。",
       "inputs_outputs": "单张RGB→三维手和物体。",
       "contribution": "将几何和图像特征联合映射至双曲空间建模。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2023 ICCV open-access paper 的方法相关正文（3, 4, 5, 6）、图号及流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "RGB 双分支初始网格 → Poincaré 球映射 → 动态双曲图卷积 → 图像注意力交互 → 手物体重解码。",
+      "steps": [
+        {
+          "title": "先获得可用的初始几何",
+          "description": "两路 ResNet-18 分别编码手与物体，MANO 头生成手网格，AtlasNet 头生成物体网格，同时保留浅/深层图像特征。"
+        },
+        {
+          "title": "在双曲空间构造动态邻域",
+          "description": "以 Exp 映射网格到 Poincaré 球，用测地距离 KNN 动态选择邻居；DHGC 的 Möbius 变换与聚合学习网格几何表示。"
+        },
+        {
+          "title": "为网格寻找相似视觉特征",
+          "description": "IHGC 将浅层图、深层手图、深层物体图也映到双曲空间，对每个网格节点分别取相似邻域，建立几何和图像的对应。"
+        },
+        {
+          "title": "按图像语义传递手物体信息",
+          "description": "浅层图像增强网格特征作为 V，深层手/物体特征作为 Q/K；经 Log 回切空间计算注意力，让交互对方提供遮挡线索。"
+        },
+        {
+          "title": "融合特征重新解码网格",
+          "description": "将增强网格表示与图像编码拼接，分别重建 778 点手网格和 642 点物体网格，并预测平移与尺度。"
+        }
+      ],
+      "training": "监督手网格、关节和形状，以及物体 Chamfer、平移和尺度；文中总目标明确未采用所沿用基线的 contact loss，不能声称有显式接触监督。",
+      "inference": "输入手物体 RGB 图，前馈得到双方网格；双曲空间用于内部特征学习，最终输出仍是普通三维坐标。",
+      "figure_reading": "图 2 是双分支总图；图 3 的 DHGC 是网格几何，图 4 的 IHGC 加入图像交互。Exp/Log 是空间映射而非扩散步。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Leng_Dynamic_Hyperbolic_Attention_Network_for_Fine_Hand-object_Reconstruction_ICCV_2023_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Leng_Dynamic_Hyperbolic_Attention_Network_for_Fine_Hand-object_Reconstruction_ICCV_2023_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Leng_Dynamic_Hyperbolic_Attention_Network_for_Fine_Hand-object_Reconstruction_ICCV_2023_paper.pdf#page=5"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 6 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Leng_Dynamic_Hyperbolic_Attention_Network_for_Fine_Hand-object_Reconstruction_ICCV_2023_paper.pdf#page=6"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Leng_Dynamic_Hyperbolic_Attention_Network_for_Fine_Hand-object_Reconstruction_ICCV_2023_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/ICCV2023/papers/Leng_Dynamic_Hyperbolic_Attention_Network_for_Fine_Hand-object_Reconstruction_ICCV_2023_paper.pdf#page=3",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -15476,21 +16547,86 @@
       "method": "单目交互双手重建采用二维视觉与三维关节两种特征空间交替细化。图卷积建模手内关系，Transformer建模手间关系，再投影回像素空间。",
       "limitations": "二维与三维空间交替迭代有额外计算开销；双手相对位置和各手根相对几何应分别评价。",
       "sources": [
-        "https://openaccess.thecvf.com/content/ICCV2023/html/Ren_Decoupled_Iterative_Refinement_Framework_for_Interacting_Hands_Reconstruction_from_a_ICCV_2023_paper.html"
+        "https://openaccess.thecvf.com/content/ICCV2023/html/Ren_Decoupled_Iterative_Refinement_Framework_for_Interacting_Hands_Reconstruction_from_a_ICCV_2023_paper.html",
+        "https://openaccess.thecvf.com/content/ICCV2023/papers/Ren_Decoupled_Iterative_Refinement_Framework_for_Interacting_Hands_Reconstruction_from_a_ICCV_2023_paper.pdf",
+        "https://openaccess.thecvf.com/content/ICCV2023/papers/Ren_Decoupled_Iterative_Refinement_Framework_for_Interacting_Hands_Reconstruction_from_a_ICCV_2023_paper.pdf#page=4",
+        "https://github.com/PengfeiRen96/DIR"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_notes": "已核对CVF正式论文页的标题、年份、会议信息及摘要。问题、方法、输入输出和贡献为摘要级解读；尚未复核正文实验、失败案例与作者局限，不代表全文精读或复现。",
       "problem": "双手相似外观、互遮挡与复杂空间关系影响网格对齐。",
       "inputs_outputs": "单张RGB→交互双手三维网格。",
       "contribution": "在二维视觉和三维关节空间交替增强和投影细化。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2023 ICCV open-access paper 的方法相关正文（3, 4, 5）、图号及流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "RGB/MANO 初估 → 关节采样 → GCN/Transformer 双手关系 → 多平面投回图像 → 迭代更新。",
+      "steps": [
+        {
+          "title": "从全局图像产生双手初估",
+          "description": "ResNet-50 提取多尺度特征，左右空间注意力分别池化回归 MANO 与弱透视相机，整体池化估计双手相对偏移。"
+        },
+        {
+          "title": "依据当前预测采样关节特征",
+          "description": "用预测弱透视相机把当前三维关节投到融合图像特征，双线性采样外观并加坐标嵌入；相对偏移把双手放在共同系中。"
+        },
+        {
+          "title": "在三维关节空间建模关系",
+          "description": "骨架 GCN 处理单手关节依赖，多层 Transformer 处理跨手空间关系；以较少、语义明确的关节节点代替稠密网格间全交互。"
+        },
+        {
+          "title": "分平面投回二维避免混淆",
+          "description": "MFP 将每个关节增强特征分别投到自己的平面后拼接，避免重叠关节落在同一像素时直接混合，再用局部卷积增强图像证据。"
+        },
+        {
+          "title": "解码并重复精化",
+          "description": "由增强特征更新 MANO 与相对偏移，并逐步融合编码器多尺度特征。三维关系推理与二维局部对齐在各轮中解耦执行。"
+        }
+      ],
+      "training": "多轮二维/三维关节和顶点、相对偏移监督，配法线/边长约束及分割/稠密对应辅助损失，端到端训练。",
+      "inference": "输入交互双手裁剪；投影依赖预测弱透视相机，无需真实相机内参。多轮精化仍是同一图像的计算，不是视频跟踪。",
+      "figure_reading": "图 2 中 FS 从图像取关节特征，MFP 反向投回图像；左右 GCN 与中间 Transformer 分别对应手内和手间关系。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Ren_Decoupled_Iterative_Refinement_Framework_for_Interacting_Hands_Reconstruction_from_a_ICCV_2023_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Ren_Decoupled_Iterative_Refinement_Framework_for_Interacting_Hands_Reconstruction_from_a_ICCV_2023_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Ren_Decoupled_Iterative_Refinement_Framework_for_Interacting_Hands_Reconstruction_from_a_ICCV_2023_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Ren_Decoupled_Iterative_Refinement_Framework_for_Interacting_Hands_Reconstruction_from_a_ICCV_2023_paper.pdf#page=4"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/ICCV2023/papers/Ren_Decoupled_Iterative_Refinement_Framework_for_Interacting_Hands_Reconstruction_from_a_ICCV_2023_paper.pdf#page=4",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
+    },
+    "code": "https://github.com/PengfeiRen96/DIR",
+    "code_provenance": {
+      "url": "https://github.com/PengfeiRen96/DIR",
+      "verified_at": "2026-11-18",
+      "basis": "论文或作者项目页给出的仓库；已核对 README 对应论文标题和公开实现目录，未运行代码。"
     }
   },
   {
@@ -15517,15 +16653,20 @@
       "method": "提供面向交互双手姿态估计的合成数据与TransHand基线。通过姿态优化生成交互状态，并变化背景、视角及纹理，研究合成预训练的价值。",
       "limitations": "合成交互覆盖由姿态优化、背景和视角采样决定；预训练收益需通过独立真实数据验证。",
       "sources": [
-        "https://openaccess.thecvf.com/content/ICCV2023/html/Li_RenderIH_A_Large-Scale_Synthetic_Dataset_for_3D_Interacting_Hand_Pose_ICCV_2023_paper.html"
+        "https://openaccess.thecvf.com/content/ICCV2023/html/Li_RenderIH_A_Large-Scale_Synthetic_Dataset_for_3D_Interacting_Hand_Pose_ICCV_2023_paper.html",
+        "https://openaccess.thecvf.com/content/ICCV2023/papers/Li_RenderIH_A_Large-Scale_Synthetic_Dataset_for_3D_Interacting_Hand_Pose_ICCV_2023_paper.pdf",
+        "https://openaccess.thecvf.com/content/ICCV2023/papers/Li_RenderIH_A_Large-Scale_Synthetic_Dataset_for_3D_Interacting_Hand_Pose_ICCV_2023_paper.pdf#page=6"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_notes": "已核对CVF正式论文页的标题、年份、会议信息及摘要。问题、方法、输入输出和贡献为摘要级解读；尚未复核正文实验、失败案例与作者局限，不代表全文精读或复现。",
       "problem": "现有交互手数据的姿态、背景、纹理多样性和标注精度有限。",
       "inputs_outputs": "合成交互姿态/场景→带三维标注的图像；TransHand预测姿态。",
       "contribution": "提供RenderIH数据和交互手Transformer基线。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2023 ICCV open-access paper 的方法相关正文（3, 4, 5, 6）、图号及流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "code": "https://github.com/adwardlee/RenderIH",
     "ccf": {
@@ -15533,6 +16674,63 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "A-MANO 姿态增广 → 穿透/接触/解剖/自然度优化 → Blender 多样渲染 → RenderIH 数据 → TransHand 基线。",
+      "steps": [
+        {
+          "title": "由真实姿态增广初值",
+          "description": "以 InterHand2.6M 姿态为基础，在 A-MANO 的 bend/splay 轴加入随机偏移，并限制允许的关节自由度与角度。"
+        },
+        {
+          "title": "优化两手接触和穿透",
+          "description": "把手拆成 16 个部件计算 SDF 穿透能量，使用接触高频顶点采样的锚点对吸引两手；锚点及其权重随优化重建。"
+        },
+        {
+          "title": "同时约束解剖与自然度",
+          "description": "关节角范围约束保证基本解剖合理；预训练姿态判别器另提供自然度损失，与接触、穿透联合优化，而非仅靠随机姿态渲染。"
+        },
+        {
+          "title": "渲染具有多样外观的合成数据",
+          "description": "Blender Cycles 使用多种皮肤纹理、HDR 环境光/背景和环绕相机，配合优化姿态得到图像及精确几何标注。"
+        },
+        {
+          "title": "用 TransHand 验证训练收益",
+          "description": "独立的基线网络将全局图像编码为左右顶点特征，三层 correlation encoder 融合多尺度图像和对手侧向信息，逐级上采样至每手 778 点。"
+        }
+      ],
+      "training": "姿态自然度判别器先训练，数据生成阶段优化姿态；TransHand 再用二维/三维关节和顶点及表面平滑监督训练。数据生成和网络训练不是一个端到端模型。",
+      "inference": "RenderIH 本身是合成训练数据；测试 RGB 手姿时运行 TransHand 等估计器，不需要现场启动 Blender 或重复生成数据。",
+      "figure_reading": "图 8 是 TransHand 的估计网络；图 4 仅为数据生成中的自然度判别器。图 2/3 解释锚点与姿态优化，不应合称同一个 RGB 网络。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Li_RenderIH_A_Large-Scale_Synthetic_Dataset_for_3D_Interacting_Hand_Pose_ICCV_2023_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Li_RenderIH_A_Large-Scale_Synthetic_Dataset_for_3D_Interacting_Hand_Pose_ICCV_2023_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Li_RenderIH_A_Large-Scale_Synthetic_Dataset_for_3D_Interacting_Hand_Pose_ICCV_2023_paper.pdf#page=5"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 6 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Li_RenderIH_A_Large-Scale_Synthetic_Dataset_for_3D_Interacting_Hand_Pose_ICCV_2023_paper.pdf#page=6"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Li_RenderIH_A_Large-Scale_Synthetic_Dataset_for_3D_Interacting_Hand_Pose_ICCV_2023_paper.pdf#page=6"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/ICCV2023/papers/Li_RenderIH_A_Large-Scale_Synthetic_Dataset_for_3D_Interacting_Hand_Pose_ICCV_2023_paper.pdf#page=6",
+      "caption": "Figure 8 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -15558,21 +16756,79 @@
       "method": "以双分支协同学习联合恢复手与未知物体。注意力引导图卷积关注相互遮挡，无监督关联损失促进手物网格信息交换。",
       "limitations": "未知物体重建应说明训练与测试对象的划分；联合关联损失不等于恢复了准确物理接触。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2022/html/Tse_Collaborative_Learning_for_Hand_and_Object_Reconstruction_With_Attention-Guided_Graph_CVPR_2022_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2022/html/Tse_Collaborative_Learning_for_Hand_and_Object_Reconstruction_With_Attention-Guided_Graph_CVPR_2022_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2022/papers/Tse_Collaborative_Learning_for_Hand_and_Object_Reconstruction_With_Attention-Guided_Graph_CVPR_2022_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2022/papers/Tse_Collaborative_Learning_for_Hand_and_Object_Reconstruction_With_Attention-Guided_Graph_CVPR_2022_paper.pdf#page=3"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_notes": "已核对CVF正式论文页的标题、年份、会议信息及摘要。问题、方法、输入输出和贡献为摘要级解读；尚未复核正文实验、失败案例与作者局限，不代表全文精读或复现。",
       "problem": "未知物体形状与手物互遮挡使联合重建困难。",
       "inputs_outputs": "交互图像→手物姿态及密集形状。",
       "contribution": "双分支互传网格信息，并以注意力和关联损失稳定协同学习。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2022 CVPR open-access paper 的方法相关正文（3, 4, 5）、图号及流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "RGB 双编码 → MANO 手网格 → 注意力图特征传到物体 → AtlasNet 物体网格 → 反传特征迭代手重建。",
+      "steps": [
+        {
+          "title": "分别编码手与物体外观",
+          "description": "两个 ResNet-18 编码器读取同一裁剪，先由手特征回归 MANO 姿态/形状，得到初始手表面。"
+        },
+        {
+          "title": "从手网格提取可传递特征",
+          "description": "注意力图卷积动态选择邻域，多头聚合与残差历史记录当前及前轮几何，映射为与图像编码同维的手几何表示。"
+        },
+        {
+          "title": "几何辅助物体重建",
+          "description": "把手几何表示加到物体图像特征，再由 AtlasNet 重建物体网格；手握姿态为部分遮挡的物体提供形状线索。"
+        },
+        {
+          "title": "把物体几何传回手分支",
+          "description": "对物体网格运行相同类型的图特征提取，加入手图像特征后重新解码 MANO，按设定次数循环双方协作。"
+        },
+        {
+          "title": "用关联目标稳定特征共享",
+          "description": "构造 batch 内嵌入转移及往返概率，无监督关联损失鼓励有效的双向特征传递，降低简单相连分支导致误差累积的问题。"
+        }
+      ],
+      "training": "联合手顶点/关节 L2、物体 Chamfer 与无监督关联损失；关联项无类别标签不意味着网格重建也无监督。实验通常使用两轮协作。",
+      "inference": "输入单张 RGB 得到手与物体网格；循环作用于同一图像的几何特征，不是时间序列。参数化手头和自由形状物体头的输出不同。",
+      "figure_reading": "图 2 手→物体与物体→手形成迭代，右下是注意力图卷积；第 5 页 Algorithm 1 明确各分支的先后次序。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Tse_Collaborative_Learning_for_Hand_and_Object_Reconstruction_With_Attention-Guided_Graph_CVPR_2022_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Tse_Collaborative_Learning_for_Hand_and_Object_Reconstruction_With_Attention-Guided_Graph_CVPR_2022_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Tse_Collaborative_Learning_for_Hand_and_Object_Reconstruction_With_Attention-Guided_Graph_CVPR_2022_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Tse_Collaborative_Learning_for_Hand_and_Object_Reconstruction_With_Attention-Guided_Graph_CVPR_2022_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2022/papers/Tse_Collaborative_Learning_for_Hand_and_Object_Reconstruction_With_Attention-Guided_Graph_CVPR_2022_paper.pdf#page=3",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -15599,21 +16855,83 @@
       "method": "以双目图像恢复手网格，并把已有数据学得的手先验迁移到无关节标注场景。训练借助左右外观一致性与形状一致性约束。",
       "limitations": "左右外观一致性需要双目输入；无关节标注适配不代表没有预训练手先验或相机条件。",
       "sources": [
-        "https://openaccess.thecvf.com/content/ICCV2021/html/Chen_Self-Supervised_Transfer_Learning_for_Hand_Mesh_Recovery_From_Binocular_Images_ICCV_2021_paper.html"
+        "https://openaccess.thecvf.com/content/ICCV2021/html/Chen_Self-Supervised_Transfer_Learning_for_Hand_Mesh_Recovery_From_Binocular_Images_ICCV_2021_paper.html",
+        "https://openaccess.thecvf.com/content/ICCV2021/papers/Chen_Self-Supervised_Transfer_Learning_for_Hand_Mesh_Recovery_From_Binocular_Images_ICCV_2021_paper.pdf",
+        "https://openaccess.thecvf.com/content/ICCV2021/papers/Chen_Self-Supervised_Transfer_Learning_for_Hand_Mesh_Recovery_From_Binocular_Images_ICCV_2021_paper.pdf#page=3"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_notes": "已核对CVF正式论文页的标题、年份、会议信息及摘要。问题、方法、输入输出和贡献为摘要级解读；尚未复核正文实验、失败案例与作者局限，不代表全文精读或复现。",
       "problem": "已有RGB手模型难以适应缺少标注的新场景。",
       "inputs_outputs": "双目图像→手网格。",
       "contribution": "使用左右外观和形状一致性完成无关节标注迁移。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2021 ICCV open-access paper 的方法相关正文（2, 3, 4, 5）、图号及流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "FreiHAND 有监督预训练 → 共享双目网格回归 → 视差三维恢复 → 可微渲染/重投影一致性 → 无标签目标域适应。",
+      "steps": [
+        {
+          "title": "先学习已有标注数据的手先验",
+          "description": "编码器—网格回归器在 FreiHAND 顶点标注上预训练；目标域自监督并不抹去这个有监督来源。"
+        },
+        {
+          "title": "用共享分支预测左右对应顶点",
+          "description": "双目图分别经共享模型预测网格的图像坐标，同拓扑顶点形成左右对应；由横向视差、焦距和基线计算共享深度。"
+        },
+        {
+          "title": "恢复公制坐标并生成视差图",
+          "description": "结合相机标定将图像坐标和深度转为三维，再渲染深度图并换算稠密视差，用它把一侧图像 warp 到另一侧。"
+        },
+        {
+          "title": "以双目外观和轮廓适应新域",
+          "description": "手区域的光度/SSIM 与渲染掩膜对齐提供无关键点标签信号；掩膜来自现有肤色检测，不能当作完全无需预处理。"
+        },
+        {
+          "title": "维持不可见表面的合理形状",
+          "description": "预训练预测作为伪网格边长约束，配 Laplacian 平滑、跨视图 Chamfer 与法线一致性，防止仅可见区域对齐导致整体变形。"
+        }
+      ],
+      "training": "源域用顶点监督预训练，目标域用无二维/三维关节标签的双目一致性微调；源模型的伪边长与外部手掩膜仍参与适应。",
+      "inference": "双目版需要配对图像、基线和焦距来获得绝对三维坐标。论文另有直接回归深度的单目对照，不能将其与视差版输入条件混同。",
+      "figure_reading": "图 1 左侧是共享估计器，右侧是双目渲染与 warp 训练目标；图 2 才是源域预训练，左右分支是同一只手的两个视图。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 2 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Chen_Self-Supervised_Transfer_Learning_for_Hand_Mesh_Recovery_From_Binocular_Images_ICCV_2021_paper.pdf#page=2"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Chen_Self-Supervised_Transfer_Learning_for_Hand_Mesh_Recovery_From_Binocular_Images_ICCV_2021_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Chen_Self-Supervised_Transfer_Learning_for_Hand_Mesh_Recovery_From_Binocular_Images_ICCV_2021_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Chen_Self-Supervised_Transfer_Learning_for_Hand_Mesh_Recovery_From_Binocular_Images_ICCV_2021_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Chen_Self-Supervised_Transfer_Learning_for_Hand_Mesh_Recovery_From_Binocular_Images_ICCV_2021_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/ICCV2021/papers/Chen_Self-Supervised_Transfer_Learning_for_Hand_Mesh_Recovery_From_Binocular_Images_ICCV_2021_paper.pdf#page=3",
+      "caption": "Figure 1 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -15639,21 +16957,79 @@
       "method": "联合检测并估计交互双手的三维姿态。通过联合训练利用双手依赖，并用交互姿态判别器约束物理上不合理的预测。",
       "limitations": "交互判别器约束合理性而非提供真实接触测量；检测召回与条件于正确检测的姿态精度需分开。",
       "sources": [
-        "https://openaccess.thecvf.com/content/ICCV2021/html/Kim_End-to-End_Detection_and_Pose_Estimation_of_Two_Interacting_Hands_ICCV_2021_paper.html"
+        "https://openaccess.thecvf.com/content/ICCV2021/html/Kim_End-to-End_Detection_and_Pose_Estimation_of_Two_Interacting_Hands_ICCV_2021_paper.html",
+        "https://openaccess.thecvf.com/content/ICCV2021/papers/Kim_End-to-End_Detection_and_Pose_Estimation_of_Two_Interacting_Hands_ICCV_2021_paper.pdf",
+        "https://openaccess.thecvf.com/content/ICCV2021/papers/Kim_End-to-End_Detection_and_Pose_Estimation_of_Two_Interacting_Hands_ICCV_2021_paper.pdf#page=3"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_notes": "已核对CVF正式论文页的标题、年份、会议信息及摘要。问题、方法、输入输出和贡献为摘要级解读；尚未复核正文实验、失败案例与作者局限，不代表全文精读或复现。",
       "problem": "双手近距离交互时互相遮挡，独立估计不稳定。",
       "inputs_outputs": "图像→手检测结果和双手三维姿态。",
       "contribution": "把联合检测、关节可见性和姿态判别器纳入同一模型。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2021 ICCV open-access paper 的方法相关正文（3, 4, 5）、图号及流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "整图检测 → 单手/交互手分类 → 对应热图与深度头 → 可见性增强 → 三维关节。",
+      "steps": [
+        {
+          "title": "整图生成手候选框",
+          "description": "ResNet-50 加 Faster R-CNN 式候选网络及 RoI 特征池化，端到端学习位置和局部特征，不预先假定真值手裁剪。"
+        },
+        {
+          "title": "区分左/右单手与交互双手",
+          "description": "检测分类器将前景分为左手、右手、交互双手；交互情形用一个框和共享特征描述两手，其他情形分别估计。"
+        },
+        {
+          "title": "为不同情形配置姿态分支",
+          "description": "单手头预测 21 张二维热图及深度，交互头预测 42 关节；两者均将图像特征与热图结合估计归一化深度。"
+        },
+        {
+          "title": "可见性引导交互热图",
+          "description": "预测 42 个可见性值，对初始热图逐通道加权，再与图像特征一起增强热图，使用可靠关节为遮挡关节补充证据。"
+        },
+        {
+          "title": "组合二维峰值与深度",
+          "description": "取最终热图峰值位置并与预测深度组成骨架，输出检测到的手姿；不使用 MANO 网格解码。"
+        }
+      ],
+      "training": "联合检测、分类、二维热图、深度、可见性损失；额外的热图及三维骨架 GAN 判别器约束交互合理性。二维峰值不可微，因此分设热图判别器。",
+      "inference": "输入任意大小 RGB 后检测并路由姿态分支。GAN 判别器只用于训练；关节在归一化参考系估计，不能直接解释为无条件的相机绝对公制坐标。",
+      "figure_reading": "图 2 黑箭头为推理、绿箭头为监督，区分单手头与交互头；可见性和判别器是不同机制。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Kim_End-to-End_Detection_and_Pose_Estimation_of_Two_Interacting_Hands_ICCV_2021_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Kim_End-to-End_Detection_and_Pose_Estimation_of_Two_Interacting_Hands_ICCV_2021_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Kim_End-to-End_Detection_and_Pose_Estimation_of_Two_Interacting_Hands_ICCV_2021_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Kim_End-to-End_Detection_and_Pose_Estimation_of_Two_Interacting_Hands_ICCV_2021_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/ICCV2021/papers/Kim_End-to-End_Detection_and_Pose_Estimation_of_Two_Interacting_Hands_ICCV_2021_paper.pdf#page=3",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -15679,21 +17055,86 @@
       "method": "从单张彩色图像恢复交互双手的三维姿态与形状，针对相互遮挡和左右手关系建模；将双手恢复作为联合任务而非独立单手回归。",
       "limitations": "联合双手任务需核对左右手身份、相对平移及根对齐协议；不能只用单手对齐误差概括交互恢复。",
       "sources": [
-        "https://openaccess.thecvf.com/content/ICCV2021/html/Zhang_Interacting_Two-Hand_3D_Pose_and_Shape_Reconstruction_From_Single_Color_ICCV_2021_paper.html"
+        "https://openaccess.thecvf.com/content/ICCV2021/html/Zhang_Interacting_Two-Hand_3D_Pose_and_Shape_Reconstruction_From_Single_Color_ICCV_2021_paper.html",
+        "https://openaccess.thecvf.com/content/ICCV2021/papers/Zhang_Interacting_Two-Hand_3D_Pose_and_Shape_Reconstruction_From_Single_Color_ICCV_2021_paper.pdf",
+        "https://openaccess.thecvf.com/content/ICCV2021/papers/Zhang_Interacting_Two-Hand_3D_Pose_and_Shape_Reconstruction_From_Single_Color_ICCV_2021_paper.pdf#page=3",
+        "https://github.com/BaowenZ/Two-Hand-Shape-Pose"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_notes": "已核对CVF正式论文页的标题、年份、会议信息及摘要。问题、方法、输入输出和贡献为摘要级解读；尚未复核正文实验、失败案例与作者局限，不代表全文精读或复现。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verification_notes": "作者所链原仓库是 InterHand2.6M v0 推理实现；README 另链接 v1.0 训练/测试新版。这里方法说明依据 ICCV 2021 论文，未混用新版结果。",
       "problem": "单手方法难应对双手遮挡及更大姿态解空间。",
       "inputs_outputs": "单张彩色图像→交互双手三维姿态与形状。",
       "contribution": "姿态感知注意力提取单手特征，利用双手上下文级联细化。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2021 ICCV open-access paper 的方法相关正文（3, 4, 5）、图号及流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "RGB 多尺度特征/2.5D 热图 → 单手注意力 → 双 MANO 与相对变换初估 → 双手上下文级联精化。",
+      "steps": [
+        {
+          "title": "用关节热图区分两手",
+          "description": "ResNet-50 提取多尺度图像，预测双手每关节 2.5D 热图，聚合为左右 pose-aware 注意力以减少两手外观混淆。"
+        },
+        {
+          "title": "分别提取姿态相关特征",
+          "description": "注意力乘图像通道，经卷积降采样及全局池化生成每手特征；相对变换则读取整体特征以保留双方信息。"
+        },
+        {
+          "title": "初始化两个 MANO 和相对关系",
+          "description": "三个 MLP 分别预测左右姿态/形状，以及左手相对右手的平移与尺度；先各自根对齐，再用相对关系合并。"
+        },
+        {
+          "title": "从当前模型重投影注意力",
+          "description": "由预测 MANO 关节和原 2.5D 定位估计弱透视相机，再渲染二维高斯关节图，更新 pose-aware 特征。"
+        },
+        {
+          "title": "逐级融合双手上下文",
+          "description": "将当前手特征与上一阶段双方 MANO 参数拼接回归更新值；后续级联使用更高分辨率图像特征补充局部细节。"
+        }
+      ],
+      "training": "联合关节、骨长、形状、手间关节偏移、左右形状一致性和参数正则。相对平移/尺度通过关节及偏移间接监督，而非独立直接标签回归。",
+      "inference": "实验训练和测试均按标注框裁剪，并用真值手骨长度恢复尺度；因此文中结果不能等价为完整整图检测与无额外尺度的绝对三维恢复。",
+      "figure_reading": "图 2 显示三路初估与级联，图 3 展开注意力特征提取；高分辨率精化同时读取双方参数，并非两套互不沟通的单手模型。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Zhang_Interacting_Two-Hand_3D_Pose_and_Shape_Reconstruction_From_Single_Color_ICCV_2021_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Zhang_Interacting_Two-Hand_3D_Pose_and_Shape_Reconstruction_From_Single_Color_ICCV_2021_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Zhang_Interacting_Two-Hand_3D_Pose_and_Shape_Reconstruction_From_Single_Color_ICCV_2021_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Zhang_Interacting_Two-Hand_3D_Pose_and_Shape_Reconstruction_From_Single_Color_ICCV_2021_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/ICCV2021/papers/Zhang_Interacting_Two-Hand_3D_Pose_and_Shape_Reconstruction_From_Single_Color_ICCV_2021_paper.pdf#page=3",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
+    },
+    "code": "https://github.com/BaowenZ/Two-Hand-Shape-Pose",
+    "code_provenance": {
+      "url": "https://github.com/BaowenZ/Two-Hand-Shape-Pose",
+      "verified_at": "2026-11-18",
+      "basis": "论文或作者项目页给出的仓库；已核对 README 对应论文标题和公开实现目录，未运行代码。"
     }
   },
   {

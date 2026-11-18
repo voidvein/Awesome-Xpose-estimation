@@ -2,9 +2,9 @@
   "updated_at": "2026-11-18",
   "total": 371,
   "counts": {
-    "complete": 22,
-    "figure_pending": 110,
-    "pending": 239
+    "complete": 25,
+    "figure_pending": 131,
+    "pending": 215
   },
   "completion_standard": "Source-checked module-level pipeline, separate training/inference, figure guide, and a verified local architecture/process figure. Summaries and applicability notes do not count.",
   "entries": [
@@ -507,12 +507,12 @@
       "id": "hand-motion-physics",
       "category": "Hand",
       "title": "Diffusion-based 3D Hand Motion Recovery with Intuitive Physics",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2025/html/Zhang_Diffusion-based_3D_Hand_Motion_Recovery_with_Intuitive_Physics_ICCV_2025_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
     {
       "id": "a2j-transformer-plus",
@@ -529,44 +529,44 @@
       "id": "reach",
       "category": "Hand",
       "title": "REACH: Hand Pose Estimation from Room Corners",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://arxiv.org/abs/2605.22231",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
       "id": "kad-net",
       "category": "Hand",
       "title": "KAD-Net: Kinematics-Aware Decoupled Learning for Robust 3D Hand Pose Estimation from a Single Depth Image",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2609.12559",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
     {
       "id": "hand-visibility",
       "category": "Hand",
       "title": "Hand Visibility Detector: Per-Keypoint Visibility Estimation for Hands",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://arxiv.org/abs/2608.11574",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
       "id": "gesture-aware-hand",
       "category": "Hand",
       "title": "Gesture-Aware Pretraining and Token Fusion for 3D Hand Pose Estimation",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://arxiv.org/abs/2603.17396",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
@@ -870,23 +870,23 @@
       "id": "cascaded-hand-regression",
       "category": "Hand",
       "title": "Cascaded Hand Pose Regression",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2015/html/Sun_Cascaded_Hand_Pose_2015_CVPR_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
     {
       "id": "mano",
       "category": "Hand",
       "title": "Embodied Hands: Modeling and Capturing Hands and Bodies Together",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://mano.is.tue.mpg.de/",
-      "reading_level": "primary_project_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
     {
       "id": "interhand26m",
@@ -914,23 +914,23 @@
       "id": "fphab",
       "category": "Hand",
       "title": "First-Person Hand Action Benchmark With RGB-D Videos and 3D Hand Pose Annotations",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Garcia-Hernando_First-Person_Hand_Action_CVPR_2018_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
     {
       "id": "body2hands",
       "category": "Hand",
       "title": "Body2Hands: Learning To Infer 3D Hands From Conversational Gesture Body Dynamics",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Ng_Body2Hands_Learning_To_Infer_3D_Hands_From_Conversational_Gesture_Body_CVPR_2021_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
     {
       "id": "rtmo",
@@ -2113,166 +2113,166 @@
       "id": "hand-novel-view-synthesis-and-pose-estimation-for-hand-object-interaction-from-sparse-views",
       "category": "Hand",
       "title": "Novel-View Synthesis and Pose Estimation for Hand-Object Interaction from Sparse Views",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Qu_Novel-View_Synthesis_and_Pose_Estimation_for_Hand-Object_Interaction_from_Sparse_ICCV_2023_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
     {
       "id": "hand-diffusion-guided-reconstruction-of-everyday-hand-object-interaction-clips",
       "category": "Hand",
       "title": "Diffusion-Guided Reconstruction of Everyday Hand-Object Interaction Clips",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Ye_Diffusion-Guided_Reconstruction_of_Everyday_Hand-Object_Interaction_Clips_ICCV_2023_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
     {
       "id": "hand-handr2n2-iterative-3d-hand-pose-estimation-using-a-residual-recurrent-neural-network",
       "category": "Hand",
       "title": "HandR2N2: Iterative 3D Hand Pose Estimation Using a Residual Recurrent Neural Network",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Cheng_HandR2N2_Iterative_3D_Hand_Pose_Estimation_Using_a_Residual_Recurrent_ICCV_2023_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
     {
       "id": "hand-hamuco-hand-pose-estimation-via-multiview-collaborative-self-supervised-learning",
       "category": "Hand",
       "title": "HaMuCo: Hand Pose Estimation via Multiview Collaborative Self-Supervised Learning",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Zheng_HaMuCo_Hand_Pose_Estimation_via_Multiview_Collaborative_Self-Supervised_Learning_ICCV_2023_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
     {
       "id": "hand-phrit-parametric-hand-representation-with-implicit-template",
       "category": "Hand",
       "title": "PHRIT: Parametric Hand Representation with Implicit Template",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Huang_PHRIT_Parametric_Hand_Representation_with_Implicit_Template_ICCV_2023_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
     {
       "id": "hand-spectral-graphormer-spectral-graph-based-transformer-for-egocentric-two-hand-reconstruction-using-multi-view-c",
       "category": "Hand",
       "title": "Spectral Graphormer: Spectral Graph-Based Transformer for Egocentric Two-Hand Reconstruction using Multi-View Color Images",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Tse_Spectral_Graphormer_Spectral_Graph-Based_Transformer_for_Egocentric_Two-Hand_Reconstruction_using_ICCV_2023_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
     {
       "id": "hand-reconstructing-interacting-hands-with-interaction-prior-from-monocular-images",
       "category": "Hand",
       "title": "Reconstructing Interacting Hands with Interaction Prior from Monocular Images",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Zuo_Reconstructing_Interacting_Hands_with_Interaction_Prior_from_Monocular_Images_ICCV_2023_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
     {
       "id": "hand-ochid-fi-occlusion-robust-hand-pose-estimation-in-3d-via-rf-vision",
       "category": "Hand",
       "title": "OCHID-Fi: Occlusion-Robust Hand Pose Estimation in 3D via RF-Vision",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Zhang_OCHID-Fi_Occlusion-Robust_Hand_Pose_Estimation_in_3D_via_RF-Vision_ICCV_2023_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
     {
       "id": "hand-dynamic-hyperbolic-attention-network-for-fine-hand-object-reconstruction",
       "category": "Hand",
       "title": "Dynamic Hyperbolic Attention Network for Fine Hand-object Reconstruction",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Leng_Dynamic_Hyperbolic_Attention_Network_for_Fine_Hand-object_Reconstruction_ICCV_2023_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
     {
       "id": "hand-decoupled-iterative-refinement-framework-for-interacting-hands-reconstruction-from-a-single-rgb-image",
       "category": "Hand",
       "title": "Decoupled Iterative Refinement Framework for Interacting Hands Reconstruction from a Single RGB Image",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Ren_Decoupled_Iterative_Refinement_Framework_for_Interacting_Hands_Reconstruction_from_a_ICCV_2023_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
     {
       "id": "hand-renderih-a-large-scale-synthetic-dataset-for-3d-interacting-hand-pose-estimation",
       "category": "Hand",
       "title": "RenderIH: A Large-Scale Synthetic Dataset for 3D Interacting Hand Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Li_RenderIH_A_Large-Scale_Synthetic_Dataset_for_3D_Interacting_Hand_Pose_ICCV_2023_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
     {
       "id": "hand-collaborative-learning-for-hand-and-object-reconstruction-with-attention-guided-graph-convolution",
       "category": "Hand",
       "title": "Collaborative Learning for Hand and Object Reconstruction With Attention-Guided Graph Convolution",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Tse_Collaborative_Learning_for_Hand_and_Object_Reconstruction_With_Attention-Guided_Graph_CVPR_2022_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
     {
       "id": "hand-self-supervised-transfer-learning-for-hand-mesh-recovery-from-binocular-images",
       "category": "Hand",
       "title": "Self-Supervised Transfer Learning for Hand Mesh Recovery From Binocular Images",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Chen_Self-Supervised_Transfer_Learning_for_Hand_Mesh_Recovery_From_Binocular_Images_ICCV_2021_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
     {
       "id": "hand-end-to-end-detection-and-pose-estimation-of-two-interacting-hands",
       "category": "Hand",
       "title": "End-to-End Detection and Pose Estimation of Two Interacting Hands",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Kim_End-to-End_Detection_and_Pose_Estimation_of_Two_Interacting_Hands_ICCV_2021_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
     {
       "id": "hand-interacting-two-hand-3d-pose-and-shape-reconstruction-from-single-color-image",
       "category": "Hand",
       "title": "Interacting Two-Hand 3D Pose and Shape Reconstruction From Single Color Image",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Zhang_Interacting_Two-Hand_3D_Pose_and_Shape_Reconstruction_From_Single_Color_ICCV_2021_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     },
     {
       "id": "hand-weakly-supervised-domain-adaptation-via-gan-and-mesh-model-for-estimating-3d-hand-poses-interacting-objects",

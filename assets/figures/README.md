@@ -323,3 +323,43 @@ Asiri Gawesha Lindamulage, Sanka Mohottala, Dharshana Kasthurirathna, Nuwan Koda
 - License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 - License evidence: https://arxiv.org/abs/2611.07828v1
 - SHA-256: `640a2b3856def9811c9fe555087d9fdf2dd109afed6a710a0ea2a2891bcf6532`
+
+### assets/figures/reach-architecture.png
+
+Shu Nakamura, Ryo Kawahara, Genki Kinoshita, Ryosuke Hirai, Yasutomo Kawanishi, Shohei Nobuhara, Ko Nishino. REACH: Hand Pose Estimation from Room Corners, Figure 4, arXiv:2605.22231v1. CC BY-NC-SA 4.0.
+
+- Original source: https://arxiv.org/html/2605.22231v1#S4.F4
+- Unmodified original file: https://arxiv.org/html/2605.22231v1/oneframe.png
+- License: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+- License evidence: https://arxiv.org/abs/2605.22231v1
+- SHA-256: `ab352cadc7f2978ae251f57b49da9d6079802292911e5ab81ec7e66709c62144`
+
+### assets/figures/hand-visibility-architecture.png
+
+Ryosei Hara, Masashi Hatano, Rintaro Yanagi, Atsushi Hashimoto, Takuma Yagi, Mariko Isogawa. Hand Visibility Detector: Per-Keypoint Visibility Estimation for Hands, Figure 2, arXiv:2608.11574v1. CC BY-SA 4.0.
+
+- Original source: https://arxiv.org/html/2608.11574v1#S3.F2
+- Unmodified original file: https://arxiv.org/html/2608.11574v1/method.png
+- License: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+- License evidence: https://arxiv.org/abs/2608.11574v1
+- SHA-256: `feab9b571b0cf0fcad819f017e9125465bee9d87089c4f11f21f80aa6e4e3fe4`
+
+### assets/figures/gesture-aware-hand-architecture.png
+
+Rui Hong, Jana Košecká. Gesture-Aware Pretraining and Token Fusion for 3D Hand Pose Estimation, Figure 3, arXiv:2603.17396v3. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2603.17396v3#S3.F3
+- Unmodified original file: https://arxiv.org/html/2603.17396v3/figures/one-hand-architecture.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2603.17396v3
+- SHA-256: `2e25fdf8faa1068a961cbca1f866fe470d5e11c5ab5cbdb5dca02b546c670a8b`
+
+### assets/figures/gesture-aware-hand-pretraining.png
+
+Rui Hong, Jana Košecká. Gesture-Aware Pretraining and Token Fusion for 3D Hand Pose Estimation, Figure 1, arXiv:2603.17396v3. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2603.17396v3#S3.F1
+- Unmodified original file: https://arxiv.org/html/2603.17396v3/figures/stage1_gesture_pretrain.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2603.17396v3
+- SHA-256: `746d513abbc4bffd6b4ecd25b08069ffcda778942db2b6a90e9150e8ac1de103`

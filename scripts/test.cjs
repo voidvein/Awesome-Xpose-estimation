@@ -121,13 +121,13 @@ const reach=papers.find(p=>p.id==='reach');
 assert.ok(reach,'REACH stays in the catalog');
 assert.equal(reach.venue,'FG');assert.equal(reach.year,2026);assert.equal(reach.status,'Published');assert.equal(ccfTier(reach),'C');
 assert.equal(reach.url,'https://arxiv.org/abs/2605.22231');assert.equal(reach.preprint_url,reach.url);
-assert.equal(reach.analysis.evidence_level,'primary_abstract');assert.equal(reach.analysis.limitations_kind,'editorial_scope');assert.ok(reach.analysis.limitations.includes('多视角'));
+assert.equal(reach.analysis.evidence_level,'primary_abstract_and_targeted_fulltext');assert.equal(reach.analysis.limitations_kind,'editorial_scope');assert.ok(reach.analysis.limitations.includes('多视角'));
 assert.ok(reach.primary_sources.includes('https://vision.ist.i.kyoto-u.ac.jp/research/reach/'));
 assert.ok(reach.primary_sources.includes('https://vision.ist.i.kyoto-u.ac.jp/publication/'));
 assert.ok(!reach.summary.includes('正式接收状态未核实'));
 assert.ok(filterPapers(papers,{status:'Published',ccf:'C',venue:'FG'}).some(p=>p.id==='reach'));
 assert.ok(!filterPapers(papers,{status:'Preprint'}).some(p=>p.id==='reach'));
-console.log('PASS: REACH FG 2026 / CCF C correction, preserved arXiv and abstract-only evidence, author sources and publication filters.');
+console.log('PASS: REACH FG 2026 / CCF C correction, preserved arXiv and targeted method evidence, author sources and publication filters.');
 
 // Pipeline depth is optional; only sourced, structured notes are rendered.
 const {paperPipeline,paperFigures}=require(path.join(__dirname,root,'app.js'));
