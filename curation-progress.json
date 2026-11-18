@@ -2,9 +2,9 @@
   "updated_at": "2026-11-18",
   "total": 371,
   "counts": {
-    "complete": 30,
-    "figure_pending": 174,
-    "pending": 167
+    "complete": 31,
+    "figure_pending": 197,
+    "pending": 143
   },
   "completion_standard": "Source-checked module-level pipeline, separate training/inference, figure guide, and a verified local architecture/process figure. Summaries and applicability notes do not count.",
   "entries": [
@@ -859,12 +859,12 @@
       "id": "depth-hand-survey",
       "category": "Hand",
       "title": "Depth-Based Hand Pose Estimation: Data, Methods, and Challenges",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2015/html/Supancic_Depth-Based_Hand_Pose_ICCV_2015_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接原文（PDF 第 5 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 4 解释体素 Hamming 距离如何转为二维投影距离；同页图 5 比较二维窗口与三维体积。两图是基线原理示意，整篇的核心还包括数据与评测协议。"
     },
     {
       "id": "cascaded-hand-regression",
@@ -2278,253 +2278,253 @@
       "id": "hand-weakly-supervised-domain-adaptation-via-gan-and-mesh-model-for-estimating-3d-hand-poses-interacting-objects",
       "category": "Hand",
       "title": "Weakly-Supervised Domain Adaptation via GAN and Mesh Model for Estimating 3D Hand Poses Interacting Objects",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2020/html/Baek_Weakly-Supervised_Domain_Adaptation_via_GAN_and_Mesh_Model_for_Estimating_CVPR_2020_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接原文（PDF 第 3 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 的绿色箭头是数据处理，蓝色箭头是监督；不要把训练标签当部署输入，也不要漏掉 §3.5 延续至第 6 页的测试优化。"
     },
     {
       "id": "hand-hope-net-a-graph-based-model-for-hand-object-pose-estimation",
       "category": "Hand",
       "title": "HOPE-Net: A Graph-Based Model for Hand-Object Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2020/html/Doosti_HOPE-Net_A_Graph-Based_Model_for_Hand-Object_Pose_Estimation_CVPR_2020_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接原文（PDF 第 3 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 是整图到二维再到三维的总体结构，第 4 页图 3 展开图 U-Net；池化发生在节点维，不是在原始 RGB 图像上裁去手指。"
     },
     {
       "id": "hand-3d-hand-pose-estimation-with-disentangled-cross-modal-latent-space",
       "category": "Hand",
       "title": "3D Hand Pose Estimation with Disentangled Cross-Modal Latent Space",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_WACV_2020/html/Gu_3D_Hand_Pose_Estimation_with_Disentangled_Cross-Modal_Latent_Space_WACV_2020_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接原文（PDF 第 3 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 中两路 VAE 负责模态重建，姿态对齐与上下文翻译是两种不同连接；最终三维预测同时使用共享因素和翻译后的特有因素。"
     },
     {
       "id": "hand-dggan-depth-image-guided-generative-adversarial-networks-for-disentangling-rgb-and-depth-images-in-3d-hand-pos",
       "category": "Hand",
       "title": "DGGAN: Depth-image Guided Generative Adversarial Networks for Disentangling RGB and Depth Images in 3D Hand Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_WACV_2020/html/Chen_DGGAN_Depth-image_Guided_Generative_Adversarial_Networks_forDisentangling_RGB_and_Depth_WACV_2020_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接原文（PDF 第 3 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 看两模块关系，第 4 页图 3 是 GAN 深度生成器，第 5 页图 4 是姿态及深度正则器；判别器与重建误差表示训练监督，不是额外测量。"
     },
     {
       "id": "hand-rotation-invariant-mixed-graphical-model-network-for-2d-hand-pose-estimation",
       "category": "Hand",
       "title": "Rotation-invariant Mixed Graphical Model Network for 2D Hand Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_WACV_2020/html/Kong_Rotation-invariant_Mixed_Graphical_Model_Network_for_2D_Hand_Pose_Estimation_WACV_2020_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接原文（PDF 第 3 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 的两条并行支路分别负责热图/图模型和混合权重，最后才逆旋转；第 5 页图 4 说明树拓扑，不是另一套骨干网络。"
     },
     {
       "id": "hand-disentangling-latent-hands-for-image-synthesis-and-pose-estimation",
       "category": "Hand",
       "title": "Disentangling Latent Hands for Image Synthesis and Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2019/html/Yang_Disentangling_Latent_Hands_for_Image_Synthesis_and_Pose_Estimation_CVPR_2019_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接原文（PDF 第 5 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 3 左/中对应可控合成，右对应手姿推断；第 3 页图 2 是三种概率模型，区分观测节点、潜节点及编码/生成方向后再对照网络阅读。"
     },
     {
       "id": "hand-h-o-unified-egocentric-recognition-of-3d-hand-object-poses-and-interactions",
       "category": "Hand",
       "title": "H+O: Unified Egocentric Recognition of 3D Hand-Object Poses and Interactions",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2019/html/Tekin_HO_Unified_Egocentric_Recognition_of_3D_Hand-Object_Poses_and_Interactions_CVPR_2019_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接原文（PDF 第 4 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 的三维网格是输出参数化，输入并非深度体素；高置信姿态先经关系 MLP，再送入 interaction RNN。"
     },
     {
       "id": "hand-self-supervised-3d-hand-pose-estimation-through-training-by-fitting",
       "category": "Hand",
       "title": "Self-Supervised 3D Hand Pose Estimation Through Training by Fitting",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2019/html/Wan_Self-Supervised_3D_Hand_Pose_Estimation_Through_Training_by_Fitting_CVPR_2019_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接原文（PDF 第 1 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 对照合成初始化和真实数据微调，PDF 第 3 页图 2 展示 41 球模型及渲染结果；training by fitting 不能误写成部署时逐帧拟合。"
     },
     {
       "id": "hand-crossinfonet-multi-task-information-sharing-based-hand-pose-estimation",
       "category": "Hand",
       "title": "CrossInfoNet: Multi-Task Information Sharing Based Hand Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2019/html/Du_CrossInfoNet_Multi-Task_Information_Sharing_Based_Hand_Pose_Estimation_CVPR_2019_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接原文（PDF 第 3 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 是整体结构，第 5 页图 5 和算法 1 解释减法、交叉拼接和回归；“attention mask”是特征残差的比喻，不是额外人工分割标签。"
     },
     {
       "id": "hand-pushing-the-envelope-for-rgb-based-dense-3d-hand-pose-estimation-via-neural-rendering",
       "category": "Hand",
       "title": "Pushing the Envelope for RGB-Based Dense 3D Hand Pose Estimation via Neural Rendering",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2019/html/Baek_Pushing_the_Envelope_for_RGB-Based_Dense_3D_Hand_Pose_Estimation_CVPR_2019_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接原文（PDF 第 3 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 中虚线的 testing refinement 是推理实际步骤；训练中的真实轮廓监督与测试中的渲染掩码自一致性应分开读，不应把所有监督箭头作为输入。"
     },
     {
       "id": "hand-handmap-robust-hand-pose-estimation-via-intermediate-dense-guidance-map-supervision",
       "category": "Hand",
       "title": "HandMap: Robust Hand Pose Estimation via Intermediate Dense Guidance Map Supervision",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ECCV_2018/html/Xiaokun_Wu_HandMap_Robust_Hand_ECCV_2018_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接原文（PDF 第 2 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 表示主回归路径和中间监督侧支路，第 7–8 页图 2、3 比较引导图；手部距离场用于中间特征监督，不是最后通过投票解码全部点。"
     },
     {
       "id": "hand-hbe-hand-branch-ensemble-network-for-real-time-3d-hand-pose-estimation",
       "category": "Hand",
       "title": "HBE: Hand Branch Ensemble Network for Real-time 3D Hand Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ECCV_2018/html/Yidan_Zhou_HBE_Hand_Branch_ECCV_2018_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接原文（PDF 第 3 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 上、中、下分支分别对应拇指、食指、其余三指，右侧还包含融合和 PCA 瓶颈；第 6 页图 2 是各分支内部层结构。"
     },
     {
       "id": "hand-point-to-point-regression-pointnet-for-3d-hand-pose-estimation",
       "category": "Hand",
       "title": "Point-to-Point Regression PointNet for 3D Hand Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ECCV_2018/html/Liuhao_Ge_Point-to-Point_Regression_PointNet_ECCV_2018_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接原文（PDF 第 3 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 是点云到关节的全流程，第 7 页图 3 和第 8 页图 4 展开单模块及两模块连接；第 9 页图 5 是投票分散时的回退支路。"
     },
     {
       "id": "hand-weakly-supervised-3d-hand-pose-estimation-from-monocular-rgb-images",
       "category": "Hand",
       "title": "Weakly-supervised 3D Hand Pose Estimation from Monocular RGB Images",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ECCV_2018/html/Yujun_Cai_Weakly-supervised_3D_Hand_ECCV_2018_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接原文（PDF 第 6 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 3 虚线框内是测试路径，外侧 depth regularizer 属于训练；第 8 页图 4 展开它的结构，不应将其当成必须输入深度的双模态部署网络。"
     },
     {
       "id": "hand-occlusion-aware-hand-pose-estimation-using-hierarchical-mixture-density-network",
       "category": "Hand",
       "title": "Occlusion-aware Hand Pose Estimation Using Hierarchical Mixture Density Network",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ECCV_2018/html/Qi_Ye_Occlusion-aware_Hand_Pose_ECCV_2018_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接原文（PDF 第 7 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 5 的三条输出分别是可见性、单高斯与多高斯；球模型图 4 用于产生训练可见性，不是每次预测都要求先完成球体拟合。"
     },
     {
       "id": "hand-crossing-nets-combining-gans-and-vaes-with-a-shared-latent-space-for-hand-pose-estimation",
       "category": "Hand",
       "title": "Crossing Nets: Combining GANs and VAEs With a Shared Latent Space for Hand Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2017/html/Wan_Crossing_Nets_Combining_CVPR_2017_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接原文（PDF 第 4 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 的彩色路线分别表示生成、潜变量估计和训练任务；GAN 的判别特征被复用于后验学习，不能简单删掉整个判别网络后声称仅用生成器估计姿态。"
     },
     {
       "id": "hand-3d-convolutional-neural-networks-for-efficient-and-robust-hand-pose-estimation-from-single-depth-images",
       "category": "Hand",
       "title": "3D Convolutional Neural Networks for Efficient and Robust Hand Pose Estimation From Single Depth Images",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2017/html/Ge_3D_Convolutional_Neural_CVPR_2017_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接原文（PDF 第 4 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 3 左侧给出三层三维卷积和全连接，右侧显示特征体积；第 3 页图 2 对比准确 TSDF 与投影近似，第 5 页图 4 是训练增强。"
     },
     {
       "id": "hand-robust-3d-hand-pose-estimation-in-single-depth-images-from-single-view-cnn-to-multi-view-cnns",
       "category": "Hand",
       "title": "Robust 3D Hand Pose Estimation in Single Depth Images: From Single-View CNN to Multi-View CNNs",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2016/html/Ge_Robust_3D_Hand_CVPR_2016_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接原文（PDF 第 2 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 展示多视图融合总体关系，第 3 页图 3 解释三个正交投影，第 4 页图 4 展开单视图 CNN；“multi-view”在此指虚拟投影视图。"
     },
     {
       "id": "hand-deephand-robust-hand-pose-estimation-by-completing-a-matrix-imputed-with-deep-features",
       "category": "Hand",
       "title": "DeepHand: Robust Hand Pose Estimation by Completing a Matrix Imputed With Deep Features",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2016/html/Sinha_DeepHand_Robust_Hand_CVPR_2016_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接原文（PDF 第 3 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 的 MC 是矩阵补全、PQnn 是近邻检索；阶段 1 回归整体方向，阶段 2 分指细化。文中低秩补全不是对缺失深度像素作图像修复。"
     },
     {
       "id": "hand-3d-hand-pose-estimation-using-randomized-decision-forest-with-segmentation-index-points",
       "category": "Hand",
       "title": "3D Hand Pose Estimation Using Randomized Decision Forest With Segmentation Index Points",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2015/html/Li_3D_Hand_Pose_ICCV_2015_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接原文（PDF 第 1 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 看逐步定位关节的过程，第 3 页图 2 对比固定拓扑与 SIP，第 4 页图 3 区分只选一路的 split 和同时展开两路的 division 节点。"
     },
     {
       "id": "hand-evolutionary-quasi-random-search-for-hand-articulations-tracking",
       "category": "Hand",
       "title": "Evolutionary Quasi-random Search for Hand Articulations Tracking",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2014/html/Oikonomidis_Evolutionary_Quasi-random_Search_2014_CVPR_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "原文以算法描述搜索流程，未提供网络结构图。仅链接原文（PDF 第 4 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。PDF 第 4 页算法 1 是完整进化搜索循环，图 2（第 3 页）仅展示手模型，图 3（第 5 页）展示收缩系数。论文没有神经网络结构图，保留真实算法页链接。"
     },
     {
       "id": "hand-hoisdf-constraining-3d-hand-object-pose-estimation-with-global-signed-distance-fields",
       "category": "Hand",
       "title": "HOISDF: Constraining 3D Hand-Object Pose Estimation with Global Signed Distance Fields",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Qi_HOISDF_Constraining_3D_Hand-Object_Pose_Estimation_with_Global_Signed_Distance_CVPR_2024_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接原文（PDF 第 3 页）；本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 左侧是双 SDF 学习，右侧是场引导姿态回归；注意自身距离增强和跨场交互是两种用途，且训练真值采样与测试预测场采样不同。"
     },
     {
       "id": "hand-a-simple-baseline-for-efficient-hand-mesh-reconstruction",
       "category": "Hand",
       "title": "A Simple Baseline for Efficient Hand Mesh Reconstruction",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Zhou_A_Simple_Baseline_for_Efficient_Hand_Mesh_Reconstruction_CVPR_2024_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {

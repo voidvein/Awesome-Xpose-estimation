@@ -436,3 +436,25 @@ Zhengxiong Luo, Zhicheng Wang, Yan Huang, Liang Wang, Tieniu Tan, Erjin Zhou. Re
 - License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 - License evidence: https://arxiv.org/abs/2012.15175v1
 - SHA-256: `317f1b2f435c0f821dc835cf3a29f46ea2bdb24ea1d2cfd6b3b9b52a1186f47d`
+
+## SimpleHand original figures — batch 10
+
+### assets/figures/simplehand-architecture.png
+
+Zhishan Zhou, Shihao Zhou, Zhi Lv, Minqiang Zou, Yao Tang, Jiajun Liang. A Simple Baseline for Efficient Hand Mesh Reconstruction, Figure 4, arXiv:2403.01813v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2403.01813v1#S3.F4
+- Unmodified original file: https://arxiv.org/html/2403.01813v1/overview.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2403.01813v1
+- SHA-256: `bf2869b7aee1da2b99b4e9961d2a22286608fc05e8f70154cc59fadaeb5a6770`
+
+### assets/figures/simplehand-decoder.png
+
+Zhishan Zhou, Shihao Zhou, Zhi Lv, Minqiang Zou, Yao Tang, Jiajun Liang. A Simple Baseline for Efficient Hand Mesh Reconstruction, Figure 3, arXiv:2403.01813v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2403.01813v1#S3.F3
+- Unmodified original file: https://arxiv.org/html/2403.01813v1/encoder_layer.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2403.01813v1
+- SHA-256: `bef247c9eb4f2da6bb54857a53b4238f85b9feaaf5f15d178a7958a8ff387ff6`

@@ -1,0 +1,534 @@
+{
+  "review_date": "2026-11-18",
+  "expanded_records": 24,
+  "new_code_links": [
+    "hope",
+    "crossinfo",
+    "p2p",
+    "simple"
+  ],
+  "records": [
+    {
+      "id": "depth-hand-survey",
+      "version": "Official 2015 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        5,
+        "Figure 4"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_iccv_2015/papers/Supancic_Depth-Based_Hand_Pose_ICCV_2015_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "hand-weakly-supervised-domain-adaptation-via-gan-and-mesh-model-for-estimating-3d-hand-poses-interacting-objects",
+      "version": "Official 2020 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_CVPR_2020/papers/Baek_Weakly-Supervised_Domain_Adaptation_via_GAN_and_Mesh_Model_for_Estimating_CVPR_2020_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "implementation_check": {
+        "url": "https://github.com/bsrvision/weak_da_hands",
+        "status": "placeholder_only_no_code_badge",
+        "verified_at": "2026-11-18"
+      }
+    },
+    {
+      "id": "hand-hope-net-a-graph-based-model-for-hand-object-pose-estimation",
+      "version": "Official 2020 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_CVPR_2020/papers/Doosti_HOPE-Net_A_Graph-Based_Model_for_Hand-Object_Pose_Estimation_CVPR_2020_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "implementation_check": {
+        "url": "https://github.com/bardiadoosti/HOPE",
+        "verified_at": "2026-11-18",
+        "basis": "作者对应论文 README 已核对，公开包含 Graph.py、HOPE.py、models/ 及训练/测试入口；README 的预训练说明主要展示 GraphUNet，不据此承诺全流程模型已验证。 本轮未运行实现。"
+      }
+    },
+    {
+      "id": "hand-3d-hand-pose-estimation-with-disentangled-cross-modal-latent-space",
+      "version": "Official 2020 WACV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_WACV_2020/papers/Gu_3D_Hand_Pose_Estimation_with_Disentangled_Cross-Modal_Latent_Space_WACV_2020_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "hand-dggan-depth-image-guided-generative-adversarial-networks-for-disentangling-rgb-and-depth-images-in-3d-hand-pos",
+      "version": "Official 2020 WACV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_WACV_2020/papers/Chen_DGGAN_Depth-image_Guided_Generative_Adversarial_Networks_forDisentangling_RGB_and_Depth_WACV_2020_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "hand-rotation-invariant-mixed-graphical-model-network-for-2d-hand-pose-estimation",
+      "version": "Official 2020 WACV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_WACV_2020/papers/Kong_Rotation-invariant_Mixed_Graphical_Model_Network_for_2D_Hand_Pose_Estimation_WACV_2020_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "hand-h-o-unified-egocentric-recognition-of-3d-hand-object-poses-and-interactions",
+      "version": "Official 2019 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Tekin_HO_Unified_Egocentric_Recognition_of_3D_Hand-Object_Poses_and_Interactions_CVPR_2019_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "hand-self-supervised-3d-hand-pose-estimation-through-training-by-fitting",
+      "version": "Official 2019 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        1,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Wan_Self-Supervised_3D_Hand_Pose_Estimation_Through_Training_by_Fitting_CVPR_2019_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "hand-crossinfonet-multi-task-information-sharing-based-hand-pose-estimation",
+      "version": "Official 2019 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Du_CrossInfoNet_Multi-Task_Information_Sharing_Based_Hand_Pose_Estimation_CVPR_2019_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "implementation_check": {
+        "url": "https://github.com/dumyy/handpose",
+        "verified_at": "2026-11-18",
+        "basis": "原文给出作者仓库；已核对 README 的对应标题、network/NYU 和 MSRA 训练/测试入口与代码目录。 本轮未运行实现。"
+      }
+    },
+    {
+      "id": "hand-pushing-the-envelope-for-rgb-based-dense-3d-hand-pose-estimation-via-neural-rendering",
+      "version": "Official 2019 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Baek_Pushing_the_Envelope_for_RGB-Based_Dense_3D_Hand_Pose_Estimation_CVPR_2019_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "hand-handmap-robust-hand-pose-estimation-via-intermediate-dense-guidance-map-supervision",
+      "version": "Official 2018 ECCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "figure_anchor": [
+        2,
+        "Fig. 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_ECCV_2018/papers/Xiaokun_Wu_HandMap_Robust_Hand_ECCV_2018_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "hand-hbe-hand-branch-ensemble-network-for-real-time-3d-hand-pose-estimation",
+      "version": "Official 2018 ECCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        5,
+        6,
+        7
+      ],
+      "figure_anchor": [
+        3,
+        "Fig. 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_ECCV_2018/papers/Yidan_Zhou_HBE_Hand_Branch_ECCV_2018_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "hand-point-to-point-regression-pointnet-for-3d-hand-pose-estimation",
+      "version": "Official 2018 ECCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "figure_anchor": [
+        3,
+        "Fig. 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_ECCV_2018/papers/Liuhao_Ge_Point-to-Point_Regression_PointNet_ECCV_2018_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "implementation_check": {
+        "url": "https://github.com/ataata107/Point-to-Point-Regression-Hand-Pose",
+        "verified_at": "2026-11-18",
+        "basis": "第三方实现；README 指向本论文，已阅读 train_eval/network_point.py 中两阶段层级 PointNet 与逐点输出，并核对训练入口。未确认包含原文全部回退/PCA 后处理，不作为作者正式发布或数值复现。 本轮未运行实现。"
+      }
+    },
+    {
+      "id": "hand-weakly-supervised-3d-hand-pose-estimation-from-monocular-rgb-images",
+      "version": "Official 2018 ECCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "figure_anchor": [
+        6,
+        "Fig. 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_ECCV_2018/papers/Yujun_Cai_Weakly-supervised_3D_Hand_ECCV_2018_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "hand-occlusion-aware-hand-pose-estimation-using-hierarchical-mixture-density-network",
+      "version": "Official 2018 ECCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "figure_anchor": [
+        7,
+        "Fig. 5"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_ECCV_2018/papers/Qi_Ye_Occlusion-aware_Hand_Pose_ECCV_2018_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "mixture",
+        "version": "1711.10872v2",
+        "url": "https://arxiv.org/abs/1711.10872v2",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Ye, Qi",
+          "Kim, Tae-Kyun"
+        ]
+      }
+    },
+    {
+      "id": "hand-crossing-nets-combining-gans-and-vaes-with-a-shared-latent-space-for-hand-pose-estimation",
+      "version": "Official 2017 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2017/papers/Wan_Crossing_Nets_Combining_CVPR_2017_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "crossing",
+        "version": "1702.03431v2",
+        "url": "https://arxiv.org/abs/1702.03431v2",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Wan, Chengde",
+          "Probst, Thomas",
+          "Van Gool, Luc",
+          "Yao, Angela"
+        ]
+      }
+    },
+    {
+      "id": "hand-robust-3d-hand-pose-estimation-in-single-depth-images-from-single-view-cnn-to-multi-view-cnns",
+      "version": "Official 2016 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        2,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2016/papers/Ge_Robust_3D_Hand_CVPR_2016_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "hand-3d-hand-pose-estimation-using-randomized-decision-forest-with-segmentation-index-points",
+      "version": "Official 2015 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        1,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_iccv_2015/papers/Li_3D_Hand_Pose_ICCV_2015_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "hand-deephand-robust-hand-pose-estimation-by-completing-a-matrix-imputed-with-deep-features",
+      "version": "Official 2016 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2016/papers/Sinha_DeepHand_Robust_Hand_CVPR_2016_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "hand-disentangling-latent-hands-for-image-synthesis-and-pose-estimation",
+      "version": "Official 2019 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        5,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Yang_Disentangling_Latent_Hands_for_Image_Synthesis_and_Pose_Estimation_CVPR_2019_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "latent",
+        "version": "1812.01002v1",
+        "url": "https://arxiv.org/abs/1812.01002v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Yang, Linlin",
+          "Yao, Angela"
+        ]
+      }
+    },
+    {
+      "id": "hand-3d-convolutional-neural-networks-for-efficient-and-robust-hand-pose-estimation-from-single-depth-images",
+      "version": "Official 2017 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2017/papers/Ge_3D_Convolutional_Neural_CVPR_2017_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "hand-evolutionary-quasi-random-search-for-hand-articulations-tracking",
+      "version": "Official 2014 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Algorithm 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Oikonomidis_Evolutionary_Quasi-random_Search_2014_CVPR_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "hand-hoisdf-constraining-3d-hand-object-pose-estimation-with-global-signed-distance-fields",
+      "version": "Official 2024 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2024/papers/Qi_HOISDF_Constraining_3D_Hand-Object_Pose_Estimation_with_Global_Signed_Distance_CVPR_2024_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "hoisdf",
+        "version": "2402.17062v1",
+        "url": "https://arxiv.org/abs/2402.17062v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Qi, Haozhe",
+          "Zhao, Chen",
+          "Salzmann, Mathieu",
+          "Mathis, Alexander"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/amathislab/HOISDF",
+        "verified_at": "2026-11-18",
+        "basis": "论文直接给出的官方实现；已核对 README 标题、main/ 与 common/ 目录和数据/模型准备及评估说明。 本轮未运行实现。"
+      }
+    },
+    {
+      "id": "hand-a-simple-baseline-for-efficient-hand-mesh-reconstruction",
+      "version": "Official 2024 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        5,
+        "Figure 4"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2024/papers/Zhou_A_Simple_Baseline_for_Efficient_Hand_Mesh_Reconstruction_CVPR_2024_paper.pdf",
+      "figure_reuse": "verified_local_cc_by_4",
+      "arxiv_license_check": {
+        "alias": "simple",
+        "version": "2403.01813v1",
+        "url": "https://arxiv.org/abs/2403.01813v1",
+        "license_url": "http://creativecommons.org/licenses/by/4.0/",
+        "authors": [
+          "Zhou, Zhishan",
+          "zhou, Shihao.",
+          "Lv, Zhi",
+          "Zou, Minqiang",
+          "Tang, Yao",
+          "Liang, Jiajun"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/patienceFromZhou/simpleHand",
+        "verified_at": "2026-11-18",
+        "basis": "作者对应论文 README、hand_net.py、models/、train.py 和评估入口已核对；当前 README 示例使用 epoch_200，原文训练为 100 epochs，本页以指定论文正文为准。 本轮未运行实现。"
+      },
+      "original_figure_version": "2403.01813v1",
+      "original_figure_sources": [
+        "https://arxiv.org/html/2403.01813v1#S3.F4",
+        "https://arxiv.org/html/2403.01813v1#S3.F3"
+      ]
+    }
+  ]
+}
