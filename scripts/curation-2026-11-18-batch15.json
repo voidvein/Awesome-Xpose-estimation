@@ -1,0 +1,661 @@
+{
+  "reviewed_at": "2026-11-18",
+  "updated_pipelines": 27,
+  "original_figures": 3,
+  "new_code_badges": [
+    "head-3fabrec-fast-few-shot-face-alignment-by-reconstruction-2020",
+    "head-a-vector-based-representation-to-enhance-head-pose-estimation-2021",
+    "head-teacher-supervises-students-how-to-learn-from-partially-labeled-images-for-facial-landmark-detection-2019",
+    "head-3d-aware-facial-landmark-detection-via-multi-view-consistent-training-on-synthetic-data-2023",
+    "head-robust-facial-landmark-detection-via-a-fully-convolutional-local-global-context-network-2018",
+    "head-supervision-by-registration-an-unsupervised-approach-to-improve-the-precision-of-facial-landmark-detector-2018",
+    "head-deep-head-pose-estimation-using-synthetic-images-and-partial-adversarial-domain-adaption-for-continuous-l-2019"
+  ],
+  "entries": [
+    {
+      "id": "head-3fabrec-fast-few-shot-face-alignment-by-reconstruction-2020",
+      "version": "arXiv:1911.10448v1",
+      "format": "arxiv_html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S4.SS5"
+      ],
+      "figure_anchor": [
+        "S2.F2",
+        "Figure 2"
+      ],
+      "source_url": "https://arxiv.org/html/1911.10448v1",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "1911.10448v1",
+        "url": "https://arxiv.org/abs/1911.10448v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Browatzki, Bjoern",
+          "Wallraven, Christian"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/browatbn2/3FabRec",
+        "verified_at": "2026-11-18",
+        "basis": "论文指向的作者 PyTorch 实现，包含无标注重建与地标训练代码。"
+      }
+    },
+    {
+      "id": "head-a-vector-based-representation-to-enhance-head-pose-estimation-2021",
+      "version": "arXiv:2010.07184v1",
+      "format": "arxiv_html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4",
+        "S3.SS5"
+      ],
+      "figure_anchor": [
+        "S3.F3",
+        "Figure 3"
+      ],
+      "source_url": "https://arxiv.org/html/2010.07184v1",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2010.07184v1",
+        "url": "https://arxiv.org/abs/2010.07184v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Cao, Zhiwen",
+          "Chu, Zongcheng",
+          "Liu, Dongfang",
+          "Chen, Yingjie"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/anArkitek/TriNet_WACV2021",
+        "verified_at": "2026-11-18",
+        "basis": "作者发布的 TriNet WACV 2021 仓库，README 对应论文及推理代码。"
+      }
+    },
+    {
+      "id": "head-disentangling-3d-pose-in-a-dendritic-cnn-for-unconstrained-2d-face-alignment-2018",
+      "version": "arXiv:1802.06713v3",
+      "format": "arxiv_html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4.SS1"
+      ],
+      "figure_anchor": [
+        "S1.F2",
+        "Figure 2"
+      ],
+      "source_url": "https://arxiv.org/html/1802.06713v3",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "1802.06713v3",
+        "url": "https://arxiv.org/abs/1802.06713v3",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Kumar, Amit",
+          "Chellappa, Rama"
+        ]
+      }
+    },
+    {
+      "id": "head-style-aggregated-network-for-facial-landmark-detection-2018",
+      "version": "arXiv:1803.04108v4",
+      "format": "arxiv_html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S4.SS2"
+      ],
+      "figure_anchor": [
+        "S2.F3",
+        "Figure 3"
+      ],
+      "source_url": "https://arxiv.org/html/1803.04108v4",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "1803.04108v4",
+        "url": "https://arxiv.org/abs/1803.04108v4",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Dong, Xuanyi",
+          "Yan, Yan",
+          "Ouyang, Wanli",
+          "Yang, Yi"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/D-X-Y/landmark-detection/tree/master/SAN",
+        "verified_at": "2026-11-18",
+        "basis": "作者 landmark-detection 仓库的 SAN 目录含论文对应的训练、评估和模型接口。"
+      }
+    },
+    {
+      "id": "dad-3dheads",
+      "version": "arXiv:2204.03688v1",
+      "format": "arxiv_html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S4.SS1",
+        "S4.SS2",
+        "S4.SS3"
+      ],
+      "figure_anchor": [
+        "S4.F6",
+        "Figure 6"
+      ],
+      "source_url": "https://arxiv.org/html/2204.03688v1",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2204.03688v1",
+        "title": "DAD-3DHeads: A Large-scale Dense, Accurate and Diverse Dataset for 3D Head Alignment from a Single Image",
+        "url": "https://arxiv.org/abs/2204.03688v1",
+        "license_url": "http://creativecommons.org/licenses/by/4.0/",
+        "authors": [
+          "Martyniuk, Tetiana",
+          "Kupyn, Orest",
+          "Kurliak, Yana",
+          "Krashenyi, Igor",
+          "Jiři",
+          "Sharmanska, Viktoriia"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/PinataFarms/DAD-3DHeads",
+        "verified_at": "2026-11-18",
+        "basis": "作者官方仓库提供 DAD-3DNet 模型、训练、推理和基准评测。"
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2204.03688v1#S4.F6"
+      ]
+    },
+    {
+      "id": "head-fab-a-robust-facial-landmark-detection-framework-for-motion-blurred-videos-2019",
+      "version": "arXiv:1910.12100v1",
+      "format": "arxiv_html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4",
+        "S4.SS2"
+      ],
+      "figure_anchor": [
+        "S1.F2",
+        "Figure 2"
+      ],
+      "source_url": "https://arxiv.org/html/1910.12100v1",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "1910.12100v1",
+        "title": "FAB: A Robust Facial Landmark Detection Framework for Motion-Blurred Videos",
+        "url": "https://arxiv.org/abs/1910.12100v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Sun, Keqiang",
+          "Wu, Wayne",
+          "Liu, Tinghao",
+          "Yang, Shuo",
+          "Wang, Quan",
+          "Zhou, Qiang",
+          "Ye, Zuochang",
+          "Qian, Chen"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/KeqiangSun/FAB",
+        "verified_at": "2026-11-18",
+        "basis": "会议正文和作者项目链接 FAB 实现，含结构预测、去模糊和地标检测。"
+      }
+    },
+    {
+      "id": "head-aggregation-via-separation-boosting-facial-landmark-detector-with-semi-supervised-style-translation-2019",
+      "version": "Official 2019 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "source_url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Qian_Aggregation_via_Separation_Boosting_Facial_Landmark_Detector_With_Semi-Supervised_Style_ICCV_2019_paper.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "implementation_check": {
+        "url": "https://github.com/thesouthfrog/stylealign",
+        "verified_at": "2026-11-18",
+        "basis": "论文指定的作者仓库，包含风格分离、翻译和关键点检测适配。"
+      }
+    },
+    {
+      "id": "head-direct-shape-regression-networks-for-end-to-end-face-alignment-2018",
+      "version": "Official 2018 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        2,
+        "Figure 1"
+      ],
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Miao_Direct_Shape_Regression_CVPR_2018_paper.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "head-face-alignment-with-kernel-density-deep-neural-network-2019",
+      "version": "Official 2019 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        8
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 1"
+      ],
+      "source_url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Chen_Face_Alignment_With_Kernel_Density_Deep_Neural_Network_ICCV_2019_paper.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "head-semantic-alignment-finding-semantically-consistent-ground-truth-for-facial-landmark-detection-2019",
+      "version": "Official 2019 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        7
+      ],
+      "figure_anchor": [
+        5,
+        "Figure 5"
+      ],
+      "source_url": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Liu_Semantic_Alignment_Finding_Semantically_Consistent_Ground-Truth_for_Facial_Landmark_Detection_CVPR_2019_paper.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "head-teacher-supervises-students-how-to-learn-from-partially-labeled-images-for-facial-landmark-detection-2019",
+      "version": "Official 2019 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 3"
+      ],
+      "source_url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Dong_Teacher_Supervises_Students_How_to_Learn_From_Partially_Labeled_Images_ICCV_2019_paper.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "implementation_check": {
+        "url": "https://github.com/D-X-Y/landmark-detection/tree/master/TS3",
+        "verified_at": "2026-11-18",
+        "basis": "论文页脚指向作者 landmark-detection 仓库，TS3 子目录对应教师和学生训练。"
+      }
+    },
+    {
+      "id": "head-robust-facial-landmark-detection-via-occlusion-adaptive-deep-networks-2019",
+      "version": "Official 2019 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 1"
+      ],
+      "source_url": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Zhu_Robust_Facial_Landmark_Detection_via_Occlusion-Adaptive_Deep_Networks_CVPR_2019_paper.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "head-robust-facial-landmark-detection-via-aggregation-on-geometrically-manipulated-faces-2020",
+      "version": "Official 2020 WACV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "source_url": "https://openaccess.thecvf.com/content_WACV_2020/papers/Iranmanesh_Robust_Facial_Landmark_Detection_via_Aggregation_on_Geometrically_Manipulated_Faces_WACV_2020_paper.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "head-3d-aware-facial-landmark-detection-via-multi-view-consistent-training-on-synthetic-data-2023",
+      "version": "Official 2023 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        5,
+        "Figure 4"
+      ],
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Zeng_3D-Aware_Facial_Landmark_Detection_via_Multi-View_Consistent_Training_on_Synthetic_CVPR_2023_paper.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "implementation_check": {
+        "url": "https://github.com/libingzeng/landmark_consistent_plugin",
+        "verified_at": "2026-11-18",
+        "basis": "第一作者项目页的 Code 入口指向该训练插件，仓库含 3DDFA 和 DAD-3DNet 适配。"
+      }
+    },
+    {
+      "id": "head-improving-robustness-of-facial-landmark-detection-by-defending-against-adversarial-attacks-2021",
+      "version": "Official 2021 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        7
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Zhu_Improving_Robustness_of_Facial_Landmark_Detection_by_Defending_Against_Adversarial_ICCV_2021_paper.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "implementation_check": {
+        "url": "https://github.com/zhuccly/SAAT",
+        "verified_at": "2026-11-18",
+        "basis": "作者仓库 README 对应 ICCV 2021 的 SAAT，包含公开的评测代码与数据入口。"
+      }
+    },
+    {
+      "id": "head-robust-facial-landmark-detection-via-a-fully-convolutional-local-global-context-network-2018",
+      "version": "Official 2018 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 1"
+      ],
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Merget_Robust_Facial_Landmark_CVPR_2018_paper.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "implementation_check": {
+        "url": "https://www.ce.cit.tum.de/mmk/cvpr2018/",
+        "verified_at": "2026-11-18",
+        "basis": "论文指定的 TUM 项目发布页提供训练与评估代码、模型和 PCA 拟合。"
+      }
+    },
+    {
+      "id": "head-learning-robust-facial-landmark-detection-via-hierarchical-structured-ensemble-2019",
+      "version": "Official 2019 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "source_url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Zou_Learning_Robust_Facial_Landmark_Detection_via_Hierarchical_Structured_Ensemble_ICCV_2019_paper.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "head-super-fan-integrated-facial-landmark-localization-and-super-resolution-of-real-world-low-resolution-faces-2018",
+      "version": "Official 2018 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Bulat_Super-FAN_Integrated_Facial_CVPR_2018_paper.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "head-supervision-by-registration-an-unsupervised-approach-to-improve-the-precision-of-facial-landmark-detector-2018",
+      "version": "Official 2018 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 3"
+      ],
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Dong_Supervision-by-Registration_An_Unsupervised_CVPR_2018_paper.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "implementation_check": {
+        "url": "https://github.com/D-X-Y/landmark-detection/tree/master/SBR",
+        "verified_at": "2026-11-18",
+        "basis": "作者 landmark-detection 仓库的 SBR 方法目录，有独立配置、训练和评估说明。"
+      }
+    },
+    {
+      "id": "head-deep-head-pose-estimation-using-synthetic-images-and-partial-adversarial-domain-adaption-for-continuous-l-2019",
+      "version": "Official 2019 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "source_url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Kuhnke_Deep_Head_Pose_Estimation_Using_Synthetic_Images_and_Partial_Adversarial_ICCV_2019_paper.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "implementation_check": {
+        "url": "https://github.com/kuhnkeF/headposeplus",
+        "verified_at": "2026-11-18",
+        "basis": "作者 HeadPose+ 仓库明确提供 PADACO 的模型、检查点和测试代码。"
+      }
+    },
+    {
+      "id": "hpe-deep-survey-2023",
+      "version": "Springer Nature Version of Record, 2023",
+      "format": "publisher_html",
+      "method_sections_or_pages": [
+        "Sec5",
+        "Sec7",
+        "Sec11",
+        "Sec17",
+        "Sec18",
+        "Sec20"
+      ],
+      "figure_anchor": [
+        "figure-6",
+        "Figure 6"
+      ],
+      "source_url": "https://link.springer.com/article/10.1007/s42979-023-01796-z",
+      "reading_scope": "targeted_survey_reading",
+      "figure_reuse": "verified_local_original",
+      "original_figure_sources": [
+        "https://link.springer.com/article/10.1007/s42979-023-01796-z#figure-6"
+      ]
+    },
+    {
+      "id": "hpe-ml-survey-2024",
+      "version": "Springer Nature Version of Record, 2024",
+      "format": "publisher_html",
+      "method_sections_or_pages": [
+        "Sec4",
+        "Sec9",
+        "Sec14",
+        "Sec18",
+        "Sec25",
+        "Sec34"
+      ],
+      "figure_anchor": [
+        "figure-3",
+        "Figure 3"
+      ],
+      "source_url": "https://link.springer.com/article/10.1007/s10462-024-10936-7",
+      "reading_scope": "targeted_survey_reading",
+      "figure_reuse": "verified_local_original",
+      "original_figure_sources": [
+        "https://link.springer.com/article/10.1007/s10462-024-10936-7#figure-3"
+      ]
+    },
+    {
+      "id": "hpe-survey-2009",
+      "version": "USC-hosted accepted manuscript",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 3"
+      ],
+      "source_url": "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf",
+      "reading_scope": "targeted_survey_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "rf-face-analysis",
+      "version": "Springer Nature Version of Record, IJCV 2013",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        12,
+        13
+      ],
+      "figure_anchor": [
+        5,
+        "Figure 1"
+      ],
+      "source_url": "https://link.springer.com/content/pdf/10.1007/s11263-012-0549-0.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "headdiff",
+      "version": "IEEE Transactions on Image Processing Version of Record, 2024",
+      "format": "publisher",
+      "method_sections_or_pages": [
+        "III",
+        "IV",
+        "IV-C"
+      ],
+      "figure_anchor": [
+        "publisher-figure",
+        "Figure 2"
+      ],
+      "source_url": "https://ieeexplore.ieee.org/document/10462910",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "method_evidence": "Formal article figure 2 and §§III–IV-C, cross-checked against Ningxia University explanation."
+    },
+    {
+      "id": "head-attention-driven-cropping-for-very-high-resolution-facial-landmark-detection-2020",
+      "version": "Official CVPR 2020 open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4
+      ],
+      "figure_anchor": [
+        2,
+        "Figure 1"
+      ],
+      "source_url": "https://openaccess.thecvf.com/content_CVPR_2020/papers/Chandran_Attention-Driven_Cropping_for_Very_High_Resolution_Facial_Landmark_Detection_CVPR_2020_paper.pdf",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "method_evidence": "Publisher PDF §3.1–3.4, printed pages 5863–5865, cross-checked using the indexed full PDF."
+    },
+    {
+      "id": "quatnet",
+      "version": "IEEE Transactions on Multimedia accepted manuscript, DOI 10.1109/TMM.2018.2866770",
+      "format": "publisher",
+      "method_sections_or_pages": [
+        "3",
+        "4",
+        "5",
+        "6",
+        "9"
+      ],
+      "figure_anchor": [
+        "publisher-figure",
+        "Figure 3"
+      ],
+      "source_url": "https://ieeexplore.ieee.org/document/8444061",
+      "reading_scope": "targeted_method_reading",
+      "figure_reuse": "link_only_publisher_permission_required",
+      "reading_copy_pdf_sha256": "dba68871fde0a507b7aa4c66923c976dc06396d097134c3ddfcd16d1356fdb92",
+      "reading_copy_type": "IEEE accepted manuscript with same article DOI"
+    }
+  ]
+}

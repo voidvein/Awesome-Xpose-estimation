@@ -223,18 +223,71 @@
     },
     "analysis": {
       "problem": "自然场景头姿存在旋转不确定性，直接图像到姿态回归难以显式遵循旋转流形。",
-      "method": "把头姿预测建模为旋转流形上的反向扩散，逐步去噪和细化；使用各向同性高斯分布表达旋转表示中的不一致信息，并加入近邻面部关系的循环一致性。",
+      "method": "HeadDiff 把单张脸的方向估计建模为 SO(3) 上的条件扩散，逐步降低旋转分布的不确定性，并用人脸邻域一致性补充图像条件。",
       "inputs_outputs": "人脸图像到头部旋转估计；核心为概率式旋转回归。",
       "contribution": "将一次性回归改为分步概率推断，并利用面部关系约束应对形状变化。",
       "limitations": "扩散在旋转空间建模不确定性，不能据此推得相机平移或六自由度位姿；推理耗时需结合去噪步数实测。",
       "sources": [
-        "https://ieeexplore.ieee.org/abstract/document/10462910"
+        "https://ieeexplore.ieee.org/abstract/document/10462910",
+        "https://ieeexplore.ieee.org/document/10462910",
+        "https://www.nxu.edu.cn/info/1590/31709.htm",
+        "https://www.nxu.edu.cn/__local/3/AF/BD/10E5B14A0EC54DD6CA74765A293_AF945962_61CB5.png?e=.png"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_note": "读取到出版社搜索索引中的完整作者摘要；直接页面触发机器人验证，未声称已阅读全文。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未在本站运行。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对正式记录和IEEE Transactions on Image Processing Version of Record, 2024 §III–IV、图 2 和算法 1。"
+    },
+    "pipeline": {
+      "overview": "HeadDiff 把单张脸的方向估计建模为 SO(3) 上的条件扩散，逐步降低旋转分布的不确定性，并用人脸邻域一致性补充图像条件。",
+      "steps": [
+        {
+          "title": "编码图像和旋转",
+          "description": "从脸图提取特征，使用轴角刻画旋转，基于 SO(3) 上的各向同性高斯表示初始姿态分布。"
+        },
+        {
+          "title": "构造不同噪声时刻",
+          "description": "前向过程按照时间步在旋转流形上增加不确定性，沿测地线插值并生成该时刻的带噪姿态，作为去噪输入。"
+        },
+        {
+          "title": "形成软邻域条件",
+          "description": "从队列中的已投影人脸特征挑选近邻，用对比式循环一致性学习邻域表示，再把软邻域特征注入去噪分支。"
+        },
+        {
+          "title": "逐步反向估计",
+          "description": "去噪模型接收带噪旋转、时间和条件特征，预测逆过程的分布参数，反复将候选方向移向低不确定性的区域。"
+        },
+        {
+          "title": "读出头姿",
+          "description": "可把估计的旋转转换为 yaw、pitch、roll，和原评测中的角度标注对应。"
+        }
+      ],
+      "training": "由有三维旋转标注的脸图建立正向带噪样本，以姿态重建损失和循环一致性损失共同训练反向过程。",
+      "inference": "测试时输入脸图及时间步，从初始噪声分布直接采样，逐步运行训练好的逆过程得到方向。软邻域分支用于训练期约束。",
+      "figure_reading": "论文图 2 并列展示训练时的加噪、循环近邻条件和反向去噪，并给出测试时的直接采样路径。",
+      "sources": [
+        {
+          "label": "出版商正文 · §III–IV、图 2 和算法 1",
+          "url": "https://ieeexplore.ieee.org/document/10462910"
+        },
+        {
+          "label": "作者所在机构提供的说明",
+          "url": "https://www.nxu.edu.cn/info/1590/31709.htm"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://www.nxu.edu.cn/__local/3/AF/BD/10E5B14A0EC54DD6CA74765A293_AF945962_61CB5.png?e=.png"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://www.nxu.edu.cn/__local/3/AF/BD/10E5B14A0EC54DD6CA74765A293_AF945962_61CB5.png?e=.png",
+      "caption": "Figure 2 · HeadDiff: Exploring Rotation Uncertainty With Diffusion Models for Head Pose Estimation",
+      "note": "沿链接查看论文原图。转载许可尚未确认。论文图 2 并列展示训练时的加噪、循环近邻条件和反向去噪，并给出测试时的直接采样路径。"
     }
   },
   {
@@ -16063,25 +16116,92 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "利用生成模型与神经渲染合成多视图训练数据，以多视图一致性约束增强二维、三维人脸关键点预测的三维几何一致性。",
+      "method": "该方法以同一个人的多个合成视角约束关键点训练。不同视图的点应能三角化为一组位置，再重投影回任一相机。",
       "limitations": "多视图一致性来自生成与渲染训练数据，不是实测多相机真值；合成到真实泛化需独立验证。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2023/html/Zeng_3D-Aware_Facial_Landmark_Detection_via_Multi-View_Consistent_Training_on_Synthetic_CVPR_2023_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2023/html/Zeng_3D-Aware_Facial_Landmark_Detection_via_Multi-View_Consistent_Training_on_Synthetic_CVPR_2023_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2023/papers/Zeng_3D-Aware_Facial_Landmark_Detection_via_Multi-View_Consistent_Training_on_Synthetic_CVPR_2023_paper.pdf#page=3",
+        "https://openaccess.thecvf.com/content/CVPR2023/papers/Zeng_3D-Aware_Facial_Landmark_Detection_via_Multi-View_Consistent_Training_on_Synthetic_CVPR_2023_paper.pdf#page=4",
+        "https://openaccess.thecvf.com/content/CVPR2023/papers/Zeng_3D-Aware_Facial_Landmark_Detection_via_Multi-View_Consistent_Training_on_Synthetic_CVPR_2023_paper.pdf#page=5",
+        "https://openaccess.thecvf.com/content/CVPR2023/papers/Zeng_3D-Aware_Facial_Landmark_Detection_via_Multi-View_Consistent_Training_on_Synthetic_CVPR_2023_paper.pdf#page=6",
+        "https://libingzeng.github.io/projects/landmark/landmark.html",
+        "https://github.com/libingzeng/eg3d_pti_inv_synthetic_dataset",
+        "https://github.com/libingzeng/landmark_consistent_plugin"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和Official 2023 CVPR open-access paper 的 PDF 第 3、4、5、6 页。",
+      "verified_at": "2026-11-18",
       "problem": "缺少真实场景多视图训练数据，使关键点模型难以保证三维一致性。",
       "inputs_outputs": "由生成及神经渲染构造的多视图数据用于训练，输出二维/三维人脸关键点。",
       "contribution": "提供可结合现有关键点算法的三维感知、多视图一致性训练模块。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未在本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "该方法以同一个人的多个合成视角约束关键点训练。不同视图的点应能三角化为一组位置，再重投影回任一相机。",
+      "steps": [
+        {
+          "title": "由单张人脸合成多视角",
+          "description": "从 DAD-3DHeads 真实图及其估计相机出发，PTI 反演出 EG3D 潜码，解码为辐射场，从采样视角渲染配对图像。"
+        },
+        {
+          "title": "给渲染图统一标注",
+          "description": "通过参考相机把标注反投影到三维，再按各采样相机投影得到跨视角一致的伪标注。"
+        },
+        {
+          "title": "生成各视角的检测结果",
+          "description": "共享同一关键点检测基线处理配对视图。在训练组中抽取部分视角，准备二维预测和相机投影矩阵。"
+        },
+        {
+          "title": "用多视图约束检测",
+          "description": "由抽取的预测点通过 DLT 三角化出规范空间的关键点，然后把三维点投影至剩余视角，与这些视角的预测比较。"
+        },
+        {
+          "title": "监督二维点和模板网格",
+          "description": "多视角地标损失与二维监督共同约束预测。若基线输出参数化网格，再用规范空间网格一致性约束形状。"
+        }
+      ],
+      "training": "用有标注单图和配对合成图更新已有定位器。视角几何提供自投影一致性，有标注数据维持目标地标定义。",
+      "inference": "推理沿原基线处理单张人脸。多视角辐射场生成、三角化和重投影用于训练。",
+      "figure_reading": "图 4 的不同颜色区分直接预测、三角化点和其他视角上的重投影。图 3 给出训练多视图及其伪标签的生成顺序。",
+      "sources": [
+        {
+          "label": "Figure 3 · 合成训练对",
+          "url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Zeng_3D-Aware_Facial_Landmark_Detection_via_Multi-View_Consistent_Training_on_Synthetic_CVPR_2023_paper.pdf#page=3"
+        },
+        {
+          "label": "相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Zeng_3D-Aware_Facial_Landmark_Detection_via_Multi-View_Consistent_Training_on_Synthetic_CVPR_2023_paper.pdf#page=4"
+        },
+        {
+          "label": "Figure 4 · 原图",
+          "url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Zeng_3D-Aware_Facial_Landmark_Detection_via_Multi-View_Consistent_Training_on_Synthetic_CVPR_2023_paper.pdf#page=5"
+        },
+        {
+          "label": "相关正文 · PDF 第 6 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Zeng_3D-Aware_Facial_Landmark_Detection_via_Multi-View_Consistent_Training_on_Synthetic_CVPR_2023_paper.pdf#page=6"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2023/papers/Zeng_3D-Aware_Facial_Landmark_Detection_via_Multi-View_Consistent_Training_on_Synthetic_CVPR_2023_paper.pdf#page=5",
+      "caption": "Figure 4 · 3D-Aware Facial Landmark Detection via Multi-View Consistent Training on Synthetic Data",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 4 的不同颜色区分直接预测、三角化点和其他视角上的重投影。图 3 给出训练多视图及其伪标签的生成顺序。"
+    },
+    "code": "https://github.com/libingzeng/landmark_consistent_plugin",
+    "code_provenance": {
+      "url": "https://github.com/libingzeng/landmark_consistent_plugin",
+      "verified_at": "2026-11-18",
+      "basis": "第一作者项目页的 Code 入口指向该训练插件，仓库含 3DDFA 和 DAD-3DNet 适配。"
     }
   },
   {
@@ -16344,19 +16464,25 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "SAAT 交替训练攻击器与关键点检测器，以样本自适应对抗扰动增强检测鲁棒性，并提供 Masked-300W 数据集评估口罩遮挡。",
+      "method": "SAAT 是一个训练框架，将基线检测器在难样本上的误差反馈给数据增广分支，并按脸部结构是否保留来加权，以提高关键点定位鲁棒性。",
       "limitations": "对抗扰动训练和真实口罩遮挡是不同检验；对指定攻击的改善不能直接推广为所有分布变化鲁棒性。",
       "sources": [
-        "https://openaccess.thecvf.com/content/ICCV2021/html/Zhu_Improving_Robustness_of_Facial_Landmark_Detection_by_Defending_Against_Adversarial_ICCV_2021_paper.html"
+        "https://openaccess.thecvf.com/content/ICCV2021/html/Zhu_Improving_Robustness_of_Facial_Landmark_Detection_by_Defending_Against_Adversarial_ICCV_2021_paper.html",
+        "https://openaccess.thecvf.com/content/ICCV2021/papers/Zhu_Improving_Robustness_of_Facial_Landmark_Detection_by_Defending_Against_Adversarial_ICCV_2021_paper.pdf#page=3",
+        "https://openaccess.thecvf.com/content/ICCV2021/papers/Zhu_Improving_Robustness_of_Facial_Landmark_Detection_by_Defending_Against_Adversarial_ICCV_2021_paper.pdf#page=4",
+        "https://openaccess.thecvf.com/content/ICCV2021/papers/Zhu_Improving_Robustness_of_Facial_Landmark_Detection_by_Defending_Against_Adversarial_ICCV_2021_paper.pdf#page=5",
+        "https://openaccess.thecvf.com/content/ICCV2021/papers/Zhu_Improving_Robustness_of_Facial_Landmark_Detection_by_Defending_Against_Adversarial_ICCV_2021_paper.pdf#page=7",
+        "https://github.com/zhuccly/SAAT"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和Official 2021 ICCV open-access paper 的 PDF 第 3、4、5、7 页。",
+      "verified_at": "2026-11-18",
       "problem": "依赖更多参数或更多人工标注提升鲁棒性会增加计算、过拟合和标注负担。",
       "inputs_outputs": "人脸图像及训练时的自适应扰动输入，输出鲁棒关键点预测。",
       "contribution": "通过攻击器与检测器交互训练发现模型弱点，以自适应权重平衡对抗样本，并提供 Masked-300W。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未在本站运行。"
     },
     "code": "https://github.com/zhuccly/SAAT",
     "ccf": {
@@ -16364,6 +16490,64 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "SAAT 是一个训练框架，将基线检测器在难样本上的误差反馈给数据增广分支，并按脸部结构是否保留来加权，以提高关键点定位鲁棒性。",
+      "steps": [
+        {
+          "title": "接入现成地标检测器",
+          "description": "以脸部裁剪为输入，训练使用人工二维地标。论文分别以坐标回归和沙漏热图检测器验证同一训练框架。"
+        },
+        {
+          "title": "构造结构条件",
+          "description": "训练分支从已有地标得到面部语义信息，让增广围绕脸部结构生成。真实样本保留作为监督参照。"
+        },
+        {
+          "title": "形成样本自适应增广",
+          "description": "生成分支提供会暴露当前检测弱点的图像，检测器的反馈随训练更新。生成的样本与对应原脸保留配对。"
+        },
+        {
+          "title": "衡量变体可用性",
+          "description": "以语义区域的结构相似度计算样本权重，降低脸部变形过大或定位标签可靠性差的变体对检测器的影响。"
+        },
+        {
+          "title": "联合原图与难样本",
+          "description": "以干净图像定位损失和按样本加权的增广损失更新基线。交替训练让数据难度与当前模型匹配。"
+        }
+      ],
+      "training": "训练把可替换检测器与结构条件增广结合，并评估人工遮挡数据和跨数据集泛化。生成分支仅在训练期参与更新。",
+      "inference": "推理直接使用训练后的基线检测器，从裁剪脸图读出二维地标，网络结构随所选基线。",
+      "figure_reading": "图 2 展示训练分支怎样把变体及质量权重送到检测器，并由检测反馈形成闭环。",
+      "sources": [
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Zhu_Improving_Robustness_of_Facial_Landmark_Detection_by_Defending_Against_Adversarial_ICCV_2021_paper.pdf#page=3"
+        },
+        {
+          "label": "相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Zhu_Improving_Robustness_of_Facial_Landmark_Detection_by_Defending_Against_Adversarial_ICCV_2021_paper.pdf#page=4"
+        },
+        {
+          "label": "相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Zhu_Improving_Robustness_of_Facial_Landmark_Detection_by_Defending_Against_Adversarial_ICCV_2021_paper.pdf#page=5"
+        },
+        {
+          "label": "相关正文 · PDF 第 7 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Zhu_Improving_Robustness_of_Facial_Landmark_Detection_by_Defending_Against_Adversarial_ICCV_2021_paper.pdf#page=7"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/ICCV2021/papers/Zhu_Improving_Robustness_of_Facial_Landmark_Detection_by_Defending_Against_Adversarial_ICCV_2021_paper.pdf#page=3",
+      "caption": "Figure 2 · Improving Robustness of Facial Landmark Detection by Defending Against Adversarial Attacks",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 2 展示训练分支怎样把变体及质量权重送到检测器，并由检测反馈形成闭环。"
+    },
+    "code_provenance": {
+      "url": "https://github.com/zhuccly/SAAT",
+      "verified_at": "2026-11-18",
+      "basis": "作者仓库 README 对应 ICCV 2021 的 SAAT，包含公开的评测代码与数据入口。"
     }
   },
   {
@@ -16604,19 +16788,77 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "从单张人脸生成多种几何扰动视图，包括对抗式扰动与已知变换，再聚合预测以增强对形状变化的鲁棒性。",
+      "method": "GEAN 将同一张脸变形成多个几何变体，用共享网络逐个定位，把预测逆变换回原图坐标再汇聚。",
       "limitations": "多扰动视图聚合增加推理分支；鲁棒性收益需连同生成视图数量与整体耗时理解。",
       "sources": [
-        "https://openaccess.thecvf.com/content_WACV_2020/html/Iranmanesh_Robust_Facial_Landmark_Detection_via_Aggregation_on_Geometrically_Manipulated_Faces_WACV_2020_paper.html"
+        "https://openaccess.thecvf.com/content_WACV_2020/html/Iranmanesh_Robust_Facial_Landmark_Detection_via_Aggregation_on_Geometrically_Manipulated_Faces_WACV_2020_paper.html",
+        "https://openaccess.thecvf.com/content_WACV_2020/papers/Iranmanesh_Robust_Facial_Landmark_Detection_via_Aggregation_on_Geometrically_Manipulated_Faces_WACV_2020_paper.pdf#page=2",
+        "https://openaccess.thecvf.com/content_WACV_2020/papers/Iranmanesh_Robust_Facial_Landmark_Detection_via_Aggregation_on_Geometrically_Manipulated_Faces_WACV_2020_paper.pdf#page=3",
+        "https://openaccess.thecvf.com/content_WACV_2020/papers/Iranmanesh_Robust_Facial_Landmark_Detection_via_Aggregation_on_Geometrically_Manipulated_Faces_WACV_2020_paper.pdf#page=4",
+        "https://openaccess.thecvf.com/content_WACV_2020/papers/Iranmanesh_Robust_Facial_Landmark_Detection_via_Aggregation_on_Geometrically_Manipulated_Faces_WACV_2020_paper.pdf#page=5"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和Official 2020 WACV open-access paper 的 PDF 第 2、3、4、5 页。",
+      "verified_at": "2026-11-18",
       "problem": "复杂形状和外观变形使单次人脸关键点预测不够稳健。",
       "inputs_outputs": "单张人脸及其生成的几何扰动版本输入，输出聚合关键点预测。",
       "contribution": "比较两种对抗几何扰动和一种已知变换的增强策略，以多视图聚合捕捉形状变化。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未在本站运行。"
+    },
+    "pipeline": {
+      "overview": "GEAN 将同一张脸变形成多个几何变体，用共享网络逐个定位，把预测逆变换回原图坐标再汇聚。",
+      "steps": [
+        {
+          "title": "准备粗始地标",
+          "description": "训练时从带扰动的真实点出发，测试时先用检测器求粗始坐标。这些点提供图像几何变形的参考。"
+        },
+        {
+          "title": "建立不同几何变体",
+          "description": "对粗始关键点施加几何位移并变形脸图。论文比较逐点、按语义区域和预定义变换等构造方法。"
+        },
+        {
+          "title": "用同一网络读取每支",
+          "description": "各变体走同一套沙漏网络，输出逐点响应图。响应图的加权均值提供变体坐标系中的关键点。"
+        },
+        {
+          "title": "统一坐标系",
+          "description": "对各支点位应用相应逆变换，将预测折回原始人脸坐标。此时语义对应点可以逐一比较。"
+        },
+        {
+          "title": "按照位移得分融合",
+          "description": "针对每个点，以各支路的归一化位移作评分，汇聚回到原图的多个坐标得到最终位置。"
+        }
+      ],
+      "training": "用标注点加轻微扰动模拟推理时的粗始误差，按位移得分加权各支逆变换后的坐标损失，更新共享检测器。",
+      "inference": "先对原脸做一次粗定位，再生成多支变体并分别推理，在原始坐标系聚合成一组二维坐标。",
+      "figure_reading": "图 2 自左向右串起生成变体、共享沙漏、逆变换、逐点聚合。图中不同形状的检测结果先对齐到同一个参照。",
+      "sources": [
+        {
+          "label": "相关正文 · PDF 第 2 页",
+          "url": "https://openaccess.thecvf.com/content_WACV_2020/papers/Iranmanesh_Robust_Facial_Landmark_Detection_via_Aggregation_on_Geometrically_Manipulated_Faces_WACV_2020_paper.pdf#page=2"
+        },
+        {
+          "label": "相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_WACV_2020/papers/Iranmanesh_Robust_Facial_Landmark_Detection_via_Aggregation_on_Geometrically_Manipulated_Faces_WACV_2020_paper.pdf#page=3"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://openaccess.thecvf.com/content_WACV_2020/papers/Iranmanesh_Robust_Facial_Landmark_Detection_via_Aggregation_on_Geometrically_Manipulated_Faces_WACV_2020_paper.pdf#page=4"
+        },
+        {
+          "label": "相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_WACV_2020/papers/Iranmanesh_Robust_Facial_Landmark_Detection_via_Aggregation_on_Geometrically_Manipulated_Faces_WACV_2020_paper.pdf#page=5"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_WACV_2020/papers/Iranmanesh_Robust_Facial_Landmark_Detection_via_Aggregation_on_Geometrically_Manipulated_Faces_WACV_2020_paper.pdf#page=4",
+      "caption": "Figure 2 · Robust Facial Landmark Detection via Aggregation on Geometrically Manipulated Faces",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 2 自左向右串起生成变体、共享沙漏、逆变换、逐点聚合。图中不同形状的检测结果先对齐到同一个参照。"
     }
   },
   {
@@ -16639,19 +16881,94 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "用旋转矩阵的三个向量表示头姿，并施加正交约束；提出向量角误差 MAEV，讨论欧拉角误差在侧脸情况下的解释局限。",
+      "method": "TriNet 将头部旋转写成坐标系的三条方向轴。从图像分别估计向左、向下、向前三个向量，再把预测矩阵投影到合法三维旋转。",
       "limitations": "MAEV 与欧拉角 MAE 的定义不同，数值不能直接互换；三个向量编码旋转，不包含平移。",
       "sources": [
-        "https://openaccess.thecvf.com/content/WACV2021/html/Chu_A_Vector-Based_Representation_to_Enhance_Head_Pose_Estimation_WACV_2021_paper.html"
+        "https://openaccess.thecvf.com/content/WACV2021/html/Chu_A_Vector-Based_Representation_to_Enhance_Head_Pose_Estimation_WACV_2021_paper.html",
+        "https://arxiv.org/html/2010.07184v1#S3.SS1",
+        "https://arxiv.org/html/2010.07184v1#S3.SS2",
+        "https://arxiv.org/html/2010.07184v1#S3.SS3",
+        "https://arxiv.org/html/2010.07184v1#S3.SS4",
+        "https://arxiv.org/html/2010.07184v1#S3.SS5",
+        "https://arxiv.org/html/2010.07184v1#S3.F3",
+        "https://github.com/anArkitek/TriNet_WACV2021"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和作者预印本 arXiv:2010.07184v1 的 S3.SS1、S3.SS2、S3.SS3、S3.SS4、S3.SS5 章节。",
+      "verified_at": "2026-11-18",
       "problem": "欧拉角或四元数标注的非连续性影响训练，欧拉角 MAE 在侧脸情况下未必反映真实旋转偏差。",
       "inputs_outputs": "头部图像输入，输出带正交约束的三个旋转矩阵向量。",
       "contribution": "提出向量式头姿标注与 MAEV 评价，并研究大角度下的表示和度量问题。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未在本站运行。"
+    },
+    "pipeline": {
+      "overview": "TriNet 将头部旋转写成坐标系的三条方向轴。从图像分别估计向左、向下、向前三个向量，再把预测矩阵投影到合法三维旋转。",
+      "steps": [
+        {
+          "title": "用三个单位方向表示头姿",
+          "description": "将参考头坐标的三个单位基向量旋转到图像对应的三维坐标。三列方向共同组成旋转矩阵。"
+        },
+        {
+          "title": "提取不同层级的人脸特征",
+          "description": "ResNet 输出多级特征，池化和 1×1 映射统一空间及通道尺寸，分组后作为粗到细的预测输入。"
+        },
+        {
+          "title": "由三个头分别估计方向",
+          "description": "每个分支只负责一条轴。将向量各分量的范围分为逐级更细的区间，依据区间概率计算多级期望并组合各分量。"
+        },
+        {
+          "title": "在训练时约束轴之间的关系",
+          "description": "回归损失拉近预测和目标向量，正交损失约束不同预测向量的内积接近零。"
+        },
+        {
+          "title": "对矩阵做旋转细化",
+          "description": "把三条预测向量拼成矩阵，用 SVD 求最接近的正交旋转。当初始投影行列式为负时修正符号，确保得到有效旋转。"
+        }
+      ],
+      "training": "用有头姿标注的脸图训练，监督三个方向及相互正交性。评测同时可比较方向角误差和转换后的欧拉角误差。",
+      "inference": "输入单张人脸，前向估计三条方向并进行矩阵投影。结果可保留为旋转矩阵，也可转成指定角度约定。",
+      "figure_reading": "图 3 展示共享骨干和三条向量分支，图 4 放大逐级预测，图 5 解释矩阵细化的距离。",
+      "sources": [
+        {
+          "label": "3.1 Representation of Rotation",
+          "url": "https://arxiv.org/html/2010.07184v1#S3.SS1"
+        },
+        {
+          "label": "3.2 TriNet Overview",
+          "url": "https://arxiv.org/html/2010.07184v1#S3.SS2"
+        },
+        {
+          "label": "3.3 Prediction Module",
+          "url": "https://arxiv.org/html/2010.07184v1#S3.SS3"
+        },
+        {
+          "label": "3.4 Training Objective",
+          "url": "https://arxiv.org/html/2010.07184v1#S3.SS4"
+        },
+        {
+          "label": "3.5 Vector Refinement",
+          "url": "https://arxiv.org/html/2010.07184v1#S3.SS5"
+        },
+        {
+          "label": "Figure 3 · 原图",
+          "url": "https://arxiv.org/html/2010.07184v1#S3.F3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2010.07184v1#S3.F3",
+      "caption": "Figure 3 · A Vector-Based Representation to Enhance Head Pose Estimation",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 3 展示共享骨干和三条向量分支，图 4 放大逐级预测，图 5 解释矩阵细化的距离。"
+    },
+    "code": "https://github.com/anArkitek/TriNet_WACV2021",
+    "code_provenance": {
+      "url": "https://github.com/anArkitek/TriNet_WACV2021",
+      "verified_at": "2026-11-18",
+      "basis": "作者发布的 TriNet WACV 2021 仓库，README 对应论文及推理代码。"
     }
   },
   {
@@ -16922,25 +17239,88 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "Super-FAN 联合训练 GAN 人脸超分辨率与关键点热图回归，将面部结构约束引入低分辨率图像重建，关注真实低清图像与多种姿态。",
+      "method": "Super-FAN 把低分辨率人脸的 4 倍超分辨和关键点检测放入同一模型。定位器的热图一致性让超分图需要保留可辨识的脸部结构。",
       "limitations": "超分辨率生成细节并非原始高分辨率真值；图像视觉质量与关键点定位误差应分别评价。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2018/html/Bulat_Super-FAN_Integrated_Facial_CVPR_2018_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2018/html/Bulat_Super-FAN_Integrated_Facial_CVPR_2018_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Bulat_Super-FAN_Integrated_Facial_CVPR_2018_paper.pdf#page=3",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Bulat_Super-FAN_Integrated_Facial_CVPR_2018_paper.pdf#page=4",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Bulat_Super-FAN_Integrated_Facial_CVPR_2018_paper.pdf#page=5",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Bulat_Super-FAN_Integrated_Facial_CVPR_2018_paper.pdf#page=6",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Bulat_Super-FAN_Integrated_Facial_CVPR_2018_paper.pdf#page=7"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和Official 2018 CVPR open-access paper 的 PDF 第 3、4、5、6、7 页。",
+      "verified_at": "2026-11-18",
       "problem": "真实低分辨率人脸既缺少视觉细节，也难以准确定位关键点。",
       "inputs_outputs": "低分辨率人脸图像输入，联合输出超分辨率图像和关键点热图。",
       "contribution": "将关键点结构监督引入 GAN 超分辨率，并联合训练重建与对齐两个任务。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未在本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "Super-FAN 把低分辨率人脸的 4 倍超分辨和关键点检测放入同一模型。定位器的热图一致性让超分图需要保留可辨识的脸部结构。",
+      "steps": [
+        {
+          "title": "准备低清和高清配对",
+          "description": "从已裁剪人脸构造低分辨率输入与其高清参照，正文的标准实验采用 16×16 到 64×64。"
+        },
+        {
+          "title": "生成超分脸图",
+          "description": "残差超分网络在低分辨率空间提取特征，再上采样并输出更高分辨率的 RGB 图。"
+        },
+        {
+          "title": "比较生成与原始高清外观",
+          "description": "训练时以像素损失和 VGG 感知特征衡量重建，基于 WGAN 的判别器补充高分辨率外观约束。"
+        },
+        {
+          "title": "比较关键点热图",
+          "description": "FAN 对生成结果预测逐点热图，另一 FAN 从真实高清图产生参照。最小化两者距离可将关键点结构监督反传给生成器。"
+        },
+        {
+          "title": "输出图像与地标",
+          "description": "保留高清图供后续使用，对生成图上的地标热图解码，获得同一坐标系中的关键点。"
+        }
+      ],
+      "training": "用配对低清与高清脸图训练。论文分开评估像素、感知、热图和对抗损失的组合，GAN 版本从已有重建模型继续训练。",
+      "inference": "输入低分辨率的人脸裁剪，用生成器恢复更大脸图，再用 FAN 定位关键点。真实高清对照与判别器用于训练。",
+      "figure_reading": "图 2 的生成器输出同时通向 FAN 和判别器。顺着 FAN 热图路径读，可以理解几何监督如何进入超分支路。",
+      "sources": [
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Bulat_Super-FAN_Integrated_Facial_CVPR_2018_paper.pdf#page=3"
+        },
+        {
+          "label": "相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Bulat_Super-FAN_Integrated_Facial_CVPR_2018_paper.pdf#page=4"
+        },
+        {
+          "label": "相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Bulat_Super-FAN_Integrated_Facial_CVPR_2018_paper.pdf#page=5"
+        },
+        {
+          "label": "相关正文 · PDF 第 6 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Bulat_Super-FAN_Integrated_Facial_CVPR_2018_paper.pdf#page=6"
+        },
+        {
+          "label": "相关正文 · PDF 第 7 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Bulat_Super-FAN_Integrated_Facial_CVPR_2018_paper.pdf#page=7"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Bulat_Super-FAN_Integrated_Facial_CVPR_2018_paper.pdf#page=3",
+      "caption": "Figure 2 · Super-FAN: Integrated Facial Landmark Localization and Super-Resolution of Real-World Low Resolution Faces in Arbitrary Poses With GANs",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 2 的生成器输出同时通向 FAN 和判别器。顺着 FAN 热图路径读，可以理解几何监督如何进入超分支路。"
     }
   },
   {
@@ -16963,25 +17343,95 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "SBR 将相邻视频帧的光流配准一致性作为无需人工标注的监督，以可微 Lucas–Kanade 运算联合训练检测器，减轻视频关键点抖动。",
+      "method": "SBR 把相邻视频帧应当指向同一面部位置作为训练信号。用可微 Lucas–Kanade 配准跟踪上一帧预测，再与当前检测结果比较。",
       "limitations": "视频配准提供训练监督，光流一致性不等于准确标注；训练使用视频与测试使用视频应分别说明。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2018/html/Dong_Supervision-by-Registration_An_Unsupervised_CVPR_2018_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2018/html/Dong_Supervision-by-Registration_An_Unsupervised_CVPR_2018_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Dong_Supervision-by-Registration_An_Unsupervised_CVPR_2018_paper.pdf#page=2",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Dong_Supervision-by-Registration_An_Unsupervised_CVPR_2018_paper.pdf#page=3",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Dong_Supervision-by-Registration_An_Unsupervised_CVPR_2018_paper.pdf#page=4",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Dong_Supervision-by-Registration_An_Unsupervised_CVPR_2018_paper.pdf#page=5",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Dong_Supervision-by-Registration_An_Unsupervised_CVPR_2018_paper.pdf#page=6",
+        "https://github.com/D-X-Y/landmark-detection/tree/master/SBR"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和Official 2018 CVPR open-access paper 的 PDF 第 2、3、4、5、6 页。",
+      "verified_at": "2026-11-18",
       "problem": "人工关键点标注有限且逐帧预测可能抖动，需要利用无标注视频监督。",
       "inputs_outputs": "带标注图像及无标注视频用于训练，得到可用于单图或视频的关键点检测器。",
       "contribution": "以可微 Lucas–Kanade 配准约束相邻帧检测一致性，无需新增人工标注。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未在本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "SBR 把相邻视频帧应当指向同一面部位置作为训练信号。用可微 Lucas–Kanade 配准跟踪上一帧预测，再与当前检测结果比较。",
+      "steps": [
+        {
+          "title": "兼用标注图和无标注序列",
+          "description": "标注图继续提供标准热图检测损失，无标注短片只需连续人脸帧。检测器同时处理这些帧。"
+        },
+        {
+          "title": "从热图读出可微坐标",
+          "description": "用局部期望从关键点热图获得连续点位，使后续配准误差可传回热图检测网络。"
+        },
+        {
+          "title": "把上一帧点前向追踪",
+          "description": "可微 Lucas–Kanade 模块以相邻帧及上一帧检测点为输入，按局部图像匹配估计点在当前帧的位置。"
+        },
+        {
+          "title": "用反向追踪核查可靠性",
+          "description": "把追踪结果反向送回上一帧。保留返回点与原位置足够接近的匹配，过滤不可信的跟踪。"
+        },
+        {
+          "title": "让检测与配准一致",
+          "description": "对可靠匹配计算当前检测点与前向追踪点之间的距离，和人工标注监督组合更新检测器。"
+        }
+      ],
+      "training": "带标注的样本提供语义点位，视频带来时序精度约束。论文也用目标无标注视频训练个性化检测器，形成 PAM 变体。",
+      "inference": "常规推理对每一帧独立运行训练好的定位器。可按论文实验先用目标视频做个性化适配，再运行更新后的定位器。",
+      "figure_reading": "图 3 将标注监督和无标注配准接到同一定位器。图 5 则区分前向跟踪用于监督、反向跟踪用于可靠性判断。",
+      "sources": [
+        {
+          "label": "相关正文 · PDF 第 2 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Dong_Supervision-by-Registration_An_Unsupervised_CVPR_2018_paper.pdf#page=2"
+        },
+        {
+          "label": "Figure 3 · 原图",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Dong_Supervision-by-Registration_An_Unsupervised_CVPR_2018_paper.pdf#page=3"
+        },
+        {
+          "label": "相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Dong_Supervision-by-Registration_An_Unsupervised_CVPR_2018_paper.pdf#page=4"
+        },
+        {
+          "label": "Figure 5 · 正向与反向跟踪",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Dong_Supervision-by-Registration_An_Unsupervised_CVPR_2018_paper.pdf#page=5"
+        },
+        {
+          "label": "相关正文 · PDF 第 6 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Dong_Supervision-by-Registration_An_Unsupervised_CVPR_2018_paper.pdf#page=6"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Dong_Supervision-by-Registration_An_Unsupervised_CVPR_2018_paper.pdf#page=3",
+      "caption": "Figure 3 · Supervision-by-Registration: An Unsupervised Approach to Improve the Precision of Facial Landmark Detectors",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 3 将标注监督和无标注配准接到同一定位器。图 5 则区分前向跟踪用于监督、反向跟踪用于可靠性判断。"
+    },
+    "code": "https://github.com/D-X-Y/landmark-detection/tree/master/SBR",
+    "code_provenance": {
+      "url": "https://github.com/D-X-Y/landmark-detection/tree/master/SBR",
+      "verified_at": "2026-11-18",
+      "basis": "作者 landmark-detection 仓库的 SBR 方法目录，有独立配置、训练和评估说明。"
     }
   },
   {
@@ -17004,26 +17454,90 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "SAN 用生成对抗模块构造风格聚合图像，将原始与聚合风格图像共同用于关键点预测，以降低光照、色彩等图像风格变化的影响。",
+      "method": "SAN 为同一张脸建立原图和风格聚合视图，利用两条图像支路的互补特征定位关键点。风格分组由外观表示自动学习。",
       "limitations": "风格聚合需要额外生成与融合过程；风格鲁棒性的结论不能直接推广为几何遮挡鲁棒性。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2018/html/Dong_Style_Aggregated_Network_CVPR_2018_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2018/html/Dong_Style_Aggregated_Network_CVPR_2018_paper.html",
+        "https://arxiv.org/html/1803.04108v4#S3.SS1",
+        "https://arxiv.org/html/1803.04108v4#S3.SS2",
+        "https://arxiv.org/html/1803.04108v4#S4.SS2",
+        "https://arxiv.org/html/1803.04108v4#S2.F3",
+        "https://github.com/D-X-Y/landmark-detection/tree/master/SAN"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和作者预印本 arXiv:1803.04108v4 的 S3.SS1、S3.SS2、S4.SS2 章节。",
+      "verified_at": "2026-11-18",
       "problem": "灰度、色彩、亮度等图像风格差异会损害跨来源数据的关键点检测。",
       "inputs_outputs": "原始人脸与对应风格聚合图像共同输入，输出关键点位置。",
       "contribution": "用生成对抗模块减少风格变化，并让原始和聚合外观为检测器提供互补信息。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未在本站运行。"
     },
-    "code": "https://github.com/D-X-Y/SAN",
+    "code": "https://github.com/D-X-Y/landmark-detection/tree/master/SAN",
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "SAN 为同一张脸建立原图和风格聚合视图，利用两条图像支路的互补特征定位关键点。风格分组由外观表示自动学习。",
+      "steps": [
+        {
+          "title": "构造可区分的外观增广",
+          "description": "从训练脸图产生亮色、灰度和素描三种变体，用原图和变体训练 ResNet 风格分类器。"
+        },
+        {
+          "title": "发掘图像中隐含的风格",
+          "description": "将训练原图的池化特征聚类，将各簇作为不同风格图像集合。"
+        },
+        {
+          "title": "学习风格变换并聚合",
+          "description": "用 CycleGAN 在风格簇间学习变换，尽量保留面部结构。对同一输入的转换结果求平均形成风格聚合脸。"
+        },
+        {
+          "title": "在两路图中提取定位特征",
+          "description": "将原图和聚合脸分别经过 VGG 类特征提取器，先得到各自的关键点响应，再融合两路特征和已有热图逐级细化。"
+        },
+        {
+          "title": "将最终热图映回原图",
+          "description": "对最后的响应图做双三次上采样，按每个通道的峰值位置输出二维关键点。"
+        }
+      ],
+      "training": "从可控的风格变体学习表示，并以无标注的风格簇训练生成器。关键点分支使用真实二维坐标对应的热图监督。",
+      "inference": "测试时先生成输入的聚合风格视图，再与原图共同输出关键点。无需给待测脸图提供风格类别。",
+      "figure_reading": "图 3 展示原图和聚合图如何汇合到最后预测阶段，图 4 展开训练时的风格特征、聚类和 CycleGAN。",
+      "sources": [
+        {
+          "label": "3.1 Style-Aggregated Face Generation Module",
+          "url": "https://arxiv.org/html/1803.04108v4#S3.SS1"
+        },
+        {
+          "label": "3.2 Facial Landmark Prediction Module",
+          "url": "https://arxiv.org/html/1803.04108v4#S3.SS2"
+        },
+        {
+          "label": "4.2 Experiment Settings",
+          "url": "https://arxiv.org/html/1803.04108v4#S4.SS2"
+        },
+        {
+          "label": "Figure 3 · 原图",
+          "url": "https://arxiv.org/html/1803.04108v4#S2.F3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/1803.04108v4#S2.F3",
+      "caption": "Figure 3 · Style Aggregated Network for Facial Landmark Detection",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 3 展示原图和聚合图如何汇合到最后预测阶段，图 4 展开训练时的风格特征、聚类和 CycleGAN。"
+    },
+    "code_provenance": {
+      "url": "https://github.com/D-X-Y/landmark-detection/tree/master/SAN",
+      "verified_at": "2026-11-18",
+      "basis": "作者 landmark-detection 仓库的 SAN 目录含论文对应的训练、评估和模型接口。"
     }
   },
   {
@@ -17046,25 +17560,78 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "PCD-CNN 通过显式的三维姿态条件化关键点估计，而非普通多任务共享；结合树枝状网络、Mask-Softmax 和难例挖掘处理非受控二维对齐。",
+      "method": "PCD-CNN 将图像预测的三维头姿作为二维关键点的显式条件。关键点分支用树状结构表达面部部件的依赖，再以第二阶段细化像素位置。",
       "limitations": "三维头姿作为二维定位的条件，主要输出仍是二维对齐；需区分姿态估计误差与定位收益。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2018/html/Kumar_Disentangling_3D_Pose_CVPR_2018_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2018/html/Kumar_Disentangling_3D_Pose_CVPR_2018_paper.html",
+        "https://arxiv.org/html/1802.06713v3#S3",
+        "https://arxiv.org/html/1802.06713v3#S4.SS1",
+        "https://arxiv.org/html/1802.06713v3#S1.F2"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和作者预印本 arXiv:1802.06713v3 的 S3、S4.SS1 章节。",
+      "verified_at": "2026-11-18",
       "problem": "非受控人脸姿态变化干扰二维关键点热图定位。",
       "inputs_outputs": "人脸图像输入，通过姿态条件化预测二维关键点。",
       "contribution": "以显式姿态条件化区别于常规多任务学习，并结合 Mask-Softmax 和难例挖掘。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未在本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "PCD-CNN 将图像预测的三维头姿作为二维关键点的显式条件。关键点分支用树状结构表达面部部件的依赖，再以第二阶段细化像素位置。",
+      "steps": [
+        {
+          "title": "并行编码姿态和关键点线索",
+          "description": "用两个紧凑 SqueezeNet 编码同一张脸图，一路产生头姿表征，另一路保留关键点特征。"
+        },
+        {
+          "title": "把头姿送入关键点网络",
+          "description": "在中间特征图逐元素相乘，用姿态响应调制关键点特征，让侧脸与正脸的定位利用各自可见结构。"
+        },
+        {
+          "title": "沿面部树解码点位",
+          "description": "以鼻尖为根，按面部部件构建树状反卷积结构。轻量反卷积和 1×1 通道压缩将共享特征还原为逐点响应图。"
+        },
+        {
+          "title": "把粗响应送回细化网络",
+          "description": "在第一阶段响应上做可学习变换，与原图拼接，经第二个卷积及反卷积网络细化位置。"
+        },
+        {
+          "title": "按标注规范输出二维点",
+          "description": "从输出响应读取二维关键点。针对不同数据集，通过调整并切分末端热图通道扩展到相应的关键点集合。"
+        }
+      ],
+      "training": "以逐像素分类训练热图，Mask-Softmax 将不可见关键点作为背景，并对难样本加重训练。训练第二阶段时固定前级 PCD-CNN。",
+      "inference": "单张脸图先产生头姿条件，再通过树状定位及细化输出二维点。可见点由热图预测。",
+      "figure_reading": "图 2 展示姿态特征怎样调制关键点网络及进入细化，图 3 放大树中单个反卷积模块。",
+      "sources": [
+        {
+          "label": "3 Pose Conditioned Dendritic CNN",
+          "url": "https://arxiv.org/html/1802.06713v3#S3"
+        },
+        {
+          "label": "4.1 Results",
+          "url": "https://arxiv.org/html/1802.06713v3#S4.SS1"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://arxiv.org/html/1802.06713v3#S1.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/1802.06713v3#S1.F2",
+      "caption": "Figure 2 · Disentangling 3D Pose in a Dendritic CNN for Unconstrained 2D Face Alignment",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 2 展示姿态特征怎样调制关键点网络及进入细化，图 3 放大树中单个反卷积模块。"
     }
   },
   {
@@ -17087,25 +17654,95 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "以隐式核卷积连接局部与全局上下文子网，并用空洞卷积细化全局结构；之后通过 PCA 二维形状模型过滤异常关键点。",
+      "method": "Local-Global Context Network 先从局部外观形成尖锐的候选响应，再用具备更大感受野的全卷积网络校正，最后从热图恢复完整二维脸形。",
       "limitations": "PCA 形状后处理限制可用形状空间；对异常点的修正与网络本身的预测应分开做消融。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2018/html/Merget_Robust_Facial_Landmark_CVPR_2018_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2018/html/Merget_Robust_Facial_Landmark_CVPR_2018_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Merget_Robust_Facial_Landmark_CVPR_2018_paper.pdf#page=2",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Merget_Robust_Facial_Landmark_CVPR_2018_paper.pdf#page=3",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Merget_Robust_Facial_Landmark_CVPR_2018_paper.pdf#page=4",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Merget_Robust_Facial_Landmark_CVPR_2018_paper.pdf#page=5",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Merget_Robust_Facial_Landmark_CVPR_2018_paper.pdf#page=6",
+        "https://www.ce.cit.tum.de/mmk/cvpr2018/"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和Official 2018 CVPR open-access paper 的 PDF 第 2、3、4、5、6 页。",
+      "verified_at": "2026-11-18",
       "problem": "全卷积网络擅长局部特征，但受限感受野导致全局上下文不足。",
       "inputs_outputs": "人脸图像输入，输出由全局上下文及 PCA 形状后处理修正的二维关键点。",
       "contribution": "以内置核卷积连接局部和空洞卷积全局子网，使全局信息直接参与网络学习。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未在本站运行。 论文指定的 TUM 项目发布页提供训练与评估代码、模型和 PCA 拟合。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "Local-Global Context Network 先从局部外观形成尖锐的候选响应，再用具备更大感受野的全卷积网络校正，最后从热图恢复完整二维脸形。",
+      "steps": [
+        {
+          "title": "预测各点局部证据",
+          "description": "全卷积局部分支用较小感受野预测逐点热图，可以捕捉眼角、嘴角等细节，同时相似区域可能也产生响应。"
+        },
+        {
+          "title": "用固定核传递上下文",
+          "description": "把局部热图与定制固定核卷积。该操作在训练和测试都显式执行，不增加学习参数，局部预测仍可保持尖锐。"
+        },
+        {
+          "title": "计算全局校正项",
+          "description": "扩张卷积全局分支聚合较大范围内的候选关系，判断由其他部件支持的响应。"
+        },
+        {
+          "title": "合并热图",
+          "description": "加上局部预测与全局校正得到最终响应，训练时用同一固定核处理目标热图计算回归损失。"
+        },
+        {
+          "title": "估计整脸坐标",
+          "description": "简单场景可提取各通道局部峰。标准解码先估计整体旋转，然后以响应为权重拟合 PCA 形状，并迭代收窄有效像素范围。"
+        }
+      ],
+      "training": "局部和全局两个热图分支按网络结构训练。PCA 形状模型由同一批训练标注拟合。",
+      "inference": "全卷积网络处理脸部图像并产生响应图，鲁棒形状拟合可剔除离群响应并估计遮挡或截断地标。论文也展示不使用单独人脸检测器的情形。",
+      "figure_reading": "图 1 对照局部预测、固定核、全局空洞卷积和回归损失。图 3 可查看全局信息如何压低错误的局部峰。",
+      "sources": [
+        {
+          "label": "相关正文 · PDF 第 2 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Merget_Robust_Facial_Landmark_CVPR_2018_paper.pdf#page=2"
+        },
+        {
+          "label": "Figure 1 · 原图",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Merget_Robust_Facial_Landmark_CVPR_2018_paper.pdf#page=3"
+        },
+        {
+          "label": "相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Merget_Robust_Facial_Landmark_CVPR_2018_paper.pdf#page=4"
+        },
+        {
+          "label": "相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Merget_Robust_Facial_Landmark_CVPR_2018_paper.pdf#page=5"
+        },
+        {
+          "label": "相关正文 · PDF 第 6 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Merget_Robust_Facial_Landmark_CVPR_2018_paper.pdf#page=6"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Merget_Robust_Facial_Landmark_CVPR_2018_paper.pdf#page=3",
+      "caption": "Figure 1 · Robust Facial Landmark Detection via a Fully-Convolutional Local-Global Context Network",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 1 对照局部预测、固定核、全局空洞卷积和回归损失。图 3 可查看全局信息如何压低错误的局部峰。"
+    },
+    "code": "https://www.ce.cit.tum.de/mmk/cvpr2018/",
+    "code_provenance": {
+      "url": "https://www.ce.cit.tum.de/mmk/cvpr2018/",
+      "verified_at": "2026-11-18",
+      "basis": "论文指定的 TUM 项目发布页提供训练与评估代码、模型和 PCA 拟合。"
     }
   },
   {
@@ -17128,25 +17765,88 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "DSRN 通过双重卷积与 Fourier 特征池化表示图像到形状的非线性关系，并用低秩学习编码关键点相关性，实现直接、端到端人脸对齐。",
+      "method": "DSRN 将单张人脸直接映射为完整二维形状向量。它先压缩卷积滤波器的冗余，再用可学习的 Fourier 特征保留布局，以低秩线性回归联合输出所有点。",
       "limitations": "低秩关系约束反映训练中的点间相关性；直接回归不提供概率校准或视频时序保证。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2018/html/Miao_Direct_Shape_Regression_CVPR_2018_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2018/html/Miao_Direct_Shape_Regression_CVPR_2018_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Miao_Direct_Shape_Regression_CVPR_2018_paper.pdf#page=2",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Miao_Direct_Shape_Regression_CVPR_2018_paper.pdf#page=3",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Miao_Direct_Shape_Regression_CVPR_2018_paper.pdf#page=4",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Miao_Direct_Shape_Regression_CVPR_2018_paper.pdf#page=5",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Miao_Direct_Shape_Regression_CVPR_2018_paper.pdf#page=6"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和Official 2018 CVPR open-access paper 的 PDF 第 2、3、4、5、6 页。",
+      "verified_at": "2026-11-18",
       "problem": "图像到形状的高度非线性和关键点间相关性难以联合建模，级联方法又依赖初始化。",
       "inputs_outputs": "人脸图像输入，直接输出对齐形状。",
       "contribution": "结合双重卷积、Fourier 特征池化和低秩结构学习，避免依赖传统级联细化。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未在本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "DSRN 将单张人脸直接映射为完整二维形状向量。它先压缩卷积滤波器的冗余，再用可学习的 Fourier 特征保留布局，以低秩线性回归联合输出所有点。",
+      "steps": [
+        {
+          "title": "共享卷积滤波器",
+          "description": "双重卷积从较大的元滤波器滑取多个平移相关的小滤波器。这些小滤波器生成独立特征图，重叠参数共享。"
+        },
+        {
+          "title": "取各位置处的通道向量",
+          "description": "从卷积骨干输出中提取空间位置对应的通道特征，保留它在脸图中的网格索引。"
+        },
+        {
+          "title": "进行 Fourier 特征变换",
+          "description": "用可学习的线性投影与偏置后接余弦映射，把每个位置的特征嵌入非线性表示。"
+        },
+        {
+          "title": "拼成全脸特征",
+          "description": "按空间顺序拼接经过映射的向量，令回归层能够读取特征在脸上的原始位置。"
+        },
+        {
+          "title": "用低秩映射联合预测",
+          "description": "两层无非线性线性投影组成有秩上限的矩阵，关联不同关键点坐标，输出长度为 2N 的形状向量。"
+        }
+      ],
+      "training": "用人脸图与其二维地标直接监督，卷积元滤波器、Fourier 变换与低秩映射一起反向传播学习。",
+      "inference": "测试时对已准备的人脸图前向并读取坐标向量，完整轮廓由一次回归给出。",
+      "figure_reading": "图 1 给出端到端管线。图 2 可看元滤波器如何共享参数，图 3 显示逐位置的余弦映射及拼接。",
+      "sources": [
+        {
+          "label": "Figure 1 · 原图",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Miao_Direct_Shape_Regression_CVPR_2018_paper.pdf#page=2"
+        },
+        {
+          "label": "相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Miao_Direct_Shape_Regression_CVPR_2018_paper.pdf#page=3"
+        },
+        {
+          "label": "Figures 2–3 · 双重卷积与 Fourier pooling",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Miao_Direct_Shape_Regression_CVPR_2018_paper.pdf#page=4"
+        },
+        {
+          "label": "相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Miao_Direct_Shape_Regression_CVPR_2018_paper.pdf#page=5"
+        },
+        {
+          "label": "相关正文 · PDF 第 6 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Miao_Direct_Shape_Regression_CVPR_2018_paper.pdf#page=6"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Miao_Direct_Shape_Regression_CVPR_2018_paper.pdf#page=2",
+      "caption": "Figure 1 · Direct Shape Regression Networks for End-to-End Face Alignment",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 1 给出端到端管线。图 2 可看元滤波器如何共享参数，图 3 显示逐位置的余弦映射及拼接。"
     }
   },
   {
@@ -17169,25 +17869,83 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "将语义一致的真实标注作为潜变量，在搜索校正标注与训练关键点网络之间交替优化；用全局热图校正单元修复遮挡和低质量导致的异常预测。",
+      "method": "Semantic Alignment 将人工地标看作潜在语义点的有噪声观测。训练时在小邻域内交替更新点位和热图网络，最后用全局热图校正器回归更一致的脸形。",
       "limitations": "校正标签是潜变量估计，不应当作人工重标注真值；原标注与校正后的评价基准需保持清楚。",
       "sources": [
-        "https://openaccess.thecvf.com/content_CVPR_2019/html/Liu_Semantic_Alignment_Finding_Semantically_Consistent_Ground-Truth_for_Facial_Landmark_Detection_CVPR_2019_paper.html"
+        "https://openaccess.thecvf.com/content_CVPR_2019/html/Liu_Semantic_Alignment_Finding_Semantically_Consistent_Ground-Truth_for_Facial_Landmark_Detection_CVPR_2019_paper.html",
+        "https://openaccess.thecvf.com/content_CVPR_2019/papers/Liu_Semantic_Alignment_Finding_Semantically_Consistent_Ground-Truth_for_Facial_Landmark_Detection_CVPR_2019_paper.pdf#page=3",
+        "https://openaccess.thecvf.com/content_CVPR_2019/papers/Liu_Semantic_Alignment_Finding_Semantically_Consistent_Ground-Truth_for_Facial_Landmark_Detection_CVPR_2019_paper.pdf#page=4",
+        "https://openaccess.thecvf.com/content_CVPR_2019/papers/Liu_Semantic_Alignment_Finding_Semantically_Consistent_Ground-Truth_for_Facial_Landmark_Detection_CVPR_2019_paper.pdf#page=5",
+        "https://openaccess.thecvf.com/content_CVPR_2019/papers/Liu_Semantic_Alignment_Finding_Semantically_Consistent_Ground-Truth_for_Facial_Landmark_Detection_CVPR_2019_paper.pdf#page=7"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和Official 2019 CVPR open-access paper 的 PDF 第 3、4、5、7 页。",
+      "verified_at": "2026-11-18",
       "problem": "轮廓等关键点语义不清晰，使人工标注不一致并污染监督信号。",
       "inputs_outputs": "带关键点标注的人脸训练数据输入，交替获得校正标注与关键点检测器。",
       "contribution": "将语义一致标注作为潜变量共同优化，并以全局热图校正修复异常点。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未在本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "Semantic Alignment 将人工地标看作潜在语义点的有噪声观测。训练时在小邻域内交替更新点位和热图网络，最后用全局热图校正器回归更一致的脸形。",
+      "steps": [
+        {
+          "title": "建立潜在标签",
+          "description": "把原始标注设为初始观测，假设真实语义点位于它的局部邻域，用邻域距离约束可选候选。"
+        },
+        {
+          "title": "结合热图匹配程度",
+          "description": "当前 CNN 给出关键点的预测热图。对每个候选比较候选中心的目标热图与预测热图，同时计算对观测的距离。"
+        },
+        {
+          "title": "搜索更新后的监督点",
+          "description": "固定网络时，在局部区域选总代价最小的像素。后续迭代把上一次选出的点作为新的观测。"
+        },
+        {
+          "title": "用新标签再训练",
+          "description": "固定搜索得出的点，重建其目标热图并优化 CNN。交替执行直到标签变化趋稳。"
+        },
+        {
+          "title": "利用全脸约束修正",
+          "description": "Global Heatmap Correction Unit 读入完整地标热图张量，用轻量 CNN 联合回归全脸二维坐标，并以搜索出的点监督。"
+        }
+      ],
+      "training": "概率模型的标签估计与热图拟合交替优化。全局校正模块学习所有点的联合位置。",
+      "inference": "测试时对输入脸图生成热图，再用全局校正输出坐标。围绕人工标注的邻域搜索用于训练。",
+      "figure_reading": "图 5 显示原始热图中的离群关键点怎样被全局校正模块修正。图 3、图 4 分别说明训练时的局部搜索和连续迭代。",
+      "sources": [
+        {
+          "label": "相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Liu_Semantic_Alignment_Finding_Semantically_Consistent_Ground-Truth_for_Facial_Landmark_Detection_CVPR_2019_paper.pdf#page=3"
+        },
+        {
+          "label": "Figure 3 · 局部标签搜索",
+          "url": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Liu_Semantic_Alignment_Finding_Semantically_Consistent_Ground-Truth_for_Facial_Landmark_Detection_CVPR_2019_paper.pdf#page=4"
+        },
+        {
+          "label": "Figure 5 · 原图",
+          "url": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Liu_Semantic_Alignment_Finding_Semantically_Consistent_Ground-Truth_for_Facial_Landmark_Detection_CVPR_2019_paper.pdf#page=5"
+        },
+        {
+          "label": "相关正文 · PDF 第 7 页",
+          "url": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Liu_Semantic_Alignment_Finding_Semantically_Consistent_Ground-Truth_for_Facial_Landmark_Detection_CVPR_2019_paper.pdf#page=7"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Liu_Semantic_Alignment_Finding_Semantically_Consistent_Ground-Truth_for_Facial_Landmark_Detection_CVPR_2019_paper.pdf#page=5",
+      "caption": "Figure 5 · Semantic Alignment: Finding Semantically Consistent Ground-Truth for Facial Landmark Detection",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 5 显示原始热图中的离群关键点怎样被全局校正模块修正。图 3、图 4 分别说明训练时的局部搜索和连续迭代。"
     }
   },
   {
@@ -17210,25 +17968,78 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "ODN 通过蒸馏模块估计遮挡概率并重加权高层特征，再以几何关系引导低秩学习恢复缺失语义，结合抑制遮挡与特征补全。",
+      "method": "ODN 把长程脸部几何、可见区域筛选与低秩形状回归连接起来，用未被遮挡的局部证据估计完整的二维地标。",
       "limitations": "几何引导的低秩恢复对缺失语义作先验补全；需区分遮挡判别与恢复后点位的实际误差。",
       "sources": [
-        "https://openaccess.thecvf.com/content_CVPR_2019/html/Zhu_Robust_Facial_Landmark_Detection_via_Occlusion-Adaptive_Deep_Networks_CVPR_2019_paper.html"
+        "https://openaccess.thecvf.com/content_CVPR_2019/html/Zhu_Robust_Facial_Landmark_Detection_via_Occlusion-Adaptive_Deep_Networks_CVPR_2019_paper.html",
+        "https://openaccess.thecvf.com/content_CVPR_2019/papers/Zhu_Robust_Facial_Landmark_Detection_via_Occlusion-Adaptive_Deep_Networks_CVPR_2019_paper.pdf#page=3",
+        "https://openaccess.thecvf.com/content_CVPR_2019/papers/Zhu_Robust_Facial_Landmark_Detection_via_Occlusion-Adaptive_Deep_Networks_CVPR_2019_paper.pdf#page=4",
+        "https://openaccess.thecvf.com/content_CVPR_2019/papers/Zhu_Robust_Facial_Landmark_Detection_via_Occlusion-Adaptive_Deep_Networks_CVPR_2019_paper.pdf#page=5"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和Official 2019 CVPR open-access paper 的 PDF 第 3、4、5 页。",
+      "verified_at": "2026-11-18",
       "problem": "遮挡污染特征，而仅抑制遮挡又会留下缺失的面部语义。",
       "inputs_outputs": "遮挡人脸图像输入，输出关键点位置。",
       "contribution": "结合遮挡概率加权、低秩特征恢复和面部几何关系建模。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未在本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "ODN 把长程脸部几何、可见区域筛选与低秩形状回归连接起来，用未被遮挡的局部证据估计完整的二维地标。",
+      "steps": [
+        {
+          "title": "提取多路径特征",
+          "description": "对待对齐的人脸图生成共享特征，分给几何感知和蒸馏两组子网络。"
+        },
+        {
+          "title": "建立远距离几何交互",
+          "description": "几何模块用含 3×3 与 5×5 卷积的两路特征，对对应通道作矩阵外积，再以 1×1 卷积压缩空间关系表示。"
+        },
+        {
+          "title": "抑制遮挡与背景",
+          "description": "蒸馏模块有残差特征支路及单通道掩码支路。Sigmoid 权重对空间特征逐元素缩放，降低遮挡和背景的贡献。"
+        },
+        {
+          "title": "补全形状相关信息",
+          "description": "拼接几何特征与加权外观，降采样展开。低秩结构矩阵学习特征相关性，利用已观察部位支持不可见部位的位置估计。"
+        },
+        {
+          "title": "读出全部二维坐标",
+          "description": "线性回归层从结构化的特征向量输出每个地标的横纵坐标，可见与遮挡点使用同一输出。"
+        }
+      ],
+      "training": "通过二维坐标监督联合训练。掩码带稀疏约束，结构矩阵受低秩约束，分别控制无关区域响应和特征相关结构。",
+      "inference": "测试时从一张裁剪脸同时计算几何特征与空间掩码，再回归完整地标。掩码由图像特征生成。",
+      "figure_reading": "图 1 分别追踪 A/B 路径的几何外积、C/D 路径的权重蒸馏，以及下游低秩回归。图 2 解释外积捕捉长程关系。",
+      "sources": [
+        {
+          "label": "Figure 1 · 原图",
+          "url": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Zhu_Robust_Facial_Landmark_Detection_via_Occlusion-Adaptive_Deep_Networks_CVPR_2019_paper.pdf#page=3"
+        },
+        {
+          "label": "相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Zhu_Robust_Facial_Landmark_Detection_via_Occlusion-Adaptive_Deep_Networks_CVPR_2019_paper.pdf#page=4"
+        },
+        {
+          "label": "相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Zhu_Robust_Facial_Landmark_Detection_via_Occlusion-Adaptive_Deep_Networks_CVPR_2019_paper.pdf#page=5"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Zhu_Robust_Facial_Landmark_Detection_via_Occlusion-Adaptive_Deep_Networks_CVPR_2019_paper.pdf#page=3",
+      "caption": "Figure 1 · Robust Facial Landmark Detection via Occlusion-Adaptive Deep Networks",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 1 分别追踪 A/B 路径的几何外积、C/D 路径的权重蒸馏，以及下游低秩回归。图 2 解释外积捕捉长程关系。"
     }
   },
   {
@@ -17251,25 +18062,95 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "3FabRec 先在无标注人脸上训练对抗自编码器，再向解码器插入迁移层，把图像重建转换为关键点热图预测，面向少量标注训练。",
+      "method": "3FabRec 先从大量无标注人脸学习重建结构，再将生成器的分层特征转换为逐点热图。少量标注用于训练插入式转换层，图像生成器保留预训练权重。",
       "limitations": "少样本微调以大量无标注人脸预训练为前提；比较样本效率时应计入预训练数据与计算量。",
       "sources": [
-        "https://openaccess.thecvf.com/content_CVPR_2020/html/Browatzki_3FabRec_Fast_Few-Shot_Face_Alignment_by_Reconstruction_CVPR_2020_paper.html"
+        "https://openaccess.thecvf.com/content_CVPR_2020/html/Browatzki_3FabRec_Fast_Few-Shot_Face_Alignment_by_Reconstruction_CVPR_2020_paper.html",
+        "https://arxiv.org/html/1911.10448v1#S3.SS1",
+        "https://arxiv.org/html/1911.10448v1#S3.SS2",
+        "https://arxiv.org/html/1911.10448v1#S3.SS3",
+        "https://arxiv.org/html/1911.10448v1#S4.SS5",
+        "https://arxiv.org/html/1911.10448v1#S2.F2",
+        "https://github.com/browatbn2/3FabRec"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和作者预印本 arXiv:1911.10448v1 的 S3.SS1、S3.SS2、S3.SS3、S4.SS5 章节。",
+      "verified_at": "2026-11-18",
       "problem": "全监督关键点检测依赖大量标注，且大模型容易过拟合特定数据集。",
       "inputs_outputs": "无标注人脸预训练加少量有标注样本微调，输出关键点热图。",
       "contribution": "将对抗自编码器的重建知识通过少量迁移层转换为关键点预测。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未在本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "3FabRec 先从大量无标注人脸学习重建结构，再将生成器的分层特征转换为逐点热图。少量标注用于训练插入式转换层，图像生成器保留预训练权重。",
+      "steps": [
+        {
+          "title": "学习低维脸部表示",
+          "description": "编码器将输入脸图压缩为潜变量，生成器重建图像。潜变量判别器让编码分布接近预设先验。"
+        },
+        {
+          "title": "在重建阶段保持结构",
+          "description": "用像素 L1 和基于 SSIM 的局部结构项保持面部元素的位置，并用图像判别器促使重建保留眼角、唇边等高频细节。"
+        },
+        {
+          "title": "把生成器激活转为定位特征",
+          "description": "冻结自编码器，在生成器的逆 ResNet 层之间插入 3×3 转换卷积，再将 RGB 输出层换成逐关键点热图输出。"
+        },
+        {
+          "title": "用标注适配热图",
+          "description": "以点为中心构造高斯热图，用少量标注训练转换层和最终输出。之后可解冻编码器共同微调，生成器主体继续冻结。"
+        },
+        {
+          "title": "从单张脸读出点位",
+          "description": "输入经编码器、冻结生成块和转换层产生热图，各通道取峰值得到二维坐标。"
+        }
+      ],
+      "training": "先以无标注脸图训练对抗自编码器，再用任务的二维标注训练热图分支。作者另比较不同标注比例和可选的编码器微调。",
+      "inference": "测试使用一张裁剪脸图输出二维关键点。预测沿热图路径运行，图像重建判别器用于预训练。",
+      "figure_reading": "图 2 区分无标注重建、插层学习和可选微调，标清各阶段哪些模块更新。",
+      "sources": [
+        {
+          "label": "3.1 Our approach",
+          "url": "https://arxiv.org/html/1911.10448v1#S3.SS1"
+        },
+        {
+          "label": "3.2 Unsupervised face representation",
+          "url": "https://arxiv.org/html/1911.10448v1#S3.SS2"
+        },
+        {
+          "label": "3.3 Supervised landmark discovery",
+          "url": "https://arxiv.org/html/1911.10448v1#S3.SS3"
+        },
+        {
+          "label": "4.5 Limited training data and few-shot learning",
+          "url": "https://arxiv.org/html/1911.10448v1#S4.SS5"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://arxiv.org/html/1911.10448v1#S2.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/1911.10448v1#S2.F2",
+      "caption": "Figure 2 · 3FabRec: Fast Few-Shot Face Alignment by Reconstruction",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 2 区分无标注重建、插层学习和可选微调，标清各阶段哪些模块更新。"
+    },
+    "code": "https://github.com/browatbn2/3FabRec",
+    "code_provenance": {
+      "url": "https://github.com/browatbn2/3FabRec",
+      "verified_at": "2026-11-18",
+      "basis": "论文指向的作者 PyTorch 实现，包含无标注重建与地标训练代码。"
     }
   },
   {
@@ -17292,25 +18173,78 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "采用注意力驱动的区域裁剪与全卷积架构，直接利用高分辨率人脸的细节，避免整体下采样或整幅高分辨率推理造成的信息损失与显存瓶颈。",
+      "method": "Attention-Driven Cropping 先用低分辨率代理确定全脸位置，再从原高清图裁四个局部做精定位，将局部细节与全脸结构合成同一组坐标。",
       "limitations": "高分辨率收益依赖原图含有的细节及裁剪位置；全流程计算量应包含注意区域预测与局部推理。",
       "sources": [
-        "https://openaccess.thecvf.com/content_CVPR_2020/html/Chandran_Attention-Driven_Cropping_for_Very_High_Resolution_Facial_Landmark_Detection_CVPR_2020_paper.html"
+        "https://openaccess.thecvf.com/content_CVPR_2020/html/Chandran_Attention-Driven_Cropping_for_Very_High_Resolution_Facial_Landmark_Detection_CVPR_2020_paper.html",
+        "https://openaccess.thecvf.com/content_CVPR_2020/papers/Chandran_Attention-Driven_Cropping_for_Very_High_Resolution_Facial_Landmark_Detection_CVPR_2020_paper.pdf#page=2",
+        "https://openaccess.thecvf.com/content_CVPR_2020/papers/Chandran_Attention-Driven_Cropping_for_Very_High_Resolution_Facial_Landmark_Detection_CVPR_2020_paper.pdf#page=3",
+        "https://openaccess.thecvf.com/content_CVPR_2020/papers/Chandran_Attention-Driven_Cropping_for_Very_High_Resolution_Facial_Landmark_Detection_CVPR_2020_paper.pdf#page=4"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和Official CVPR 2020 open-access paper 的 PDF 第 2、3、4 页。",
+      "verified_at": "2026-11-18",
       "problem": "高分辨率整图推理受显存限制，而下采样丢失对关键点有用的细节。",
       "inputs_outputs": "从普通分辨率到 4K 的人脸图像输入，输出精细关键点位置。",
       "contribution": "以注意力驱动裁剪和全卷积区域架构利用原始高分辨率细节。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未在本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "Attention-Driven Cropping 先用低分辨率代理确定全脸位置，再从原高清图裁四个局部做精定位，将局部细节与全脸结构合成同一组坐标。",
+      "steps": [
+        {
+          "title": "从低清代理预测全脸",
+          "description": "平均池化将高清脸图缩至 256×256。全局沙漏输出逐点潜在热图，空间 softmax 与 soft-argmax 把热图转成粗坐标。"
+        },
+        {
+          "title": "根据粗点形成四个框",
+          "description": "对左眼、右眼、鼻子和嘴分别确定兴趣框。训练期给框尺寸注入噪声，框坐标换算回原图范围。"
+        },
+        {
+          "title": "在原分辨率裁取局部",
+          "description": "通过可微 RoIAlign 从原图采样，并将各裁块调整为局部网络输入尺寸。保存框原点与缩放比例。"
+        },
+        {
+          "title": "并行细化各部位",
+          "description": "四个专用区域沙漏各自产生局部热图，经 soft-argmax 读出裁块中的精细坐标。"
+        },
+        {
+          "title": "复原全尺寸坐标",
+          "description": "按比例和裁框原点将局部点映回高分辨率图。轮廓等区域框外地标由全局网络保留。"
+        }
+      ],
+      "training": "对粗定位和局部细化的坐标分别计算 L2 并联合训练，无须构造目标热图。从 256 开始逐级初始化更高分辨率，4K 版本使用深度可分离卷积减少显存消耗。",
+      "inference": "给定单张预裁人脸，运行全局定位、局部裁剪和修正分支。输出原图坐标系中一套完整地标。",
+      "figure_reading": "图 1 追踪低分辨代理如何选择原图的局部，及局部结果如何回填。图 2 展示区域覆盖的地标，图 3 对比两级热图。",
+      "sources": [
+        {
+          "label": "Figure 1 · 原图",
+          "url": "https://openaccess.thecvf.com/content_CVPR_2020/papers/Chandran_Attention-Driven_Cropping_for_Very_High_Resolution_Facial_Landmark_Detection_CVPR_2020_paper.pdf#page=2"
+        },
+        {
+          "label": "Figure 2 · 四个区域",
+          "url": "https://openaccess.thecvf.com/content_CVPR_2020/papers/Chandran_Attention-Driven_Cropping_for_Very_High_Resolution_Facial_Landmark_Detection_CVPR_2020_paper.pdf#page=3"
+        },
+        {
+          "label": "Figure 3 · 热图对比",
+          "url": "https://openaccess.thecvf.com/content_CVPR_2020/papers/Chandran_Attention-Driven_Cropping_for_Very_High_Resolution_Facial_Landmark_Detection_CVPR_2020_paper.pdf#page=4"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_CVPR_2020/papers/Chandran_Attention-Driven_Cropping_for_Very_High_Resolution_Facial_Landmark_Detection_CVPR_2020_paper.pdf#page=2",
+      "caption": "Figure 1 · Attention-Driven Cropping for Very High Resolution Facial Landmark Detection",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 1 追踪低分辨代理如何选择原图的局部，及局部结果如何回填。图 2 展示区域覆盖的地标，图 3 对比两级热图。"
     }
   },
   {
@@ -17333,25 +18267,83 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "HSLE 自动发现关键点之间的稳健关系并构建层级结构集成，以局部和整体结构约束改善热图回归，减少对手工树结构的依赖。",
+      "method": "HSLE 先从训练标注发现覆盖充分且稳定的地标子结构，再把子结构的预测约束接到常规热图检测器，减少单点不可见时的连锁影响。",
       "limitations": "自动层级关系仍从训练数据学习；改变关键点定义或数据域时需重查结构是否适用。",
       "sources": [
-        "https://openaccess.thecvf.com/content_ICCV_2019/html/Zou_Learning_Robust_Facial_Landmark_Detection_via_Hierarchical_Structured_Ensemble_ICCV_2019_paper.html"
+        "https://openaccess.thecvf.com/content_ICCV_2019/html/Zou_Learning_Robust_Facial_Landmark_Detection_via_Hierarchical_Structured_Ensemble_ICCV_2019_paper.html",
+        "https://openaccess.thecvf.com/content_ICCV_2019/papers/Zou_Learning_Robust_Facial_Landmark_Detection_via_Hierarchical_Structured_Ensemble_ICCV_2019_paper.pdf#page=3",
+        "https://openaccess.thecvf.com/content_ICCV_2019/papers/Zou_Learning_Robust_Facial_Landmark_Detection_via_Hierarchical_Structured_Ensemble_ICCV_2019_paper.pdf#page=4",
+        "https://openaccess.thecvf.com/content_ICCV_2019/papers/Zou_Learning_Robust_Facial_Landmark_Detection_via_Hierarchical_Structured_Ensemble_ICCV_2019_paper.pdf#page=5",
+        "https://openaccess.thecvf.com/content_ICCV_2019/papers/Zou_Learning_Robust_Facial_Landmark_Detection_via_Hierarchical_Structured_Ensemble_ICCV_2019_paper.pdf#page=6"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和Official 2019 ICCV open-access paper 的 PDF 第 3、4、5、6 页。",
+      "verified_at": "2026-11-18",
       "problem": "热图缺少结构约束，而手工层级树在关键点缺失或误预测时脆弱。",
       "inputs_outputs": "人脸图像输入，输出由自动层级结构约束的关键点热图。",
       "contribution": "自动发现稳健的局部与整体关键点关系，形成可接入现有检测器的层级集成。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未在本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "HSLE 先从训练标注发现覆盖充分且稳定的地标子结构，再把子结构的预测约束接到常规热图检测器，减少单点不可见时的连锁影响。",
+      "steps": [
+        {
+          "title": "从训练标注形成候选组合",
+          "description": "用点对距离及其方差衡量跨表情和姿态的稳定性，同时平衡各点入组选取频次，形成由多个地标组成的 ensemble。"
+        },
+        {
+          "title": "为每组建立覆盖条件",
+          "description": "有限覆盖集要求每个地标出现在至少一个子结构中，并保证在部分点缺失时仍有完整子结构可用。"
+        },
+        {
+          "title": "发现较稳定的层次结构",
+          "description": "从完全连接的组结构反复删去可移除边，保留满足覆盖条件的候选，最终选择误差度量较低的一组结构。"
+        },
+        {
+          "title": "注入结构化热图约束",
+          "description": "基线生成逐点热图，HSLE 从嵌套的局部与全局点关系生成补充响应。一个点可由多个其他点对其位置提供线索。"
+        },
+        {
+          "title": "合并地标响应",
+          "description": "将对应点的结构约束热图与基线热图相加，产出含全脸关系的定位响应。"
+        }
+      ],
+      "training": "先利用训练标注选择图结构，再将 HSLE 与适配后的基线端到端训练，合并后的热图对齐人工标注的高斯图。",
+      "inference": "测试用保留的图结构校正单张图像的逐点响应，再由热图得到二维地标。图结构来自训练期统计。",
+      "figure_reading": "图 2 上半展示覆盖结构发现，下半展示基础热图和结构约束合并。图 3 用小图说明为什么部分节点缺失时仍有子结构可工作。",
+      "sources": [
+        {
+          "label": "相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Zou_Learning_Robust_Facial_Landmark_Detection_via_Hierarchical_Structured_Ensemble_ICCV_2019_paper.pdf#page=3"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Zou_Learning_Robust_Facial_Landmark_Detection_via_Hierarchical_Structured_Ensemble_ICCV_2019_paper.pdf#page=4"
+        },
+        {
+          "label": "相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Zou_Learning_Robust_Facial_Landmark_Detection_via_Hierarchical_Structured_Ensemble_ICCV_2019_paper.pdf#page=5"
+        },
+        {
+          "label": "相关正文 · PDF 第 6 页",
+          "url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Zou_Learning_Robust_Facial_Landmark_Detection_via_Hierarchical_Structured_Ensemble_ICCV_2019_paper.pdf#page=6"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Zou_Learning_Robust_Facial_Landmark_Detection_via_Hierarchical_Structured_Ensemble_ICCV_2019_paper.pdf#page=4",
+      "caption": "Figure 2 · Learning Robust Facial Landmark Detection via Hierarchical Structured Ensemble",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 2 上半展示覆盖结构发现，下半展示基础热图和结构约束合并。图 3 用小图说明为什么部分节点缺失时仍有子结构可工作。"
     }
   },
   {
@@ -17374,25 +18366,90 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "以两个检测学生和一个质量判断教师进行半监督学习：教师筛选学生生成的伪标注，再让学生使用优质样本重训并聚合预测。",
+      "method": "TS³ 让结构不同的两个学生给未标注脸图打伪标签，由教师根据图像和热图评估伪标签可靠性，再用筛选结果循环训练学生。",
       "limitations": "教师筛选伪标签与双学生融合均是方法条件；不能把使用未标注训练图像的结果当作纯监督基线。",
       "sources": [
-        "https://openaccess.thecvf.com/content_ICCV_2019/html/Dong_Teacher_Supervises_Students_How_to_Learn_From_Partially_Labeled_Images_ICCV_2019_paper.html"
+        "https://openaccess.thecvf.com/content_ICCV_2019/html/Dong_Teacher_Supervises_Students_How_to_Learn_From_Partially_Labeled_Images_ICCV_2019_paper.html",
+        "https://openaccess.thecvf.com/content_ICCV_2019/papers/Dong_Teacher_Supervises_Students_How_to_Learn_From_Partially_Labeled_Images_ICCV_2019_paper.pdf#page=3",
+        "https://openaccess.thecvf.com/content_ICCV_2019/papers/Dong_Teacher_Supervises_Students_How_to_Learn_From_Partially_Labeled_Images_ICCV_2019_paper.pdf#page=4",
+        "https://openaccess.thecvf.com/content_ICCV_2019/papers/Dong_Teacher_Supervises_Students_How_to_Learn_From_Partially_Labeled_Images_ICCV_2019_paper.pdf#page=5",
+        "https://openaccess.thecvf.com/content_ICCV_2019/papers/Dong_Teacher_Supervises_Students_How_to_Learn_From_Partially_Labeled_Images_ICCV_2019_paper.pdf#page=6",
+        "https://github.com/D-X-Y/landmark-detection/tree/master/TS3"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和Official 2019 ICCV open-access paper 的 PDF 第 3、4、5、6 页。",
+      "verified_at": "2026-11-18",
       "problem": "半监督关键点学习中的低质量伪标注会影响再训练效果。",
       "inputs_outputs": "部分带标注的人脸数据输入，输出教师筛选伪标注后训练的双检测器及融合预测。",
       "contribution": "教师评价两个学生的伪标注质量，构成交互式筛选、重训和集成流程。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未在本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "TS³ 让结构不同的两个学生给未标注脸图打伪标签，由教师根据图像和热图评估伪标签可靠性，再用筛选结果循环训练学生。",
+      "steps": [
+        {
+          "title": "先训练两种学生",
+          "description": "用少量标注分别训练 Convolutional Pose Machines 和 Stacked Hourglass。两者都逐级预测各关键点热图，特征结构各有差异。"
+        },
+        {
+          "title": "融合预测产生伪标签",
+          "description": "由两个学生的输出形成联合热图，为无标注人脸产生点位。标注样本上的预测也送给教师用于学习打分。"
+        },
+        {
+          "title": "学习热图质量",
+          "description": "教师把原始 RGB 与预测热图按通道拼接，残差网络回归质量标量。用已有标注计算检测损失，以其负值作分数目标。"
+        },
+        {
+          "title": "筛选可信无标注样本",
+          "description": "教师对无标注数据产生的伪标签打分，保留更可信的候选，和有标注图像一起重训一名学生。"
+        },
+        {
+          "title": "轮换并重新评分",
+          "description": "交替更换重训的学生。学生变强后重新生成伪标签并更新教师，使质量判断跟进改良的检测器。"
+        }
+      ],
+      "training": "少量人工标注同时提供学生监督和教师的质量基准。每轮重训在人工标注之外引入教师筛选出来的伪标注。",
+      "inference": "得到最终学生后，用其中一个或融合两者热图预测二维地标。教师承担训练样本选择。",
+      "figure_reading": "图 3 展示教师如何把 RGB 和热图变成分数，并用检测损失监督。图 2 是两个学生检测器并行结构。",
+      "sources": [
+        {
+          "label": "Figure 2 · 两个学生网络",
+          "url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Dong_Teacher_Supervises_Students_How_to_Learn_From_Partially_Labeled_Images_ICCV_2019_paper.pdf#page=3"
+        },
+        {
+          "label": "Figure 3 · 原图",
+          "url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Dong_Teacher_Supervises_Students_How_to_Learn_From_Partially_Labeled_Images_ICCV_2019_paper.pdf#page=4"
+        },
+        {
+          "label": "相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Dong_Teacher_Supervises_Students_How_to_Learn_From_Partially_Labeled_Images_ICCV_2019_paper.pdf#page=5"
+        },
+        {
+          "label": "相关正文 · PDF 第 6 页",
+          "url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Dong_Teacher_Supervises_Students_How_to_Learn_From_Partially_Labeled_Images_ICCV_2019_paper.pdf#page=6"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Dong_Teacher_Supervises_Students_How_to_Learn_From_Partially_Labeled_Images_ICCV_2019_paper.pdf#page=4",
+      "caption": "Figure 3 · Teacher Supervises Students How to Learn From Partially Labeled Images for Facial Landmark Detection",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 3 展示教师如何把 RGB 和热图变成分数，并用检测损失监督。图 2 是两个学生检测器并行结构。"
+    },
+    "code": "https://github.com/D-X-Y/landmark-detection/tree/master/TS3",
+    "code_provenance": {
+      "url": "https://github.com/D-X-Y/landmark-detection/tree/master/TS3",
+      "verified_at": "2026-11-18",
+      "basis": "论文页脚指向作者 landmark-detection 仓库，TS3 子目录对应教师和学生训练。"
     }
   },
   {
@@ -17415,19 +18472,24 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "将人脸表示分为风格与结构空间，通过半监督风格转换增强既有结构样本，改善关键点检测器对外观环境变化的适应性。",
+      "method": "StyleAlign 通过条件变分自编码器拆开人脸结构和成像风格，用新风格重新渲染已有标注的几何，再训练二维关键点检测器。",
       "limitations": "半监督风格转换需要相应无标注图像；目标域外观参与训练的情形应与完全未知域测试区分。",
       "sources": [
-        "https://openaccess.thecvf.com/content_ICCV_2019/html/Qian_Aggregation_via_Separation_Boosting_Facial_Landmark_Detector_With_Semi-Supervised_Style_ICCV_2019_paper.html"
+        "https://openaccess.thecvf.com/content_ICCV_2019/html/Qian_Aggregation_via_Separation_Boosting_Facial_Landmark_Detector_With_Semi-Supervised_Style_ICCV_2019_paper.html",
+        "https://openaccess.thecvf.com/content_ICCV_2019/papers/Qian_Aggregation_via_Separation_Boosting_Facial_Landmark_Detector_With_Semi-Supervised_Style_ICCV_2019_paper.pdf#page=3",
+        "https://openaccess.thecvf.com/content_ICCV_2019/papers/Qian_Aggregation_via_Separation_Boosting_Facial_Landmark_Detector_With_Semi-Supervised_Style_ICCV_2019_paper.pdf#page=4",
+        "https://openaccess.thecvf.com/content_ICCV_2019/papers/Qian_Aggregation_via_Separation_Boosting_Facial_Landmark_Detector_With_Semi-Supervised_Style_ICCV_2019_paper.pdf#page=5",
+        "https://github.com/thesouthfrog/stylealign"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和Official 2019 ICCV open-access paper 的 PDF 第 3、4、5 页。",
+      "verified_at": "2026-11-18",
       "problem": "光照、纹理和图像环境的变化可影响关键点检测，需增加有效外观多样性。",
       "inputs_outputs": "真实人脸及风格转换增强样本用于半监督训练，输出人脸关键点。",
       "contribution": "分离风格和结构空间，通过保持结构的风格转换扩展训练样本。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未在本站运行。"
     },
     "code": "https://github.com/thesouthfrog/stylealign",
     "ccf": {
@@ -17435,6 +18497,60 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "StyleAlign 通过条件变分自编码器拆开人脸结构和成像风格，用新风格重新渲染已有标注的几何，再训练二维关键点检测器。",
+      "steps": [
+        {
+          "title": "分别表示外观和点位",
+          "description": "将人工关键点写成叠加热图交给结构编码器，并用人脸图提取低维风格码。几何信息由结构支路提供。"
+        },
+        {
+          "title": "重建两者的组合",
+          "description": "渲染解码器融合风格码和结构特征，结构编码器通过多尺度跳接传入位置信息，使生成图的关键点能沿用原标注。"
+        },
+        {
+          "title": "限制风格码的容量",
+          "description": "以 KL 项将风格后验约束到标准高斯附近。重建以 VGG-19 感知特征比较生成图与原图，促使风格码保存外观差异。"
+        },
+        {
+          "title": "交换风格扩充样本",
+          "description": "保留某张脸的关键点热图，从其他脸取多个风格，再按同一几何渲染不同外观。生成脸自然继承几何输入的二维坐标。"
+        },
+        {
+          "title": "训练下游检测器",
+          "description": "合并真实与生成样本训练热图式定位器。论文分别比较不同训练组合与检测器，以检验增广带来的变化。"
+        }
+      ],
+      "training": "先训练用于结构和风格分离的生成网络，再渲染带点位的合成集并训练检测器。源样本与生成样本共用关键点的语义与标注布局。",
+      "inference": "测试只运行训练好的关键点检测器，输入真实裁剪脸，输出二维点位。风格编码和渲染用于训练数据准备。",
+      "figure_reading": "图 2 左侧是拆分并重建，右侧是交叉取样后训练检测器。PDF 第 4 页的图 3 可核对哪些点在风格变化中保持固定。",
+      "sources": [
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Qian_Aggregation_via_Separation_Boosting_Facial_Landmark_Detector_With_Semi-Supervised_Style_ICCV_2019_paper.pdf#page=3"
+        },
+        {
+          "label": "Figure 3 · 风格翻译示例",
+          "url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Qian_Aggregation_via_Separation_Boosting_Facial_Landmark_Detector_With_Semi-Supervised_Style_ICCV_2019_paper.pdf#page=4"
+        },
+        {
+          "label": "相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Qian_Aggregation_via_Separation_Boosting_Facial_Landmark_Detector_With_Semi-Supervised_Style_ICCV_2019_paper.pdf#page=5"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Qian_Aggregation_via_Separation_Boosting_Facial_Landmark_Detector_With_Semi-Supervised_Style_ICCV_2019_paper.pdf#page=3",
+      "caption": "Figure 2 · Aggregation via Separation: Boosting Facial Landmark Detector With Semi-Supervised Style Translation",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 2 左侧是拆分并重建，右侧是交叉取样后训练检测器。PDF 第 4 页的图 3 可核对哪些点在风格变化中保持固定。"
+    },
+    "code_provenance": {
+      "url": "https://github.com/thesouthfrog/stylealign",
+      "verified_at": "2026-11-18",
+      "basis": "论文指定的作者仓库，包含风格分离、翻译和关键点检测适配。"
     }
   },
   {
@@ -17458,19 +18574,28 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "FAB 利用视频时序结构预测补全运动模糊造成的几何信息损失，以几何先验辅助去模糊；更好的关键点结果又反馈到下一帧结构预测。",
+      "method": "FAB 在运动模糊视频中利用前两帧的面部轮廓约束当前去模糊结果，再定位二维关键点，并把新点位反馈给下一帧。",
       "limitations": "需要视频时序结构进行去模糊与定位反馈；不能直接把时序结果推广到孤立模糊单图。",
       "sources": [
-        "https://openaccess.thecvf.com/content_ICCV_2019/html/Sun_FAB_A_Robust_Facial_Landmark_Detection_Framework_for_Motion-Blurred_Videos_ICCV_2019_paper.html"
+        "https://openaccess.thecvf.com/content_ICCV_2019/html/Sun_FAB_A_Robust_Facial_Landmark_Detection_Framework_for_Motion-Blurred_Videos_ICCV_2019_paper.html",
+        "https://arxiv.org/html/1910.12100v1#S3.SS1",
+        "https://arxiv.org/html/1910.12100v1#S3.SS2",
+        "https://arxiv.org/html/1910.12100v1#S3.SS3",
+        "https://arxiv.org/html/1910.12100v1#S3.SS4",
+        "https://arxiv.org/html/1910.12100v1#S4.SS2",
+        "https://arxiv.org/html/1910.12100v1#S1.F2",
+        "https://keqiangsun.github.io/projects/FAB/FAB.html",
+        "https://github.com/KeqiangSun/FAB"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和作者预印本 arXiv:1910.12100v1 的 S3.SS1、S3.SS2、S3.SS3、S3.SS4、S4.SS2 章节。",
+      "verified_at": "2026-11-18",
       "problem": "运动模糊丢失面部结构，静态图像检测器用于视频时不准确且不稳定。",
       "inputs_outputs": "运动模糊人脸视频输入，输出去模糊图像与时序关键点。",
       "contribution": "形成结构预测、几何引导去模糊和关键点检测的反馈循环，并提供 RWMB 数据。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未在本站运行。"
     },
     "code": "https://github.com/KeqiangSun/FAB",
     "ccf": {
@@ -17478,6 +18603,72 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "FAB 在运动模糊视频中利用前两帧的面部轮廓约束当前去模糊结果，再定位二维关键点，并把新点位反馈给下一帧。",
+      "steps": [
+        {
+          "title": "维护轮廓状态",
+          "description": "将历史关键点按面部部件作三次样条插值，形成两幅边界图，与最近三幅脸部图像构成处理窗口。"
+        },
+        {
+          "title": "预测当前轮廓",
+          "description": "结构预测器的沙漏网络估计轮廓之间的光流，变形模块据此从前两帧轮廓生成当前轮廓先验。"
+        },
+        {
+          "title": "按结构去模糊",
+          "description": "把当前轮廓和三帧 RGB 图一并编码，用动态时序混合聚合特征，再经解码器预测相对模糊输入的残差，恢复清晰脸图。"
+        },
+        {
+          "title": "从清晰帧定位",
+          "description": "可替换的定位器处理清晰帧，正文使用预激活 ResNet-18 作为实例，回归当前帧关键点坐标。"
+        },
+        {
+          "title": "把检测反馈到下一帧",
+          "description": "将新点位插值成边界图供结构预测器下一时刻使用。该反馈路径让去模糊和定位随视频递推。"
+        }
+      ],
+      "training": "分别预训练三个模块。结构和去模糊用各自的均方误差，关键点用 L1；再交替微调，定位器可经去模糊模块反向传递监督。",
+      "inference": "在视频帧窗口内输入当前模糊脸及历史信息，顺序输出当前清晰脸和关键点。前两帧的几何状态来自先前的检测结果。",
+      "figure_reading": "图 2 区分三种张量，历史边界图连到光流和变形，三帧图像连到去模糊，清晰输出再连到检测器和反馈回路。",
+      "sources": [
+        {
+          "label": "3.1 Structure Predictor",
+          "url": "https://arxiv.org/html/1910.12100v1#S3.SS1"
+        },
+        {
+          "label": "3.2 Structure-Aware Motion Deblurring",
+          "url": "https://arxiv.org/html/1910.12100v1#S3.SS2"
+        },
+        {
+          "label": "3.3 Replaceable Facial Landmark Detection Network",
+          "url": "https://arxiv.org/html/1910.12100v1#S3.SS3"
+        },
+        {
+          "label": "3.4 Alternate Fine-Tuning",
+          "url": "https://arxiv.org/html/1910.12100v1#S3.SS4"
+        },
+        {
+          "label": "4.2 Training",
+          "url": "https://arxiv.org/html/1910.12100v1#S4.SS2"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://arxiv.org/html/1910.12100v1#S1.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/1910.12100v1#S1.F2",
+      "caption": "Figure 2 · FAB: A Robust Facial Landmark Detection Framework for Motion-Blurred Videos",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 2 区分三种张量，历史边界图连到光流和变形，三帧图像连到去模糊，清晰输出再连到检测器和反馈回路。"
+    },
+    "code_provenance": {
+      "url": "https://github.com/KeqiangSun/FAB",
+      "verified_at": "2026-11-18",
+      "basis": "会议正文和作者项目链接 FAB 实现，含结构预测、去模糊和地标检测。"
     }
   },
   {
@@ -17500,25 +18691,83 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "将沙漏网络改为核密度概率网络，输出关键点概率图而非单一高斯假设；支持非对称或多峰分布，并通过多阶段细化同时提供定位与偶然不确定性。",
+      "method": "Kernel Density Network 为每个二维地标学习一张概率分布。离散网格输出经过高斯核变成连续密度，再用该密度的众数定位。",
       "limitations": "输出多峰概率图，需要说明坐标解码与不确定性校准；预测方差不能单独证明真实定位可靠。",
       "sources": [
-        "https://openaccess.thecvf.com/content_ICCV_2019/html/Chen_Face_Alignment_With_Kernel_Density_Deep_Neural_Network_ICCV_2019_paper.html"
+        "https://openaccess.thecvf.com/content_ICCV_2019/html/Chen_Face_Alignment_With_Kernel_Density_Deep_Neural_Network_ICCV_2019_paper.html",
+        "https://openaccess.thecvf.com/content_ICCV_2019/papers/Chen_Face_Alignment_With_Kernel_Density_Deep_Neural_Network_ICCV_2019_paper.pdf#page=3",
+        "https://openaccess.thecvf.com/content_ICCV_2019/papers/Chen_Face_Alignment_With_Kernel_Density_Deep_Neural_Network_ICCV_2019_paper.pdf#page=4",
+        "https://openaccess.thecvf.com/content_ICCV_2019/papers/Chen_Face_Alignment_With_Kernel_Density_Deep_Neural_Network_ICCV_2019_paper.pdf#page=5",
+        "https://openaccess.thecvf.com/content_ICCV_2019/papers/Chen_Face_Alignment_With_Kernel_Density_Deep_Neural_Network_ICCV_2019_paper.pdf#page=8"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和Official 2019 ICCV open-access paper 的 PDF 第 3、4、5、8 页。",
+      "verified_at": "2026-11-18",
       "problem": "低清、遮挡等情形需要量化定位不确定性，单一高斯分布假设过强。",
       "inputs_outputs": "人脸图像输入，输出关键点概率图、位置及偶然不确定性。",
       "contribution": "用核密度深度网络表达多峰或非对称分布，并逐阶段细化概率图。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未在本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "Kernel Density Network 为每个二维地标学习一张概率分布。离散网格输出经过高斯核变成连续密度，再用该密度的众数定位。",
+      "steps": [
+        {
+          "title": "得到离散位置概率",
+          "description": "沙漏网络输出每个点的空间 logits，对同一关键点的所有网格位置应用 softmax，形成归一化权重。"
+        },
+        {
+          "title": "把网格变成连续密度",
+          "description": "以各位置为 Gaussian 核的中心，用网络预测的概率作混合权重。核带宽固定，最终密度形状随图像变化。"
+        },
+        {
+          "title": "监督连续标注",
+          "description": "求人工点坐标处的条件密度，并对其最小化负对数似然。空间距离通过核贡献体现，可让一个点保留多个候选区域。"
+        },
+        {
+          "title": "逐级传递分布线索",
+          "description": "每级把 softmax 前 logits、当前特征图和缩小的输入图拼接给下一沙漏，后一级再调整候选概率。"
+        },
+        {
+          "title": "求连续众数",
+          "description": "先在网格平滑密度上找峰并用其邻域均值初始化，再在连续密度上搜索峰值。也可由预测分布计算协方差衡量不确定性。"
+        }
+      ],
+      "training": "各级均用密度似然监督。网格输出的宽度、形状和多个峰由网络学习，监督信号是连续坐标。",
+      "inference": "测试沿各级概率特征前向，最后检测每点密度的峰来得到二维坐标。易混淆点会体现为分散或多峰概率。",
+      "figure_reading": "图 1 同时标出 256×256 输入、64×64 分布和级间拼接。对照图 6 可看各级不确定性及定位偏差怎样变化。",
+      "sources": [
+        {
+          "label": "相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Chen_Face_Alignment_With_Kernel_Density_Deep_Neural_Network_ICCV_2019_paper.pdf#page=3"
+        },
+        {
+          "label": "Figure 1 · 原图",
+          "url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Chen_Face_Alignment_With_Kernel_Density_Deep_Neural_Network_ICCV_2019_paper.pdf#page=4"
+        },
+        {
+          "label": "相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Chen_Face_Alignment_With_Kernel_Density_Deep_Neural_Network_ICCV_2019_paper.pdf#page=5"
+        },
+        {
+          "label": "Figure 6 · 不确定性与偏差",
+          "url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Chen_Face_Alignment_With_Kernel_Density_Deep_Neural_Network_ICCV_2019_paper.pdf#page=8"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Chen_Face_Alignment_With_Kernel_Density_Deep_Neural_Network_ICCV_2019_paper.pdf#page=4",
+      "caption": "Figure 1 · Face Alignment With Kernel Density Deep Neural Network",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 1 同时标出 256×256 输入、64×64 分布和级间拼接。对照图 6 可看各级不确定性及定位偏差怎样变化。"
     }
   },
   {
@@ -17541,25 +18790,95 @@
     ],
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "面向合成到真实的头姿域适应，在连续且仅部分共享的姿态标签空间内进行源域加权重采样和对抗训练，减少只依赖合成标注时的域差异。",
+      "method": "PADACO 用大姿态范围的带标签合成人脸为源域，用无标签真实脸为目标域，在连续俯仰、偏航和翻滚空间选择训练样本并对齐两域特征。",
       "limitations": "源域与目标域仅部分共享连续姿态空间，适配使用真实目标域图像；不属于完全不接触目标域的泛化。",
       "sources": [
-        "https://openaccess.thecvf.com/content_ICCV_2019/html/Kuhnke_Deep_Head_Pose_Estimation_Using_Synthetic_Images_and_Partial_Adversarial_ICCV_2019_paper.html"
+        "https://openaccess.thecvf.com/content_ICCV_2019/html/Kuhnke_Deep_Head_Pose_Estimation_Using_Synthetic_Images_and_Partial_Adversarial_ICCV_2019_paper.html",
+        "https://openaccess.thecvf.com/content_ICCV_2019/papers/Kuhnke_Deep_Head_Pose_Estimation_Using_Synthetic_Images_and_Partial_Adversarial_ICCV_2019_paper.pdf#page=3",
+        "https://openaccess.thecvf.com/content_ICCV_2019/papers/Kuhnke_Deep_Head_Pose_Estimation_Using_Synthetic_Images_and_Partial_Adversarial_ICCV_2019_paper.pdf#page=4",
+        "https://openaccess.thecvf.com/content_ICCV_2019/papers/Kuhnke_Deep_Head_Pose_Estimation_Using_Synthetic_Images_and_Partial_Adversarial_ICCV_2019_paper.pdf#page=5",
+        "https://openaccess.thecvf.com/content_ICCV_2019/papers/Kuhnke_Deep_Head_Pose_Estimation_Using_Synthetic_Images_and_Partial_Adversarial_ICCV_2019_paper.pdf#page=6",
+        "https://openaccess.thecvf.com/content_ICCV_2019/papers/Kuhnke_Deep_Head_Pose_Estimation_Using_Synthetic_Images_and_Partial_Adversarial_ICCV_2019_paper.pdf#page=7",
+        "https://github.com/kuhnkeF/headposeplus"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和Official 2019 ICCV open-access paper 的 PDF 第 3、4、5、6、7 页。",
+      "verified_at": "2026-11-18",
       "problem": "合成头姿训练数据与真实图像存在域差异，且两域的连续姿态空间仅部分共享。",
       "inputs_outputs": "有标签合成人脸与真实目标域图像用于适配，输出真实图像头姿。",
       "contribution": "将部分域适配扩展到连续标签空间，以源域加权重采样配合对抗学习，并建立修订扩展的评估基准。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未在本站运行。 作者 HeadPose+ 仓库明确提供 PADACO 的模型、检查点和测试代码。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ICCV"
+    },
+    "pipeline": {
+      "overview": "PADACO 用大姿态范围的带标签合成人脸为源域，用无标签真实脸为目标域，在连续俯仰、偏航和翻滚空间选择训练样本并对齐两域特征。",
+      "steps": [
+        {
+          "title": "预训练角度回归器",
+          "description": "ResNet-18 和全连接回归头用合成图及其三角度标签建立初始映射。"
+        },
+        {
+          "title": "估计目标域姿态分布",
+          "description": "用预训练回归器预测真实目标人脸的三角度。目标预测形成头姿连续分布的近似。"
+        },
+        {
+          "title": "挑选姿态相近的源图",
+          "description": "由目标分布与源标签的距离决定采样。PADACO 以目标预测的近邻累积采样权重，缩小源域多余的姿态范围并考虑密度。"
+        },
+        {
+          "title": "在前向前重采样",
+          "description": "用权重作随机采样概率，从源域组织训练批次。源域姿态仍以真实合成标签回归，归一化统计按域处理。"
+        },
+        {
+          "title": "学习跨域特征",
+          "description": "域判别分支区分真实与合成特征，特征提取器接收反向域梯度。回归头维持从共享特征到三角度的预测。"
+        }
+      ],
+      "training": "先做有标签源训练，再用带标签合成源数据和无标签真实数据做部分域自适应，联合角度均方误差和域分类目标。",
+      "inference": "在目标域以图像运行特征网络与回归头，输出 pitch、yaw 和 roll。加权采样与域判别器用于训练。",
+      "figure_reading": "图 2 先看连续源样本筛选，再跟踪三支模块 F、R 和 D，以及源域的角度监督怎样保留。",
+      "sources": [
+        {
+          "label": "相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Kuhnke_Deep_Head_Pose_Estimation_Using_Synthetic_Images_and_Partial_Adversarial_ICCV_2019_paper.pdf#page=3"
+        },
+        {
+          "label": "Figure 2 · 原图",
+          "url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Kuhnke_Deep_Head_Pose_Estimation_Using_Synthetic_Images_and_Partial_Adversarial_ICCV_2019_paper.pdf#page=4"
+        },
+        {
+          "label": "相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Kuhnke_Deep_Head_Pose_Estimation_Using_Synthetic_Images_and_Partial_Adversarial_ICCV_2019_paper.pdf#page=5"
+        },
+        {
+          "label": "相关正文 · PDF 第 6 页",
+          "url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Kuhnke_Deep_Head_Pose_Estimation_Using_Synthetic_Images_and_Partial_Adversarial_ICCV_2019_paper.pdf#page=6"
+        },
+        {
+          "label": "相关正文 · PDF 第 7 页",
+          "url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Kuhnke_Deep_Head_Pose_Estimation_Using_Synthetic_Images_and_Partial_Adversarial_ICCV_2019_paper.pdf#page=7"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Kuhnke_Deep_Head_Pose_Estimation_Using_Synthetic_Images_and_Partial_Adversarial_ICCV_2019_paper.pdf#page=4",
+      "caption": "Figure 2 · Deep Head Pose Estimation Using Synthetic Images and Partial Adversarial Domain Adaption for Continuous Label Spaces",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 2 先看连续源样本筛选，再跟踪三支模块 F、R 和 D，以及源域的角度监督怎样保留。"
+    },
+    "code": "https://github.com/kuhnkeF/headposeplus",
+    "code_provenance": {
+      "url": "https://github.com/kuhnkeF/headposeplus",
+      "verified_at": "2026-11-18",
+      "basis": "作者 HeadPose+ 仓库明确提供 PADACO 的模型、检查点和测试代码。"
     }
   },
   {
@@ -17585,25 +18904,112 @@
       "https://openaccess.thecvf.com/content/CVPR2022/html/Martyniuk_DAD-3DHeads_A_Large-Scale_Dense_Accurate_and_Diverse_Dataset_for_3D_CVPR_2022_paper.html"
     ],
     "analysis": {
-      "method": "提供多样化头部数据集，每个头部提供 3,500 余个稠密关键点标注，并训练 DAD-3DNet 联合预测 FLAME 形状、表情与姿态，以评估自然场景三维头部对齐和域偏移鲁棒性。",
+      "method": "DAD-3DHeads 用人工锚点拟合整头 FLAME 网格作为标注，基线 DAD-3DNet 再从单张裁剪头图联合预测模型参数和二维关键点。",
       "limitations": "FLAME 参数空间及稠密标注定义限定输出；数据集贡献与 DAD-3DNet 基线的精度应分别记录。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2022/html/Martyniuk_DAD-3DHeads_A_Large-Scale_Dense_Accurate_and_Diverse_Dataset_for_3D_CVPR_2022_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2022/html/Martyniuk_DAD-3DHeads_A_Large-Scale_Dense_Accurate_and_Diverse_Dataset_for_3D_CVPR_2022_paper.html",
+        "https://arxiv.org/html/2204.03688v1#S3.SS1",
+        "https://arxiv.org/html/2204.03688v1#S3.SS2",
+        "https://arxiv.org/html/2204.03688v1#S4.SS1",
+        "https://arxiv.org/html/2204.03688v1#S4.SS2",
+        "https://arxiv.org/html/2204.03688v1#S4.SS3",
+        "https://arxiv.org/html/2204.03688v1#S4.F6",
+        "https://arxiv.org/html/2204.03688v1#S3.F2",
+        "https://github.com/PinataFarms/DAD-3DHeads"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "核对官方会议摘要或作者机构出版记录与摘要；未逐节复核全文、未复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和作者预印本 arXiv:2204.03688v1 的 S3.SS1、S3.SS2、S4.SS1、S4.SS2、S4.SS3 章节。",
+      "verified_at": "2026-11-18",
       "problem": "自然场景三维头部对齐需要应对姿态、表情、遮挡和人群差异，以及训练与部署间的分布变化。",
       "inputs_outputs": "单张头部图像输入，输出 FLAME 网格、形状、表情、姿态参数及关键点。",
       "contribution": "提供每个头部带有 3,500 余个稠密关键点标注的数据集和多任务 DAD-3DNet，支持多类头部几何任务与域偏移评估。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未在本站运行。 作者官方仓库提供 DAD-3DNet 模型、训练、推理和基准评测。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "DAD-3DHeads 用人工锚点拟合整头 FLAME 网格作为标注，基线 DAD-3DNet 再从单张裁剪头图联合预测模型参数和二维关键点。",
+      "steps": [
+        {
+          "title": "用可见点标注整头",
+          "description": "标注人员在三维模板表面选点并拖到对应像素，系统优化 FLAME 参数以减小锚点重投影误差，并显示纹理渲染供复核。数据保留 5023 个顶点，论文以去除颈部和眼球后的 3669 个头部顶点作为主要监督。"
+        },
+        {
+          "title": "生成多尺度热图",
+          "description": "CNN 编码器处理近似居中的头部裁剪。BiFPN 融合编码器第二到第四阶段的特征，得到原始分辨率四分之一的关键点高斯热图。"
+        },
+        {
+          "title": "融合热图与外观",
+          "description": "将粗热图插值到深层特征图分辨率，与编码器和 BiFPN 特征共同送入 Inception 融合模块。回归分支输出精细二维点位以及三维形状、表情与姿态参数。"
+        },
+        {
+          "title": "解码与投影",
+          "description": "固定的可微 FLAME 层生成模板拓扑的网格。整体旋转用连续六维表示，和下颌旋转分开。对网格施加全局旋转、尺度和平移后再正交投影，得到图像中的稠密点。"
+        },
+        {
+          "title": "监督不同输出",
+          "description": "形状和表情用归一化的去整体旋转网格监督，投影损失约束整体姿态。二维坐标和高斯热图也分别接收标注。"
+        }
+      ],
+      "training": "端到端训练包含三维形状与表情、二维重投影、直接点位回归和 Adaptive Wing 热图损失，FLAME 层保持固定。",
+      "inference": "测试输入一张已检测并留有边界的头部图，输出参数化整头网格和二维点。可按任务读取整体旋转或重投影顶点。",
+      "figure_reading": "图 6 从 CNN、BiFPN 和融合模块读到热图、坐标与 FLAME 三种输出。图 2 解释数据标注时怎样把表面锚点和二维像素连起来。",
+      "sources": [
+        {
+          "label": "3.1 Data acquisition",
+          "url": "https://arxiv.org/html/2204.03688v1#S3.SS1"
+        },
+        {
+          "label": "3.2 Dataset Statistics",
+          "url": "https://arxiv.org/html/2204.03688v1#S3.SS2"
+        },
+        {
+          "label": "4.1 DAD-3DNet Architecture",
+          "url": "https://arxiv.org/html/2204.03688v1#S4.SS1"
+        },
+        {
+          "label": "4.2 Objective Function",
+          "url": "https://arxiv.org/html/2204.03688v1#S4.SS2"
+        },
+        {
+          "label": "4.3 Implementation details",
+          "url": "https://arxiv.org/html/2204.03688v1#S4.SS3"
+        },
+        {
+          "label": "Figure 6 · 原图",
+          "url": "https://arxiv.org/html/2204.03688v1#S4.F6"
+        },
+        {
+          "label": "Figure 2 · 标注界面",
+          "url": "https://arxiv.org/html/2204.03688v1#S3.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local"
+    },
+    "figure": {
+      "src": "assets/figures/dad-3dheads-original.png",
+      "caption": "Figure 6 · DAD-3DNet 的热图、关键点与 FLAME 解码",
+      "alt": "Figure 6 · DAD-3DNet 的热图、关键点与 FLAME 解码",
+      "source": "https://arxiv.org/html/2204.03688v1#S4.F6",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Tetiana Martyniuk, Orest Kupyn, Yana Kurliak, Igor Krashenyi, Jiři, Viktoriia Sharmanska. DAD-3DHeads: A Large-scale Dense, Accurate and Diverse Dataset for 3D Head Alignment from a Single Image, Figure 6, arXiv:2204.03688v1. CC BY 4.0.",
+      "authors": "Tetiana Martyniuk, Orest Kupyn, Yana Kurliak, Igor Krashenyi, Jiři, Viktoriia Sharmanska",
+      "figure_number": "Figure 6",
+      "version": "2204.03688v1",
+      "modifications": "arXiv HTML 原始 PNG 文件，未做图像编辑。"
+    },
+    "code_provenance": {
+      "url": "https://github.com/PinataFarms/DAD-3DHeads",
+      "verified_at": "2026-11-18",
+      "basis": "作者官方仓库提供 DAD-3DNet 模型、训练、推理和基准评测。"
     }
   },
   {
@@ -17628,26 +19034,79 @@
     "status": "Published",
     "verified_at": "2026-11-17",
     "analysis": {
-      "method": "将头姿回归表述为四元数预测，并结合多种回归损失学习特征与精细姿态，针对欧拉角表示歧义及单一回归目标的局限。期刊卷期为 2019 年，DOI 对应 2018 年在线发表。",
+      "method": "QuatNet 从 RGB 裁剪脸图回归头部四元数，用额外的序数任务训练共享视觉特征，再通过连续回归读出具体姿态。",
       "limitations": "四元数具有等价符号表示，损失与角度度量须对应；旋转输出不包含三维平移。",
       "sources": [
         "https://scholar.nycu.edu.tw/en/publications/quatnet-quaternion-based-head-pose-estimation-with-multiregressio/",
-        "https://doi.org/10.1109/TMM.2018.2866770"
+        "https://doi.org/10.1109/TMM.2018.2866770",
+        "https://ieeexplore.ieee.org/document/8444061",
+        "https://scholar.nycu.edu.tw/zh/publications/quatnet-quaternion-based-head-pose-estimation-with-multiregressio/",
+        "https://ieeexplore.ieee.org/document/8444061/figures#fig3"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "核对官方会议摘要或作者机构出版记录与摘要；未逐节复核全文、未复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和IEEE Transactions on Multimedia accepted manuscript, DOI 10.1109/TMM.2018.2866770 §III–IV、§V-D 和图 3。",
+      "verified_at": "2026-11-18",
       "problem": "头姿回归需兼顾精细角度预测，并处理常用欧拉角表示的歧义。",
       "inputs_outputs": "头部图像输入，输出四元数表示的头部姿态。",
       "contribution": "以四元数表述姿态并联合多种回归损失，连接特征学习与精细姿态预测。",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未在本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=44",
       "version": "2026 第七版（目录原文转载）",
       "venue": "TMM"
+    },
+    "pipeline": {
+      "overview": "QuatNet 从 RGB 裁剪脸图回归头部四元数，用额外的序数任务训练共享视觉特征，再通过连续回归读出具体姿态。",
+      "steps": [
+        {
+          "title": "转换输入监督",
+          "description": "将数据集的 yaw、pitch、roll 按正文坐标和旋转顺序转成单位四元数。脸图预处理后送入网络。"
+        },
+        {
+          "title": "共享视觉特征",
+          "description": "使用预训练 GoogLeNet 至最终池化层，回归与序数支路共用该图像表示。"
+        },
+        {
+          "title": "构造四元数回归",
+          "description": "四个全连接子网分别输出三个轴分量和一个与角度对应的分量，经轴角到四元数的三角函数变换后，监督四元数的四个值。"
+        },
+        {
+          "title": "利用序数辅助学习",
+          "description": "对四元数的向量三个分量各设置多组有序阈值，每组学习是否超过预设值。该分支以二元分类让共享特征表征姿态变化规律。"
+        },
+        {
+          "title": "解码旋转",
+          "description": "预测四元数先做单位范数归一化，然后按基准约定可转成三轴角度。"
+        }
+      ],
+      "training": "在共享骨干上联合优化四元数 L2 回归与加权序数损失。论文的主要训练集为 300W-LP。",
+      "inference": "测试只运行骨干和回归支路，由四元数得到头姿。序数判别用于训练，不参与角度输出。",
+      "figure_reading": "论文图 3 给出同一池化层后的彩色分支，单独追踪四个回归值如何经非线性变换汇聚成四元数。",
+      "sources": [
+        {
+          "label": "出版商正文 · §III–IV、§V-D 和图 3",
+          "url": "https://ieeexplore.ieee.org/document/8444061"
+        },
+        {
+          "label": "作者所在机构提供的说明",
+          "url": "https://scholar.nycu.edu.tw/zh/publications/quatnet-quaternion-based-head-pose-estimation-with-multiregressio/"
+        },
+        {
+          "label": "Figure 3 · 原图",
+          "url": "https://ieeexplore.ieee.org/document/8444061/figures#fig3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://ieeexplore.ieee.org/document/8444061/figures#fig3",
+      "caption": "Figure 3 · QuatNet: Quaternion-Based Head Pose Estimation With Multiregression Loss",
+      "note": "沿出版商链接查看论文图 3。核对的 IEEE 接收稿要求获得许可后再发布原图。论文图 3 给出同一池化层后的彩色分支，单独追踪四个回归值如何经非线性变换汇聚成四元数。"
     }
   },
   {
@@ -33947,25 +35406,119 @@
     ],
     "analysis": {
       "problem": "身份无关的头姿估计缺少统一评估与通用方案。",
-      "method": "按技术路线梳理 90 篇代表性研究，比较粗粒度与精细头姿估计的优缺点。",
+      "method": "Murphy-Chutorian 与 Trivedi 从视觉观测如何约束三维方向出发，系统梳理深度学习普及前的头姿方法，并比较常见传感器、使用条件和数据集。",
       "inputs_outputs": "综述对象是从视觉信息估计头部朝向的系统，不是新的预测网络。",
       "contribution": "提供非约束头姿估计的历史脉络与方法比较，可作为深度学习前研究的入口。",
       "limitations": "历史综述覆盖其发表时的研究，不能直接作为深度学习时代方法的完整比较或当前排行榜。",
       "sources": [
         "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf",
-        "https://doi.org/10.1109/TPAMI.2008.106"
+        "https://doi.org/10.1109/TPAMI.2008.106",
+        "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf#page=2",
+        "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf#page=3",
+        "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf#page=4",
+        "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf#page=5",
+        "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf#page=6",
+        "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf#page=7",
+        "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf#page=8",
+        "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf#page=9",
+        "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf#page=10",
+        "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf#page=11",
+        "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf#page=12"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "核对原始摘要与出版信息；未全文逐段复核、未复现，不将摘要中的优势外推为全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和USC-hosted accepted manuscript 的 PDF 第 2、3、4、5、6、7、8、9、10、11、12 页。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "综述按论文的分类、对比和指标组织。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=51",
       "version": "2026 第七版（目录原文转载）",
       "venue": "TPAMI"
+    },
+    "pipeline": {
+      "overview": "Murphy-Chutorian 与 Trivedi 从视觉观测如何约束三维方向出发，系统梳理深度学习普及前的头姿方法，并比较常见传感器、使用条件和数据集。",
+      "steps": [
+        {
+          "title": "设定估计任务",
+          "description": "先用 yaw、pitch、roll 表达相机相对的方向，区分连续角度估计与离散姿态分类，以及静态图和时序跟踪。"
+        },
+        {
+          "title": "沿外观路线归类",
+          "description": "模板法匹配已知姿态外观，检测器阵列为离散方向训练专门分类器，非线性回归从观测直接映射到姿态。"
+        },
+        {
+          "title": "沿低维与几何路线归类",
+          "description": "流形嵌入从不同方向的图像学习低维结构。可变形模型拟合人脸结构，几何方法以可见特征位置限制方向。"
+        },
+        {
+          "title": "识别时序及混合方法",
+          "description": "跟踪法利用前一时刻状态解释当前外观或运动，也可将检测、几何或回归与滤波结合，处理连续序列。"
+        },
+        {
+          "title": "对齐实验协议后读结果",
+          "description": "跨数据集比较时核对头部角度覆盖、传感器、已知裁剪和训练划分。将受控单图与真实视频的条件分开阅读。"
+        }
+      ],
+      "training": "论文按视觉线索和解算方式归纳七类基础方法，单列结合多种线索的混合路线，并讨论不同条件下的人类表现。",
+      "inference": "可用分类表把历史基线放到相同的问题设定中，再按数据集表核对测试条件与各轴误差。单一总分难以描述不同观测条件。",
+      "figure_reading": "PDF 第 3 页的图 3 列举多个方法族的示意，可与同页分类表以及第 2 页图 1 的角度定义一起读。",
+      "sources": [
+        {
+          "label": "Figure 1 · 三轴定义",
+          "url": "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf#page=2"
+        },
+        {
+          "label": "Figure 3 · 原图",
+          "url": "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf#page=3"
+        },
+        {
+          "label": "相关正文 · PDF 第 4 页",
+          "url": "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf#page=4"
+        },
+        {
+          "label": "相关正文 · PDF 第 5 页",
+          "url": "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf#page=5"
+        },
+        {
+          "label": "相关正文 · PDF 第 6 页",
+          "url": "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf#page=6"
+        },
+        {
+          "label": "相关正文 · PDF 第 7 页",
+          "url": "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf#page=7"
+        },
+        {
+          "label": "相关正文 · PDF 第 8 页",
+          "url": "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf#page=8"
+        },
+        {
+          "label": "相关正文 · PDF 第 9 页",
+          "url": "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf#page=9"
+        },
+        {
+          "label": "相关正文 · PDF 第 10 页",
+          "url": "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf#page=10"
+        },
+        {
+          "label": "相关正文 · PDF 第 11 页",
+          "url": "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf#page=11"
+        },
+        {
+          "label": "相关正文 · PDF 第 12 页",
+          "url": "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf#page=12"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only",
+      "kind": "survey"
+    },
+    "figure": {
+      "source": "https://people.ict.usc.edu/~gratch/CSCI534/Old-Readings/Head%20Pose%20estimation.pdf#page=3",
+      "caption": "Figure 3 · Head Pose Estimation in Computer Vision: A Survey",
+      "note": "沿链接查看论文原图。转载许可尚未确认。PDF 第 3 页的图 3 列举多个方法族的示意，可与同页分类表以及第 2 页图 1 的角度定义一起读。"
     }
   },
   {
@@ -33986,24 +35539,98 @@
     ],
     "analysis": {
       "problem": "深度传感器噪声、大角度旋转与局部遮挡增加头姿和面部定位难度。",
-      "method": "随机森林让深度图局部块向头姿与三维面部特征位置投票，每帧独立处理。",
+      "method": "Fanelli 等用随机回归森林直接从深度块投票得到鼻尖位置和头部方向，并扩展同一训练结构，以短距离投票定位其他三维面部特征。",
       "inputs_outputs": "深度图输入；输出头部姿态及三维面部特征位置。",
       "contribution": "将头姿投票扩展至三维面部特征定位，并提供 Kinect 头姿标注数据库。",
       "limitations": "每帧独立的深度图投票不使用时间跟踪；需要深度传感器，不能当作普通 RGB 单帧方案。",
       "sources": [
-        "https://www.research-collection.ethz.ch/server/api/core/bitstreams/57a5ec37-5416-4e47-af2f-8df94b8385b8/content"
+        "https://www.research-collection.ethz.ch/server/api/core/bitstreams/57a5ec37-5416-4e47-af2f-8df94b8385b8/content",
+        "https://link.springer.com/content/pdf/10.1007/s11263-012-0549-0.pdf#page=4",
+        "https://link.springer.com/content/pdf/10.1007/s11263-012-0549-0.pdf#page=5",
+        "https://link.springer.com/content/pdf/10.1007/s11263-012-0549-0.pdf#page=6",
+        "https://link.springer.com/content/pdf/10.1007/s11263-012-0549-0.pdf#page=7",
+        "https://link.springer.com/content/pdf/10.1007/s11263-012-0549-0.pdf#page=8",
+        "https://link.springer.com/content/pdf/10.1007/s11263-012-0549-0.pdf#page=12",
+        "https://link.springer.com/content/pdf/10.1007/s11263-012-0549-0.pdf#page=13",
+        "https://files.is.tue.mpg.de/jgall/projects/RFhead/RFhead.html"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "核对论文摘要及首页卷期：IJCV 101:437–458，卷期年 2013，首次在线 2012；未复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和Springer Nature Version of Record, IJCV 2013 的 PDF 第 4、5、6、7、8、12、13 页。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "流程以所列论文版本为准。实现及模型权重未在本站运行。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=51",
       "version": "2026 第七版（目录原文转载）",
       "venue": "IJCV"
+    },
+    "pipeline": {
+      "overview": "Fanelli 等用随机回归森林直接从深度块投票得到鼻尖位置和头部方向，并扩展同一训练结构，以短距离投票定位其他三维面部特征。",
+      "steps": [
+        {
+          "title": "采样深度块",
+          "description": "在深度图取固定大小的局部块，取其三维中心，并计算深度特征。实验也比较把局部表面法向作为额外通道。"
+        },
+        {
+          "title": "学习树内分流",
+          "description": "用两块矩形区域的平均深度或法向特征差进行二元判别，通过分类与回归信息增益优化节点。"
+        },
+        {
+          "title": "在叶节点保存输出分布",
+          "description": "训练时为块标注脸部类别、相对鼻尖的三维偏移与 Euler 角。叶节点保存类别概率和回归向量的均值与协方差。"
+        },
+        {
+          "title": "聚合头部位姿投票",
+          "description": "测试时让可信且方差较小的叶子投票，将偏移加到当前三维块中心并聚类，再经均值漂移细化各簇。保留足够票数的簇并读取鼻尖和方向。"
+        },
+        {
+          "title": "扩展到其他三维地标",
+          "description": "为每种地标学习局部偏移，让近距离、高置信的块参与，再对每个点的候选独立做均值漂移，以保留局部表情变化。"
+        }
+      ],
+      "training": "深度训练样本需带鼻尖与方向标注，脸外区域提供背景类别。三维面部特征版本改用多类和逐地标偏移，论文比较合成扫描与 Kinect 场景。",
+      "inference": "从一帧深度图生成独立的树投票，经筛选、聚类和求均值获得头部位姿。地标版本额外为每类特征输出其三维位置。",
+      "figure_reading": "图 1 展示深度块沿各树走到有多变量分布的叶子。图 2 给出矩形测试与鼻尖偏移，图 3 显示多块投票如何汇聚到位姿。",
+      "sources": [
+        {
+          "label": "相关正文 · PDF 第 4 页",
+          "url": "https://link.springer.com/content/pdf/10.1007/s11263-012-0549-0.pdf#page=4"
+        },
+        {
+          "label": "Figure 1 · 原图",
+          "url": "https://link.springer.com/content/pdf/10.1007/s11263-012-0549-0.pdf#page=5"
+        },
+        {
+          "label": "Figure 2 · 深度块训练标注",
+          "url": "https://link.springer.com/content/pdf/10.1007/s11263-012-0549-0.pdf#page=6"
+        },
+        {
+          "label": "Figure 3 · 位姿投票汇聚",
+          "url": "https://link.springer.com/content/pdf/10.1007/s11263-012-0549-0.pdf#page=7"
+        },
+        {
+          "label": "相关正文 · PDF 第 8 页",
+          "url": "https://link.springer.com/content/pdf/10.1007/s11263-012-0549-0.pdf#page=8"
+        },
+        {
+          "label": "相关正文 · PDF 第 12 页",
+          "url": "https://link.springer.com/content/pdf/10.1007/s11263-012-0549-0.pdf#page=12"
+        },
+        {
+          "label": "相关正文 · PDF 第 13 页",
+          "url": "https://link.springer.com/content/pdf/10.1007/s11263-012-0549-0.pdf#page=13"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://link.springer.com/content/pdf/10.1007/s11263-012-0549-0.pdf#page=5",
+      "caption": "Figure 1 · Random Forests for Real Time 3D Face Analysis",
+      "note": "沿链接查看论文原图。转载许可尚未确认。图 1 展示深度块沿各树走到有多变量分布的叶子。图 2 给出矩形测试与鼻尖偏移，图 3 显示多块投票如何汇聚到位姿。"
     }
   },
   {
@@ -34511,18 +36138,100 @@
     ],
     "analysis": {
       "problem": "非约束头姿估计仍存在挑战，不同方法与数据库之间缺乏清晰的比较入口。",
-      "method": "整理公开数据库，回顾经典技术并重点分析现代深度学习路线。",
+      "method": "Asperti 与 Filippini 以求解机制组织头姿估计文献，从数据和旋转表示一直比较到评测协议，并区分深度方法与经典方法的关系。",
       "inputs_outputs": "综述针对图像头部方向估计方法与数据；不引入新的推理网络。",
       "contribution": "提供从传统路线到深度模型的头姿估计研究地图，适合定位数据及方法选择。",
       "limitations": "综述覆盖截至发表时的深度头姿方法，不提供统一新模型；选择模型还需核对最新数据、协议与实现。",
       "sources": [
-        "https://link.springer.com/article/10.1007/s42979-023-01796-z"
+        "https://link.springer.com/article/10.1007/s42979-023-01796-z",
+        "https://link.springer.com/article/10.1007/s42979-023-01796-z#Sec5",
+        "https://link.springer.com/article/10.1007/s42979-023-01796-z#Sec7",
+        "https://link.springer.com/article/10.1007/s42979-023-01796-z#Sec11",
+        "https://link.springer.com/article/10.1007/s42979-023-01796-z#Sec17",
+        "https://link.springer.com/article/10.1007/s42979-023-01796-z#Sec18",
+        "https://link.springer.com/article/10.1007/s42979-023-01796-z#Sec20",
+        "https://link.springer.com/article/10.1007/s42979-023-01796-z#figure-6"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "核对原始摘要与出版信息；未全文逐段复核、未复现，不将摘要中的优势外推为全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和Springer Nature Version of Record, 2023 的 Sec5、Sec7、Sec11、Sec17、Sec18、Sec20 章节。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "综述按论文的分类、对比和指标组织。"
+    },
+    "pipeline": {
+      "overview": "Asperti 与 Filippini 以求解机制组织头姿估计文献，从数据和旋转表示一直比较到评测协议，并区分深度方法与经典方法的关系。",
+      "steps": [
+        {
+          "title": "先确定输入条件",
+          "description": "查数据章节中的 RGB、深度与其他输入，记录拍摄环境、可用注释、角度覆盖和训练测试划分。"
+        },
+        {
+          "title": "统一旋转语义",
+          "description": "对照 Euler 角、旋转矩阵与单位四元数，核对坐标系和轴顺序，确定如何从不同模型输出得到可比的三维旋转。"
+        },
+        {
+          "title": "按求解机制读分类树",
+          "description": "以作者的分割、模型拟合、非线性回归和多任务分支为主线；配合正文比较经典与深度实现的假设、前置检测和几何信息。"
+        },
+        {
+          "title": "核对误差定义",
+          "description": "区分按轴平均绝对误差、处理角度周期性的指标及旋转间的距离，特别检查跨 ±180° 处的误差行为。"
+        },
+        {
+          "title": "按协议阅读结果表",
+          "description": "进入评测小节核对训练测试组合、是否用深度及可用数据，再在相同条件下比较。讨论章节补充输入域和不均匀标注造成的偏差。"
+        }
+      ],
+      "training": "以方法所依赖的信号和核心估计机制分类，并单列涉及地标检测、对齐等关联任务的联合方法。",
+      "inference": "比较两项工作时，先匹配角度范围和传感器，再匹配评测协议、输出约定和误差定义。可由这一顺序定位性能差异是否来自方法本身。",
+      "figure_reading": "图 6 是作者的深度头姿方法分类树。先沿主分支找方法族，再查正文中的子类、输入依赖与挑战。",
+      "sources": [
+        {
+          "label": "Datasets",
+          "url": "https://link.springer.com/article/10.1007/s42979-023-01796-z#Sec5"
+        },
+        {
+          "label": "Head Pose Rotations Representations",
+          "url": "https://link.springer.com/article/10.1007/s42979-023-01796-z#Sec7"
+        },
+        {
+          "label": "Methods",
+          "url": "https://link.springer.com/article/10.1007/s42979-023-01796-z#Sec11"
+        },
+        {
+          "label": "Evaluation Metrics",
+          "url": "https://link.springer.com/article/10.1007/s42979-023-01796-z#Sec17"
+        },
+        {
+          "label": "Evaluation",
+          "url": "https://link.springer.com/article/10.1007/s42979-023-01796-z#Sec18"
+        },
+        {
+          "label": "Discussion",
+          "url": "https://link.springer.com/article/10.1007/s42979-023-01796-z#Sec20"
+        },
+        {
+          "label": "Figure 6 · 原图",
+          "url": "https://link.springer.com/article/10.1007/s42979-023-01796-z#figure-6"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local",
+      "kind": "survey"
+    },
+    "figure": {
+      "src": "assets/figures/hpe-deep-survey-2023-original.png",
+      "caption": "Figure 6 · 深度学习头姿估计方法分类",
+      "alt": "Figure 6 · 深度学习头姿估计方法分类",
+      "source": "https://link.springer.com/article/10.1007/s42979-023-01796-z#figure-6",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Andrea Asperti, Daniele Filippini. Deep Learning for Head Pose Estimation: A Survey, Figure 6, Springer Nature Version of Record, 2023. CC BY 4.0.",
+      "authors": "Andrea Asperti, Daniele Filippini",
+      "figure_number": "Figure 6",
+      "version": "Springer Nature Version of Record, 2023",
+      "modifications": "Springer Nature 论文页面的原始全尺寸 PNG 文件，未做图像编辑。"
     }
   },
   {
@@ -34543,18 +36252,100 @@
     ],
     "analysis": {
       "problem": "头姿估计方法快速增长，研究者需要比较机器学习和深度学习技术路线。",
-      "method": "梳理头姿估计技术及其发展，对不同方法进行组织和比较。",
+      "method": "Algabri、Abdu 与 Lee 用四组十一项条件描述头姿系统，为比较传统机器学习与深度学习提供统一阅读顺序。",
       "inputs_outputs": "综述覆盖视觉头姿估计文献，不对应一个单独的输入输出模型。",
       "contribution": "为头姿估计的方法比较与后续研究提供较新的综述入口。",
       "limitations": "不同机器学习路线在各自数据与协议上比较，不能从综述汇总直接推导当前统一排名。",
       "sources": [
-        "https://link.springer.com/article/10.1007/s10462-024-10936-7"
+        "https://link.springer.com/article/10.1007/s10462-024-10936-7",
+        "https://link.springer.com/article/10.1007/s10462-024-10936-7#Sec4",
+        "https://link.springer.com/article/10.1007/s10462-024-10936-7#Sec9",
+        "https://link.springer.com/article/10.1007/s10462-024-10936-7#Sec14",
+        "https://link.springer.com/article/10.1007/s10462-024-10936-7#Sec18",
+        "https://link.springer.com/article/10.1007/s10462-024-10936-7#Sec25",
+        "https://link.springer.com/article/10.1007/s10462-024-10936-7#Sec34",
+        "https://link.springer.com/article/10.1007/s10462-024-10936-7#figure-3"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "核对原始摘要与出版信息；未全文逐段复核、未复现，不将摘要中的优势外推为全面领先。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对正式记录和Springer Nature Version of Record, 2024 的 Sec4、Sec9、Sec14、Sec18、Sec25、Sec34 章节。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "综述按论文的分类、对比和指标组织。"
+    },
+    "pipeline": {
+      "overview": "Algabri、Abdu 与 Lee 用四组十一项条件描述头姿系统，为比较传统机器学习与深度学习提供统一阅读顺序。",
+      "steps": [
+        {
+          "title": "界定应用场景",
+          "description": "先写明应用、单任务或联合任务，以及受控或自然环境。这些条件决定处理流程需要面对的遮挡、尺度和姿态变化。"
+        },
+        {
+          "title": "记录数据与真值",
+          "description": "检查数据集种类、角度范围、旋转表示和自由度。第 3 节另对照深度测量、传感器及已有模型等标注办法。"
+        },
+        {
+          "title": "定位技术路线",
+          "description": "按有无关键点、估计算法以及旋转类型整理方法，区分以几何中间量估姿与从外观直接估姿的方案。"
+        },
+        {
+          "title": "匹配评测指标",
+          "description": "确认输出是离散方向或连续角度，再比较适合该输出的误差指标和评测设置。"
+        },
+        {
+          "title": "按同一字段复核文献表",
+          "description": "将应用、输入、表示、算法和评测逐项对应到综述表格。用讨论章节核对数据偏差、尺度和遮挡等挑战。"
+        }
+      ],
+      "training": "分类次序从应用、数据准备到技术与评测，覆盖 11 个维度。论文用同一套字段对照 113 项研究。",
+      "inference": "已有系统可依次核对场景、输入、姿态表示和输出评测。只有条件对应的结果才能直接横向比较。",
+      "figure_reading": "图 3 从四个灰色分组编号出发，顺着各分支读完场景、数据、方法、指标。可用它逐项定位正文条目。",
+      "sources": [
+        {
+          "label": "2 Main steps of head pose estimation frameworks",
+          "url": "https://link.springer.com/article/10.1007/s10462-024-10936-7#Sec4"
+        },
+        {
+          "label": "2.2 Data handling and preparation",
+          "url": "https://link.springer.com/article/10.1007/s10462-024-10936-7#Sec9"
+        },
+        {
+          "label": "2.3 Techniques and methodologies",
+          "url": "https://link.springer.com/article/10.1007/s10462-024-10936-7#Sec14"
+        },
+        {
+          "label": "2.4 Evaluation metrics",
+          "url": "https://link.springer.com/article/10.1007/s10462-024-10936-7#Sec18"
+        },
+        {
+          "label": "3 Datasets and ground-truth techniques",
+          "url": "https://link.springer.com/article/10.1007/s10462-024-10936-7#Sec25"
+        },
+        {
+          "label": "4 Discussion, challenges, and future directions",
+          "url": "https://link.springer.com/article/10.1007/s10462-024-10936-7#Sec34"
+        },
+        {
+          "label": "Figure 3 · 原图",
+          "url": "https://link.springer.com/article/10.1007/s10462-024-10936-7#figure-3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local",
+      "kind": "survey"
+    },
+    "figure": {
+      "src": "assets/figures/hpe-ml-survey-2024-original.png",
+      "caption": "Figure 3 · 头部姿态估计的四组十一项流程分类",
+      "alt": "Figure 3 · 头部姿态估计的四组十一项流程分类",
+      "source": "https://link.springer.com/article/10.1007/s10462-024-10936-7#figure-3",
+      "license": "CC BY-NC-ND 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+      "attribution": "Redhwan Algabri, Ahmed Abdu, Sungon Lee. Deep learning and machine learning techniques for head pose estimation: a survey, Figure 3, Springer Nature Version of Record, 2024. CC BY-NC-ND 4.0.",
+      "authors": "Redhwan Algabri, Ahmed Abdu, Sungon Lee",
+      "figure_number": "Figure 3",
+      "version": "Springer Nature Version of Record, 2024",
+      "modifications": "Springer Nature 论文页面的原始全尺寸 PNG 文件，未做图像编辑。"
     }
   },
   {

@@ -826,3 +826,9 @@ Xiao Tang, Tianyu Wang, Chi-Wing Fu. Towards Accurate Alignment in Real-time 3D 
 - License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 - License evidence: https://arxiv.org/abs/2109.01723v1
 - SHA-256: `f315fea73f0e33537c4cd65f7eee56f9aefb5d8b8659a5b662f5e8310d32f635`
+
+## 2026-11-18 第 15 批
+
+- [dad-3dheads-original.png](https://arxiv.org/html/2204.03688v1#S4.F6) · Tetiana Martyniuk, Orest Kupyn, Yana Kurliak, Igor Krashenyi, Jiři, Viktoriia Sharmanska. DAD-3DHeads: A Large-scale Dense, Accurate and Diverse Dataset for 3D Head Alignment from a Single Image, Figure 6, arXiv:2204.03688v1. CC BY 4.0. [许可依据](https://arxiv.org/abs/2204.03688v1)
+- [hpe-deep-survey-2023-original.png](https://link.springer.com/article/10.1007/s42979-023-01796-z#figure-6) · Andrea Asperti, Daniele Filippini. Deep Learning for Head Pose Estimation: A Survey, Figure 6, Springer Nature Version of Record, 2023. CC BY 4.0. [许可依据](https://link.springer.com/article/10.1007/s42979-023-01796-z#rightslink)
+- [hpe-ml-survey-2024-original.png](https://link.springer.com/article/10.1007/s10462-024-10936-7#figure-3) · Redhwan Algabri, Ahmed Abdu, Sungon Lee. Deep learning and machine learning techniques for head pose estimation: a survey, Figure 3, Springer Nature Version of Record, 2024. CC BY-NC-ND 4.0. [许可依据](https://link.springer.com/article/10.1007/s10462-024-10936-7#rightslink)

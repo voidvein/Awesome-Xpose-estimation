@@ -1,6 +1,6 @@
 # 详情页构建进度
 
-更新：2026-11-18。共 371 篇；流程说明已完成 317 篇，其中原图已收录 60 篇；待开展 54 篇。
+更新：2026-11-18。共 371 篇；流程说明已完成 344 篇，其中原图已收录 63 篇；待开展 27 篇。
 
 每篇按原文核对模块顺序、数据流、训练与推理、图号及版本。只使用论文原图；转载许可未明确时只保留原图链接，不重绘。摘要与适用边界笔记不计为流程精读完成。
 
@@ -36,6 +36,7 @@
 - [T-FAKE: Synthesizing Thermal Images for Facial Landmarking](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-t-fake-synthesizing-thermal-images-for-facial-landmarking-2025)
 - [Heatmap Regression without Soft-Argmax for Facial Landmark Detection](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-heatmap-regression-without-soft-argmax-for-facial-landmark-detection-2025)
 - [ORFormer: Occlusion-Robust Transformer for Accurate Facial Landmark Detection](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-orformer-occlusion-robust-transformer-for-accurate-facial-landmark-detection-2025)
+- [DAD-3DHeads: A Large-Scale Dense, Accurate and Diverse Dataset for 3D Head Alignment From a Single Image](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=dad-3dheads)
 - [A Simple Baseline for Efficient Hand Mesh Reconstruction](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-a-simple-baseline-for-efficient-hand-mesh-reconstruction)
 - [HandBooster: Boosting 3D Hand-Mesh Reconstruction by Conditional Synthesis and Sampling of Hand-Object Interactions](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-handbooster-boosting-3d-hand-mesh-reconstruction-by-conditional-synthesis-and-sampling-of-hand-object-interact)
 - [Single-to-Dual-View Adaptation for Egocentric 3D Hand Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-single-to-dual-view-adaptation-for-egocentric-3d-hand-pose-estimation)
@@ -68,9 +69,12 @@
 - [MaskHand: Generative Masked Modeling for Robust Hand Mesh Reconstruction in the Wild](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=maskhand-generative-masked-modeling-for-robust-hand-mesh-reconstruction-in-the-wild)
 - [High-Resolution Spatiotemporal Modeling with Global-Local State Space Models for Video-Based Human Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=high-resolution-spatiotemporal-modeling-with-global-local-state-space-models-for-video-based-human-pose-estimation)
 - [Fish2Mesh Transformer: 3D Human Mesh Recovery from Egocentric Vision](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=fish2mesh-transformer-3d-human-mesh-recovery-from-egocentric-vision)
+- [Deep Learning for Head Pose Estimation: A Survey](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hpe-deep-survey-2023)
+- [Deep learning and machine learning techniques for head pose estimation: a survey](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hpe-ml-survey-2024)
 
 ## 流程已完成，原图待收录
 
+- [HeadDiff: Exploring Rotation Uncertainty With Diffusion Models for Head Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=headdiff)
 - [Infinite 3D Landmarks: Improving Continuous 2D Facial Landmark Detection](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=infinite-landmarks)
 - [Unsupervised Discovery of Facial Landmarks and Head Pose](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=uld-headpose)
 - [FaceXFormer: A Unified Transformer for Facial Analysis](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=facexformer)
@@ -207,9 +211,30 @@
 - [Sparse Local Patch Transformer for Robust Face Alignment and Landmarks Inherent Relation Learning](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-sparse-local-patch-transformer-for-robust-face-alignment-and-landmarks-inherent-relation-learning-2022)
 - [Occlusion-Robust Face Alignment Using a Viewpoint-Invariant Hierarchical Network Architecture](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-occlusion-robust-face-alignment-using-a-viewpoint-invariant-hierarchical-network-architecture-2022)
 - [DSFNet: Dual Space Fusion Network for Occlusion-Robust 3D Dense Face Alignment](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-dsfnet-dual-space-fusion-network-for-occlusion-robust-3d-dense-face-alignment-2023)
+- [3D-Aware Facial Landmark Detection via Multi-View Consistent Training on Synthetic Data](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-3d-aware-facial-landmark-detection-via-multi-view-consistent-training-on-synthetic-data-2023)
 - [Generalizable Face Landmarking Guided by Conditional Face Warping](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-generalizable-face-landmarking-guided-by-conditional-face-warping-2024)
+- [Improving Robustness of Facial Landmark Detection by Defending Against Adversarial Attacks](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-improving-robustness-of-facial-landmark-detection-by-defending-against-adversarial-attacks-2021)
 - [PossLoss: A Reliable and Sensitive Facial Landmark Detection Loss Function](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-possloss-a-reliable-and-sensitive-facial-landmark-detection-loss-function-2025)
+- [Robust Facial Landmark Detection via Aggregation on Geometrically Manipulated Faces](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-robust-facial-landmark-detection-via-aggregation-on-geometrically-manipulated-faces-2020)
+- [A Vector-Based Representation to Enhance Head Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-a-vector-based-representation-to-enhance-head-pose-estimation-2021)
 - [Cascaded Dual Vision Transformer for Accurate Facial Landmark Detection](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-cascaded-dual-vision-transformer-for-accurate-facial-landmark-detection-2025)
+- [Super-FAN: Integrated Facial Landmark Localization and Super-Resolution of Real-World Low Resolution Faces in Arbitrary Poses With GANs](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-super-fan-integrated-facial-landmark-localization-and-super-resolution-of-real-world-low-resolution-faces-2018)
+- [Supervision-by-Registration: An Unsupervised Approach to Improve the Precision of Facial Landmark Detectors](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-supervision-by-registration-an-unsupervised-approach-to-improve-the-precision-of-facial-landmark-detector-2018)
+- [Style Aggregated Network for Facial Landmark Detection](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-style-aggregated-network-for-facial-landmark-detection-2018)
+- [Disentangling 3D Pose in a Dendritic CNN for Unconstrained 2D Face Alignment](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-disentangling-3d-pose-in-a-dendritic-cnn-for-unconstrained-2d-face-alignment-2018)
+- [Robust Facial Landmark Detection via a Fully-Convolutional Local-Global Context Network](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-robust-facial-landmark-detection-via-a-fully-convolutional-local-global-context-network-2018)
+- [Direct Shape Regression Networks for End-to-End Face Alignment](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-direct-shape-regression-networks-for-end-to-end-face-alignment-2018)
+- [Semantic Alignment: Finding Semantically Consistent Ground-Truth for Facial Landmark Detection](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-semantic-alignment-finding-semantically-consistent-ground-truth-for-facial-landmark-detection-2019)
+- [Robust Facial Landmark Detection via Occlusion-Adaptive Deep Networks](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-robust-facial-landmark-detection-via-occlusion-adaptive-deep-networks-2019)
+- [3FabRec: Fast Few-Shot Face Alignment by Reconstruction](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-3fabrec-fast-few-shot-face-alignment-by-reconstruction-2020)
+- [Attention-Driven Cropping for Very High Resolution Facial Landmark Detection](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-attention-driven-cropping-for-very-high-resolution-facial-landmark-detection-2020)
+- [Learning Robust Facial Landmark Detection via Hierarchical Structured Ensemble](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-learning-robust-facial-landmark-detection-via-hierarchical-structured-ensemble-2019)
+- [Teacher Supervises Students How to Learn From Partially Labeled Images for Facial Landmark Detection](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-teacher-supervises-students-how-to-learn-from-partially-labeled-images-for-facial-landmark-detection-2019)
+- [Aggregation via Separation: Boosting Facial Landmark Detector With Semi-Supervised Style Translation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-aggregation-via-separation-boosting-facial-landmark-detector-with-semi-supervised-style-translation-2019)
+- [FAB: A Robust Facial Landmark Detection Framework for Motion-Blurred Videos](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-fab-a-robust-facial-landmark-detection-framework-for-motion-blurred-videos-2019)
+- [Face Alignment With Kernel Density Deep Neural Network](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-face-alignment-with-kernel-density-deep-neural-network-2019)
+- [Deep Head Pose Estimation Using Synthetic Images and Partial Adversarial Domain Adaption for Continuous Label Spaces](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-deep-head-pose-estimation-using-synthetic-images-and-partial-adversarial-domain-adaption-for-continuous-l-2019)
+- [QuatNet: Quaternion-Based Head Pose Estimation With Multiregression Loss](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=quatnet)
 - [Novel-View Synthesis and Pose Estimation for Hand-Object Interaction from Sparse Views](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-novel-view-synthesis-and-pose-estimation-for-hand-object-interaction-from-sparse-views)
 - [Diffusion-Guided Reconstruction of Everyday Hand-Object Interaction Clips](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-diffusion-guided-reconstruction-of-everyday-hand-object-interaction-clips)
 - [HandR2N2: Iterative 3D Hand Pose Estimation Using a Residual Recurrent Neural Network](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-handr2n2-iterative-3d-hand-pose-estimation-using-a-residual-recurrent-neural-network)
@@ -323,6 +348,8 @@
 - [PoseSyn: Synthesizing Diverse 3D Pose Data from In-the-Wild 2D Data](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=posesyn-synthesizing-diverse-3d-pose-data-from-in-the-wild-2d-data)
 - [A Structure-aware and Motion-adaptive Framework for 3D Human Pose Estimation with Mamba](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=a-structure-aware-and-motion-adaptive-framework-for-3d-human-pose-estimation-with-mamba)
 - [LDPose: Towards Inclusive Human Pose Estimation for Limb-Deficient Individuals in the Wild](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=ldpose-towards-inclusive-human-pose-estimation-for-limb-deficient-individuals-in-the-wild)
+- [Head Pose Estimation in Computer Vision: A Survey](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hpe-survey-2009)
+- [Random Forests for Real Time 3D Face Analysis](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=rf-face-analysis)
 - [Robust Head-Pose Estimation Based on Partially-Latent Mixture of Linear Regressions](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hpe-partially-latent)
 - [Pose Priors from Language Models](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=prosepose)
 - [LangPose: Language-Aligned Motion for Robust 3D Human Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=langpose)

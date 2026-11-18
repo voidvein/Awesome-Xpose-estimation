@@ -132,6 +132,8 @@ console.log('PASS: REACH FG 2026 / CCF C correction, preserved arXiv and targete
 // Pipeline depth is optional; only sourced, structured notes are rendered.
 const {paperPipeline,paperFigures}=require(path.join(__dirname,root,'app.js'));
 assert.equal(paperPipeline({}).available,false);
+assert.equal(paperPipeline({}).kind,'method');
+assert.equal(paperPipeline({pipeline:{kind:'survey'}}).kind,'survey');
 assert.equal(paperPipeline({pipeline:{steps:[{title:'one',description:'text'}],sources:[{url:'https://example.org'}]}}).available,false);
 assert.equal(paperPipeline({pipeline:{steps:[{title:'one',description:'text'},{title:'two',description:'text'}],sources:[{url:'javascript:alert(1)'}]}}).available,false);
 const pipelinePapers=papers.filter(p=>p.pipeline);
@@ -143,7 +145,12 @@ for(const p of pipelinePapers){
  assert.ok(pipeline.sources.every(s=>
   /^https:\/\/arxiv\.org\/html\/\d{4}\.\d{4,5}v\d+#\S+$/.test(s.url)||
   /^https:\/\/openaccess\.thecvf\.com\/content[^#]+\/papers\/[^#]+\.pdf#page=\d+$/.test(s.url)||
-  /^https:\/\/www\.cs\.uic\.edu\/~tangw\/files\/2025_PR_ZhimingZou\.pdf#page=\d+$/.test(s.url)
+  /^https:\/\/www\.cs\.uic\.edu\/~tangw\/files\/2025_PR_ZhimingZou\.pdf#page=\d+$/.test(s.url)||
+  /^https:\/\/link\.springer\.com\/article\/10\.1007\/(?:s42979-023-01796-z|s10462-024-10936-7)#(?:Sec\d+|figure-\d+)$/.test(s.url)||
+  /^https:\/\/link\.springer\.com\/content\/pdf\/10\.1007\/s11263-012-0549-0\.pdf#page=\d+$/.test(s.url)||
+  /^https:\/\/people\.ict\.usc\.edu\/~gratch\/CSCI534\/Old-Readings\/Head%20Pose%20estimation\.pdf#page=\d+$/.test(s.url)||
+  (p.id==='headdiff'&&/^https:\/\/(?:ieeexplore\.ieee\.org\/document\/10462910|www\.nxu\.edu\.cn\/(?:info\/1590\/31709\.htm|__local\/3\/AF\/BD\/10E5B14A0EC54DD6CA74765A293_AF945962_61CB5\.png\?e=\.png))$/.test(s.url))||
+  (p.id==='quatnet'&&/^https:\/\/(?:ieeexplore\.ieee\.org\/document\/8444061(?:\/figures#fig3)?|scholar\.nycu\.edu\.tw\/zh\/publications\/quatnet-quaternion-based-head-pose-estimation-with-multiregressio\/)$/.test(s.url))
  ),`${p.id}: versioned section or primary PDF page anchors`);
 }
 assert.ok(pipelinePapers.length>=6);
