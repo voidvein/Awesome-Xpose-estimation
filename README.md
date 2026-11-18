@@ -123,6 +123,9 @@ Serve the repository root with `python -m http.server 8000`.
 
 ### Hand
 
+- **[WinDEX: Metric 3D Hand Motion Reconstruction in the Wild for Dexterous Teleoperation and Policy Learning](https://arxiv.org/abs/2611.21143)** — arXiv 2026 · Preprint · 3D. 以标定双目、惯性里程计和时序建模恢复米制手部运动，区分离线重建与因果遥操作。
+- **[MetricHand: Geometry-Aware Flow Matching for 4D Hand Reconstruction in Metric World Space](https://arxiv.org/abs/2611.21060)** — arXiv 2026 · Preprint · 3D. 把手物交互区域的深度几何持续注入流匹配，以改善世界坐标下手部位置和时序一致性。
+
 - [code](https://github.com/GinKenneth/Hand_RSI) **[HandRSI: Recursive Self-Improvement for Hand Pose Estimation](https://arxiv.org/abs/2611.22164)** — arXiv 2026 · Preprint · 3D. 将推理代码改进与模型蒸馏交替进行，缓解第一人称手部跟踪的漏检、遮挡误差与抖动。
 
 - **[Image-Free Domain Generalization via CLIP for 3D Hand Pose Estimation](https://openaccess.thecvf.com/content/WACV2023/html/Lee_Image-Free_Domain_Generalization_via_CLIP_for_3D_Hand_Pose_Estimation_WACV_2023_paper.html)** — WACV 2023 · Published · 3D. 用 CLIP 文本特征扰动手部图像特征，在不额外收集目标域图像的情况下训练三维手姿估计器。

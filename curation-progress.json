@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-18",
-  "total": 374,
+  "updated_at": "2026-11-19",
+  "total": 376,
   "counts": {
     "complete": 66,
     "figure_pending": 305,
-    "pending": 3
+    "pending": 5
   },
   "completion_standard": "Source-checked module-level pipeline or survey classification, separate use contexts, and a figure guide. Embed paper originals when reuse permission is clear, otherwise link to the original figure or method section. Summaries alone do not count.",
   "entries": [
@@ -4117,6 +4117,28 @@
       "title": "Structure-Guided Multi-Granularity Spatiotemporal Transformer for Efficient Monocular 3D Human Pose Estimation",
       "status": "pending",
       "paper_url": "https://arxiv.org/abs/2611.20361",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "not_yet_verified",
+      "reviewed_at": null,
+      "figure_note": ""
+    },
+    {
+      "id": "windex",
+      "category": "Hand",
+      "title": "WinDEX: Metric 3D Hand Motion Reconstruction in the Wild for Dexterous Teleoperation and Policy Learning",
+      "status": "pending",
+      "paper_url": "https://arxiv.org/abs/2611.21143",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "not_yet_verified",
+      "reviewed_at": null,
+      "figure_note": ""
+    },
+    {
+      "id": "metrichand",
+      "category": "Hand",
+      "title": "MetricHand: Geometry-Aware Flow Matching for 4D Hand Reconstruction in Metric World Space",
+      "status": "pending",
+      "paper_url": "https://arxiv.org/abs/2611.21060",
       "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
       "reviewed_at": null,

@@ -38983,5 +38983,99 @@
       "verification_note": "仅确认 arXiv 预印本状态，不赋予会议或期刊 CCF 评级；结果为作者报告，未独立复现。",
       "verified_at": "2026-11-18"
     }
+  },
+  {
+    "id": "windex",
+    "title": "WinDEX: Metric 3D Hand Motion Reconstruction in the Wild for Dexterous Teleoperation and Policy Learning",
+    "authors": [
+      "Hongyu Ma",
+      "Hairong Qu",
+      "Shiqi Zhao",
+      "Yongsong Yang",
+      "Kai Shi",
+      "Jiahao Ai",
+      "Xin You",
+      "Peng Yin"
+    ],
+    "url": "https://arxiv.org/abs/2611.21143",
+    "version": "2611.21143v1",
+    "summary": "以标定双目、惯性里程计和时序建模恢复米制手部运动，区分离线重建与因果遥操作。",
+    "tags": [
+      "stereo",
+      "world-space",
+      "temporal",
+      "teleoperation"
+    ],
+    "analysis": {
+      "problem": "野外手部重建需要同时解决绝对尺度、遮挡和推理速度，而腕部相对姿态不足以直接驱动机器人。",
+      "method": "先做几何时序优化标注，再训练融合双目、局部细节和时间上下文的 WinDEX-Net；蒸馏出离线 Window 与因果 Stream，并结合 VIO 转为世界坐标。",
+      "inputs_outputs": "标定的第一视角双目视频与惯性信息；输出米制三维手关节和世界轨迹，不是纯单目设置。",
+      "contribution": "作者报告离线 43.61 FPS、因果 171 FPS；独立动捕评估中 Window+cuVSLAM 的 W-MPJPE 为 37.29 mm。该指标采用分段前两帧相似变换对齐，不是完全未对齐误差。",
+      "limitations": "长时间遮挡和跨设备泛化仍有限。训练三维标签由优化生成，不能称为全部人工真值；网络吞吐量也不等于机器人端到端控制频率。",
+      "sources": [
+        "https://arxiv.org/abs/2611.21143",
+        "https://arxiv.org/html/2611.21143v1#S7",
+        "https://arxiv.org/html/2611.21143v1#S8"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "定向核对 v1 摘要、方法概览、实验协议/表格与局限；非全文审稿或独立复现。",
+      "verification_note": "2026-11-19 例行补漏，不标为本轮新发表；未确认正式录用，不授予 CCF 评级。作者项目页当前无法访问，未声称代码或数据已发布。",
+      "verified_at": "2026-11-19"
+    },
+    "year": 2026,
+    "category": "Hand",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "arXiv",
+    "status": "Preprint",
+    "submitted_at": "2026-11-16"
+  },
+  {
+    "id": "metrichand",
+    "title": "MetricHand: Geometry-Aware Flow Matching for 4D Hand Reconstruction in Metric World Space",
+    "authors": [
+      "Yibo Bai",
+      "Likui Zhang",
+      "Jinglei Zhang",
+      "Zhengbin Pang",
+      "Xingshen Song",
+      "Xiaoqing Yin",
+      "Jinsheng Deng"
+    ],
+    "url": "https://arxiv.org/abs/2611.21060",
+    "version": "2611.21060v1",
+    "summary": "把手物交互区域的深度几何持续注入流匹配，以改善世界坐标下手部位置和时序一致性。",
+    "tags": [
+      "flow matching",
+      "world-space",
+      "depth prior",
+      "temporal"
+    ],
+    "analysis": {
+      "problem": "近距离弱透视近似会把深度误差耦合到平移、旋转与关节形变，逐帧结果提升到世界坐标后仍可能漂移。",
+      "method": "融合 RGB 与单目深度先验，按关节拓扑采样交互区域；质量加权和历史队列形成条件，在流匹配各步共同生成平移、朝向、MANO 姿态和形状。",
+      "inputs_outputs": "单目视频、相机内参及估计深度/相机轨迹；输出世界坐标下双手时序 MANO 状态，深度不是传感器真值。",
+      "contribution": "作者在 HOT3D/ARCTIC 的相同有效观测帧上报告相机 MPJPE 8.60/17.54 mm，绝对世界 MPJPE 20.58/120.86 mm，并提供几何条件与记忆队列消融。",
+      "limitations": "精度依赖单目深度及 DROID-SLAM 轨迹与尺度。绝对世界误差不能与分段对齐的 W-MPJPE 混用；仅凭已观测帧比较不能证明长期完全出视野追踪。",
+      "sources": [
+        "https://arxiv.org/abs/2611.21060",
+        "https://arxiv.org/html/2611.21060v1#S3",
+        "https://arxiv.org/html/2611.21060v1#S4",
+        "https://arxiv.org/html/2611.21060v1#S5"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "定向核对 v1 摘要、方法概览、实验协议/表格与局限；非全文审稿或独立复现。",
+      "verification_note": "2026-11-19 例行补漏，不标为本轮新发表；未确认正式录用，不授予 CCF 评级。作者项目页当前无法访问，未声称代码或数据已发布。",
+      "verified_at": "2026-11-19"
+    },
+    "year": 2026,
+    "category": "Hand",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "arXiv",
+    "status": "Preprint",
+    "submitted_at": "2026-11-16"
   }
 ]

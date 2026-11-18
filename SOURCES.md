@@ -1,5 +1,11 @@
 # Sources and curation notes
 
+## Scheduled maintenance — 2026-11-19 (UTC+8)
+
+Backfilled WinDEX ([v1](https://arxiv.org/html/2611.21143v1)) and MetricHand ([v1](https://arxiv.org/html/2611.21060v1)), both submitted 16 November, not newly published since the preceding check. Verified authors, submission/version, targeted method sections, evaluation protocols and limitations. Both remain arXiv preprints without CCF ratings. Do not compare WinDEX’s aligned W-MPJPE directly with MetricHand’s unaligned ABS-W-MPJPE. Author project pages were inaccessible during this pass; no code/data-release claim or copied figure was added.
+
+Searched arXiv, IEEE TPAMI/TIP and CVF/ECVA/NeurIPS sources; this pass did not establish a relevant publication newer than the preceding successful check. Search coverage is non-exhaustive.
+
 ## Hand representation and reconstruction batch — 2026-11-18
 
 Added 29 module-level readings spanning RGB-to-3D hands, V2V-PoseNet, Hand PointNet, latent 2.5D regression, dense depth regression, FreiHAND, Graph CNN reconstruction, MANO-based reconstruction in the wild, HOnnotate, YouTube mesh reconstruction, DetNet/IKNet, HandFoldingNet, I2UV-HandNet, Mesh Graphormer, METRO, CMR, HandOccNet, MobRecon, multi-view depth self-supervision, Handy, Deformer, THOR-Net, dense mutual hand-object attention, HMP, multiview bootstrapping, DeepPrior++, InterHand2.6M, MediaPipe Hands and EvHandPose. Exact versions, method sections or official PDF pages and original figure locations are recorded in `scripts/curation-2026-11-18-batch4.json` and individual page sources.
