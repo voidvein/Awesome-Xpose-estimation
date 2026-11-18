@@ -1,0 +1,786 @@
+{
+  "review_date": "2026-11-18",
+  "expanded_records": 24,
+  "new_code_links": [
+    "mps",
+    "gf",
+    "stc",
+    "osx",
+    "humaniflow",
+    "potter",
+    "aios",
+    "token",
+    "rmpe",
+    "flow",
+    "pymaf"
+  ],
+  "records": [
+    {
+      "id": "mps-net",
+      "version": "Official 2022 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Wei_Capturing_Humans_in_Motion_Temporal-Attentive_3D_Human_Pose_and_Shape_CVPR_2022_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "mps",
+        "version": "2203.08534v1",
+        "url": "https://arxiv.org/abs/2203.08534v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Wei, Wen-Li",
+          "Lin, Jen-Chun",
+          "Liu, Tyng-Luh",
+          "Liao, Hong-Yuan Mark"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/MPS-Net/MPS-Net_release",
+        "verified_at": "2026-11-18",
+        "basis": "已核对作者对应论文 README、evaluate.py/demo.py 入口及 lib/ 实现目录。 本轮未运行实现。"
+      }
+    },
+    {
+      "id": "litepose",
+      "version": "arXiv:2205.01271v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4",
+        "S5.SS2"
+      ],
+      "figure_anchor": [
+        "S3.F4",
+        "Figure 4"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2205.01271v1",
+      "figure_reuse": "verified_local_cc_by-nc-sa_4.0",
+      "arxiv_license_check": {
+        "alias": "lite",
+        "version": "2205.01271v1",
+        "url": "https://arxiv.org/abs/2205.01271v1",
+        "license_url": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "authors": [
+          "Wang, Yihan",
+          "Li, Muyang",
+          "Cai, Han",
+          "Chen, Wei-Ming",
+          "Han, Song"
+        ]
+      },
+      "original_figure_version": "2205.01271v1",
+      "original_figure_sources": [
+        "https://arxiv.org/html/2205.01271v1#S3.F4"
+      ]
+    },
+    {
+      "id": "posetriplet",
+      "version": "Official 2022 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Gong_PoseTriplet_Co-Evolving_3D_Human_Pose_Estimation_Imitation_and_Hallucination_Under_CVPR_2022_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "triplet",
+        "version": "2203.15625v1",
+        "url": "https://arxiv.org/abs/2203.15625v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Gong, Kehong",
+          "Li, Bingbing",
+          "Zhang, Jianfeng",
+          "Wang, Tao",
+          "Huang, Jing",
+          "Mi, Michael Bi",
+          "Feng, Jiashi",
+          "Wang, Xinchao"
+        ]
+      }
+    },
+    {
+      "id": "gfpose",
+      "version": "arXiv:2212.08641v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4",
+        "S5.SS2",
+        "A3"
+      ],
+      "figure_anchor": [
+        "S1.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2212.08641v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "gf",
+        "version": "2212.08641v1",
+        "url": "https://arxiv.org/abs/2212.08641v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Ci, Hai",
+          "Wu, Mingdong",
+          "Zhu, Wentao",
+          "Ma, Xiaoxuan",
+          "Dong, Hao",
+          "Zhong, Fangwei",
+          "Wang, Yizhou"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/Embracing/GFPose",
+        "verified_at": "2026-11-18",
+        "basis": "已核对作者官方实现 README、五种任务的命令及 run/train_fc_adv_3d.py 训练代码。 本轮未运行实现。"
+      }
+    },
+    {
+      "id": "stcformer",
+      "version": "Official 2023 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Tang_3D_Human_Pose_Estimation_With_Spatio-Temporal_Criss-Cross_Attention_CVPR_2023_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "implementation_check": {
+        "url": "https://github.com/zhenhuat/STCFormer",
+        "verified_at": "2026-11-18",
+        "basis": "已核对作者 README、model/stcformer.py 及训练/评估入口。作者说明提供 27/81 帧模型，243 帧权重未公开。 本轮未运行实现。"
+      }
+    },
+    {
+      "id": "glot",
+      "version": "arXiv:2303.14747v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4"
+      ],
+      "figure_anchor": [
+        "S1.F3",
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2303.14747v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "glot",
+        "version": "2303.14747v1",
+        "url": "https://arxiv.org/abs/2303.14747v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Shen, Xiaolong",
+          "Yang, Zongxin",
+          "Wang, Xiaohan",
+          "Ma, Jianxin",
+          "Zhou, Chang",
+          "Yang, Yi"
+        ]
+      }
+    },
+    {
+      "id": "osx",
+      "version": "arXiv:2303.16160v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S5.SS1"
+      ],
+      "figure_anchor": [
+        "S3.F3",
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2303.16160v1",
+      "figure_reuse": "verified_local_cc_by_4.0",
+      "arxiv_license_check": {
+        "alias": "osx",
+        "version": "2303.16160v1",
+        "url": "https://arxiv.org/abs/2303.16160v1",
+        "license_url": "http://creativecommons.org/licenses/by/4.0/",
+        "authors": [
+          "Lin, Jing",
+          "Zeng, Ailing",
+          "Wang, Haoqian",
+          "Zhang, Lei",
+          "Li, Yu"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/IDEA-Research/OSX",
+        "verified_at": "2026-11-18",
+        "basis": "作者项目页直接链接该官方仓库；已核对 README、main/OSX.py、训练和测试入口。 本轮未运行实现。"
+      },
+      "original_figure_version": "2303.16160v1",
+      "original_figure_sources": [
+        "https://arxiv.org/html/2303.16160v1#S3.F3"
+      ]
+    },
+    {
+      "id": "psvt",
+      "version": "Official 2023 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Qiu_PSVT_End-to-End_Multi-Person_3D_Pose_and_Shape_Estimation_With_Progressive_CVPR_2023_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "psvt",
+        "version": "2303.09187v1",
+        "url": "https://arxiv.org/abs/2303.09187v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Qiu, Zhongwei",
+          "Qiansheng, Yang",
+          "Wang, Jian",
+          "Feng, Haocheng",
+          "Han, Junyu",
+          "Ding, Errui",
+          "Xu, Chang",
+          "Fu, Dongmei",
+          "Wang, Jingdong"
+        ]
+      }
+    },
+    {
+      "id": "niki",
+      "version": "arXiv:2305.08590v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": [
+        "S3.F3",
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2305.08590v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "niki",
+        "version": "2305.08590v1",
+        "url": "https://arxiv.org/abs/2305.08590v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Li, Jiefeng",
+          "Bian, Siyuan",
+          "Liu, Qi",
+          "Tang, Jiasheng",
+          "Wang, Fan",
+          "Lu, Cewu"
+        ]
+      }
+    },
+    {
+      "id": "pct",
+      "version": "Official 2023 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Geng_Human_Pose_As_Compositional_Tokens_CVPR_2023_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "pct",
+        "version": "2303.11638v1",
+        "url": "https://arxiv.org/abs/2303.11638v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Geng, Zigang",
+          "Wang, Chunyu",
+          "Wei, Yixuan",
+          "Liu, Ze",
+          "Li, Houqiang",
+          "Hu, Han"
+        ]
+      }
+    },
+    {
+      "id": "humaniflow",
+      "version": "arXiv:2305.06968v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS3",
+        "S3.SS4",
+        "S3.SS5",
+        "S3.SS6",
+        "S3.SS7",
+        "S4"
+      ],
+      "figure_anchor": [
+        "S3.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2305.06968v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "humaniflow",
+        "version": "2305.06968v1",
+        "url": "https://arxiv.org/abs/2305.06968v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Sengupta, Akash",
+          "Budvytis, Ignas",
+          "Cipolla, Roberto"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/akashsengupta1997/HuManiFlow",
+        "verified_at": "2026-11-18",
+        "basis": "已核对作者对应论文 README、models/humaniflow_model.py、norm_flows/ 和推理/训练目录。 本轮未运行实现。"
+      }
+    },
+    {
+      "id": "deformer",
+      "version": "Official 2023 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Yoshiyasu_Deformable_Mesh_Transformer_for_3D_Human_Mesh_Recovery_CVPR_2023_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "potter",
+      "version": "Official 2023 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 4"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Zheng_POTTER_Pooling_Attention_Transformer_for_Efficient_Human_Mesh_Recovery_CVPR_2023_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "potter",
+        "version": "2303.13357v1",
+        "url": "https://arxiv.org/abs/2303.13357v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Zheng, Ce",
+          "Liu, Xianpeng",
+          "Qi, Guo-Jun",
+          "Chen, Chen"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/zczcwh/POTTER",
+        "verified_at": "2026-11-18",
+        "basis": "已核对作者官方实现 README 及 human_mesh_recovery/hybrik/models/PoolAttnHRWithCam.py；区分图像分类与人体恢复两部分。 本轮未运行实现。"
+      }
+    },
+    {
+      "id": "dpmesh",
+      "version": "Official 2024 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2024/papers/Zhu_DPMesh_Exploiting_Diffusion_Prior_for_Occluded_Human_Mesh_Recovery_CVPR_2024_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "dpmesh",
+        "version": "2404.01424v1",
+        "url": "https://arxiv.org/abs/2404.01424v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Zhu, Yixuan",
+          "Li, Ao",
+          "Tang, Yansong",
+          "Zhao, Wenliang",
+          "Zhou, Jie",
+          "Lu, Jiwen"
+        ]
+      }
+    },
+    {
+      "id": "aios",
+      "version": "arXiv:2403.17934v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": [
+        "S3.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2403.17934v1",
+      "figure_reuse": "verified_local_cc_by_4.0",
+      "arxiv_license_check": {
+        "alias": "aios",
+        "version": "2403.17934v1",
+        "url": "https://arxiv.org/abs/2403.17934v1",
+        "license_url": "http://creativecommons.org/licenses/by/4.0/",
+        "authors": [
+          "Sun, Qingping",
+          "Wang, Yanjun",
+          "Zeng, Ailing",
+          "Yin, Wanqi",
+          "Wei, Chen",
+          "Wang, Wenjia",
+          "Mei, Haiyi",
+          "Leung, Chi Sing",
+          "Liu, Ziwei",
+          "Yang, Lei",
+          "Cai, Zhongang"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/MotrixLab/AiOS",
+        "verified_at": "2026-11-18",
+        "basis": "已核对论文作者 README、模型准备与推理说明、models/aios/、main.py 和 engine.py。 本轮未运行实现。"
+      },
+      "original_figure_version": "2403.17934v1",
+      "original_figure_sources": [
+        "https://arxiv.org/html/2403.17934v1#S3.F2"
+      ]
+    },
+    {
+      "id": "finepose",
+      "version": "arXiv:2405.05216v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": [
+        "S2.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2405.05216v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "fine",
+        "version": "2405.05216v1",
+        "url": "https://arxiv.org/abs/2405.05216v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Xu, Jinglin",
+          "Guo, Yijie",
+          "Peng, Yuxin"
+        ]
+      }
+    },
+    {
+      "id": "tokenhmr",
+      "version": "arXiv:2404.16752v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4"
+      ],
+      "figure_anchor": [
+        "S4.F3",
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2404.16752v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "token",
+        "version": "2404.16752v1",
+        "url": "https://arxiv.org/abs/2404.16752v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Dwivedi, Sai Kumar",
+          "Sun, Yu",
+          "Patel, Priyanka",
+          "Feng, Yao",
+          "Black, Michael J."
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/saidwivedi/TokenHMR",
+        "verified_at": "2026-11-18",
+        "basis": "已核对作者对应论文 README、tokenhmr/demo.py、train.py、eval.py 和 tokenization/。仓库区分 Paper/Release/Demo 版本，配置及结果需对应版本。 本轮未运行实现。"
+      }
+    },
+    {
+      "id": "hot-tokenizer",
+      "version": "Official 2024 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2024/papers/Li_Hourglass_Tokenizer_for_Efficient_Transformer-Based_3D_Human_Pose_Estimation_CVPR_2024_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "hot",
+        "version": "2311.12028v1",
+        "url": "https://arxiv.org/abs/2311.12028v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Li, Wenhao",
+          "Liu, Mengyuan",
+          "Liu, Hong",
+          "Wang, Pichao",
+          "Cai, Jialun",
+          "Sebe, Nicu"
+        ]
+      }
+    },
+    {
+      "id": "ktpformer",
+      "version": "Official 2024 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2024/papers/Peng_KTPFormer_Kinematics_and_Trajectory_Prior_Knowledge-Enhanced_Transformer_for_3D_Human_CVPR_2024_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "ktp",
+        "version": "2404.00658v1",
+        "url": "https://arxiv.org/abs/2404.00658v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Peng, Jihua",
+          "Zhou, Yanghong",
+          "Mok, P. Y."
+        ]
+      }
+    },
+    {
+      "id": "rmpe",
+      "version": "arXiv:1612.00137v5",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4.SS2"
+      ],
+      "figure_anchor": [
+        "S2.F3",
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/1612.00137v5",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "rmpe",
+        "version": "1612.00137v5",
+        "url": "https://arxiv.org/abs/1612.00137v5",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Fang, Hao-Shu",
+          "Xie, Shuqin",
+          "Tai, Yu-Wing",
+          "Lu, Cewu"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/MVIG-SJTU/RMPE",
+        "verified_at": "2026-11-18",
+        "basis": "已核对作者原始 RMPE README、examples/rmpe/demo.py 和 SSTN/SPPE 模型说明；该仓库推荐后续 AlphaPose，本页链接仍指向 RMPE。 本轮未运行实现。"
+      }
+    },
+    {
+      "id": "modulated-gcn",
+      "version": "Official 2021 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        5,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Zou_Modulated_Graph_Convolutional_Network_for_3D_Human_Pose_Estimation_ICCV_2021_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "normalizing-flow-pose",
+      "version": "Official 2021 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Wehrbein_Probabilistic_Monocular_3D_Human_Pose_Estimation_With_Normalizing_Flows_ICCV_2021_paper.pdf",
+      "figure_reuse": "verified_local_cc_by_4.0",
+      "arxiv_license_check": {
+        "alias": "flow",
+        "version": "2107.13788v1",
+        "url": "https://arxiv.org/abs/2107.13788v1",
+        "license_url": "http://creativecommons.org/licenses/by/4.0/",
+        "authors": [
+          "Wehrbein, Tom",
+          "Rudolph, Marco",
+          "Rosenhahn, Bodo",
+          "Wandt, Bastian"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/twehrbein/Probabilistic-Monocular-3D-Human-Pose-Estimation-with-Normalizing-Flows",
+        "verified_at": "2026-11-18",
+        "basis": "已核对作者官方实现 README、models/model.py、critic_network.py 以及 train.py 与评估入口。 本轮未运行实现。"
+      },
+      "original_figure_version": "2107.13788v1",
+      "original_figure_sources": [
+        "https://arxiv.org/html/2107.13788v1#S2.F2"
+      ]
+    },
+    {
+      "id": "rle-pose",
+      "version": "Official 2021 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Li_Human_Pose_Regression_With_Residual_Log-Likelihood_Estimation_ICCV_2021_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "rle",
+        "version": "2107.11291v1",
+        "url": "https://arxiv.org/abs/2107.11291v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Li, Jiefeng",
+          "Bian, Siyuan",
+          "Zeng, Ailing",
+          "Wang, Can",
+          "Pang, Bo",
+          "Liu, Wentao",
+          "Lu, Cewu"
+        ]
+      }
+    },
+    {
+      "id": "pymaf",
+      "version": "Official 2021 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Zhang_PyMAF_3D_Human_Pose_and_Shape_Regression_With_Pyramidal_Mesh_ICCV_2021_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "pymaf",
+        "version": "2103.16507v1",
+        "url": "https://arxiv.org/abs/2103.16507v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Zhang, Hongwen",
+          "Tian, Yating",
+          "Zhou, Xinchi",
+          "Ouyang, Wanli",
+          "Liu, Yebin",
+          "Wang, Limin",
+          "Sun, Zhenan"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/HongwenZhang/PyMAF",
+        "verified_at": "2026-11-18",
+        "basis": "已核对作者 README、models/pymaf_net.py、maf_extractor.py、iuv_predictor.py 和训练/评估入口；本条对应 PyMAF，非后续 PyMAF-X 的 smplx 分支。 本轮未运行实现。"
+      }
+    }
+  ]
+}

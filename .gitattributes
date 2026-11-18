@@ -1,0 +1,2 @@
+# Preserve the exact bytes of attributed original vector figures on Windows.
+assets/figures/*.svg -text

@@ -458,3 +458,45 @@ Zhishan Zhou, Shihao Zhou, Zhi Lv, Minqiang Zou, Yao Tang, Jiajun Liang. A Simpl
 - License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 - License evidence: https://arxiv.org/abs/2403.01813v1
 - SHA-256: `bef247c9eb4f2da6bb54857a53b4238f85b9feaaf5f15d178a7958a8ff387ff6`
+
+## Human method original figures — batch 11
+
+### assets/figures/litepose-architecture-original.svg
+
+Yihan Wang, Muyang Li, Han Cai, Wei-Ming Chen, Song Han. Lite Pose: Efficient Architecture Design for 2D Human Pose Estimation, Figure 4, arXiv:2205.01271v1. CC BY-NC-SA 4.0.
+
+- Original source: https://arxiv.org/html/2205.01271v1#S3.F4
+- Unmodified original file: https://arxiv.org/html/2205.01271v1/Figure-Arch.svg
+- License: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+- License evidence: https://arxiv.org/abs/2205.01271v1
+- SHA-256: `7f4c56e04b555796acd6af793aad6e8f730b8172fab4ac57e4daaf922a132237`
+
+### assets/figures/osx-architecture-original.png
+
+Jing Lin, Ailing Zeng, Haoqian Wang, Lei Zhang, Yu Li. One-Stage 3D Whole-Body Mesh Recovery With Component Aware Transformer, Figure 3, arXiv:2303.16160v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2303.16160v1#S3.F3
+- Unmodified original file: https://arxiv.org/html/2303.16160v1/osx_pipeline.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2303.16160v1
+- SHA-256: `3e5bed0048b76c3f679cb4e30d914bcd124fcd1bd475f611f8738fb72ae70222`
+
+### assets/figures/aios-architecture-original.png
+
+Qingping Sun, Yanjun Wang, Ailing Zeng, Wanqi Yin, Chen Wei, Wenjia Wang, Haiyi Mei, Chi Sing Leung, Ziwei Liu, Lei Yang, Zhongang Cai. AiOS: All-in-One-Stage Expressive Human Pose and Shape Estimation, Figure 2, arXiv:2403.17934v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2403.17934v1#S3.F2
+- Unmodified original file: https://arxiv.org/html/2403.17934v1/pipeline.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2403.17934v1
+- SHA-256: `1d6d019dc6b4092fdaf95107abad1b45d5118cb1313dbacfbf67d2a32c274a69`
+
+### assets/figures/normalizing-flow-pose-architecture-original.jpg
+
+Tom Wehrbein, Marco Rudolph, Bodo Rosenhahn, Bastian Wandt. Probabilistic Monocular 3D Human Pose Estimation With Normalizing Flows, Figure 2, arXiv:2107.13788v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2107.13788v1#S2.F2
+- Unmodified original file: https://arxiv.org/html/2107.13788v1/method_fig.jpg
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2107.13788v1
+- SHA-256: `fb88e30138f6997d27f6ea25aa2c864c3dfb5eec483a2de8cc72b232f5263137`
