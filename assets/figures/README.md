@@ -500,3 +500,95 @@ Tom Wehrbein, Marco Rudolph, Bodo Rosenhahn, Bastian Wandt. Probabilistic Monocu
 - License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 - License evidence: https://arxiv.org/abs/2107.13788v1
 - SHA-256: `fb88e30138f6997d27f6ea25aa2c864c3dfb5eec483a2de8cc72b232f5263137`
+
+## Original figures from CVPR and ICCV 2025 methods
+
+### assets/figures/hipart-original.png
+
+Hongwei Zheng, Han Li, Wenrui Dai, Ziyang Zheng, Chenglin Li, Junni Zou, Hongkai Xiong. HiPART: Hierarchical Pose AutoRegressive Transformer for Occluded 3D Human Pose Estimation, Figure 3, arXiv:2503.23331v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2503.23331v1#S1.F3
+- Original file: https://arxiv.org/html/2503.23331v1/framework.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2503.23331v1
+- SHA-256: `3a61f76360810e3a2b1c34db94dcf6b99a2bc998c30fdbf14725fa48d2016877`
+
+### assets/figures/prompthmr-original.png
+
+Yufu Wang, Yu Sun, Priyanka Patel, Kostas Daniilidis, Michael J. Black, Muhammed Kocabas. PromptHMR: Promptable Human Mesh Recovery, Figure 2, arXiv:2504.06397v1. CC BY-NC-SA 4.0.
+
+- Original source: https://arxiv.org/html/2504.06397v1#S2.F2
+- Original file: https://arxiv.org/html/2504.06397v1/figures/method3.png
+- License: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+- License evidence: https://arxiv.org/abs/2504.06397v1
+- SHA-256: `ca50e4875eeae2664b2a208332aaa4c050b8db47934c86de3d40c5e4ab0b5ced`
+
+### assets/figures/prompthmr-decoder-original.png
+
+Yufu Wang, Yu Sun, Priyanka Patel, Kostas Daniilidis, Michael J. Black, Muhammed Kocabas. PromptHMR: Promptable Human Mesh Recovery, Figure 3, arXiv:2504.06397v1. CC BY-NC-SA 4.0.
+
+- Original source: https://arxiv.org/html/2504.06397v1#S3.F3
+- Original file: https://arxiv.org/html/2504.06397v1/figures/smplx_decoder.png
+- License: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+- License evidence: https://arxiv.org/abs/2504.06397v1
+- SHA-256: `3030180fdf581d1011515c4e190dbef54e1a02889afc4e61a550c522b80f3459`
+
+### assets/figures/unihope-original.png
+
+Yinqiao Wang, Hao Xu, Pheng-Ann Heng, Chi-Wing Fu. UniHOPE: A Unified Approach for Hand-Only and Hand-Object Pose Estimation, Figure 2, arXiv:2503.13303v1. CC BY-NC-SA 4.0.
+
+- Original source: https://arxiv.org/html/2503.13303v1#S1.F2
+- Original file: https://arxiv.org/html/2503.13303v1/pipeline.png
+- License: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+- License evidence: https://arxiv.org/abs/2503.13303v1
+- SHA-256: `8b0fbc7b92f1173c1239597aec6dbba5a5ba60e87f2834abe1ec9a5c8dfed2b9`
+
+### assets/figures/maskhand-original.png
+
+Muhammad Usama Saleem, Ekkasit Pinyoanuntapong, Mayur Jagdishbhai Patel, Hongfei Xue, Ahmed Helmy, Srijan Das, Pu Wang. MaskHand: Generative Masked Modeling for Robust Hand Mesh Reconstruction in the Wild, Figure 3, arXiv:2412.13393v2. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2412.13393v2#S3.F3
+- Original file: https://arxiv.org/html/2412.13393v2/sec/asset/MMHMR_overview.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2412.13393v2
+- SHA-256: `33049327ceb9a3596b192504039f269715bc9f20fd01826737e36726390dd1cb`
+
+### assets/figures/maskhand-inference-original.png
+
+Muhammad Usama Saleem, Ekkasit Pinyoanuntapong, Mayur Jagdishbhai Patel, Hongfei Xue, Ahmed Helmy, Srijan Das, Pu Wang. MaskHand: Generative Masked Modeling for Robust Hand Mesh Reconstruction in the Wild, Figure 5, arXiv:2412.13393v2. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2412.13393v2#S3.F5
+- Original file: https://arxiv.org/html/2412.13393v2/sec/asset/MMHMR_infer.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2412.13393v2
+- SHA-256: `8165ef6cb3a414bf429460b6dd7cc9d9908ff63b669237b01448632258a6131b`
+
+### assets/figures/dyn-hamr-original.png
+
+Zhengdi Yu, Stefanos Zafeiriou, Tolga Birdal. Dyn-HaMR: Recovering 4D Interacting Hand Motion from a Dynamic Camera, Figure 2, arXiv:2412.12861v1. CC BY-SA 4.0.
+
+- Original source: https://arxiv.org/html/2412.12861v1#S2.F2
+- Original file: https://arxiv.org/html/2412.12861v1/overview_cropped.png
+- License: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+- License evidence: https://arxiv.org/abs/2412.12861v1
+- SHA-256: `6d1a5e1d060751b82373369c8608c759ddb9a82fccc4d5171f6db72a1454cd6f`
+
+### assets/figures/glsmamba-original.png
+
+Runyang Feng, Hyung Jin Chang, Tze Ho Elden Tse, Boeun Kim, Yi Chang, Yixing Gao. High-Resolution Spatiotemporal Modeling with Global-Local State Space Models for Video-Based Human Pose Estimation, Figure 2, arXiv:2510.11017v1. CC BY-NC-ND 4.0.
+
+- Original source: https://arxiv.org/html/2510.11017v1#S2.F2
+- Original file: https://arxiv.org/html/2510.11017v1/Pipeline.png
+- License: [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+- License evidence: https://arxiv.org/abs/2510.11017v1
+- SHA-256: `f79972271c77fff564ae355211f994d6663857c269bb605a678609515adcb1c5`
+
+### assets/figures/fish2mesh-original.png
+
+David C. Jeong, Aditya Puranik, James Vong, Vrushabh Abhijit Deogirikar, Ryan Fell, Julianna Dietrich, Maria Kyrarini, Christopher Kitts. Fish2Mesh Transformer: 3D Human Mesh Recovery from Egocentric Vision, Figure 2, arXiv:2503.06089v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2503.06089v1#S2.F2
+- Original file: https://arxiv.org/html/2503.06089v1/fig/frame.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2503.06089v1
+- SHA-256: `28a67a24f93b3c45e3979993b4ce59fe6646e7d17f23e88de80623e4ce85bb6f`

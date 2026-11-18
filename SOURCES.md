@@ -185,3 +185,10 @@ Four code links were added after inspecting corresponding READMEs and public imp
 - 新增 11 个经过作者 README 与实现目录/入口核对的代码链接；红色 `code` 入口和 README 前缀与数据一致。STCFormer 未公开的 243 帧权重、TokenHMR 的论文/发布版本、RMPE 与后续 AlphaPose、PyMAF 与 PyMAF-X 均作区分。
 - LitePose（2205.01271v1，CC BY-NC-SA 4.0）、OSX（2303.16160v1）、AiOS（2403.17934v1）和 Normalizing Flows 姿态方法（2107.13788v1，后三者 CC BY 4.0）各收录一张未修改的论文原图。原图文件、版本、作者、许可证据及 SHA-256 见 `assets/figures/manifest.json` 与同目录 README。
 - 其余 20 篇仅保留原文结构图链接，不复制许可不明确的图像，不重绘。明确区分 PoseTriplet 的训练双循环、PSVT 的视频解码、RLE 仅训练使用的 flow、FinePOSE 的动作类别提示及重投影聚合、多假设评测中依赖真值的最佳样本指标。
+
+## 2026-11-18：第 12 批 CVPR 与 ICCV 2025 方法详情
+
+本批补充 19 篇已有论文的五步流程、训练、推理及原图阅读说明。`scripts/curation-2026-11-18-batch12.json` 记录各篇定向通读的官方正文页码或作者预印本版本章节。EgoPressure 区分多视角标注与单目评测，合成域差距研究逐项说明受控实验，PoseSyn 区分离线数据合成与在线估计。PoseAnchor 以投影公式和 Algorithm 2 为主，详情页直接链接算法页。
+
+- 7 篇论文收录 9 张原图。HiPART、PromptHMR、UniHOPE、MaskHand、Dyn-HaMR、GLSMamba 和 Fish2Mesh 的版本、作者、图号、授权依据和源文件校验值见 `assets/figures/manifest.json`。12 篇保留原文图或算法链接。Fish2Mesh 原图作者署名以 arXiv v1 署名为准。
+- 新增 10 个红色 `code` 入口。EgoPressure 指向作者团队的数据工具包，Fish2Mesh 指向团队实现，LDPose 指向注明来源的第三方推理实现。MV-SSM 当前公开仓库仅提供说明和示例。核对范围为项目说明和公开文件，未运行实现或复现实验。

@@ -1,0 +1,617 @@
+{
+  "review_date": "2026-11-18",
+  "expanded_records": 19,
+  "new_code_links": [
+    "mega",
+    "heat",
+    "prompt",
+    "pressure",
+    "sat",
+    "dyn",
+    "anchor",
+    "ld",
+    "fish",
+    "low"
+  ],
+  "records": [
+    {
+      "id": "hipart-hierarchical-pose-autoregressive-transformer-for-occluded-3d-human-pose-estimation",
+      "version": "arXiv:2503.23331v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4.SS1",
+        "S4.SS2",
+        "S4.SS3"
+      ],
+      "figure_anchor": [
+        "S1.F3",
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2503.23331v1",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2503.23331v1",
+        "url": "https://arxiv.org/abs/2503.23331v1",
+        "license_url": "http://creativecommons.org/licenses/by/4.0/",
+        "authors": [
+          "Zheng, Hongwei",
+          "Li, Han",
+          "Dai, Wenrui",
+          "Zheng, Ziyang",
+          "Li, Chenglin",
+          "Zou, Junni",
+          "Xiong, Hongkai"
+        ]
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2503.23331v1#S1.F3"
+      ]
+    },
+    {
+      "id": "mega-masked-generative-autoencoder-for-human-mesh-recovery",
+      "version": "arXiv:2405.18839v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4"
+      ],
+      "figure_anchor": [
+        "S3.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2405.18839v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2405.18839v1",
+        "url": "https://arxiv.org/abs/2405.18839v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Fiche, Guénolé",
+          "Leglaive, Simon",
+          "Alameda-Pineda, Xavier",
+          "Moreno-Noguer, Francesc"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/g-fiche/MEGA",
+        "verified_at": "2026-11-18",
+        "basis": "作者 README.MD 对应 CVPR 论文，包含 mega/model、预训练、训练、测试及演示入口。"
+      }
+    },
+    {
+      "id": "heatformer-a-neural-optimizer-for-multiview-human-mesh-recovery",
+      "version": "arXiv:2412.04456v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4"
+      ],
+      "figure_anchor": [
+        "S3.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2412.04456v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2412.04456v1",
+        "url": "https://arxiv.org/abs/2412.04456v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Matsubara, Yuto",
+          "Nishino, Ko"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/kyotovision-public/HeatFormer",
+        "verified_at": "2026-11-18",
+        "basis": "作者机构的 README 对应论文，包含 lib、train.py、eval.py 和 BEHAVE 评估入口。"
+      }
+    },
+    {
+      "id": "prompthmr-promptable-human-mesh-recovery",
+      "version": "arXiv:2504.06397v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4",
+        "S3.SS5"
+      ],
+      "figure_anchor": [
+        "S2.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2504.06397v1",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2504.06397v1",
+        "url": "https://arxiv.org/abs/2504.06397v1",
+        "license_url": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "authors": [
+          "Wang, Yufu",
+          "Sun, Yu",
+          "Patel, Priyanka",
+          "Daniilidis, Kostas",
+          "Black, Michael J.",
+          "Kocabas, Muhammed"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/yufu-wang/PromptHMR",
+        "verified_at": "2026-11-18",
+        "basis": "作者 README 对应 CVPR 论文，并提供单图和视频推理说明、prompt_hmr 与 pipeline 目录。"
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2504.06397v1#S2.F2",
+        "https://arxiv.org/html/2504.06397v1#S3.F3"
+      ]
+    },
+    {
+      "id": "unihope-a-unified-approach-for-hand-only-and-hand-object-pose-estimation",
+      "version": "arXiv:2503.13303v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4"
+      ],
+      "figure_anchor": [
+        "S1.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2503.13303v1",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2503.13303v1",
+        "url": "https://arxiv.org/abs/2503.13303v1",
+        "license_url": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "authors": [
+          "Wang, Yinqiao",
+          "Xu, Hao",
+          "Heng, Pheng-Ann",
+          "Fu, Chi-Wing"
+        ]
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2503.13303v1#S1.F2"
+      ]
+    },
+    {
+      "id": "egopressure-a-dataset-for-hand-pressure-and-pose-estimation-in-egocentric-vision",
+      "version": "arXiv:2409.02224v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS3",
+        "S4.SS1",
+        "S4.SS2",
+        "S5.SS1",
+        "S5.SS2"
+      ],
+      "figure_anchor": [
+        "S4.F6",
+        "Figure 6"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2409.02224v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2409.02224v1",
+        "url": "https://arxiv.org/abs/2409.02224v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Zhao, Yiming",
+          "Kwon, Taein",
+          "Streli, Paul",
+          "Pollefeys, Marc",
+          "Holz, Christian"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/eth-siplab/EgoPressure",
+        "verified_at": "2026-11-18",
+        "basis": "论文作者团队发布的数据工具包，包含标注、校准、数据及查看器代码。这里的入口是数据工具包。"
+      }
+    },
+    {
+      "id": "analyzing-the-synthetic-to-real-domain-gap-in-3d-hand-pose-estimation",
+      "version": "arXiv:2503.19307v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4",
+        "S4.SS2"
+      ],
+      "figure_anchor": [
+        "S3.F3",
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2503.19307v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2503.19307v1",
+        "url": "https://arxiv.org/abs/2503.19307v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Zhao, Zhuoran",
+          "Yang, Linlin",
+          "Sun, Pengzhan",
+          "Hui, Pan",
+          "Yao, Angela"
+        ]
+      }
+    },
+    {
+      "id": "maskhand-generative-masked-modeling-for-robust-hand-mesh-reconstruction-in-the-wild",
+      "version": "arXiv:2412.13393v2",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4"
+      ],
+      "figure_anchor": [
+        "S3.F3",
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2412.13393v2",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2412.13393v2",
+        "url": "https://arxiv.org/abs/2412.13393v2",
+        "license_url": "http://creativecommons.org/licenses/by/4.0/",
+        "authors": [
+          "Saleem, Muhammad Usama",
+          "Pinyoanuntapong, Ekkasit",
+          "Patel, Mayur Jagdishbhai",
+          "Xue, Hongfei",
+          "Helmy, Ahmed",
+          "Das, Srijan",
+          "Wang, Pu"
+        ]
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2412.13393v2#S3.F3",
+        "https://arxiv.org/html/2412.13393v2#S3.F5"
+      ]
+    },
+    {
+      "id": "sat-hmr-real-time-multi-person-3d-mesh-estimation-via-scale-adaptive-tokens",
+      "version": "arXiv:2411.19824v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4"
+      ],
+      "figure_anchor": [
+        "S3.F3",
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2411.19824v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2411.19824v1",
+        "url": "https://arxiv.org/abs/2411.19824v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Su, Chi",
+          "Ma, Xiaoxuan",
+          "Su, Jiajun",
+          "Wang, Yizhou"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/ChiSu001/SAT-HMR",
+        "verified_at": "2026-11-18",
+        "basis": "作者 README 对应 CVPR 论文，包含 models、engines、main.py 及数据准备说明。"
+      }
+    },
+    {
+      "id": "dyn-hamr-recovering-4d-interacting-hand-motion-from-a-dynamic-camera",
+      "version": "arXiv:2412.12861v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3"
+      ],
+      "figure_anchor": [
+        "S2.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2412.12861v1",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2412.12861v1",
+        "url": "https://arxiv.org/abs/2412.12861v1",
+        "license_url": "http://creativecommons.org/licenses/by-sa/4.0/",
+        "authors": [
+          "Yu, Zhengdi",
+          "Zafeiriou, Stefanos",
+          "Birdal, Tolga"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/ZhengdiYu/Dyn-HaMR",
+        "verified_at": "2026-11-18",
+        "basis": "作者 README 对应论文，包含 dyn-hamr/run_opt.py、优化、HMP 与数据预处理目录。"
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2412.12861v1#S2.F2"
+      ]
+    },
+    {
+      "id": "mv-ssm-multi-view-state-space-modeling-for-3d-human-pose-estimation",
+      "version": "arXiv:2509.00649v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS2",
+        "S2a"
+      ],
+      "figure_anchor": [
+        "S3.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2509.00649v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2509.00649v1",
+        "url": "https://arxiv.org/abs/2509.00649v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Chharia, Aviral",
+          "Gou, Wenbo",
+          "Dong, Haoye"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/aviralchharia/MV-SSM",
+        "status": "placeholder_only_no_code_badge",
+        "verified_at": "2026-11-18"
+      }
+    },
+    {
+      "id": "high-resolution-spatiotemporal-modeling-with-global-local-state-space-models-for-video-based-human-pose-estimation",
+      "version": "arXiv:2510.11017v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4"
+      ],
+      "figure_anchor": [
+        "S2.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2510.11017v1",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2510.11017v1",
+        "url": "https://arxiv.org/abs/2510.11017v1",
+        "license_url": "http://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "authors": [
+          "Feng, Runyang",
+          "Chang, Hyung Jin",
+          "Tse, Tze Ho Elden",
+          "Kim, Boeun",
+          "Chang, Yi",
+          "Gao, Yixing"
+        ]
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2510.11017v1#S2.F2"
+      ]
+    },
+    {
+      "id": "a-structure-aware-and-motion-adaptive-framework-for-3d-human-pose-estimation-with-mamba",
+      "version": "arXiv:2507.19852v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4",
+        "S3.SS5",
+        "S3.SS6"
+      ],
+      "figure_anchor": [
+        "S3.F3",
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2507.19852v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2507.19852v1",
+        "url": "https://arxiv.org/abs/2507.19852v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Lu, Ye",
+          "Wang, Jie",
+          "Gao, Jianjun",
+          "Gong, Rui",
+          "Cai, Chen",
+          "Yap, Kim-Hui"
+        ]
+      }
+    },
+    {
+      "id": "posesyn-synthesizing-diverse-3d-pose-data-from-in-the-wild-2d-data",
+      "version": "arXiv:2503.13025v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3"
+      ],
+      "figure_anchor": [
+        "S2.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2503.13025v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2503.13025v1",
+        "url": "https://arxiv.org/abs/2503.13025v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Yang, ChangHee",
+          "Song, Hyeonseop",
+          "Choi, Seokhun",
+          "Lee, Seungwoo",
+          "Kim, Jaechul",
+          "Do, Hoseok"
+        ]
+      }
+    },
+    {
+      "id": "prior-aware-dynamic-temporal-modeling-framework-for-sequential-3d-hand-pose-estimation",
+      "version": "Official 2025 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2025/papers/Ren_Prior-aware_Dynamic_Temporal_Modeling_Framework_for_Sequential_3D_Hand_Pose_ICCV_2025_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "poseanchor-robust-root-position-estimation-for-3d-human-pose-estimation",
+      "version": "Official 2025 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Algorithm 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2025/papers/Kim_PoseAnchor_Robust_Root_Position_Estimation_for_3D_Human_Pose_Estimation_ICCV_2025_paper.pdf",
+      "figure_reuse": "original_algorithm_link",
+      "implementation_check": {
+        "url": "https://github.com/junheeeeeee/PoseAnchor",
+        "verified_at": "2026-11-18",
+        "basis": "论文作者的 README 链接 ICCV 正文，并提供 model、run.py 与 evaluate.py。"
+      }
+    },
+    {
+      "id": "ldpose-towards-inclusive-human-pose-estimation-for-limb-deficient-individuals-in-the-wild",
+      "version": "Official 2025 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "figure_anchor": [
+        6,
+        "Figure 4"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2025/papers/Ying_LDPose_Towards_Inclusive_Human_Pose_Estimation_for_Limb-Deficient_Individuals_in_ICCV_2025_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "implementation_check": {
+        "url": "https://github.com/kojima-msp/ldpose",
+        "verified_at": "2026-11-18",
+        "basis": "第三方推理入口。README 指向论文项目，infer.py 使用 RTMDet 和相应 25 点配置调用 ViTPose，并附独立互斥后处理。"
+      }
+    },
+    {
+      "id": "fish2mesh-transformer-3d-human-mesh-recovery-from-egocentric-vision",
+      "version": "arXiv:2503.06089v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4",
+        "S4.SS1"
+      ],
+      "figure_anchor": [
+        "S2.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2503.06089v1",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2503.06089v1",
+        "url": "https://arxiv.org/abs/2503.06089v1",
+        "license_url": "http://creativecommons.org/licenses/by/4.0/",
+        "authors": [
+          "Jeong, David C.",
+          "Puranik, Aditya",
+          "Vong, James",
+          "Deogirikar, Vrushabh Abhijit",
+          "Fell, Ryan",
+          "Dietrich, Julianna",
+          "Kyrarini, Maria",
+          "Kitts, Christopher"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/Santa-Clara-Imaginarium-Lab/Fish2Mesh-Human-Mesh-Recovery",
+        "verified_at": "2026-11-18",
+        "basis": "研究团队仓库包含 HMR_Model、训练及评估目录。仓库标题使用 Reconstruction，README 未标明与最终会议版的精确配置对应关系。"
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2503.06089v1#S2.F2"
+      ]
+    },
+    {
+      "id": "pose-guided-temporal-enhancement-for-robust-low-resolution-hand-reconstruction",
+      "version": "Official 2025 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2025/papers/Fan_Pose-Guided_Temporal_Enhancement_for_Robust_Low-Resolution_Hand_Reconstruction_CVPR_2025_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "implementation_check": {
+        "url": "https://github.com/NewbieFan/Temp-LowRes-hand",
+        "verified_at": "2026-11-18",
+        "basis": "CVPR 全文列出的作者仓库，包含 models、train.py、eval.py 与运行说明。"
+      }
+    }
+  ]
+}
