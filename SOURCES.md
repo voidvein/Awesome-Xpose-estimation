@@ -1,5 +1,13 @@
 # Sources and curation notes
 
+## Hand representation and reconstruction batch — 2026-11-18
+
+Added 29 module-level readings spanning RGB-to-3D hands, V2V-PoseNet, Hand PointNet, latent 2.5D regression, dense depth regression, FreiHAND, Graph CNN reconstruction, MANO-based reconstruction in the wild, HOnnotate, YouTube mesh reconstruction, DetNet/IKNet, HandFoldingNet, I2UV-HandNet, Mesh Graphormer, METRO, CMR, HandOccNet, MobRecon, multi-view depth self-supervision, Handy, Deformer, THOR-Net, dense mutual hand-object attention, HMP, multiview bootstrapping, DeepPrior++, InterHand2.6M, MediaPipe Hands and EvHandPose. Exact versions, method sections or official PDF pages and original figure locations are recorded in `scripts/curation-2026-11-18-batch4.json` and individual page sources.
+
+Official PDF method diagrams were rendered and visually checked to verify figure/page selection. The corresponding diagrams remain links when republication permission is unclear. For Handy, the reviewed model-construction section does not provide a complete network overview: PCA shape and texture results are not relabeled as architecture diagrams. CMR and MobRecon each have two unmodified original diagrams with explicit CC BY-NC-ND 4.0 / CC BY-NC-SA 4.0 notices in their exact arXiv HTML versions; image hashes and attribution are in the figure manifest.
+
+The notes separate relative/normalized from metric geometry, hand model building from image inference, multi-view label generation from single-view deployment, and feed-forward prediction from test-time optimization. In particular, dense hand-object mutual attention assumes object CAD and wrist depth; HMP's main setting assumes a static camera; the MediaPipe page follows the 2020 paper rather than current software behavior. METRO and Mesh Graphormer use body examples in their general architecture figures, so body-specific vertex counts are not copied into hand configurations. These are targeted method readings, not independent reproductions or complete experimental audits.
+
 ## Head and facial alignment pipeline batch — 2026-11-18
 
 Added 24 targeted method readings covering the short/wide-range HPE analysis, Infinite 3D Landmarks, FaceXFormer v3, SemiUHPE v4, FAN, HopeNet, LAB, Wing Loss, PRNet, Adaptive Wing, DeCaFA, PFLD, LUVLi, 3DDFA-V2, WHENet, PIPNet, ADNet, 6DRepNet, HHP-Net, LwPosr, DTLD, STAR Loss, 6DRepNet360 and partially-latent mixture regression. Exact source versions, method sections and figure anchors are recorded in `scripts/curation-2026-11-18-batch3.json` and each page. LAB uses the official CVPR 2018 PDF, §3.1–3.3, Figure 2 and Algorithm 1; its original diagram remains linked because republication permission has not been established.

@@ -207,3 +207,45 @@ Thorsten Hempel, Ahmed A. Abdelrahman, Ayoub Al-Hamadi. Toward Robust and Uncons
 - License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 - License evidence: https://arxiv.org/abs/2309.07654v1
 - SHA-256: `0e9531e8caaa0fdf535e6208dfa0bf55ec96116c1f3b46979eb20702a4998480`
+
+## Hand representation and reconstruction originals — 2026-11-18
+
+### assets/figures/cmr-architecture.png
+
+Xingyu Chen, Yufeng Liu, Chongyang Ma, Jianlong Chang, Huayan Wang, Tian Chen, Xiaoyan Guo, Pengfei Wan, Wen Zheng. Camera-Space Hand Mesh Recovery via Semantic Aggregation and Adaptive 2D-1D Registration, Figure 2, arXiv:2103.02845v2. CC BY-NC-ND 4.0.
+
+- Original source: https://arxiv.org/html/2103.02845v2#S3.F2
+- Unmodified original file: https://arxiv.org/html/2103.02845v2/arch.png
+- License: [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+- License evidence: https://arxiv.org/abs/2103.02845v2
+- SHA-256: `9b1948e3fa58e524af33a4e25b33991ea7b766b335f0b23ddf9deac3531aae02`
+
+### assets/figures/cmr-spiral-decoder.png
+
+Xingyu Chen, Yufeng Liu, Chongyang Ma, Jianlong Chang, Huayan Wang, Tian Chen, Xiaoyan Guo, Pengfei Wan, Wen Zheng. Camera-Space Hand Mesh Recovery via Semantic Aggregation and Adaptive 2D-1D Registration, Figure 5, arXiv:2103.02845v2. CC BY-NC-ND 4.0.
+
+- Original source: https://arxiv.org/html/2103.02845v2#S3.F5
+- Unmodified original file: https://arxiv.org/html/2103.02845v2/spdecoder.png
+- License: [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+- License evidence: https://arxiv.org/abs/2103.02845v2
+- SHA-256: `42e78213bb7433e63851aaa9b71caeba8b7eb587ff8a41c91cf7c49f2617f3de`
+
+### assets/figures/mobrecon-architecture.png
+
+Xingyu Chen, Yufeng Liu, Yajiao Dong, Xiong Zhang, Chongyang Ma, Yanmin Xiong, Yuan Zhang, Xiaoyan Guo. MobRecon: Mobile-Friendly Hand Mesh Reconstruction From Monocular Image, Figure 2, arXiv:2112.02753v2. CC BY-NC-SA 4.0.
+
+- Original source: https://arxiv.org/html/2112.02753v2#S2.F2
+- Unmodified original file: https://arxiv.org/html/2112.02753v2/arch.png
+- License: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+- License evidence: https://arxiv.org/abs/2112.02753v2
+- SHA-256: `9130d4da4452ecb2d5324026db449cc9755402ba00e93cdf7c576ea8fde65fb0`
+
+### assets/figures/mobrecon-mapreg.png
+
+Xingyu Chen, Yufeng Liu, Yajiao Dong, Xiong Zhang, Chongyang Ma, Yanmin Xiong, Yuan Zhang, Xiaoyan Guo. MobRecon: Mobile-Friendly Hand Mesh Reconstruction From Monocular Image, Figure 4, arXiv:2112.02753v2. CC BY-NC-SA 4.0.
+
+- Original source: https://arxiv.org/html/2112.02753v2#S3.F4
+- Unmodified original file: https://arxiv.org/html/2112.02753v2/rep2d.png
+- License: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+- License evidence: https://arxiv.org/abs/2112.02753v2
+- SHA-256: `5f012398c69ef16a9c821566cfb4ec955f5b8dfc84c5f214e4d6fe2e60d684f1`

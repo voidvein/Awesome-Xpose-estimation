@@ -1,6 +1,6 @@
 # 详情页构建进度
 
-更新：2026-11-18。共 371 篇；流程说明已完成 50 篇，其中原图已收录 16 篇；待开展 321 篇。
+更新：2026-11-18。共 371 篇；流程说明已完成 79 篇，其中原图已收录 18 篇；待开展 292 篇。
 
 每篇按原文核对模块顺序、数据流、训练与推理、图号及版本。只使用论文原图；转载许可未明确时只保留原图链接，不重绘。摘要与适用边界笔记不计为流程精读完成。
 
@@ -19,6 +19,8 @@
 - [Toward Robust and Unconstrained Full Range of Rotation Head Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=6drepnet360)
 - [Reconstructing Hands in 3D with Transformers](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hamer)
 - [WiLoR: End-to-end 3D Hand Localization and Reconstruction in-the-wild](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=wilor)
+- [Camera-Space Hand Mesh Recovery via Semantic Aggregation and Adaptive 2D-1D Registration](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=cmr-hand)
+- [MobRecon: Mobile-Friendly Hand Mesh Reconstruction From Monocular Image](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=mobrecon)
 - [RTMO: Towards High-Performance One-Stage Real-Time Multi-Person Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=rtmo)
 - [WHAM: Reconstructing World-grounded Humans with Accurate 3D Motion](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=wham)
 - [World-Grounded Human Motion Recovery via Gravity-View Coordinates](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=gvhmr)
@@ -44,8 +46,35 @@
 - [ADNet: Leveraging Error-Bias Towards Normal Direction in Face Alignment](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=adnet)
 - [HHP-Net: A Light Heteroscedastic Neural Network for Head Pose Estimation With Uncertainty](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hhpnet)
 - [HandDiff: 3D Hand Pose Estimation with Diffusion on Image-Point Cloud](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=handdiff)
+- [EvHandPose: Event-Based 3D Hand Pose Estimation With Sparse Supervision](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=evhandpose)
 - [HandOS: 3D Hand Reconstruction in One Stage](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=handos)
 - [HaWoR: World-Space Hand Motion Reconstruction from Egocentric Videos](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hawor)
+- [Learning to Estimate 3D Hand Pose From Single RGB Images](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand3d)
+- [V2V-PoseNet: Voxel-to-Voxel Prediction Network for Accurate 3D Hand and Human Pose Estimation From a Single Depth Map](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=v2v-posenet-hand)
+- [Hand PointNet: 3D Hand Pose Estimation Using Point Sets](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-pointnet)
+- [Hand Pose Estimation via Latent 2.5D Heatmap Regression](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=latent-25d-hand)
+- [Dense 3D Regression for Hand Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=dense-hand-regression)
+- [FreiHAND: A Dataset for Markerless Capture of Hand Pose and Shape From Single RGB Images](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=freihand)
+- [3D Hand Shape and Pose Estimation From a Single RGB Image](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-graph-cnn)
+- [3D Hand Shape and Pose From Images in the Wild](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-wild-mano)
+- [HOnnotate: A Method for 3D Annotation of Hand and Object Poses](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=honnotate)
+- [Weakly-Supervised Mesh-Convolutional Hand Reconstruction in the Wild](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=youtube3d-hands)
+- [Monocular Real-Time Hand Shape and Motion Capture Using Multi-Modal Data](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=monocular-realtime-hand)
+- [HandFoldingNet: A 3D Hand Pose Estimation Network Using Multiscale-Feature Guided Folding of a 2D Hand Skeleton](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=handfoldingnet)
+- [I2UV-HandNet: Image-to-UV Prediction Network for Accurate and High-Fidelity 3D Hand Mesh Modeling](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=i2uv-handnet)
+- [Mesh Graphormer](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=mesh-graphormer-hand)
+- [End-to-End Human Pose and Mesh Reconstruction with Transformers](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=metro-hand)
+- [HandOccNet: Occlusion-Robust 3D Hand Mesh Estimation Network](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=handoccnet)
+- [Mining Multi-View Information: A Strong Self-Supervised Framework for Depth-Based 3D Hand Pose and Mesh Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=multiview-depth-hand)
+- [Handy: Towards a High Fidelity 3D Hand Shape and Appearance Model](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=handy)
+- [Deformer: Dynamic Fusion Transformer for Robust Hand Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=deformer-hand)
+- [THOR-Net: End-to-End Graformer-Based Realistic Two Hands and Object Reconstruction With Self-Supervision](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=thor-net)
+- [Interacting Hand-Object Pose Estimation via Dense Mutual Attention](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=dense-mutual-attention-hand)
+- [HMP: Hand Motion Priors for Pose and Shape Estimation From Video](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hmp)
+- [Hand Keypoint Detection in Single Images Using Multiview Bootstrapping](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-multiview-bootstrap)
+- [DeepPrior++: Improving Fast and Accurate 3D Hand Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=deepprior-plus)
+- [InterHand2.6M: A Dataset and Baseline for 3D Interacting Hand Pose Estimation from a Single RGB Image](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=interhand26m)
+- [MediaPipe Hands: On-device Real-time Hand Tracking](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=mediapipe-hands)
 - [Sapiens: Foundation for Human Vision Models](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=sapiens)
 - [RTMW: Real-Time Multi-Person 2D and 3D Whole-body Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=rtmw)
 - [MotionAGFormer: Enhancing 3D Human Pose Estimation With a Transformer-GCNFormer Network](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=motionagformer)

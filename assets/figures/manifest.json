@@ -779,5 +779,313 @@
     "paper_version": "CVPR 2018 author open-access paper",
     "reviewed_at": "2026-11-18",
     "note": "原论文图2位于PDF第3页；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "evhandpose",
+    "status": "link_only",
+    "source_url": "https://arxiv.org/html/2303.02862v3#S2.F2",
+    "paper_version": "2303.02862v3",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "hand3d",
+    "status": "link_only",
+    "source_url": "https://openaccess.thecvf.com/content_ICCV_2017/papers/Zimmermann_Learning_to_Estimate_ICCV_2017_paper.pdf#page=2",
+    "paper_version": "Official 2017 ICCV open-access paper",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "v2v-posenet-hand",
+    "status": "link_only",
+    "source_url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Moon_V2V-PoseNet_Voxel-to-Voxel_Prediction_CVPR_2018_paper.pdf#page=4",
+    "paper_version": "Official 2018 CVPR open-access paper",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "hand-pointnet",
+    "status": "link_only",
+    "source_url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Ge_Hand_PointNet_3D_CVPR_2018_paper.pdf#page=2",
+    "paper_version": "Official 2018 CVPR open-access paper",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "latent-25d-hand",
+    "status": "link_only",
+    "source_url": "https://openaccess.thecvf.com/content_ECCV_2018/papers/Umar_Iqbal_Hand_Pose_Estimation_ECCV_2018_paper.pdf#page=4",
+    "paper_version": "Official 2018 ECCV open-access paper",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "dense-hand-regression",
+    "status": "link_only",
+    "source_url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Wan_Dense_3D_Regression_CVPR_2018_paper.pdf#page=5",
+    "paper_version": "Official 2018 CVPR open-access paper",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "freihand",
+    "status": "link_only",
+    "source_url": "https://arxiv.org/html/1909.04349v3#S4.F4",
+    "paper_version": "1909.04349v3",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "hand-graph-cnn",
+    "status": "link_only",
+    "source_url": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Ge_3D_Hand_Shape_and_Pose_Estimation_From_a_Single_RGB_CVPR_2019_paper.pdf#page=4",
+    "paper_version": "Official 2019 CVPR open-access paper",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "hand-wild-mano",
+    "status": "link_only",
+    "source_url": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Boukhayma_3D_Hand_Shape_and_Pose_From_Images_in_the_Wild_CVPR_2019_paper.pdf#page=2",
+    "paper_version": "Official 2019 CVPR open-access paper",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "honnotate",
+    "status": "link_only",
+    "source_url": "https://openaccess.thecvf.com/content_CVPR_2020/papers/Hampali_HOnnotate_A_Method_for_3D_Annotation_of_Hand_and_Object_CVPR_2020_paper.pdf#page=6",
+    "paper_version": "Official 2020 CVPR open-access paper",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "youtube3d-hands",
+    "status": "link_only",
+    "source_url": "https://arxiv.org/html/2004.01946v1#S0.F1",
+    "paper_version": "2004.01946v1",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "monocular-realtime-hand",
+    "status": "link_only",
+    "source_url": "https://openaccess.thecvf.com/content_CVPR_2020/papers/Zhou_Monocular_Real-Time_Hand_Shape_and_Motion_Capture_Using_Multi-Modal_Data_CVPR_2020_paper.pdf#page=4",
+    "paper_version": "Official 2020 CVPR open-access paper",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "handfoldingnet",
+    "status": "link_only",
+    "source_url": "https://arxiv.org/html/2108.05545v1#S1.F2",
+    "paper_version": "2108.05545v1",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "i2uv-handnet",
+    "status": "link_only",
+    "source_url": "https://arxiv.org/html/2102.03725v2#S1.F1",
+    "paper_version": "2102.03725v2",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "mesh-graphormer-hand",
+    "status": "link_only",
+    "source_url": "https://arxiv.org/html/2104.00272v2#S2.F3",
+    "paper_version": "2104.00272v2",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "metro-hand",
+    "status": "link_only",
+    "source_url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Lin_End-to-End_Human_Pose_and_Mesh_Reconstruction_with_Transformers_CVPR_2021_paper.pdf#page=3",
+    "paper_version": "Official 2021 CVPR open-access paper",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "handoccnet",
+    "status": "link_only",
+    "source_url": "https://arxiv.org/html/2203.14564v1#S3.F2",
+    "paper_version": "2203.14564v1",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "multiview-depth-hand",
+    "status": "link_only",
+    "source_url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Ren_Mining_Multi-View_Information_A_Strong_Self-Supervised_Framework_for_Depth-Based_3D_CVPR_2022_paper.pdf#page=3",
+    "paper_version": "Official 2022 CVPR open-access paper",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "handy",
+    "status": "link_only",
+    "source_url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Potamias_Handy_Towards_a_High_Fidelity_3D_Hand_Shape_and_Appearance_CVPR_2023_paper.pdf#page=4",
+    "paper_version": "Official 2023 CVPR open-access paper",
+    "reviewed_at": "2026-11-18",
+    "note": "已核对模型构建正文；当前未定位到完整网络总图，暂留正文链接。原文形状/纹理结果图不冒充结构图。"
+  },
+  {
+    "paper_id": "deformer-hand",
+    "status": "link_only",
+    "source_url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Fu_Deformer_Dynamic_Fusion_Transformer_for_Robust_Hand_Pose_Estimation_ICCV_2023_paper.pdf#page=3",
+    "paper_version": "Official 2023 ICCV open-access paper",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "thor-net",
+    "status": "link_only",
+    "source_url": "https://openaccess.thecvf.com/content/WACV2023/papers/Aboukhadra_THOR-Net_End-to-End_Graformer-Based_Realistic_Two_Hands_and_Object_Reconstruction_With_WACV_2023_paper.pdf#page=3",
+    "paper_version": "Official 2023 WACV open-access paper",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "dense-mutual-attention-hand",
+    "status": "link_only",
+    "source_url": "https://openaccess.thecvf.com/content/WACV2023/papers/Wang_Interacting_Hand-Object_Pose_Estimation_via_Dense_Mutual_Attention_WACV_2023_paper.pdf#page=3",
+    "paper_version": "Official 2023 WACV open-access paper",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "hmp",
+    "status": "link_only",
+    "source_url": "https://openaccess.thecvf.com/content/WACV2024/papers/Duran_HMP_Hand_Motion_Priors_for_Pose_and_Shape_Estimation_From_WACV_2024_paper.pdf#page=4",
+    "paper_version": "Official 2024 WACV open-access paper",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "hand-multiview-bootstrap",
+    "status": "link_only",
+    "source_url": "https://openaccess.thecvf.com/content_cvpr_2017/papers/Simon_Hand_Keypoint_Detection_CVPR_2017_paper.pdf#page=3",
+    "paper_version": "Official 2017 CVPR open-access paper",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "deepprior-plus",
+    "status": "link_only",
+    "source_url": "https://openaccess.thecvf.com/content_ICCV_2017_workshops/papers/w11/Oberweger_DeepPrior_Improving_Fast_ICCV_2017_paper.pdf#page=4",
+    "paper_version": "Official 2017 ICCV Workshops open-access paper",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "interhand26m",
+    "status": "link_only",
+    "source_url": "https://arxiv.org/html/2008.09309v1#S4.F3",
+    "paper_version": "2008.09309v1",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "mediapipe-hands",
+    "status": "link_only",
+    "source_url": "https://arxiv.org/html/2006.10214v1#S2.F3",
+    "paper_version": "2006.10214v1",
+    "reviewed_at": "2026-11-18",
+    "note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
+  },
+  {
+    "paper_id": "cmr-hand",
+    "status": "verified",
+    "src": "assets/figures/cmr-architecture.png",
+    "source_url": "https://arxiv.org/html/2103.02845v2#S3.F2",
+    "paper_title": "Camera-Space Hand Mesh Recovery via Semantic Aggregation and Adaptive 2D-1D Registration",
+    "paper_version": "2103.02845v2",
+    "figure_number": "Figure 2",
+    "alt": "CMR：二维线索、根相对网格与相机空间根配准。",
+    "caption": "CMR：二维线索、根相对网格与相机空间根配准。",
+    "authors": "Xingyu Chen, Yufeng Liu, Chongyang Ma, Jianlong Chang, Huayan Wang, Tian Chen, Xiaoyan Guo, Pengfei Wan, Wen Zheng",
+    "attribution": "Xingyu Chen, Yufeng Liu, Chongyang Ma, Jianlong Chang, Huayan Wang, Tian Chen, Xiaoyan Guo, Pengfei Wan, Wen Zheng. Camera-Space Hand Mesh Recovery via Semantic Aggregation and Adaptive 2D-1D Registration, Figure 2, arXiv:2103.02845v2. CC BY-NC-ND 4.0.",
+    "license": "CC BY-NC-ND 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "license_evidence_url": "https://arxiv.org/abs/2103.02845v2",
+    "license_evidence": "该版本arXiv HTML顶部明确标记 License: CC BY-NC-ND 4.0。完整保留原图与作者、来源和许可信息。",
+    "original_asset_url": "https://arxiv.org/html/2103.02845v2/arch.png",
+    "modifications": "论文HTML原始图片，未裁剪、未修改；页面仅等比例缩放显示。",
+    "reviewed_at": "2026-11-18",
+    "width": 758,
+    "height": 662,
+    "sha256": "9b1948e3fa58e524af33a4e25b33991ea7b766b335f0b23ddf9deac3531aae02"
+  },
+  {
+    "paper_id": "cmr-hand",
+    "status": "verified",
+    "src": "assets/figures/cmr-spiral-decoder.png",
+    "source_url": "https://arxiv.org/html/2103.02845v2#S3.F5",
+    "paper_title": "Camera-Space Hand Mesh Recovery via Semantic Aggregation and Adaptive 2D-1D Registration",
+    "paper_version": "2103.02845v2",
+    "figure_number": "Figure 5",
+    "alt": "CMR螺旋解码器：多尺度预测、ISM及同尺度预测回馈。",
+    "caption": "CMR螺旋解码器：多尺度预测、ISM及同尺度预测回馈。",
+    "authors": "Xingyu Chen, Yufeng Liu, Chongyang Ma, Jianlong Chang, Huayan Wang, Tian Chen, Xiaoyan Guo, Pengfei Wan, Wen Zheng",
+    "attribution": "Xingyu Chen, Yufeng Liu, Chongyang Ma, Jianlong Chang, Huayan Wang, Tian Chen, Xiaoyan Guo, Pengfei Wan, Wen Zheng. Camera-Space Hand Mesh Recovery via Semantic Aggregation and Adaptive 2D-1D Registration, Figure 5, arXiv:2103.02845v2. CC BY-NC-ND 4.0.",
+    "license": "CC BY-NC-ND 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "license_evidence_url": "https://arxiv.org/abs/2103.02845v2",
+    "license_evidence": "该版本arXiv HTML顶部明确标记 License: CC BY-NC-ND 4.0。完整保留原图与作者、来源和许可信息。",
+    "original_asset_url": "https://arxiv.org/html/2103.02845v2/spdecoder.png",
+    "modifications": "论文HTML原始图片，未裁剪、未修改；页面仅等比例缩放显示。",
+    "reviewed_at": "2026-11-18",
+    "width": 554,
+    "height": 312,
+    "sha256": "42e78213bb7433e63851aaa9b71caeba8b7eb587ff8a41c91cf7c49f2617f3de"
+  },
+  {
+    "paper_id": "mobrecon",
+    "status": "verified",
+    "src": "assets/figures/mobrecon-architecture.png",
+    "source_url": "https://arxiv.org/html/2112.02753v2#S2.F2",
+    "paper_title": "MobRecon: Mobile-Friendly Hand Mesh Reconstruction From Monocular Image",
+    "paper_version": "2112.02753v2",
+    "figure_number": "Figure 2",
+    "alt": "MobRecon：轻量编码、二维姿态特征提升与螺旋图解码。",
+    "caption": "MobRecon：轻量编码、二维姿态特征提升与螺旋图解码。",
+    "authors": "Xingyu Chen, Yufeng Liu, Yajiao Dong, Xiong Zhang, Chongyang Ma, Yanmin Xiong, Yuan Zhang, Xiaoyan Guo",
+    "attribution": "Xingyu Chen, Yufeng Liu, Yajiao Dong, Xiong Zhang, Chongyang Ma, Yanmin Xiong, Yuan Zhang, Xiaoyan Guo. MobRecon: Mobile-Friendly Hand Mesh Reconstruction From Monocular Image, Figure 2, arXiv:2112.02753v2. CC BY-NC-SA 4.0.",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "license_evidence_url": "https://arxiv.org/abs/2112.02753v2",
+    "license_evidence": "该版本arXiv HTML顶部明确标记 License: CC BY-NC-SA 4.0。完整保留原图与作者、来源和许可信息。",
+    "original_asset_url": "https://arxiv.org/html/2112.02753v2/arch.png",
+    "modifications": "论文HTML原始图片，未裁剪、未修改；页面仅等比例缩放显示。",
+    "reviewed_at": "2026-11-18",
+    "width": 945,
+    "height": 161,
+    "sha256": "9130d4da4452ecb2d5324026db449cc9755402ba00e93cdf7c576ea8fde65fb0"
+  },
+  {
+    "paper_id": "mobrecon",
+    "status": "verified",
+    "src": "assets/figures/mobrecon-mapreg.png",
+    "source_url": "https://arxiv.org/html/2112.02753v2#S3.F4",
+    "paper_title": "MobRecon: Mobile-Friendly Hand Mesh Reconstruction From Monocular Image",
+    "paper_version": "2112.02753v2",
+    "figure_number": "Figure 4",
+    "alt": "MobRecon原文对比二维表示和姿态特征采样，图(d)为MapReg，图(f)为坐标采样。",
+    "caption": "MobRecon原文对比二维表示和姿态特征采样，图(d)为MapReg，图(f)为坐标采样。",
+    "authors": "Xingyu Chen, Yufeng Liu, Yajiao Dong, Xiong Zhang, Chongyang Ma, Yanmin Xiong, Yuan Zhang, Xiaoyan Guo",
+    "attribution": "Xingyu Chen, Yufeng Liu, Yajiao Dong, Xiong Zhang, Chongyang Ma, Yanmin Xiong, Yuan Zhang, Xiaoyan Guo. MobRecon: Mobile-Friendly Hand Mesh Reconstruction From Monocular Image, Figure 4, arXiv:2112.02753v2. CC BY-NC-SA 4.0.",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "license_evidence_url": "https://arxiv.org/abs/2112.02753v2",
+    "license_evidence": "该版本arXiv HTML顶部明确标记 License: CC BY-NC-SA 4.0。完整保留原图与作者、来源和许可信息。",
+    "original_asset_url": "https://arxiv.org/html/2112.02753v2/rep2d.png",
+    "modifications": "论文HTML原始图片，未裁剪、未修改；页面仅等比例缩放显示。",
+    "reviewed_at": "2026-11-18",
+    "width": 429,
+    "height": 308,
+    "sha256": "5f012398c69ef16a9c821566cfb4ec955f5b8dfc84c5f214e4d6fe2e60d684f1"
   }
 ]

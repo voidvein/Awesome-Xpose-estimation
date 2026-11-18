@@ -140,7 +140,7 @@ for(const p of pipelinePapers){
  assert.ok(pipeline.available&&pipeline.overview&&pipeline.training&&pipeline.inference&&pipeline.figure_reading,`${p.id}: complete pipeline`);
  assert.ok(pipeline.steps.length>=4,`${p.id}: module-level steps`);
  assert.ok(paperFigures(p).some(f=>f.src)||(p.pipeline.figure_status==='original_link_only'||p.pipeline.figure_status==='architecture_not_located')&&paperFigures(p).some(f=>f.source),`${p.id}: pipeline needs a verified figure or an explicitly pending original-source link`);
- assert.ok(pipeline.sources.every(s=>/^https:\/\/arxiv\.org\/html\/\d{4}\.\d{4,5}v\d+#\S+$/.test(s.url)||/^https:\/\/openaccess\.thecvf\.com\/content[^/]*\/papers\/[^#]+\.pdf#page=\d+$/.test(s.url)),`${p.id}: versioned section or published PDF page anchors`);
+ assert.ok(pipeline.sources.every(s=>/^https:\/\/arxiv\.org\/html\/\d{4}\.\d{4,5}v\d+#\S+$/.test(s.url)||/^https:\/\/openaccess\.thecvf\.com\/content[^#]+\/papers\/[^#]+\.pdf#page=\d+$/.test(s.url)),`${p.id}: versioned section or published PDF page anchors`);
 }
 assert.ok(pipelinePapers.length>=6);
 assert.equal(paperFigures({figure:{src:'assets/figures/a.png',source:'https://example.org'},figures:[{src:'assets/figures/a.png',source:'https://example.org'},null]}).length,1);

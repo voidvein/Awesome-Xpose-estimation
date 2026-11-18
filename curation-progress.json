@@ -2,9 +2,9 @@
   "updated_at": "2026-11-18",
   "total": 371,
   "counts": {
-    "complete": 16,
-    "figure_pending": 34,
-    "pending": 321
+    "complete": 18,
+    "figure_pending": 61,
+    "pending": 292
   },
   "completion_standard": "Source-checked module-level pipeline, separate training/inference, figure guide, and a verified local architecture/process figure. Summaries and applicability notes do not count.",
   "entries": [
@@ -463,12 +463,12 @@
       "id": "evhandpose",
       "category": "Hand",
       "title": "EvHandPose: Event-Based 3D Hand Pose Estimation With Sparse Supervision",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2303.02862",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "wilor",
@@ -573,287 +573,287 @@
       "id": "hand3d",
       "category": "Hand",
       "title": "Learning to Estimate 3D Hand Pose From Single RGB Images",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2017/html/Zimmermann_Learning_to_Estimate_ICCV_2017_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "v2v-posenet-hand",
       "category": "Hand",
       "title": "V2V-PoseNet: Voxel-to-Voxel Prediction Network for Accurate 3D Hand and Human Pose Estimation From a Single Depth Map",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Moon_V2V-PoseNet_Voxel-to-Voxel_Prediction_CVPR_2018_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "hand-pointnet",
       "category": "Hand",
       "title": "Hand PointNet: 3D Hand Pose Estimation Using Point Sets",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Ge_Hand_PointNet_3D_CVPR_2018_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "latent-25d-hand",
       "category": "Hand",
       "title": "Hand Pose Estimation via Latent 2.5D Heatmap Regression",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ECCV_2018/html/Umar_Iqbal_Hand_Pose_Estimation_ECCV_2018_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "dense-hand-regression",
       "category": "Hand",
       "title": "Dense 3D Regression for Hand Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Wan_Dense_3D_Regression_CVPR_2018_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "freihand",
       "category": "Hand",
       "title": "FreiHAND: A Dataset for Markerless Capture of Hand Pose and Shape From Single RGB Images",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ICCV_2019/html/Zimmermann_FreiHAND_A_Dataset_for_Markerless_Capture_of_Hand_Pose_and_ICCV_2019_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "hand-graph-cnn",
       "category": "Hand",
       "title": "3D Hand Shape and Pose Estimation From a Single RGB Image",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2019/html/Ge_3D_Hand_Shape_and_Pose_Estimation_From_a_Single_RGB_CVPR_2019_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "hand-wild-mano",
       "category": "Hand",
       "title": "3D Hand Shape and Pose From Images in the Wild",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2019/html/Boukhayma_3D_Hand_Shape_and_Pose_From_Images_in_the_Wild_CVPR_2019_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "honnotate",
       "category": "Hand",
       "title": "HOnnotate: A Method for 3D Annotation of Hand and Object Poses",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2020/html/Hampali_HOnnotate_A_Method_for_3D_Annotation_of_Hand_and_Object_CVPR_2020_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "youtube3d-hands",
       "category": "Hand",
       "title": "Weakly-Supervised Mesh-Convolutional Hand Reconstruction in the Wild",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2020/html/Kulon_Weakly-Supervised_Mesh-Convolutional_Hand_Reconstruction_in_the_Wild_CVPR_2020_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "monocular-realtime-hand",
       "category": "Hand",
       "title": "Monocular Real-Time Hand Shape and Motion Capture Using Multi-Modal Data",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2020/html/Zhou_Monocular_Real-Time_Hand_Shape_and_Motion_Capture_Using_Multi-Modal_Data_CVPR_2020_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "handfoldingnet",
       "category": "Hand",
       "title": "HandFoldingNet: A 3D Hand Pose Estimation Network Using Multiscale-Feature Guided Folding of a 2D Hand Skeleton",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Cheng_HandFoldingNet_A_3D_Hand_Pose_Estimation_Network_Using_Multiscale-Feature_Guided_ICCV_2021_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "i2uv-handnet",
       "category": "Hand",
       "title": "I2UV-HandNet: Image-to-UV Prediction Network for Accurate and High-Fidelity 3D Hand Mesh Modeling",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Chen_I2UV-HandNet_Image-to-UV_Prediction_Network_for_Accurate_and_High-Fidelity_3D_Hand_ICCV_2021_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "mesh-graphormer-hand",
       "category": "Hand",
       "title": "Mesh Graphormer",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Lin_Mesh_Graphormer_ICCV_2021_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "metro-hand",
       "category": "Hand",
       "title": "End-to-End Human Pose and Mesh Reconstruction with Transformers",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Lin_End-to-End_Human_Pose_and_Mesh_Reconstruction_with_Transformers_CVPR_2021_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "cmr-hand",
       "category": "Hand",
       "title": "Camera-Space Hand Mesh Recovery via Semantic Aggregation and Adaptive 2D-1D Registration",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Chen_Camera-Space_Hand_Mesh_Recovery_via_Semantic_Aggregation_and_Adaptive_2D-1D_CVPR_2021_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
       "id": "handoccnet",
       "category": "Hand",
       "title": "HandOccNet: Occlusion-Robust 3D Hand Mesh Estimation Network",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Park_HandOccNet_Occlusion-Robust_3D_Hand_Mesh_Estimation_Network_CVPR_2022_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "mobrecon",
       "category": "Hand",
       "title": "MobRecon: Mobile-Friendly Hand Mesh Reconstruction From Monocular Image",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Chen_MobRecon_Mobile-Friendly_Hand_Mesh_Reconstruction_From_Monocular_Image_CVPR_2022_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
       "id": "multiview-depth-hand",
       "category": "Hand",
       "title": "Mining Multi-View Information: A Strong Self-Supervised Framework for Depth-Based 3D Hand Pose and Mesh Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Ren_Mining_Multi-View_Information_A_Strong_Self-Supervised_Framework_for_Depth-Based_3D_CVPR_2022_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "handy",
       "category": "Hand",
       "title": "Handy: Towards a High Fidelity 3D Hand Shape and Appearance Model",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Potamias_Handy_Towards_a_High_Fidelity_3D_Hand_Shape_and_Appearance_CVPR_2023_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已核对模型构建正文；当前未定位到完整网络总图，暂留正文链接。原文形状/纹理结果图不冒充结构图。"
     },
     {
       "id": "deformer-hand",
       "category": "Hand",
       "title": "Deformer: Dynamic Fusion Transformer for Robust Hand Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Fu_Deformer_Dynamic_Fusion_Transformer_for_Robust_Hand_Pose_Estimation_ICCV_2023_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "thor-net",
       "category": "Hand",
       "title": "THOR-Net: End-to-End Graformer-Based Realistic Two Hands and Object Reconstruction With Self-Supervision",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/WACV2023/html/Aboukhadra_THOR-Net_End-to-End_Graformer-Based_Realistic_Two_Hands_and_Object_Reconstruction_With_WACV_2023_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "dense-mutual-attention-hand",
       "category": "Hand",
       "title": "Interacting Hand-Object Pose Estimation via Dense Mutual Attention",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/WACV2023/html/Wang_Interacting_Hand-Object_Pose_Estimation_via_Dense_Mutual_Attention_WACV_2023_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "hmp",
       "category": "Hand",
       "title": "HMP: Hand Motion Priors for Pose and Shape Estimation From Video",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/WACV2024/html/Duran_HMP_Hand_Motion_Priors_for_Pose_and_Shape_Estimation_From_WACV_2024_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "hand-multiview-bootstrap",
       "category": "Hand",
       "title": "Hand Keypoint Detection in Single Images Using Multiview Bootstrapping",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2017/html/Simon_Hand_Keypoint_Detection_CVPR_2017_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "deepprior-plus",
       "category": "Hand",
       "title": "DeepPrior++: Improving Fast and Accurate 3D Hand Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ICCV_2017_workshops/w11/html/Oberweger_DeepPrior_Improving_Fast_ICCV_2017_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "depth-hand-survey",
@@ -892,23 +892,23 @@
       "id": "interhand26m",
       "category": "Hand",
       "title": "InterHand2.6M: A Dataset and Baseline for 3D Interacting Hand Pose Estimation from a Single RGB Image",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2008.09309",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "mediapipe-hands",
       "category": "Hand",
       "title": "MediaPipe Hands: On-device Real-time Hand Tracking",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2006.10214",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始方法图；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "fphab",

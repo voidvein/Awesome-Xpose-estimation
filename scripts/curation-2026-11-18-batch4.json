@@ -1,0 +1,416 @@
+{
+  "review_date": "2026-11-18",
+  "expanded_records": 29,
+  "records": [
+    {
+      "id": "evhandpose",
+      "version": "2303.02862v3",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S4"
+      ],
+      "figure_anchor": "S2.F2",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2303.02862v3"
+    },
+    {
+      "id": "hand3d",
+      "version": "Official 2017 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4
+      ],
+      "figure_anchor": [
+        2,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_ICCV_2017/papers/Zimmermann_Learning_to_Estimate_ICCV_2017_paper.pdf"
+    },
+    {
+      "id": "v2v-posenet-hand",
+      "version": "Official 2018 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Moon_V2V-PoseNet_Voxel-to-Voxel_Prediction_CVPR_2018_paper.pdf"
+    },
+    {
+      "id": "hand-pointnet",
+      "version": "Official 2018 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        2,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Ge_Hand_PointNet_3D_CVPR_2018_paper.pdf"
+    },
+    {
+      "id": "latent-25d-hand",
+      "version": "Official 2018 ECCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_ECCV_2018/papers/Umar_Iqbal_Hand_Pose_Estimation_ECCV_2018_paper.pdf"
+    },
+    {
+      "id": "dense-hand-regression",
+      "version": "Official 2018 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4
+      ],
+      "figure_anchor": [
+        5,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Wan_Dense_3D_Regression_CVPR_2018_paper.pdf"
+    },
+    {
+      "id": "freihand",
+      "version": "1909.04349v3",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S4"
+      ],
+      "figure_anchor": "S4.F4",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/1909.04349v3"
+    },
+    {
+      "id": "hand-graph-cnn",
+      "version": "Official 2019 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Ge_3D_Hand_Shape_and_Pose_Estimation_From_a_Single_RGB_CVPR_2019_paper.pdf"
+    },
+    {
+      "id": "hand-wild-mano",
+      "version": "Official 2019 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4
+      ],
+      "figure_anchor": [
+        2,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Boukhayma_3D_Hand_Shape_and_Pose_From_Images_in_the_Wild_CVPR_2019_paper.pdf"
+    },
+    {
+      "id": "honnotate",
+      "version": "Official 2020 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        6,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_CVPR_2020/papers/Hampali_HOnnotate_A_Method_for_3D_Annotation_of_Hand_and_Object_CVPR_2020_paper.pdf"
+    },
+    {
+      "id": "youtube3d-hands",
+      "version": "2004.01946v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4"
+      ],
+      "figure_anchor": "S0.F1",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2004.01946v1"
+    },
+    {
+      "id": "monocular-realtime-hand",
+      "version": "Official 2020 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_CVPR_2020/papers/Zhou_Monocular_Real-Time_Hand_Shape_and_Motion_Capture_Using_Multi-Modal_Data_CVPR_2020_paper.pdf"
+    },
+    {
+      "id": "handfoldingnet",
+      "version": "2108.05545v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S1.F2",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2108.05545v1"
+    },
+    {
+      "id": "i2uv-handnet",
+      "version": "2102.03725v2",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S1.F1",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2102.03725v2"
+    },
+    {
+      "id": "mesh-graphormer-hand",
+      "version": "2104.00272v2",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4"
+      ],
+      "figure_anchor": "S2.F3",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2104.00272v2"
+    },
+    {
+      "id": "metro-hand",
+      "version": "Official 2021 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        8
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Lin_End-to-End_Human_Pose_and_Mesh_Reconstruction_with_Transformers_CVPR_2021_paper.pdf"
+    },
+    {
+      "id": "cmr-hand",
+      "version": "2103.02845v2",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S3.F2",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2103.02845v2"
+    },
+    {
+      "id": "handoccnet",
+      "version": "2203.14564v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S3.F2",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2203.14564v1"
+    },
+    {
+      "id": "mobrecon",
+      "version": "2112.02753v2",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S2.F2",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2112.02753v2"
+    },
+    {
+      "id": "multiview-depth-hand",
+      "version": "Official 2022 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Ren_Mining_Multi-View_Information_A_Strong_Self-Supervised_Framework_for_Depth-Based_3D_CVPR_2022_paper.pdf"
+    },
+    {
+      "id": "handy",
+      "version": "Official 2023 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4
+      ],
+      "figure_anchor": [
+        4,
+        "method text"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Potamias_Handy_Towards_a_High_Fidelity_3D_Hand_Shape_and_Appearance_CVPR_2023_paper.pdf"
+    },
+    {
+      "id": "deformer-hand",
+      "version": "Official 2023 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Fu_Deformer_Dynamic_Fusion_Transformer_for_Robust_Hand_Pose_Estimation_ICCV_2023_paper.pdf"
+    },
+    {
+      "id": "thor-net",
+      "version": "Official 2023 WACV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/WACV2023/papers/Aboukhadra_THOR-Net_End-to-End_Graformer-Based_Realistic_Two_Hands_and_Object_Reconstruction_With_WACV_2023_paper.pdf"
+    },
+    {
+      "id": "dense-mutual-attention-hand",
+      "version": "Official 2023 WACV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/WACV2023/papers/Wang_Interacting_Hand-Object_Pose_Estimation_via_Dense_Mutual_Attention_WACV_2023_paper.pdf"
+    },
+    {
+      "id": "hmp",
+      "version": "Official 2024 WACV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/WACV2024/papers/Duran_HMP_Hand_Motion_Priors_for_Pose_and_Shape_Estimation_From_WACV_2024_paper.pdf"
+    },
+    {
+      "id": "hand-multiview-bootstrap",
+      "version": "Official 2017 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2017/papers/Simon_Hand_Keypoint_Detection_CVPR_2017_paper.pdf"
+    },
+    {
+      "id": "deepprior-plus",
+      "version": "Official 2017 ICCV Workshops open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_ICCV_2017_workshops/papers/w11/Oberweger_DeepPrior_Improving_Fast_ICCV_2017_paper.pdf"
+    },
+    {
+      "id": "interhand26m",
+      "version": "2008.09309v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4"
+      ],
+      "figure_anchor": "S4.F3",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2008.09309v1"
+    },
+    {
+      "id": "mediapipe-hands",
+      "version": "2006.10214v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S2",
+        "S5"
+      ],
+      "figure_anchor": "S2.F3",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2006.10214v1"
+    }
+  ],
+  "pdf_figure_pages_visually_checked": 17,
+  "unmodified_original_images_added": 4
+}
