@@ -1,5 +1,13 @@
 # Sources and curation notes
 
+## Head and facial alignment pipeline batch — 2026-11-18
+
+Added 24 targeted method readings covering the short/wide-range HPE analysis, Infinite 3D Landmarks, FaceXFormer v3, SemiUHPE v4, FAN, HopeNet, LAB, Wing Loss, PRNet, Adaptive Wing, DeCaFA, PFLD, LUVLi, 3DDFA-V2, WHENet, PIPNet, ADNet, 6DRepNet, HHP-Net, LwPosr, DTLD, STAR Loss, 6DRepNet360 and partially-latent mixture regression. Exact source versions, method sections and figure anchors are recorded in `scripts/curation-2026-11-18-batch3.json` and each page. LAB uses the official CVPR 2018 PDF, §3.1–3.3, Figure 2 and Algorithm 1; its original diagram remains linked because republication permission has not been established.
+
+These pages distinguish training components from inference, loss-function contributions from new network architectures, rotation representation dimensions from spatial degrees of freedom, and FAN's projected 3D-semantic landmarks from complete XYZ reconstruction. The targeted reading does not constitute a full experiment audit or reproduction. 6DRepNet's ICIP RepVGG configuration and the later 6DRepNet360 ResNet50 configuration are described separately.
+
+Eight complete original image files from seven papers have verified CC/CC0 notices in their exact arXiv HTML versions: wide/short-range HPE methodology, PRNet (architecture plus UV representation), 6DRepNet, LwPosr, DTLD, STAR Loss and 6DRepNet360. Files are unchanged; the manifest records exact URLs, attribution, dimensions and SHA-256. The remaining new diagrams retain original source links. No replacement diagrams were generated.
+
 ## Continuing pipeline construction
 
 The user requested extending the HaMeR-style pages across the remaining catalogue. The reproducible queue is tracked in `curation-progress.json` and summarized in `CURATION.md`; `scripts/curation_progress.py` derives it from the actual records and figure manifest. A short abstract or applicability note never counts as a finished pipeline.

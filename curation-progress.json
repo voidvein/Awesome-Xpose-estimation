@@ -2,9 +2,9 @@
   "updated_at": "2026-11-18",
   "total": 371,
   "counts": {
-    "complete": 9,
-    "figure_pending": 17,
-    "pending": 345
+    "complete": 16,
+    "figure_pending": 34,
+    "pending": 321
   },
   "completion_standard": "Source-checked module-level pipeline, separate training/inference, figure guide, and a verified local architecture/process figure. Summaries and applicability notes do not count.",
   "entries": [
@@ -45,23 +45,23 @@
       "id": "wide-short-hpe",
       "category": "Head",
       "title": "On the representation and methodology for wide and short range head pose estimation",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://www.sciencedirect.com/science/article/pii/S0031320324000141",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
       "id": "infinite-landmarks",
       "category": "Head",
       "title": "Infinite 3D Landmarks: Improving Continuous 2D Facial Landmark Detection",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://onlinelibrary.wiley.com/doi/10.1111/cgf.15126",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "uld-headpose",
@@ -78,12 +78,12 @@
       "id": "facexformer",
       "category": "Head",
       "title": "FaceXFormer: A Unified Transformer for Facial Analysis",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2025/html/Narayan_FaceXFormer_A_Unified_Transformer_for_Facial_Analysis_ICCV_2025_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "joint-unsup-landmarks",
@@ -100,12 +100,12 @@
       "id": "semiuhpe",
       "category": "Head",
       "title": "Semi-Supervised Unconstrained Head Pose Estimation in the Wild",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://doi.org/10.1109/TPAMI.2025.3631642",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "vggt-hpe",
@@ -188,55 +188,55 @@
       "id": "fan",
       "category": "Head",
       "title": "How Far Are We From Solving the 2D & 3D Face Alignment Problem? (And a Dataset of 230,000 3D Facial Landmarks)",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2017/html/Bulat_How_Far_Are_ICCV_2017_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "hopenet",
       "category": "Head",
       "title": "Fine-Grained Head Pose Estimation Without Keypoints",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2018_workshops/w41/html/Ruiz_Fine-Grained_Head_Pose_CVPR_2018_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "lab",
       "category": "Head",
       "title": "Look at Boundary: A Boundary-Aware Face Alignment Algorithm",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Wu_Look_at_Boundary_CVPR_2018_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "原论文图2位于PDF第3页；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "wing-loss",
       "category": "Head",
       "title": "Wing Loss for Robust Facial Landmark Localisation With Convolutional Neural Networks",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Feng_Wing_Loss_for_CVPR_2018_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "prnet",
       "category": "Head",
       "title": "Joint 3D Face Reconstruction and Dense Alignment with Position Map Regression Network",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://openaccess.thecvf.com/content_ECCV_2018/html/Yao_Feng_Joint_3D_Face_ECCV_2018_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
@@ -254,67 +254,67 @@
       "id": "adaptive-wing",
       "category": "Head",
       "title": "Adaptive Wing Loss for Robust Face Alignment via Heatmap Regression",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ICCV_2019/html/Wang_Adaptive_Wing_Loss_for_Robust_Face_Alignment_via_Heatmap_Regression_ICCV_2019_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "decafa",
       "category": "Head",
       "title": "DeCaFA: Deep Convolutional Cascade for Face Alignment in the Wild",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ICCV_2019/papers/Dapogny_DeCaFA_Deep_Convolutional_Cascade_for_Face_Alignment_in_the_Wild_ICCV_2019_paper.pdf",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "pfld",
       "category": "Head",
       "title": "PFLD: A Practical Facial Landmark Detector",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/1902.10859",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "luvli",
       "category": "Head",
       "title": "LUVLi Face Alignment: Estimating Landmarks' Location, Uncertainty, and Visibility Likelihood",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2020/html/Kumar_LUVLi_Face_Alignment_Estimating_Landmarks_Location_Uncertainty_and_Visibility_Likelihood_CVPR_2020_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "3ddfa-v2",
       "category": "Head",
       "title": "Towards Fast, Accurate and Stable 3D Dense Face Alignment",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://github.com/cleardusk/3DDFA_V2",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "whenet",
       "category": "Head",
       "title": "WHENet: Real-time Fine-Grained Estimation for Wide Range Head Pose",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://bmva-archive.org.uk/bmvc/2020/conference/papers/paper_0907.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "img2pose",
@@ -331,23 +331,23 @@
       "id": "pipnet",
       "category": "Head",
       "title": "Pixel-in-Pixel Net: Towards Efficient Facial Landmark Detection in the Wild",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://doi.org/10.1007/s11263-021-01521-4",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "adnet",
       "category": "Head",
       "title": "ADNet: Leveraging Error-Bias Towards Normal Direction in Face Alignment",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Huang_ADNet_Leveraging_Error-Bias_Towards_Normal_Direction_in_Face_Alignment_ICCV_2021_paper.pdf",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "hih",
@@ -364,44 +364,44 @@
       "id": "6drepnet",
       "category": "Head",
       "title": "6D Rotation Representation For Unconstrained Head Pose Estimation",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://arxiv.org/abs/2202.12555",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
       "id": "hhpnet",
       "category": "Head",
       "title": "HHP-Net: A Light Heteroscedastic Neural Network for Head Pose Estimation With Uncertainty",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/WACV2022/papers/Cantarini_HHP-Net_A_Light_Heteroscedastic_Neural_Network_for_Head_Pose_Estimation_WACV_2022_paper.pdf",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "lwposr",
       "category": "Head",
       "title": "LwPosr: Lightweight Efficient Fine Grained Head Pose Estimation",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://openaccess.thecvf.com/content/WACV2022/papers/Dhingra_LwPosr_Lightweight_Efficient_Fine_Grained_Head_Pose_Estimation_WACV_2022_paper.pdf",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
       "id": "cascaded-transformers",
       "category": "Head",
       "title": "Towards Accurate Facial Landmark Detection via Cascaded Transformers",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Li_Towards_Accurate_Facial_Landmark_Detection_via_Cascaded_Transformers_CVPR_2022_paper.pdf",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
@@ -419,22 +419,22 @@
       "id": "star-loss",
       "category": "Head",
       "title": "STAR Loss: Reducing Semantic Ambiguity in Facial Landmark Detection",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Zhou_STAR_Loss_Reducing_Semantic_Ambiguity_in_Facial_Landmark_Detection_CVPR_2023_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
       "id": "6drepnet360",
       "category": "Head",
       "title": "Toward Robust and Unconstrained Full Range of Rotation Head Pose Estimation",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://doi.org/10.1109/TIP.2024.3378180",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
@@ -3895,12 +3895,12 @@
       "id": "hpe-partially-latent",
       "category": "Head",
       "title": "Robust Head-Pose Estimation Based on Partially-Latent Mixture of Linear Regressions",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/1603.09732",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     },
     {
       "id": "hand-model-monocular-2011",

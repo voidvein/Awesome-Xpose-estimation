@@ -267,13 +267,74 @@
       "contribution": "价值主要在表示、损失及评测方法的系统检查。论文指出欧拉角在极端旋转以及作为误差度量时的问题，提醒不能仅凭角度 MAE 比较模型。",
       "limitations": "宽角度与窄角度实验的参考系、角度表示和距离度量必须一致；该研究的表示结论不能直接替代具体模型的跨库验证。",
       "sources": [
-        "https://arxiv.org/abs/2401.05807"
+        "https://arxiv.org/abs/2401.05807",
+        "https://arxiv.org/html/2401.05807v1#S3",
+        "https://arxiv.org/html/2401.05807v1#S4",
+        "https://arxiv.org/html/2401.05807v1#S1.F2"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "pipeline_reviewed_at": "2026-11-18",
+      "evidence_scope": "本轮定向核对 arXiv:2401.05807v1 的 S3, S4 与对应方法图，补充模块数据流及训练/推理；未独立复现或全面复核实验。"
+    },
+    "pipeline": {
+      "overview": "这篇工作重新组织头姿估计的表示、损失和跨库评测流程；核心不是一个独立的新检测器。需先区分前向短范围与包含后脑的宽范围旋转。",
+      "steps": [
+        {
+          "title": "确定姿态范围",
+          "description": "先规定短范围或宽范围任务，再选择欧拉角、四元数或连续6D表示；表示能力与训练样本覆盖分别核查。"
+        },
+        {
+          "title": "图像回归姿态表示",
+          "description": "将裁剪人脸送入头姿回归器，得到所选表示；不同表示可统一转换为旋转矩阵。"
+        },
+        {
+          "title": "以测地距离比较旋转",
+          "description": "在SO(3)上计算预测与真值的角距离，避免把接近万向锁的欧拉角差直接当成几何差。"
+        },
+        {
+          "title": "训练时施加Opal权重",
+          "description": "按测地误差的区间改变样本影响，平衡小误差细化、中间误差与大误差的梯度。"
+        },
+        {
+          "title": "跨库评测时估计参考系偏移",
+          "description": "用旋转平均估计数据集间固定对齐旋转，再单独报告校正后的误差；这一步使用评测真值。"
+        }
+      ],
+      "training": "比较表示和损失时保持实验协议一致。Opal是训练目标，参考系校正是需要真值的评测操作，二者不能混作部署时的自动校准。",
+      "inference": "单张裁剪图像经过回归器输出旋转；没有目标真值时，不能执行文中的跨库误差对齐步骤。",
+      "figure_reading": "图2是表示与误差度量的概念流程：回归后的姿态可转换到不同表示。它不展开具体骨干网络，也不是作者新增的完整网络架构。",
+      "sources": [
+        {
+          "label": "方法正文 · 3 Representation and methodology for HPE",
+          "url": "https://arxiv.org/html/2401.05807v1#S3"
+        },
+        {
+          "label": "方法正文 · 4 Opal loss function for HPE",
+          "url": "https://arxiv.org/html/2401.05807v1#S4"
+        },
+        {
+          "label": "论文原始图示",
+          "url": "https://arxiv.org/html/2401.05807v1#S1.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local"
+    },
+    "figure": {
+      "src": "assets/figures/wide-short-hpe-methodology.png",
+      "source": "https://arxiv.org/html/2401.05807v1#S1.F2",
+      "caption": "头姿表示、转换与误差度量的原始概念流程；不是独立新骨干网络。",
+      "alt": "头姿表示、转换与误差度量的原始概念流程；不是独立新骨干网络。",
+      "figure_number": "Figure 2",
+      "version": "2401.05807v1",
+      "license": "CC BY-NC-ND 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+      "attribution": "Alejandro Cobo, Roberto Valle, José M. Buenaposada, Luis Baumela. On the representation and methodology for wide and short range head pose estimation, Figure 2, arXiv:2401.05807v1. CC BY-NC-ND 4.0.",
+      "modifications": "原始论文HTML图片，未裁剪、未修改；页面仅按容器等比例缩放显示。"
     }
   },
   {
@@ -305,13 +366,64 @@
       "contribution": "把预处理、三维结构和标注语义对齐纳入统一学习，三维形状仅用二维关键点监督；在连续关键点检测器上验证模块作用。",
       "limitations": "规范三维点服务于二维投影定位，不等于恢复带真实尺度的完整人脸；跨库使用还涉及关键点语义校正。",
       "sources": [
-        "https://arxiv.org/abs/2405.20117"
+        "https://arxiv.org/abs/2405.20117",
+        "https://arxiv.org/html/2405.20117v1#S3",
+        "https://arxiv.org/html/2405.20117v1#S3.F1"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "pipeline_reviewed_at": "2026-11-18",
+      "evidence_scope": "本轮定向核对 arXiv:2405.20117v1 的 S3 与对应方法图，补充模块数据流及训练/推理；未独立复现或全面复核实验。"
+    },
+    "pipeline": {
+      "overview": "以图像和规范人脸上的任意查询点为输入，先学习人脸归一化，再预测规范三维点并投影回二维，兼顾连续查询和跨数据集标注语义。",
+      "steps": [
+        {
+          "title": "空间变换器定位人脸",
+          "description": "从原始单人脸图像预测二维仿射变换，重采样出归一化图像；定位与关键点网络共同训练。"
+        },
+        {
+          "title": "编码图像与相机",
+          "description": "图像编码器同时产生视觉特征、6D旋转、三维平移及相对预设焦距的偏移。"
+        },
+        {
+          "title": "按数据集修正查询",
+          "description": "查询变形器根据规范点和数据集编码调整查询位置，再用MLP编码位置，协调标注风格。"
+        },
+        {
+          "title": "预测规范三维位移",
+          "description": "查询预测器融合图像特征与位置编码，在平均脸上预测三维偏移和置信度，不直接回归整张二维热图。"
+        },
+        {
+          "title": "投影并恢复原图坐标",
+          "description": "用预测头姿与焦距投影三维点，再应用空间变换的逆变换，得到原图中的二维关键点。"
+        }
+      ],
+      "training": "以二维关键点的高斯负对数似然监督端到端训练；三维偏移、相机与空间变换通过投影接受监督，不要求每个样本有三维点真值。",
+      "inference": "图像编码可服务多个查询点，查询布局不局限于固定点数。逐帧独立推断，不保证不同视角得到完全一致的三维人脸。",
+      "figure_reading": "图1从左到右展示空间变换、图像/相机编码、查询变形和三维预测；最后经过相机投影及逆变换回到原图。",
+      "sources": [
+        {
+          "label": "方法正文 · 3 Method",
+          "url": "https://arxiv.org/html/2405.20117v1#S3"
+        },
+        {
+          "label": "论文原始图示",
+          "url": "https://arxiv.org/html/2405.20117v1#S3.F1"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2405.20117v1#S3.F1",
+      "caption": "Infinite 3D Landmarks: Improving Continuous 2D Facial Landmark Detection：论文方法图（原文链接）",
+      "figure_number": "Figure 1",
+      "version": "2405.20117v1",
+      "note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     }
   },
   {
@@ -384,19 +496,70 @@
       "contribution": "把头姿与关键点放入共享人脸表示框架，比较专用模型与多任务模型，并评估野外鲁棒性及计算效率。",
       "limitations": "统一十类任务不意味着每项任务均可替代专门模型；关键点、头姿与身份任务需分别评价。",
       "sources": [
-        "https://arxiv.org/abs/2403.12960v3"
+        "https://arxiv.org/abs/2403.12960v3",
+        "https://arxiv.org/html/2403.12960v3#S3",
+        "https://arxiv.org/html/2403.12960v3#S3.F2"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "采用十任务的 v3/ICCV 版本；早期九任务摘要不可直接作为最终版本描述。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "pipeline_reviewed_at": "2026-11-18",
+      "evidence_scope": "本轮定向核对 arXiv:2403.12960v3 的 S3 与对应方法图，补充模块数据流及训练/推理；未独立复现或全面复核实验。"
     },
     "code": "https://github.com/Kartik-3004/facexformer",
     "code_provenance": {
       "url": "https://github.com/Kartik-3004/facexformer",
       "verified_at": "2026-11-18",
       "basis": "作者仓库 README 的对应论文标题、引用或实现说明；项目目录已公开，未运行代码。"
+    },
+    "pipeline": {
+      "overview": "采用十任务的v3版本：共享多尺度人脸特征，以任务token和人脸token的双向交互学习统一表示，随后交给各任务预测头。",
+      "steps": [
+        {
+          "title": "提取四级图像特征",
+          "description": "编码器输出多个分辨率的特征，保留分割所需局部信息和年龄等任务所需全局信息。"
+        },
+        {
+          "title": "MLP融合为人脸token",
+          "description": "分别统一各级特征的通道维，再拼接和融合，形成供多个任务共享的人脸表示。"
+        },
+        {
+          "title": "任务token自注意力",
+          "description": "不同任务对应的可学习token先相互交互，建立任务之间的结构联系。"
+        },
+        {
+          "title": "双向交叉注意力",
+          "description": "任务token查询人脸特征，再由人脸token查询更新后的任务token，同时精炼两类表示。"
+        },
+        {
+          "title": "专用头输出各项结果",
+          "description": "再细化任务token后送入对应预测头：关键点用hourglass，头姿用回归MLP，分割结合上采样与分割token。"
+        }
+      ],
+      "training": "联合任务损失包括关键点STAR损失、头姿测地损失、分割Dice/交叉熵及其他分类目标；统一输入预处理需保留头姿变化。",
+      "inference": "单张人脸共享一次编码并输出多任务结果。十任务共享表示不等于各任务输出可互换；头姿、关键点、身份分别解释。",
+      "figure_reading": "图2左侧是多尺度编码与MLP融合，中间展开FaceX解码器的三种注意力，右侧展示任务token和各预测头。",
+      "sources": [
+        {
+          "label": "方法正文 · 3 FaceXFormer",
+          "url": "https://arxiv.org/html/2403.12960v3#S3"
+        },
+        {
+          "label": "论文原始图示",
+          "url": "https://arxiv.org/html/2403.12960v3#S3.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2403.12960v3#S3.F2",
+      "caption": "FaceXFormer: A Unified Transformer for Facial Analysis：论文方法图（原文链接）",
+      "figure_number": "Figure 2",
+      "version": "2403.12960v3",
+      "note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     }
   },
   {
@@ -462,13 +625,17 @@
       "contribution": "专门处理非正脸情况下关键点不可得和伪标签误差敏感的问题，在前向范围和全范围设置中进行对比。",
       "limitations": "仍需要有标注样本和伪标签筛选；半监督的收益与无标注数据分布、筛选阈值有关，不属于完全无监督方法。",
       "sources": [
-        "https://arxiv.org/abs/2404.02544"
+        "https://arxiv.org/abs/2404.02544",
+        "https://arxiv.org/html/2404.02544v4#S3",
+        "https://arxiv.org/html/2404.02544v4#S2.F3"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "方法分析依据预印本摘要；正式出版信息据作者机构及 PubMed 书目核对，未读取期刊全文或独立复现。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "pipeline_reviewed_at": "2026-11-18",
+      "evidence_scope": "本轮定向核对 arXiv:2404.02544v4 的 S3 与对应方法图，补充模块数据流及训练/推理；未独立复现或全面复核实验。"
     },
     "authors": [
       "Huayi Zhou",
@@ -495,7 +662,54 @@
       "https://arxiv.org/abs/2404.02544",
       "https://www.cs.sjtu.edu.cn/en/jiaoshiml/luhongtao.html",
       "https://pubmed.ncbi.nlm.nih.gov/41217926/"
-    ]
+    ],
+    "pipeline": {
+      "overview": "先用有标签头部图像训练旋转回归器，再以Mean-Teacher学习无标签图像；利用矩阵Fisher分布的熵筛选伪标签，并保持增强前后的旋转一致。",
+      "steps": [
+        {
+          "title": "保持宽高比裁剪",
+          "description": "围绕头框宽松裁剪并补边，避免强制拉伸或关键点对齐改变外观中的朝向信息。"
+        },
+        {
+          "title": "预训练学生并复制教师",
+          "description": "学生先在有标签数据上学习旋转分布，半监督阶段以相同权重初始化教师。"
+        },
+        {
+          "title": "教师生成分布式伪标签",
+          "description": "弱增强图像进入教师，输出矩阵Fisher分布；由分布的模态和熵分别表示姿态与不确定性。"
+        },
+        {
+          "title": "动态熵筛选和强增强",
+          "description": "按训练阶段更新熵阈值，保留可信样本；学生接收CutOcc遮挡与平面旋转后的图像。"
+        },
+        {
+          "title": "对齐旋转并更新两网络",
+          "description": "同步旋转教师伪标签以匹配增强图像，用监督与分布一致性损失更新学生，教师由学生指数滑动平均更新。"
+        }
+      ],
+      "training": "有监督预训练与半监督学习是连续的两个阶段；动态阈值按保留比例更新。v4还讨论三维头重建扩展，本页主流程对应原始旋转估计。",
+      "inference": "输入单张裁剪头部图像，回归旋转分布及其模态；教师—学生一致性、伪标签筛选和强增强属于训练流程。",
+      "figure_reading": "图3把教师弱增强路径、学生强增强路径和熵筛选连起来；读旋转增强时要同时看图像变化和伪标签的坐标变换。",
+      "sources": [
+        {
+          "label": "方法正文 · III Method",
+          "url": "https://arxiv.org/html/2404.02544v4#S3"
+        },
+        {
+          "label": "论文原始图示",
+          "url": "https://arxiv.org/html/2404.02544v4#S2.F3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2404.02544v4#S2.F3",
+      "caption": "Semi-Supervised Unconstrained Head Pose Estimation in the Wild：论文方法图（原文链接）",
+      "figure_number": "Figure 3",
+      "version": "2404.02544v4",
+      "note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
+    }
   },
   {
     "id": "vggt-hpe",
@@ -797,13 +1011,69 @@
       "contribution": "同时贡献网络、统一数据和诊断实验，分析姿态、初始化、分辨率及模型规模的影响，而不是只报告单一数据集成绩。",
       "limitations": "LS3D-W 包含由二维标注转换的三维监督；使用时需区分自动转换标注与独立三维测量真值。",
       "sources": [
-        "https://arxiv.org/abs/1703.07332"
+        "https://arxiv.org/abs/1703.07332",
+        "https://arxiv.org/html/1703.07332v3#S4",
+        "https://arxiv.org/html/1703.07332v3#S7",
+        "https://arxiv.org/html/1703.07332v3#S1.F1"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "pipeline_reviewed_at": "2026-11-18",
+      "evidence_scope": "本轮定向核对 arXiv:1703.07332v3 的 S4, S7 与对应方法图，补充模块数据流及训练/推理；未独立复现或全面复核实验。"
+    },
+    "pipeline": {
+      "overview": "FAN以四级堆叠hourglass预测人脸关键点。正文中用于主要对齐评测的“3D标注”指三维语义点的二维投影，不能直接等同完整XYZ恢复。",
+      "steps": [
+        {
+          "title": "输入归一化人脸",
+          "description": "准备裁剪RGB图像；2D-FAN与3D-FAN按各自关键点标注体系独立训练。"
+        },
+        {
+          "title": "多尺度块提取特征",
+          "description": "用层级、并行、多尺度残差块替换原hourglass中的瓶颈块，融合不同感受野。"
+        },
+        {
+          "title": "四级hourglass逐步细化",
+          "description": "重复下采样与上采样的hourglass结构，以空间热图逐级定位固定的人脸关键点。"
+        },
+        {
+          "title": "由最终热图读取位置",
+          "description": "按最终关键点响应定位图像坐标；二维布局与三维语义布局对应不同模型。"
+        },
+        {
+          "title": "标注生成另用引导网络",
+          "description": "构建LS3D-W时，2D-to-3D FAN额外接收68个二维点的高斯图作为输入，不是普通RGB推理的必需路径。"
+        }
+      ],
+      "training": "2D-FAN、3D-FAN、2D-to-3D FAN分别训练；使用300W-LP的对应标注及旋转、缩放、遮挡等增强。不要把引导标注网络误当作所有模型的输入。",
+      "inference": "常规FAN接收人脸RGB并输出关键点热图。完整深度恢复需要另核对补充材料，主要正文的投影点评测不支持任意公制三维重建结论。",
+      "figure_reading": "图1显示四级hourglass及其多尺度块；图2才是加入二维点引导通道的数据标注网络，两张图描述的用途不同。",
+      "sources": [
+        {
+          "label": "方法正文 · 4 Method",
+          "url": "https://arxiv.org/html/1703.07332v3#S4"
+        },
+        {
+          "label": "方法正文 · 7 3D face alignment",
+          "url": "https://arxiv.org/html/1703.07332v3#S7"
+        },
+        {
+          "label": "论文原始图示",
+          "url": "https://arxiv.org/html/1703.07332v3#S1.F1"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/1703.07332v3#S1.F1",
+      "caption": "How Far Are We From Solving the 2D & 3D Face Alignment Problem? (And a Dataset of 230,000 3D Facial Landmarks)：论文方法图（原文链接）",
+      "figure_number": "Figure 1",
+      "version": "1703.07332v3",
+      "note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     }
   },
   {
@@ -835,19 +1105,70 @@
       "contribution": "建立无关键点头姿回归方案，并在300W-LP训练后验证自然场景与深度估计常用数据集上的效果。",
       "limitations": "输出为欧拉角旋转，不含平移；角度分箱、周期边界和训练角度覆盖共同限定比较协议。",
       "sources": [
-        "https://arxiv.org/abs/1710.00925"
+        "https://arxiv.org/abs/1710.00925",
+        "https://arxiv.org/html/1710.00925v5#S3",
+        "https://arxiv.org/html/1710.00925v5#S3.F2"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "pipeline_reviewed_at": "2026-11-18",
+      "evidence_scope": "本轮定向核对 arXiv:1710.00925v5 的 S3 与对应方法图，补充模块数据流及训练/推理；未独立复现或全面复核实验。"
     },
     "code": "https://github.com/natanielruiz/deep-head-pose",
     "code_provenance": {
       "url": "https://github.com/natanielruiz/deep-head-pose",
       "verified_at": "2026-11-18",
       "basis": "作者仓库 README 的对应论文标题、引用或实现说明；项目目录已公开，未运行代码。"
+    },
+    "pipeline": {
+      "overview": "从人脸外观直接预测yaw、pitch、roll：先对每个角度分箱分类，再对分类概率求期望，以分类和连续回归联合监督获得细粒度输出。",
+      "steps": [
+        {
+          "title": "裁剪并编码人脸",
+          "description": "人脸RGB经过共享卷积骨干；图2使用ResNet50，不先求二维关键点再进行PnP。"
+        },
+        {
+          "title": "分成三个角度分支",
+          "description": "分别建立yaw、pitch、roll的全连接分类头，共享前面的图像特征。"
+        },
+        {
+          "title": "预测各角度分箱概率",
+          "description": "对每个角度的离散区间输出logits，经softmax形成概率分布。"
+        },
+        {
+          "title": "概率期望得到连续角度",
+          "description": "用各分箱的中心与概率加权求和，将离散分类结果转为细粒度欧拉角。"
+        },
+        {
+          "title": "联合监督分类与回归",
+          "description": "训练时每个角度同时使用分箱交叉熵和期望角度的均方误差，再把三路损失反传到共享骨干。"
+        }
+      ],
+      "training": "使用300W-LP等有姿态标注图像；分类与回归损失按权重组合。随机降采样再放大、模糊用于低分辨率鲁棒性实验。",
+      "inference": "一次前向得到三路角度分布并计算期望；不需要关键点或深度。逐图像预测，不利用BIWI视频的时间信息。",
+      "figure_reading": "图2上游是共享ResNet50，下游三路分别给出分类概率和角度期望；均方误差与交叉熵框是训练监督。",
+      "sources": [
+        {
+          "label": "方法正文 · 3 METHOD",
+          "url": "https://arxiv.org/html/1710.00925v5#S3"
+        },
+        {
+          "label": "论文原始图示",
+          "url": "https://arxiv.org/html/1710.00925v5#S3.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/1710.00925v5#S3.F2",
+      "caption": "Fine-Grained Head Pose Estimation Without Keypoints：论文方法图（原文链接）",
+      "figure_number": "Figure 2",
+      "version": "1710.00925v5",
+      "note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     }
   },
   {
@@ -885,13 +1206,64 @@
       "contribution": "以边界作为跨关键点标注的几何中间表示；同时提出 WFLW 数据集，覆盖姿态、表情、照明、化妆、遮挡和模糊。",
       "limitations": "边界是关键点定位的中间表示，评估需区分边界预测误差和最终点误差；不直接输出稠密三维几何。",
       "sources": [
-        "https://arxiv.org/abs/1805.10483"
+        "https://arxiv.org/abs/1805.10483",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Wu_Look_at_Boundary_CVPR_2018_paper.pdf#page=3",
+        "https://openaccess.thecvf.com/content_cvpr_2018/papers/Wu_Look_at_Boundary_CVPR_2018_paper.pdf#page=4"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "pipeline_reviewed_at": "2026-11-18",
+      "evidence_scope": "本轮核对CVPR 2018公开正文§3.1–3.3、图2–6及算法1（PDF第3–5页），补充边界到关键点的数据流与训练/推理区别；未独立复现。"
+    },
+    "pipeline": {
+      "overview": "LAB先估计13类人脸边界热图，再以边界引导坐标回归。边界在不同点数标注协议间共享，关键点坐标由后续回归器输出。",
+      "steps": [
+        {
+          "title": "hourglass估计边界",
+          "description": "输入人脸经过堆叠hourglass，输出13种边界响应；训练真值由关键点插值成线，再经距离变换生成高斯边界热图。"
+        },
+        {
+          "title": "在边界之间传递信息",
+          "description": "各级采用树结构的双向消息传递，让可见边界支持遮挡边界；相邻hourglass级之间还传递信息。"
+        },
+        {
+          "title": "边界融合到回归特征",
+          "description": "原图与边界加权后的图像拼接输入回归器；中间层再通过hourglass式变换和乘法门控融合边界线索。"
+        },
+        {
+          "title": "四级回归器输出关键点",
+          "description": "以四阶段ResNet18回归坐标，多处引入边界信息；边界表示共享，但输出点数遵循目标数据集协议。"
+        },
+        {
+          "title": "训练时评估边界有效性",
+          "description": "判别器区分真值与预测边界，其预测边界目标与后续关键点误差相关，反向促进有助于定位的边界估计。"
+        }
+      ],
+      "training": "边界估计器用热图MSE与对抗目标，坐标回归器用坐标误差，判别器单独更新；算法1说明交替优化过程。跨库共享边界不等于各数据集原始点定义相同。",
+      "inference": "先预测边界热图，再把图像与边界送入坐标回归器；训练用有效性判别器不参与最终关键点预测。",
+      "figure_reading": "图2(a)为带消息传递的边界估计，(b)为多处边界融合的回归器，(c)为训练判别器。图4进一步展开中间特征的乘法门控及拼接。",
+      "sources": [
+        {
+          "label": "CVPR 2018 正文 §3、图2（PDF第3页）",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Wu_Look_at_Boundary_CVPR_2018_paper.pdf#page=3"
+        },
+        {
+          "label": "边界融合、消息传递与训练 §3.1–3.3（PDF第4–5页）",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Wu_Look_at_Boundary_CVPR_2018_paper.pdf#page=4"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2018/papers/Wu_Look_at_Boundary_CVPR_2018_paper.pdf#page=3",
+      "caption": "LAB边界感知人脸对齐框架：边界估计、关键点回归与训练判别器。",
+      "figure_number": "Figure 2",
+      "version": "CVPR 2018 author open-access paper",
+      "note": "原论文图2位于PDF第3页；转载许可尚未核实，暂留原图链接，不复制、不重绘。"
     }
   },
   {
@@ -928,13 +1300,79 @@
       "contribution": "将研究重点放在误差区间的优化权重，而非单纯增加模型规模。",
       "limitations": "Wing 是训练损失，效果需在相同骨干、数据增强和姿态采样下比较；不能单凭损失名称推断部署速度。",
       "sources": [
-        "https://arxiv.org/abs/1711.06753"
+        "https://arxiv.org/abs/1711.06753",
+        "https://arxiv.org/html/1711.06753v5#S3",
+        "https://arxiv.org/html/1711.06753v5#S4",
+        "https://arxiv.org/html/1711.06753v5#S5",
+        "https://arxiv.org/html/1711.06753v5#S6",
+        "https://arxiv.org/html/1711.06753v5#S3.F2"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "pipeline_reviewed_at": "2026-11-18",
+      "evidence_scope": "本轮定向核对 arXiv:1711.06753v5 的 S3, S4, S5, S6 与对应方法图，补充模块数据流及训练/推理；未独立复现或全面复核实验。"
+    },
+    "pipeline": {
+      "overview": "Wing Loss改变坐标回归的误差权重：小中误差采用对数形式，大误差采用线性形式；论文另给出姿态均衡采样和两阶段定位配置。",
+      "steps": [
+        {
+          "title": "由检测框取得人脸",
+          "description": "按检测框裁剪图像；基础CNN-6用卷积和全连接层直接回归固定布局的二维坐标。"
+        },
+        {
+          "title": "用Wing误差训练坐标",
+          "description": "对每个坐标残差应用分段损失，在小误差区域增强影响，在大误差区域保持线性惩罚。"
+        },
+        {
+          "title": "按姿态均衡训练数据",
+          "description": "对齐训练形状并用PCA构造姿态空间，对低频区间增加带增强的样本，缓解正脸占多数的问题。"
+        },
+        {
+          "title": "首级预测用于重整图像",
+          "description": "在两阶段配置中，CNN-6的粗关键点用于校正框和去除平面旋转。"
+        },
+        {
+          "title": "高分辨率第二级精定位",
+          "description": "将重整后图像交给CNN-7进一步回归关键点；这是论文的增强配置，Wing本身也可用于其他坐标网络。"
+        }
+      ],
+      "training": "Wing是训练损失，PDB是采样策略；两阶段CNN-6/7与更强骨干是分别比较的配置，不应把它们说成损失函数必须包含的模块。",
+      "inference": "基础模型直接输出坐标；选择两阶段配置时才运行重裁剪和第二网络。推理时不计算训练误差或进行姿态均衡采样。",
+      "figure_reading": "图2展示用于损失比较的CNN-6；损失曲线图说明梯度作用，两阶段过程需结合§6阅读，不能由图2推成热图模型。",
+      "sources": [
+        {
+          "label": "方法正文 · 3 CNN-based facial landmark localisation",
+          "url": "https://arxiv.org/html/1711.06753v5#S3"
+        },
+        {
+          "label": "方法正文 · 4 Wing loss",
+          "url": "https://arxiv.org/html/1711.06753v5#S4"
+        },
+        {
+          "label": "方法正文 · 5 Pose-based data balancing",
+          "url": "https://arxiv.org/html/1711.06753v5#S5"
+        },
+        {
+          "label": "方法正文 · 6 Two-stage landmark localisation",
+          "url": "https://arxiv.org/html/1711.06753v5#S6"
+        },
+        {
+          "label": "论文原始图示",
+          "url": "https://arxiv.org/html/1711.06753v5#S3.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/1711.06753v5#S3.F2",
+      "caption": "Wing Loss for Robust Facial Landmark Localisation With Convolutional Neural Networks：论文方法图（原文链接）",
+      "figure_number": "Figure 2",
+      "version": "1711.06753v5",
+      "note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     }
   },
   {
@@ -972,14 +1410,84 @@
       "contribution": "把非规则三维表面变成可用二维卷积学习的表示，无需在推理中拟合预定义人脸形状模型。",
       "limitations": "UV 图采用固定人脸语义对应；预测的完整表面包含不可见区域的模型推断，不能当作背面几何的直接观测。",
       "sources": [
-        "https://arxiv.org/abs/1803.07835"
+        "https://arxiv.org/abs/1803.07835",
+        "https://arxiv.org/html/1803.07835v1#S3",
+        "https://arxiv.org/html/1803.07835v1#S3.F3"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
-    }
+      "scope_reviewed_at": "2026-11-18",
+      "pipeline_reviewed_at": "2026-11-18",
+      "evidence_scope": "本轮定向核对 arXiv:1803.07835v1 的 S3 与对应方法图，补充模块数据流及训练/推理；未独立复现或全面复核实验。"
+    },
+    "pipeline": {
+      "overview": "PRNet把稠密人脸三维坐标存成UV位置图，用编码—解码网络直接将RGB映射到三通道XYZ图，同时保留拓扑语义对应。",
+      "steps": [
+        {
+          "title": "裁剪并缩放RGB",
+          "description": "将输入人脸归一化为网络需要的图像；训练标签由有对应关系的三维脸形渲染到UV空间。"
+        },
+        {
+          "title": "残差编码器压缩特征",
+          "description": "卷积与残差块逐步减少空间分辨率，编码图像中的脸形和姿态信息。"
+        },
+        {
+          "title": "转置卷积恢复UV网格",
+          "description": "解码器通过连续上采样生成UV位置图；输出的三个通道是XYZ坐标，不是颜色或逐像素可见深度。"
+        },
+        {
+          "title": "按UV语义取关键点和网格",
+          "description": "从位置图中预定义语义位置读取关键点，并利用固定对应关系重建稠密表面，包括预测的不可见区域。"
+        },
+        {
+          "title": "训练时按区域加权",
+          "description": "对UV位置图坐标误差施加权重掩码，强调关键点及五官区域，颈部不计入该目标。"
+        }
+      ],
+      "training": "300W-LP的拟合3DMM用于生成监督位置图，并加入颜色、平面几何及遮挡增强。监督来源是模型拟合，但输出不局限于线性3DMM参数。",
+      "inference": "一次编码—解码生成位置图，再读取关键点与表面；无需先回归3DMM系数再进行迭代拟合。",
+      "figure_reading": "图3中绿色部分为残差编码，蓝色部分为转置卷积解码；图2解释UV位置图如何把语义拓扑与XYZ坐标绑定。",
+      "sources": [
+        {
+          "label": "方法正文 · 3 Proposed Method",
+          "url": "https://arxiv.org/html/1803.07835v1#S3"
+        },
+        {
+          "label": "论文原始图示",
+          "url": "https://arxiv.org/html/1803.07835v1#S3.F3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local"
+    },
+    "figure": {
+      "src": "assets/figures/prnet-architecture.jpg",
+      "source": "https://arxiv.org/html/1803.07835v1#S3.F3",
+      "caption": "PRNet残差编码器与转置卷积解码器，将RGB映射到XYZ位置图。",
+      "alt": "PRNet残差编码器与转置卷积解码器，将RGB映射到XYZ位置图。",
+      "figure_number": "Figure 3",
+      "version": "1803.07835v1",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "attribution": "Yao Feng, Fan Wu, Xiaohu Shao, Yanfeng Wang, Xi Zhou. Joint 3D Face Reconstruction and Dense Alignment with Position Map Regression Network, Figure 3, arXiv:1803.07835v1. CC0 1.0.",
+      "modifications": "原始论文HTML图片，未裁剪、未修改；页面仅按容器等比例缩放显示。"
+    },
+    "figures": [
+      {
+        "src": "assets/figures/prnet-uv-position.jpg",
+        "source": "https://arxiv.org/html/1803.07835v1#S3.F2",
+        "caption": "UV位置图表示：在统一语义拓扑下记录三维坐标。",
+        "alt": "UV位置图表示：在统一语义拓扑下记录三维坐标。",
+        "figure_number": "Figure 2",
+        "version": "1803.07835v1",
+        "license": "CC0 1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "attribution": "Yao Feng, Fan Wu, Xiaohu Shao, Yanfeng Wang, Xi Zhou. Joint 3D Face Reconstruction and Dense Alignment with Position Map Regression Network, Figure 2, arXiv:1803.07835v1. CC0 1.0.",
+        "modifications": "原始论文HTML图片，未裁剪、未修改；页面仅按容器等比例缩放显示。"
+      }
+    ]
   },
   {
     "id": "fsa-net",
@@ -1064,13 +1572,79 @@
       "contribution": "针对热图回归而非直接坐标回归重新设计损失，使训练资源集中于影响定位的区域。",
       "limitations": "该损失针对热图前景和背景不均衡；与坐标回归方法比较时，应控制热图分辨率及解码策略。",
       "sources": [
-        "https://arxiv.org/abs/1904.07399"
+        "https://arxiv.org/abs/1904.07399",
+        "https://arxiv.org/html/1904.07399v3#S3",
+        "https://arxiv.org/html/1904.07399v3#S4",
+        "https://arxiv.org/html/1904.07399v3#S5",
+        "https://arxiv.org/html/1904.07399v3#S6",
+        "https://arxiv.org/html/1904.07399v3#S1.F3"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "pipeline_reviewed_at": "2026-11-18",
+      "evidence_scope": "本轮定向核对 arXiv:1904.07399v3 的 S3, S4, S5, S6 与对应方法图，补充模块数据流及训练/推理；未独立复现或全面复核实验。"
+    },
+    "pipeline": {
+      "overview": "面向热图回归调整Wing损失：依据真值热图强度改变像素梯度，兼顾关键点峰值细化与背景稳定，并用加权图平衡前景和困难背景。",
+      "steps": [
+        {
+          "title": "输入人脸和坐标通道",
+          "description": "裁剪图像在进入首层及hourglass模块前加入坐标编码，帮助卷积表示绝对位置。"
+        },
+        {
+          "title": "堆叠hourglass生成热图",
+          "description": "每个hourglass输出关键点热图，并增加一个合并全部脸部边界的辅助通道。"
+        },
+        {
+          "title": "由真值构造像素权重",
+          "description": "对真值热图灰度膨胀，将前景及其邻近困难背景赋予更高训练权重。"
+        },
+        {
+          "title": "AWing逐像素监督",
+          "description": "损失形状随真值强度变化：前景小误差受到更强关注，背景接近正确时影响减小；各级热图接受监督。"
+        },
+        {
+          "title": "边界坐标反馈到后级",
+          "description": "利用上一hourglass的边界预测生成边界坐标通道，与常规坐标特征一起服务后续卷积定位。"
+        }
+      ],
+      "training": "AWing用于热图强度回归，并结合Weighted Loss Map和边界辅助任务。不能把原坐标Wing与热图AWing视为完全相同的损失。",
+      "inference": "输入人脸生成最终关键点热图并读取位置；真值膨胀、加权损失与中间监督仅在训练时使用。",
+      "figure_reading": "图3是整体hourglass和坐标通道架构；加权图生成需结合§4.3，边界辅助与坐标聚合对应§5–6。",
+      "sources": [
+        {
+          "label": "方法正文 · 3 Our Model",
+          "url": "https://arxiv.org/html/1904.07399v3#S3"
+        },
+        {
+          "label": "方法正文 · 4 Adaptive Wing Loss for Face Alignment",
+          "url": "https://arxiv.org/html/1904.07399v3#S4"
+        },
+        {
+          "label": "方法正文 · 5 Boundary Information",
+          "url": "https://arxiv.org/html/1904.07399v3#S5"
+        },
+        {
+          "label": "方法正文 · 6 Coordinate aggregation",
+          "url": "https://arxiv.org/html/1904.07399v3#S6"
+        },
+        {
+          "label": "论文原始图示",
+          "url": "https://arxiv.org/html/1904.07399v3#S1.F3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/1904.07399v3#S1.F3",
+      "caption": "Adaptive Wing Loss for Robust Face Alignment via Heatmap Regression：论文方法图（原文链接）",
+      "figure_number": "Figure 3",
+      "version": "1904.07399v3",
+      "note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     }
   },
   {
@@ -1108,13 +1682,64 @@
       "contribution": "融合级联回归与端到端学习，并验证利用粗标注数据辅助少量精细标注的训练。",
       "limitations": "级联和多标注任务协同建立在可对应的面部结构上；阶段数与采用的标注组合会改变训练和推理条件。",
       "sources": [
-        "https://arxiv.org/abs/1904.02549"
+        "https://arxiv.org/abs/1904.02549",
+        "https://arxiv.org/html/1904.02549v1#S3",
+        "https://arxiv.org/html/1904.02549v1#S3.F2"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "pipeline_reviewed_at": "2026-11-18",
+      "evidence_scope": "本轮定向核对 arXiv:1904.02549v1 的 S3 与对应方法图，补充模块数据流及训练/推理；未独立复现或全面复核实验。"
+    },
+    "pipeline": {
+      "overview": "把级联形状细化写成可端到端训练的卷积网络：每级U-net产生关键点注意力图，同时保留全局特征和注意力选中的局部信息。",
+      "steps": [
+        {
+          "title": "首级U-net编码图像",
+          "description": "归一化灰度人脸进入全卷积U-net，得到保留空间结构的特征。"
+        },
+        {
+          "title": "产生逐关键点注意力",
+          "description": "转换层输出每点响应并进行空间softmax，以一阶矩即soft-argmax求连续坐标。"
+        },
+        {
+          "title": "衔接不同标注任务",
+          "description": "按点数从多到少串联轻量转换层，使稀疏与密集标注数据共同训练共享特征。"
+        },
+        {
+          "title": "融合局部与全局信息",
+          "description": "聚合注意力作为掩码，拼接原图、上一阶段特征及各自被掩码突出后的版本。"
+        },
+        {
+          "title": "后级再次定位",
+          "description": "下一U-net在融合表示上重新预测，逐级细化；每级坐标接受中间监督以维持注意力的关键点语义。"
+        }
+      ],
+      "training": "端到端优化坐标损失，按样本已有的标注任务计算监督；后级监督权重较高，避免早级过度收紧注意力而损害细化。",
+      "inference": "依次运行选定数量的U-net级联，输出最终阶段坐标；各阶段不是彼此独立训练后另行拼接的传统回归器。",
+      "figure_reading": "图2展示U-net、转换层与注意力掩码如何连接；重点看跨级融合同时保留全局和局部信息，而非只留下裁剪小块。",
+      "sources": [
+        {
+          "label": "方法正文 · 3 DeCaFA overview",
+          "url": "https://arxiv.org/html/1904.02549v1#S3"
+        },
+        {
+          "label": "论文原始图示",
+          "url": "https://arxiv.org/html/1904.02549v1#S3.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/1904.02549v1#S3.F2",
+      "caption": "DeCaFA: Deep Convolutional Cascade for Face Alignment in the Wild：论文方法图（原文链接）",
+      "figure_number": "Figure 2",
+      "version": "1904.02549v1",
+      "note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     }
   },
   {
@@ -1146,13 +1771,64 @@
       "contribution": "用训练期几何辅助与数据均衡改善轻量模型，而不把额外姿态分支成本带入推理。",
       "limitations": "辅助旋转分支仅参与训练，推理结果仍是二维关键点；移动端效率须在目标设备上验证。",
       "sources": [
-        "https://arxiv.org/abs/1902.10859"
+        "https://arxiv.org/abs/1902.10859",
+        "https://arxiv.org/html/1902.10859v2#S2",
+        "https://arxiv.org/html/1902.10859v2#S2.F2"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "pipeline_reviewed_at": "2026-11-18",
+      "evidence_scope": "本轮定向核对 arXiv:1902.10859v2 的 S2 与对应方法图，补充模块数据流及训练/推理；未独立复现或全面复核实验。"
+    },
+    "pipeline": {
+      "overview": "PFLD用紧凑主干直接回归二维关键点，训练时加入头姿辅助网络，并根据姿态误差与样本属性调整关键点监督的权重。",
+      "steps": [
+        {
+          "title": "检测框归一化人脸",
+          "description": "先检测、居中并缩放人脸，网络处理单张裁剪RGB。"
+        },
+        {
+          "title": "轻量卷积提取特征",
+          "description": "主干采用MobileNet式深度可分离卷积、线性瓶颈和倒残差以压缩计算量。"
+        },
+        {
+          "title": "聚合多尺度特征",
+          "description": "通过带步长卷积扩大感受野，联合不同尺度特征，再经全连接层回归全部关键点坐标。"
+        },
+        {
+          "title": "训练时预测辅助头姿",
+          "description": "中间主干特征分出辅助网络回归yaw、pitch、roll；辅助标签由固定参考脸和选定对应点估计。"
+        },
+        {
+          "title": "按几何和属性加权优化",
+          "description": "把姿态偏差及稀有属性权重耦合到关键点距离损失，提高困难姿态和少数样本的贡献。"
+        }
+      ],
+      "training": "主干和头姿辅助分支联合训练。辅助头姿标签由既有关键点计算；论文并未要求为每张脸另标一套精确三维旋转真值。",
+      "inference": "部署只运行关键点主干，移除辅助头姿分支；不能把训练图中的两条路径都计作必要推理开销。",
+      "figure_reading": "图2上方主干用于定位，下方辅助子网在训练时提供几何信息；读右侧损失连接时要区分辅助监督和最终输出。",
+      "sources": [
+        {
+          "label": "方法正文 · 2 Methodology",
+          "url": "https://arxiv.org/html/1902.10859v2#S2"
+        },
+        {
+          "label": "论文原始图示",
+          "url": "https://arxiv.org/html/1902.10859v2#S2.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/1902.10859v2#S2.F2",
+      "caption": "PFLD: A Practical Facial Landmark Detector：论文方法图（原文链接）",
+      "figure_number": "Figure 2",
+      "version": "1902.10859v2",
+      "note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     }
   },
   {
@@ -1190,19 +1866,70 @@
       "contribution": "除联合估计外，重新标注包含约1.9万张图像的数据，区分可见、自遮挡和外部遮挡；不确定性可用于识别对齐失败。",
       "limitations": "可见概率与位置不确定性是模型预测，需检验校准；低置信度提示不等于对不可见关键点的准确恢复保证。",
       "sources": [
-        "https://arxiv.org/abs/2004.02980"
+        "https://arxiv.org/abs/2004.02980",
+        "https://arxiv.org/html/2004.02980v1#S3",
+        "https://arxiv.org/html/2004.02980v1#S3.F2"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "pipeline_reviewed_at": "2026-11-18",
+      "evidence_scope": "本轮定向核对 arXiv:2004.02980v1 的 S3 与对应方法图，补充模块数据流及训练/推理；未独立复现或全面复核实验。"
     },
     "code": "https://github.com/abhi1kumar/LUVLi",
     "code_provenance": {
       "url": "https://github.com/abhi1kumar/LUVLi",
       "verified_at": "2026-11-18",
       "basis": "作者仓库 README 的对应论文标题、引用或实现说明；项目目录已公开，未运行代码。"
+    },
+    "pipeline": {
+      "overview": "在DU-Net的关键点热图之外，增加Cholesky系数与可见性分支，用联合似然同时学习位置、二维不确定性和可见概率。",
+      "steps": [
+        {
+          "title": "DU-Net逐级编码解码",
+          "description": "人脸图像经过堆叠U-net，每级输出逐关键点热图。"
+        },
+        {
+          "title": "正热图的空间均值定位",
+          "description": "对热图使用ReLU保留正响应，再计算加权空间均值，获得可微的亚像素坐标。"
+        },
+        {
+          "title": "瓶颈分支估计协方差",
+          "description": "Cholesky Estimator从瓶颈输出下三角矩阵系数，以正对角约束构造正定二维协方差。"
+        },
+        {
+          "title": "另一分支估计可见性",
+          "description": "Visibility Estimator从瓶颈预测每点的可见概率；两类估计器在各U-net间共享权重。"
+        },
+        {
+          "title": "联合似然连接三种输出",
+          "description": "训练时把可见性Bernoulli分布与可见条件下的位置分布组成LUVLi损失，对各级共同监督。"
+        }
+      ],
+      "training": "比较二维高斯和拉普拉斯位置似然；协方差不是直接从热图峰值读出，也不强制为对角矩阵。监督联合学习位置、可见性与不确定性。",
+      "inference": "读取最后U-net的位置均值、Cholesky系数和可见概率，再计算协方差。不可把可见概率和定位协方差当作同一置信度。",
+      "figure_reading": "图2明确显示热图的均值估计路径，以及从瓶颈分出的CEN和VEN；三路输出在训练损失中关联。",
+      "sources": [
+        {
+          "label": "方法正文 · 3 Proposed Method",
+          "url": "https://arxiv.org/html/2004.02980v1#S3"
+        },
+        {
+          "label": "论文原始图示",
+          "url": "https://arxiv.org/html/2004.02980v1#S3.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2004.02980v1#S3.F2",
+      "caption": "LUVLi Face Alignment: Estimating Landmarks' Location, Uncertainty, and Visibility Likelihood：论文方法图（原文链接）",
+      "figure_number": "Figure 2",
+      "version": "2004.02980v1",
+      "note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     }
   },
   {
@@ -1241,13 +1968,64 @@
       "contribution": "把速度、精度与视频稳定性共同作为目标，提供可在CPU运行的实现。",
       "limitations": "输出处于 3DMM 表示空间；静态图像生成的短视频增强不能代替长序列的抖动与跟踪评估。",
       "sources": [
-        "https://arxiv.org/abs/2009.09960"
+        "https://arxiv.org/abs/2009.09960",
+        "https://arxiv.org/html/2009.09960v2#S2",
+        "https://arxiv.org/html/2009.09960v2#S2.F2"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "pipeline_reviewed_at": "2026-11-18",
+      "evidence_scope": "本轮定向核对 arXiv:2009.09960v2 的 S2 与对应方法图，补充模块数据流及训练/推理；未独立复现或全面复核实验。"
+    },
+    "pipeline": {
+      "overview": "轻量骨干回归62维3DMM相关参数，以元联合优化选择参数/顶点损失，加入关键点辅助任务和三维辅助短视频合成来改善精度与稳定性。",
+      "steps": [
+        {
+          "title": "裁剪人脸并提取特征",
+          "description": "轻量骨干编码人脸，池化后连接参数回归与训练用关键点回归分支。"
+        },
+        {
+          "title": "预测紧凑人脸参数",
+          "description": "回归相似变换矩阵、40维形状和10维表情系数；各维按统计量归一化以控制量纲。"
+        },
+        {
+          "title": "由3DMM重建并投影",
+          "description": "组合平均脸、形状基和表情基生成三维网格，再用相似变换取得图像中的稠密对齐结果。"
+        },
+        {
+          "title": "元联合选择优化路径",
+          "description": "训练时分别沿fWPDC与VDC向前更新，在meta-test批次比较顶点误差，选择较好的状态更新主模型。"
+        },
+        {
+          "title": "辅助任务和短视频增强",
+          "description": "额外回归68个二维点；将静态图像合成为带轻微旋转、噪声、模糊及面外运动的短序列参与训练。"
+        }
+      ],
+      "training": "元联合优化、中间关键点辅助损失与短视频合成属于训练策略；fWPDC通过减少重复重建加速参数权重计算。",
+      "inference": "单帧骨干预测参数后即可重建。训练使用连续合成帧，不代表测试网络包含时序注意力或必须等待未来帧。",
+      "figure_reading": "图2区分骨干、参数回归、关键点辅助和重建模块；元联合优化在图4展开，不能把它理解成每张测试图的搜索过程。",
+      "sources": [
+        {
+          "label": "方法正文 · 2 Methodology",
+          "url": "https://arxiv.org/html/2009.09960v2#S2"
+        },
+        {
+          "label": "论文原始图示",
+          "url": "https://arxiv.org/html/2009.09960v2#S2.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2009.09960v2#S2.F2",
+      "caption": "Towards Fast, Accurate and Stable 3D Dense Face Alignment：论文方法图（原文链接）",
+      "figure_number": "Figure 2",
+      "version": "2009.09960v2",
+      "note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     }
   },
   {
@@ -1285,12 +2063,67 @@
       "contribution": "arXiv v1 Table 1报告全范围WHENet为4.4M参数，在BIWI/AFLW2000的MAE分别为3.814°/5.424°，混合宽范围数据的MAWE为7.655°；窄范围WHENet-V对应前两个测试集为3.475°/4.834°，应区分模型版本。§5与Figure 3的消融显示wrapped损失改善极端yaw边界附近误差。主要价值是把周期角度损失与可自动构造的宽视角监督配套设计，而非仅增加分类区间。",
       "limitations": "作者明确指出Panoptic背景变化不足，因此不能单独用来训练；固定模板关键点标注也可能限制效果，提出未来按个体调整模板。§6承认欧拉角仍有万向节锁问题，yaw接近±90°时pitch/roll误差较大，wrapped损失并未解决这一表示缺陷。§5强调与两个既有全范围方法使用不同、非公开测试集的比较只能作定性参考，不支持严格的同协议领先结论。",
       "sources": [
-        "https://arxiv.org/pdf/2005.10353v1"
+        "https://arxiv.org/pdf/2005.10353v1",
+        "https://arxiv.org/html/2005.10353v1#S3",
+        "https://arxiv.org/html/2005.10353v1#S4",
+        "https://arxiv.org/html/2005.10353v1#S1.F1"
       ],
       "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "已定向核对下列原文方法、实验与讨论；数值为作者报告，未独立复现，不代表全文逐段复核。",
       "verified_at": "2026-11-17",
-      "evidence_scope": "明确核对2020-05-20 arXiv v1：§3–4损失、网络和数据构造；§5 Tables 1、3与Figure 3；§6局限及未来工作。未将此版本数值无条件等同后续版本。"
+      "evidence_scope": "本轮定向核对 arXiv:2005.10353v1 的 S3, S4 与对应方法图，补充模块数据流及训练/推理；未独立复现或全面复核实验。 明确核对2020-05-20 arXiv v1：§3–4损失、网络和数据构造；§5 Tables 1、3与Figure 3；§6局限及未来工作。未将此版本数值无条件等同后续版本。",
+      "pipeline_reviewed_at": "2026-11-18"
+    },
+    "pipeline": {
+      "overview": "以EfficientNet-B0作共享骨干，沿用角度分类加期望回归，并用环绕角误差及宽范围训练数据扩展yaw预测范围。",
+      "steps": [
+        {
+          "title": "准备宽范围头部数据",
+          "description": "把300W-LP与CMU Panoptic头部图像组合；后者由三维点和相机标定生成相机相对头姿标签。"
+        },
+        {
+          "title": "轻量骨干编码外观",
+          "description": "裁剪RGB进入EfficientNet-B0，为三路角度预测提供共享特征。"
+        },
+        {
+          "title": "分别预测角度分箱",
+          "description": "yaw覆盖整周，用120个分箱；pitch和roll采用各自分箱，不应据yaw全范围推断所有角度均无限制。"
+        },
+        {
+          "title": "由softmax求角度期望",
+          "description": "将各分箱logits转为概率并按中心值求期望，输出连续yaw、pitch和roll。"
+        },
+        {
+          "title": "环绕距离监督yaw",
+          "description": "训练将分箱分类与回归组合，在yaw周界采用最小环绕角距离，避免相邻朝向因数值跨界被重罚。"
+        }
+      ],
+      "training": "先在300W-LP训练窄范围WHENet-V，再以其权重初始化混合数据上的WHENet。文章分类项采用sigmoid二元交叉熵，期望解码仍用softmax。",
+      "inference": "单张头部图像经骨干和角度头输出三角度；CMU相机和三维点仅用于数据标签准备，不是部署输入。",
+      "figure_reading": "图1中间是网络，两侧示意宽角度数据与预测场景；图2解释环绕误差和Panoptic标签几何，勿混作额外推理网络。",
+      "sources": [
+        {
+          "label": "方法正文 · 3 Our Method",
+          "url": "https://arxiv.org/html/2005.10353v1#S3"
+        },
+        {
+          "label": "方法正文 · 4 Datasets & Training",
+          "url": "https://arxiv.org/html/2005.10353v1#S4"
+        },
+        {
+          "label": "论文原始图示",
+          "url": "https://arxiv.org/html/2005.10353v1#S1.F1"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2005.10353v1#S1.F1",
+      "caption": "WHENet: Real-time Fine-Grained Estimation for Wide Range Head Pose：论文方法图（原文链接）",
+      "figure_number": "Figure 1",
+      "version": "2005.10353v1",
+      "note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     }
   },
   {
@@ -1379,13 +2212,64 @@
       "contribution": "把低成本定位、关键点结构一致性及跨域学习放入同一框架，而非仅通过增大热图提升精度。",
       "limitations": "邻居回归依赖固定关键点拓扑；跨域自训练使用伪标签，需区分源域训练与目标域无标注适配设置。",
       "sources": [
-        "https://arxiv.org/abs/2003.03771"
+        "https://arxiv.org/abs/2003.03771",
+        "https://arxiv.org/html/2003.03771v3#S3",
+        "https://arxiv.org/html/2003.03771v3#S3.F8"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "pipeline_reviewed_at": "2026-11-18",
+      "evidence_scope": "本轮定向核对 arXiv:2003.03771v3 的 S3 与对应方法图，补充模块数据流及训练/推理；未独立复现或全面复核实验。"
+    },
+    "pipeline": {
+      "overview": "在低分辨率网格上同时预测关键点所在单元和单元内偏移，再用邻居回归融合形状证据；课程式自训练另用于跨域无标签数据。",
+      "steps": [
+        {
+          "title": "骨干生成低分辨率网格",
+          "description": "避免为定位反复上采样到高分辨率，直接从低分辨率特征建立逐关键点score map。"
+        },
+        {
+          "title": "并行预测分数与局部偏移",
+          "description": "每个关键点的网格分数定位最可能单元，同时预测相对单元左上角的x/y偏移。"
+        },
+        {
+          "title": "邻居回归补充约束",
+          "description": "每点除自身偏移外，再预测平均脸中邻近关键点的相对偏移，让一个局部位置支持多个点。"
+        },
+        {
+          "title": "合并自身与邻居投票",
+          "description": "推理先用最高分网格和偏移解码，再平均本点预测及邻居提供的位置，形成最终坐标。"
+        },
+        {
+          "title": "可选课程式伪标签训练",
+          "description": "跨域训练时增加更高stride的辅助头，由易到难学习伪标签任务；这些辅助头部署时移除。"
+        }
+      ],
+      "training": "score map用L2，正样本格点的自身和邻居偏移用L1。STC是附加训练策略，不能把它的多任务头说成标准PIP推理必须执行的级联。",
+      "inference": "标准PIP头一次前向同时算网格分数、偏移和邻居预测，随后解码聚合；没有逐点反复裁图的步骤。",
+      "figure_reading": "图8展示带课程自训练辅助头的版本；基础PIP与邻居回归头见同节图3，图8新增路径仅供训练。",
+      "sources": [
+        {
+          "label": "方法正文 · 3 Our Method",
+          "url": "https://arxiv.org/html/2003.03771v3#S3"
+        },
+        {
+          "label": "论文原始图示",
+          "url": "https://arxiv.org/html/2003.03771v3#S3.F8"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2003.03771v3#S3.F8",
+      "caption": "Pixel-in-Pixel Net: Towards Efficient Facial Landmark Detection in the Wild：论文方法图（原文链接）",
+      "figure_number": "Figure 8",
+      "version": "2003.03771v3",
+      "note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     }
   },
   {
@@ -1423,19 +2307,70 @@
       "contribution": "显式利用方向性误差分布，把面部结构与局部纹理结合，而不是假设定位误差各向同性。",
       "limitations": "损失以面部边缘法向与切向定义误差，依赖相应拓扑；不能未经修改用于没有边界方向的任意关键点。",
       "sources": [
-        "https://arxiv.org/abs/2109.05721"
+        "https://arxiv.org/abs/2109.05721",
+        "https://arxiv.org/html/2109.05721v2#S3",
+        "https://arxiv.org/html/2109.05721v2#S3.F2"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "pipeline_reviewed_at": "2026-11-18",
+      "evidence_scope": "本轮定向核对 arXiv:2109.05721v2 的 S3 与对应方法图，补充模块数据流及训练/推理；未独立复现或全面复核实验。"
     },
     "code": "https://github.com/huangyangyu/ADNet",
     "code_provenance": {
       "url": "https://github.com/huangyangyu/ADNet",
       "verified_at": "2026-11-18",
       "basis": "作者仓库 README 的对应论文标题、引用或实现说明；项目目录已公开，未运行代码。"
+    },
+    "pipeline": {
+      "overview": "ADNet针对轮廓关键点的切向标注歧义，结合点—边注意力与方向性坐标损失，对法向偏差施加更强约束。",
+      "steps": [
+        {
+          "title": "四级hourglass提取特征",
+          "description": "裁剪人脸进入堆叠hourglass，结合坐标编码和抗混叠块提取定位特征。"
+        },
+        {
+          "title": "每级产生三种热图",
+          "description": "分别预测用于定位的landmark热图、边缘热图和点热图，三者承担不同监督角色。"
+        },
+        {
+          "title": "构造点—边各向异性注意力",
+          "description": "组合点和边缘响应，让目标附近及其轮廓方向保留较高权重，而非只用一张边界掩码。"
+        },
+        {
+          "title": "注意力约束下求坐标",
+          "description": "在被突出显示的定位响应上用soft-argmax得到关键点坐标，减少无关区域干扰。"
+        },
+        {
+          "title": "分解法向和切向误差",
+          "description": "训练根据标注相邻点定义轮廓切线与法线，对两个误差方向施加不同权重；不在轮廓上的点退回各向同性约束。"
+        }
+      ],
+      "training": "点/边热图以Adaptive Wing损失监督，坐标采用ADL，联合优化；方向信息来自标注几何而不是额外三维传感器。",
+      "inference": "输出最终二维关键点；法向/切向误差计算与真值热图仅为训练监督。方法不直接输出头部三维旋转。",
+      "figure_reading": "图2连接三种热图、注意力和soft-argmax；阅读损失箭头时区分热图AWing监督与坐标方向ADL监督。",
+      "sources": [
+        {
+          "label": "方法正文 · 3 ADNet",
+          "url": "https://arxiv.org/html/2109.05721v2#S3"
+        },
+        {
+          "label": "论文原始图示",
+          "url": "https://arxiv.org/html/2109.05721v2#S3.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2109.05721v2#S3.F2",
+      "caption": "ADNet: Leveraging Error-Bias Towards Normal Direction in Face Alignment：论文方法图（原文链接）",
+      "figure_number": "Figure 2",
+      "version": "2109.05721v2",
+      "note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     }
   },
   {
@@ -1512,13 +2447,74 @@
       "contribution": "重点是连续旋转参数化与几何一致损失，避免把不连续角度标签直接当作普通向量回归。",
       "limitations": "六维表示只编码旋转；不能将结果当作含平移的 6DoF，也不应沿用仅适合窄角度的欧拉角误差解释。",
       "sources": [
-        "https://arxiv.org/abs/2202.12555"
+        "https://arxiv.org/abs/2202.12555",
+        "https://arxiv.org/html/2202.12555v2#S2",
+        "https://arxiv.org/html/2202.12555v2#S3",
+        "https://arxiv.org/html/2202.12555v2#S2.F1"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "pipeline_reviewed_at": "2026-11-18",
+      "evidence_scope": "本轮定向核对 arXiv:2202.12555v2 的 S2, S3 与对应方法图，补充模块数据流及训练/推理；未独立复现或全面复核实验。"
+    },
+    "pipeline": {
+      "overview": "直接从人脸RGB回归两个三维向量，经Gram–Schmidt映射为合法旋转矩阵，以SO(3)测地距离训练，避开逐欧拉角分箱。",
+      "steps": [
+        {
+          "title": "裁剪RGB并编码",
+          "description": "RepVGG-B1g2提取图像特征；训练多分支结构可重参数化为部署时单分支卷积结构。"
+        },
+        {
+          "title": "单全连接层输出6维",
+          "description": "回归两个三维向量，作为旋转矩阵前两列的连续表示；不是六自由度空间位姿。"
+        },
+        {
+          "title": "归一化第一个方向",
+          "description": "将第一个向量归一化，作为旋转矩阵的第一列。"
+        },
+        {
+          "title": "正交化并补齐第三列",
+          "description": "从第二向量减去第一方向的投影再归一化，用叉乘生成第三列，满足正交约束。"
+        },
+        {
+          "title": "在旋转矩阵上监督",
+          "description": "训练用预测与真值旋转之间的测地角距离；需要展示时再将结果转换为欧拉角。"
+        }
+      ],
+      "training": "使用旋转标签训练并把欧拉真值转换为矩阵。测地损失作用于正交化后的旋转，主干可在部署前进行结构重参数化。",
+      "inference": "单图像→6维输出→确定性正交化→旋转矩阵；不需要关键点和PnP，也没有平移预测分量。",
+      "figure_reading": "图1把神经回归与确定性的Gram–Schmidt转换分开，训练损失在矩阵空间计算；其中“6D”是旋转表示维数。",
+      "sources": [
+        {
+          "label": "方法正文 · 2 Method",
+          "url": "https://arxiv.org/html/2202.12555v2#S2"
+        },
+        {
+          "label": "方法正文 · 3 Experiments",
+          "url": "https://arxiv.org/html/2202.12555v2#S3"
+        },
+        {
+          "label": "论文原始图示",
+          "url": "https://arxiv.org/html/2202.12555v2#S2.F1"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local"
+    },
+    "figure": {
+      "src": "assets/figures/6drepnet-architecture.png",
+      "source": "https://arxiv.org/html/2202.12555v2#S2.F1",
+      "caption": "从图像回归连续6D旋转，并以Gram–Schmidt构造旋转矩阵。",
+      "alt": "从图像回归连续6D旋转，并以Gram–Schmidt构造旋转矩阵。",
+      "figure_number": "Figure 1",
+      "version": "2202.12555v2",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Thorsten Hempel, Ahmed A. Abdelrahman, Ayoub Al-Hamadi. 6D Rotation Representation For Unconstrained Head Pose Estimation, Figure 1, arXiv:2202.12555v2. CC BY 4.0.",
+      "modifications": "原始论文HTML图片，未裁剪、未修改；页面仅按容器等比例缩放显示。"
     }
   },
   {
@@ -1549,19 +2545,70 @@
       "contribution": "用低维几何输入替代重型图像处理，并分析误差与不确定性的关联，展示多人互动分析应用。",
       "limitations": "输入为上游估计的少量二维关键点，因此需计入检测器误差与开销；不确定性输出还需独立校准。",
       "sources": [
-        "https://arxiv.org/abs/2111.01440"
+        "https://arxiv.org/abs/2111.01440",
+        "https://arxiv.org/html/2111.01440v2#S3",
+        "https://arxiv.org/html/2111.01440v2#S3.F2"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "pipeline_reviewed_at": "2026-11-18",
+      "evidence_scope": "本轮定向核对 arXiv:2111.01440v2 的 S3 与对应方法图，补充模块数据流及训练/推理；未独立复现或全面复核实验。"
     },
     "code": "https://github.com/cantarinigiorgio/HHP-Net",
     "code_provenance": {
       "url": "https://github.com/cantarinigiorgio/HHP-Net",
       "verified_at": "2026-11-18",
       "basis": "作者仓库 README 的对应论文标题、引用或实现说明；项目目录已公开，未运行代码。"
+    },
+    "pipeline": {
+      "overview": "从现成人体姿态检测器得到头部语义点及置信度，以置信度门控轻量回归器，同时输出三个欧拉角和每个角度的异方差不确定性。",
+      "steps": [
+        {
+          "title": "取得头部关键点和分数",
+          "description": "外部姿态检测器提供x、y和置信度；低分与缺失点的信息显式保留。"
+        },
+        {
+          "title": "中心化并分路卷积",
+          "description": "坐标按中心和尺度归一化，x、y、confidence三路分别进行一维卷积与激活。"
+        },
+        {
+          "title": "用置信度门控坐标特征",
+          "description": "将分数流的sigmoid特征分别乘到x/y特征上，抑制不可信点的影响。"
+        },
+        {
+          "title": "拼接后经轻量MLP",
+          "description": "门控后的两路特征拼接，送入250、200、150单元的三层全连接网络。"
+        },
+        {
+          "title": "回归角度与噪声尺度",
+          "description": "各输出头同时估计yaw/pitch/roll及相应对数方差，联合描述方向与数据噪声。"
+        }
+      ],
+      "training": "以含异方差偶然不确定性的多任务损失学习，预测方差调节各角度残差的权重，同时受正则项约束。",
+      "inference": "必须先获得关键点和置信度，再运行轻量回归器；网络本身的计算量不包括外部姿态检测器。",
+      "figure_reading": "图2左侧三流分别处理坐标和置信度，中间是乘法门控及MLP，右侧并列角度和不确定性输出。",
+      "sources": [
+        {
+          "label": "方法正文 · 3 The proposed method: HHP-Net",
+          "url": "https://arxiv.org/html/2111.01440v2#S3"
+        },
+        {
+          "label": "论文原始图示",
+          "url": "https://arxiv.org/html/2111.01440v2#S3.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2111.01440v2#S3.F2",
+      "caption": "HHP-Net: A Light Heteroscedastic Neural Network for Head Pose Estimation With Uncertainty：论文方法图（原文链接）",
+      "figure_number": "Figure 2",
+      "version": "2111.01440v2",
+      "note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     }
   },
   {
@@ -1592,13 +2639,69 @@
       "contribution": "通过局部卷积与注意力组合寻求轻量化，在300W-LP、AFLW2000和BIWI上做消融。",
       "limitations": "效率结论与双流、多阶段配置及输入尺寸相关；旋转回归不包含三维平移恢复。",
       "sources": [
-        "https://arxiv.org/abs/2202.03544"
+        "https://arxiv.org/abs/2202.03544",
+        "https://arxiv.org/html/2202.03544v1#S3",
+        "https://arxiv.org/html/2202.03544v1#S3.F1"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "pipeline_reviewed_at": "2026-11-18",
+      "evidence_scope": "本轮定向核对 arXiv:2202.03544v1 的 S3 与对应方法图，补充模块数据流及训练/推理；未独立复现或全面复核实验。"
+    },
+    "pipeline": {
+      "overview": "以双流、三级结构预测头姿。局部卷积特征与后两级Transformer全局交互结合，各级产生角度，再加权融合最终结果。",
+      "steps": [
+        {
+          "title": "双流深度可分离卷积",
+          "description": "两路分别提取不同卷积核配置的特征，通过depthwise和pointwise卷积降低计算。"
+        },
+        {
+          "title": "后两级加入Transformer",
+          "description": "将二维特征展平成带位置编码的序列；第二和第三级的Transformer建模空间全局关联。"
+        },
+        {
+          "title": "同级双流逐元素融合",
+          "description": "在每一级把两流特征相乘，再用卷积调整通道，形成该级共享表示。"
+        },
+        {
+          "title": "各级独立回归三角度",
+          "description": "预测头将融合特征展平并通过线性层输出yaw、pitch和roll。"
+        },
+        {
+          "title": "加权组合三级预测",
+          "description": "使用论文选定的级间权重求最终角度；三级不是视频中的连续时间帧。"
+        }
+      ],
+      "training": "按角度回归任务训练并采用MAE损失；级间权重由实验选择。第一阶段没有Transformer，不能将所有级说成相同编码块。",
+      "inference": "单张图像同时经过两流，读取三级角度的加权输出；不需要关键点输入或时序窗口。",
+      "figure_reading": "图1先按横向看每级的双流融合，再沿层级看三个预测头如何合成为最终角度。",
+      "sources": [
+        {
+          "label": "方法正文 · 3 Method",
+          "url": "https://arxiv.org/html/2202.03544v1#S3"
+        },
+        {
+          "label": "论文原始图示",
+          "url": "https://arxiv.org/html/2202.03544v1#S3.F1"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local"
+    },
+    "figure": {
+      "src": "assets/figures/lwposr-architecture.png",
+      "source": "https://arxiv.org/html/2202.03544v1#S3.F1",
+      "caption": "双流三级LwPosr：深度可分离卷积、Transformer和逐级角度融合。",
+      "alt": "双流三级LwPosr：深度可分离卷积、Transformer和逐级角度融合。",
+      "figure_number": "Figure 1",
+      "version": "2202.03544v1",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "Naina Dhingra. LwPosr: Lightweight Efficient Fine Grained Head Pose Estimation, Figure 1, arXiv:2202.03544v1. CC BY-SA 4.0.",
+      "modifications": "原始论文HTML图片，未裁剪、未修改；页面仅按容器等比例缩放显示。"
     }
   },
   {
@@ -1635,13 +2738,69 @@
       "contribution": "不依赖高分辨率热图逐像素回归，通过结构关系与自适应局部取样实现迭代精化，并进行跨数据集验证。",
       "limitations": "级联可变形注意力围绕当前预测采样局部证据，需单独评估初始定位与细化过程；结果仍为二维点。",
       "sources": [
-        "https://arxiv.org/abs/2208.10808"
+        "https://arxiv.org/abs/2208.10808",
+        "https://arxiv.org/html/2208.10808v1#S3",
+        "https://arxiv.org/html/2208.10808v1#S2.F2"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "pipeline_reviewed_at": "2026-11-18",
+      "evidence_scope": "本轮定向核对 arXiv:2208.10808v1 的 S3 与对应方法图，补充模块数据流及训练/推理；未独立复现或全面复核实验。"
+    },
+    "pipeline": {
+      "overview": "DTLD以图像特征初始化关键点查询和参考坐标，再逐层用自注意力、可变形注意力和偏移回归迭代细化坐标。",
+      "steps": [
+        {
+          "title": "ResNet18构建多级记忆",
+          "description": "骨干输出多尺度特征，统一通道后展平拼接，作为解码器的图像memory。"
+        },
+        {
+          "title": "从图像初始化点查询",
+          "description": "最高级特征经空间线性投影得到逐点query，再经预测层与sigmoid产生初始参考坐标。"
+        },
+        {
+          "title": "自注意力关联关键点",
+          "description": "query之间交互，学习人脸点的结构关系，而不是独立为每点回归。"
+        },
+        {
+          "title": "在参考点附近采样图像证据",
+          "description": "可变形注意力按学习到的偏移和权重，从多层memory采样少量相关特征。"
+        },
+        {
+          "title": "回归偏移并迭代更新",
+          "description": "解码层更新query及参考坐标；可选parallel decoder同时更新图像memory，基础版本保持memory固定。"
+        }
+      ],
+      "training": "对初始化和各解码层的坐标施加L1监督。基础与并行解码器是两种独立配置，后者增加图像特征更新。",
+      "inference": "一次骨干编码后逐层细化二维点坐标；迭代发生在网络内部，不需要测试图的真值或额外优化器。",
+      "figure_reading": "图2展示完整网络，图3–4分别解释基础与并行解码器；注意query初始化来自图像，而非直接随机取一组固定坐标。",
+      "sources": [
+        {
+          "label": "方法正文 · 3 Method",
+          "url": "https://arxiv.org/html/2208.10808v1#S3"
+        },
+        {
+          "label": "论文原始图示",
+          "url": "https://arxiv.org/html/2208.10808v1#S2.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local"
+    },
+    "figure": {
+      "src": "assets/figures/dtld-architecture.png",
+      "source": "https://arxiv.org/html/2208.10808v1#S2.F2",
+      "caption": "DTLD以图像特征初始化查询与关键点，再逐层细化坐标。",
+      "alt": "DTLD以图像特征初始化查询与关键点，再逐层细化坐标。",
+      "figure_number": "Figure 2",
+      "version": "2208.10808v1",
+      "license": "CC BY-NC-ND 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+      "attribution": "Hui Li, Zidong Guo, Seon-Min Rhee, Seungju Han, Jae-Joon Han. Towards Accurate Facial Landmark Detection via Cascaded Transformers, Figure 2, arXiv:2208.10808v1. CC BY-NC-ND 4.0.",
+      "modifications": "原始论文HTML图片，未裁剪、未修改；页面仅按容器等比例缩放显示。"
     }
   },
   {
@@ -1727,13 +2886,74 @@
       "contribution": "把语义歧义从固定统一惩罚改成由预测分布反映的适应性损失，不是单独建立新的人脸骨干。",
       "limitations": "损失降低标注歧义的影响，并未修正数据集标注本身；需固定骨干和解码方式再比较收益。",
       "sources": [
-        "https://arxiv.org/abs/2306.02763"
+        "https://arxiv.org/abs/2306.02763",
+        "https://arxiv.org/html/2306.02763v1#S3",
+        "https://arxiv.org/html/2306.02763v1#S4",
+        "https://arxiv.org/html/2306.02763v1#S1.F2"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "pipeline_reviewed_at": "2026-11-18",
+      "evidence_scope": "本轮定向核对 arXiv:2306.02763v1 的 S3, S4 与对应方法图，补充模块数据流及训练/推理；未独立复现或全面复核实验。"
+    },
+    "pipeline": {
+      "overview": "STAR从预测热图的概率分布估计主方向和方差，把坐标误差分解到两个主方向，自适应减轻轮廓切向语义歧义的训练影响。",
+      "steps": [
+        {
+          "title": "堆叠hourglass预测热图",
+          "description": "采用四级hourglass作为基线，每级为各关键点输出空间响应。"
+        },
+        {
+          "title": "归一化并解码坐标",
+          "description": "将响应解释为空间概率分布，以soft-argmax计算坐标期望。"
+        },
+        {
+          "title": "计算加权协方差和PCA",
+          "description": "从离散分布估计均值与经修正的协方差，再进行特征分解，得到两个主方向及能量。"
+        },
+        {
+          "title": "按方向重新度量残差",
+          "description": "将预测与标注坐标差投影到两个主方向，并按对应特征值的平方根缩放，减小高歧义方向的误差影响。"
+        },
+        {
+          "title": "限制特征值的退化增长",
+          "description": "使用值约束或detach约束，避免网络仅放大方差来降低损失；默认实验用值约束。"
+        }
+      ],
+      "training": "STAR是可结合不同距离函数的坐标回归训练目标。PCA来自预测分布，不需要人工给每个点标注歧义方向。",
+      "inference": "最终仍由网络热图解码二维关键点；STAR及其特征值约束用于训练，不构成新的三维输出或测试后处理器。",
+      "figure_reading": "图2把普通回归和STAR的训练路径并列；新增分布PCA与方向分解位于损失路径，不应算成推理时必需的独立网络。",
+      "sources": [
+        {
+          "label": "方法正文 · 3 Preliminary",
+          "url": "https://arxiv.org/html/2306.02763v1#S3"
+        },
+        {
+          "label": "方法正文 · 4 Method",
+          "url": "https://arxiv.org/html/2306.02763v1#S4"
+        },
+        {
+          "label": "论文原始图示",
+          "url": "https://arxiv.org/html/2306.02763v1#S1.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local"
+    },
+    "figure": {
+      "src": "assets/figures/star-loss-framework.png",
+      "source": "https://arxiv.org/html/2306.02763v1#S1.F2",
+      "caption": "STAR框架：预测分布的PCA与方向性误差缩放作用于训练损失。",
+      "alt": "STAR框架：预测分布的PCA与方向性误差缩放作用于训练损失。",
+      "figure_number": "Figure 2",
+      "version": "2306.02763v1",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Zhenglin Zhou, Huaxia Li, Hong Liu, Nanyang Wang, Gang Yu, Rongrong Ji. STAR Loss: Reducing Semantic Ambiguity in Facial Landmark Detection, Figure 2, arXiv:2306.02763v1. CC BY 4.0.",
+      "modifications": "原始论文HTML图片，未裁剪、未修改；页面仅按容器等比例缩放显示。"
     }
   },
   {
@@ -1773,13 +2993,74 @@
       "limitations": "全范围旋转依赖相应训练覆盖；六维旋转参数仍不含三维平移，期刊扩展与原始 6DRepNet 应分开记录。",
       "sources": [
         "https://arxiv.org/abs/2309.07654",
-        "https://github.com/thohemp/6DRepNet360"
+        "https://github.com/thohemp/6DRepNet360",
+        "https://arxiv.org/html/2309.07654v1#S3",
+        "https://arxiv.org/html/2309.07654v1#S4",
+        "https://arxiv.org/html/2309.07654v1#S2.F2"
       ],
-      "evidence_level": "primary_abstract",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "pipeline_reviewed_at": "2026-11-18",
+      "evidence_scope": "本轮定向核对 arXiv:2309.07654v1 的 S3, S4 与对应方法图，补充模块数据流及训练/推理；未独立复现或全面复核实验。"
+    },
+    "pipeline": {
+      "overview": "沿用连续6D旋转回归与测地损失，重点把训练扩展到含后脑视角的CMU Panoptic与300W-LP混合数据；本版本主干采用ResNet50。",
+      "steps": [
+        {
+          "title": "生成覆盖整周的头姿训练图",
+          "description": "由Panoptic三维脸点和相机标定得到多视角标签，与300W-LP组合，补充稀缺背向视角。"
+        },
+        {
+          "title": "ResNet50编码单张头图",
+          "description": "ImageNet预训练骨干提取外观；相机标定是标签准备条件，不是测试网络输入。"
+        },
+        {
+          "title": "全连接层预测两个向量",
+          "description": "单层回归六个数，作为连续旋转表示；与六自由度含平移位姿不同。"
+        },
+        {
+          "title": "Gram–Schmidt重建旋转",
+          "description": "将两个向量正交归一化，再以叉乘生成第三轴，得到合法的三维旋转矩阵。"
+        },
+        {
+          "title": "以测地角损失优化",
+          "description": "预测旋转和真值在SO(3)上比较，学习全范围外观；欧拉角或轴向误差用于各自协议的报告。"
+        }
+      ],
+      "training": "v1在方法对照中保持训练配置并改变数据覆盖；不能把ICIP版6DRepNet的RepVGG骨干直接写成此处ResNet50配置。",
+      "inference": "单图编码和6D解码得到旋转，不输出平移；全范围能力还依赖训练中背向样本覆盖，并非仅换表示即可保证。",
+      "figure_reading": "图2概述图像到6D再到旋转矩阵的路线；图4是数据角度分布，不能用分布统计图替代网络架构。",
+      "sources": [
+        {
+          "label": "方法正文 · III Method",
+          "url": "https://arxiv.org/html/2309.07654v1#S3"
+        },
+        {
+          "label": "方法正文 · IV Experiments",
+          "url": "https://arxiv.org/html/2309.07654v1#S4"
+        },
+        {
+          "label": "论文原始图示",
+          "url": "https://arxiv.org/html/2309.07654v1#S2.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local"
+    },
+    "figure": {
+      "src": "assets/figures/6drepnet360-architecture.png",
+      "source": "https://arxiv.org/html/2309.07654v1#S2.F2",
+      "caption": "6DRepNet360从RGB预测旋转表示，映射至SO(3)并以测地距离训练。",
+      "alt": "6DRepNet360从RGB预测旋转表示，映射至SO(3)并以测地距离训练。",
+      "figure_number": "Figure 2",
+      "version": "2309.07654v1",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Thorsten Hempel, Ahmed A. Abdelrahman, Ayoub Al-Hamadi. Toward Robust and Unconstrained Full Range of Rotation Head Pose Estimation, Figure 2, arXiv:2309.07654v1. CC BY 4.0.",
+      "modifications": "原始论文HTML图片，未裁剪、未修改；页面仅按容器等比例缩放显示。"
     }
   },
   {
@@ -15866,19 +17147,74 @@
       "limitations": "回归联合预测头姿与框位移，边界框仍是输入；定位校正效果与角度精度应分别评价。",
       "sources": [
         "https://arxiv.org/abs/1603.09732",
-        "https://doi.org/10.1109/TIP.2017.2654165"
+        "https://doi.org/10.1109/TIP.2017.2654165",
+        "https://arxiv.org/html/1603.09732v3#S3",
+        "https://arxiv.org/html/1603.09732v3#S4",
+        "https://arxiv.org/html/1603.09732v3#S1.F1"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "核对原始摘要与出版信息；未全文逐段复核、未复现，不将摘要中的优势外推为全面领先。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "本轮定向核对 arXiv:1603.09732v3 的 S3, S4 与对应方法图，补充模块数据流及训练/推理；未独立复现或全面复核实验。 核对原始摘要与出版信息；未全文逐段复核、未复现，不将摘要中的优势外推为全面领先。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "pipeline_reviewed_at": "2026-11-18"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=44",
       "version": "2026 第七版（目录原文转载）",
       "venue": "TIP"
+    },
+    "pipeline": {
+      "overview": "用局部线性混合建模低维姿态到高维人脸描述子的逆回归，加入吸收非姿态变化的潜变量；训练后解析得到用于预测的正向条件分布。",
+      "steps": [
+        {
+          "title": "检测并规范化人脸",
+          "description": "组合正脸和侧脸检测框，裁剪、灰度化和直方图均衡，准备外观描述。"
+        },
+        {
+          "title": "构建金字塔HOG特征",
+          "description": "堆叠多分辨率HOG形成高维输入，保留不同尺度的局部梯度信息。"
+        },
+        {
+          "title": "学习部分潜在的逆映射",
+          "description": "把姿态、可观测框偏移和潜变量作为低维输出，以混合局部仿射高斯模型解释高维特征。"
+        },
+        {
+          "title": "解析转换为正向预测",
+          "description": "用学习到的逆回归参数构造高维到低维的条件高斯混合，预测角度和框位移。"
+        },
+        {
+          "title": "迭代校正框与头姿",
+          "description": "依据预测框位移更新裁剪位置，重新提取特征再预测，使外观对齐和头姿估计相互改善。"
+        }
+      ],
+      "training": "EM联合估计混合分配与潜变量；潜变量用于吸收外观变化，不保证每一维都有可解释物理意义。本方法不是卷积神经网络。",
+      "inference": "由HOG特征经条件混合预测头姿和框偏移，并按文中迭代过程更新检测框；与只预测一次角度的直接回归器不同。",
+      "figure_reading": "图1上部说明监督学习局部混合映射，下部是测试特征与头姿预测；具体检测框迭代还需结合§4及算法1。",
+      "sources": [
+        {
+          "label": "方法正文 · III Partially-Latent Mixture of Linear Regressions",
+          "url": "https://arxiv.org/html/1603.09732v3#S3"
+        },
+        {
+          "label": "方法正文 · IV Implementation Details",
+          "url": "https://arxiv.org/html/1603.09732v3#S4"
+        },
+        {
+          "label": "论文原始图示",
+          "url": "https://arxiv.org/html/1603.09732v3#S1.F1"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/1603.09732v3#S1.F1",
+      "caption": "Robust Head-Pose Estimation Based on Partially-Latent Mixture of Linear Regressions：论文方法图（原文链接）",
+      "figure_number": "Figure 1",
+      "version": "1603.09732v3",
+      "note": "已定位论文原始图示；当前未核实可再分发许可，暂留原图链接，不复制、不重绘。"
     }
   },
   {

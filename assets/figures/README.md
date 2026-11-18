@@ -1,6 +1,6 @@
 # Paper figure attribution
 
-These extracted figure assets are separate from the repository code license. Each image retains its own source license: **CC BY 4.0**, **CC BY-NC-SA 4.0**, or **CC BY-NC-ND 4.0**, as recorded below and in the manifest. Noncommercial and share-alike terms continue to apply to the corresponding figures. No endorsement is implied.
+These original figure assets are separate from the repository code license. Each image retains its source terms: **CC0 1.0**, **CC BY 4.0**, **CC BY-SA 4.0**, **CC BY-NC-SA 4.0**, or **CC BY-NC-ND 4.0**, as recorded below and in the manifest. Noncommercial and share-alike terms continue to apply to the corresponding figures. No endorsement is implied.
 
 ## rtmpose
 
@@ -125,3 +125,85 @@ Wanqi Yin, Zhongang Cai et al.. SMPLest-X: Ultimate Scaling for Expressive Human
 - License evidence: https://arxiv.org/html/2501.09782v1
 - Changes: 原始 arXiv HTML 图片；完整保留原图，未裁剪、未修改、未重绘。页面仅等比缩放，点击可打开原尺寸。
 - SHA-256: `f6acf8c1eca369b7f70b372c536493f213c4d6eabda3fdf4840d66a882677197`
+
+## Head and facial alignment original figures — 2026-11-18
+
+### assets/figures/wide-short-hpe-methodology.png
+
+Alejandro Cobo, Roberto Valle, José M. Buenaposada, Luis Baumela. On the representation and methodology for wide and short range head pose estimation, Figure 2, arXiv:2401.05807v1. CC BY-NC-ND 4.0.
+
+- Original source: https://arxiv.org/html/2401.05807v1#S1.F2
+- Unmodified original file: https://arxiv.org/html/2401.05807v1/figures/model_architecture.png
+- License: [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+- License evidence: https://arxiv.org/abs/2401.05807v1
+- SHA-256: `91f94c4a913dce82ed78d294d4264c9bb6f4f11dc40a5c6ad53b46fc0b2ee63d`
+
+### assets/figures/prnet-architecture.jpg
+
+Yao Feng, Fan Wu, Xiaohu Shao, Yanfeng Wang, Xi Zhou. Joint 3D Face Reconstruction and Dense Alignment with Position Map Regression Network, Figure 3, arXiv:1803.07835v1. CC0 1.0.
+
+- Original source: https://arxiv.org/html/1803.07835v1#S3.F3
+- Unmodified original file: https://arxiv.org/html/1803.07835v1/images/network.jpg
+- License: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
+- License evidence: https://arxiv.org/abs/1803.07835v1
+- SHA-256: `7c1173e93991e0f1ab25835fcab38342555cb3d696fb86fcdfe2de4641edb15c`
+
+### assets/figures/prnet-uv-position.jpg
+
+Yao Feng, Fan Wu, Xiaohu Shao, Yanfeng Wang, Xi Zhou. Joint 3D Face Reconstruction and Dense Alignment with Position Map Regression Network, Figure 2, arXiv:1803.07835v1. CC0 1.0.
+
+- Original source: https://arxiv.org/html/1803.07835v1#S3.F2
+- Unmodified original file: https://arxiv.org/html/1803.07835v1/images/repre.jpg
+- License: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
+- License evidence: https://arxiv.org/abs/1803.07835v1
+- SHA-256: `ce15e8e866ae2984abe2c41a66674aa6e9e5d707922a3ded9189e0c9f7d7c3ff`
+
+### assets/figures/6drepnet-architecture.png
+
+Thorsten Hempel, Ahmed A. Abdelrahman, Ayoub Al-Hamadi. 6D Rotation Representation For Unconstrained Head Pose Estimation, Figure 1, arXiv:2202.12555v2. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2202.12555v2#S2.F1
+- Unmodified original file: https://arxiv.org/html/2202.12555v2/method.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2202.12555v2
+- SHA-256: `6b0a51fb9913bb20d0cadd7bf922d46327955594e4a0421c8b1171b4e93bbb21`
+
+### assets/figures/lwposr-architecture.png
+
+Naina Dhingra. LwPosr: Lightweight Efficient Fine Grained Head Pose Estimation, Figure 1, arXiv:2202.03544v1. CC BY-SA 4.0.
+
+- Original source: https://arxiv.org/html/2202.03544v1#S3.F1
+- Unmodified original file: https://arxiv.org/html/2202.03544v1/lwposr_arch.png
+- License: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+- License evidence: https://arxiv.org/abs/2202.03544v1
+- SHA-256: `00804f18eff4f1284b7bdcd5cc694163febc773d2247baa7a8f24f5cf3281037`
+
+### assets/figures/dtld-architecture.png
+
+Hui Li, Zidong Guo, Seon-Min Rhee, Seungju Han, Jae-Joon Han. Towards Accurate Facial Landmark Detection via Cascaded Transformers, Figure 2, arXiv:2208.10808v1. CC BY-NC-ND 4.0.
+
+- Original source: https://arxiv.org/html/2208.10808v1#S2.F2
+- Unmodified original file: https://arxiv.org/html/2208.10808v1/net10.png
+- License: [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+- License evidence: https://arxiv.org/abs/2208.10808v1
+- SHA-256: `3c311d629ff8527c06ffeafc7de1d4d657d78b3432584fd56aeded9a0a6a730b`
+
+### assets/figures/star-loss-framework.png
+
+Zhenglin Zhou, Huaxia Li, Hong Liu, Nanyang Wang, Gang Yu, Rongrong Ji. STAR Loss: Reducing Semantic Ambiguity in Facial Landmark Detection, Figure 2, arXiv:2306.02763v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2306.02763v1#S1.F2
+- Unmodified original file: https://arxiv.org/html/2306.02763v1/images/framework_v9.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2306.02763v1
+- SHA-256: `696017e5f286d728a640261cfc45e4fae673f3779e9981de29beb5c7a8717f25`
+
+### assets/figures/6drepnet360-architecture.png
+
+Thorsten Hempel, Ahmed A. Abdelrahman, Ayoub Al-Hamadi. Toward Robust and Unconstrained Full Range of Rotation Head Pose Estimation, Figure 2, arXiv:2309.07654v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2309.07654v1#S2.F2
+- Unmodified original file: https://arxiv.org/html/2309.07654v1/method9.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2309.07654v1
+- SHA-256: `0e9531e8caaa0fdf535e6208dfa0bf55ec96116c1f3b46979eb20702a4998480`
