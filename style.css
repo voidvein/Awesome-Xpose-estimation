@@ -27,3 +27,5 @@ body{font-family:"Source Han Sans SC","Source Han Sans","Noto Sans CJK SC","Noto
 .figure-metadata,.figure-attribution,.figure-modifications{display:block;font-size:11px;margin-top:5px;overflow-wrap:anywhere}.figure-attribution{color:#625b50}
 
 .chart-empty{align-self:center;width:100%;text-align:center;color:var(--muted);font-size:12px}
+
+.code-badge{display:inline-block;vertical-align:middle;border:1px solid #54816b;border-radius:4px;background:#edf4ee;color:#315b43;font:600 10px/1.5 var(--mono);letter-spacing:0;padding:1px 5px;white-space:nowrap}.code-badge:hover{background:#315b43;color:#fff;border-color:#315b43}.detail-title .code-badge{font-size:12px;vertical-align:middle;padding:3px 8px}

@@ -6,6 +6,20 @@ const {filterPapers} = require(path.join(__dirname, root, 'app.js'));
 const papers = JSON.parse(fs.readFileSync(path.join(__dirname, root, 'papers.json')));
 assert.ok(papers.length>0);
 assert.equal(new Set(papers.map(p=>p.id)).size,papers.length,'Unique paper ids');
+const {codeLink}=require(path.join(__dirname,root,'app.js'));
+for(const code of [undefined,'','javascript:alert(1)','http://example.org','https://','https://user:pass@example.org'])assert.equal(codeLink({code}),'');
+assert.equal(codeLink({code:'https://github.com/example/project'}),'https://github.com/example/project');
+for(const p of papers){
+ for(const key of ['problem','method','inputs_outputs','contribution','limitations'])assert.ok(typeof p.analysis?.[key]==='string'&&p.analysis[key].trim(),`${p.id}: missing analysis ${key}`);
+ assert.ok(p.analysis.sources.length,`${p.id}: analysis must cite sources`);
+ assert.ok(p.analysis.evidence_level,`${p.id}: reading scope must be explicit`);
+ if(p.analysis.limitations_kind==='editorial_scope')assert.ok(p.analysis.scope_reviewed_at,`${p.id}: editorial scope review date`);
+ if(p.code)assert.equal(codeLink(p),p.code);
+ if(p.code_provenance){assert.equal(p.code_provenance.url,p.code);assert.ok(p.code_provenance.verified_at);}
+}
+const markdown=fs.readFileSync(path.join(__dirname,root,'README.md'),'utf8');
+for(const p of papers.filter(p=>p.code))assert.ok(markdown.includes(`- [code](${p.code}) **[${p.title}]`),`${p.id}: README badge precedes method`);
+console.log('PASS: complete sourced detail fields, explicit reading scope, implementation provenance, safe code links and matching Markdown badges.');
 for(const p of papers){for(const key of ['id','title','category','venue','status','summary','url'])assert.ok(typeof p[key]==='string'&&p[key],`${p.id}: ${key}`);assert.ok(['Head','Hand','Human'].includes(p.category));assert.ok(['Published','Preprint'].includes(p.status));assert.ok(p.year>=1990&&p.year<=new Date().getFullYear()+1);assert.ok(p.dimensions.length&&p.dimensions.every(d=>['2D','3D'].includes(d)));assert.equal(new URL(p.url).protocol,'https:');if(p.code)assert.equal(new URL(p.code).protocol,'https:');}
 assert.equal(filterPapers(papers,{}).length,papers.length);
 for(const category of ['Head','Hand','Human'])assert.ok(filterPapers(papers,{category}).every(p=>p.category===category));
@@ -107,7 +121,7 @@ const reach=papers.find(p=>p.id==='reach');
 assert.ok(reach,'REACH stays in the catalog');
 assert.equal(reach.venue,'FG');assert.equal(reach.year,2026);assert.equal(reach.status,'Published');assert.equal(ccfTier(reach),'C');
 assert.equal(reach.url,'https://arxiv.org/abs/2605.22231');assert.equal(reach.preprint_url,reach.url);
-assert.equal(reach.analysis.evidence_level,'primary_abstract');assert.equal(reach.analysis.limitations,null);
+assert.equal(reach.analysis.evidence_level,'primary_abstract');assert.equal(reach.analysis.limitations_kind,'editorial_scope');assert.ok(reach.analysis.limitations.includes('多视角'));
 assert.ok(reach.primary_sources.includes('https://vision.ist.i.kyoto-u.ac.jp/research/reach/'));
 assert.ok(reach.primary_sources.includes('https://vision.ist.i.kyoto-u.ac.jp/publication/'));
 assert.ok(!reach.summary.includes('正式接收状态未核实'));

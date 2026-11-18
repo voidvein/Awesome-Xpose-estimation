@@ -1,0 +1,79 @@
+{
+  "review_date": "2026-11-18",
+  "records": 371,
+  "scope_notes_added": 346,
+  "code_links_added": [
+    "adnet",
+    "analyzing-the-synthetic-to-real-domain-gap-in-3d-hand-pose-estimation",
+    "cpm",
+    "deepprior-plus",
+    "dense-mutual-attention-hand",
+    "dynpose",
+    "facexformer",
+    "freihand",
+    "fsa-net",
+    "hamer",
+    "hand-visibility",
+    "hhpnet",
+    "hmr",
+    "hopenet",
+    "hourglass",
+    "hrnet",
+    "img2pose",
+    "luvli",
+    "metro-hand",
+    "mixste",
+    "openpose",
+    "pare",
+    "perspose",
+    "rtmo",
+    "simplebaseline2d",
+    "smplx",
+    "thor-net",
+    "tokenhpe",
+    "unihope-a-unified-approach-for-hand-only-and-hand-object-pose-estimation",
+    "wham",
+    "wilor"
+  ],
+  "code_total": 129,
+  "targeted_body_checks": [
+    "motionagformer",
+    "poseformer"
+  ],
+  "unread_primary_pages": [
+    "joint-unsup-landmarks",
+    "simcc",
+    "cocowholebody",
+    "hand-survey-cameras-2019"
+  ],
+  "code_aliases_checked": [
+    {
+      "id": "higherhrnet",
+      "old": "https://github.com/HRNet/HigherHRNet-Human-Pose-Estimation",
+      "new": "https://github.com/HRNet/Higher-HRNet-Human-Pose-Estimation"
+    },
+    {
+      "id": "hybrik",
+      "old": "https://github.com/jeffffffli/HybrIK",
+      "new": "https://github.com/Jeff-sjtu/HybrIK"
+    },
+    {
+      "id": "smplerx",
+      "old": "https://github.com/MotrixLab/SMPLer-X",
+      "new": "https://github.com/caizhongang/SMPLer-X"
+    },
+    {
+      "id": "smplest-x",
+      "old": "https://github.com/MotrixLab/SMPLest-X",
+      "new": "https://github.com/wqyin/SMPLest-X"
+    }
+  ],
+  "code_links_corrected": [],
+  "records_before_merge": 366,
+  "merged_remote_head": "c1a308dc047985cc7900fc9352c37cffa8b082d9",
+  "additional_scope_notes": [
+    "hland-pose",
+    "clip-hand-domain-generalization",
+    "dexavatar"
+  ]
+}

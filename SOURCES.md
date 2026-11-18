@@ -2,6 +2,16 @@
 
 This is a selective catalogue, not a systematic review. Source lists aided discovery; entries link to papers or author sources. Metrics are snapshots and are not comparable across providers.
 
+## Detail and implementation review — 2026-11-18
+
+The initial 366 entries now have the five detail fields. This pass adds 346 individual applicability notes, explicitly labeled **编者归纳** in the detail view. These are deductions from the already cited input/output and method conditions, not invented author-reported failures or claims of full-text review. Existing sourced limitations are retained. MotionAGFormer (arXiv:2310.16288v1, experiments and appendices A–D) and PoseFormer (arXiv:2103.10455v3, complexity discussion and appendix D) received targeted body checks, including difficult sequences and dependence on 2D detections.
+
+Primary-page retrieval succeeded for 362 records. Four records (joint-unsup-landmarks, simcc, cocowholebody, hand-survey-cameras-2019) were unavailable in this pass; their pre-existing source references were retained. Retrieval does not imply full-text reading, and their new editorial boundaries do not upgrade the previous evidence level. Nine previously unlabeled reading scopes are now explicitly identified as abstract or project-page readings.
+
+31 implementation links were added after checking author repository READMEs, paper citations and implementation files. Four alternative author repository addresses were also checked; they redirect to the already stored canonical projects, whose addresses were retained. After merging the concurrent five additions, the catalogue contains 371 entries and links 129 implementations; a `code` link precedes the method title on cards, detail headers and in this repository's Markdown index. Code links lead directly to the implementation project; paper-title links continue to open the method detail. A linked repository does not imply that its software, weights or datasets are unrestricted, or that its results have been reproduced. Methods without a verified link remain unmarked, rather than being labeled unavailable.
+
+See `scripts/curation-2026-11-18.json` for the changed implementation records and unavailable primary pages. Metrics were not refreshed in this pass.
+
 # Head / face expansion provenance
 
 39 entries: 12 retained recent entries from `head.json`, plus 27 newly researched entries spanning 2013–2024. Existing recent entries extend coverage through 2026. This is a curated research list, not a claim of exhaustive coverage.
@@ -74,3 +84,5 @@ The additional 198 entries were discovered in conference proceedings and verifie
 ## LLM, recent and journal gap batch
 
 This batch includes LocLLM and KptLLM with targeted source-text checks; related KptLLM++ is an extension, not a distinct research lineage. Further additions include 19 CVPR/ICCV 2025 papers and 13 journal plus two conference records. Most are abstract-level readings and not independently reproduced. For LocLLM/KptLLM architecture figures, the arXiv non-exclusive distribution licence does not establish third-party republication rights, so the site links to the original figures rather than embedding them. See the figure manifest.
+
+The concurrent publication-metadata corrections, five additional records, and deeper body analyses through c1a308d were preserved on merge. Three newly added abstract-level entries also received explicitly labeled editorial applicability notes. Existing deeper author-reported limitations take precedence over the editorial notes in this pass.
