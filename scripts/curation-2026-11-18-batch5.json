@@ -1,0 +1,336 @@
+{
+  "review_date": "2026-11-18",
+  "expanded_records": 29,
+  "records": [
+    {
+      "id": "probpose",
+      "version": "2412.02254v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S3.F4",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2412.02254v1"
+    },
+    {
+      "id": "dynpose",
+      "version": "Official 2025 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2025/papers/Xu_DynPose_Largely_Improving_the_Efficiency_of_Human_Pose_Estimation_by_CVPR_2025_paper.pdf"
+    },
+    {
+      "id": "perspose",
+      "version": "2508.17239v2",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4",
+        "S5.SS1"
+      ],
+      "figure_anchor": "S4.F4",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2508.17239v2"
+    },
+    {
+      "id": "egocentric-visibility-aware",
+      "version": "2602.23618v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S4"
+      ],
+      "figure_anchor": "S3.F2",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2602.23618v1"
+    },
+    {
+      "id": "metricpose",
+      "version": "2611.08954v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S2.F2",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2611.08954v1"
+    },
+    {
+      "id": "deeppose",
+      "version": "1312.4659v3",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S3.F2",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/1312.4659v3"
+    },
+    {
+      "id": "cpm",
+      "version": "1602.00134v4",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S3.F2",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/1602.00134v4"
+    },
+    {
+      "id": "hourglass",
+      "version": "1603.06937v2",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S0.F1",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/1603.06937v2"
+    },
+    {
+      "id": "openpose",
+      "version": "1611.08050v2",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S2"
+      ],
+      "figure_anchor": "S2.F3",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/1611.08050v2"
+    },
+    {
+      "id": "simplebaseline2d",
+      "version": "1804.06208v2",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S2",
+        "S3"
+      ],
+      "figure_anchor": "S2.F1",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/1804.06208v2"
+    },
+    {
+      "id": "higherhrnet",
+      "version": "1908.10357v3",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S2.F2",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/1908.10357v3"
+    },
+    {
+      "id": "dekr",
+      "version": "2104.02300v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S3.F3",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2104.02300v1"
+    },
+    {
+      "id": "tokenpose",
+      "version": "2104.03516v3",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S2.F2",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2104.03516v3"
+    },
+    {
+      "id": "simplebaseline3d",
+      "version": "1705.03098v2",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S2.F1",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/1705.03098v2"
+    },
+    {
+      "id": "mixste",
+      "version": "2203.00859v4",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S2.F2",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2203.00859v4"
+    },
+    {
+      "id": "poseformerv2",
+      "version": "2303.17472v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S3.F4",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2303.17472v1"
+    },
+    {
+      "id": "motionbert",
+      "version": "2210.06551v5",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S2.F2",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2210.06551v5"
+    },
+    {
+      "id": "smplify",
+      "version": "1607.08128v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S3.F2",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/1607.08128v1"
+    },
+    {
+      "id": "hmr",
+      "version": "1712.06584v2",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S0.F2",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/1712.06584v2"
+    },
+    {
+      "id": "spin",
+      "version": "1909.12828v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S1.F2",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/1909.12828v1"
+    },
+    {
+      "id": "vibe",
+      "version": "1912.05656v3",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S1.F2",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/1912.05656v3"
+    },
+    {
+      "id": "hybrik",
+      "version": "2011.14672v4",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S3.F2",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2011.14672v4"
+    },
+    {
+      "id": "romp",
+      "version": "2008.12272v4",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S1.F2",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2008.12272v4"
+    },
+    {
+      "id": "4dhumans",
+      "version": "2305.20091v3",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4"
+      ],
+      "figure_anchor": "S2.F2",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2305.20091v3"
+    },
+    {
+      "id": "smplx",
+      "version": "1904.05866v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S3",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/1904.05866v1"
+    },
+    {
+      "id": "expose",
+      "version": "2008.09062v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S3.F2",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2008.09062v1"
+    },
+    {
+      "id": "pixie",
+      "version": "2105.05301v2",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3"
+      ],
+      "figure_anchor": "S3.F3",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2105.05301v2"
+    },
+    {
+      "id": "cocowholebody",
+      "version": "2007.11858v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4"
+      ],
+      "figure_anchor": "S4.F6",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2007.11858v1"
+    },
+    {
+      "id": "smplerx",
+      "version": "2309.17448v3",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4"
+      ],
+      "figure_anchor": "S4.F4",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2309.17448v3"
+    }
+  ]
+}

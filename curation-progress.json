@@ -2,9 +2,9 @@
   "updated_at": "2026-11-18",
   "total": 371,
   "counts": {
-    "complete": 18,
-    "figure_pending": 61,
-    "pending": 292
+    "complete": 21,
+    "figure_pending": 87,
+    "pending": 263
   },
   "completion_standard": "Source-checked module-level pipeline, separate training/inference, figure guide, and a verified local architecture/process figure. Summaries and applicability notes do not count.",
   "entries": [
@@ -1002,34 +1002,34 @@
       "id": "probpose",
       "category": "Human",
       "title": "ProbPose: A Probabilistic Approach to 2D Human Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2025/html/Purkrabek_ProbPose_A_Probabilistic_Approach_to_2D_Human_Pose_Estimation_CVPR_2025_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "原文版本明确标记 CC BY-NC-SA 4.0；本次先保留图 4 的双窗口表示示意链接，尚未收录本地图像。它不是完整骨干网络结构图。"
     },
     {
       "id": "dynpose",
       "category": "Human",
       "title": "DynPose: Largely Improving the Efficiency of Human Pose Estimation by a Simple Dynamic Framework",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2025/html/Xu_DynPose_Largely_Improving_the_Efficiency_of_Human_Pose_Estimation_by_CVPR_2025_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "perspose",
       "category": "Human",
       "title": "PersPose: 3D Human Pose Estimation with Perspective Encoding and Perspective Rotation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2025/html/Hao_PersPose_3D_Human_Pose_Estimation_with_Perspective_Encoding_and_Perspective_ICCV_2025_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "smplest-x",
@@ -1046,78 +1046,78 @@
       "id": "egocentric-visibility-aware",
       "category": "Human",
       "title": "Egocentric Visibility-Aware Human Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2026/html/Dai_Egocentric_Visibility-Aware_Human_Pose_Estimation_CVPR_2026_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "metricpose",
       "category": "Human",
       "title": "MetricPose: Flexible 3D Human Pose Estimation with Depth and Geometric Cues",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2611.08954",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "deeppose",
       "category": "Human",
       "title": "DeepPose: Human Pose Estimation via Deep Neural Networks",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/1312.4659",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "cpm",
       "category": "Human",
       "title": "Convolutional Pose Machines",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/1602.00134",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "hourglass",
       "category": "Human",
       "title": "Stacked Hourglass Networks for Human Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/1603.06937",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "openpose",
       "category": "Human",
       "title": "Realtime Multi-Person 2D Pose Estimation Using Part Affinity Fields",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/1611.08050",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "simplebaseline2d",
       "category": "Human",
       "title": "Simple Baselines for Human Pose Estimation and Tracking",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ECCV_2018/papers/Bin_Xiao_Simple_Baselines_for_ECCV_2018_paper.pdf",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "hrnet",
@@ -1134,34 +1134,34 @@
       "id": "higherhrnet",
       "category": "Human",
       "title": "HigherHRNet: Scale-Aware Representation Learning for Bottom-Up Human Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2020/html/Cheng_HigherHRNet_Scale-Aware_Representation_Learning_for_Bottom-Up_Human_Pose_Estimation_CVPR_2020_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "dekr",
       "category": "Human",
       "title": "Bottom-Up Human Pose Estimation via Disentangled Keypoint Regression",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Geng_Bottom-Up_Human_Pose_Estimation_via_Disentangled_Keypoint_Regression_CVPR_2021_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "tokenpose",
       "category": "Human",
       "title": "TokenPose: Learning Keypoint Tokens for Human Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Li_TokenPose_Learning_Keypoint_Tokens_for_Human_Pose_Estimation_ICCV_2021_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "vitpose",
@@ -1200,12 +1200,12 @@
       "id": "simplebaseline3d",
       "category": "Human",
       "title": "A Simple yet Effective Baseline for 3D Human Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/1705.03098",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "videopose3d",
@@ -1233,78 +1233,78 @@
       "id": "mixste",
       "category": "Human",
       "title": "MixSTE: Seq2seq Mixed Spatio-Temporal Encoder for 3D Human Pose Estimation in Video",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Zhang_MixSTE_Seq2seq_Mixed_Spatio-Temporal_Encoder_for_3D_Human_Pose_Estimation_CVPR_2022_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "poseformerv2",
       "category": "Human",
       "title": "PoseFormerV2: Exploring Frequency Domain for Efficient and Robust 3D Human Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Zhao_PoseFormerV2_Exploring_Frequency_Domain_for_Efficient_and_Robust_3D_Human_CVPR_2023_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "motionbert",
       "category": "Human",
       "title": "MotionBERT: A Unified Perspective on Learning Human Motion Representations",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Zhu_MotionBERT_A_Unified_Perspective_on_Learning_Human_Motion_Representations_ICCV_2023_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
       "id": "smplify",
       "category": "Human",
       "title": "Keep It SMPL: Automatic Estimation of 3D Human Pose and Shape from a Single Image",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://smplify.is.tuebingen.mpg.de/",
-      "reading_level": "primary_project_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "hmr",
       "category": "Human",
       "title": "End-to-End Recovery of Human Shape and Pose",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Kanazawa_End-to-End_Recovery_of_CVPR_2018_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "spin",
       "category": "Human",
       "title": "Learning to Reconstruct 3D Human Pose and Shape via Model-Fitting in the Loop",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_ICCV_2019/html/Kolotouros_Learning_to_Reconstruct_3D_Human_Pose_and_Shape_via_Model-Fitting_ICCV_2019_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "vibe",
       "category": "Human",
       "title": "VIBE: Video Inference for Human Body Pose and Shape Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2020/html/Kocabas_VIBE_Video_Inference_for_Human_Body_Pose_and_Shape_Estimation_CVPR_2020_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "pare",
@@ -1321,88 +1321,88 @@
       "id": "hybrik",
       "category": "Human",
       "title": "HybrIK: A Hybrid Analytical-Neural Inverse Kinematics Solution for 3D Human Pose and Shape Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Li_HybrIK_A_Hybrid_Analytical-Neural_Inverse_Kinematics_Solution_for_3D_Human_CVPR_2021_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "romp",
       "category": "Human",
       "title": "Monocular, One-Stage, Regression of Multiple 3D People",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Sun_Monocular_One-Stage_Regression_of_Multiple_3D_People_ICCV_2021_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "4dhumans",
       "category": "Human",
       "title": "Humans in 4D: Reconstructing and Tracking Humans with Transformers",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Goel_Humans_in_4D_Reconstructing_and_Tracking_Humans_with_Transformers_ICCV_2023_paper.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
       "id": "smplx",
       "category": "Human",
       "title": "Expressive Body Capture: 3D Hands, Face, and Body from a Single Image",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://smpl-x.is.tuebingen.mpg.de/",
-      "reading_level": "primary_project_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "本次未定位可准确代表整体流程的独立架构图，保留原文方法章节链接。"
     },
     {
       "id": "expose",
       "category": "Human",
       "title": "Monocular Expressive Body Regression through Body-Driven Attention",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2008.09062",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "pixie",
       "category": "Human",
       "title": "Collaborative Regression of Expressive Bodies using Moderation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2105.05301",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "cocowholebody",
       "category": "Human",
       "title": "Whole-Body Human Pose Estimation in the Wild",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://www.ecva.net/papers/eccv_2020/papers_ECCV/html/768_ECCV_2020_paper.php",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图；尚未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "smplerx",
       "category": "Human",
       "title": "SMPLer-X: Scaling Up Expressive Human Pose and Shape Estimation",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://papers.nips.cc/paper_files/paper/2023/hash/2614947a25d7c435bcd56c51958ddcb1-Abstract-Datasets_and_Benchmarks.html",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {

@@ -249,3 +249,45 @@ Xingyu Chen, Yufeng Liu, Yajiao Dong, Xiong Zhang, Chongyang Ma, Yanmin Xiong, Y
 - License: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 - License evidence: https://arxiv.org/abs/2112.02753v2
 - SHA-256: `5f012398c69ef16a9c821566cfb4ec955f5b8dfc84c5f214e4d6fe2e60d684f1`
+
+## Human motion and expressive body originals — 2026-11-18
+
+### assets/figures/motionbert-architecture.png
+
+Wentao Zhu, Xiaoxuan Ma, Zhaoyang Liu, Libin Liu, Wayne Wu, Yizhou Wang. MotionBERT: A Unified Perspective on Learning Human Motion Representations, Figure 2, arXiv:2210.06551v5. CC BY-SA 4.0.
+
+- Original source: https://arxiv.org/html/2210.06551v5#S2.F2
+- Unmodified original file: https://arxiv.org/html/2210.06551v5/arch_wide_v12.png
+- License: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+- License evidence: https://arxiv.org/abs/2210.06551v5
+- SHA-256: `2c624e2c160f8979f54b9c90aa4b5718b967a8045bace911250193a6933c5ecb`
+
+### assets/figures/4dhumans-architecture.png
+
+Shubham Goel, Georgios Pavlakos, Jathushan Rajasegaran, Angjoo Kanazawa, Jitendra Malik. Humans in 4D: Reconstructing and Tracking Humans with Transformers, Figure 2, arXiv:2305.20091v3. CC BY-NC-SA 4.0.
+
+- Original source: https://arxiv.org/html/2305.20091v3#S2.F2
+- Unmodified original file: https://arxiv.org/html/2305.20091v3/approach3.png
+- License: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+- License evidence: https://arxiv.org/abs/2305.20091v3
+- SHA-256: `9e8f0915b3d51741fb9edc152cda6964cdbead50cde86f79ca8541393843d2fd`
+
+### assets/figures/4dhumans-pose-predictor.png
+
+Shubham Goel, Georgios Pavlakos, Jathushan Rajasegaran, Angjoo Kanazawa, Jitendra Malik. Humans in 4D: Reconstructing and Tracking Humans with Transformers, Figure 3, arXiv:2305.20091v3. CC BY-NC-SA 4.0.
+
+- Original source: https://arxiv.org/html/2305.20091v3#S3.F3
+- Unmodified original file: https://arxiv.org/html/2305.20091v3/pose_predictor1.png
+- License: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+- License evidence: https://arxiv.org/abs/2305.20091v3
+- SHA-256: `def7460b0537529c794825256daaadeed5b070f17a5c288d3e05be1d1099ffa3`
+
+### assets/figures/smplerx-architecture.svg
+
+Zhongang Cai, Wanqi Yin, Ailing Zeng, Chen Wei, Qingping Sun, Yanjun Wang, Hui En Pang, Haiyi Mei, Mingyuan Zhang, Lei Zhang, Chen Change Loy, Lei Yang, Ziwei Liu. SMPLer-X: Scaling Up Expressive Human Pose and Shape Estimation, Figure 4, arXiv:2309.17448v3. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2309.17448v3#S4.F4
+- Unmodified original file: https://arxiv.org/html/2309.17448v3/architecture.svg
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2309.17448v3
+- SHA-256: `6b144fb3ab67060499cb4dd222df7aea111e40f78afaf6739b2ea9fcd7206313`
