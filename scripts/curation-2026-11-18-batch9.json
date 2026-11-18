@@ -1,0 +1,515 @@
+{
+  "review_date": "2026-11-18",
+  "expanded_records": 24,
+  "new_code_links": [
+    "mdm",
+    "binary",
+    "slpt"
+  ],
+  "records": [
+    {
+      "id": "head-occlusion-free-face-alignment-deep-regression-networks-coupled-with-de-corrupt-autoencoders-2016",
+      "version": "Official 2016 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        2,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2016/papers/Zhang_Occlusion-Free_Face_Alignment_CVPR_2016_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "head-mnemonic-descent-method-a-recurrent-process-applied-for-end-to-end-face-alignment-2016",
+      "version": "Official 2016 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2016/papers/Trigeorgis_Mnemonic_Descent_Method_CVPR_2016_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "implementation_check": {
+        "url": "https://github.com/trigeorgis/mdm",
+        "verified_at": "2026-11-18",
+        "basis": "作者 TensorFlow 实现；README 列出 mdm_train.py / mdm_model.py，并说明数据增强尚不同于论文、预训练模型限非商业学术用途。 本轮未运行实现。"
+      }
+    },
+    {
+      "id": "head-large-pose-face-alignment-via-cnn-based-dense-3d-model-fitting-2016",
+      "version": "Official 2016 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2016/papers/Jourabloo_Large-Pose_Face_Alignment_CVPR_2016_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "head-a-deep-regression-architecture-with-two-stage-re-initialization-for-high-performance-facial-landmark-dete-2017",
+      "version": "Official 2017 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        2,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2017/papers/Lv_A_Deep_Regression_CVPR_2017_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "head-simultaneous-facial-landmark-detection-pose-and-deformation-estimation-under-facial-occlusion-2017",
+      "version": "Official 2017 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2017/papers/Wu_Simultaneous_Facial_Landmark_CVPR_2017_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "jointoc",
+        "version": "1709.08130v1",
+        "url": "https://arxiv.org/abs/1709.08130v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "license_text": "view license",
+        "authors": [
+          "Wu, Yue",
+          "Gou, Chao",
+          "Ji, Qiang"
+        ]
+      }
+    },
+    {
+      "id": "head-pose-free-facial-landmark-fitting-via-optimized-part-mixtures-and-cascaded-deformable-shape-model-2013",
+      "version": "Official 2013 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_iccv_2013/papers/Yu_Pose-Free_Facial_Landmark_2013_ICCV_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "head-no-matter-where-you-are-flexible-graph-guided-multi-task-learning-for-multi-view-head-pose-classification-2013",
+      "version": "Official 2013 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_iccv_2013/papers/Yan_No_Matter_Where_2013_ICCV_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "head-cascaded-shape-space-pruning-for-robust-facial-landmark-detection-2013",
+      "version": "Official 2013 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        2,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_iccv_2013/papers/Zhao_Cascaded_Shape_Space_2013_ICCV_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "head-exemplar-based-graph-matching-for-robust-facial-landmark-localization-2013",
+      "version": "Official 2013 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_iccv_2013/papers/Zhou_Exemplar-Based_Graph_Matching_2013_ICCV_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "head-robust-face-landmark-estimation-under-occlusion-2013",
+      "version": "Official 2013 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_iccv_2013/papers/Burgos-Artizzu_Robust_Face_Landmark_2013_ICCV_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "head-fast-and-accurate-head-pose-estimation-via-random-projection-forests-2015",
+      "version": "Official 2015 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        1,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_iccv_2015/papers/Lee_Fast_and_Accurate_ICCV_2015_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "head-robust-model-based-3d-head-pose-estimation-2015",
+      "version": "Official 2015 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_iccv_2015/papers/Meyer_Robust_Model-Based_3D_ICCV_2015_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "head-robust-facial-landmark-detection-under-significant-head-poses-and-occlusion-2015",
+      "version": "Official 2015 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_iccv_2015/papers/Wu_Robust_Facial_Landmark_ICCV_2015_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "head-pose-invariant-3d-face-alignment-2015",
+      "version": "Official 2015 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_iccv_2015/papers/Jourabloo_Pose-Invariant_3D_Face_ICCV_2015_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "head-leveraging-datasets-with-varying-annotations-for-face-alignment-via-deep-regression-network-2015",
+      "version": "Official 2015 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        1,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_iccv_2015/papers/Zhang_Leveraging_Datasets_With_ICCV_2015_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "head-regressive-tree-structured-model-for-facial-landmark-localization-2015",
+      "version": "Official 2015 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_iccv_2015/papers/Hsu_Regressive_Tree_Structured_ICCV_2015_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "head-piefa-personalized-incremental-and-ensemble-face-alignment-2015",
+      "version": "Official 2015 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_iccv_2015/papers/Peng_PIEFA_Personalized_Incremental_ICCV_2015_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "head-recurrent-3d-2d-dual-learning-for-large-pose-facial-landmark-detection-2017",
+      "version": "Official 2017 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_ICCV_2017/papers/Xiao_Recurrent_3D-2D_Dual_ICCV_2017_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "head-pose-invariant-face-alignment-with-a-single-cnn-2017",
+      "version": "Official 2017 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_ICCV_2017/papers/Jourabloo_Pose-Invariant_Face_Alignment_ICCV_2017_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "pifacnn",
+        "version": "1707.06286v1",
+        "url": "https://arxiv.org/abs/1707.06286v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "license_text": "view license",
+        "authors": [
+          "Jourabloo, Amin",
+          "Ye, Mao",
+          "Liu, Xiaoming",
+          "Ren, Liu"
+        ]
+      }
+    },
+    {
+      "id": "head-binarized-convolutional-landmark-localizers-for-human-pose-estimation-and-face-alignment-with-limited-res-2017",
+      "version": "Official 2017 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        6,
+        "Figure 4"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_ICCV_2017/papers/Bulat_Binarized_Convolutional_Landmark_ICCV_2017_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "binary",
+        "version": "1703.00862v2",
+        "url": "https://arxiv.org/abs/1703.00862v2",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "license_text": "view license",
+        "authors": [
+          "Bulat, Adrian",
+          "Tzimiropoulos, Georgios"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/1adrianb/binary-face-alignment",
+        "verified_at": "2026-11-18",
+        "basis": "作者项目页链接到人体演示仓库，其 README 再指向本脸部演示；这是 Torch7 demo，不宣称完整原论文训练脚本。 本轮未运行实现。"
+      }
+    },
+    {
+      "id": "head-synergy-between-face-alignment-and-tracking-via-discriminative-global-consensus-optimization-2017",
+      "version": "Official 2017 ICCV open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        1,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_ICCV_2017/papers/Khan_Synergy_Between_Face_ICCV_2017_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "head-sparse-local-patch-transformer-for-robust-face-alignment-and-landmarks-inherent-relation-learning-2022",
+      "version": "Official 2022 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Xia_Sparse_Local_Patch_Transformer_for_Robust_Face_Alignment_and_Landmarks_CVPR_2022_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "slpt",
+        "version": "2203.06541v1",
+        "url": "https://arxiv.org/abs/2203.06541v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "license_text": "view license",
+        "authors": [
+          "Xia, Jiahao",
+          "qu, Weiwei",
+          "Huang, Wenjian",
+          "Zhang, Jianguo",
+          "Wang, Xi",
+          "Xu, Min"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/Jiahao-UTS/SLPT-master",
+        "verified_at": "2026-11-18",
+        "basis": "论文直接给出作者仓库；已核对 README.MD、SLPT/、Backbone/ 与 test.py。 本轮未运行实现。"
+      }
+    },
+    {
+      "id": "head-occlusion-robust-face-alignment-using-a-viewpoint-invariant-hierarchical-network-architecture-2022",
+      "version": "Official 2022 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Zhu_Occlusion-Robust_Face_Alignment_Using_a_Viewpoint-Invariant_Hierarchical_Network_Architecture_CVPR_2022_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "implementation_check": {
+        "url": "https://github.com/zhuccly/GlomFace-Face-Alignment",
+        "verified_at": "2026-11-18",
+        "basis": "论文直接给出作者仓库；已核对 README、Glom_model.py、GlomFace_train.py 和 Glom_eval.py。 本轮未运行实现。"
+      }
+    },
+    {
+      "id": "head-dsfnet-dual-space-fusion-network-for-occlusion-robust-3d-dense-face-alignment-2023",
+      "version": "Official 2023 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Li_DSFNet_Dual_Space_Fusion_Network_for_Occlusion-Robust_3D_Dense_Face_CVPR_2023_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "alias": "dsfnet",
+        "version": "2305.11522v1",
+        "url": "https://arxiv.org/abs/2305.11522v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "license_text": "view license",
+        "authors": [
+          "Li, Heyuan",
+          "Wang, Bo",
+          "Cheng, Yu",
+          "Kankanhalli, Mohan",
+          "Tan, Robby T."
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/lhyfst/DSFNet",
+        "verified_at": "2026-11-18",
+        "basis": "论文直接给出作者仓库；README 提供模型准备与 src/run/predict.py 评估入口，已核对 src/ 实现目录。 本轮未运行实现。"
+      }
+    }
+  ]
+}

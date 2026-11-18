@@ -3,8 +3,8 @@
   "total": 371,
   "counts": {
     "complete": 30,
-    "figure_pending": 150,
-    "pending": 191
+    "figure_pending": 174,
+    "pending": 167
   },
   "completion_standard": "Source-checked module-level pipeline, separate training/inference, figure guide, and a verified local architecture/process figure. Summaries and applicability notes do not count.",
   "entries": [
@@ -1541,265 +1541,265 @@
       "id": "head-occlusion-free-face-alignment-deep-regression-networks-coupled-with-de-corrupt-autoencoders-2016",
       "category": "Head",
       "title": "Occlusion-Free Face Alignment: Deep Regression Networks Coupled With De-Corrupt AutoEncoders",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2016/html/Zhang_Occlusion-Free_Face_Alignment_CVPR_2016_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图（PDF 第 2 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 读整体交替流程，PDF 第 4 页图 2 读部件重建。这里的 deep regression 主要处理 SIFT，不能把它画成从整幅像素直接回归的现代 CNN。"
     },
     {
       "id": "head-mnemonic-descent-method-a-recurrent-process-applied-for-end-to-end-face-alignment-2016",
       "category": "Head",
       "title": "Mnemonic Descent Method: A Recurrent Process Applied for End-To-End Face Alignment",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2016/html/Trigeorgis_Mnemonic_Descent_Method_CVPR_2016_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图（PDF 第 4 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 中反复出现的局部图像块来自同一张图的不同形状估计；横向箭头表示下降历史，而非视频时序。"
     },
     {
       "id": "head-large-pose-face-alignment-via-cnn-based-dense-3d-model-fitting-2016",
       "category": "Head",
       "title": "Large-Pose Face Alignment via CNN-Based Dense 3D Model Fitting",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2016/html/Jourabloo_Large-Pose_Face_Alignment_CVPR_2016_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 展示三维模型、特征与级联拟合闭环；PDF 第 4 页图 3 给出 CNN。观察输入块如何依赖当前三维估计，而不只是查看网络层数。"
     },
     {
       "id": "head-a-deep-regression-architecture-with-two-stage-re-initialization-for-high-performance-facial-landmark-dete-2017",
       "category": "Head",
       "title": "A Deep Regression Architecture With Two-Stage Re-Initialization for High Performance Facial Landmark Detection",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2017/html/Lv_A_Deep_Regression_CVPR_2017_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图（PDF 第 2 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 按全局重初始化、全局回归、局部重初始化、局部回归阅读；特别注意输出需要逆变换，轮廓也没有独立局部支路。"
     },
     {
       "id": "head-simultaneous-facial-landmark-detection-pose-and-deformation-estimation-under-facial-occlusion-2017",
       "category": "Head",
       "title": "Simultaneous Facial Landmark Detection, Pose and Deformation Estimation Under Facial Occlusion",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2017/html/Wu_Simultaneous_Facial_Landmark_CVPR_2017_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 3 对应单轮的三个环节，PDF 第 4 页算法 1 给出循环；可见性先影响二维回归，再影响三维拟合。"
     },
     {
       "id": "head-pose-free-facial-landmark-fitting-via-optimized-part-mixtures-and-cascaded-deformable-shape-model-2013",
       "category": "Head",
       "title": "Pose-Free Facial Landmark Fitting via Optimized Part Mixtures and Cascaded Deformable Shape Model",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2013/html/Yu_Pose-Free_Facial_Landmark_2013_ICCV_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 展示三维参考形状的初始化，不是完整网络结构图；完整方法需连同 §3–4 的部件检测、均值漂移和主动轮廓顺序阅读。"
     },
     {
       "id": "head-no-matter-where-you-are-flexible-graph-guided-multi-task-learning-for-multi-view-head-pose-classification-2013",
       "category": "Head",
       "title": "No Matter Where You Are: Flexible Graph-Guided Multi-task Learning for Multi-view Head Pose Classification under Target Motion",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2013/html/Yan_No_Matter_Where_2013_ICCV_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 依次对应跟踪、外观特征、任务关系和分类，PDF 第 5 页算法 1 是训练求解器；训练迭代不是每次预测都要重新运行。"
     },
     {
       "id": "head-cascaded-shape-space-pruning-for-robust-facial-landmark-detection-2013",
       "category": "Head",
       "title": "Cascaded Shape Space Pruning for Robust Facial Landmark Detection",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2013/html/Zhao_Cascaded_Shape_Space_2013_ICCV_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图（PDF 第 2 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 是级联形状空间裁剪的整体流程，第 4 页图 4 进一步解释单轮裁剪；收缩的是关键点搜索邻域，不是深度网络参数。"
     },
     {
       "id": "head-exemplar-based-graph-matching-for-robust-facial-landmark-localization-2013",
       "category": "Head",
       "title": "Exemplar-Based Graph Matching for Robust Facial Landmark Localization",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2013/html/Zhou_Exemplar-Based_Graph_Matching_2013_ICCV_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 明确区分 Offline 的局部检测器训练与在线 Learning/Matching；后两项才是 EGM 的主要新增部分。"
     },
     {
       "id": "head-robust-face-landmark-estimation-under-occlusion-2013",
       "category": "Head",
       "title": "Robust Face Landmark Estimation under Occlusion",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2013/html/Burgos-Artizzu_Robust_Face_Landmark_2013_ICCV_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图（PDF 第 4 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 3 对照两种形状索引方式，属于关键特征示意；PDF 第 2 页算法 1 给出级联基本循环，第 4 页图 4 展示重启依据。论文未提供现代 CNN 式架构图。"
     },
     {
       "id": "head-fast-and-accurate-head-pose-estimation-via-random-projection-forests-2015",
       "category": "Head",
       "title": "Fast and Accurate Head Pose Estimation via Random Projection Forests",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2015/html/Lee_Fast_and_Accurate_ICCV_2015_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图（PDF 第 1 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 读滤波、压缩与森林的总体联系，PDF 第 3 页图 2 看滤波器，第 4 页图 3 看单个节点如何组合颜色和梯度证据。"
     },
     {
       "id": "head-robust-model-based-3d-head-pose-estimation-2015",
       "category": "Head",
       "title": "Robust Model-Based 3D Head Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2015/html/Meyer_Robust_Model-Based_3D_ICCV_2015_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 仅展示深度头部检测，不是完整配准架构图；PSO、ICP 和形状适配流程应对照 §3.2（PDF 第 3–4 页）阅读，暂不把检测结果图冒充网络结构。"
     },
     {
       "id": "head-robust-facial-landmark-detection-under-significant-head-poses-and-occlusion-2015",
       "category": "Head",
       "title": "Robust Facial Landmark Detection Under Significant Head Poses and Occlusion",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2015/html/Wu_Robust_Facial_Landmark_ICCV_2015_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 3 是单轮可见性—点位更新；第 5 页图 4 是遮挡标签自编码器。应与重建人脸外观的去污染自编码器方法区分。"
     },
     {
       "id": "head-pose-invariant-3d-face-alignment-2015",
       "category": "Head",
       "title": "Pose-Invariant 3D Face Alignment",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2015/html/Jourabloo_Pose-Invariant_3D_Face_ICCV_2015_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 的三维扫描位于离线建模部分，投影回归器与形状回归器才是级联推理主体；绿色与红色法向箭头解释可见性的计算。"
     },
     {
       "id": "head-leveraging-datasets-with-varying-annotations-for-face-alignment-via-deep-regression-network-2015",
       "category": "Head",
       "title": "Leveraging Datasets With Varying Annotations for Face Alignment via Deep Regression Network",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2015/html/Zhang_Leveraging_Datasets_With_ICCV_2015_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图（PDF 第 1 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 展示不同标注规范如何参与统一学习，第 4 页图 2 解释稀疏补全。deep regression 的输入为 SIFT，不能直接改写成整图 CNN 训练。"
     },
     {
       "id": "head-regressive-tree-structured-model-for-facial-landmark-localization-2015",
       "category": "Head",
       "title": "Regressive Tree Structured Model for Facial Landmark Localization",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2015/html/Hsu_Regressive_Tree_Structured_ICCV_2015_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图（PDF 第 4 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 标明粗模型、精模型与回归点的分工，属于点集配置示意；第 4 页图 3 进一步标出反向回归的参考点，没有现代神经网络层结构。"
     },
     {
       "id": "head-piefa-personalized-incremental-and-ensemble-face-alignment-2015",
       "category": "Head",
       "title": "PIEFA: Personalized Incremental and Ensemble Face Alignment",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2015/html/Peng_PIEFA_Personalized_Incremental_ICCV_2015_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 的 a–f 对应采样、并行定位、分解、恢复、评价和个性化；低秩约束发生在同帧候选及可信历史编码之间，不是简单对所有历史图像求平均。"
     },
     {
       "id": "head-recurrent-3d-2d-dual-learning-for-large-pose-facial-landmark-detection-2017",
       "category": "Head",
       "title": "Recurrent 3D-2D Dual Learning for Large-Pose Facial Landmark Detection",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2017/html/Xiao_Recurrent_3D-2D_Dual_ICCV_2017_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 上方是三维初始化，下方为 PE-LSTM/C-LSTM 循环；沿投影、补偿、重新取特征的闭环阅读，注意两个模块并非重复预测相同变量。"
     },
     {
       "id": "head-pose-invariant-face-alignment-with-a-single-cnn-2017",
       "category": "Head",
       "title": "Pose-Invariant Face Alignment With a Single CNN",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2017/html/Jourabloo_Pose-Invariant_Face_Alignment_ICCV_2017_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 展示连接的 visualization blocks，第 4 页图 3 展示块内的特征与参数两条路径。single CNN 仍含多次参数更新，并不表示一次线性回归。"
     },
     {
       "id": "head-binarized-convolutional-landmark-localizers-for-human-pose-estimation-and-face-alignment-with-limited-res-2017",
       "category": "Head",
       "title": "Binarized Convolutional Landmark Localizers for Human Pose Estimation and Face Alignment With Limited Resources",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2017/html/Bulat_Binarized_Convolutional_Landmark_ICCV_2017_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图（PDF 第 6 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。第 6 页图 4 依次比较原 bottleneck 与若干变体，最终设计见子图 e；正文 §4.5 解释层级多尺度及梯度路径，图并非多个独立阶段必须顺序执行。"
     },
     {
       "id": "head-synergy-between-face-alignment-and-tracking-via-discriminative-global-consensus-optimization-2017",
       "category": "Head",
       "title": "Synergy Between Face Alignment and Tracking via Discriminative Global Consensus Optimization",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_iccv_2017/html/Khan_Synergy_Between_Face_ICCV_2017_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图（PDF 第 1 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 1 展示检测与跟踪如何迭代达成共识；§3.3 是解析推导，§3.4 是判别式实现，不能把前者每轮重算 Jacobian 的全部成本套到最终模型上。"
     },
     {
       "id": "head-sparse-local-patch-transformer-for-robust-face-alignment-and-landmarks-inherent-relation-learning-2022",
       "category": "Head",
       "title": "Sparse Local Patch Transformer for Robust Face Alignment and Landmarks Inherent Relation Learning",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Xia_Sparse_Local_Patch_Transformer_for_Robust_Face_Alignment_and_Landmarks_CVPR_2022_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 2 左侧是局部块采样，中部为查询和结构编码，右侧关系层按自注意力、交叉注意力、前馈网络阅读；局部位置必须映回支持块的全局坐标。"
     },
     {
       "id": "head-occlusion-robust-face-alignment-using-a-viewpoint-invariant-hierarchical-network-architecture-2022",
       "category": "Head",
       "title": "Occlusion-Robust Face Alignment Using a Viewpoint-Invariant Hierarchical Network Architecture",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Zhu_Occlusion-Robust_Face_Alignment_Using_a_Viewpoint-Invariant_Hierarchical_Network_Architecture_CVPR_2022_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 3 读 PHM 向上组合与 WHM 向下解析，第 4 页图 4 解释五级语义层级。跳接还会传递对应低层特征，不能只画成单条全连接链。"
     },
     {
       "id": "head-dsfnet-dual-space-fusion-network-for-occlusion-robust-3d-dense-face-alignment-2023",
       "category": "Head",
       "title": "DSFNet: Dual Space Fusion Network for Occlusion-Robust 3D Dense Face Alignment",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Li_DSFNet_Dual_Space_Fusion_Network_for_Occlusion-Robust_3D_Dense_Face_CVPR_2023_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅链接论文原图（PDF 第 3 页）。本次未确认支持本站转载的明确许可，暂不复制或重绘。图 3 的 a、b、c 是模型空间、图像空间及融合三部分；第 5 页图 5 补充采样与 PointNet 后处理。四类图中深度是预测的相对深度，不是输入扫描。"
     },
     {
       "id": "head-3d-aware-facial-landmark-detection-via-multi-view-consistent-training-on-synthetic-data-2023",

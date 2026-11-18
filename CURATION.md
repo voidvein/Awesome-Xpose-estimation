@@ -1,6 +1,6 @@
 # 详情页构建进度
 
-更新：2026-11-18。共 371 篇；流程说明已完成 180 篇，其中原图已收录 30 篇；待开展 191 篇。
+更新：2026-11-18。共 371 篇；流程说明已完成 204 篇，其中原图已收录 30 篇；待开展 167 篇。
 
 每篇按原文核对模块顺序、数据流、训练与推理、图号及版本。只使用论文原图；转载许可未明确时只保留原图链接，不重绘。摘要与适用边界笔记不计为流程精读完成。
 
@@ -151,6 +151,30 @@
 - [Face Alignment by Coarse-to-Fine Shape Searching](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-face-alignment-by-coarse-to-fine-shape-searching-2015)
 - [Constrained Joint Cascade Regression Framework for Simultaneous Facial Action Unit Recognition and Facial Landmark Detection](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-constrained-joint-cascade-regression-framework-for-simultaneous-facial-action-unit-recognition-and-facial-2016)
 - [Unconstrained Face Alignment via Cascaded Compositional Learning](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-unconstrained-face-alignment-via-cascaded-compositional-learning-2016)
+- [Occlusion-Free Face Alignment: Deep Regression Networks Coupled With De-Corrupt AutoEncoders](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-occlusion-free-face-alignment-deep-regression-networks-coupled-with-de-corrupt-autoencoders-2016)
+- [Mnemonic Descent Method: A Recurrent Process Applied for End-To-End Face Alignment](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-mnemonic-descent-method-a-recurrent-process-applied-for-end-to-end-face-alignment-2016)
+- [Large-Pose Face Alignment via CNN-Based Dense 3D Model Fitting](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-large-pose-face-alignment-via-cnn-based-dense-3d-model-fitting-2016)
+- [A Deep Regression Architecture With Two-Stage Re-Initialization for High Performance Facial Landmark Detection](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-a-deep-regression-architecture-with-two-stage-re-initialization-for-high-performance-facial-landmark-dete-2017)
+- [Simultaneous Facial Landmark Detection, Pose and Deformation Estimation Under Facial Occlusion](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-simultaneous-facial-landmark-detection-pose-and-deformation-estimation-under-facial-occlusion-2017)
+- [Pose-Free Facial Landmark Fitting via Optimized Part Mixtures and Cascaded Deformable Shape Model](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-pose-free-facial-landmark-fitting-via-optimized-part-mixtures-and-cascaded-deformable-shape-model-2013)
+- [No Matter Where You Are: Flexible Graph-Guided Multi-task Learning for Multi-view Head Pose Classification under Target Motion](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-no-matter-where-you-are-flexible-graph-guided-multi-task-learning-for-multi-view-head-pose-classification-2013)
+- [Cascaded Shape Space Pruning for Robust Facial Landmark Detection](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-cascaded-shape-space-pruning-for-robust-facial-landmark-detection-2013)
+- [Exemplar-Based Graph Matching for Robust Facial Landmark Localization](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-exemplar-based-graph-matching-for-robust-facial-landmark-localization-2013)
+- [Robust Face Landmark Estimation under Occlusion](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-robust-face-landmark-estimation-under-occlusion-2013)
+- [Fast and Accurate Head Pose Estimation via Random Projection Forests](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-fast-and-accurate-head-pose-estimation-via-random-projection-forests-2015)
+- [Robust Model-Based 3D Head Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-robust-model-based-3d-head-pose-estimation-2015)
+- [Robust Facial Landmark Detection Under Significant Head Poses and Occlusion](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-robust-facial-landmark-detection-under-significant-head-poses-and-occlusion-2015)
+- [Pose-Invariant 3D Face Alignment](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-pose-invariant-3d-face-alignment-2015)
+- [Leveraging Datasets With Varying Annotations for Face Alignment via Deep Regression Network](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-leveraging-datasets-with-varying-annotations-for-face-alignment-via-deep-regression-network-2015)
+- [Regressive Tree Structured Model for Facial Landmark Localization](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-regressive-tree-structured-model-for-facial-landmark-localization-2015)
+- [PIEFA: Personalized Incremental and Ensemble Face Alignment](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-piefa-personalized-incremental-and-ensemble-face-alignment-2015)
+- [Recurrent 3D-2D Dual Learning for Large-Pose Facial Landmark Detection](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-recurrent-3d-2d-dual-learning-for-large-pose-facial-landmark-detection-2017)
+- [Pose-Invariant Face Alignment With a Single CNN](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-pose-invariant-face-alignment-with-a-single-cnn-2017)
+- [Binarized Convolutional Landmark Localizers for Human Pose Estimation and Face Alignment With Limited Resources](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-binarized-convolutional-landmark-localizers-for-human-pose-estimation-and-face-alignment-with-limited-res-2017)
+- [Synergy Between Face Alignment and Tracking via Discriminative Global Consensus Optimization](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-synergy-between-face-alignment-and-tracking-via-discriminative-global-consensus-optimization-2017)
+- [Sparse Local Patch Transformer for Robust Face Alignment and Landmarks Inherent Relation Learning](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-sparse-local-patch-transformer-for-robust-face-alignment-and-landmarks-inherent-relation-learning-2022)
+- [Occlusion-Robust Face Alignment Using a Viewpoint-Invariant Hierarchical Network Architecture](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-occlusion-robust-face-alignment-using-a-viewpoint-invariant-hierarchical-network-architecture-2022)
+- [DSFNet: Dual Space Fusion Network for Occlusion-Robust 3D Dense Face Alignment](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-dsfnet-dual-space-fusion-network-for-occlusion-robust-3d-dense-face-alignment-2023)
 - [Novel-View Synthesis and Pose Estimation for Hand-Object Interaction from Sparse Views](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-novel-view-synthesis-and-pose-estimation-for-hand-object-interaction-from-sparse-views)
 - [Diffusion-Guided Reconstruction of Everyday Hand-Object Interaction Clips](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-diffusion-guided-reconstruction-of-everyday-hand-object-interaction-clips)
 - [HandR2N2: Iterative 3D Hand Pose Estimation Using a Residual Recurrent Neural Network](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-handr2n2-iterative-3d-hand-pose-estimation-using-a-residual-recurrent-neural-network)
