@@ -29,12 +29,14 @@
       "limitations": "极端不对称表情、噘嘴与遮挡仍会失败；二维检测器错误可传递至三维结果。评估采用了 DAD-3DHeads 训练集以获得细分类别，作者明确排除在这些样本上训练过的对手参与领先性结论。",
       "sources": [
         "https://arxiv.org/html/2405.19646v1#S4",
-        "https://arxiv.org/html/2405.19646v1#S5"
+        "https://arxiv.org/html/2405.19646v1#S5",
+        "https://arxiv.org/html/2405.19646v1#S3",
+        "https://arxiv.org/html/2405.19646v1#S3.F4"
       ],
       "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "未复现；未将论文报告的优势解释为所有数据集、指标上的全面领先。",
-      "verified_at": "2026-11-17",
-      "evidence_scope": "定向核对原文 §4 的训练设置、评价指标、比较协议、消融与失败案例；不是全文逐段复核。"
+      "verified_at": "2026-11-18",
+      "evidence_scope": "定向核对原文 §4 的训练设置、评价指标、比较协议、消融与失败案例；不是全文逐段复核。 本轮定向核对该版本 §3 方法结构、图示及训练/推理条件；不是全文实验复核。"
     },
     "figure": {
       "src": "assets/figures/facelift-architecture.png",
@@ -47,7 +49,61 @@
       "modifications": "原始 arXiv HTML 图片，未裁剪、未修改；页面按容器缩放显示。",
       "figure_number": "Figure 2",
       "version": "2405.19646v1"
-    }
+    },
+    "pipeline": {
+      "overview": "训练先从真实视频与 3D-aware GAN 多视图建立伪监督；部署时只需单张脸，由 ViT 编码器和 landmark/pose token 解码三维关键点及头姿。",
+      "steps": [
+        {
+          "title": "两路数据先做二维关键点检测",
+          "description": "真实视频帧和同一 GAN 身份的不同渲染视角都经过预训练二维检测器；视频保留二维伪标签，多视图路保留已知的渲染相机。"
+        },
+        {
+          "title": "用多视图重投影拟合三维伪标签",
+          "description": "对同一 GAN latent 的各视角联合优化一组三维点，最小化带可见性掩码的二维重投影误差。该三维监督是优化得到的伪标签，不是人工测量三维真值。"
+        },
+        {
+          "title": "单图 ViT 编码",
+          "description": "FaRL 预训练 ViT 将当前人脸图像编码为 image tokens；为每个 landmark 和旋转、平移分别设置可学习查询 token。"
+        },
+        {
+          "title": "解码器联合更新点和姿态",
+          "description": "三个 decoder block 依次执行对图像 token 的交叉注意力、landmark/pose token 之间的自注意力和 MLP。点查询读取图像证据，同时与姿态查询交换几何上下文。"
+        },
+        {
+          "title": "预测三维点、姿态与投影不确定性",
+          "description": "MLP 头输出模板三维点的偏移、六维旋转、平移校正及投影点二维协方差的 Cholesky 因子；按预测姿态与固定内参投影到图像，连接二维监督与三维输出。"
+        }
+      ],
+      "training": "联合采样多视图合成图与视频图。合成路使用三维点、姿态与 2.5D 投影损失；视频路使用按姿态可见性遮罩的二维伪标签损失。预测协方差调节二维噪声的权重；GAN 和多视角优化属于监督准备。",
+      "inference": "输入单张人脸，直接运行 ViT、token 解码器和 MLP 头即可得到三维点与姿态。不需要同时输入视频、多相机或现场运行 GAN，也不执行训练前的伪标签优化。",
+      "figure_reading": "图 2 展示监督数据如何生成，不能把两路训练数据都当成部署输入。新增图 4 才是单图预测网络：Image Tokens 提供证据，Landmark/Pose Tokens 经过 decoder 与独立预测头，最终通过投影连接到图像空间。",
+      "sources": [
+        {
+          "label": "方法正文 §3",
+          "url": "https://arxiv.org/html/2405.19646v1#S3"
+        },
+        {
+          "label": "架构图 4",
+          "url": "https://arxiv.org/html/2405.19646v1#S3.F4"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figures": [
+      {
+        "src": "assets/figures/facelift-network-architecture.png",
+        "caption": "FaceLift：ViT 图像编码器、关键点与姿态查询解码器及投影输出。",
+        "alt": "FaceLift：ViT 图像编码器、关键点与姿态查询解码器及投影输出。",
+        "source": "https://arxiv.org/html/2405.19646v1#S3.F4",
+        "license": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "attribution": "David Ferman, Pablo Garrido, Gaurav Bharaj. FaceLift: Semi-supervised 3D Facial Landmark Localization, Figure 4, arXiv:2405.19646v1. CC BY 4.0.",
+        "authors": "David Ferman, Pablo Garrido, Gaurav Bharaj",
+        "figure_number": "Figure 4",
+        "version": "2405.19646v1",
+        "modifications": "原始 arXiv HTML 图片，未裁剪、未修改；页面按容器缩放显示。"
+      }
+    ]
   },
   {
     "id": "trg",
@@ -81,12 +137,66 @@
       "sources": [
         "https://arxiv.org/html/2407.14136v1#S4.SS1",
         "https://arxiv.org/html/2407.14136v1#S4.SS4",
-        "https://arxiv.org/html/2407.14136v1#S4.SS6"
+        "https://arxiv.org/html/2407.14136v1#S4.SS6",
+        "https://arxiv.org/html/2407.14136v1#S3",
+        "https://arxiv.org/html/2407.14136v1#S3.F2"
       ],
       "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "未复现；未混入后续 TRGv2 的结果。",
-      "verified_at": "2026-11-17",
-      "evidence_scope": "锁定 ECCV 对应 v1，核对 §4.1–4.4 实验协议、指标及消融；保留先前 §4.6 内参限制核验。"
+      "verified_at": "2026-11-18",
+      "evidence_scope": "锁定 ECCV 对应 v1，核对 §4.1–4.4 实验协议、指标及消融；保留先前 §4.6 内参限制核验。 本轮定向核对该版本 §3 方法结构、图示及训练/推理条件；不是全文实验复核。"
+    },
+    "pipeline": {
+      "overview": "ResNet18 多尺度特征 → 与当前人脸几何对齐的采样 → 残差回归旋转、框校正及三维点 → 透视投影后重新采样，连续三轮细化。",
+      "steps": [
+        {
+          "title": "图像与检测框提供初始化条件",
+          "description": "输入 192×192 的人脸图像及原图检测框信息。完整平移恢复使用相机内参；第一轮的采样位置初始化为二维规则网格。"
+        },
+        {
+          "title": "提取逐轮使用的多尺度特征",
+          "description": "ImageNet 预训练 ResNet18 去掉分类与池化头，后接三个反卷积层。每层输出一个尺度供对应迭代使用；末层额外产生二维热图与 soft-argmax 点，用于辅助训练。"
+        },
+        {
+          "title": "按当前几何采样图像证据",
+          "description": "在当前采样点位置对特征图做双线性采样；每点特征经 MLP 压缩为五维后拼接。第一轮之后，采样点来自上轮三维脸在图像上的投影，使几何决定下一轮看哪里。"
+        },
+        {
+          "title": "回归残差，间接恢复平移",
+          "description": "Face Regressor 读取采样特征、上一轮参数和检测框信息，预测旋转、框尺度与中心偏移校正以及稠密三维点的残差。平移由框大小、焦距与校正参数按几何公式计算，而不是直接回归绝对平移。"
+        },
+        {
+          "title": "投影反馈并完成三轮更新",
+          "description": "将更新后的三维点按旋转、平移和相机内参投影回图像，再选取投影点进入下一轮采样。最终输出头部旋转、相机空间平移和头部空间稠密人脸几何。"
+        }
+      ],
+      "training": "对三轮输出施加头部空间、相机空间和图像空间点损失及旋转损失，并加强后期迭代权重；末轮另加边长约束，二维稀疏点分支提供辅助监督。",
+      "inference": "同一张图在多尺度特征上连续迭代三次，属于网络内的几何反馈；不需要对视频做时间跟踪。缺少内参时不能据此保证精确绝对平移，需保留其内参适用边界。",
+      "figure_reading": "先读 Feature Extractor，再沿 Feature Sampler → Face Regressor → Perspective Projection 的反馈环路。上轮三维几何定位下一轮的二维采样；新采样特征又修正三维几何和头姿，这就是双向交互。",
+      "sources": [
+        {
+          "label": "方法正文 §3",
+          "url": "https://arxiv.org/html/2407.14136v1#S3"
+        },
+        {
+          "label": "架构图 2",
+          "url": "https://arxiv.org/html/2407.14136v1#S3.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "src": "assets/figures/trg-architecture.png",
+      "caption": "TRG：多尺度特征、几何对齐采样与三轮头姿及人脸几何反馈。",
+      "alt": "TRG：多尺度特征、几何对齐采样与三轮头姿及人脸几何反馈。",
+      "source": "https://arxiv.org/html/2407.14136v1#S3.F2",
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "attribution": "Sungho Chun, Ju Yong Chang. 6DoF Head Pose Estimation through Explicit Bidirectional Interaction with Face Geometry, Figure 2, arXiv:2407.14136v1. CC BY-NC-SA 4.0.",
+      "authors": "Sungho Chun, Ju Yong Chang",
+      "figure_number": "Figure 2",
+      "version": "2407.14136v1",
+      "modifications": "原始 arXiv HTML 图片，未裁剪、未修改；页面按容器缩放显示。"
     }
   },
   {
@@ -1703,21 +1813,72 @@
       "limitations": "评测边界：HInt 只有 2D 关键点，因此改进证明的是投影准确性，不能直接当作野外 3D 精度证据；主要 3D 基准仍来自受控采集。此处未核实其他作者明确列出的失败类型。",
       "sources": [
         "https://openaccess.thecvf.com/content/CVPR2024/html/Pavlakos_Reconstructing_Hands_in_3D_with_Transformers_CVPR_2024_paper.html",
-        "https://arxiv.org/html/2312.05251v1"
+        "https://arxiv.org/html/2312.05251v1",
+        "https://arxiv.org/html/2312.05251v1#S3",
+        "https://arxiv.org/html/2312.05251v1#S2.F2"
       ],
       "evidence_level": "primary_abstract_and_targeted_fulltext",
-      "verification_notes": "核对 arXiv v1 正文 §3.5、§4、§5.1–5.3（数据、评测与消融）。未复现训练或独立验证性能；局限栏区分评测边界与失败案例。"
+      "verification_notes": "核对 arXiv v1 正文 §3.5、§4、§5.1–5.3（数据、评测与消融）。未复现训练或独立验证性能；局限栏区分评测边界与失败案例。",
+      "evidence_scope": " 本轮定向核对该版本 §3 方法结构、图示及训练/推理条件；不是全文实验复核。",
+      "verified_at": "2026-11-18"
     },
     "figure": {
+      "src": "assets/figures/hamer-architecture.png",
+      "caption": "HaMeR：图 2 下半部网络架构，展示 ViT → Transformer Head → 姿态/形状/相机参数 → MANO 解码。",
+      "alt": "HaMeR：ViT 图像编码、Transformer 参数回归与 MANO 几何解码。",
       "source": "https://arxiv.org/html/2312.05251v1#S2.F2",
-      "caption": "论文原文中的方法图",
-      "license": ""
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "attribution": "Georgios Pavlakos, Dandan Shan, Ilija Radosavovic, Angjoo Kanazawa, David Fouhey, Jitendra Malik. Reconstructing Hands in 3D with Transformers, Figure 2, arXiv:2312.05251v1. CC BY-NC-SA 4.0.",
+      "authors": "Georgios Pavlakos, Dandan Shan, Ilija Radosavovic, Angjoo Kanazawa, David Fouhey, Jitendra Malik",
+      "figure_number": "Figure 2 (bottom)",
+      "version": "2312.05251v1",
+      "modifications": "从 arXiv:2312.05251v1 PDF 第 3 页以 200 DPI 渲染，截取图 2 下半部网络架构（像素区域 x=130, y=480, w=1395, h=215）；移除上半部数据集样例、统计和页面正文，保留完整输入、模块、箭头与输出；未改写图内内容。"
     },
     "code": "https://github.com/geopavlakos/hamer",
     "code_provenance": {
       "url": "https://github.com/geopavlakos/hamer",
       "verified_at": "2026-11-18",
       "basis": "作者仓库 README 的对应论文标题、引用或实现说明；项目目录已公开，未运行代码。"
+    },
+    "pipeline": {
+      "overview": "手部 RGB 裁剪 → ViT-H 图像 token → 单查询 Transformer decoder → MANO 与相机参数 → 三维网格和关节。",
+      "steps": [
+        {
+          "title": "手部裁剪作为网络输入",
+          "description": "HaMeR 的网格恢复网络处理单只手的 RGB 图像区域。完整图像中的手部发现或多人多手检测属于外围流程，不能把这张架构图理解为整图检测器。"
+        },
+        {
+          "title": "ViT-H 编码图像块",
+          "description": "将手图像切成 patch，并以 patch token 输入 ViT-Huge。骨干输出携带手部局部外观及全局关系的图像 token 序列。"
+        },
+        {
+          "title": "单查询解码手参数",
+          "description": "Transformer decoder 处理一个查询 token，并对 ViT 输出执行交叉注意力；查询汇聚手的图像证据，回归姿态、形状和相机参数，而不是为每个网格顶点分别设一个输出 token。"
+        },
+        {
+          "title": "MANO 把参数变成几何",
+          "description": "将预测的 48 维姿态与 10 维形状参数交给 MANO，得到固定拓扑的 778 个网格顶点及 21 个手关键点。该参数化解码不同于 METRO 直接回归顶点坐标。"
+        },
+        {
+          "title": "投影到图像并用于监督或展示",
+          "description": "相机头预测三维平移，在固定内参下将网格关节投影回图像。训练时比较二维重投影；推理时可输出和渲染三维网格，但单图结果不自动给出世界坐标运动轨迹。"
+        }
+      ],
+      "training": "混合多个含二维或三维手标注的数据集。有三维标注时监督 MANO 参数和三维关节；二维重投影损失也参与训练。只有二维标注时，姿态、形状及关节角判别器用于约束不自然的手形。",
+      "inference": "手部裁剪经过骨干和参数解码头，再经 MANO 一次生成几何；训练判别器不作为输出阶段的搜索器。架构没有显式时间模块，视频视觉稳定性不应被解释为网络内有时序注意力。",
+      "figure_reading": "本页只截取原论文图 2 下半部的网络架构，省略上半部 HInt 数据样例与统计。沿 ViT → Transformer Head → Pose/Shape/Camera → MANO → 手网格阅读；左侧输入图上的方格表示图像 patch，橙色序列是 ViT 输出 token。HInt 数据标注不是网络内部计算模块。",
+      "sources": [
+        {
+          "label": "方法正文 §3",
+          "url": "https://arxiv.org/html/2312.05251v1#S3"
+        },
+        {
+          "label": "架构图 2",
+          "url": "https://arxiv.org/html/2312.05251v1#S2.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
     }
   },
   {
@@ -3611,12 +3772,15 @@
       "contribution": "把高精度的坐标分类表示引入单阶段多人预测，研究重点是改变精度与吞吐量的权衡，而不是增加时序或三维建模。",
       "limitations": "输出为二维多人关键点；单阶段实时性需计入分辨率与后处理，不能推导为三维重建能力。",
       "sources": [
-        "https://arxiv.org/abs/2312.07526"
+        "https://arxiv.org/abs/2312.07526",
+        "https://arxiv.org/html/2312.07526v1#S3",
+        "https://arxiv.org/html/2312.07526v1#S2.F2"
       ],
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "evidence_level": "primary_abstract",
+      "evidence_scope": "定向核对版本化原文 §3 方法结构、图 2 和训练/推理条件；本轮未进行全文实验复核或独立复现。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verified_at": "2026-11-18"
     },
     "figure": {
       "src": "assets/figures/rtmo-architecture.png",
@@ -3635,6 +3799,45 @@
       "url": "https://github.com/open-mmlab/mmpose/tree/main/projects/rtmo",
       "verified_at": "2026-11-18",
       "basis": "作者仓库 README 的对应论文标题、引用或实现说明；项目目录已公开，未运行代码。"
+    },
+    "pipeline": {
+      "overview": "整图特征一次提取 → 网格预测人物与姿态特征 → 动态坐标分类 → 筛选后解码多人二维关键点。",
+      "steps": [
+        {
+          "title": "整图骨干与多尺度编码",
+          "description": "CSPDarknet 处理整张图，Hybrid Encoder 聚合骨干末三级特征，得到步长为 16、32 的 P4、P5 特征。每个网格位置都可提出人物候选，无需先用独立检测器裁剪每个人。"
+        },
+        {
+          "title": "网格级预测头",
+          "description": "每个尺度的卷积块预测候选得分和 pose feature，并产生人物框、关键点可见性等输出。pose feature 是后续坐标分类的输入，不能直接当作最终关键点坐标。"
+        },
+        {
+          "title": "按预测框动态设置分箱",
+          "description": "DCC 将人物预测框扩大到 1.25 倍，再沿 x、y 轴分别分箱；各候选的分箱对应自己的图像坐标范围，而非对所有人物使用同一个固定坐标分类器。"
+        },
+        {
+          "title": "位置编码与关键点特征匹配",
+          "description": "各分箱坐标经正弦位置编码和线性变换形成表示；关键点特征经 GAU 精炼，与分箱表示相乘并归一化，形成每个关节两条一维概率热图。"
+        },
+        {
+          "title": "先筛选候选，再解码坐标",
+          "description": "推理时先按得分与 NMS 筛选网格，再只对保留候选运行 DCC 解码，以热图积分得到关键点位置，结合可见性输出每个人的二维骨架。"
+        }
+      ],
+      "training": "用扩展 SimOTA 分配正网格，联合框 IoU、分类、可见性和坐标 MLE 等损失。训练另用直接坐标回归代理分支参与匹配，以避免对所有稠密网格运行 DCC 带来的内存开销；代理分支不是测试时最终坐标解码路径。",
+      "inference": "整张图只做共享骨干前向；先筛选网格，后为选中的人物解码一维分布。输出是多人二维关键点及可见性，流程不包含三维网格或时间跟踪。",
+      "figure_reading": "先读左侧 Backbone 与 Hybrid Encoder，再读中部双卷积预测头，最后看右侧 Dynamic Coordinate Classifier。框坐标参与动态分箱，GAU 精炼关键点表示；图里的直接回归分支需结合 §3.3 的训练代理说明理解。",
+      "sources": [
+        {
+          "label": "方法正文 §3",
+          "url": "https://arxiv.org/html/2312.07526v1#S3"
+        },
+        {
+          "label": "架构图 2",
+          "url": "https://arxiv.org/html/2312.07526v1#S2.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
     }
   },
   {
@@ -3791,16 +3994,71 @@
       "limitations": "作者附录 G 指出：滑板、骑车等训练分布外移动方式会失败；接触只覆盖足部，手部支撑可能悬空或滑动。附录 F 的 A100 测试中，含预处理的在线速度约 9 fps，且不计 SLAM，不能将核心网络约 200 fps 当作端到端速度。",
       "sources": [
         "https://arxiv.org/abs/2312.07531",
-        "https://arxiv.org/html/2312.07531v2"
+        "https://arxiv.org/html/2312.07531v2",
+        "https://arxiv.org/html/2312.07531v2#S3",
+        "https://arxiv.org/html/2312.07531v2#S2.F2"
       ],
-      "evidence_scope": "已核对摘要、第 3 节方法、第 4 节评测设置及附录 F/G 的运行时间与失败场景；未独立复现，未逐表复核所有精度结果。",
-      "evidence_level": "primary_abstract_and_targeted_fulltext"
+      "evidence_scope": "已核对摘要、第 3 节方法、第 4 节评测设置及附录 F/G 的运行时间与失败场景；未独立复现，未逐表复核所有精度结果。 本轮定向核对该版本 §3 方法结构、图示及训练/推理条件；不是全文实验复核。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verified_at": "2026-11-18"
     },
     "code": "https://github.com/yohanshin/WHAM",
     "code_provenance": {
       "url": "https://github.com/yohanshin/WHAM",
       "verified_at": "2026-11-18",
       "basis": "作者仓库 README 的对应论文标题、引用或实现说明；项目目录已公开，未运行代码。"
+    },
+    "pipeline": {
+      "overview": "二维关节序列与图像特征融合 → 局部 SMPL 运动及足地接触 → 结合相机角速度解码根运动 → 接触感知修正并积分为世界轨迹。",
+      "steps": [
+        {
+          "title": "从视频提取稀疏运动和视觉线索",
+          "description": "预训练 ViTPose 得到二维关节；对关节按人体框归一化，并附加框中心与尺度。冻结的图像编码器另外提取图像特征，为单纯骨架 lifting 提供外观与形状证据。"
+        },
+        {
+          "title": "单向运动编码与残差特征融合",
+          "description": "单向 RNN 从当前与历史二维点编码 motion feature；Feature Integrator 拼接运动和图像特征，经网络产生残差再加回运动特征，得到供局部网格解码的融合表示。"
+        },
+        {
+          "title": "局部运动解码",
+          "description": "Local Motion Decoder 从融合表示恢复 SMPL 姿态、形状、弱透视相机平移和足地接触概率。相机空间网格与接触信号在此产生，尚未完成世界轨迹恢复。"
+        },
+        {
+          "title": "解码初始世界根运动",
+          "description": "Trajectory Decoder 将运动特征与相机角速度结合，预测初始全局根朝向及自身坐标系中的根速度。相机角速度可来自 SLAM 或陀螺仪，用于区分人物运动和相机转动。"
+        },
+        {
+          "title": "接触修正、学习式精修与积分",
+          "description": "根据接触概率识别支撑脚，以其世界速度修正根速度以减轻滑步；Trajectory Refiner 再更新朝向和速度，最后按朝向把速度转换并逐步累加为全局平移轨迹。"
+        }
+      ],
+      "training": "先用 AMASS 动作及动态虚拟相机生成二维投影序列，预训练运动与轨迹模块；再用视频数据训练特征融合并以较小学习率微调已预训练模块。图像编码器与二维检测器保持冻结；合成预训练阶段不需要真实图像特征。",
+      "inference": "先取得视频二维点、图像特征及相机角速度，再顺序输出局部网格和世界轨迹。主体单向 RNN 使用当前及历史信号；这不保证外围 SLAM、检测和所有预处理也具有相同在线延迟。",
+      "figure_reading": "图 2 两条输入支路分别是二维骨架运动与图像外观。Local Motion Decoder 产生身体和接触概率，Trajectory Decoder 还接收相机运动；接触连线流入 Trajectory Refiner，再得到全局轨迹。不要把人体局部形状头和世界定位头混为一个输出。",
+      "sources": [
+        {
+          "label": "方法正文 §3",
+          "url": "https://arxiv.org/html/2312.07531v2#S3"
+        },
+        {
+          "label": "架构图 2",
+          "url": "https://arxiv.org/html/2312.07531v2#S2.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "src": "assets/figures/wham-architecture.png",
+      "caption": "WHAM：运动和图像特征融合、局部人体解码与接触感知世界轨迹恢复。",
+      "alt": "WHAM：运动和图像特征融合、局部人体解码与接触感知世界轨迹恢复。",
+      "source": "https://arxiv.org/html/2312.07531v2#S2.F2",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Soyong Shin, Juyong Kim, Eni Halilaj, Michael J. Black. WHAM: Reconstructing World-grounded Humans with Accurate 3D Motion, Figure 2, arXiv:2312.07531v2. CC BY 4.0.",
+      "authors": "Soyong Shin, Juyong Kim, Eni Halilaj, Michael J. Black",
+      "figure_number": "Figure 2",
+      "version": "2312.07531v2",
+      "modifications": "原始 arXiv HTML 图片，未裁剪、未修改；页面按容器缩放显示。"
     }
   },
   {
@@ -4624,12 +4882,15 @@
       "contribution": "提供跨 CPU、GPU 与移动芯片的模型系列，体现工程链路联合优化的价值；不应把单个姿态网络速度等同于完整多人系统速度。",
       "limitations": "不同模型、输入尺寸及部署后端的速度不可混用；项目中的持续更新配置需与论文版本对应。",
       "sources": [
-        "https://arxiv.org/html/2303.07399v2"
+        "https://arxiv.org/html/2303.07399v2",
+        "https://arxiv.org/html/2303.07399v2#S3",
+        "https://arxiv.org/html/2303.07399v2#S2.F2"
       ],
-      "evidence_scope": "当前内容依据所列项目主页或作者摘要；不代表已完成全文实验核验。",
+      "evidence_scope": "定向核对版本化原文 §3 方法结构、图 2 和训练/推理条件；本轮未进行全文实验复核或独立复现。",
       "limitations_kind": "editorial_scope",
       "scope_reviewed_at": "2026-11-18",
-      "evidence_level": "primary_abstract"
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verified_at": "2026-11-18"
     },
     "figure": {
       "src": "assets/figures/rtmpose-architecture.png",
@@ -4642,6 +4903,45 @@
       "modifications": "原始 arXiv HTML 图片，未裁剪、未修改；页面按容器缩放显示。",
       "figure_number": "Figure 2",
       "version": "2303.07399v2"
+    },
+    "pipeline": {
+      "overview": "先检测每个人，再对人体裁剪图运行 CSPNeXt → 关键点特征 → GAU → 横纵坐标分类；视频系统额外加入跳帧检测与平滑。",
+      "steps": [
+        {
+          "title": "人体检测与裁剪",
+          "description": "外部人体检测器先产生人物框，将每个框变换为姿态网络输入。多人图像会形成多个人体裁剪，因此图中的姿态网络不是完整的多人检测系统。"
+        },
+        {
+          "title": "CSPNeXt 提取特征",
+          "description": "用紧凑的 CSPNeXt 替换较重骨干，保留低分辨率特征；相较热图基线，不依赖昂贵的上采样层恢复二维高分辨率热图。"
+        },
+        {
+          "title": "构造关键点表示并交互",
+          "description": "卷积把图像特征转换为 K 个关键点表示，展平后经全连接层扩展特征维度，再由 Gated Attention Unit（GAU）交换关键点间的信息。最终设计采用较大卷积核，而不是把最初 SimCC 基线的 1×1 卷积当作最终配置。"
+        },
+        {
+          "title": "分别分类 x 与 y 坐标",
+          "description": "两个输出分支分别预测每个关键点在横轴和纵轴分箱中的分布。把离散位置解码为裁剪图坐标，再逆变换回原图；这与预测一张二维联合热图不同。"
+        },
+        {
+          "title": "视频系统层的优化",
+          "description": "视频可每隔 K 帧运行人体检测，中间帧由上一帧姿态生成框；再结合 OKS-based pose NMS 和 OneEuro 滤波减少重复及抖动。这些是系统配置，不能全算作骨干网络的作用。"
+        }
+      ],
+      "training": "论文 §3 按轻量 SimCC 基线、骨干预训练、EMA 与学习率策略、先强后弱的数据增强、GAU 和损失细节逐步改进；训练的软分箱目标用于学习坐标分布。具体数据组合和模型尺寸应对应选用权重。",
+      "inference": "人体框 → 逐人姿态前向 → 坐标解码与逆变换；视频可再启用跳帧检测和平滑。训练增强与预训练流程不在测试时重复执行。",
+      "figure_reading": "从左侧图像特征沿 Conv、Flatten、FC、GAU 依次读到右侧两个分类分支。K 表示关键点数；两个轴向分类输出不代表两个独立人体检测器。图 2 画姿态网络，图 4 才补充完整推理链路。",
+      "sources": [
+        {
+          "label": "方法正文 §3",
+          "url": "https://arxiv.org/html/2303.07399v2#S3"
+        },
+        {
+          "label": "架构图 2",
+          "url": "https://arxiv.org/html/2303.07399v2#S2.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
     }
   },
   {

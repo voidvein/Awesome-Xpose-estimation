@@ -128,3 +128,30 @@ assert.ok(!reach.summary.includes('正式接收状态未核实'));
 assert.ok(filterPapers(papers,{status:'Published',ccf:'C',venue:'FG'}).some(p=>p.id==='reach'));
 assert.ok(!filterPapers(papers,{status:'Preprint'}).some(p=>p.id==='reach'));
 console.log('PASS: REACH FG 2026 / CCF C correction, preserved arXiv and abstract-only evidence, author sources and publication filters.');
+
+// Pipeline depth is optional; only sourced, structured notes are rendered.
+const {paperPipeline,paperFigures}=require(path.join(__dirname,root,'app.js'));
+assert.equal(paperPipeline({}).available,false);
+assert.equal(paperPipeline({pipeline:{steps:[{title:'one',description:'text'}],sources:[{url:'https://example.org'}]}}).available,false);
+assert.equal(paperPipeline({pipeline:{steps:[{title:'one',description:'text'},{title:'two',description:'text'}],sources:[{url:'javascript:alert(1)'}]}}).available,false);
+const pipelinePapers=papers.filter(p=>p.pipeline);
+for(const p of pipelinePapers){
+ const pipeline=paperPipeline(p);
+ assert.ok(pipeline.available&&pipeline.overview&&pipeline.training&&pipeline.inference&&pipeline.figure_reading,`${p.id}: complete pipeline`);
+ assert.ok(pipeline.steps.length>=4,`${p.id}: module-level steps`);
+ assert.ok(paperFigures(p).some(f=>f.src),`${p.id}: pipeline needs a local architecture figure`);
+ assert.ok(pipeline.sources.every(s=>s.url.includes('arxiv.org/html/')&&s.url.includes('#')),`${p.id}: versioned section anchors`);
+}
+assert.ok(pipelinePapers.length>=6);
+assert.equal(paperFigures({figure:{src:'assets/figures/a.png',source:'https://example.org'},figures:[{src:'assets/figures/a.png',source:'https://example.org'},null]}).length,1);
+const crypto=require('node:crypto');
+const figureManifest=JSON.parse(fs.readFileSync(path.join(__dirname,root,'assets/figures/manifest.json'),'utf8'));
+for(const p of papers)for(const figure of paperFigures(p).filter(f=>f.src)){
+ const file=path.join(__dirname,root,figure.src);
+ assert.ok(fs.existsSync(file),`${p.id}: figure exists`);
+ const entry=figureManifest.find(f=>f.src===figure.src&&f.paper_id===p.id);
+ assert.ok(entry&&entry.attribution&&entry.license_evidence_url&&entry.modifications,`${p.id}: image provenance`);
+ assert.equal(crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex'),entry.sha256,`${p.id}: manifest checksum`);
+ assert.equal(figure.source,entry.source_url);assert.equal(figure.license,entry.license);
+}
+console.log(`PASS: ${pipelinePapers.length} sourced pipelines, training/inference separation, optional multi-figure rendering and all local image checksums/attributions.`);

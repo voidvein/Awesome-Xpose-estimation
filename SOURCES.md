@@ -1,5 +1,13 @@
 # Sources and curation notes
 
+## Pipeline and architecture batch — 2026-11-18
+
+The first detailed pipeline batch covers RTMPose, RTMO, FaceLift, HaMeR, TRG and WHAM. Each now has five ordered module-level steps, separate training and inference explanations, a figure-reading guide and version-specific method/figure links. The scope is targeted method-section reading, not independent reproduction or a claim that all catalogue entries received this depth of reading.
+
+Four additional architecture images were imported: FaceLift Figure 4 (the predictor network, alongside the existing training overview), HaMeR Figure 2's architecture, TRG Figure 2 and WHAM Figure 2. Figure-specific attribution, license, version and processing records are in `assets/figures/manifest.json`. CC BY-NC-SA figures retain that license for this noncommercial research catalogue; the repository's software terms do not replace the figure licenses.
+
+Progress is explicitly recorded by the optional `pipeline` field in `papers.json`. Entries without that field remain at their existing reading depth, rather than receiving generated generic module descriptions. Future batches should inspect the method text, distinguish training from inference, identify the actual architecture figure, verify reuse terms, inspect the final image and record the exact source version before adding a pipeline.
+
 This is a selective catalogue, not a systematic review. Source lists aided discovery; entries link to papers or author sources. Metrics are snapshots and are not comparable across providers.
 
 ## Detail and implementation review — 2026-11-18
