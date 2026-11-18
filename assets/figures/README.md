@@ -363,3 +363,76 @@ Rui Hong, Jana Košecká. Gesture-Aware Pretraining and Token Fusion for 3D Hand
 - License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 - License evidence: https://arxiv.org/abs/2603.17396v3
 - SHA-256: `746d513abbc4bffd6b4ecd25b08069ffcda778942db2b6a90e9150e8ac1de103`
+
+### assets/figures/fcpose-architecture.png
+
+Weian Mao, Zhi Tian, Xinlong Wang, Chunhua Shen. FCPose: Fully Convolutional Multi-Person Pose Estimation With Dynamic Instance-Aware Convolutions, Figure 4, arXiv:2105.14185v1. CC BY-NC-SA 4.0.
+
+- Original source: https://arxiv.org/html/2105.14185v1#S3.F4
+- Unmodified original file: https://arxiv.org/html/2105.14185v1/framework.png
+- License: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+- License evidence: https://arxiv.org/abs/2105.14185v1
+- SHA-256: `c7c24d0a207b18baf55ad5aafe80fafa223bd4f6e4ca57df196edfce93bdb074`
+
+### assets/figures/fcpose-dynamic-head.png
+
+Weian Mao, Zhi Tian, Xinlong Wang, Chunhua Shen. FCPose: Fully Convolutional Multi-Person Pose Estimation With Dynamic Instance-Aware Convolutions, Figure 3, arXiv:2105.14185v1. CC BY-NC-SA 4.0.
+
+- Original source: https://arxiv.org/html/2105.14185v1#S3.F3
+- Unmodified original file: https://arxiv.org/html/2105.14185v1/head.png
+- License: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+- License evidence: https://arxiv.org/abs/2105.14185v1
+- SHA-256: `3fa8b28a9c49839c92bb5a26c4b3711c4d583ff0901dea90edb6210b0393b353`
+
+### assets/figures/mirrored-human-constraints.png
+
+Qi Fang, Qing Shuai, Junting Dong, Hujun Bao, Xiaowei Zhou. Reconstructing 3D Human Pose by Watching Humans in the Mirror, Figure 3, arXiv:2104.00340v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2104.00340v1#S3.F3
+- Original file before whitespace crop: https://arxiv.org/html/2104.00340v1/mirrorloss.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2104.00340v1
+- SHA-256: `7890c91c524780316b1a918135669141507a7a48d94683a2f38d0a85b009ec18`
+
+- Modifications: 从论文原图裁去大幅页边空白及页码；保留几何示意与全部标签，未重绘。
+- Original file SHA-256: `9c7bf4d2d0d97fff4ef8ec3385868968489b39fe29f7bf283980edcfe5fdfa6b`
+
+### assets/figures/ochmr-architecture.png
+
+Rawal Khirodkar, Shashank Tripathi, Kris Kitani. Occluded Human Mesh Recovery, Figure 3, arXiv:2203.13349v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2203.13349v1#S2.F3
+- Unmodified original file: https://arxiv.org/html/2203.13349v1/architecture.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2203.13349v1
+- SHA-256: `a6358bae2cde1ce3d4dda70e1d01f9ee6b16e16423d6a6c742604257c4fe691b`
+
+### assets/figures/ray3d-architecture.png
+
+Yu Zhan, Fenghai Li, Renliang Weng, Wongun Choi. Ray3D: Ray-Based 3D Human Pose Estimation for Monocular Absolute 3D Localization, Figure 4, arXiv:2203.11471v1. CC BY-NC-SA 4.0.
+
+- Original source: https://arxiv.org/html/2203.11471v1#S3.F4
+- Unmodified original file: https://arxiv.org/html/2203.11471v1/embedding.png
+- License: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+- License evidence: https://arxiv.org/abs/2203.11471v1
+- SHA-256: `dd9c1a62ea2fbb2342925b75e29e8dcdd0d797227f6737b6928c798e570ae152`
+
+### assets/figures/ray3d-coordinates.png
+
+Yu Zhan, Fenghai Li, Renliang Weng, Wongun Choi. Ray3D: Ray-Based 3D Human Pose Estimation for Monocular Absolute 3D Localization, Figure 3, arXiv:2203.11471v1. CC BY-NC-SA 4.0.
+
+- Original source: https://arxiv.org/html/2203.11471v1#S3.F3
+- Unmodified original file: https://arxiv.org/html/2203.11471v1/coodinates.png
+- License: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+- License evidence: https://arxiv.org/abs/2203.11471v1
+- SHA-256: `9b1349d94d3d4a7f9c9f1dc8fd85b428c00f25656416367eea61bfe7de74b91e`
+
+### assets/figures/swahr-pipeline.png
+
+Zhengxiong Luo, Zhicheng Wang, Yan Huang, Liang Wang, Tieniu Tan, Erjin Zhou. Rethinking the Heatmap Regression for Bottom-Up Human Pose Estimation, Figure 2, arXiv:2012.15175v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2012.15175v1#S2.F2
+- Unmodified original file: https://arxiv.org/html/2012.15175v1/swa_loss.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2012.15175v1
+- SHA-256: `317f1b2f435c0f821dc835cf3a29f46ea2bdb24ea1d2cfd6b3b9b52a1186f47d`

@@ -1,6 +1,6 @@
 # 详情页构建进度
 
-更新：2026-11-18。共 371 篇；流程说明已完成 156 篇，其中原图已收录 25 篇；待开展 215 篇。
+更新：2026-11-18。共 371 篇；流程说明已完成 180 篇，其中原图已收录 30 篇；待开展 191 篇。
 
 每篇按原文核对模块顺序、数据流、训练与推理、图号及版本。只使用论文原图；转载许可未明确时只保留原图链接，不重绘。摘要与适用边界笔记不计为流程精读完成。
 
@@ -33,6 +33,11 @@
 - [MotionBERT: A Unified Perspective on Learning Human Motion Representations](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=motionbert)
 - [Humans in 4D: Reconstructing and Tracking Humans with Transformers](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=4dhumans)
 - [SMPLer-X: Scaling Up Expressive Human Pose and Shape Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=smplerx)
+- [Rethinking the Heatmap Regression for Bottom-Up Human Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=swahr)
+- [Reconstructing 3D Human Pose by Watching Humans in the Mirror](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=mirrored-human)
+- [FCPose: Fully Convolutional Multi-Person Pose Estimation With Dynamic Instance-Aware Convolutions](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=fcpose)
+- [Ray3D: Ray-Based 3D Human Pose Estimation for Monocular Absolute 3D Localization](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=ray3d)
+- [Occluded Human Mesh Recovery](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=ochmr)
 
 ## 流程已完成，原图待收录
 
@@ -161,6 +166,25 @@
 - [Self-Supervised Transfer Learning for Hand Mesh Recovery From Binocular Images](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-self-supervised-transfer-learning-for-hand-mesh-recovery-from-binocular-images)
 - [End-to-End Detection and Pose Estimation of Two Interacting Hands](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-end-to-end-detection-and-pose-estimation-of-two-interacting-hands)
 - [Interacting Two-Hand 3D Pose and Shape Reconstruction From Single Color Image](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand-interacting-two-hand-3d-pose-and-shape-reconstruction-from-single-color-image)
+- [Body Meshes as Points](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=bmp)
+- [Beyond Static Features for Temporally Consistent 3D Human Pose and Shape From a Video](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=tcmr)
+- [TesseTrack: End-to-End Learnable Multi-Person Articulated 3D Pose Tracking](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=tessetrack)
+- [Multi-View Multi-Person 3D Pose Estimation With Plane Sweep Stereo](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=planesweep-pose)
+- [Context Modeling in 3D Human Pose Estimation: A Unified Perspective](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=contextpose)
+- [PoseAug: A Differentiable Pose Augmentation Framework for 3D Human Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=poseaug)
+- [Monocular 3D Multi-Person Pose Estimation by Integrating Top-Down and Bottom-Up Networks](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=integrated-topdown-bottomup-3d)
+- [SimPoE: Simulated Character Control for 3D Human Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=simpoe)
+- [Bilevel Online Adaptation for Out-of-Domain Human Mesh Reconstruction](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=boa)
+- [Graph Stacked Hourglass Networks for 3D Human Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=graph-stacked-hourglass)
+- [Neural Descent for Visual 3D Human Pose and Shape](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hund)
+- [CanonPose: Self-Supervised Monocular 3D Human Pose Estimation in the Wild](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=canonpose)
+- [End-to-End Multi-Person Pose Estimation With Transformers](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=petr-pose)
+- [ElePose: Unsupervised 3D Human Pose Estimation by Predicting Camera Elevation and Learning Normalizing Flows on 2D Poses](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=elepose)
+- [MHFormer: Multi-Hypothesis Transformer for 3D Human Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=mhformer)
+- [GLAMR: Global Occlusion-Aware Human Mesh Recovery With Dynamic Cameras](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=glamr)
+- [Contextual Instance Decoupling for Robust Multi-Person Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=cid)
+- [Single-Stage Is Enough: Multi-Person Absolute 3D Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=drm-absolute)
+- [Generalizable Human Pose Triangulation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=generalizable-triangulation)
 - [LocLLM: Exploiting Generalizable Human Keypoint Localization via Large Language Model](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=locllm)
 - [KptLLM: Unveiling the Power of Large Language Model for Keypoint Comprehension](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=kptllm)
 - [CapeLLM: Support-Free Category-Agnostic Pose Estimation with Multimodal Large Language Models](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=capellm)

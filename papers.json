@@ -19427,13 +19427,16 @@
       "contribution": "实例间深度排序损失约束同场景前后关系，并以关键点感知增强处理遮挡。",
       "limitations": "空间深度点表示用于单帧多人网格，实例分离与深度排序应分别评价；二维检测成功不等于网格形状准确。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2021/html/Zhang_Body_Meshes_as_Points_CVPR_2021_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2021/html/Zhang_Body_Meshes_as_Points_CVPR_2021_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Zhang_Body_Meshes_as_Points_CVPR_2021_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Zhang_Body_Meshes_as_Points_CVPR_2021_paper.pdf#page=4"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2021 CVPR open-access paper 的方法相关正文（PDF 第 3, 4, 5 页）、图号与流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "code": "https://github.com/jfzhang95/BMP",
     "ccf": {
@@ -19441,6 +19444,59 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "整图 ResNet/FPN → 空间网格×尺度层定位 → 同位置 SMPL/相机回归 → 峰值解码与去重 → 多人网格。",
+      "steps": [
+        {
+          "title": "以三维索引区分人体",
+          "description": "每人用二维中心网格和 FPN 层号共同表示；层号按图像人体尺度分配，提供粗深度区分，并非直接测得真实公制深度。"
+        },
+        {
+          "title": "共享整图多尺度特征",
+          "description": "ResNet-50/FPN 提取特征，各层插值到对应网格，附加归一化像素坐标后送入网格回归头。无需逐人裁剪重跑骨干。"
+        },
+        {
+          "title": "并行定位和参数预测",
+          "description": "实例头预测各网格的人体概率，网格头预测 SMPL 连续旋转、形状、弱透视相机、OKS 置信度及训练深度变量。"
+        },
+        {
+          "title": "训练时补充遮挡与深度次序",
+          "description": "由有三维标签数据学初始深度，对野外图产生伪次序；按置信度监督人间深度顺序，并在关节附近粘贴物体模拟遮挡。"
+        },
+        {
+          "title": "从中心峰取出各人网格",
+          "description": "在实例图找局部极大值，读取对应层/位置的网格参数，经 SMPL 生成表面；用人体概率与 OKS 乘积排序进行关键点 NMS。"
+        }
+      ],
+      "training": "组合 focal 实例定位、网格/关节/参数与重投影、深度及次序损失，参数判别器约束人体合理性。次序监督和遮挡粘贴主要用于训练。",
+      "inference": "单张整图前馈恢复多人，不依赖独立人体框检测器。FPN 尺度分层只是深度代理；重复中心仍需去重，测试翻转设置也影响开销。",
+      "figure_reading": "图 2 上方定位头与下方网格头读取同一网格；图中层数是示例，不要把每个金字塔层理解为独立相机。",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Zhang_Body_Meshes_as_Points_CVPR_2021_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Zhang_Body_Meshes_as_Points_CVPR_2021_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Zhang_Body_Meshes_as_Points_CVPR_2021_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位 · Figure 2",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Zhang_Body_Meshes_as_Points_CVPR_2021_paper.pdf#page=4"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2021/papers/Zhang_Body_Meshes_as_Points_CVPR_2021_paper.pdf#page=4",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -19466,19 +19522,78 @@
       "contribution": "把跨帧平滑性和单帧重建精度一起纳入视频方法的比较。",
       "limitations": "利用过去与未来帧，属于带时间上下文的视频估计；离线结果不能直接代表无未来帧的在线延迟。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2021/html/Choi_Beyond_Static_Features_for_Temporally_Consistent_3D_Human_Pose_and_CVPR_2021_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2021/html/Choi_Beyond_Static_Features_for_Temporally_Consistent_3D_Human_Pose_and_CVPR_2021_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Choi_Beyond_Static_Features_for_Temporally_Consistent_3D_Human_Pose_and_CVPR_2021_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Choi_Beyond_Static_Features_for_Temporally_Consistent_3D_Human_Pose_and_CVPR_2021_paper.pdf#page=4",
+        "https://github.com/hongsukchoi/TCMR_RELEASE"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2021 CVPR open-access paper 的方法相关正文（PDF 第 4, 5 页）、图号与流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "视频裁剪 → 共享静态特征 → 全序列双向 GRU + 前后 PoseForecast → 注意力融合 → 当前帧 SMPL。",
+      "steps": [
+        {
+          "title": "提取逐帧静态特征",
+          "description": "SPIN 预训练 ResNet 从人体裁剪获得每帧 2048 维表示，保留输入片段的时间顺序。实验训练/测试均使用标注框。"
+        },
+        {
+          "title": "全帧编码减少单帧支配",
+          "description": "双向 GRU 在目标帧汇合前后隐藏状态；取消目标静态特征到时序表示的直接残差，降低逐帧误差对最终输出的支配。"
+        },
+        {
+          "title": "不看当前帧预测当前表示",
+          "description": "PoseForecast 另用两个 GRU 分别读取过去和未来，均排除目标帧，得到可以解释当前姿态的前后时序特征。"
+        },
+        {
+          "title": "融合三类时间表示",
+          "description": "将全帧、过去、未来表示投影到相同维度，预测三个 softmax 权重后加权求和，而非简单复制单帧回归结果。"
+        },
+        {
+          "title": "共享回归器输出网格",
+          "description": "融合表示进入 SMPL/弱透视相机回归器；训练另让前后表示各自回归当前真值，测试只保留融合输出。"
+        }
+      ],
+      "training": "三路输出均以当前帧 SMPL 参数和二维/三维关节 L2 监督。使用预训练静态编码、遮挡增强；PoseForecast 的目标是当前帧，而不是预测未来动画。",
+      "inference": "对视频片段的目标帧估计，再滑动处理视频；未来上下文仍是必需输入，不能直接当作零延迟因果网络。训练辅助回归输出不参与最终融合后解码。",
+      "figure_reading": "图 2 金色输出才用于测试；图 3 展开注意力融合。PoseForecast 的 past/future 指输入范围，三路监督都指向同一目标帧。",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Choi_Beyond_Static_Features_for_Temporally_Consistent_3D_Human_Pose_and_CVPR_2021_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Choi_Beyond_Static_Features_for_Temporally_Consistent_3D_Human_Pose_and_CVPR_2021_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位 · Figure 2",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Choi_Beyond_Static_Features_for_Temporally_Consistent_3D_Human_Pose_and_CVPR_2021_paper.pdf#page=4"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2021/papers/Choi_Beyond_Static_Features_for_Temporally_Consistent_3D_Human_Pose_and_CVPR_2021_paper.pdf#page=4",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
+    },
+    "code": "https://github.com/hongsukchoi/TCMR_RELEASE",
+    "code_provenance": {
+      "url": "https://github.com/hongsukchoi/TCMR_RELEASE",
+      "verified_at": "2026-11-18",
+      "basis": "论文/作者项目或作者 README 的对应标题与实现说明；已核对公开实现目录，未运行代码。"
     }
   },
   {
@@ -19504,19 +19619,75 @@
       "contribution": "在统一可学习框架中处理多视图重建和跨时间身份关联，也评估单视图推理。",
       "limitations": "多视角体素聚合和四维卷积依赖时空观测；相机数量、体素分辨率及匹配窗口均影响成本。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2021/html/Reddy_TesseTrack_End-to-End_Learnable_Multi-Person_Articulated_3D_Pose_Tracking_CVPR_2021_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2021/html/Reddy_TesseTrack_End-to-End_Learnable_Multi-Person_Articulated_3D_Pose_Tracking_CVPR_2021_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Reddy_TesseTrack_End-to-End_Learnable_Multi-Person_Articulated_3D_Pose_Tracking_CVPR_2021_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Reddy_TesseTrack_End-to-End_Learnable_Multi-Person_Articulated_3D_Pose_Tracking_CVPR_2021_paper.pdf#page=2"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2021 CVPR open-access paper 的方法相关正文（PDF 第 3, 4, 5 页）、图号与流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "标定视频 → 图像特征反投影 → 三维中心检测 → 四维时空描述 → 可微匹配与合并 → 跟踪三维骨架。",
+      "steps": [
+        {
+          "title": "将视觉特征投到共同体素",
+          "description": "共享 HRNet 提取末层前特征，依相机标定投影每个体素中心，学习融合各视图特征；聚合的是特征而非仅二维热图。"
+        },
+        {
+          "title": "在三维空间检测人体中心",
+          "description": "三维卷积预测全场中心热图，以颈和髋中心的中点为目标，NMS 保留高分中心。"
+        },
+        {
+          "title": "围绕检测构建 tesseract",
+          "description": "各人中心处裁取空间与时间四维特征块，4D 卷积/池化产生短时描述，同时为身份匹配和骨架估计服务。"
+        },
+        {
+          "title": "图注意力与 Sinkhorn 跟踪",
+          "description": "同时间及跨时间的 GNN 消息更新描述，内积形成匹配分数；加入 dustbin 处理未匹配检测，以 Sinkhorn 归一化得到可微分配。"
+        },
+        {
+          "title": "合并同身份片段再解码",
+          "description": "追踪后将时间重叠的同人描述按 softmax 融合，以 4D 反卷积生成中心帧三维关节热图，soft-argmax 得到坐标。"
+        }
+      ],
+      "training": "联合三维检测热图、身份匹配负对数似然和三维坐标/热图损失，梯度可回传到图像骨干；有真实身份和三维姿态监督。",
+      "inference": "需要相机标定与预定三维覆盖空间。框架可处理单视图或多视图，但结果依观测条件而变；短时窗口及重叠描述合并不同于仅逐帧三角化。",
+      "figure_reading": "第 2 页图 2 串联检测、时空跟踪和姿态解码，第 4 页图 3 才展开匹配；dustbin 表示不匹配，不是额外人物。",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Reddy_TesseTrack_End-to-End_Learnable_Multi-Person_Articulated_3D_Pose_Tracking_CVPR_2021_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Reddy_TesseTrack_End-to-End_Learnable_Multi-Person_Articulated_3D_Pose_Tracking_CVPR_2021_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Reddy_TesseTrack_End-to-End_Learnable_Multi-Person_Articulated_3D_Pose_Tracking_CVPR_2021_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位 · Figure 2",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Reddy_TesseTrack_End-to-End_Learnable_Multi-Person_Articulated_3D_Pose_Tracking_CVPR_2021_paper.pdf#page=2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2021/papers/Reddy_TesseTrack_End-to-End_Learnable_Multi-Person_Articulated_3D_Pose_Tracking_CVPR_2021_paper.pdf#page=2",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -19541,13 +19712,17 @@
       "contribution": "将监督热图的形状和损失权重一起调整，而非仅更换骨干网络。",
       "limitations": "尺度自适应热图与加权损失作用不同，需分开消融；输出仍是二维多人点而非三维姿态。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2021/html/Luo_Rethinking_the_Heatmap_Regression_for_Bottom-Up_Human_Pose_Estimation_CVPR_2021_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2021/html/Luo_Rethinking_the_Heatmap_Regression_for_Bottom-Up_Human_Pose_Estimation_CVPR_2021_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Luo_Rethinking_the_Heatmap_Regression_for_Bottom-Up_Human_Pose_Estimation_CVPR_2021_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Luo_Rethinking_the_Heatmap_Regression_for_Bottom-Up_Human_Pose_Estimation_CVPR_2021_paper.pdf#page=4",
+        "https://arxiv.org/html/2012.15175v1#S2.F2"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2021 CVPR open-access paper 的方法相关正文（PDF 第 3, 4, 5, 6 页）、图号与流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "code": "https://github.com/greatlog/SWAHR-HumanPose",
     "ccf": {
@@ -19555,6 +19730,71 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "HigherHRNet 热图/embedding → 训练预测尺度图 → 调整高斯监督 → 自适应损失权重 → 热图聚合与分组。",
+      "steps": [
+        {
+          "title": "保留自底向上共享骨干",
+          "description": "主要实现建立在 HigherHRNet，多人共享整图特征，输出两个分辨率的热图和关联 embedding，不逐人裁剪。"
+        },
+        {
+          "title": "SAHR 学习监督核的尺度",
+          "description": "附加尺度图分支，根据关节区域预测值调整真值高斯宽度；尺度不是必须另有人体框标签才能获得的固定规则。"
+        },
+        {
+          "title": "正则化尺度并稳定目标",
+          "description": "对尺度偏离加正则，在尺度 1 附近用低阶展开构造稳定的监督热图，避免只靠 L2 任意改变分布宽度。"
+        },
+        {
+          "title": "WAHR 处理前背景不均衡",
+          "description": "用连续热图值与预测值形成像 focal 的软权重，下调容易背景、强调难样本；SAHR 与 WAHR 一起构成 SWAHR。"
+        },
+        {
+          "title": "测试按热图与关联分组",
+          "description": "聚合多分辨率热图，用关联 embedding 把关节归到各人。尺度图的作用主要是训练目标调整，不是测试时的人体深度图。"
+        }
+      ],
+      "training": "独立监督两个分辨率分支，使用尺度正则、自适应回归及 embedding 拉近/推远损失；只用 SAHR 或 WAHR 是独立消融配置。",
+      "inference": "输入整图输出多人二维姿态，包含热图聚合与关联分组；单尺度、翻转及多尺度测试要分别理解。该方法不估计三维姿态或公制人体大小。",
+      "figure_reading": "图 2 黑色/红色箭头区分训练/测试，图 4 展示 HigherHRNet 实现；不要把监督真值重新缩放的箭头误看作测试输入。",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Luo_Rethinking_the_Heatmap_Regression_for_Bottom-Up_Human_Pose_Estimation_CVPR_2021_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Luo_Rethinking_the_Heatmap_Regression_for_Bottom-Up_Human_Pose_Estimation_CVPR_2021_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Luo_Rethinking_the_Heatmap_Regression_for_Bottom-Up_Human_Pose_Estimation_CVPR_2021_paper.pdf#page=5"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 6 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Luo_Rethinking_the_Heatmap_Regression_for_Bottom-Up_Human_Pose_Estimation_CVPR_2021_paper.pdf#page=6"
+        },
+        {
+          "label": "原图 / 方法流程定位 · Figure 2",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Luo_Rethinking_the_Heatmap_Regression_for_Bottom-Up_Human_Pose_Estimation_CVPR_2021_paper.pdf#page=4"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local"
+    },
+    "figure": {
+      "src": "assets/figures/swahr-pipeline.png",
+      "source": "https://arxiv.org/html/2012.15175v1#S2.F2",
+      "caption": "SWAHR 原图：训练尺度图/自适应损失与测试热图/关联分组。",
+      "alt": "SWAHR 原图：训练尺度图/自适应损失与测试热图/关联分组。",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Zhengxiong Luo, Zhicheng Wang, Yan Huang, Liang Wang, Tieniu Tan, Erjin Zhou. Rethinking the Heatmap Regression for Bottom-Up Human Pose Estimation, Figure 2, arXiv:2012.15175v1. CC BY 4.0.",
+      "authors": "Zhengxiong Luo, Zhicheng Wang, Yan Huang, Liang Wang, Tieniu Tan, Erjin Zhou",
+      "figure_number": "Figure 2",
+      "version": "2012.15175v1",
+      "modifications": "论文 HTML 原始图像，未裁剪、未修改；页面仅等比例缩放显示。"
     }
   },
   {
@@ -19580,19 +19820,82 @@
       "contribution": "把跨视角融合和深度估计合并，并采用由粗到细的人体／关节深度分解。",
       "limitations": "需要多视角图像、二维姿态及相机几何；平面扫描深度范围影响覆盖，不宜与单 RGB 同条件比较。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2021/html/Lin_Multi-View_Multi-Person_3D_Pose_Estimation_With_Plane_Sweep_Stereo_CVPR_2021_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2021/html/Lin_Multi-View_Multi-Person_3D_Pose_Estimation_With_Plane_Sweep_Stereo_CVPR_2021_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Lin_Multi-View_Multi-Person_3D_Pose_Estimation_With_Plane_Sweep_Stereo_CVPR_2021_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Lin_Multi-View_Multi-Person_3D_Pose_Estimation_With_Plane_Sweep_Stereo_CVPR_2021_paper.pdf#page=3",
+        "https://github.com/jiahaoLjh/PlaneSweepPose"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2021 CVPR open-access paper 的方法相关正文（PDF 第 4, 5, 6 页）、图号与流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "标定多视图二维姿态 → 粗深度平面扫描 → 人体深度 → 局部关节深度扫描 → 反投影融合去重。",
+      "steps": [
+        {
+          "title": "先获得各相机二维候选骨架",
+          "description": "同步标定视图分别运行 top-down 姿态估计，轮流选择目标相机，其余作为参考。三维模块读取检测坐标及置信度。"
+        },
+        {
+          "title": "逐深度构造几何一致性分数",
+          "description": "将目标骨架放在虚拟深度平面并投到参考视图，寻找最接近的参考骨架，按逐关节距离产生深度×关节分数矩阵，跨视图置信度加权。"
+        },
+        {
+          "title": "粗回归人体中心深度",
+          "description": "一维残差 CNN 沿深度轴处理分数，选响应最大的滑动窗口后做局部 soft-argmax，避免多峰深度被全局平均。"
+        },
+        {
+          "title": "再估相对关节深度",
+          "description": "围绕人体中心进行更细的相对深度扫描，以膨胀一维卷积建立较大范围关节推理，常规 soft-argmax 得到每点深度偏移。"
+        },
+        {
+          "title": "反投影并合并重复人体",
+          "description": "中心深度加关节偏移后反投影到三维；各目标视图的结果转换到共同坐标，对相近骨架聚类平均去重。"
+        }
+      ],
+      "training": "中心深度和关节相对深度使用 L1；用动捕骨架在标定空间随机摆放并加二维噪声合成训练数据。相对深度分支训练时使用真值中心深度稳定学习。",
+      "inference": "需要同步多视图、内外参和前置二维估计。虽避免预先固定跨视图人物匹配，扫描中仍会按每个深度假设寻找最近二维候选。",
+      "figure_reading": "图 2 是先人后关节的两级深度估计，图 3 是一维网络；depth plane 是假设深度，不是输入的真实深度传感器图。",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Lin_Multi-View_Multi-Person_3D_Pose_Estimation_With_Plane_Sweep_Stereo_CVPR_2021_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Lin_Multi-View_Multi-Person_3D_Pose_Estimation_With_Plane_Sweep_Stereo_CVPR_2021_paper.pdf#page=5"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 6 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Lin_Multi-View_Multi-Person_3D_Pose_Estimation_With_Plane_Sweep_Stereo_CVPR_2021_paper.pdf#page=6"
+        },
+        {
+          "label": "原图 / 方法流程定位 · Figure 2",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Lin_Multi-View_Multi-Person_3D_Pose_Estimation_With_Plane_Sweep_Stereo_CVPR_2021_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2021/papers/Lin_Multi-View_Multi-Person_3D_Pose_Estimation_With_Plane_Sweep_Stereo_CVPR_2021_paper.pdf#page=3",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
+    },
+    "code": "https://github.com/jiahaoLjh/PlaneSweepPose",
+    "code_provenance": {
+      "url": "https://github.com/jiahaoLjh/PlaneSweepPose",
+      "verified_at": "2026-11-18",
+      "basis": "论文/作者项目或作者 README 的对应标题与实现说明；已核对公开实现目录，未运行代码。"
     }
   },
   {
@@ -19617,19 +19920,99 @@
       "contribution": "提出 Mirrored-Human 数据集，并用重建伪标签改善单视图估计器的训练。",
       "limitations": "图像必须同时包含人物和镜像，并满足镜面几何约束；不能推广到没有镜面线索的普通单图。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2021/html/Fang_Reconstructing_3D_Human_Pose_by_Watching_Humans_in_the_Mirror_CVPR_2021_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2021/html/Fang_Reconstructing_3D_Human_Pose_by_Watching_Humans_in_the_Mirror_CVPR_2021_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Fang_Reconstructing_3D_Human_Pose_by_Watching_Humans_in_the_Mirror_CVPR_2021_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Fang_Reconstructing_3D_Human_Pose_by_Watching_Humans_in_the_Mirror_CVPR_2021_paper.pdf#page=3",
+        "https://arxiv.org/html/2104.00340v1#S3.F3",
+        "https://github.com/zju3dv/Mirrored-Human",
+        "https://github.com/zju3dv/EasyMocap/blob/master/apps/demo/1v1p_mirror.py"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2021 CVPR open-access paper 的方法相关正文（PDF 第 3, 4, 5 页）、图号与流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "人与镜像的二维检测/SMPL 初值 → 共享形状和反射姿态 → 镜面对称约束 → 联合优化 → 伪标注数据。",
+      "steps": [
+        {
+          "title": "同时检测真实人与镜像",
+          "description": "输入含镜面的单张图，先预测双方二维关键点和 SMPL 初值，选重投影更好的初姿反射到另一侧改善初始化。"
+        },
+        {
+          "title": "把两人表示绑定为同一身体",
+          "description": "双方共享形状，局部姿态按轴角反射对应；全局旋转和平移仍需优化，不能把镜像视作无关联第二个人。"
+        },
+        {
+          "title": "施加不依赖已知镜面的对称性",
+          "description": "对应关节连线应平行，其中点应位于同一镜面；以方向叉积及中点关系约束双方三维配置。"
+        },
+        {
+          "title": "可选加入镜面法线",
+          "description": "由人—镜像对应获得消失点；有内参可求法线，无内参时可借人工标镜边缘与主点等假设估计。法线约束是可选项。"
+        },
+        {
+          "title": "联合重投影与模型先验优化",
+          "description": "L-BFGS 最小化双方鲁棒重投影、初值先验和镜面对称能量；对收集的互联网图重复处理可生成 Mirrored-Human 伪真值用于训练。"
+        }
+      ],
+      "training": "核心重建是每图优化，二维检测和初始网格来自已有网络；产生的伪标签可以另训练单视图估计器，不能把两者称为同一前馈网络。",
+      "inference": "需看见同一人的直接视图及镜像。无需已知镜面法线的版本仍使用对称关系；有法线版本可能额外依赖标定或镜边缘标注。",
+      "figure_reading": "图 2 区分重建优化与后续数据训练，图 3/4 分别解释对称关系和消失点；不是两台真实相机的常规立体系统。",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Fang_Reconstructing_3D_Human_Pose_by_Watching_Humans_in_the_Mirror_CVPR_2021_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Fang_Reconstructing_3D_Human_Pose_by_Watching_Humans_in_the_Mirror_CVPR_2021_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Fang_Reconstructing_3D_Human_Pose_by_Watching_Humans_in_the_Mirror_CVPR_2021_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位 · Figure 2",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Fang_Reconstructing_3D_Human_Pose_by_Watching_Humans_in_the_Mirror_CVPR_2021_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local"
+    },
+    "figure": {
+      "src": "assets/figures/mirrored-human-constraints.png",
+      "source": "https://arxiv.org/html/2104.00340v1#S3.F3",
+      "caption": "Mirrored-Human 原图：对应关节连线及中点的镜面对称几何约束。",
+      "alt": "Mirrored-Human 原图：对应关节连线及中点的镜面对称几何约束。",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Qi Fang, Qing Shuai, Junting Dong, Hujun Bao, Xiaowei Zhou. Reconstructing 3D Human Pose by Watching Humans in the Mirror, Figure 3, arXiv:2104.00340v1. CC BY 4.0.",
+      "authors": "Qi Fang, Qing Shuai, Junting Dong, Hujun Bao, Xiaowei Zhou",
+      "figure_number": "Figure 3",
+      "version": "2104.00340v1",
+      "modifications": "从论文原图裁去大幅页边空白及页码；保留几何示意与全部标签，未重绘。"
+    },
+    "figures": [
+      {
+        "source": "https://openaccess.thecvf.com/content/CVPR2021/papers/Fang_Reconstructing_3D_Human_Pose_by_Watching_Humans_in_the_Mirror_CVPR_2021_paper.pdf#page=3",
+        "caption": "Figure 2 · 原论文总览",
+        "note": "总览含互联网照片，项目页说明相关图片权利有限，暂只保留链接；页面收录的是作者几何约束原图。"
+      }
+    ],
+    "code": "https://github.com/zju3dv/Mirrored-Human",
+    "code_provenance": {
+      "url": "https://github.com/zju3dv/Mirrored-Human",
+      "verified_at": "2026-11-18",
+      "basis": "作者项目仓库 README 将实现接入 EasyMocap；已核对其 apps/demo/1v1p_mirror.py 与镜像优化入口。项目主页不是完整代码副本，未运行实现。"
     }
   },
   {
@@ -19650,23 +20033,75 @@
     "analysis": {
       "problem": "单图三维恢复有多解，输出可能违反肢体长度关系。",
       "method": "统一图模型与图神经网络的上下文表述，以注意力将软骨长约束融入深度网络。",
-      "inputs_outputs": "单张图像→具有人体结构约束的三维关节。",
+      "inputs_outputs": "标定多视角图像及相机参数 → 融合人体结构上下文的三维关节。",
       "contribution": "分析端到端学习与显式骨长约束的互补性，而不把二者视为互斥路线。",
-      "limitations": "软骨长约束提供结构先验，不直接消除单目三维歧义；骨长与根对齐协议需在评测中明确。",
+      "limitations": "示例系统依赖标定图像的三维特征体，体素范围与分辨率影响成本；骨长项是软统计先验，不是输出必须满足的硬约束。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2021/html/Ma_Context_Modeling_in_3D_Human_Pose_Estimation_A_Unified_Perspective_CVPR_2021_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2021/html/Ma_Context_Modeling_in_3D_Human_Pose_Estimation_A_Unified_Perspective_CVPR_2021_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Ma_Context_Modeling_in_3D_Human_Pose_Estimation_A_Unified_Perspective_CVPR_2021_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Ma_Context_Modeling_in_3D_Human_Pose_Estimation_A_Unified_Perspective_CVPR_2021_paper.pdf#page=4"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2021 CVPR open-access paper 的方法相关正文（PDF 第 4, 5 页）、图号与流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "标定图像特征反投影 → 三维编码 → 关节全局/成对注意力 → 三维解码热图 → 积分坐标。",
+      "steps": [
+        {
+          "title": "从多视图形成三维特征体",
+          "description": "二维 CNN 特征依据相机参数反投影到体素，经三维编码器产生每关节的体素表示；ContextPose 插在编码器与解码器之间。"
+        },
+        {
+          "title": "把通道分成关节特征组",
+          "description": "为每个关节保留独立体素特征，使消息可以明确地从某关节某体素传到另一个关节位置。"
+        },
+        {
+          "title": "全局注意力选择可信位置",
+          "description": "对每个来源关节的所有体素归一化打分，降低背景体素消息的权重，而不是先取一个硬坐标再做图推理。"
+        },
+        {
+          "title": "成对注意力施加骨长先验",
+          "description": "直接相连的关节按训练集骨长均值/方差衡量空间兼容性，与全局注意力相乘再聚合；非骨连接可仅用全局项。"
+        },
+        {
+          "title": "残差更新后解码坐标",
+          "description": "将加权变换后的上下文加到原特征，三维解码器输出各关节热图，再计算三维期望得到位置。"
+        }
+      ],
+      "training": "联合训练二维骨干、三维编解码及上下文模块，使用三维坐标 L1、弱热图正则及全局注意力高斯监督；骨长统计只由训练集计算。",
+      "inference": "依赖相机几何与三维特征体，计算/显存受体素分辨率影响。成对项是软统计约束，不是输出必须精确满足固定骨长的硬解算。",
+      "figure_reading": "图 2 底部逐体素说明 GA×PA 如何收集消息，上部是特征体到坐标的整体流程；不要把“context”仅理解为二维背景。",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Ma_Context_Modeling_in_3D_Human_Pose_Estimation_A_Unified_Perspective_CVPR_2021_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Ma_Context_Modeling_in_3D_Human_Pose_Estimation_A_Unified_Perspective_CVPR_2021_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位 · Figure 2",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Ma_Context_Modeling_in_3D_Human_Pose_Estimation_A_Unified_Perspective_CVPR_2021_paper.pdf#page=4"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2021/papers/Ma_Context_Modeling_in_3D_Human_Pose_Estimation_A_Unified_Perspective_CVPR_2021_paper.pdf#page=4",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -19691,13 +20126,16 @@
       "contribution": "使用局部运动链空间判别增强姿态合理性，同时提升样本多样性。",
       "limitations": "增强器改变训练样本而非测试观测；收益应固定二维检测器、训练预算及目标测试域比较。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2021/html/Gong_PoseAug_A_Differentiable_Pose_Augmentation_Framework_for_3D_Human_Pose_CVPR_2021_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2021/html/Gong_PoseAug_A_Differentiable_Pose_Augmentation_Framework_for_3D_Human_Pose_CVPR_2021_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Gong_PoseAug_A_Differentiable_Pose_Augmentation_Framework_for_3D_Human_Pose_CVPR_2021_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Gong_PoseAug_A_Differentiable_Pose_Augmentation_Framework_for_3D_Human_Pose_CVPR_2021_paper.pdf#page=2"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2021 CVPR open-access paper 的方法相关正文（PDF 第 3, 4, 5 页）、图号与流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "code": "https://github.com/jfzhang95/PoseAug",
     "ccf": {
@@ -19705,6 +20143,59 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "源域三维骨架 → 可微姿态/骨长/刚体增广 → 二维重投影 → 估计误差反馈与判别 → 训练更泛化的 lifting。",
+      "steps": [
+        {
+          "title": "先训练二维到三维估计器",
+          "description": "用已标注二维/三维姿态对预训练估计器，提供稳定的误差信号。PoseAug 是可套在不同 lifting 网络上的训练框架。"
+        },
+        {
+          "title": "把骨架转为可编辑骨向量",
+          "description": "沿层级运动链分解骨方向和骨长度；MLP 读取姿态及高斯噪声，生成角度残差、骨长比例、全局旋转和平移。"
+        },
+        {
+          "title": "生成成对二维三维样本",
+          "description": "按预测操作修改骨架，左右对称部位共享骨长增广参数，再用原数据的透视相机投影，保持二维/三维配对一致。"
+        },
+        {
+          "title": "控制难度而非无限最大化误差",
+          "description": "估计器误差反馈使新姿态更具挑战，以受控比率和参数正则避免过难样本导致训练崩溃。"
+        },
+        {
+          "title": "局部合理性约束后交替学习",
+          "description": "三维判别器读取分部 KCS 保留局部角度合理性，二维判别器约束投影外观；增广器、判别器、估计器交替更新。"
+        }
+      ],
+      "training": "估计器对原始和增广对使用三维 MSE，增广器有误差反馈和参数正则，二维/三维判别器使用 LS-GAN。需要源域配对三维标签。",
+      "inference": "测试只运行训练好的二维到三维估计器；增广器和判别器不需要部署。系统不直接从 RGB 检测二维点，也不凭增广消除单目固有歧义。",
+      "figure_reading": "图 2 是训练闭环，图 3 展开 BA/BL/RT 操作，图 4 对比全身与分部 KCS；不要把增广姿态当作测试时第二种传感器。",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Gong_PoseAug_A_Differentiable_Pose_Augmentation_Framework_for_3D_Human_Pose_CVPR_2021_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Gong_PoseAug_A_Differentiable_Pose_Augmentation_Framework_for_3D_Human_Pose_CVPR_2021_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Gong_PoseAug_A_Differentiable_Pose_Augmentation_Framework_for_3D_Human_Pose_CVPR_2021_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位 · Figure 2",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Gong_PoseAug_A_Differentiable_Pose_Augmentation_Framework_for_3D_Human_Pose_CVPR_2021_paper.pdf#page=2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2021/papers/Gong_PoseAug_A_Differentiable_Pose_Augmentation_Framework_for_3D_Human_Pose_CVPR_2021_paper.pdf#page=2",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -19729,19 +20220,83 @@
       "contribution": "自顶向下分支允许框内多人关节，自底向上分支借助检测归一化热图，组合双方优势。",
       "limitations": "输入为多人视频，交互判别器约束的是合理性；逐人误差、人物关联和人物间几何需分开评价。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2021/html/Cheng_Monocular_3D_Multi-Person_Pose_Estimation_by_Integrating_Top-Down_and_Bottom-Up_CVPR_2021_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2021/html/Cheng_Monocular_3D_Multi-Person_Pose_Estimation_by_Integrating_Top-Down_and_Bottom-Up_CVPR_2021_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Cheng_Monocular_3D_Multi-Person_Pose_Estimation_by_Integrating_Top-Down_and_Bottom-Up_CVPR_2021_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Cheng_Monocular_3D_Multi-Person_Pose_Estimation_by_Integrating_Top-Down_and_Bottom-Up_CVPR_2021_paper.pdf#page=3",
+        "https://github.com/3dpose/3D-Multi-Person-Pose"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2021 CVPR open-access paper 的方法相关正文（PDF 第 3, 4, 5 页）、图号与流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。",
+      "verification_notes": "论文链接的作者仓库当前主要介绍 2022 TPAMI 扩展，同时保留 CVPR 2021 测试说明；本页方法依据 CVPR 2021 正文，未混用扩展论文的结果。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "视频 top-down 分支 → 热图指导 bottom-up 分支 → 三维骨架匹配 → 融合网络 → 多人相机系姿态。",
+      "steps": [
+        {
+          "title": "在检测框中保留全部关节",
+          "description": "扩大人体检测区域，预测其中所有人的二维热图和关节 ID，再分组；不同于假定框中只能有一个人。"
+        },
+        {
+          "title": "跟踪后做时序三维回归",
+          "description": "有向 GCN 补全遮挡或出框的二维姿态，以跟踪器得到同一人序列，再由两个 TCN 分别预测根相对姿态和根深度。"
+        },
+        {
+          "title": "整图分支获得全局深度",
+          "description": "将 top-down 热图合回图像并与整图拼接，bottom-up 网络预测二维热图、ID、关节相对深度及根深度，组合为相机系骨架。"
+        },
+        {
+          "title": "匹配两分支的同人结果",
+          "description": "按置信度加权的三维相似性构造代价，以 Hungarian 匹配 top-down 与 bottom-up 骨架，处理双方对应。"
+        },
+        {
+          "title": "融合两种估计与置信度",
+          "description": "将匹配骨架和逐关节置信度输入三层全连接融合器，兼取局部精度及全局定位；未配对情况在训练中以置零一侧模拟。"
+        }
+      ],
+      "training": "各分支使用热图、ID 与深度监督，融合器以掩码/坐标扰动训练；单人及人间姿态判别器约束合理性，另以教师伪标签和重投影/多视角一致性做半监督学习。",
+      "inference": "需要视频检测、二维分组、身份跟踪及 TCN 上下文，不能仅看融合器就称为单图前馈方法。判别器及教师伪标签是训练机制。",
+      "figure_reading": "图 2 上路是局部时序估计、下路是整图深度，右侧才融合；半监督训练策略没有完整画在该图中。",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Cheng_Monocular_3D_Multi-Person_Pose_Estimation_by_Integrating_Top-Down_and_Bottom-Up_CVPR_2021_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Cheng_Monocular_3D_Multi-Person_Pose_Estimation_by_Integrating_Top-Down_and_Bottom-Up_CVPR_2021_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Cheng_Monocular_3D_Multi-Person_Pose_Estimation_by_Integrating_Top-Down_and_Bottom-Up_CVPR_2021_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位 · Figure 2",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Cheng_Monocular_3D_Multi-Person_Pose_Estimation_by_Integrating_Top-Down_and_Bottom-Up_CVPR_2021_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2021/papers/Cheng_Monocular_3D_Multi-Person_Pose_Estimation_by_Integrating_Top-Down_and_Bottom-Up_CVPR_2021_paper.pdf#page=3",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
+    },
+    "code": "https://github.com/3dpose/3D-Multi-Person-Pose",
+    "code_provenance": {
+      "url": "https://github.com/3dpose/3D-Multi-Person-Pose",
+      "verified_at": "2026-11-18",
+      "basis": "论文/作者项目或作者 README 的对应标题与实现说明；已核对公开实现目录，未运行代码。"
     }
   },
   {
@@ -19761,24 +20316,84 @@
     ],
     "analysis": {
       "problem": "单纯运动学回归未必满足真实动力学约束。",
-      "method": "将二维关键点驱动的运动学姿态优化与物理角色控制联合学习，以强化学习更新关节控制。",
+      "method": "将已有运动学初估和二维重投影梯度特征送入学习的精化/控制策略，通过 PPO 与 Meta-PD 在物理模拟器中生成运动。",
       "inputs_outputs": "单目视频与当前姿态状态→物理模拟中的下一帧三维姿态。",
       "contribution": "以可学习姿态细化和状态相关的动力学参数调节耦合视觉证据与物理合理性。",
       "limitations": "物理角色控制依赖模拟器、身体模型和当前状态；模拟合理性不等于准确重建真实接触力。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2021/html/Yuan_SimPoE_Simulated_Character_Control_for_3D_Human_Pose_Estimation_CVPR_2021_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2021/html/Yuan_SimPoE_Simulated_Character_Control_for_3D_Human_Pose_Estimation_CVPR_2021_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Yuan_SimPoE_Simulated_Character_Control_for_3D_Human_Pose_Estimation_CVPR_2021_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Yuan_SimPoE_Simulated_Character_Control_for_3D_Human_Pose_Estimation_CVPR_2021_paper.pdf#page=4"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2021 CVPR open-access paper 的方法相关正文（PDF 第 3, 4, 5, 6 页）、图号与流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "逐帧运动学/二维初估 → 自动物理角色 → 运动学精化策略 → Meta-PD 控制 → 物理模拟运动。",
+      "steps": [
+        {
+          "title": "用外部网络初始化观测",
+          "description": "先取得每帧关节角/根位置、二维关节及置信度，首帧姿态初始化模拟角色；这些观测不是物理控制器自己直接从像素检测。"
+        },
+        {
+          "title": "从蒙皮网格创建角色",
+          "description": "按最大蒙皮权重把顶点分配骨骼，对每骨顶点取凸包并按体积赋质量，构造与人体形状匹配的物理代理。"
+        },
+        {
+          "title": "学习运动学残差精化",
+          "description": "计算当前估计的二维重投影梯度作为特征，MLP 迭代预测姿态更新；梯度用于策略输入，不是显式逐步最小化重投影误差。"
+        },
+        {
+          "title": "输出关节目标与控制参数",
+          "description": "策略结合当前模拟姿态/速度和下一待估帧观测，预测 PD 目标角残差、根部残余力/力矩及刚度/阻尼缩放。"
+        },
+        {
+          "title": "在高频模拟中推进角色",
+          "description": "每视频步执行多个物理子步，Meta-PD 调整各子步控制增益，模拟得到下一姿态并继续递推；控制目标角不等于模拟后的实际角。"
+        }
+      ],
+      "training": "PPO 学习策略，以姿态、速度、三维关节及二维投影对真值的一致性乘积作为奖励；测试去除动作探索噪声。动力学通过模拟器而非普通可微网格层产生。",
+      "inference": "在线按已有模拟状态和下一待输出帧观测推进；依赖前置运动学估计与物理模拟。根部残余外力是模型的一部分，不能声称完全只受真实环境力驱动。",
+      "figure_reading": "图 2(b) 是视频频率与模拟频率的连接，(c) 展开策略；重投影梯度、动作、PD 力矩及最终姿态是不同变量。",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Yuan_SimPoE_Simulated_Character_Control_for_3D_Human_Pose_Estimation_CVPR_2021_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Yuan_SimPoE_Simulated_Character_Control_for_3D_Human_Pose_Estimation_CVPR_2021_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Yuan_SimPoE_Simulated_Character_Control_for_3D_Human_Pose_Estimation_CVPR_2021_paper.pdf#page=5"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 6 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Yuan_SimPoE_Simulated_Character_Control_for_3D_Human_Pose_Estimation_CVPR_2021_paper.pdf#page=6"
+        },
+        {
+          "label": "原图 / 方法流程定位 · Figure 2",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Yuan_SimPoE_Simulated_Character_Control_for_3D_Human_Pose_Estimation_CVPR_2021_paper.pdf#page=4"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2021/papers/Yuan_SimPoE_Simulated_Character_Control_for_3D_Human_Pose_Estimation_CVPR_2021_paper.pdf#page=4",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -19803,19 +20418,82 @@
       "contribution": "协调二维投影监督与时间约束，避免只拟合单帧二维证据。",
       "limitations": "目标视频用于在线更新模型，属于测试域适配；更新耗时与不做适配的前向推理不能混算。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2021/html/Guan_Bilevel_Online_Adaptation_for_Out-of-Domain_Human_Mesh_Reconstruction_CVPR_2021_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2021/html/Guan_Bilevel_Online_Adaptation_for_Out-of-Domain_Human_Mesh_Reconstruction_CVPR_2021_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Guan_Bilevel_Online_Adaptation_for_Out-of-Domain_Human_Mesh_Reconstruction_CVPR_2021_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Guan_Bilevel_Online_Adaptation_for_Out-of-Domain_Human_Mesh_Reconstruction_CVPR_2021_paper.pdf#page=4",
+        "https://github.com/syguan96/BOA"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2021 CVPR open-access paper 的方法相关正文（PDF 第 2, 3, 4 页）、图号与流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "源域预训练模型 → 当前帧单帧损失探测 → 时空上层目标 → 二阶在线权重更新 → EMA 教师与网格输出。",
+      "steps": [
+        {
+          "title": "顺序接收未标注目标视频",
+          "description": "从源域训练的 SMPL/相机回归器出发，按时间读取目标帧，保持前一帧更新后的权重，而非一次访问全部目标数据。"
+        },
+        {
+          "title": "下层用单帧约束探测权重",
+          "description": "以二维重投影、姿态形状先验和随机源域样本的三维监督执行临时梯度步；临时权重只是 probe，不直接替换主模型。"
+        },
+        {
+          "title": "在探测模型上计算时序目标",
+          "description": "同时计算单帧约束、相邻观测/预测二维位移一致性，以及与历史 EMA 教师的输出一致性，兼顾短期运动与长期稳定。"
+        },
+        {
+          "title": "上层反传更新原始权重",
+          "description": "通过临时梯度步求二阶导数，把联合目标对原权重的梯度用于真实更新，减少仅适应单帧目标造成的偏差。"
+        },
+        {
+          "title": "更新教师并输出当前网格",
+          "description": "完成设定的双层步数后更新教师 EMA，用已适应回归器预测当前帧的 SMPL 和相机，再处理后续帧。"
+        }
+      ],
+      "training": "源域先有监督训练；目标阶段是测试时在线训练，且仍抽取源域三维样本防遗忘。目标无三维标签不等于完全无三维监督或无需源数据。",
+      "inference": "推理期间需要反向传播、源域样本与历史状态，计算和内存条件不同于冻结权重的一次前馈；视频顺序会影响适应轨迹。",
+      "figure_reading": "图 3 需区分 data flow 与 weight flow，下层临时模型到上层目标的箭头决定二阶更新；第 3 页 Algorithm 1 给出逐帧顺序。",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 2 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Guan_Bilevel_Online_Adaptation_for_Out-of-Domain_Human_Mesh_Reconstruction_CVPR_2021_paper.pdf#page=2"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Guan_Bilevel_Online_Adaptation_for_Out-of-Domain_Human_Mesh_Reconstruction_CVPR_2021_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Guan_Bilevel_Online_Adaptation_for_Out-of-Domain_Human_Mesh_Reconstruction_CVPR_2021_paper.pdf#page=4"
+        },
+        {
+          "label": "原图 / 方法流程定位 · Figure 3",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Guan_Bilevel_Online_Adaptation_for_Out-of-Domain_Human_Mesh_Reconstruction_CVPR_2021_paper.pdf#page=4"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2021/papers/Guan_Bilevel_Online_Adaptation_for_Out-of-Domain_Human_Mesh_Reconstruction_CVPR_2021_paper.pdf#page=4",
+      "caption": "Figure 3 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
+    },
+    "code": "https://github.com/syguan96/BOA",
+    "code_provenance": {
+      "url": "https://github.com/syguan96/BOA",
+      "verified_at": "2026-11-18",
+      "basis": "论文/作者项目或作者 README 的对应标题与实现说明；已核对公开实现目录，未运行代码。"
     }
   },
   {
@@ -19840,19 +20518,75 @@
       "contribution": "把堆叠沙漏的多尺度设计推广到骨架图，并区分多尺度与多层级特征贡献。",
       "limitations": "骨架尺度与图拓扑固定，依赖二维关节输入；多尺度 lifting 不包含图像检测或绝对根定位。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2021/html/Xu_Graph_Stacked_Hourglass_Networks_for_3D_Human_Pose_Estimation_CVPR_2021_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2021/html/Xu_Graph_Stacked_Hourglass_Networks_for_3D_Human_Pose_Estimation_CVPR_2021_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Xu_Graph_Stacked_Hourglass_Networks_for_3D_Human_Pose_Estimation_CVPR_2021_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Xu_Graph_Stacked_Hourglass_Networks_for_3D_Human_Pose_Estimation_CVPR_2021_paper.pdf#page=4"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2021 CVPR open-access paper 的方法相关正文（PDF 第 3, 4, 5 页）、图号与流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "二维骨架图 → 图卷积嵌入 → 多尺度骨架沙漏堆叠 → 多层特征/SE → 三维关节。",
+      "steps": [
+        {
+          "title": "把二维点编码为图节点",
+          "description": "输入固定关节布局的二维坐标，预处理图卷积映入隐空间，骨架关系贯穿网络；不直接读取 RGB。"
+        },
+        {
+          "title": "按骨架先验做池化",
+          "description": "依预定的人体节点配对执行 max-pooling，将 16 点骨架依次缩为 8 点和 4 点，并在低分辨率增加通道。"
+        },
+        {
+          "title": "反池化恢复局部结构",
+          "description": "复制低分辨率节点特征到其对应两个节点，逐级恢复骨架；同尺度残差连接融合细节，形成输入输出同尺寸的图沙漏。"
+        },
+        {
+          "title": "堆叠沙漏并收集不同深度",
+          "description": "前一模块输出传给下一模块，同时以 1×1 卷积压缩各阶段中间特征，沿通道拼接多层信息。"
+        },
+        {
+          "title": "SE 选择信息后回归坐标",
+          "description": "节点全局平均得到通道统计，经 SE 门控重加权，再以输出卷积预测每点三维位置。"
+        }
+      ],
+      "training": "二维到三维配对以坐标 MSE 监督；论文实例使用四个沙漏及 PreAggr 图卷积，沙漏的池化结构可适配其他图卷积。",
+      "inference": "单帧二维骨架进入 lifting 网络，二维检测误差会传递；骨架节点数和池化对应固定，不可直接把另一关节协议无映射地输入。",
+      "figure_reading": "图 3 是全网络，图 2 是单个沙漏，图 1 定义骨架缩放；此处 scale 指节点粒度，不是图像缩放或人物公制大小。",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Xu_Graph_Stacked_Hourglass_Networks_for_3D_Human_Pose_Estimation_CVPR_2021_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Xu_Graph_Stacked_Hourglass_Networks_for_3D_Human_Pose_Estimation_CVPR_2021_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Xu_Graph_Stacked_Hourglass_Networks_for_3D_Human_Pose_Estimation_CVPR_2021_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位 · Figure 3",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Xu_Graph_Stacked_Hourglass_Networks_for_3D_Human_Pose_Estimation_CVPR_2021_paper.pdf#page=4"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2021/papers/Xu_Graph_Stacked_Hourglass_Networks_for_3D_Human_Pose_Estimation_CVPR_2021_paper.pdf#page=4",
+      "caption": "Figure 3 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -19877,19 +20611,79 @@
       "contribution": "学习优化过程而非测试时昂贵梯度下降，并支持自监督训练设定。",
       "limitations": "输出采用 GHUM 模型，与 SMPL 参数不能直接互换；循环下降迭代及渲染损失需对应具体实现。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2021/html/Zanfir_Neural_Descent_for_Visual_3D_Human_Pose_and_Shape_CVPR_2021_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2021/html/Zanfir_Neural_Descent_for_Visual_3D_Human_Pose_and_Shape_CVPR_2021_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Zanfir_Neural_Descent_for_Visual_3D_Human_Pose_and_Shape_CVPR_2021_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Zanfir_Neural_Descent_for_Visual_3D_Human_Pose_and_Shape_CVPR_2021_paper.pdf#page=3"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2021 CVPR open-access paper 的方法相关正文（PDF 第 2, 3, 4, 5 页）、图号与流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "图像关键点/部件语义 → GHUM 初值及上下文 → 语义对齐误差 → 共享 RNN 神经下降 → 全身部件融合。",
+      "steps": [
+        {
+          "title": "先预测图像语义与初始状态",
+          "description": "人体裁剪生成关键点热图、部件分割和图像特征，再编码上下文及 GHUM 姿态、形状、全局旋转和平移初值。"
+        },
+        {
+          "title": "计算当前状态的对齐误差",
+          "description": "把 GHUM 关节投影并渲染语义部件，与图像预测比较；加入 GHUM 姿态/形状先验，得到当前阶段损失数值。"
+        },
+        {
+          "title": "RNN 根据上下文学习更新",
+          "description": "共享递归单元读取前一状态、记忆、对齐损失及上下文，预测下一状态。测试更新无需再显式求对齐损失对模型状态的梯度。"
+        },
+        {
+          "title": "用多轮学习替代传统优化器",
+          "description": "展开多个 RNN 阶段，以阶段损失的不同聚合策略端到端学习下降行为，保留训练和测试相同的递归结构。"
+        },
+        {
+          "title": "可组合身体手脸专用网络",
+          "description": "完整系统进一步关注身体、左右手和脸，用独立 HUND 部件网络处理不同尺度，再融合全身估计；单个 HUND 与完整组合系统需区分。"
+        }
+      ],
+      "training": "可按数据条件使用预测语义的自监督、人工二维弱监督或三维网格/关节监督。GHUM 本身及前置语义预测带有已学习先验，不能把自监督配置解释为无任何外部训练。",
+      "inference": "处理人体裁剪，使用近似原图内参并随裁剪变换；输出 GHUM 而非 SMPL 参数。递归仍需计算语义对齐值，但不使用传统状态梯度下降求解。",
+      "figure_reading": "图 1 展开单个神经下降器，图 2 才是部件融合系统；损失数值输入 RNN 与对其求梯度进行传统优化不是一回事。",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 2 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Zanfir_Neural_Descent_for_Visual_3D_Human_Pose_and_Shape_CVPR_2021_paper.pdf#page=2"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Zanfir_Neural_Descent_for_Visual_3D_Human_Pose_and_Shape_CVPR_2021_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Zanfir_Neural_Descent_for_Visual_3D_Human_Pose_and_Shape_CVPR_2021_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Zanfir_Neural_Descent_for_Visual_3D_Human_Pose_and_Shape_CVPR_2021_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位 · Figure 1",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Zanfir_Neural_Descent_for_Visual_3D_Human_Pose_and_Shape_CVPR_2021_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2021/papers/Zanfir_Neural_Descent_for_Visual_3D_Human_Pose_and_Shape_CVPR_2021_paper.pdf#page=3",
+      "caption": "Figure 1 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -19914,19 +20708,82 @@
       "contribution": "允许移动且未标定的相机，并在 Human3.6M、MPI-INF-3DHP 和 SkiPose 上检验。",
       "limitations": "未标定多视角训练仍利用跨视角同步与结构线索；单视角部署不意味着单视角训练。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2021/html/Wandt_CanonPose_Self-Supervised_Monocular_3D_Human_Pose_Estimation_in_the_Wild_CVPR_2021_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2021/html/Wandt_CanonPose_Self-Supervised_Monocular_3D_Human_Pose_Estimation_in_the_Wild_CVPR_2021_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Wandt_CanonPose_Self-Supervised_Monocular_3D_Human_Pose_Estimation_in_the_Wild_CVPR_2021_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Wandt_CanonPose_Self-Supervised_Monocular_3D_Human_Pose_Estimation_in_the_Wild_CVPR_2021_paper.pdf#page=2",
+        "https://github.com/bastianwandt/CanonPose"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2021 CVPR open-access paper 的方法相关正文（PDF 第 3, 4, 5 页）、图号与流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "多视角二维点/置信度 → 规范三维姿态与旋转解耦 → 跨视角交换重投影 → 一致性训练 → 单视图 lifting。",
+      "steps": [
+        {
+          "title": "先归一化二维检测",
+          "description": "外部检测器给二维点和热图峰值置信度，根居中并除 Frobenius 范数，去除平移和尺度。"
+        },
+        {
+          "title": "共享网络预测姿态与相机旋转",
+          "description": "MLP 残差主干分两头输出规范系三维点及轴角，Rodrigues 生成旋转；规范坐标由训练自动形成。"
+        },
+        {
+          "title": "交换视图间的姿态和旋转",
+          "description": "将一视图规范姿态与另一视图旋转混合，弱透视投影后匹配对应二维点，避免仅强迫三维表示相等造成退化。"
+        },
+        {
+          "title": "按检测置信度监督重投影",
+          "description": "置信度既输入网络也加权损失，降低不可靠点的影响。静态相机配置可额外跨样本交换相对旋转来约束相机一致性。"
+        },
+        {
+          "title": "训练后只保留单视图网络",
+          "description": "测试一次二维检测及 lifting 即可恢复该相机方向的三维骨架，不需同步第二视图；公制尺度仍未由此确定。"
+        }
+      ],
+      "training": "同步多视角二维观测通过自/跨视图归一化重投影训练，无需相机标定或三维坐标标签；静态相机约束可选，运动相机实验使用不含此项配置。",
+      "inference": "单帧二维姿态加置信度输入，输出相对三维结构；评测需按协议调整未知尺度。不能把多视角训练误写成多视角测试或无外部二维检测器。",
+      "figure_reading": "第 2 页图 2 是跨视图训练，图 3 展开双头 MLP；交换的是预测姿态和旋转，未把两幅图当作一幅拼图输入。",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Wandt_CanonPose_Self-Supervised_Monocular_3D_Human_Pose_Estimation_in_the_Wild_CVPR_2021_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Wandt_CanonPose_Self-Supervised_Monocular_3D_Human_Pose_Estimation_in_the_Wild_CVPR_2021_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Wandt_CanonPose_Self-Supervised_Monocular_3D_Human_Pose_Estimation_in_the_Wild_CVPR_2021_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位 · Figure 2",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Wandt_CanonPose_Self-Supervised_Monocular_3D_Human_Pose_Estimation_in_the_Wild_CVPR_2021_paper.pdf#page=2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2021/papers/Wandt_CanonPose_Self-Supervised_Monocular_3D_Human_Pose_Estimation_in_the_Wild_CVPR_2021_paper.pdf#page=2",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
+    },
+    "code": "https://github.com/bastianwandt/CanonPose",
+    "code_provenance": {
+      "url": "https://github.com/bastianwandt/CanonPose",
+      "verified_at": "2026-11-18",
+      "basis": "论文/作者项目或作者 README 的对应标题与实现说明；已核对公开实现目录，未运行代码。"
     }
   },
   {
@@ -19951,19 +20808,108 @@
       "contribution": "紧凑动态卷积头令推理时间对人数变化较不敏感，关注速度与精度的折中。",
       "limitations": "动态实例卷积减少 ROI 和分组步骤，仍需识别人物实例；速度应包含整图特征与动态头生成。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2021/html/Mao_FCPose_Fully_Convolutional_Multi-Person_Pose_Estimation_With_Dynamic_Instance-Aware_Convolutions_CVPR_2021_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2021/html/Mao_FCPose_Fully_Convolutional_Multi-Person_Pose_Estimation_With_Dynamic_Instance-Aware_Convolutions_CVPR_2021_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Mao_FCPose_Fully_Convolutional_Multi-Person_Pose_Estimation_With_Dynamic_Instance-Aware_Convolutions_CVPR_2021_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Mao_FCPose_Fully_Convolutional_Multi-Person_Pose_Estimation_With_Dynamic_Instance-Aware_Convolutions_CVPR_2021_paper.pdf#page=4",
+        "https://arxiv.org/html/2105.14185v1#S3.F4",
+        "https://arxiv.org/html/2105.14185v1#S3.F3",
+        "https://github.com/aim-uofa/AdelaiDet/tree/master/configs/FCPose"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2021 CVPR open-access paper 的方法相关正文（PDF 第 3, 4, 5 页）、图号与流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。",
+      "verification_notes": "作者所链 AdelaiDet 的 FCPose README 声明为重实现，数值与原论文略有差异；运行时间的该 README 测试条件也不同。本页流程依据 CVPR 2021 论文，未替换成重实现的实验数值。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "整图 FCOS/FPN → 实例条件动态卷积权重 → 全图逐人热图 → 共享坐标偏移 → 去重二维姿态。",
+      "steps": [
+        {
+          "title": "共享检测与关键点特征",
+          "description": "FCOS 在 FPN 上定位人物；共享特征映射到低通道整图表示，无需对每个框裁剪特征再运行大型姿态网络。"
+        },
+        {
+          "title": "为每人生成轻量关键点头",
+          "description": "FCOS 框分支旁的 controller 在每个正位置生成一套 1×1 卷积参数，使动态头专门响应对应人物。"
+        },
+        {
+          "title": "相对坐标帮助指定目标",
+          "description": "整图特征附加相对于参数生成位置的坐标图，动态头输出该人的 K 张热图，区别重叠人物的同类关键点。"
+        },
+        {
+          "title": "共享偏移弥补热图量化",
+          "description": "共享精化分支从每个热图位置预测到最近同类真值点的偏移；热图峰值加该偏移得到精细坐标，不必高倍上采样所有实例热图。"
+        },
+        {
+          "title": "按检测候选生成并去重",
+          "description": "选择前景高分位置，执行其动态头、取峰并精化，最后 NMS 移除重复人体输出。"
+        }
+      ],
+      "training": "保留 FCOS 损失，热图用空间 softmax/one-hot 交叉熵，偏移用 MSE；动态权重通过输出热图间接学习，训练只抽取有限正位置降低成本。",
+      "inference": "输出整图多人的二维点。动态头很小但仍按候选实例执行，不能把近似稳定的测量时延称为数学上完全不随人数增长。",
+      "figure_reading": "图 4 是总流程，图 3 解释逐实例权重；controller 生成参数，而共享 refinement 分支在各实例间复用。",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Mao_FCPose_Fully_Convolutional_Multi-Person_Pose_Estimation_With_Dynamic_Instance-Aware_Convolutions_CVPR_2021_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Mao_FCPose_Fully_Convolutional_Multi-Person_Pose_Estimation_With_Dynamic_Instance-Aware_Convolutions_CVPR_2021_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Mao_FCPose_Fully_Convolutional_Multi-Person_Pose_Estimation_With_Dynamic_Instance-Aware_Convolutions_CVPR_2021_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位 · Figure 4",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Mao_FCPose_Fully_Convolutional_Multi-Person_Pose_Estimation_With_Dynamic_Instance-Aware_Convolutions_CVPR_2021_paper.pdf#page=4"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local"
+    },
+    "figure": {
+      "src": "assets/figures/fcpose-architecture.png",
+      "source": "https://arxiv.org/html/2105.14185v1#S3.F4",
+      "caption": "FCPose 原图：共享 FCOS/FPN、动态关键点头及偏移精化。",
+      "alt": "FCPose 原图：共享 FCOS/FPN、动态关键点头及偏移精化。",
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "attribution": "Weian Mao, Zhi Tian, Xinlong Wang, Chunhua Shen. FCPose: Fully Convolutional Multi-Person Pose Estimation With Dynamic Instance-Aware Convolutions, Figure 4, arXiv:2105.14185v1. CC BY-NC-SA 4.0.",
+      "authors": "Weian Mao, Zhi Tian, Xinlong Wang, Chunhua Shen",
+      "figure_number": "Figure 4",
+      "version": "2105.14185v1",
+      "modifications": "论文 HTML 原始图像，未裁剪、未修改；页面仅等比例缩放显示。"
+    },
+    "figures": [
+      {
+        "src": "assets/figures/fcpose-dynamic-head.png",
+        "source": "https://arxiv.org/html/2105.14185v1#S3.F3",
+        "caption": "FCPose 原图：每个实例的动态参数与相对坐标输入。",
+        "alt": "FCPose 原图：每个实例的动态参数与相对坐标输入。",
+        "license": "CC BY-NC-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "attribution": "Weian Mao, Zhi Tian, Xinlong Wang, Chunhua Shen. FCPose: Fully Convolutional Multi-Person Pose Estimation With Dynamic Instance-Aware Convolutions, Figure 3, arXiv:2105.14185v1. CC BY-NC-SA 4.0.",
+        "authors": "Weian Mao, Zhi Tian, Xinlong Wang, Chunhua Shen",
+        "figure_number": "Figure 3",
+        "version": "2105.14185v1",
+        "modifications": "论文 HTML 原始图像，未裁剪、未修改；页面仅等比例缩放显示。"
+      }
+    ],
+    "code": "https://github.com/aim-uofa/AdelaiDet/tree/master/configs/FCPose",
+    "code_provenance": {
+      "url": "https://github.com/aim-uofa/AdelaiDet/tree/master/configs/FCPose",
+      "verified_at": "2026-11-18",
+      "basis": "论文/作者项目或作者 README 的对应标题与实现说明；已核对公开实现目录，未运行代码。"
     }
   },
   {
@@ -19988,13 +20934,18 @@
       "contribution": "分别研究内参和外参变化，强调绝对定位而不只是根节点相对姿态。",
       "limitations": "绝对三维恢复显式使用已标定相机参数；相机相对或根对齐精度不能代替绝对定位评价。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2022/html/Zhan_Ray3D_Ray-Based_3D_Human_Pose_Estimation_for_Monocular_Absolute_3D_CVPR_2022_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2022/html/Zhan_Ray3D_Ray-Based_3D_Human_Pose_Estimation_for_Monocular_Absolute_3D_CVPR_2022_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2022/papers/Zhan_Ray3D_Ray-Based_3D_Human_Pose_Estimation_for_Monocular_Absolute_3D_CVPR_2022_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2022/papers/Zhan_Ray3D_Ray-Based_3D_Human_Pose_Estimation_for_Monocular_Absolute_3D_CVPR_2022_paper.pdf#page=3",
+        "https://arxiv.org/html/2203.11471v1#S3.F4",
+        "https://arxiv.org/html/2203.11471v1#S3.F3"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2022 CVPR open-access paper 的方法相关正文（PDF 第 3, 4, 5, 6 页）、图号与流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "code": "https://github.com/YxZhxn/Ray3D",
     "ccf": {
@@ -20002,7 +20953,87 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
-    }
+    },
+    "pipeline": {
+      "overview": "二维序列 + 标定 → 归一化三维射线 → 时空特征与相机嵌入 → 相对姿态/根轨迹 → 世界系坐标。",
+      "steps": [
+        {
+          "title": "以内参把二维点转成射线",
+          "description": "按焦距和主点将像素转为光心出发的三维方向，减少不同相机内参对像素坐标分布的影响。"
+        },
+        {
+          "title": "构造俯仰归一化坐标系",
+          "description": "依据标定俯仰角和相机高度，把射线及训练三维标签变换到 NCS，输入输出处于相同规范系。"
+        },
+        {
+          "title": "编码局部身体与时间变化",
+          "description": "RIE 骨干按躯干及四肢分组，融合相对位置、邻帧差异和当前帧全局表示；用射线替换原始二维输入。"
+        },
+        {
+          "title": "为两种回归注入相机条件",
+          "description": "MLP 将相机俯仰与离地高度编码，拼接时序射线特征；独立姿态网络预测根相对骨架，轨迹网络预测根位置。"
+        },
+        {
+          "title": "合并后反变换至世界系",
+          "description": "相对骨架加根轨迹获得 NCS 绝对点，再用标定反归一化到世界坐标，区分根相对误差与绝对定位误差。"
+        }
+      ],
+      "training": "用已标定数据的规范系三维标签学习两个回归任务；相机嵌入与 lifting 联合训练。具体损失实现应另查代码，不能由归一化公式推断全部训练细节。",
+      "inference": "需要可靠内参、外参、地面高度和俯仰信息；采用相机 yaw/roll 接近零的规范化设定。时序版还需要邻帧二维点，不是无需标定的任意单图绝对定位。",
+      "figure_reading": "图 2 展示坐标系变换和两网输出，图 3 定义 NCS，图 4 展开相机条件；三维射线不是已测出的三维关节。",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Zhan_Ray3D_Ray-Based_3D_Human_Pose_Estimation_for_Monocular_Absolute_3D_CVPR_2022_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Zhan_Ray3D_Ray-Based_3D_Human_Pose_Estimation_for_Monocular_Absolute_3D_CVPR_2022_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Zhan_Ray3D_Ray-Based_3D_Human_Pose_Estimation_for_Monocular_Absolute_3D_CVPR_2022_paper.pdf#page=5"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 6 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Zhan_Ray3D_Ray-Based_3D_Human_Pose_Estimation_for_Monocular_Absolute_3D_CVPR_2022_paper.pdf#page=6"
+        },
+        {
+          "label": "原图 / 方法流程定位 · Figure 2",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Zhan_Ray3D_Ray-Based_3D_Human_Pose_Estimation_for_Monocular_Absolute_3D_CVPR_2022_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local"
+    },
+    "figure": {
+      "src": "assets/figures/ray3d-architecture.png",
+      "source": "https://arxiv.org/html/2203.11471v1#S3.F4",
+      "caption": "Ray3D 原图：局部/全局射线特征和相机嵌入的 lifting 网络。",
+      "alt": "Ray3D 原图：局部/全局射线特征和相机嵌入的 lifting 网络。",
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "attribution": "Yu Zhan, Fenghai Li, Renliang Weng, Wongun Choi. Ray3D: Ray-Based 3D Human Pose Estimation for Monocular Absolute 3D Localization, Figure 4, arXiv:2203.11471v1. CC BY-NC-SA 4.0.",
+      "authors": "Yu Zhan, Fenghai Li, Renliang Weng, Wongun Choi",
+      "figure_number": "Figure 4",
+      "version": "2203.11471v1",
+      "modifications": "论文 HTML 原始图像，未裁剪、未修改；页面仅等比例缩放显示。"
+    },
+    "figures": [
+      {
+        "src": "assets/figures/ray3d-coordinates.png",
+        "source": "https://arxiv.org/html/2203.11471v1#S3.F3",
+        "caption": "Ray3D 原图：世界、相机及俯仰归一化坐标系。",
+        "alt": "Ray3D 原图：世界、相机及俯仰归一化坐标系。",
+        "license": "CC BY-NC-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "attribution": "Yu Zhan, Fenghai Li, Renliang Weng, Wongun Choi. Ray3D: Ray-Based 3D Human Pose Estimation for Monocular Absolute 3D Localization, Figure 3, arXiv:2203.11471v1. CC BY-NC-SA 4.0.",
+        "authors": "Yu Zhan, Fenghai Li, Renliang Weng, Wongun Choi",
+        "figure_number": "Figure 3",
+        "version": "2203.11471v1",
+        "modifications": "论文 HTML 原始图像，未裁剪、未修改；页面仅等比例缩放显示。"
+      }
+    ]
   },
   {
     "id": "ochmr",
@@ -20027,19 +21058,84 @@
       "contribution": "利用框外和邻近人体信息消除重叠人物的歧义，可叠加到已有恢复架构。",
       "limitations": "人体中心上下文为目标人物恢复提供额外条件；需检验中心定位错误及密集人群的实例选择。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2022/html/Khirodkar_Occluded_Human_Mesh_Recovery_CVPR_2022_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2022/html/Khirodkar_Occluded_Human_Mesh_Recovery_CVPR_2022_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2022/papers/Khirodkar_Occluded_Human_Mesh_Recovery_CVPR_2022_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2022/papers/Khirodkar_Occluded_Human_Mesh_Recovery_CVPR_2022_paper.pdf#page=2",
+        "https://arxiv.org/html/2203.13349v1#S2.F3"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2022 CVPR open-access paper 的方法相关正文（PDF 第 3, 4, 5 页）、图号与流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "人体裁剪 + 全局中心图 → 指定局部中心 → 多层 CoNorm 条件化 → SMPL/相机回归 → 多人一致性训练。",
+      "steps": [
+        {
+          "title": "先预测裁剪内的多人中心",
+          "description": "上下文网络输出全局身体中心热图；中心优先由可见躯干关节定义，无躯干可见时用其余可见点。"
+        },
+        {
+          "title": "指定当前需要恢复的人",
+          "description": "全局图包含邻居，局部图只标当前人物中心；拼为两通道上下文，弥补高度重叠检测框难以区分目标的问题。"
+        },
+        {
+          "title": "在多个深度注入上下文",
+          "description": "CoNorm 将上下文缩到中间特征尺寸，经卷积产生逐空间位置/通道的缩放和偏置，以仿射方式调制特征。"
+        },
+        {
+          "title": "条件回归单个人体网格",
+          "description": "ResNet 主干和参数头读取图像及指定上下文，预测 SMPL 旋转、形状与弱透视相机；变更局部中心可对同裁剪提取不同人。"
+        },
+        {
+          "title": "训练时约束人间几何",
+          "description": "除单人损失外，SDF 穿透损失抑制网格相交，联合渲染深度与实例掩膜监督前后次序，提高多人场景一致性。"
+        }
+      ],
+      "training": "中心估计用 MSE，网格使用可用二维/三维标签；COCO 实例分割支持深度次序监督。原文训练集未使用 Human3.6M，不能自行加入该训练来源。",
+      "inference": "仍属于 top-down 网格回归，依赖输入人体区域与中心预测；不能由多个中心得出整个系统无需检测。CoNorm 的尺度参数是特征调制，不是人体真实尺寸。",
+      "figure_reading": "图 2 是上下文条件化整体架构，图 3 展开 CoNorm；图 4 的穿透及次序分支用于训练，而非部署时物理仿真。",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Khirodkar_Occluded_Human_Mesh_Recovery_CVPR_2022_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Khirodkar_Occluded_Human_Mesh_Recovery_CVPR_2022_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Khirodkar_Occluded_Human_Mesh_Recovery_CVPR_2022_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位 · Figure 2",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Khirodkar_Occluded_Human_Mesh_Recovery_CVPR_2022_paper.pdf#page=2"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "verified_local"
+    },
+    "figure": {
+      "src": "assets/figures/ochmr-architecture.png",
+      "source": "https://arxiv.org/html/2203.13349v1#S2.F3",
+      "caption": "OCHMR 原图：全局/局部中心上下文与多层 CoNorm 特征调制。",
+      "alt": "OCHMR 原图：全局/局部中心上下文与多层 CoNorm 特征调制。",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Rawal Khirodkar, Shashank Tripathi, Kris Kitani. Occluded Human Mesh Recovery, Figure 3, arXiv:2203.13349v1. CC BY 4.0.",
+      "authors": "Rawal Khirodkar, Shashank Tripathi, Kris Kitani",
+      "figure_number": "Figure 3",
+      "version": "2203.13349v1",
+      "modifications": "论文 HTML 原始图像，未裁剪、未修改；页面仅等比例缩放显示。"
     }
   },
   {
@@ -20065,13 +21161,16 @@
       "contribution": "省去 ROI 裁剪、NMS 和关节分组，以注意力对齐目标关键点特征。",
       "limitations": "分层集合预测输出二维多人点；查询数目、匹配与关节细化的配置影响人物数量覆盖及速度。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2022/html/Shi_End-to-End_Multi-Person_Pose_Estimation_With_Transformers_CVPR_2022_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2022/html/Shi_End-to-End_Multi-Person_Pose_Estimation_With_Transformers_CVPR_2022_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2022/papers/Shi_End-to-End_Multi-Person_Pose_Estimation_With_Transformers_CVPR_2022_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2022/papers/Shi_End-to-End_Multi-Person_Pose_Estimation_With_Transformers_CVPR_2022_paper.pdf#page=3"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2022 CVPR open-access paper 的方法相关正文（PDF 第 3, 4, 5 页）、图号与流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "code": "https://github.com/hikvision-research/opera",
     "ccf": {
@@ -20079,6 +21178,59 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "整图多尺度编码 → pose queries 预测全身点集 → joint queries 细化各点 → 集合匹配训练 → 多人二维姿态。",
+      "steps": [
+        {
+          "title": "用可变形注意力编码图像",
+          "description": "骨干 C3/C4/C5 特征统一通道并展平，加位置/层级编码，以多尺度 deformable encoder 获得视觉 memory。"
+        },
+        {
+          "title": "人体查询并行预测全身",
+          "description": "固定数量 pose queries 自注意力交互，每个通过 K 个参考关节点读取视觉特征，回归一人的全部二维点和置信度。"
+        },
+        {
+          "title": "随层更新姿态参考点",
+          "description": "将预测偏移在 inverse-sigmoid 空间加到前层坐标，再 sigmoid 归一化；更新点也作为下一层可变形采样参考。"
+        },
+        {
+          "title": "关节解码器进一步定位",
+          "description": "每人的 K 个 joint queries 以粗姿态为参考，做关节间自注意力和图像交叉注意力，再逐层预测坐标残差；各人可并行处理。"
+        },
+        {
+          "title": "集合预测直接形成实例",
+          "description": "训练用 Hungarian 一对一匹配人物，减少重复输出；测试按置信度输出已细化点集，无需单独检测框或底层关节分组。"
+        }
+      ],
+      "training": "人物分类、L1/OKS 坐标损失及辅助热图监督共同训练；辅助热图头只用于加快收敛，推理移除。",
+      "inference": "单张整图输出多人二维姿态，固定 query 数限制最大候选容量。此 PETR 是姿态估计框架，不能与同名三维目标检测模型混淆。",
+      "figure_reading": "图 2 是 encoder—pose decoder—joint decoder，图 3/4 分别展开人体与关节查询；最终输出是二维坐标。",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Shi_End-to-End_Multi-Person_Pose_Estimation_With_Transformers_CVPR_2022_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Shi_End-to-End_Multi-Person_Pose_Estimation_With_Transformers_CVPR_2022_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Shi_End-to-End_Multi-Person_Pose_Estimation_With_Transformers_CVPR_2022_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位 · Figure 2",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Shi_End-to-End_Multi-Person_Pose_Estimation_With_Transformers_CVPR_2022_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2022/papers/Shi_End-to-End_Multi-Person_Pose_Estimation_With_Transformers_CVPR_2022_paper.pdf#page=3",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -20104,19 +21256,82 @@
       "contribution": "联合处理姿态先验与相机角度分布，并以子空间投影稳定流模型训练。",
       "limitations": "无需三维标签并不等于没有相机分布与人体先验；二维投影似然不能唯一证明真实三维解。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2022/html/Wandt_ElePose_Unsupervised_3D_Human_Pose_Estimation_by_Predicting_Camera_Elevation_CVPR_2022_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2022/html/Wandt_ElePose_Unsupervised_3D_Human_Pose_Estimation_by_Predicting_Camera_Elevation_CVPR_2022_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2022/papers/Wandt_ElePose_Unsupervised_3D_Human_Pose_Estimation_by_Predicting_Camera_Elevation_CVPR_2022_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2022/papers/Wandt_ElePose_Unsupervised_3D_Human_Pose_Estimation_by_Predicting_Camera_Elevation_CVPR_2022_paper.pdf#page=3",
+        "https://github.com/bastianwandt/ElePose"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2022 CVPR open-access paper 的方法相关正文（PDF 第 3, 4, 5 页）、图号与流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "二维姿态 → 深度/相机仰角双头 → 随机虚拟视图 → 二维 normalizing flow 似然 → 无三维标签 lifting。",
+      "steps": [
+        {
+          "title": "先学习二维姿态分布",
+          "description": "二维姿态先经 PCA 降冗余，预训练可逆 normalizing flow 对其密度建模；先验来自二维训练姿态，不是带三维真值的生成器。"
+        },
+        {
+          "title": "输入归一化点预测深度",
+          "description": "根居中并按根到头长度归一化，MLP 预测每点相对固定深度的偏移，通过透视反投影形成三维骨架。"
+        },
+        {
+          "title": "同时估计相机仰角",
+          "description": "并行分支预测当前仰角，批内估计其均值/方差；校正重力方向后采样水平旋转及学习到的仰角分布形成虚拟视角。"
+        },
+        {
+          "title": "用二维似然评价虚拟投影",
+          "description": "把旋转后的三维骨架投回二维，由预训练 flow 的负对数似然判断是否符合真实二维姿态分布，反馈训练 lifting 网络。"
+        },
+        {
+          "title": "循环重建与骨长先验正则",
+          "description": "虚拟二维点再次 lifting，并通过逆旋转/重投影约束恢复原输入，结合相对骨长软先验，减少仅满足单视图的退化解。"
+        }
+      ],
+      "training": "使用二维样本、虚拟视角似然、循环/形变与相对骨长目标；循环中的三维目标来自当前预测，不是外部三维标注。相机采样仍假设近水平持机和主要方位角变化。",
+      "inference": "测试由二维点预测深度与相机仰角；没有由固定深度常数获得公制绝对尺度。无需真实多相机训练，但仍依赖外部二维检测及其姿态分布。",
+      "figure_reading": "图 2 的虚拟相机是训练生成的视角，flow 负责二维密度，lifting 才输出三维；不要将 flow 密度视为已校准的真实三维概率。",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Wandt_ElePose_Unsupervised_3D_Human_Pose_Estimation_by_Predicting_Camera_Elevation_CVPR_2022_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Wandt_ElePose_Unsupervised_3D_Human_Pose_Estimation_by_Predicting_Camera_Elevation_CVPR_2022_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Wandt_ElePose_Unsupervised_3D_Human_Pose_Estimation_by_Predicting_Camera_Elevation_CVPR_2022_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位 · Figure 2",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Wandt_ElePose_Unsupervised_3D_Human_Pose_Estimation_by_Predicting_Camera_Elevation_CVPR_2022_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2022/papers/Wandt_ElePose_Unsupervised_3D_Human_Pose_Estimation_by_Predicting_Camera_Elevation_CVPR_2022_paper.pdf#page=3",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
+    },
+    "code": "https://github.com/bastianwandt/ElePose",
+    "code_provenance": {
+      "url": "https://github.com/bastianwandt/ElePose",
+      "verified_at": "2026-11-18",
+      "basis": "论文/作者项目或作者 README 的对应标题与实现说明；已核对公开实现目录，未运行代码。"
     }
   },
   {
@@ -20142,13 +21357,16 @@
       "contribution": "把多假设学习嵌入时空 Transformer，而非只对单个姿态表示做注意力。",
       "limitations": "多假设表征与最终聚合结果应区分；输入视频窗口和二维检测质量仍是精度条件。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2022/html/Li_MHFormer_Multi-Hypothesis_Transformer_for_3D_Human_Pose_Estimation_CVPR_2022_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2022/html/Li_MHFormer_Multi-Hypothesis_Transformer_for_3D_Human_Pose_Estimation_CVPR_2022_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2022/papers/Li_MHFormer_Multi-Hypothesis_Transformer_for_3D_Human_Pose_Estimation_CVPR_2022_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2022/papers/Li_MHFormer_Multi-Hypothesis_Transformer_for_3D_Human_Pose_Estimation_CVPR_2022_paper.pdf#page=3"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2022 CVPR open-access paper 的方法相关正文（PDF 第 4, 5 页）、图号与流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "code": "https://github.com/Vegetebird/MHFormer",
     "ccf": {
@@ -20156,6 +21374,55 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "二维姿态序列 → 多层假设特征生成 → 时间嵌入 → 假设内精化/假设间交互 → 中心帧三维姿态。",
+      "steps": [
+        {
+          "title": "读取前置检测的二维序列",
+          "description": "将连续帧各关节 x/y 组织为序列，预测目标是中心帧三维骨架；输入不含原始图像特征。"
+        },
+        {
+          "title": "级联生成多个潜在假设",
+          "description": "MHG 在空间维做多层 Transformer，前一假设输出作为下一输入，收集不同深度的潜表示，而非直接采样多个最终三维坐标。"
+        },
+        {
+          "title": "把假设转成时间 token",
+          "description": "转置并线性嵌入，加入各假设可学习时间位置编码，准备跨帧建模。"
+        },
+        {
+          "title": "先各自精化再交叉交流",
+          "description": "SHR 对每个假设独立做时间自注意力，再用混合 MLP 交流通道；CHI 将不同假设交替作为 Q/K/V 做交叉注意力，融合其关系。"
+        },
+        {
+          "title": "合成一个最终三维结果",
+          "description": "最后混合层不再拆分假设，回归头输出三维序列并选择中心帧；并非测试时保留多个人体候选再由真值挑最佳。"
+        }
+      ],
+      "training": "端到端使用三维序列坐标 MSE；多个假设指内部特征表示，不额外要求人工标注多种合理三维解。",
+      "inference": "需要二维时间窗口和前置姿态检测；中心帧设置包含未来上下文。最终只输出一个姿态，无法直接把隐层假设当作可校准不确定性分布。",
+      "figure_reading": "图 3(a) 展示三阶段，(b)(c)(d) 分别是 MHG/SHR/CHI；图 4 对比 self-attention 与跨假设 Q/K/V 交换。",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Li_MHFormer_Multi-Hypothesis_Transformer_for_3D_Human_Pose_Estimation_CVPR_2022_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Li_MHFormer_Multi-Hypothesis_Transformer_for_3D_Human_Pose_Estimation_CVPR_2022_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位 · Figure 3",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Li_MHFormer_Multi-Hypothesis_Transformer_for_3D_Human_Pose_Estimation_CVPR_2022_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2022/papers/Li_MHFormer_Multi-Hypothesis_Transformer_for_3D_Human_Pose_Estimation_CVPR_2022_paper.pdf#page=3",
+      "caption": "Figure 3 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -20181,19 +21448,86 @@
       "contribution": "将局部运动补全、全局轨迹预测与视频证据约束连接，处理离开视野的片段。",
       "limitations": "全局恢复联合运动补全和相机优化，遮挡片段含先验生成内容；轨迹漂移与局部网格误差需分别报告。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2022/html/Yuan_GLAMR_Global_Occlusion-Aware_Human_Mesh_Recovery_With_Dynamic_Cameras_CVPR_2022_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2022/html/Yuan_GLAMR_Global_Occlusion-Aware_Human_Mesh_Recovery_With_Dynamic_Cameras_CVPR_2022_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2022/papers/Yuan_GLAMR_Global_Occlusion-Aware_Human_Mesh_Recovery_With_Dynamic_Cameras_CVPR_2022_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2022/papers/Yuan_GLAMR_Global_Occlusion-Aware_Human_Mesh_Recovery_With_Dynamic_Cameras_CVPR_2022_paper.pdf#page=3",
+        "https://github.com/NVlabs/GLAMR"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2022 CVPR open-access paper 的方法相关正文（PDF 第 3, 4, 5, 6 页）、图号与流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "视频跟踪/网格初估 → 生成式局部动作补全 → 自身坐标轨迹预测 → 人体与相机联合优化 → 全局运动。",
+      "steps": [
+        {
+          "title": "先建立各人的相机系运动",
+          "description": "多目标跟踪和重识别给人体框轨迹，已有网格估计器产生相机系 SMPL；检测缺失形成可见性掩码。"
+        },
+        {
+          "title": "补全局部身体姿态",
+          "description": "Transformer CVAE 仅编码可见姿态，结合潜变量生成完整局部动作；滑窗以已补上下文及未来 look-ahead 延续长序列，形状另用插值。"
+        },
+        {
+          "title": "预测全局轨迹变化",
+          "description": "另一 LSTM CVAE 根据完整局部动作预测朝向坐标中的逐帧位移/转向，再累积为全局根平移与旋转，避免直接回归大范围绝对轨迹。"
+        },
+        {
+          "title": "联合对齐相机和所有人物",
+          "description": "保持补全的局部姿态及形状固定，优化各人自身坐标轨迹和逐帧相机外参，匹配二维点与初始相机系轨迹。"
+        },
+        {
+          "title": "以先验与多人约束稳定输出",
+          "description": "轨迹正则、相机平滑/直立和人间穿透能量协同约束，输出统一世界系运动及网格；遮挡部分由先验补全而非直接观测。"
+        }
+      ],
+      "training": "动作补全器和轨迹预测器均用 AMASS 的 CVAE 重建/KL 目标训练；新视频还需要全局优化。补全模型训练使用模拟缺失片段。",
+      "inference": "允许移动相机且不必运行场景 SLAM，但仍依赖跟踪、初始网格、近似内参及整段优化。滑窗含未来引导，不是严格因果实时恢复。",
+      "figure_reading": "图 2 四阶段不可省略最后优化；图 3 只展开局部动作补全。相机系根轨迹没有直接交给补全器，而由独立全局预测/优化处理。",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Yuan_GLAMR_Global_Occlusion-Aware_Human_Mesh_Recovery_With_Dynamic_Cameras_CVPR_2022_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Yuan_GLAMR_Global_Occlusion-Aware_Human_Mesh_Recovery_With_Dynamic_Cameras_CVPR_2022_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Yuan_GLAMR_Global_Occlusion-Aware_Human_Mesh_Recovery_With_Dynamic_Cameras_CVPR_2022_paper.pdf#page=5"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 6 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Yuan_GLAMR_Global_Occlusion-Aware_Human_Mesh_Recovery_With_Dynamic_Cameras_CVPR_2022_paper.pdf#page=6"
+        },
+        {
+          "label": "原图 / 方法流程定位 · Figure 2",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Yuan_GLAMR_Global_Occlusion-Aware_Human_Mesh_Recovery_With_Dynamic_Cameras_CVPR_2022_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2022/papers/Yuan_GLAMR_Global_Occlusion-Aware_Human_Mesh_Recovery_With_Dynamic_Cameras_CVPR_2022_paper.pdf#page=3",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
+    },
+    "code": "https://github.com/NVlabs/GLAMR",
+    "code_provenance": {
+      "url": "https://github.com/NVlabs/GLAMR",
+      "verified_at": "2026-11-18",
+      "basis": "论文/作者项目或作者 README 的对应标题与实现说明；已核对公开实现目录，未运行代码。"
     }
   },
   {
@@ -20218,19 +21552,82 @@
       "contribution": "以可微特征解耦替代依赖边界框的实例隔离，并利用更宽的上下文。",
       "limitations": "实例解耦解决二维多人关联，不能据此推断三维深度或视频身份；拥挤和小尺度人物需单独评价。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2022/html/Wang_Contextual_Instance_Decoupling_for_Robust_Multi-Person_Pose_Estimation_CVPR_2022_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2022/html/Wang_Contextual_Instance_Decoupling_for_Robust_Multi-Person_Pose_Estimation_CVPR_2022_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2022/papers/Wang_Contextual_Instance_Decoupling_for_Robust_Multi-Person_Pose_Estimation_CVPR_2022_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2022/papers/Wang_Contextual_Instance_Decoupling_for_Robust_Multi-Person_Pose_Estimation_CVPR_2022_paper.pdf#page=3",
+        "https://github.com/kennethwdk/CID"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2022 CVPR open-access paper 的方法相关正文（PDF 第 3, 4, 5 页）、图号与流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "整图共享特征 → 中心/实例特征抽取 → 空间与通道解耦 → 逐人热图 → 多人二维点。",
+      "steps": [
+        {
+          "title": "整图编码保留上下文",
+          "description": "共享 CNN 产生全局特征，不用人体框裁剪切断周围上下文，后续针对每个人调制同一特征图。"
+        },
+        {
+          "title": "IIA 定位并描述人物",
+          "description": "中心热图找各人位置，在该处取实例特征；对比损失让外观相似的邻人特征可区分。"
+        },
+        {
+          "title": "空间重校准突出目标位置",
+          "description": "实例特征与全图特征的相似性图，加相对中心坐标，经卷积/Sigmoid 生成空间掩膜，压低其他人物干扰。"
+        },
+        {
+          "title": "通道重校准选择目标线索",
+          "description": "以实例表示调制全图通道，再与空间调制结果拼接卷积，得到每个人的实例感知特征图；不是为每人固定分配一个独占通道。"
+        },
+        {
+          "title": "逐人热图直接读出关键点",
+          "description": "轻量热图头对每实例特征预测 K 张关节图，分别取峰得到该人二维骨架，不需再把全局关节做人体归组。"
+        }
+      ],
+      "training": "用多人热图/中心 focal、实例特征对比及逐人热图 focal 联合训练；尺度适应的高斯监督来自二维标注。",
+      "inference": "从单张整图生成多人二维姿态，实例数量依赖中心检测。避免传统框裁剪和关节分组，不等于中心漏检不会影响输出。",
+      "figure_reading": "图 2 左侧 IIA 提取点与特征，右侧 GFD 的 channel/spatial 两路再融合；中心图是人体定位，不是各关节最终热图。",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Wang_Contextual_Instance_Decoupling_for_Robust_Multi-Person_Pose_Estimation_CVPR_2022_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Wang_Contextual_Instance_Decoupling_for_Robust_Multi-Person_Pose_Estimation_CVPR_2022_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Wang_Contextual_Instance_Decoupling_for_Robust_Multi-Person_Pose_Estimation_CVPR_2022_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位 · Figure 2",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Wang_Contextual_Instance_Decoupling_for_Robust_Multi-Person_Pose_Estimation_CVPR_2022_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2022/papers/Wang_Contextual_Instance_Decoupling_for_Robust_Multi-Person_Pose_Estimation_CVPR_2022_paper.pdf#page=3",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
+    },
+    "code": "https://github.com/kennethwdk/CID",
+    "code_provenance": {
+      "url": "https://github.com/kennethwdk/CID",
+      "verified_at": "2026-11-18",
+      "basis": "论文/作者项目或作者 README 的对应标题与实现说明；已核对公开实现目录，未运行代码。"
     }
   },
   {
@@ -20255,19 +21652,79 @@
       "contribution": "分开绝对根深度与根相对深度监督，以解耦表示构成单阶段方法。",
       "limitations": "绝对深度与二维定位采用不同编码；根平移误差应独立报告，不能只看对齐后的三维误差。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2022/html/Jin_Single-Stage_Is_Enough_Multi-Person_Absolute_3D_Pose_Estimation_CVPR_2022_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2022/html/Jin_Single-Stage_Is_Enough_Multi-Person_Absolute_3D_Pose_Estimation_CVPR_2022_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2022/papers/Jin_Single-Stage_Is_Enough_Multi-Person_Absolute_3D_Pose_Estimation_CVPR_2022_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2022/papers/Jin_Single-Stage_Is_Enough_Multi-Person_Absolute_3D_Pose_Estimation_CVPR_2022_paper.pdf#page=4"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2022 CVPR open-access paper 的方法相关正文（PDF 第 3, 4, 5, 6 页）、图号与流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "RGB 共享骨干 → 中心/二维偏移 + 根深度/相对深度 → 姿态引导深度查询 → 透视重建 → 多人绝对骨架。",
+      "steps": [
+        {
+          "title": "分清人体中心与根关节",
+          "description": "二维定位以可见关节平均中心为参考，深度则以骨盆根点为参考；两个锚点不同，不能把 center heatmap 直接当骨盆图。"
+        },
+        {
+          "title": "同时预测四类回归图",
+          "description": "共享特征分出中心概率、中心到各关节二维偏移、绝对根深度和各关节相对根深度四路，以解耦空间定位与深度。"
+        },
+        {
+          "title": "姿态位置查询帮助根深度",
+          "description": "PDQM 根据预测二维偏移及根—中心偏移，从其他关节附近 warp 特征并拼到根深度分支，使其感知整体人体尺度。"
+        },
+        {
+          "title": "训练时单独强调深度误差",
+          "description": "DAPL 使用真值二维点及内参组合预测深度恢复三维，突出深度对绝对姿态的影响，配合各图的直接监督。"
+        },
+        {
+          "title": "组合二维与深度恢复绝对点",
+          "description": "检测中心并读取二维骨架，按骨盆处深度图取得根及相对深度，用透视相机反投影各关节，形成同相机系多人坐标。"
+        }
+      ],
+      "training": "中心 L2、二维偏移与深度 smooth L1、DAPL 共同训练。DAPL 的真值二维坐标只用于训练损失，测试应使用预测坐标。",
+      "inference": "单阶段图像网络后仍要解码回归图并使用相机内参做绝对三维重建；可见关节均值中心与根位置不应混用。",
+      "figure_reading": "图 3 四路输出及 PDQM，图 2 定义两种参考点。相对深度采用根深度减关节深度的约定，组合时注意符号。",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Jin_Single-Stage_Is_Enough_Multi-Person_Absolute_3D_Pose_Estimation_CVPR_2022_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Jin_Single-Stage_Is_Enough_Multi-Person_Absolute_3D_Pose_Estimation_CVPR_2022_paper.pdf#page=4"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Jin_Single-Stage_Is_Enough_Multi-Person_Absolute_3D_Pose_Estimation_CVPR_2022_paper.pdf#page=5"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 6 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Jin_Single-Stage_Is_Enough_Multi-Person_Absolute_3D_Pose_Estimation_CVPR_2022_paper.pdf#page=6"
+        },
+        {
+          "label": "原图 / 方法流程定位 · Figure 3",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Jin_Single-Stage_Is_Enough_Multi-Person_Absolute_3D_Pose_Estimation_CVPR_2022_paper.pdf#page=4"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2022/papers/Jin_Single-Stage_Is_Enough_Multi-Person_Absolute_3D_Pose_Estimation_CVPR_2022_paper.pdf#page=4",
+      "caption": "Figure 3 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
     }
   },
   {
@@ -20292,19 +21749,82 @@
       "contribution": "将验证重点放在未见相机设置，并把同一随机框架扩展到基础矩阵估计。",
       "limitations": "泛化三角化仍需要多视角关键点与几何信息；相机数量和布置变化应在独立划分上检验。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2022/html/Bartol_Generalizable_Human_Pose_Triangulation_CVPR_2022_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2022/html/Bartol_Generalizable_Human_Pose_Triangulation_CVPR_2022_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2022/papers/Bartol_Generalizable_Human_Pose_Triangulation_CVPR_2022_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2022/papers/Bartol_Generalizable_Human_Pose_Triangulation_CVPR_2022_paper.pdf#page=3",
+        "https://github.com/kristijanbartol/general-3d-humans"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对原论文摘要；尚未完成全文逐节精读或独立复现。",
-      "verified_at": "2026-11-17",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2022 CVPR open-access paper 的方法相关正文（PDF 第 2, 3, 4 页）、图号与流程；未完成全文逐节精读或独立复现。",
+      "verified_at": "2026-11-18",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示整理；未进行全文实验复核或独立复现。"
     },
     "ccf": {
       "tier": "A",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "多视图二维点 → 随机视图子集三角化候选 → 规范骨架/骨长评分 → 概率加权 → 稳健三维姿态。",
+      "steps": [
+        {
+          "title": "前置二维检测提供对应",
+          "description": "各视图检测同一人体关节，关节语义对应已知；随机模型输入是二维坐标，不能自动解决任意多人跨视图身份匹配。"
+        },
+        {
+          "title": "随机组合生成三维假设",
+          "description": "每个关节分别采样视图子集三角化，组成多个全身候选，以不同组合减轻部分二维点错误的影响。"
+        },
+        {
+          "title": "在骨架空间评分而非记相机布局",
+          "description": "用肩/骨盆定义平面对齐姿态，拼接规范三维坐标及 16 段骨长，经 MLP 给每个假设打分，这是三角化模型的可学习部分。"
+        },
+        {
+          "title": "把分数归一成假设权重",
+          "description": "Gumbel-Softmax 用于训练概率评分；论文比较多种选择策略，表现较好的配置使用全部候选的加权平均。"
+        },
+        {
+          "title": "输出候选融合后的骨架",
+          "description": "将权重施于原三维假设形成结果，而非对各相机图像做固定布局特征融合。另一个独立实例把随机框架用于基础矩阵估计。"
+        }
+      ],
+      "training": "用真值三维姿态计算候选误差期望、选中/融合误差及熵项训练评分器；不属于无三维监督方法。随机候选生成和二维检测器有各自前置过程。",
+      "inference": "姿态三角化仍需多视图相机几何。基础矩阵扩展另通过八点法生成相机候选且假设内参已知，不能据此称主方法无需标定或无需对应。",
+      "figure_reading": "图 2 分成生成、评分和选择，损失节点只在训练使用；评分器处理骨架先验，多视图几何在候选生成阶段已经使用。",
+      "sources": [
+        {
+          "label": "方法相关正文 · PDF 第 2 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Bartol_Generalizable_Human_Pose_Triangulation_CVPR_2022_paper.pdf#page=2"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Bartol_Generalizable_Human_Pose_Triangulation_CVPR_2022_paper.pdf#page=3"
+        },
+        {
+          "label": "方法相关正文 · PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Bartol_Generalizable_Human_Pose_Triangulation_CVPR_2022_paper.pdf#page=4"
+        },
+        {
+          "label": "原图 / 方法流程定位 · Figure 2",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Bartol_Generalizable_Human_Pose_Triangulation_CVPR_2022_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18",
+      "figure_status": "original_link_only"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2022/papers/Bartol_Generalizable_Human_Pose_Triangulation_CVPR_2022_paper.pdf#page=3",
+      "caption": "Figure 2 · 论文原图链接",
+      "note": "已定位论文原图；尚未确认可在本站转载的许可，暂仅保留原文链接。"
+    },
+    "code": "https://github.com/kristijanbartol/general-3d-humans",
+    "code_provenance": {
+      "url": "https://github.com/kristijanbartol/general-3d-humans",
+      "verified_at": "2026-11-18",
+      "basis": "论文/作者项目或作者 README 的对应标题与实现说明；已核对公开实现目录，未运行代码。"
     }
   },
   {

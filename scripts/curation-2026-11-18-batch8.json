@@ -1,0 +1,393 @@
+{
+  "review_date": "2026-11-18",
+  "expanded_records": 24,
+  "records": [
+    {
+      "id": "bmp",
+      "version": "Official 2021 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Zhang_Body_Meshes_as_Points_CVPR_2021_paper.pdf"
+    },
+    {
+      "id": "tcmr",
+      "version": "Official 2021 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Choi_Beyond_Static_Features_for_Temporally_Consistent_3D_Human_Pose_and_CVPR_2021_paper.pdf"
+    },
+    {
+      "id": "tessetrack",
+      "version": "Official 2021 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        2,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Reddy_TesseTrack_End-to-End_Learnable_Multi-Person_Articulated_3D_Pose_Tracking_CVPR_2021_paper.pdf"
+    },
+    {
+      "id": "swahr",
+      "version": "Official 2021 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Luo_Rethinking_the_Heatmap_Regression_for_Bottom-Up_Human_Pose_Estimation_CVPR_2021_paper.pdf"
+    },
+    {
+      "id": "planesweep-pose",
+      "version": "Official 2021 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Lin_Multi-View_Multi-Person_3D_Pose_Estimation_With_Plane_Sweep_Stereo_CVPR_2021_paper.pdf"
+    },
+    {
+      "id": "mirrored-human",
+      "version": "Official 2021 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Fang_Reconstructing_3D_Human_Pose_by_Watching_Humans_in_the_Mirror_CVPR_2021_paper.pdf"
+    },
+    {
+      "id": "contextpose",
+      "version": "Official 2021 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Ma_Context_Modeling_in_3D_Human_Pose_Estimation_A_Unified_Perspective_CVPR_2021_paper.pdf"
+    },
+    {
+      "id": "poseaug",
+      "version": "Official 2021 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        2,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Gong_PoseAug_A_Differentiable_Pose_Augmentation_Framework_for_3D_Human_Pose_CVPR_2021_paper.pdf"
+    },
+    {
+      "id": "integrated-topdown-bottomup-3d",
+      "version": "Official 2021 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Cheng_Monocular_3D_Multi-Person_Pose_Estimation_by_Integrating_Top-Down_and_Bottom-Up_CVPR_2021_paper.pdf"
+    },
+    {
+      "id": "simpoe",
+      "version": "Official 2021 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Yuan_SimPoE_Simulated_Character_Control_for_3D_Human_Pose_Estimation_CVPR_2021_paper.pdf"
+    },
+    {
+      "id": "boa",
+      "version": "Official 2021 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Guan_Bilevel_Online_Adaptation_for_Out-of-Domain_Human_Mesh_Reconstruction_CVPR_2021_paper.pdf"
+    },
+    {
+      "id": "graph-stacked-hourglass",
+      "version": "Official 2021 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Xu_Graph_Stacked_Hourglass_Networks_for_3D_Human_Pose_Estimation_CVPR_2021_paper.pdf"
+    },
+    {
+      "id": "hund",
+      "version": "Official 2021 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Zanfir_Neural_Descent_for_Visual_3D_Human_Pose_and_Shape_CVPR_2021_paper.pdf"
+    },
+    {
+      "id": "canonpose",
+      "version": "Official 2021 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        2,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Wandt_CanonPose_Self-Supervised_Monocular_3D_Human_Pose_Estimation_in_the_Wild_CVPR_2021_paper.pdf"
+    },
+    {
+      "id": "fcpose",
+      "version": "Official 2021 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 4"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Mao_FCPose_Fully_Convolutional_Multi-Person_Pose_Estimation_With_Dynamic_Instance-Aware_Convolutions_CVPR_2021_paper.pdf"
+    },
+    {
+      "id": "ray3d",
+      "version": "Official 2022 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Zhan_Ray3D_Ray-Based_3D_Human_Pose_Estimation_for_Monocular_Absolute_3D_CVPR_2022_paper.pdf"
+    },
+    {
+      "id": "ochmr",
+      "version": "Official 2022 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        2,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Khirodkar_Occluded_Human_Mesh_Recovery_CVPR_2022_paper.pdf"
+    },
+    {
+      "id": "petr-pose",
+      "version": "Official 2022 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Shi_End-to-End_Multi-Person_Pose_Estimation_With_Transformers_CVPR_2022_paper.pdf"
+    },
+    {
+      "id": "elepose",
+      "version": "Official 2022 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Wandt_ElePose_Unsupervised_3D_Human_Pose_Estimation_by_Predicting_Camera_Elevation_CVPR_2022_paper.pdf"
+    },
+    {
+      "id": "mhformer",
+      "version": "Official 2022 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Li_MHFormer_Multi-Hypothesis_Transformer_for_3D_Human_Pose_Estimation_CVPR_2022_paper.pdf"
+    },
+    {
+      "id": "glamr",
+      "version": "Official 2022 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Yuan_GLAMR_Global_Occlusion-Aware_Human_Mesh_Recovery_With_Dynamic_Cameras_CVPR_2022_paper.pdf"
+    },
+    {
+      "id": "cid",
+      "version": "Official 2022 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Wang_Contextual_Instance_Decoupling_for_Robust_Multi-Person_Pose_Estimation_CVPR_2022_paper.pdf"
+    },
+    {
+      "id": "drm-absolute",
+      "version": "Official 2022 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Jin_Single-Stage_Is_Enough_Multi-Person_Absolute_3D_Pose_Estimation_CVPR_2022_paper.pdf"
+    },
+    {
+      "id": "generalizable-triangulation",
+      "version": "Official 2022 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Bartol_Generalizable_Human_Pose_Triangulation_CVPR_2022_paper.pdf"
+    }
+  ]
+}
