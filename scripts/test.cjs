@@ -139,7 +139,7 @@ for(const p of pipelinePapers){
  const pipeline=paperPipeline(p);
  assert.ok(pipeline.available&&pipeline.overview&&pipeline.training&&pipeline.inference&&pipeline.figure_reading,`${p.id}: complete pipeline`);
  assert.ok(pipeline.steps.length>=4,`${p.id}: module-level steps`);
- assert.ok(paperFigures(p).some(f=>f.src),`${p.id}: pipeline needs a local architecture figure`);
+ assert.ok(paperFigures(p).some(f=>f.src)||(p.pipeline.figure_status==='original_link_only'||p.pipeline.figure_status==='architecture_not_located')&&paperFigures(p).some(f=>f.source),`${p.id}: pipeline needs a verified figure or an explicitly pending original-source link`);
  assert.ok(pipeline.sources.every(s=>s.url.includes('arxiv.org/html/')&&s.url.includes('#')),`${p.id}: versioned section anchors`);
 }
 assert.ok(pipelinePapers.length>=6);
@@ -155,3 +155,15 @@ for(const p of papers)for(const figure of paperFigures(p).filter(f=>f.src)){
  assert.equal(figure.source,entry.source_url);assert.equal(figure.license,entry.license);
 }
 console.log(`PASS: ${pipelinePapers.length} sourced pipelines, training/inference separation, optional multi-figure rendering and all local image checksums/attributions.`);
+const progress=JSON.parse(fs.readFileSync(path.join(__dirname,root,'curation-progress.json'),'utf8'));
+assert.equal(progress.total,papers.length);assert.equal(progress.entries.length,papers.length);
+assert.equal(new Set(progress.entries.map(p=>p.id)).size,papers.length);
+assert.equal(progress.counts.complete+progress.counts.figure_pending,pipelinePapers.length);
+assert.equal(Object.values(progress.counts).reduce((a,b)=>a+b,0),papers.length);
+for(const entry of progress.entries){
+ const p=papers.find(p=>p.id===entry.id);assert.ok(p);
+ if(entry.status==='complete')assert.ok(p.pipeline&&paperFigures(p).some(f=>f.src));
+ if(entry.status==='figure_pending')assert.ok(p.pipeline&&!paperFigures(p).some(f=>f.src));
+ if(entry.status==='pending')assert.ok(!p.pipeline);
+}
+console.log('PASS: full catalogue queue matches actual pipeline and original-figure completion; pending pages are never counted as complete.');

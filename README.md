@@ -2,7 +2,7 @@
 
 A curated, non-exhaustive index of 2D and 3D head, hand and human pose estimation research, including historical and recent work. Publication, preprint, and workshop status are distinguished where known.
 
-[Browse the site](https://voidvein.github.io/Awesome-Xpose-estimation/) · [Sources and curation notes](SOURCES.md)
+[Browse the site](https://voidvein.github.io/Awesome-Xpose-estimation/) · [Sources and curation notes](SOURCES.md) · [Detail-page progress](CURATION.md)
 
 ## Run locally
 

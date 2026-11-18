@@ -1,6 +1,6 @@
 # Paper figure attribution
 
-These extracted figure assets are separate from the repository code license. Each image retains its own source license: **CC BY 4.0** or **CC BY-NC-SA 4.0**, as recorded below and in the manifest. Noncommercial and share-alike terms continue to apply to the corresponding figures. No endorsement is implied.
+These extracted figure assets are separate from the repository code license. Each image retains its own source license: **CC BY 4.0**, **CC BY-NC-SA 4.0**, or **CC BY-NC-ND 4.0**, as recorded below and in the manifest. Noncommercial and share-alike terms continue to apply to the corresponding figures. No endorsement is implied.
 
 ## rtmpose
 
@@ -75,3 +75,53 @@ David Ferman, Pablo Garrido, Gaurav Bharaj. FaceLift: Semi-supervised 3D Facial 
 - License evidence: https://arxiv.org/html/2405.19646v1
 - Changes: 原始 arXiv HTML 图片，未裁剪、未修改；页面按容器缩放显示。
 - SHA-256: `34b679e75164f1ae3d105549d7e0bff487a9c1205d6a6b3de5254cc24da8296a`
+
+## wilor · Figure 4
+
+Rolandos Alexandros Potamias, Jinglei Zhang, Jiankang Deng, Stefanos Zafeiriou. WiLoR: End-to-end 3D Hand Localization and Reconstruction in-the-wild, Figure 4, arXiv:2409.12259v2. CC BY-NC-ND 4.0.
+
+- Source: https://arxiv.org/html/2409.12259v2#S4.F4
+- License: https://creativecommons.org/licenses/by-nc-nd/4.0/
+- License evidence: https://arxiv.org/html/2409.12259v2
+- Changes: 原始 arXiv HTML 图片；完整保留原图，未裁剪、未修改、未重绘。页面仅等比缩放，点击可打开原尺寸。
+- SHA-256: `2302f0b40aa2321761b24a3809275a2cea106dc19365041fbc3a9ef439637fdc`
+
+## wilor · Figure 3
+
+Rolandos Alexandros Potamias, Jinglei Zhang, Jiankang Deng, Stefanos Zafeiriou. WiLoR: End-to-end 3D Hand Localization and Reconstruction in-the-wild, Figure 3, arXiv:2409.12259v2. CC BY-NC-ND 4.0.
+
+- Source: https://arxiv.org/html/2409.12259v2#S4.F3
+- License: https://creativecommons.org/licenses/by-nc-nd/4.0/
+- License evidence: https://arxiv.org/html/2409.12259v2
+- Changes: 原始 arXiv HTML 图片；完整保留原图，未裁剪、未修改、未重绘。页面仅等比缩放，点击可打开原尺寸。
+- SHA-256: `5880b5fece82e48320ad79eeadfc643fc077db5b645af22a024769546afc1d75`
+
+## gvhmr · Figure 6
+
+Zehong Shen, Huaijin Pi, Yan Xia, Zhi Cen, Sida Peng, Zechen Hu, Hujun Bao, Ruizhen Hu, Xiaowei Zhou. World-Grounded Human Motion Recovery via Gravity-View Coordinates, Figure 6, arXiv:2409.06662v1. CC BY-NC-SA 4.0.
+
+- Source: https://arxiv.org/html/2409.06662v1#S3.F6
+- License: https://creativecommons.org/licenses/by-nc-sa/4.0/
+- License evidence: https://arxiv.org/html/2409.06662v1
+- Changes: 原始 arXiv HTML 图片；完整保留原图，未裁剪、未修改、未重绘。页面仅等比缩放，点击可打开原尺寸。
+- SHA-256: `e0ebbd5b14298ab25951fec627a9a57d352cd29048e4b15dee3f990a3caf5473`
+
+## gvhmr · Figure 3
+
+Zehong Shen, Huaijin Pi, Yan Xia, Zhi Cen, Sida Peng, Zechen Hu, Hujun Bao, Ruizhen Hu, Xiaowei Zhou. World-Grounded Human Motion Recovery via Gravity-View Coordinates, Figure 3, arXiv:2409.06662v1. CC BY-NC-SA 4.0.
+
+- Source: https://arxiv.org/html/2409.06662v1#S2.F3
+- License: https://creativecommons.org/licenses/by-nc-sa/4.0/
+- License evidence: https://arxiv.org/html/2409.06662v1
+- Changes: 原始 arXiv HTML 图片；完整保留原图，未裁剪、未修改、未重绘。页面仅等比缩放，点击可打开原尺寸。
+- SHA-256: `921bdf2669679ff3976dba70c58f11d35678d89a537f20d2d3e6574c4f3eafc4`
+
+## smplest-x · Figure 5
+
+Wanqi Yin, Zhongang Cai et al.. SMPLest-X: Ultimate Scaling for Expressive Human Pose and Shape Estimation, Figure 5, arXiv:2501.09782v1. CC BY 4.0.
+
+- Source: https://arxiv.org/html/2501.09782v1#S4.F5
+- License: https://creativecommons.org/licenses/by/4.0/
+- License evidence: https://arxiv.org/html/2501.09782v1
+- Changes: 原始 arXiv HTML 图片；完整保留原图，未裁剪、未修改、未重绘。页面仅等比缩放，点击可打开原尺寸。
+- SHA-256: `f6acf8c1eca369b7f70b372c536493f213c4d6eabda3fdf4840d66a882677197`

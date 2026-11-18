@@ -1,5 +1,13 @@
 # Sources and curation notes
 
+## Continuing pipeline construction
+
+The user requested extending the HaMeR-style pages across the remaining catalogue. The reproducible queue is tracked in `curation-progress.json` and summarized in `CURATION.md`; `scripts/curation_progress.py` derives it from the actual records and figure manifest. A short abstract or applicability note never counts as a finished pipeline.
+
+The next batch adds 20 method-specific, versioned readings: Sapiens, WiLoR, HandOS, HaWoR, HandDiff, MotionAGFormer, PoseFormer, VideoPose3D, PARE, LocLLM, KptLLM, CapeLLM, ProsePose, LangPose, GVHMR, ViTPose, HRNet, SimCC, RTMW and SMPLest-X. This is targeted method-section reading, without independent reproduction or a blanket full-paper audit. SimCC and ViTPose use their revised v3 sources, rather than early v1 architectures; RTMW's title was checked before accepting its source record.
+
+The user's explicit figure preference is **original paper images only; retain links when republication permission is unclear; do not redraw**. WiLoR's CC BY-NC-ND originals are copied in full without cropping or changing their content. GVHMR and SMPLest-X retain their respective CC licenses. Other new pages link to the precise original figures. For Sapiens v1, the available training-reconstruction and annotation examples are not mislabeled as a complete architecture diagram; its method section is linked while architecture-image discovery remains pending.
+
 ## Pipeline and architecture batch — 2026-11-18
 
 The first detailed pipeline batch covers RTMPose, RTMO, FaceLift, HaMeR, TRG and WHAM. Each now has five ordered module-level steps, separate training and inference explanations, a figure-reading guide and version-specific method/figure links. The scope is targeted method-section reading, not independent reproduction or a claim that all catalogue entries received this depth of reading.
