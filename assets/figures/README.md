@@ -704,3 +704,125 @@ Pengfei Xie, Wenqiang Xu, Tutian Tang, Zhenjun Yu, Cewu Lu. MS-MANO: Enabling Ha
 - License: [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 - License evidence: https://arxiv.org/abs/2404.10227v1
 - SHA-256: `f1259f3114a17a7b7c9052d070f6e3f1eb9104ec32b9fe0b165edd8fc493c2a7`
+
+## Original figures from 2021–2023 hand methods, batch 14
+
+### assets/figures/blurhandnet-original.png
+
+Yeonguk Oh, JoonKyu Park, Jaeha Kim, Gyeongsik Moon, Kyoung Mu Lee. Recovering 3D Hand Mesh Sequence from a Single Blurry Image: A New Dataset and Temporal Unfolding, Figure 3, arXiv:2303.15417v1. CC BY-NC-SA 4.0.
+
+- Original source: https://arxiv.org/html/2303.15417v1#S3.F3
+- Original file: https://arxiv.org/html/2303.15417v1/model15.png
+- License: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+- License evidence: https://arxiv.org/abs/2303.15417v1
+- SHA-256: `654a767f7c1aa21d1dd3583ff184b133230f40337e4e276ca1bed341f70c7d63`
+
+### assets/figures/acr-original.png
+
+Zhengdi Yu, Shaoli Huang, Chen Fang, Toby P. Breckon, Jue Wang. ACR: Attention Collaboration-based Regressor for Arbitrary Two-Hand Reconstruction, Figure 2, arXiv:2303.05938v1. CC BY-NC-SA 4.0.
+
+- Original source: https://arxiv.org/html/2303.05938v1#S2.F2
+- Original file: https://arxiv.org/html/2303.05938v1/fig1-v2.png
+- License: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+- License evidence: https://arxiv.org/abs/2303.05938v1
+- SHA-256: `405b7f8d7dbd31413b140ad96a7913772ab85adee1b5e40dd499c86eaaebd080`
+
+### assets/figures/memahand-original.png
+
+Congyi Wang, Feida Zhu, Shilei Wen. MeMaHand: Exploiting Mesh-Mano Interaction for Single Image Two-Hand Reconstruction, Figure 2, arXiv:2303.15718v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2303.15718v1#S1.F2
+- Original file: https://arxiv.org/html/2303.15718v1/architecture_a.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2303.15718v1
+- SHA-256: `e350f42cf538337acf217a5ff06b75bb811d8388a4235d1fdc97893a8bff9e94`
+
+### assets/figures/interwild-original.png
+
+Gyeongsik Moon. Bringing Inputs to Shared Domains for 3D Interacting Hands Recovery in the Wild, Figure 4, arXiv:2303.13652v1. CC BY-NC-ND 4.0.
+
+- Original source: https://arxiv.org/html/2303.13652v1#S2.F4
+- Original file: https://arxiv.org/html/2303.13652v1/overall_pipeline.png
+- License: [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+- License evidence: https://arxiv.org/abs/2303.13652v1
+- SHA-256: `689c8d58a87458860045b795d99bffb696f8d64cf1d1b8e2bc508f9134a47ac6`
+
+### assets/figures/interwild-transnet-original.png
+
+Gyeongsik Moon. Bringing Inputs to Shared Domains for 3D Interacting Hands Recovery in the Wild, Figure 6, arXiv:2303.13652v1. CC BY-NC-ND 4.0.
+
+- Original source: https://arxiv.org/html/2303.13652v1#S3.F6
+- Original file: https://arxiv.org/html/2303.13652v1/transnet.png
+- License: [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+- License evidence: https://arxiv.org/abs/2303.13652v1
+- SHA-256: `f5a645d3fb53943b6302081a7b9ec529b2e87eff6809e10a142749b08648c504`
+
+### assets/figures/assemblyhands-original.png
+
+Takehiko Ohkawa, Kun He, Fadime Sener, Tomas Hodan, Luan Tran, Cem Keskin. AssemblyHands: Towards Egocentric Activity Understanding via 3D Hand Pose Estimation, Figure 2, arXiv:2304.12301v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2304.12301v1#S1.F2
+- Original file: https://arxiv.org/html/2304.12301v1/pipeline.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2304.12301v1
+- SHA-256: `7f483ada857889e0ed264db1b6a5faa03c0d4188efc96700247eb7188b5a5a53`
+
+### assets/figures/assemblyhands-mvexonet-original.png
+
+Takehiko Ohkawa, Kun He, Fadime Sener, Tomas Hodan, Luan Tran, Cem Keskin. AssemblyHands: Towards Egocentric Activity Understanding via 3D Hand Pose Estimation, Figure 3, arXiv:2304.12301v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2304.12301v1#S3.F3
+- Original file: https://arxiv.org/html/2304.12301v1/volnet_v3.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2304.12301v1
+- SHA-256: `6a94048f572b5bdea4d422ee5c0392d139449555afa6160d347463613f96d23f`
+
+### assets/figures/poem-original.png
+
+Lixin Yang, Jian Xu, Licheng Zhong, Xinyu Zhan, Zhicheng Wang, Kejian Wu, Cewu Lu. POEM: Reconstructing Hand in a Point Embedded Multi-view Stereo, Figure 2, arXiv:2304.04038v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2304.04038v1#S3.F2
+- Original file: https://arxiv.org/html/2304.04038v1/framework.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2304.04038v1
+- SHA-256: `aec95cbd33b63a5f91e811f0fd53b3d8ccc73cc9f6ca28726b7fa472540f15dc`
+
+### assets/figures/peclr-original.png
+
+Adrian Spurr, Aneesh Dahiya, Xucong Zhang, Xi Wang, Otmar Hilliges. Self-Supervised 3D Hand Pose Estimation from monocular RGB via Contrastive Learning, Figure 2, arXiv:2106.05953v1. CC BY-NC-ND 4.0.
+
+- Original source: https://arxiv.org/html/2106.05953v1#S3.F2
+- Original file: https://arxiv.org/html/2106.05953v1/overview_figure_1.png
+- License: [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+- License evidence: https://arxiv.org/abs/2106.05953v1
+- SHA-256: `ecd111586a7e064082a108b38ea23ae28df18415212df1fed88c4b943a2c153c`
+
+### assets/figures/hand-object-wild-original.png
+
+Zhe Cao, Ilija Radosavovic, Angjoo Kanazawa, Jitendra Malik. Reconstructing Hand-Object Interactions in the Wild, Figure 3, arXiv:2012.09856v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2012.09856v1#S2.F3
+- Original file: https://arxiv.org/html/2012.09856v1/pipeline_v4.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2012.09856v1
+- SHA-256: `969e4839ccd8c28e94189da4df4aa9468ca9332d91d3e37cc61adc0635bd1528`
+
+### assets/figures/handar-alignment-original.png
+
+Xiao Tang, Tianyu Wang, Chi-Wing Fu. Towards Accurate Alignment in Real-time 3D Hand-Mesh Reconstruction, Figure 2, arXiv:2109.01723v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2109.01723v1#S2.F2
+- Original file: https://arxiv.org/html/2109.01723v1/network.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2109.01723v1
+- SHA-256: `2b77b6963bd8ffc190f84ae6cf1424eaa96b820681b27a898777615ab9567263`
+
+### assets/figures/handar-alignment-gcn-original.png
+
+Xiao Tang, Tianyu Wang, Chi-Wing Fu. Towards Accurate Alignment in Real-time 3D Hand-Mesh Reconstruction, Figure 4, arXiv:2109.01723v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2109.01723v1#S3.F4
+- Original file: https://arxiv.org/html/2109.01723v1/GCN.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2109.01723v1
+- SHA-256: `f315fea73f0e33537c4cd65f7eee56f9aefb5d8b8659a5b662f5e8310d32f635`

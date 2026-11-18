@@ -199,3 +199,10 @@ Four code links were added after inspecting corresponding READMEs and public imp
 
 - 9 篇论文收录 11 张未经修改的原图，另有 10 篇保留原图链接。全部图号、版本、许可依据和源文件散列值可在图像清单中核对。结构化热图回归收录原文的标签平滑图，网络与训练目标另在正文解释。
 - 新增 9 个经 README 与实现入口核对的代码链接。其中 MS-MANO 按钮直达作者 Dynamics 实现，项目页另列 Unity 演示。代码和权重未经运行验证。
+
+## 2026-11-18：第 14 批 2021–2023 年手部方法详情
+
+本批补充 27 篇现有论文，覆盖手网格重建、视频时序、事件输入、手物姿态、数据集构建和跨域学习。各篇方法章节或会议 PDF 页码见 `scripts/curation-2026-11-18-batch14.json`。ARCTIC 采用含 ArcticNet 和 InterField 两项任务的 arXiv v3，AssemblyHands 区分外部相机标注与头戴相机单图基线，H2ONet 区分逐指网格融合和整手朝向估计。
+
+- 9 篇收录 12 张未经修改的作者原图。18 篇保留原文链接。各图的作者、版本、许可依据和校验值见图像清单。
+- 新增 14 个经项目说明和源码目录核对的代码链接。AssemblyHands 和 OakInk 链接数据集工具，PeCLR 主要提供预训练实现。作者的 MOW 仓库记录为关联数据与可视化资源。代码与权重未经运行验证。

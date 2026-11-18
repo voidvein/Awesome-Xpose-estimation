@@ -1,0 +1,913 @@
+{
+  "review_date": "2026-11-18",
+  "expanded_records": 27,
+  "new_code_links": [
+    "hand-assemblyhands-towards-egocentric-activity-understanding-via-3d-hand-pose-estimation",
+    "hand-neural-voting-field-for-camera-space-3d-hand-pose-estimation",
+    "hand-gsdf-geometry-driven-signed-distance-functions-for-3d-hand-object-reconstruction",
+    "hand-poem-reconstructing-hand-in-a-point-embedded-multi-view-stereo",
+    "hand-hierarchical-temporal-transformer-for-3d-hand-pose-estimation-and-action-recognition-from-egocentric-rgb-video",
+    "hand-oakink-a-large-scale-knowledge-repository-for-understanding-hand-object-interaction",
+    "hand-keypoint-transformer-solving-joint-identification-in-challenging-hands-and-object-interactions-for-accurate-3d",
+    "hand-model-based-3d-hand-reconstruction-via-self-supervised-learning",
+    "hand-self-supervised-3d-hand-pose-estimation-from-monocular-rgb-via-contrastive-learning",
+    "hand-a2j-transformer-anchor-to-joint-transformer-network-for-3d-interacting-hand-pose-estimation-from-a-single-rgb-",
+    "hand-eventhands-real-time-neural-3d-hand-pose-estimation-from-an-event-stream",
+    "hand-semi-supervised-3d-hand-object-poses-estimation-with-interactions-in-time",
+    "hand-h2onet-hand-occlusion-and-orientation-aware-network-for-real-time-3d-hand-mesh-reconstruction",
+    "hand-arctic-a-dataset-for-dexterous-bimanual-hand-object-manipulation"
+  ],
+  "records": [
+    {
+      "id": "hand-recovering-3d-hand-mesh-sequence-from-a-single-blurry-image-a-new-dataset-and-temporal-unfolding",
+      "version": "arXiv:2303.15417v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4.SS1",
+        "S4.SS2",
+        "S4.SS3",
+        "S4.SS4"
+      ],
+      "figure_anchor": [
+        "S3.F3",
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2303.15417v1",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2303.15417v1",
+        "url": "https://arxiv.org/abs/2303.15417v1",
+        "license_url": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "authors": [
+          "Oh, Yeonguk",
+          "Park, JoonKyu",
+          "Kim, Jaeha",
+          "Moon, Gyeongsik",
+          "Lee, Kyoung Mu"
+        ]
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2303.15417v1#S3.F3"
+      ]
+    },
+    {
+      "id": "hand-acr-attention-collaboration-based-regressor-for-arbitrary-two-hand-reconstruction",
+      "version": "arXiv:2303.05938v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4",
+        "S3.SS5"
+      ],
+      "figure_anchor": [
+        "S2.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2303.05938v1",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2303.05938v1",
+        "url": "https://arxiv.org/abs/2303.05938v1",
+        "license_url": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "authors": [
+          "Yu, Zhengdi",
+          "Huang, Shaoli",
+          "Fang, Chen",
+          "Breckon, Toby P.",
+          "Wang, Jue"
+        ]
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2303.05938v1#S2.F2"
+      ]
+    },
+    {
+      "id": "hand-memahand-exploiting-mesh-mano-interaction-for-single-image-two-hand-reconstruction",
+      "version": "arXiv:2303.15718v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4"
+      ],
+      "figure_anchor": [
+        "S1.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2303.15718v1",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2303.15718v1",
+        "url": "https://arxiv.org/abs/2303.15718v1",
+        "license_url": "http://creativecommons.org/licenses/by/4.0/",
+        "authors": [
+          "Wang, Congyi",
+          "Zhu, Feida",
+          "Wen, Shilei"
+        ]
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2303.15718v1#S1.F2"
+      ]
+    },
+    {
+      "id": "hand-bringing-inputs-to-shared-domains-for-3d-interacting-hands-recovery-in-the-wild",
+      "version": "arXiv:2303.13652v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3"
+      ],
+      "figure_anchor": [
+        "S2.F4",
+        "Figure 4"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2303.13652v1",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2303.13652v1",
+        "url": "https://arxiv.org/abs/2303.13652v1",
+        "license_url": "http://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "authors": [
+          "Moon, Gyeongsik"
+        ]
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2303.13652v1#S2.F4",
+        "https://arxiv.org/html/2303.13652v1#S3.F6"
+      ]
+    },
+    {
+      "id": "hand-assemblyhands-towards-egocentric-activity-understanding-via-3d-hand-pose-estimation",
+      "version": "arXiv:2304.12301v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S4",
+        "S4.SS1",
+        "S5"
+      ],
+      "figure_anchor": [
+        "S1.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2304.12301v1",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2304.12301v1",
+        "url": "https://arxiv.org/abs/2304.12301v1",
+        "license_url": "http://creativecommons.org/licenses/by/4.0/",
+        "authors": [
+          "Ohkawa, Takehiko",
+          "He, Kun",
+          "Sener, Fadime",
+          "Hodan, Tomas",
+          "Tran, Luan",
+          "Keskin, Cem"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/facebookresearch/assemblyhands-toolkit",
+        "verified_at": "2026-11-18",
+        "basis": "作者维护的 AssemblyHands 工具包，提供数据读取、标定、可视化和评估。此入口对应数据集工具。"
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2304.12301v1#S1.F2",
+        "https://arxiv.org/html/2304.12301v1#S3.F3"
+      ]
+    },
+    {
+      "id": "hand-neural-voting-field-for-camera-space-3d-hand-pose-estimation",
+      "version": "arXiv:2305.04328v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4"
+      ],
+      "figure_anchor": [
+        "S1.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2305.04328v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2305.04328v1",
+        "url": "https://arxiv.org/abs/2305.04328v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Huang, Lin",
+          "Lin, Chung-Ching",
+          "Lin, Kevin",
+          "Liang, Lin",
+          "Wang, Lijuan",
+          "Yuan, Junsong",
+          "Liu, Zicheng"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/LinHuang17/NVF-code",
+        "verified_at": "2026-11-18",
+        "basis": "作者项目链接此版本，仓库有 apps、lib 和运行说明。"
+      }
+    },
+    {
+      "id": "hand-gsdf-geometry-driven-signed-distance-functions-for-3d-hand-object-reconstruction",
+      "version": "arXiv:2304.11970v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4",
+        "S3.SS5"
+      ],
+      "figure_anchor": [
+        "S3.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2304.11970v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2304.11970v1",
+        "url": "https://arxiv.org/abs/2304.11970v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Chen, Zerui",
+          "Chen, Shizhe",
+          "Schmid, Cordelia",
+          "Laptev, Ivan"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/zerchen/gSDF",
+        "verified_at": "2026-11-18",
+        "basis": "项目页链接作者发布，仓库包含数据准备、playground 模型和运行工具。"
+      }
+    },
+    {
+      "id": "hand-poem-reconstructing-hand-in-a-point-embedded-multi-view-stereo",
+      "version": "arXiv:2304.04038v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3"
+      ],
+      "figure_anchor": [
+        "S3.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2304.04038v1",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2304.04038v1",
+        "url": "https://arxiv.org/abs/2304.04038v1",
+        "license_url": "http://creativecommons.org/licenses/by/4.0/",
+        "authors": [
+          "Yang, Lixin",
+          "Xu, Jian",
+          "Zhong, Licheng",
+          "Zhan, Xinyu",
+          "Wang, Zhicheng",
+          "Wu, Kejian",
+          "Lu, Cewu"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/lixiny/POEM",
+        "verified_at": "2026-11-18",
+        "basis": "作者预印本链接此项目，提供多视角数据准备、lib、配置和运行脚本。"
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2304.04038v1#S3.F2"
+      ]
+    },
+    {
+      "id": "hand-hierarchical-temporal-transformer-for-3d-hand-pose-estimation-and-action-recognition-from-egocentric-rgb-video",
+      "version": "arXiv:2209.09484v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4"
+      ],
+      "figure_anchor": [
+        "S3.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2209.09484v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2209.09484v1",
+        "url": "https://arxiv.org/abs/2209.09484v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Wen, Yilin",
+          "Pan, Hao",
+          "Yang, Lei",
+          "Pan, Jia",
+          "Komura, Taku",
+          "Wang, Wenping"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/fylwen/HTT",
+        "verified_at": "2026-11-18",
+        "basis": "会议正文及作者项目指向此实现，提供 models、train.py 和 eval.py。"
+      }
+    },
+    {
+      "id": "hand-artiboost-boosting-articulated-3d-hand-object-pose-estimation-via-online-exploration-and-synthesis",
+      "version": "arXiv:2109.05488v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4"
+      ],
+      "figure_anchor": [
+        "S3.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2109.05488v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2109.05488v1",
+        "url": "https://arxiv.org/abs/2109.05488v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Li, Kailin",
+          "Yang, Lixin",
+          "Zhan, Xinyu",
+          "Lv, Jun",
+          "Xu, Wenqiang",
+          "Li, Jiefeng",
+          "Lu, Cewu"
+        ]
+      }
+    },
+    {
+      "id": "hand-oakink-a-large-scale-knowledge-repository-for-understanding-hand-object-interaction",
+      "version": "arXiv:2203.15709v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4",
+        "S4.SS1",
+        "S4.SS2",
+        "S4.SS3",
+        "S4.SS4"
+      ],
+      "figure_anchor": [
+        "S3.F5",
+        "Figure 5"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2203.15709v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2203.15709v1",
+        "url": "https://arxiv.org/abs/2203.15709v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Yang, Lixin",
+          "Li, Kailin",
+          "Zhan, Xinyu",
+          "Wu, Fei",
+          "Xu, Anran",
+          "Liu, Liu",
+          "Lu, Cewu"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/oakink/OakInk",
+        "verified_at": "2026-11-18",
+        "basis": "作者项目仓库现位于 oakink 组织，提供 oikit、数据加载和 scripts。此入口对应数据集工具。"
+      }
+    },
+    {
+      "id": "hand-interacting-attention-graph-for-single-image-two-hand-reconstruction",
+      "version": "arXiv:2203.09364v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S4.SS1",
+        "S4.SS2",
+        "S4.SS3",
+        "S4.SS4"
+      ],
+      "figure_anchor": [
+        "S2.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2203.09364v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2203.09364v1",
+        "url": "https://arxiv.org/abs/2203.09364v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Li, Mengcheng",
+          "An, Liang",
+          "Zhang, Hongwen",
+          "Wu, Lianpeng",
+          "Chen, Feng",
+          "Yu, Tao",
+          "Liu, Yebin"
+        ]
+      }
+    },
+    {
+      "id": "hand-keypoint-transformer-solving-joint-identification-in-challenging-hands-and-object-interactions-for-accurate-3d",
+      "version": "arXiv:2104.14639v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4",
+        "S3.SS5",
+        "S3.SS6"
+      ],
+      "figure_anchor": [
+        "S3.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2104.14639v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2104.14639v1",
+        "url": "https://arxiv.org/abs/2104.14639v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Hampali, Shreyas",
+          "Sarkar, Sayan Deb",
+          "Rad, Mahdi",
+          "Lepetit, Vincent"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/shreyashampali/kypt_transformer",
+        "verified_at": "2026-11-18",
+        "basis": "第一作者发布的对应实现，含 common、main、数据和预处理工具。"
+      }
+    },
+    {
+      "id": "hand-model-based-3d-hand-reconstruction-via-self-supervised-learning",
+      "version": "arXiv:2103.11703v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4",
+        "S4.SS2"
+      ],
+      "figure_anchor": [
+        "S1.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2103.11703v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2103.11703v1",
+        "url": "https://arxiv.org/abs/2103.11703v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Chen, Yujin",
+          "Tu, Zhigang",
+          "Kang, Di",
+          "Bao, Linchao",
+          "Zhang, Ying",
+          "Zhe, Xuefei",
+          "Chen, Ruizhi",
+          "Yuan, Junsong"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/TerenceCYJ/S2HAND",
+        "verified_at": "2026-11-18",
+        "basis": "作者预印本链接此实现，examples 中含模型、重建损失、训练和评估配置。"
+      }
+    },
+    {
+      "id": "hand-self-supervised-3d-hand-pose-estimation-from-monocular-rgb-via-contrastive-learning",
+      "version": "arXiv:2106.05953v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S4.SS1",
+        "S4.SS2",
+        "S4.SS4"
+      ],
+      "figure_anchor": [
+        "S3.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2106.05953v1",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2106.05953v1",
+        "url": "https://arxiv.org/abs/2106.05953v1",
+        "license_url": "http://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "authors": [
+          "Spurr, Adrian",
+          "Dahiya, Aneesh",
+          "Zhang, Xucong",
+          "Wang, Xi",
+          "Hilliges, Otmar"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/dahiyaaneesh/peclr",
+        "verified_at": "2026-11-18",
+        "basis": "作者发布的 PeCLR 预训练实现，含 src 与 testing，可作为预训练和检测代码入口。"
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2106.05953v1#S3.F2"
+      ]
+    },
+    {
+      "id": "hand-cpf-learning-a-contact-potential-field-to-model-the-hand-object-interaction",
+      "version": "arXiv:2012.00924v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4",
+        "S5.SS1",
+        "S5.SS2",
+        "S5.SS3"
+      ],
+      "figure_anchor": [
+        "S3.F3",
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2012.00924v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2012.00924v1",
+        "url": "https://arxiv.org/abs/2012.00924v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Yang, Lixin",
+          "Zhan, Xinyu",
+          "Li, Kailin",
+          "Xu, Wenqiang",
+          "Li, Jiefeng",
+          "Lu, Cewu"
+        ]
+      }
+    },
+    {
+      "id": "hand-reconstructing-hand-object-interactions-in-the-wild",
+      "version": "arXiv:2012.09856v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4",
+        "S3.SS5"
+      ],
+      "figure_anchor": [
+        "S2.F3",
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2012.09856v1",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2012.09856v1",
+        "url": "https://arxiv.org/abs/2012.09856v1",
+        "license_url": "http://creativecommons.org/licenses/by/4.0/",
+        "authors": [
+          "Cao, Zhe",
+          "Radosavovic, Ilija",
+          "Kanazawa, Angjoo",
+          "Malik, Jitendra"
+        ]
+      },
+      "related_dataset_tool": "https://github.com/ZheC/MOW",
+      "original_figure_sources": [
+        "https://arxiv.org/html/2012.09856v1#S2.F3"
+      ]
+    },
+    {
+      "id": "hand-towards-accurate-alignment-in-real-time-3d-hand-mesh-reconstruction",
+      "version": "arXiv:2109.01723v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4"
+      ],
+      "figure_anchor": [
+        "S2.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2109.01723v1",
+      "figure_reuse": "verified_local_original",
+      "arxiv_license_check": {
+        "version": "2109.01723v1",
+        "url": "https://arxiv.org/abs/2109.01723v1",
+        "license_url": "http://creativecommons.org/licenses/by/4.0/",
+        "authors": [
+          "Tang, Xiao",
+          "Wang, Tianyu",
+          "Fu, Chi-Wing"
+        ]
+      },
+      "original_figure_sources": [
+        "https://arxiv.org/html/2109.01723v1#S2.F2",
+        "https://arxiv.org/html/2109.01723v1#S3.F4"
+      ]
+    },
+    {
+      "id": "hand-harmonious-feature-learning-for-interactive-hand-object-pose-estimation",
+      "version": "Official CVPR 2023 open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Lin_Harmonious_Feature_Learning_for_Interactive_Hand-Object_Pose_Estimation_CVPR_2023_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "clip-hand-domain-generalization",
+      "version": "Official WACV 2023 open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/WACV2023/papers/Lee_Image-Free_Domain_Generalization_via_CLIP_for_3D_Hand_Pose_Estimation_WACV_2023_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "hand-a2j-transformer-anchor-to-joint-transformer-network-for-3d-interacting-hand-pose-estimation-from-a-single-rgb-",
+      "version": "arXiv:2304.03635v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S3.SS3",
+        "S3.SS4",
+        "S4.SS1"
+      ],
+      "figure_anchor": [
+        "S1.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2304.03635v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2304.03635v1",
+        "title": "A2J-Transformer: Anchor-to-Joint Transformer Network for 3D Interacting Hand Pose Estimation from a Single RGB Image",
+        "url": "https://arxiv.org/abs/2304.03635v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Jiang, Changlong",
+          "Xiao, Yang",
+          "Wu, Cunlin",
+          "Zhang, Mingyang",
+          "Zheng, Jinghong",
+          "Cao, Zhiguo",
+          "Zhou, Joey Tianyi"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/ChanglongJiangGit/A2J-Transformer",
+        "verified_at": "2026-11-18",
+        "basis": "作者 CVPR 2023 实现，含锚点、模型、InterHand2.6M 训练和测试入口，并在 README 单独链接后续 TPAMI 扩展。"
+      }
+    },
+    {
+      "id": "hand-eventhands-real-time-neural-3d-hand-pose-estimation-from-an-event-stream",
+      "version": "arXiv:2012.06475v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4.SS1",
+        "S4.SS2",
+        "S5.SS1",
+        "S5.SS2",
+        "S5.SS3"
+      ],
+      "figure_anchor": [
+        "S4.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2012.06475v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2012.06475v1",
+        "title": "EventHands: Real-Time Neural 3D Hand Reconstruction from an Event Stream",
+        "url": "https://arxiv.org/abs/2012.06475v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Rudnev, Viktor",
+          "Golyanik, Vladislav",
+          "Wang, Jiayi",
+          "Seidel, Hans-Peter",
+          "Mueller, Franziska",
+          "Elgharib, Mohamed",
+          "Theobalt, Christian"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/r00tman/EventHands",
+        "verified_at": "2026-11-18",
+        "basis": "作者提供事件模拟、模型、滤波、训练与实时演示源码和用法。"
+      }
+    },
+    {
+      "id": "hand-semi-supervised-3d-hand-object-poses-estimation-with-interactions-in-time",
+      "version": "arXiv:2106.05266v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4.SS1",
+        "S4.SS2",
+        "S4.SS3",
+        "S5.SS1",
+        "S5.SS2"
+      ],
+      "figure_anchor": [
+        "S1.F2",
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2106.05266v1",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2106.05266v1",
+        "title": "Semi-Supervised 3D Hand-Object Poses Estimation with Interactions in Time",
+        "url": "https://arxiv.org/abs/2106.05266v1",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Liu, Shaowei",
+          "Jiang, Hanwen",
+          "Xu, Jiarui",
+          "Liu, Sifei",
+          "Wang, Xiaolong"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/stevenlsw/Semi-Hand-Object",
+        "verified_at": "2026-11-18",
+        "basis": "作者项目页链接此实现，含 models.py、networks、traineval.py 和数据模块。"
+      }
+    },
+    {
+      "id": "hand-cross-domain-3d-hand-pose-estimation-with-dual-modalities",
+      "version": "Official CVPR 2023 open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Lin_Cross-Domain_3D_Hand_Pose_Estimation_With_Dual_Modalities_CVPR_2023_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "hand-semihand-semi-supervised-hand-pose-estimation-with-consistency",
+      "version": "Official ICCV 2021 open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Yang_SemiHand_Semi-Supervised_Hand_Pose_Estimation_With_Consistency_ICCV_2021_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license"
+    },
+    {
+      "id": "hand-h2onet-hand-occlusion-and-orientation-aware-network-for-real-time-3d-hand-mesh-reconstruction",
+      "version": "Official CVPR 2023 open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Xu_H2ONet_Hand-Occlusion-and-Orientation-Aware_Network_for_Real-Time_3D_Hand_Mesh_Reconstruction_CVPR_2023_paper.pdf",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "implementation_check": {
+        "url": "https://github.com/hxwork/H2ONet_Pytorch",
+        "verified_at": "2026-11-18",
+        "basis": "作者 PyTorch 版本，含单帧与多帧配置、遮挡标签准备以及训练和测试入口。"
+      }
+    },
+    {
+      "id": "hand-arctic-a-dataset-for-dexterous-bimanual-hand-object-manipulation",
+      "version": "arXiv:2204.13662v3",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3.SS1",
+        "S3.SS2",
+        "S4",
+        "S5.SS1",
+        "S5.SS2",
+        "S3.SS1a",
+        "S3.SS2a"
+      ],
+      "figure_anchor": [
+        "S5.F4",
+        "Figure 4"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2204.13662v3",
+      "figure_reuse": "link_only_no_confirmed_republication_license",
+      "arxiv_license_check": {
+        "version": "2204.13662v3",
+        "title": "ARCTIC: A Dataset for Dexterous Bimanual Hand-Object Manipulation",
+        "url": "https://arxiv.org/abs/2204.13662v3",
+        "license_url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "authors": [
+          "Fan, Zicong",
+          "Taheri, Omid",
+          "Tzionas, Dimitrios",
+          "Kocabas, Muhammed",
+          "Kaufmann, Manuel",
+          "Black, Michael J.",
+          "Hilliges, Otmar"
+        ]
+      },
+      "implementation_check": {
+        "url": "https://github.com/zc-alexfan/arctic",
+        "verified_at": "2026-11-18",
+        "basis": "作者项目发布的 ARCTIC 实现，含训练与评估的 scripts_method、数据处理和模型源码。"
+      }
+    }
+  ]
+}
