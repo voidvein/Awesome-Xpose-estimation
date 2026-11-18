@@ -1883,9 +1883,9 @@
     "dimensions": [
       "3D"
     ],
-    "venue": "arXiv",
-    "status": "Preprint",
-    "summary": "结合手身协调、时序和多视角观测，从房间角落相机估计远处低分辨率手部；正式接收状态未核实。",
+    "venue": "FG",
+    "status": "Published",
+    "summary": "结合手身协调、时序和多视角观测，从房间角落相机估计远处低分辨率手部；发表于 FG 2026，作者实验室标注为 oral。",
     "url": "https://arxiv.org/abs/2605.22231",
     "tags": [
       "multiview",
@@ -1899,10 +1899,33 @@
       "contribution": "提出 REACH-Net 和包含 50 名参与者日常活动的 REACH 数据集；以隐蔽胸前相机辅助获取标注，让远距离自然活动的手部研究具备训练和评价数据。",
       "limitations": null,
       "sources": [
-        "https://arxiv.org/abs/2605.22231"
+        "https://arxiv.org/abs/2605.22231",
+        "https://vision.ist.i.kyoto-u.ac.jp/research/reach/",
+        "https://vision.ist.i.kyoto-u.ac.jp/publication/",
+        "https://vision.is.kit.ac.jp/bibliography/nakamura2026reach/"
       ],
       "evidence_level": "primary_abstract",
-      "verification_notes": "已核对主源摘要；未据此声称完成全文精读。局限未获原文支持时留空。"
+      "verification_notes": "方法分析仍依据主源摘要，未据此声称全文精读或独立复现。正式发表信息据作者实验室项目页和 KIT 书目核对；oral 据京都大学实验室 publication 列表。CCF C 据 2026 第七版目录第 59 页，属载体评级而非单篇论文质量评价。",
+      "evidence_scope": "方法、输入输出和贡献为摘要级核验；另核对作者机构的会议书目与 oral 标注。不将发表状态核验等同于全文精读。",
+      "verified_at": "2026-11-18"
+    },
+    "project": "https://vision.ist.i.kyoto-u.ac.jp/research/reach/",
+    "preprint_url": "https://arxiv.org/abs/2605.22231",
+    "preprint_date": "2026-05-21",
+    "publication_date": "2026-05",
+    "presentation": "Oral (author lab)",
+    "verified_at": "2026-11-18",
+    "primary_sources": [
+      "https://arxiv.org/abs/2605.22231",
+      "https://vision.ist.i.kyoto-u.ac.jp/research/reach/",
+      "https://vision.ist.i.kyoto-u.ac.jp/publication/",
+      "https://vision.is.kit.ac.jp/bibliography/nakamura2026reach/"
+    ],
+    "ccf": {
+      "tier": "C",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=59",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "FG"
     }
   },
   {

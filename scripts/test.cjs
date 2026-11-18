@@ -101,3 +101,16 @@ for(const filters of [{},{category:'Head'},{category:'Hand'},{category:'Human'},
 assert.deepEqual(filteredYearCounts([],{category:'Head'}),[]);
 const preservedFilters={category:'Hand',year:'2024'};filteredYearCounts(papers,preservedFilters);assert.equal(preservedFilters.year,'2024');
 console.log('PASS: chart follows category/dimension/status/CCF/code/query/venue and combined filters; ignores year without mutating filters; handles empty results.');
+
+// REACH publication correction: hosting on arXiv must not imply preprint-only status.
+const reach=papers.find(p=>p.id==='reach');
+assert.ok(reach,'REACH stays in the catalog');
+assert.equal(reach.venue,'FG');assert.equal(reach.year,2026);assert.equal(reach.status,'Published');assert.equal(ccfTier(reach),'C');
+assert.equal(reach.url,'https://arxiv.org/abs/2605.22231');assert.equal(reach.preprint_url,reach.url);
+assert.equal(reach.analysis.evidence_level,'primary_abstract');assert.equal(reach.analysis.limitations,null);
+assert.ok(reach.primary_sources.includes('https://vision.ist.i.kyoto-u.ac.jp/research/reach/'));
+assert.ok(reach.primary_sources.includes('https://vision.ist.i.kyoto-u.ac.jp/publication/'));
+assert.ok(!reach.summary.includes('正式接收状态未核实'));
+assert.ok(filterPapers(papers,{status:'Published',ccf:'C',venue:'FG'}).some(p=>p.id==='reach'));
+assert.ok(!filterPapers(papers,{status:'Preprint'}).some(p=>p.id==='reach'));
+console.log('PASS: REACH FG 2026 / CCF C correction, preserved arXiv and abstract-only evidence, author sources and publication filters.');
