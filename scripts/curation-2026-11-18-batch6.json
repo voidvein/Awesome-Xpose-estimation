@@ -1,0 +1,385 @@
+{
+  "review_date": "2026-11-18",
+  "expanded_records": 24,
+  "records": [
+    {
+      "id": "uld-headpose",
+      "version": "Official 2025 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        5,
+        "Figure 4"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2025/papers/Tourani_Unsupervised_Discovery_of_Facial_Landmarks_and_Head_Pose_CVPR_2025_paper.pdf"
+    },
+    {
+      "id": "vggt-hpe",
+      "version": "2604.10106v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S5"
+      ],
+      "figure_anchor": "S2.F2",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2604.10106v1"
+    },
+    {
+      "id": "reva-hpe",
+      "version": "2611.03283v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S5"
+      ],
+      "figure_anchor": "S1.F2",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2611.03283v1"
+    },
+    {
+      "id": "stag-net",
+      "version": "2611.07828v1",
+      "format": "html",
+      "method_sections_or_pages": [
+        "S3",
+        "S4.SS3"
+      ],
+      "figure_anchor": "S3.F9",
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://arxiv.org/html/2611.07828v1"
+    },
+    {
+      "id": "sdm",
+      "version": "Official 2013 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4
+      ],
+      "figure_anchor": [
+        1,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2013/papers/Xiong_Supervised_Descent_Method_2013_CVPR_paper.pdf"
+    },
+    {
+      "id": "ert",
+      "version": "Official 2014 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3
+      ],
+      "figure_anchor": [
+        3,
+        "Algorithm 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Kazemi_One_Millisecond_Face_2014_CVPR_paper.pdf"
+    },
+    {
+      "id": "lbf",
+      "version": "Official 2014 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4
+      ],
+      "figure_anchor": [
+        2,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Ren_Face_Alignment_at_2014_CVPR_paper.pdf"
+    },
+    {
+      "id": "3ddfa",
+      "version": "Official 2016 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2016/papers/Zhu_Face_Alignment_Across_CVPR_2016_paper.pdf"
+    },
+    {
+      "id": "fsa-net",
+      "version": "Official 2019 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Yang_FSA-Net_Learning_Fine-Grained_Structure_Aggregation_for_Head_Pose_Estimation_From_CVPR_2019_paper.pdf"
+    },
+    {
+      "id": "img2pose",
+      "version": "Official 2021 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Albiero_img2pose_Face_Alignment_and_Detection_via_6DoF_Face_Pose_Estimation_CVPR_2021_paper.pdf"
+    },
+    {
+      "id": "hih",
+      "version": "Official 2021 ICCV Workshops open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2021W/MFR/papers/Lan_Revisting_Quantization_Error_in_Face_Alignment_ICCVW_2021_paper.pdf"
+    },
+    {
+      "id": "tokenhpe",
+      "version": "Official 2023 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Zhang_TokenHPE_Learning_Orientation_Tokens_for_Efficient_Head_Pose_Estimation_via_CVPR_2023_paper.pdf"
+    },
+    {
+      "id": "head-nonparametric-context-modeling-of-local-appearance-for-pose-and-expression-robust-facial-landmark-localiz-2014",
+      "version": "Official 2014 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        5,
+        "Figure 2 (feature weights)"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Smith_Nonparametric_Context_Modeling_2014_CVPR_paper.pdf"
+    },
+    {
+      "id": "head-towards-multi-view-and-partially-occluded-face-alignment-2014",
+      "version": "Official 2014 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Algorithm 1 and Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Xing_Towards_Multi-view_and_2014_CVPR_paper.pdf"
+    },
+    {
+      "id": "head-head-pose-estimation-based-on-multivariate-label-distribution-2014",
+      "version": "Official 2014 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Geng_Head_Pose_Estimation_2014_CVPR_paper.pdf"
+    },
+    {
+      "id": "head-gauss-newton-deformable-part-models-for-face-alignment-in-the-wild-2014",
+      "version": "Official 2014 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        1,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Tzimiropoulos_Gauss-Newton_Deformable_Part_2014_CVPR_paper.pdf"
+    },
+    {
+      "id": "head-incremental-face-alignment-in-the-wild-2014",
+      "version": "Official 2014 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Asthana_Incremental_Face_Alignment_2014_CVPR_paper.pdf"
+    },
+    {
+      "id": "head-project-out-cascaded-regression-with-an-application-to-face-alignment-2015",
+      "version": "Official 2015 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        1,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Tzimiropoulos_Project-Out_Cascaded_Regression_2015_CVPR_paper.pdf"
+    },
+    {
+      "id": "head-face-alignment-using-cascade-gaussian-process-regression-trees-2015",
+      "version": "Official 2015 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        4,
+        "Algorithms 1–2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Lee_Face_Alignment_Using_2015_CVPR_paper.pdf"
+    },
+    {
+      "id": "head-shape-based-automatic-detection-of-a-large-number-of-3d-facial-landmarks-2015",
+      "version": "Official 2015 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Gilani_Shape-Based_Automatic_Detection_2015_CVPR_paper.pdf"
+    },
+    {
+      "id": "head-real-time-3d-head-pose-and-facial-landmark-estimation-from-depth-images-using-triangular-surface-patch-fe-2015",
+      "version": "Official 2015 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "figure_anchor": [
+        4,
+        "Figure 3"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Papazov_Real-Time_3D_Head_2015_CVPR_paper.pdf"
+    },
+    {
+      "id": "head-face-alignment-by-coarse-to-fine-shape-searching-2015",
+      "version": "Official 2015 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        2,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Zhu_Face_Alignment_by_2015_CVPR_paper.pdf"
+    },
+    {
+      "id": "head-constrained-joint-cascade-regression-framework-for-simultaneous-facial-action-unit-recognition-and-facial-2016",
+      "version": "Official 2016 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        1,
+        "Figure 1"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2016/papers/Wu_Constrained_Joint_Cascade_CVPR_2016_paper.pdf"
+    },
+    {
+      "id": "head-unconstrained-face-alignment-via-cascaded-compositional-learning-2016",
+      "version": "Official 2016 CVPR open-access paper",
+      "format": "pdf",
+      "method_sections_or_pages": [
+        3,
+        4,
+        5
+      ],
+      "figure_anchor": [
+        3,
+        "Figure 2"
+      ],
+      "reading_scope": "targeted_method_reading",
+      "source_url": "https://openaccess.thecvf.com/content_cvpr_2016/papers/Zhu_Unconstrained_Face_Alignment_CVPR_2016_paper.pdf"
+    }
+  ]
+}

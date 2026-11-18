@@ -457,13 +457,75 @@
       "contribution": "使关键点发现与头姿估计相互改进，在 AFLW2000、MAFL、Cat-Heads、LS3D 及 300VW 等数据上报告验证。",
       "limitations": "无监督发现的点不天然对应人工标注协议，关键点匹配方式和生成模型先验均属于评测条件。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2025/html/Tourani_Unsupervised_Discovery_of_Facial_Landmarks_and_Head_Pose_CVPR_2025_paper.html"
+        "https://openaccess.thecvf.com/content/CVPR2025/html/Tourani_Unsupervised_Discovery_of_Facial_Landmarks_and_Head_Pose_CVPR_2025_paper.html",
+        "https://openaccess.thecvf.com/content/CVPR2025/papers/Tourani_Unsupervised_Discovery_of_Facial_Landmarks_and_Head_Pose_CVPR_2025_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2025/papers/Tourani_Unsupervised_Discovery_of_Facial_Landmarks_and_Head_Pose_CVPR_2025_paper.pdf#page=5"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示或算法整理；未进行全文实验复核或独立复现，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2025 CVPR open-access paper 的方法相关正文（3, 4, 5, 6）、图号或算法位置；未完成全文逐节精读或独立复现。"
+    },
+    "pipeline": {
+      "overview": "语义提示与冻结扩散模型 → 一致地标及图像感知文本嵌入 → 深度提升/Kabsch 伪头姿 → 姿态网络与旋转增强互相精化。",
+      "steps": [
+        {
+          "title": "用语义注意力发现候选地标",
+          "description": "向冻结 Stable Diffusion 输入眼、鼻、嘴等提示，聚合交叉注意力找候选位置；查询自注意力并做连通分组，补充同语义但空间分离的区域。"
+        },
+        {
+          "title": "学习嵌入并筛选循环一致性",
+          "description": "每个候选地标学习文本嵌入，使用定位及变换等变损失。将地标从图 A 映到 B，再学习对应嵌入映回 A，仅保留回到原位置附近的一致候选。"
+        },
+        {
+          "title": "引入图像感知适配器",
+          "description": "统一地标文本嵌入与图像潜变量经轻量 Transformer adapter 结合，生成依赖当前图像的文本条件；交替更新适配器和统一嵌入，扩散主体保持冻结。"
+        },
+        {
+          "title": "由深度与点云配准形成伪头姿",
+          "description": "预训练深度模型为二维地标附加深度，形成正交提升的三维点云。与近正面参考图点云用 Kabsch 求旋转，作为卷积加 MLP 头姿网络的四元数监督。"
+        },
+        {
+          "title": "通过头姿改进地标学习",
+          "description": "将较可靠的正面图像与地标点云共同旋转、渲染为新姿态样本，并逐步加入更大 yaw 范围。每轮改进的地标再用于头姿与下一轮增强。"
+        }
+      ],
+      "training": "不使用人工地标或头姿真值训练主体，但依赖预训练扩散和深度模型。文本嵌入/adapter 使用定位与等变损失，头姿头使用由配准产生的伪姿态 MSE；旋转增强属于训练流程。",
+      "inference": "新图像通过已学嵌入、adapter 与扩散注意力得到地标，头姿网络读取聚合注意力。深度/Kabsch 是伪监督生成机制，不能把整个训练闭环当成每次测试都要重新优化的步骤。",
+      "figure_reading": "图 3 是语义候选、注意力分组与循环检查；图 4 分别展示文本适配、深度辅助头姿和 Rotate-and-Render。图 5 仅展示增强样例。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法正文 PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2025/papers/Tourani_Unsupervised_Discovery_of_Facial_Landmarks_and_Head_Pose_CVPR_2025_paper.pdf#page=3"
+        },
+        {
+          "label": "方法正文 PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2025/papers/Tourani_Unsupervised_Discovery_of_Facial_Landmarks_and_Head_Pose_CVPR_2025_paper.pdf#page=4"
+        },
+        {
+          "label": "方法正文 PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2025/papers/Tourani_Unsupervised_Discovery_of_Facial_Landmarks_and_Head_Pose_CVPR_2025_paper.pdf#page=5"
+        },
+        {
+          "label": "方法正文 PDF 第 6 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2025/papers/Tourani_Unsupervised_Discovery_of_Facial_Landmarks_and_Head_Pose_CVPR_2025_paper.pdf#page=6"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content/CVPR2025/papers/Tourani_Unsupervised_Discovery_of_Facial_Landmarks_and_Head_Pose_CVPR_2025_paper.pdf#page=5"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2025/papers/Tourani_Unsupervised_Discovery_of_Facial_Landmarks_and_Head_Pose_CVPR_2025_paper.pdf#page=5",
+      "figure_number": "Figure 4",
+      "version": "Official 2025 CVPR open-access paper",
+      "caption": "Unsupervised Discovery of Facial Landmarks and Head Pose：原文方法图 / 算法定位。",
+      "note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     }
   },
   {
@@ -734,12 +796,76 @@
       "contribution": "将任务改成显式参考下的几何比较，锚点可在测试时选择；通过不同难度图像对检验相对预测的作用。",
       "limitations": "推理依赖具有已知位姿的锚点图像；该条件由论文的任务定义明确给出。",
       "sources": [
-        "https://arxiv.org/abs/2604.10106"
+        "https://arxiv.org/abs/2604.10106",
+        "https://arxiv.org/html/2604.10106v1",
+        "https://arxiv.org/html/2604.10106v1#S2.F2",
+        "https://github.com/VasilikiVas/vggt-hpe"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
-      "verified_at": "2026-11-17"
-    }
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示或算法整理；未进行全文实验复核或独立复现，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17",
+      "evidence_scope": "已核对摘要及 2604.10106v1 的方法相关正文（S3, S5）、图号或算法位置；未完成全文逐节精读或独立复现。"
+    },
+    "pipeline": {
+      "overview": "已知头姿的参考图 + 查询图 → VGGT 相机分支与 LoRA → 参考到查询的相对变换 → 与参考姿态复合。",
+      "steps": [
+        {
+          "title": "准备显式视觉参考",
+          "description": "模型读取有顺序的 anchor/query 图像对，参考图的姿态需要已知。相对任务比较两个可见状态，而非从单张图像独自确定隐含标准姿态。"
+        },
+        {
+          "title": "保留 VGGT 的相机路径",
+          "description": "沿用预训练几何模型的相机分支，关闭深度、点图和跟踪头。帧级与全局 Transformer 处理图像对的几何关系。"
+        },
+        {
+          "title": "用低秩更新适配人脸",
+          "description": "冻结预训练主体，在注意力及 MLP 投影插入 LoRA，学习面部域的低秩更新，以保留原模型的几何先验。"
+        },
+        {
+          "title": "预测相对相机参数",
+          "description": "训练时把图像对坐标归一到参考帧，只监督第二帧，并联合监督四元数旋转、平移及视场对应的焦距比；正文评测主要关注头部朝向。"
+        },
+        {
+          "title": "复合为查询头姿",
+          "description": "将预测的相对变化与已知参考姿态复合。参考帧选择影响预测难度；用估计参考头姿替代真值时，其误差也会传给最终结果。"
+        }
+      ],
+      "training": "仅以合成 FLAME 图像对适配，同一对保持身份和照明而改变表情及视角；裁剪后更新内参，并做一致的外观增强。中间相机预测按衰减权重组合旋转、平移和视场损失。",
+      "inference": "需要参考图及参考姿态，再做一次相对预测与复合；关闭的 VGGT 深度/跟踪头不参与头姿输出。不能从相机联合训练推断论文已经验证了无参考的公制 6DoF 恢复。",
+      "figure_reading": "图 2 展示 anchor/query、冻结骨干、LoRA 和最终姿态复合。参考姿态是外部输入条件，不能从图中省略；ReVA-HPE 后续才引入无标签注册与虚拟参考。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法正文 S3",
+          "url": "https://arxiv.org/html/2604.10106v1#S3"
+        },
+        {
+          "label": "方法正文 S5",
+          "url": "https://arxiv.org/html/2604.10106v1#S5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://arxiv.org/html/2604.10106v1#S2.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2604.10106v1#S2.F2",
+      "figure_number": "Figure 2",
+      "version": "2604.10106v1",
+      "caption": "VGGT-HPE: Reframing Head Pose Estimation as Relative Pose Prediction：原文方法图 / 算法定位。",
+      "note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
+    },
+    "code": "https://github.com/VasilikiVas/vggt-hpe",
+    "code_provenance": {
+      "url": "https://github.com/VasilikiVas/vggt-hpe",
+      "verified_at": "2026-11-18",
+      "basis": "作者仓库 README 中对应论文标题、训练/评估入口及实现目录已核对；未运行代码。"
+    },
+    "sources": [
+      "https://github.com/VasilikiVas/vggt-hpe"
+    ]
   },
   {
     "id": "reva-hpe",
@@ -764,12 +890,79 @@
       "contribution": "用合成位姿监督和个性化虚拟锚点消除真实锚点姿态真值要求，并提供将锚点库成本摊到注册阶段的高效变体。",
       "limitations": "摘要明确说明 FaMoS 上的旋转结果以近正脸注册图像为条件；高效变体存在一定精度牺牲。",
       "sources": [
-        "https://arxiv.org/abs/2611.03283"
+        "https://arxiv.org/abs/2611.03283",
+        "https://arxiv.org/html/2611.03283v1",
+        "https://arxiv.org/html/2611.03283v1#S1.F2",
+        "https://github.com/VasilikiVas/ReVA-HPE"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
-      "verified_at": "2026-11-17"
-    }
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示或算法整理；未进行全文实验复核或独立复现，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17",
+      "evidence_scope": "已核对摘要及 2611.03283v1 的方法相关正文（S3, S5）、图号或算法位置；未完成全文逐节精读或独立复现。",
+      "verification_notes": [
+        "这里的流程对应 arXiv:2611.03283v1。该版方法正文描述只优化 LoRA；作者当前仓库 README 另说明相机头也微调，复现应核对所用版本与训练配置。未运行实现。"
+      ]
+    },
+    "pipeline": {
+      "overview": "无标签注册图 → 个性化虚拟参考库 + 注册 PnP → 相对预测 → 库共识旋转与实图相对平移 → 6DoF。",
+      "steps": [
+        {
+          "title": "一次注册建立个性化参考",
+          "description": "由同一人的单张无姿态标签图像重建 Gaussian avatar，标定到标准头部坐标，再从已知视点渲染一组虚拟参考图。注册不是每张查询重新执行。"
+        },
+        {
+          "title": "扩展相对估计器的平移目标",
+          "description": "以有序图像对预测相对旋转及深度归一化平移：横向位移按参考深度归一化，纵深使用对数深度比。此平移解码不同于齐次相对矩阵的平移块。"
+        },
+        {
+          "title": "虚拟参考库形成旋转共识",
+          "description": "查询与各虚拟参考分别比较，生成绝对姿态候选；在姿态空间做 RANSAC，利用旋转和平移残差挑选一致集合，对其中旋转求投影均值。"
+        },
+        {
+          "title": "真实注册图提供平移尺度",
+          "description": "仅在注册时检测 68 点，与公制平均 FLAME 头结合 RGB 内参做 EPnP-RANSAC。查询再与真实注册图配对，借预测的归一化位移恢复相机系平移。"
+        },
+        {
+          "title": "融合两个分支的可靠输出",
+          "description": "最终旋转取虚拟库共识，平移取注册 PnP 加真实图像对相对解码；库平移只用于共识内部。VA-fast 是另一个将库开销集中到注册阶段的变体。"
+        }
+      ],
+      "training": "相对网络以程序化 FLAME 合成对训练，采用冻结 VGGT 主干上的 LoRA 适配和相机多阶段监督，不使用真实姿态标签训练该估计器。固定图像对、焦距及统一裁剪用于控制几何变化。",
+      "inference": "需要无标签注册图、个性化 avatar 和相机标定；旋转库匹配与真实注册到查询的平移分支分别运行。平移仍受 PnP 地标、脸形尺度及注册朝向影响，各查询独立处理。",
+      "figure_reading": "图 2 的 2A 是虚拟库旋转路径，2B 是真实注册 PnP/相对平移路径；最终不能直接拿库候选的平均平移代替 2B。图中的 avatar 构建属于注册成本。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法正文 S3",
+          "url": "https://arxiv.org/html/2611.03283v1#S3"
+        },
+        {
+          "label": "方法正文 S5",
+          "url": "https://arxiv.org/html/2611.03283v1#S5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://arxiv.org/html/2611.03283v1#S1.F2"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2611.03283v1#S1.F2",
+      "figure_number": "Figure 2",
+      "version": "2611.03283v1",
+      "caption": "ReVA-HPE: Relative 6DoF Head Pose Estimation with Synthetic Pose Supervision and Personalized Virtual Anchors：原文方法图 / 算法定位。",
+      "note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
+    },
+    "code": "https://github.com/VasilikiVas/ReVA-HPE",
+    "code_provenance": {
+      "url": "https://github.com/VasilikiVas/ReVA-HPE",
+      "verified_at": "2026-11-18",
+      "basis": "作者仓库 README 中对应论文标题、训练/评估入口及实现目录已核对；未运行代码。"
+    },
+    "sources": [
+      "https://github.com/VasilikiVas/ReVA-HPE"
+    ]
   },
   {
     "id": "stag-net",
@@ -794,12 +987,113 @@
       "contribution": "将结构归纳偏置用于小型回归器，区分回归器本身成本与含关键点提取的整条流水线成本，并在跨数据集及独立被试协议下验证。",
       "limitations": "摘要中 BIWI 的部分最佳结果仅统计关键点成功检测的帧；不能视为覆盖所有输入帧的结果。",
       "sources": [
-        "https://arxiv.org/abs/2611.07828"
+        "https://arxiv.org/abs/2611.07828",
+        "https://arxiv.org/html/2611.07828v1",
+        "https://arxiv.org/html/2611.07828v1#S3.F9",
+        "https://github.com/asirigawesha/STAGNet"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
-      "verified_at": "2026-11-17"
-    }
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示或算法整理；未进行全文实验复核或独立复现，不将未核实的局限写成论文结论。",
+      "verified_at": "2026-11-17",
+      "evidence_scope": "已核对摘要及 2611.07828v1 的方法相关正文（S3, S4.SS3）、图号或算法位置；未完成全文逐节精读或独立复现。",
+      "verification_notes": [
+        "已核对作者当前仓库 README：Protocol I 使用完整目标评估集选择最佳 checkpoint，因此仓库该设置下的最终 MAE 不是独立测试估计；需与严格保留测试集的协议区分。地标检测失败帧也不计入回归 MAE。"
+      ]
+    },
+    "pipeline": {
+      "overview": "FAN/FaceMesh 三维地标 → 鼻点归一化 → 固定分组与点筛选 → DeepSet/组间注意力 + 几何统计 → 三轴角度。",
+      "steps": [
+        {
+          "title": "从图像提取并归一化地标",
+          "description": "使用 FAN 的 68 点或 FaceMesh 的 478 点三维坐标，以各自指定的鼻部参考点居中、按各轴范围缩放，再移除该参考点；回归器直接读取坐标。"
+        },
+        {
+          "title": "训练集确定分组和筛选",
+          "description": "在训练划分计算各点相对均值的运动统计，对平均地标位置做连通约束层次聚类，并在每组保留运动较大的点。组归属和保留索引在测试时固定。"
+        },
+        {
+          "title": "每组以 DeepSet 编码",
+          "description": "各组使用同结构但权重独立的编码器；组内逐点共享 MLP，再以均值与最大池化汇聚，生成紧凑的区域 token。"
+        },
+        {
+          "title": "组合组间注意力和全局几何",
+          "description": "区域 token 通过多头自注意力交互并池化。并行几何分支从组质心计算均值、标准差和归一化协方差特征值，补充整体空间布局。"
+        },
+        {
+          "title": "共享主干后三个角度头",
+          "description": "拼接注意力与几何特征，经共享全连接解码器及轻量独立头预测 yaw、pitch、roll。两种地标检测器对应不同配置，不能随意混用点序与组索引。"
+        }
+      ],
+      "training": "使用提取后的地标坐标，以三轴角度 MAE 训练；token dropout 在保留至少一组的条件下抑制部分区域。分组与运动筛选只使用训练集，最终采用验证损失最佳的 checkpoint。",
+      "inference": "先做地标检测，再运行固定分组和坐标回归；只对有有效检测的帧报告回归误差，需同时看检测覆盖率。网络 FLOPs 不等于含检测器的端到端运行成本。",
+      "figure_reading": "原图 9(a) 是回归器总体结构，9(b) 展示组内 DeepSet；另附图 1 连接 RGB 检测、归一化与筛选。图 1 的上下两路是两种检测器配置，不要求同时运行。",
+      "figure_status": "verified_local",
+      "sources": [
+        {
+          "label": "方法正文 S3",
+          "url": "https://arxiv.org/html/2611.07828v1#S3"
+        },
+        {
+          "label": "方法正文 S4.SS3",
+          "url": "https://arxiv.org/html/2611.07828v1#S4.SS3"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://arxiv.org/html/2611.07828v1#S3.F9"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "src": "assets/figures/stagnet-architecture.svg",
+      "source": "https://arxiv.org/html/2611.07828v1#S3.F9.sf1",
+      "caption": "STAG-Net 原图：各组 DeepSet、组间注意力、几何统计和三轴角度回归。",
+      "alt": "STAG-Net 原图：各组 DeepSet、组间注意力、几何统计和三轴角度回归。",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Asiri Gawesha Lindamulage, Sanka Mohottala, Dharshana Kasthurirathna, Nuwan Kodagoda. STAG-Net: Structure-Aware Attention over Landmark Groups for Lightweight Head Pose Estimation, Figure 9(a), arXiv:2611.07828v1. CC BY 4.0.",
+      "authors": "Asiri Gawesha Lindamulage, Sanka Mohottala, Dharshana Kasthurirathna, Nuwan Kodagoda",
+      "figure_number": "Figure 9(a)",
+      "version": "2611.07828v1",
+      "modifications": "论文 HTML 原始图像，未裁剪、未修改；页面仅等比例缩放显示。"
+    },
+    "code": "https://github.com/asirigawesha/STAGNet",
+    "code_provenance": {
+      "url": "https://github.com/asirigawesha/STAGNet",
+      "verified_at": "2026-11-18",
+      "basis": "作者仓库 README 中对应论文标题、训练/评估入口及实现目录已核对；未运行代码。"
+    },
+    "sources": [
+      "https://github.com/asirigawesha/STAGNet"
+    ],
+    "figures": [
+      {
+        "src": "assets/figures/stagnet-deepset.svg",
+        "source": "https://arxiv.org/html/2611.07828v1#S3.F9.sf2",
+        "caption": "STAG-Net 原图：每个地标组的逐点编码、均值/最大池化与 token 解码。",
+        "alt": "STAG-Net 原图：每个地标组的逐点编码、均值/最大池化与 token 解码。",
+        "license": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "attribution": "Asiri Gawesha Lindamulage, Sanka Mohottala, Dharshana Kasthurirathna, Nuwan Kodagoda. STAG-Net: Structure-Aware Attention over Landmark Groups for Lightweight Head Pose Estimation, Figure 9(b), arXiv:2611.07828v1. CC BY 4.0.",
+        "authors": "Asiri Gawesha Lindamulage, Sanka Mohottala, Dharshana Kasthurirathna, Nuwan Kodagoda",
+        "figure_number": "Figure 9(b)",
+        "version": "2611.07828v1",
+        "modifications": "论文 HTML 原始图像，未裁剪、未修改；页面仅等比例缩放显示。"
+      },
+      {
+        "src": "assets/figures/stagnet-pipeline.png",
+        "source": "https://arxiv.org/html/2611.07828v1#S2.F1",
+        "caption": "STAG-Net 原图：从 FAN 或 FaceMesh 地标提取、归一化、分组和筛选到角度估计。",
+        "alt": "STAG-Net 原图：从 FAN 或 FaceMesh 地标提取、归一化、分组和筛选到角度估计。",
+        "license": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "attribution": "Asiri Gawesha Lindamulage, Sanka Mohottala, Dharshana Kasthurirathna, Nuwan Kodagoda. STAG-Net: Structure-Aware Attention over Landmark Groups for Lightweight Head Pose Estimation, Figure 1, arXiv:2611.07828v1. CC BY 4.0.",
+        "authors": "Asiri Gawesha Lindamulage, Sanka Mohottala, Dharshana Kasthurirathna, Nuwan Kodagoda",
+        "figure_number": "Figure 1",
+        "version": "2611.07828v1",
+        "modifications": "论文 HTML 原始图像，未裁剪、未修改；页面仅等比例缩放显示。"
+      }
+    ]
   },
   {
     "id": "sdm",
@@ -835,13 +1129,67 @@
       "contribution": "将人脸对齐写成学习优化过程，是级联回归路线的重要实例；论文同时展示一般非线性最小二乘问题上的适用性。",
       "limitations": "下降方向由训练集学习，使用时需要初始化形状；不能将局部迭代收敛解释为任意初始化下的全局最优。",
       "sources": [
-        "https://www.cv-foundation.org/openaccess/content_cvpr_2013/html/Xiong_Supervised_Descent_Method_2013_CVPR_paper.html"
+        "https://www.cv-foundation.org/openaccess/content_cvpr_2013/html/Xiong_Supervised_Descent_Method_2013_CVPR_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2013/papers/Xiong_Supervised_Descent_Method_2013_CVPR_paper.pdf",
+        "https://openaccess.thecvf.com/content_cvpr_2013/papers/Xiong_Supervised_Descent_Method_2013_CVPR_paper.pdf#page=1"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示或算法整理；未进行全文实验复核或独立复现，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2013 CVPR open-access paper 的方法相关正文（3, 4）、图号或算法位置；未完成全文逐节精读或独立复现。"
+    },
+    "pipeline": {
+      "overview": "人脸框内平均形状 → 当前点附近 SIFT → 学得的线性下降更新 → 重提特征并重复 → 二维地标。",
+      "steps": [
+        {
+          "title": "由人脸框初始化形状",
+          "description": "把训练平均地标按人脸检测框居中和缩放，作为初始点集。这里的形状变量是二维地标坐标，不要求额外 PCA 形状系数。"
+        },
+        {
+          "title": "在当前估计点提取特征",
+          "description": "在每个地标周围提取 SIFT 并拼接。特征位置跟随当前形状，更新后必须重新提取，而不是全程使用同一特征向量。"
+        },
+        {
+          "title": "用监督学习替代数值导数",
+          "description": "每阶段以线性矩阵与偏置将特征映射为地标位移，学习一组适用于训练样本的下降方向和尺度，避免测试时计算 SIFT 的 Jacobian/Hessian。"
+        },
+        {
+          "title": "加上位移继续精化",
+          "description": "将预测位移加到当前形状，随后使用下一组阶段参数；多个较小更新逐步接近正确位置，不能只把首个线性回归当成完整 SDM。"
+        },
+        {
+          "title": "返回最后阶段地标",
+          "description": "结束固定阶段或收敛后输出坐标。推导中的真值模板特征不在测试时可用，其作用被训练得到的偏置吸收。"
+        }
+      ],
+      "training": "对标注图像采样符合人脸检测初始化误差的扰动，逐阶段最小化预测与真实位移的平方误差。当前阶段更新形成下一阶段训练特征及残差。",
+      "inference": "测试只需检测框、图像和学好的阶段矩阵/偏置；真值地标、真值 SIFT 与逐图数值求导均不是必需输入。",
+      "figure_reading": "图 1 对比 Newton 与 SDM 的下降机制，并非 CNN 结构；图 2 展示真值点和由检测框初始化的平均形状。完整更新规则位于 PDF 第 4 页。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法正文 PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2013/papers/Xiong_Supervised_Descent_Method_2013_CVPR_paper.pdf#page=3"
+        },
+        {
+          "label": "方法正文 PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2013/papers/Xiong_Supervised_Descent_Method_2013_CVPR_paper.pdf#page=4"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2013/papers/Xiong_Supervised_Descent_Method_2013_CVPR_paper.pdf#page=1"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2013/papers/Xiong_Supervised_Descent_Method_2013_CVPR_paper.pdf#page=1",
+      "figure_number": "Figure 1",
+      "version": "Official 2013 CVPR open-access paper",
+      "caption": "Supervised Descent Method and Its Applications to Face Alignment：原文方法图 / 算法定位。",
+      "note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     }
   },
   {
@@ -879,13 +1227,67 @@
       "contribution": "无需深度卷积特征即可实现高速形状回归；框架支持缺失或部分标注，并分析正则化、样本数量和合成增强。",
       "limitations": "树模型使用稀疏像素特征并回归固定关键点布局；论文中的毫秒级速度应连同硬件和人脸检测开销理解。",
       "sources": [
-        "https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Kazemi_One_Millisecond_Face_2014_CVPR_paper.html"
+        "https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Kazemi_One_Millisecond_Face_2014_CVPR_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2014/papers/Kazemi_One_Millisecond_Face_2014_CVPR_paper.pdf",
+        "https://openaccess.thecvf.com/content_cvpr_2014/papers/Kazemi_One_Millisecond_Face_2014_CVPR_paper.pdf#page=3"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示或算法整理；未进行全文实验复核或独立复现，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2014 CVPR open-access paper 的方法相关正文（2, 3）、图号或算法位置；未完成全文逐节精读或独立复现。"
+    },
+    "pipeline": {
+      "overview": "检测框平均形状 → 形状索引像素差 → 回归树集成输出残差 → 多级级联 → 二维地标。",
+      "steps": [
+        {
+          "title": "初始化为平均形状",
+          "description": "按人脸检测框放置平均地标。每一级回归器接收原图和当前形状，目标是修正整套坐标。"
+        },
+        {
+          "title": "随形状变换采样位置",
+          "description": "把均值形状附近定义的稀疏采样点，通过当前形状的相似变换及局部偏移映到图像；不必把整张脸重采样到标准模板。"
+        },
+        {
+          "title": "像素差驱动树分裂",
+          "description": "每个树节点测试两个采样像素的强度差是否超过阈值，沿相应分支抵达叶节点，读取该叶学习的坐标更新向量。"
+        },
+        {
+          "title": "树集成预测当前级残差",
+          "description": "同一级包含梯度提升训练的多棵回归树，将输出相加并使用收缩系数控制更新，形成当前级的形状改进。"
+        },
+        {
+          "title": "逐级重新索引并更新",
+          "description": "将该级残差加到形状，随后按更新后的点集重新提取像素测试，运行下一级，最后返回二维位置。"
+        }
+      ],
+      "training": "用多初始化形状与真值坐标形成残差，逐级进行平方误差梯度树提升。像素对采样引入距离先验，避免无效搜索；论文还给出缺失或不确定标注的扩展。",
+      "inference": "每级进行稀疏像素采样和树遍历，无需 CNN 或 SIFT。树结构和叶输出已固定，测试时不重新训练；论文速度需结合检测及预处理计时范围理解。",
+      "figure_reading": "主文未提供独立完整网络图，保留第 3 页 Algorithm 1 的原始学习流程链接。第 5 页图 2 展示级联估计逐步变化，属于阶段结果，不冒充树结构图。",
+      "figure_status": "architecture_not_located",
+      "sources": [
+        {
+          "label": "方法正文 PDF 第 2 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Kazemi_One_Millisecond_Face_2014_CVPR_paper.pdf#page=2"
+        },
+        {
+          "label": "方法正文 PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Kazemi_One_Millisecond_Face_2014_CVPR_paper.pdf#page=3"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Kazemi_One_Millisecond_Face_2014_CVPR_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Kazemi_One_Millisecond_Face_2014_CVPR_paper.pdf#page=3",
+      "figure_number": "Algorithm 1",
+      "version": "Official 2014 CVPR open-access paper",
+      "caption": "One Millisecond Face Alignment with an Ensemble of Regression Trees：原文方法图 / 算法定位。",
+      "note": "主文未提供独立完整结构图，保留原始算法流程链接；阶段结果图不作为树结构图。"
     }
   },
   {
@@ -922,13 +1324,71 @@
       "contribution": "把局部特征学习与全局形状回归结合；速度来自二值特征提取和回归计算简单，而非依赖复杂神经网络。",
       "limitations": "局部二值特征与线性形状回归针对固定标注布局；题名帧率不能直接代表包含检测的端到端速度。",
       "sources": [
-        "https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Ren_Face_Alignment_at_2014_CVPR_paper.html"
+        "https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Ren_Face_Alignment_at_2014_CVPR_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2014/papers/Ren_Face_Alignment_at_2014_CVPR_paper.pdf",
+        "https://openaccess.thecvf.com/content_cvpr_2014/papers/Ren_Face_Alignment_at_2014_CVPR_paper.pdf#page=2"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示或算法整理；未进行全文实验复核或独立复现，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2014 CVPR open-access paper 的方法相关正文（2, 3, 4）、图号或算法位置；未完成全文逐节精读或独立复现。"
+    },
+    "pipeline": {
+      "overview": "当前人脸形状 → 各点局部森林 → 稀疏叶节点二进制编码 → 全局线性回归 → 级联形状更新。",
+      "steps": [
+        {
+          "title": "以当前地标定义局部区域",
+          "description": "从人脸初始化开始，在各地标附近限定像素差特征的候选范围。区域大小可随级联阶段调整，后期通常更小。"
+        },
+        {
+          "title": "每个地标独立训练森林",
+          "description": "局部回归森林先学习该地标的二维偏移，用方差减少选择像素差分裂；这一阶段决定局部特征映射。"
+        },
+        {
+          "title": "把抵达叶节点编码成特征",
+          "description": "每棵树的抵达叶为 1，其余为 0，形成稀疏二进制向量。拼接所有地标森林编码后得到全局高维 LBF。"
+        },
+        {
+          "title": "全局回归整套形状",
+          "description": "丢弃局部森林原先的二维叶回归输出，重新学习带 L2 正则的全局线性投影，使所有局部编码共同预测整个人脸的形状增量。"
+        },
+        {
+          "title": "更新形状并进入下一阶段",
+          "description": "将全局位移加到当前坐标，再用下一阶段的森林和投影继续精化。局部特征学习不意味着最终各点彼此独立预测。"
+        }
+      ],
+      "training": "各阶段先学习局部随机森林，再以全部局部编码进行全局正则线性回归。局部范围用验证集选择，稀疏编码允许高效求解大维度投影。",
+      "inference": "树遍历得到少量非零编码，仅累加全局投影相应列完成更新；不能直接把训练局部森林的叶均值当成最终 LBF 输出。",
+      "figure_reading": "图 1 上方是局部特征与全局投影的两步学习，下方为测试更新；图 2 展示树叶编码如何拼接。注意 W 是全局形状回归矩阵。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法正文 PDF 第 2 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Ren_Face_Alignment_at_2014_CVPR_paper.pdf#page=2"
+        },
+        {
+          "label": "方法正文 PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Ren_Face_Alignment_at_2014_CVPR_paper.pdf#page=3"
+        },
+        {
+          "label": "方法正文 PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Ren_Face_Alignment_at_2014_CVPR_paper.pdf#page=4"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Ren_Face_Alignment_at_2014_CVPR_paper.pdf#page=2"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Ren_Face_Alignment_at_2014_CVPR_paper.pdf#page=2",
+      "figure_number": "Figure 1",
+      "version": "Official 2014 CVPR open-access paper",
+      "caption": "Face Alignment at 3000 FPS via Regressing Local Binary Features：原文方法图 / 算法定位。",
+      "note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     }
   },
   {
@@ -965,13 +1425,71 @@
       "contribution": "用三维模型统一处理正脸与大姿态，而不是为不同视角分别训练二维形状模型；数据合成解决侧脸样本稀缺。",
       "limitations": "拟合结果受三维人脸模型参数空间约束；大姿态覆盖不等于对任意非刚性表情与遮挡均已验证。",
       "sources": [
-        "https://www.cv-foundation.org/openaccess/content_cvpr_2016/html/Zhu_Face_Alignment_Across_CVPR_2016_paper.html"
+        "https://www.cv-foundation.org/openaccess/content_cvpr_2016/html/Zhu_Face_Alignment_Across_CVPR_2016_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2016/papers/Zhu_Face_Alignment_Across_CVPR_2016_paper.pdf",
+        "https://openaccess.thecvf.com/content_cvpr_2016/papers/Zhu_Face_Alignment_Across_CVPR_2016_paper.pdf#page=3"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示或算法整理；未进行全文实验复核或独立复现，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2016 CVPR open-access paper 的方法相关正文（3, 4, 5）、图号或算法位置；未完成全文逐节精读或独立复现。"
+    },
+    "pipeline": {
+      "overview": "人脸图像 + 当前 3DMM → PNCC 渲染反馈 → 级联 CNN 预测参数增量 → 三维人脸及投影地标。",
+      "steps": [
+        {
+          "title": "以 3DMM 统一姿态和形变",
+          "description": "使用平均脸、身份 PCA 和表情 PCA 表示形状，配合弱透视尺度、旋转与二维平移形成完整参数，覆盖大角度与非刚性变化。"
+        },
+        {
+          "title": "将当前模型渲染为 PNCC",
+          "description": "给平均脸顶点赋归一化三维坐标颜色，再按当前参数投影，以 Z-buffer 生成只含可见表面的坐标编码图。"
+        },
+        {
+          "title": "图像和几何反馈共同输入",
+          "description": "将 RGB 与三通道 PNCC 堆叠送入阶段 CNN，让网络对比面部外观和当前拟合位置，预测姿态、身份及表情参数的增量。"
+        },
+        {
+          "title": "参数更新后重新渲染",
+          "description": "当前参数加上增量，重新生成 PNCC 后进入下一阶段；级联网络结构统一，但不能把几何反馈图固定为初始模板。"
+        },
+        {
+          "title": "从最终模型读取地标",
+          "description": "解码稠密三维脸并投影到图像，按对应顶点读取地标。遮挡处理来自可见性渲染与三维模型，不需要先把脸正面化再定位。"
+        }
+      ],
+      "training": "使用按参数影响加权的 WPDC，避免不同参数等权及直接顶点误差的优化困难；Face Profiling 由三维图像旋转扩充大姿态数据，深层级联还重新生成初始化以减轻过拟合。",
+      "inference": "每阶段 CNN 前都需要根据当前参数渲染 PNCC，最后输出参数化人脸及地标。训练用 Face Profiling 增强与测试的 PNCC 反馈是不同用途。",
+      "figure_reading": "图 2 是图像/PNCC 到参数增量的级联；图 3 专门解释 NCC 顶点编码如何经过 Z-buffer 成为 PNCC。图 4/5 描述训练数据生成。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法正文 PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2016/papers/Zhu_Face_Alignment_Across_CVPR_2016_paper.pdf#page=3"
+        },
+        {
+          "label": "方法正文 PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2016/papers/Zhu_Face_Alignment_Across_CVPR_2016_paper.pdf#page=4"
+        },
+        {
+          "label": "方法正文 PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2016/papers/Zhu_Face_Alignment_Across_CVPR_2016_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2016/papers/Zhu_Face_Alignment_Across_CVPR_2016_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2016/papers/Zhu_Face_Alignment_Across_CVPR_2016_paper.pdf#page=3",
+      "figure_number": "Figure 2",
+      "version": "Official 2016 CVPR open-access paper",
+      "caption": "Face Alignment Across Large Poses: A 3D Solution：原文方法图 / 算法定位。",
+      "note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     }
   },
   {
@@ -1523,18 +2041,74 @@
       "contribution": "协议1以300W-LP训练、AFLW2000与BIWI测试，Tables 1–2报告FSA-Caps-Fusion的MAE分别为5.07°与4.00°，模型5.1 MB；BIWI该协议不使用跟踪，并仅考虑角度在±99°内的样本。协议2在BIWI按16段视频训练、8段测试，Table 3报告3.60° MAE。核心意义是用可解释的空间分组及互补融合，在小模型中利用多尺度结构；两个协议的数字不宜混排为同一排行榜。",
       "limitations": "原文§4.4指出可学习的1×1评分可能过拟合，因而并不总优于方差评分。§4.5和Table 3也明确显示：单RGB融合模型虽在该表的yaw项较好，整体MAE仍不及所比较的RGB+Depth或RGB+Time方法，不能概括成全面超过多模态。评测依赖人脸裁剪与特定角度/视频划分，不构成360°头姿或任意遮挡场景的验证。",
       "sources": [
-        "https://openaccess.thecvf.com/content_CVPR_2019/papers/Yang_FSA-Net_Learning_Fine-Grained_Structure_Aggregation_for_Head_Pose_Estimation_From_CVPR_2019_paper.pdf"
+        "https://openaccess.thecvf.com/content_CVPR_2019/papers/Yang_FSA-Net_Learning_Fine-Grained_Structure_Aggregation_for_Head_Pose_Estimation_From_CVPR_2019_paper.pdf",
+        "https://openaccess.thecvf.com/content_CVPR_2019/papers/Yang_FSA-Net_Learning_Fine-Grained_Structure_Aggregation_for_Head_Pose_Estimation_From_CVPR_2019_paper.pdf#page=4"
       ],
       "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "已定向核对下列原文方法、实验与讨论；数值为作者报告，未独立复现，不代表全文逐段复核。",
       "verified_at": "2026-11-17",
-      "evidence_scope": "CVPR 2019正式论文：§3方法；§4.1–4.5实现、数据、两种协议与结果；Tables 1–3。局限中的过拟合和多模态差距为作者明确讨论，其余为评测适用范围。"
+      "evidence_scope": "CVPR 2019正式论文：§3方法；§4.1–4.5实现、数据、两种协议与结果；Tables 1–3。局限中的过拟合和多模态差距为作者明确讨论，其余为评测适用范围。\n\n本批流程补充：已核对摘要及 Official 2019 CVPR open-access paper 的方法相关正文（3, 4, 5）、图号或算法位置；未完成全文逐节精读或独立复现。"
     },
     "code": "https://github.com/shamangary/FSA-Net",
     "code_provenance": {
       "url": "https://github.com/shamangary/FSA-Net",
       "verified_at": "2026-11-18",
       "basis": "作者仓库 README 的对应论文标题、引用或实现说明；项目目录已公开，未运行代码。"
+    },
+    "pipeline": {
+      "overview": "双流多阶段特征 → 阶段融合 → 重要性图与细粒度空间映射 → 聚合 → Soft Stagewise Regression 三轴角度。",
+      "steps": [
+        {
+          "title": "双流抽取多阶段特征",
+          "description": "两条轻量卷积分支分别使用不同激活/池化设计。每阶段特征逐元素相乘，再以 1×1 卷积与平均池化形成统一尺寸表示。"
+        },
+        {
+          "title": "计算空间重要性",
+          "description": "针对各位置的通道特征产生重要性图。论文比较可学习 1×1 卷积、方差和均匀三类方案，它们不是必须同时存在的三个连续模块。"
+        },
+        {
+          "title": "细粒度结构映射先做分组",
+          "description": "将跨阶段特征展开，以阶段特定映射与共享映射的乘积形成空间加权组合，提取少量代表特征；映射按行归一化以稳定学习。"
+        },
+        {
+          "title": "聚合代表特征形成阶段输出",
+          "description": "结构化特征再经聚合模块压缩，每阶段生成分类分布、区间偏移和尺度等 SSR 参数，而不是直接从原始位置特征池化成一个角度。"
+        },
+        {
+          "title": "软分阶段回归角度",
+          "description": "SSR 将各级粗到细的代表值与概率组合为 yaw、pitch、roll。还可对不同重要性方案的模型预测求平均，需与单模型配置区分。"
+        }
+      ],
+      "training": "端到端最小化预测与真值三轴角度的 MAE，训练含随机裁剪和尺度增强。结构映射、聚合和 SSR 参数一起学习；方差重要性可微但本身没有可学习权重。",
+      "inference": "对人脸裁剪执行特征抽取、结构映射、聚合与 SSR。多阶段指特征/回归层级，不能当作视频时间递归；集成模型的开销也不同于单个网络。",
+      "figure_reading": "图 2(a) 是整体流程，(b) 展开单阶段与跨阶段结构映射。尤其区分 Fine-grained structure mapping 与后续 Feature aggregation 两个操作。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法正文 PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Yang_FSA-Net_Learning_Fine-Grained_Structure_Aggregation_for_Head_Pose_Estimation_From_CVPR_2019_paper.pdf#page=3"
+        },
+        {
+          "label": "方法正文 PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Yang_FSA-Net_Learning_Fine-Grained_Structure_Aggregation_for_Head_Pose_Estimation_From_CVPR_2019_paper.pdf#page=4"
+        },
+        {
+          "label": "方法正文 PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Yang_FSA-Net_Learning_Fine-Grained_Structure_Aggregation_for_Head_Pose_Estimation_From_CVPR_2019_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Yang_FSA-Net_Learning_Fine-Grained_Structure_Aggregation_for_Head_Pose_Estimation_From_CVPR_2019_paper.pdf#page=4"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_CVPR_2019/papers/Yang_FSA-Net_Learning_Fine-Grained_Structure_Aggregation_for_Head_Pose_Estimation_From_CVPR_2019_paper.pdf#page=4",
+      "figure_number": "Figure 2",
+      "version": "Official 2019 CVPR open-access paper",
+      "caption": "FSA-Net: Learning Fine-Grained Structure Aggregation for Head Pose Estimation From a Single Image：原文方法图 / 算法定位。",
+      "note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     }
   },
   {
@@ -2160,19 +2734,77 @@
       "contribution": "把检测和刚体位姿统一起来，无需先运行独立人脸检测器；同时在头姿与 WIDER FACE 检测基准验证。",
       "limitations": "旋转和平移应分别评价，并核对裁剪到原图的坐标转换；检测成功不等于平移已达到真实尺度精度。",
       "sources": [
-        "https://github.com/vitoralbiero/img2pose"
+        "https://github.com/vitoralbiero/img2pose",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Albiero_img2pose_Face_Alignment_and_Detection_via_6DoF_Face_Pose_Estimation_CVPR_2021_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2021/papers/Albiero_img2pose_Face_Alignment_and_Detection_via_6DoF_Face_Pose_Estimation_CVPR_2021_paper.pdf#page=4"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示或算法整理；未进行全文实验复核或独立复现，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2021 CVPR open-access paper 的方法相关正文（3, 4, 5）、图号或算法位置；未完成全文逐节精读或独立复现。"
     },
     "code": "https://github.com/vitoralbiero/img2pose",
     "code_provenance": {
       "url": "https://github.com/vitoralbiero/img2pose",
       "verified_at": "2026-11-18",
       "basis": "作者仓库 README 的对应论文标题、引用或实现说明；项目目录已公开，未运行代码。"
+    },
+    "pipeline": {
+      "overview": "整图 FPN/RPN → 候选区域特征 → 人脸置信度与局部 6DoF → 全图姿态转换 → 投影生成框与去重。",
+      "steps": [
+        {
+          "title": "整图产生候选区域",
+          "description": "基于 Faster R-CNN 与 FPN/RPN，在整张图像提出可能人脸区域；训练提议框来自真值 6DoF 对三维模板的投影。"
+        },
+        {
+          "title": "候选特征进入双头",
+          "description": "RoI pooling 后分别预测 face/non-face 分数与该 proposal 下的 6DoF，姿态包含旋转向量和三维平移。"
+        },
+        {
+          "title": "在候选坐标中学习姿态",
+          "description": "裁剪改变脸的相对大小和位置，因此真值姿态需转换为 proposal 相机条件；不能用同一全图标签直接监督所有候选。"
+        },
+        {
+          "title": "把预测转回全图相机",
+          "description": "依据候选框尺寸、位置与模型采用的内参约定，对深度尺度和主点偏移作转换，获得相对于整图的姿态。"
+        },
+        {
+          "title": "由三维投影导出检测框",
+          "description": "投影固定三维脸模型得到像素范围，再用置信度和 NMS 筛选人脸。框可通过模板区域控制松紧，不依赖额外二维地标检测作为测试输入。"
+        }
+      ],
+      "training": "以分类、局部姿态平方误差和非共面校准点重投影损失训练；姿态/校准项仅用于正 proposal。训练姿态可由 WIDER FACE 的人工或检测地标生成，但测试网络不需要这些地标。",
+      "inference": "整图一次处理并返回多张脸的 6DoF 与投影框。平移基于模板尺度及文中内参假设，不能当作任意未知真实相机都已完成公制标定。",
+      "figure_reading": "图 3 灰色为常规检测器部分，绿/红是训练损失，黄色是测试步骤。特别看 Proposal Pose 转 Global Pose，再由 pose 投影框并 NMS 的顺序。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法正文 PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Albiero_img2pose_Face_Alignment_and_Detection_via_6DoF_Face_Pose_Estimation_CVPR_2021_paper.pdf#page=3"
+        },
+        {
+          "label": "方法正文 PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Albiero_img2pose_Face_Alignment_and_Detection_via_6DoF_Face_Pose_Estimation_CVPR_2021_paper.pdf#page=4"
+        },
+        {
+          "label": "方法正文 PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Albiero_img2pose_Face_Alignment_and_Detection_via_6DoF_Face_Pose_Estimation_CVPR_2021_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content/CVPR2021/papers/Albiero_img2pose_Face_Alignment_and_Detection_via_6DoF_Face_Pose_Estimation_CVPR_2021_paper.pdf#page=4"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2021/papers/Albiero_img2pose_Face_Alignment_and_Detection_via_6DoF_Face_Pose_Estimation_CVPR_2021_paper.pdf#page=4",
+      "figure_number": "Figure 3",
+      "version": "Official 2021 CVPR open-access paper",
+      "caption": "img2pose: Face Alignment and Detection via 6DoF, Face Pose Estimation：原文方法图 / 算法定位。",
+      "note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     }
   },
   {
@@ -2402,13 +3034,75 @@
       "contribution": "先量化下采样误差，再通过像素内位置表示降低该误差，针对的是表示精度而非单纯增加骨干网络能力。",
       "limitations": "细热图补偿量化误差，仍受粗热图定位与分辨率设置影响；细粒度输出不等于获取了额外图像细节。",
       "sources": [
-        "https://openaccess.thecvf.com/content/ICCV2021W/MFR/html/Lan_Revisting_Quantization_Error_in_Face_Alignment_ICCVW_2021_paper.html"
+        "https://openaccess.thecvf.com/content/ICCV2021W/MFR/html/Lan_Revisting_Quantization_Error_in_Face_Alignment_ICCVW_2021_paper.html",
+        "https://openaccess.thecvf.com/content/ICCV2021W/MFR/papers/Lan_Revisting_Quantization_Error_in_Face_Alignment_ICCVW_2021_paper.pdf",
+        "https://openaccess.thecvf.com/content/ICCV2021W/MFR/papers/Lan_Revisting_Quantization_Error_in_Face_Alignment_ICCVW_2021_paper.pdf#page=4"
       ],
-      "evidence_level": "primary_abstract",
-      "verification_note": "依据作者摘要或官方论文页面整理；未进行全文实验复核，不将未核实的局限写成论文结论。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "verification_note": "依据所列版本摘要、方法相关正文及图示或算法整理；未进行全文实验复核或独立复现，不将未核实的局限写成论文结论。",
       "verified_at": "2026-11-17",
       "limitations_kind": "editorial_scope",
-      "scope_reviewed_at": "2026-11-18"
+      "scope_reviewed_at": "2026-11-18",
+      "evidence_scope": "已核对摘要及 Official 2021 ICCV Workshops open-access paper 的方法相关正文（3, 4, 5, 6）、图号或算法位置；未完成全文逐节精读或独立复现。"
+    },
+    "pipeline": {
+      "overview": "人脸图像 → Hourglass 整数热图 → 特征/整数图融合 → 小数热图 → 整数位置加亚像素偏移。",
+      "steps": [
+        {
+          "title": "拆分两种量化来源",
+          "description": "预处理缩放与网络下采样都会使原始地标落在热图像素之间。HIH 将坐标拆成整数格点及该格点内的小数部分。"
+        },
+        {
+          "title": "骨干产生整数热图",
+          "description": "采用堆叠 Hourglass 输出每个地标的整数位置图，提供粗位置及后续小数定位所需的视觉信息。"
+        },
+        {
+          "title": "融合特征进入偏移分支",
+          "description": "将骨干特征与整数热图融合，交给额外分支。论文设计 CNN 或 Transformer 两种替代实现，用于验证同一种表示。"
+        },
+        {
+          "title": "用小数热图表示格内位置",
+          "description": "每个地标另有一张 decimal heatmap，其整张图的范围对应整数图的一个像素；它不是原图另一尺度的普通地标位置热图。"
+        },
+        {
+          "title": "两个峰值组合并还原",
+          "description": "分别取整数图及小数图的 argmax，把小数图位置除以其分辨率作为偏移，加到整数坐标，再根据尺寸与裁剪变换映回原图。"
+        }
+      ],
+      "training": "两类热图以各自参数生成高斯目标，采用 L2 监督；整数图在各 Hourglass 输出处监督。额外的 SmoothL1 描述针对文中的 WOM 对照方案，不能写成 HIH 的默认偏移损失。",
+      "inference": "选择 HIHC 或 HIHT 配置，一次产生整数与小数两类图再联合解码。小数图仍有有限分辨率，作用是降低而非数学上彻底消除所有量化误差。",
+      "figure_reading": "图 3 上下为 Transformer/CNN 两种实现；小数热图细化的是整数热图峰值所在的一个像素，不是把全部热图逐像素嵌套展开。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法正文 PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2021W/MFR/papers/Lan_Revisting_Quantization_Error_in_Face_Alignment_ICCVW_2021_paper.pdf#page=3"
+        },
+        {
+          "label": "方法正文 PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2021W/MFR/papers/Lan_Revisting_Quantization_Error_in_Face_Alignment_ICCVW_2021_paper.pdf#page=4"
+        },
+        {
+          "label": "方法正文 PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2021W/MFR/papers/Lan_Revisting_Quantization_Error_in_Face_Alignment_ICCVW_2021_paper.pdf#page=5"
+        },
+        {
+          "label": "方法正文 PDF 第 6 页",
+          "url": "https://openaccess.thecvf.com/content/ICCV2021W/MFR/papers/Lan_Revisting_Quantization_Error_in_Face_Alignment_ICCVW_2021_paper.pdf#page=6"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content/ICCV2021W/MFR/papers/Lan_Revisting_Quantization_Error_in_Face_Alignment_ICCVW_2021_paper.pdf#page=4"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/ICCV2021W/MFR/papers/Lan_Revisting_Quantization_Error_in_Face_Alignment_ICCVW_2021_paper.pdf#page=4",
+      "figure_number": "Figure 3",
+      "version": "Official 2021 ICCV Workshops open-access paper",
+      "caption": "Revisting Quantization Error in Face Alignment：原文方法图 / 算法定位。",
+      "note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     }
   },
   {
@@ -2837,18 +3531,74 @@
       "contribution": "CVPR 2023 Tables 1–2中，以300W-LP训练的11区TokenHPE-v2在AFLW2000的MAE为4.66°，在BIWI为3.72°；另一个BIWI按视频70%/30%训练测试协议在Table 3为2.49°。Table 4中无特征提取器、CNN、ViT三种选项的AFLW2000 MAE为5.38°、4.96°、4.66°，说明收益也受视觉骨干影响。该工作把方向区域作为可监督的中间表征，而不是仅用通用Transformer直接回归角度。",
       "limitations": "证据边界：正文没有独立的局限章节。§4.1明确提醒极端角度下欧拉角MAE不可靠，因此同时给出旋转矩阵向量指标MAEV，二者不能当作同一指标混用。Table 2的跨数据集BIWI MAE为3.72°，并未优于同表6DRepNet的3.47°，不能写成所有协议/指标均领先。遮挡能力主要以Figure 5选择的热力图样例解释，不能据此推断已经完成所有遮挡程度的系统量化验证；以上是本文证据范围分析，并非作者列出的失败条件。",
       "sources": [
-        "https://openaccess.thecvf.com/content/CVPR2023/papers/Zhang_TokenHPE_Learning_Orientation_Tokens_for_Efficient_Head_Pose_Estimation_via_CVPR_2023_paper.pdf"
+        "https://openaccess.thecvf.com/content/CVPR2023/papers/Zhang_TokenHPE_Learning_Orientation_Tokens_for_Efficient_Head_Pose_Estimation_via_CVPR_2023_paper.pdf",
+        "https://openaccess.thecvf.com/content/CVPR2023/papers/Zhang_TokenHPE_Learning_Orientation_Tokens_for_Efficient_Head_Pose_Estimation_via_CVPR_2023_paper.pdf#page=3"
       ],
       "evidence_level": "primary_abstract_and_targeted_fulltext",
       "verification_note": "已定向核对下列原文方法、实验与讨论；数值为作者报告，未独立复现，不代表全文逐段复核。",
       "verified_at": "2026-11-17",
-      "evidence_scope": "CVPR 2023正式论文：§3.3–3.7朝向划分、旋转表示、损失与实现；§4.1–4.4指标、两种协议、Tables 1–4和Figure 5。未独立复现；显式区分作者指标提醒与编辑性证据边界。"
+      "evidence_scope": "CVPR 2023正式论文：§3.3–3.7朝向划分、旋转表示、损失与实现；§4.1–4.4指标、两种协议、Tables 1–4和Figure 5。未独立复现；显式区分作者指标提醒与编辑性证据边界。\n\n本批流程补充：已核对摘要及 Official 2023 CVPR open-access paper 的方法相关正文（3, 4, 5）、图号或算法位置；未完成全文逐节精读或独立复现。"
     },
     "code": "https://github.com/zc2023/TokenHPE",
     "code_provenance": {
       "url": "https://github.com/zc2023/TokenHPE",
       "verified_at": "2026-11-18",
       "basis": "作者仓库 README 的对应论文标题、引用或实现说明；项目目录已公开，未运行代码。"
+    },
+    "pipeline": {
+      "overview": "人脸视觉 token + 朝向区域 token → Transformer 交互 → 各 token 的旋转 → MLP 融合最终旋转矩阵。",
+      "steps": [
+        {
+          "title": "构造位置敏感的视觉 token",
+          "description": "可直接划分图像 patch、使用 CNN 特征或读取 ViT token；默认采用 ViT-B/16 路径，再加入空间位置表示。"
+        },
+        {
+          "title": "建立朝向区域 token",
+          "description": "按人脸不同朝向外观将姿态空间启发式划为九或十一个基本区域，为每个区域设置可学习向量。它们不是鼻眼嘴等地标查询。"
+        },
+        {
+          "title": "联合建模外观和方向",
+          "description": "视觉与 orientation tokens 拼接送入 Transformer，利用自注意力学习面部关系及区域朝向特征；最终只保留 orientation tokens 进入预测部分。"
+        },
+        {
+          "title": "各方向表示先转为旋转",
+          "description": "每个最终方向 token 线性映射为 6D 旋转表示，再用 Gram–Schmidt 构造中间旋转矩阵，以支持区域相关监督。"
+        },
+        {
+          "title": "MLP 融合整体旋转",
+          "description": "将各中间矩阵展平拼接，经 MLP 输出另一组 6D 表示，再转成最终旋转矩阵。最终预测不是仅挑一个朝向 token 的 argmax。"
+        }
+      ],
+      "training": "组合最终旋转测地线损失与区域 token 损失；区域项仅监督真值所属基本区域，对两项设置权重。各 token 的中间旋转是学习机制的一部分。",
+      "inference": "人脸裁剪生成视觉 token，全部方向 token 参与最终融合。推理只输出最终矩阵，不需要外部先提供方向区域标签或人脸地标。",
+      "figure_reading": "图 2 是四个模块与双损失，图 3 是九/十一区域的构造。区域 token 不等于二维关键点 token；注意图中 MLP head 位于中间旋转之后。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法正文 PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Zhang_TokenHPE_Learning_Orientation_Tokens_for_Efficient_Head_Pose_Estimation_via_CVPR_2023_paper.pdf#page=3"
+        },
+        {
+          "label": "方法正文 PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Zhang_TokenHPE_Learning_Orientation_Tokens_for_Efficient_Head_Pose_Estimation_via_CVPR_2023_paper.pdf#page=4"
+        },
+        {
+          "label": "方法正文 PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Zhang_TokenHPE_Learning_Orientation_Tokens_for_Efficient_Head_Pose_Estimation_via_CVPR_2023_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Zhang_TokenHPE_Learning_Orientation_Tokens_for_Efficient_Head_Pose_Estimation_via_CVPR_2023_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content/CVPR2023/papers/Zhang_TokenHPE_Learning_Orientation_Tokens_for_Efficient_Head_Pose_Estimation_via_CVPR_2023_paper.pdf#page=3",
+      "figure_number": "Figure 2",
+      "version": "Official 2023 CVPR open-access paper",
+      "caption": "TokenHPE: Learning Orientation Tokens for Efficient Head Pose Estimation via Transformers：原文方法图 / 算法定位。",
+      "note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     }
   },
   {
@@ -11025,10 +11775,12 @@
       "method": "利用局部外观特征的加权投票预测关键点，并以非参数形状正则约束结果；重点处理大姿态、表情、遮挡和尺度变化。",
       "limitations": "局部投票和非参数形状约束依赖训练外观与形状样例；鲁棒性需按姿态、遮挡及尺度分组评价。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2014/html/Smith_Nonparametric_Context_Modeling_2014_CVPR_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2014/html/Smith_Nonparametric_Context_Modeling_2014_CVPR_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2014/papers/Smith_Nonparametric_Context_Modeling_2014_CVPR_paper.pdf",
+        "https://openaccess.thecvf.com/content_cvpr_2014/papers/Smith_Nonparametric_Context_Modeling_2014_CVPR_paper.pdf#page=5"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2014 CVPR open-access paper 的方法相关正文（3, 4, 5）、图号或算法位置；未完成全文逐节精读或独立复现。",
       "verified_at": "2026-11-17",
       "problem": "极端姿态、表情与遮挡使局部外观检测器产生不稳定的关键点响应。",
       "inputs_outputs": "人脸图像输入，输出二维人脸关键点位置。",
@@ -11041,6 +11793,61 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "检测人脸 → 检索相似样例 → 加权多尺度/旋转 Hough 地标投票 → 选择响应图 → 非参数形状约束。",
+      "steps": [
+        {
+          "title": "建立带地标的样例库",
+          "description": "每个样例保存图像、量化 dense SIFT、语义地标，以及每个特征—地标对的独立权重；样例先做 Procrustes 对齐。"
+        },
+        {
+          "title": "检索适合当前脸的样例",
+          "description": "测试图裁剪缩放后提取多方向 SIFT，先以词袋粗筛，再以 Hough 响应峰筛出姿态、表情与外观较近的样例。"
+        },
+        {
+          "title": "匹配特征转移地标偏移",
+          "description": "匹配到的视觉词将样例中特征到地标的偏移转移到测试图，按多尺度与平面旋转生成加权 Hough 投票图。"
+        },
+        {
+          "title": "约束一致的整体旋转",
+          "description": "各地标可选择不同尺度的最佳响应，但全脸使用同一个平面旋转，以兼顾局部形变和全局朝向的一致性。"
+        },
+        {
+          "title": "用样例形状排除伪峰",
+          "description": "对最终各地标投票图使用非参数样例形状正则，避免局部遮挡或歧义峰；形状候选来自此次检索的相似样例。"
+        }
+      ],
+      "training": "由标注样例之间视觉词匹配和偏移一致性估计特征—地标权重，并用距离衰减正则限制过远特征；这是数据驱动的非参数权重，不是端到端 CNN 训练。",
+      "inference": "需要保存的样例、特征索引和权重，执行检索、投票与形状优化。权重适应每个样例和每个地标，不能简化成一张统一脸部注意力图。",
+      "figure_reading": "主文将完整流程分步写于 §3.1，图 2 展示两张样例的地标特定权重，解释投票证据来源；它是机制示例，不是独立网络架构图。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法正文 PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Smith_Nonparametric_Context_Modeling_2014_CVPR_paper.pdf#page=3"
+        },
+        {
+          "label": "方法正文 PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Smith_Nonparametric_Context_Modeling_2014_CVPR_paper.pdf#page=4"
+        },
+        {
+          "label": "方法正文 PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Smith_Nonparametric_Context_Modeling_2014_CVPR_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Smith_Nonparametric_Context_Modeling_2014_CVPR_paper.pdf#page=5"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Smith_Nonparametric_Context_Modeling_2014_CVPR_paper.pdf#page=5",
+      "figure_number": "Figure 2 (feature weights)",
+      "version": "Official 2014 CVPR open-access paper",
+      "caption": "Nonparametric Context Modeling of Local Appearance for Pose- and Expression-Robust Facial Landmark Localization：原文方法图 / 算法定位。",
+      "note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     }
   },
   {
@@ -11066,10 +11873,12 @@
       "method": "将外观与形状更新的关系建模为分阶段关系字典，并引入遮挡字典；通过稀疏选择相关形状位移迭代完成人脸对齐。",
       "limitations": "关系字典用于迭代形状更新，需要当前关键点估计；遮挡字典覆盖并不意味着任意新遮挡都已测试。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2014/html/Xing_Towards_Multi-view_and_2014_CVPR_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2014/html/Xing_Towards_Multi-view_and_2014_CVPR_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2014/papers/Xing_Towards_Multi-view_and_2014_CVPR_paper.pdf",
+        "https://openaccess.thecvf.com/content_cvpr_2014/papers/Xing_Towards_Multi-view_and_2014_CVPR_paper.pdf#page=4"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2014 CVPR open-access paper 的方法相关正文（2, 3, 4, 5）、图号或算法位置；未完成全文逐节精读或独立复现。",
       "verified_at": "2026-11-17",
       "problem": "大视角变化和局部遮挡破坏人脸外观与形状之间的稳定对应关系。",
       "inputs_outputs": "人脸图像及当前关键点估计输入，迭代输出细化的二维关键点。",
@@ -11082,6 +11891,65 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "当前地标外观 → 稀疏外观字典编码 → 共享系数的形状位移字典 → 阶段更新；遮挡字典吸收受污染外观。",
+      "steps": [
+        {
+          "title": "用地标初始化提取外观",
+          "description": "从检测框得到初始形状，在当前估计位置抽取 shape-indexed 外观；训练的形状目标是到真值的位移。"
+        },
+        {
+          "title": "学习成对关联字典",
+          "description": "每阶段包含外观字典和形状位移字典，要求二者共享稀疏表示系数，从而将不同视角的外观模式与形状调整关联起来。"
+        },
+        {
+          "title": "仅由外观求测试系数",
+          "description": "测试没有真值形状，因此先在外观字典中求 L1 正则稀疏系数，再把相同系数应用于形状字典，得到位移。"
+        },
+        {
+          "title": "显式分离遮挡成分",
+          "description": "OSRD 变体给外观字典增加紧凑遮挡字典及独立系数，使其解释被遮挡区域；真正形状位移仍由形状相关部分预测。"
+        },
+        {
+          "title": "更新后重提特征并继续",
+          "description": "对地标应用位移，重新构建外观并调用下一阶段的关联字典，逐渐缩小定位误差。标题中的 multi-view 表示多种人脸朝向。"
+        }
+      ],
+      "training": "分阶段交替学习两种关联字典，并让末步形状字典更新使用由外观求得的系数，以匹配测试条件。遮挡训练由自然图像与元素遮挡模式组合，减少人工像素遮挡标注需求。",
+      "inference": "输入单张人脸，逐阶段稀疏编码并更新二维地标；并不要求同步多相机输入。稀疏系数在测试中仍需求解，不能当成已训练好的直接线性回归。",
+      "figure_reading": "第 4 页 Algorithm 1 是 SRD 学习原始流程，图 1 是元素/组合遮挡模式。该图不是多视角相机布置图，也不是完整网络结构。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法正文 PDF 第 2 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Xing_Towards_Multi-view_and_2014_CVPR_paper.pdf#page=2"
+        },
+        {
+          "label": "方法正文 PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Xing_Towards_Multi-view_and_2014_CVPR_paper.pdf#page=3"
+        },
+        {
+          "label": "方法正文 PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Xing_Towards_Multi-view_and_2014_CVPR_paper.pdf#page=4"
+        },
+        {
+          "label": "方法正文 PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Xing_Towards_Multi-view_and_2014_CVPR_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Xing_Towards_Multi-view_and_2014_CVPR_paper.pdf#page=4"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Xing_Towards_Multi-view_and_2014_CVPR_paper.pdf#page=4",
+      "figure_number": "Algorithm 1 and Figure 1",
+      "version": "Official 2014 CVPR open-access paper",
+      "caption": "Towards Multi-view and Partially-Occluded Face Alignment：原文方法图 / 算法定位。",
+      "note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     }
   },
   {
@@ -11107,10 +11975,12 @@
       "method": "以姿态邻域上的多变量标签分布替代单一硬标签，缓解人工头姿标注的不准确；通过加权 Jeffrey 散度学习预测分布。",
       "limitations": "输出是姿态邻域标签分布，需说明由分布到最终角度或类别的解码；不等同于直接预测三维平移。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2014/html/Geng_Head_Pose_Estimation_2014_CVPR_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2014/html/Geng_Head_Pose_Estimation_2014_CVPR_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2014/papers/Geng_Head_Pose_Estimation_2014_CVPR_paper.pdf",
+        "https://openaccess.thecvf.com/content_cvpr_2014/papers/Geng_Head_Pose_Estimation_2014_CVPR_paper.pdf#page=3"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2014 CVPR open-access paper 的方法相关正文（2, 3, 4）、图号或算法位置；未完成全文逐节精读或独立复现。",
       "verified_at": "2026-11-17",
       "problem": "基于注视目标等主观流程获得的头姿标签不够精确，硬标签不能表达其不确定性。",
       "inputs_outputs": "头部图像输入，学习并预测姿态邻域上的多变量标签分布。",
@@ -11123,6 +11993,61 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "粗 yaw/pitch 标签 → 二维标签描述分布 → 最大熵条件模型 → 预测联合分布 → 最大描述度姿态。",
+      "steps": [
+        {
+          "title": "把单个粗标签变成邻域描述",
+          "description": "以标注 yaw/pitch 为中心构造离散二维高斯，附近姿态也赋非零描述度，缓解粗标签与相邻外观相似导致的信息不足。"
+        },
+        {
+          "title": "在联合姿态网格归一化",
+          "description": "每个单元对应一对 yaw/pitch，整体描述度和为 1，并按有效姿态约束处理网格；它不同于两个互不相关的一维角度分类器。"
+        },
+        {
+          "title": "用最大熵模型预测分布",
+          "description": "从人脸特征学习各姿态单元的条件质量函数，经指数与归一化得到完整 MLD，模型不需要深度神经网络。"
+        },
+        {
+          "title": "引入邻域感知的分布误差",
+          "description": "比较预测与目标分布时使用 Jeffrey 散度或其加权形式；加权版本考虑相邻姿态单元关系，使误差不只逐格独立计算。"
+        },
+        {
+          "title": "取最大描述度单元输出",
+          "description": "测试时计算整张二维 MLD，选择描述度最大的 yaw/pitch 对。原文使用最大值解码，不是把分布期望直接当连续角度。"
+        }
+      ],
+      "training": "由粗姿态标签生成软描述目标，用 L-BFGS 优化最大熵模型的分布损失。论文将描述度与“唯一正确姿态的概率”作概念区分，邻域宽度也会影响结果。",
+      "inference": "给出人脸特征，预测联合 yaw/pitch 描述分布并取峰值；该任务不输出 roll 或三维平移。",
+      "figure_reading": "图 1 展示脸图与对应二维 MLD 灰度网格，横纵轴为 yaw/pitch，亮度为显示增强后的描述度。它是标签表示示例，训练模型见 §3。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法正文 PDF 第 2 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Geng_Head_Pose_Estimation_2014_CVPR_paper.pdf#page=2"
+        },
+        {
+          "label": "方法正文 PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Geng_Head_Pose_Estimation_2014_CVPR_paper.pdf#page=3"
+        },
+        {
+          "label": "方法正文 PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Geng_Head_Pose_Estimation_2014_CVPR_paper.pdf#page=4"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Geng_Head_Pose_Estimation_2014_CVPR_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Geng_Head_Pose_Estimation_2014_CVPR_paper.pdf#page=3",
+      "figure_number": "Figure 1",
+      "version": "Official 2014 CVPR open-access paper",
+      "caption": "Head Pose Estimation Based on Multivariate Label Distribution：原文方法图 / 算法定位。",
+      "note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     }
   },
   {
@@ -11148,10 +12073,12 @@
       "method": "GN-DPM 联合优化局部外观模型与全局形状，而非先独立计算各关键点响应；采用 Gauss–Newton 优化与稀疏网格加权最小二乘降低拟合成本。",
       "limitations": "局部外观与全局形状联合拟合仍是迭代优化；速度与初始化、停止条件及网格设置有关。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2014/html/Tzimiropoulos_Gauss-Newton_Deformable_Part_2014_CVPR_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2014/html/Tzimiropoulos_Gauss-Newton_Deformable_Part_2014_CVPR_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2014/papers/Tzimiropoulos_Gauss-Newton_Deformable_Part_2014_CVPR_paper.pdf",
+        "https://openaccess.thecvf.com/content_cvpr_2014/papers/Tzimiropoulos_Gauss-Newton_Deformable_Part_2014_CVPR_paper.pdf#page=1"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2014 CVPR open-access paper 的方法相关正文（3, 4, 5）、图号或算法位置；未完成全文逐节精读或独立复现。",
       "verified_at": "2026-11-17",
       "problem": "独立固定部件模板产生不完美的响应图和关键点检测歧义。",
       "inputs_outputs": "人脸图像输入，联合拟合局部外观与全局形状以输出关键点。",
@@ -11164,6 +12091,61 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "当前形状 → 地标局部外观 → 联合 PCA 外观重建 → 残差驱动 Gauss–Newton → 同时更新形状/外观。",
+      "steps": [
+        {
+          "title": "学习全局形状子空间",
+          "description": "标注形状经 Procrustes 对齐与 PCA，补充相似变换基，得到紧凑形状系数及其到全部地标的映射。"
+        },
+        {
+          "title": "联合建模所有局部外观",
+          "description": "在各点抽取 patch 或 SIFT 后拼接，以 PCA 学习整体的部件外观模型。局部部件并未被假设为相互独立的固定检测器。"
+        },
+        {
+          "title": "比较观测与当前外观重建",
+          "description": "在当前形状位置读取特征，与生成外观的差构成最小二乘目标；测试同时调整形状参数和外观参数。"
+        },
+        {
+          "title": "以 Gauss–Newton 交替求更新",
+          "description": "线性化模型，通过投影消除外观变化的影响求形状步长，再更新外观。本文采用平移部件运动模型，逆组合可化为参数加减。"
+        },
+        {
+          "title": "稀疏网格降低拟合成本",
+          "description": "训练保留稠密外观，测试在选定稀疏网格上计算加权最小二乘，并使用相应近似减少计算，最终恢复整套二维地标。"
+        }
+      ],
+      "training": "PCA 形状和部件外观由标注的野外图像训练；拟合阶段才对每张图像进行 Gauss–Newton 迭代。SIFT 版本增强鲁棒性，同时依靠稀疏计算控制开销。",
+      "inference": "需要初始化、已学子空间和图像，逐轮联合拟合。它不是先做独立局部响应峰检测、再单独套全局形状的传统 CLM 流程。",
+      "figure_reading": "图 1(a) 当前形状，(b) 局部观测，(c) 外观重建，(d) 残差，(e) 拟合结果；残差连接到联合优化，不是普通 CNN 的中间激活图。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法正文 PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Tzimiropoulos_Gauss-Newton_Deformable_Part_2014_CVPR_paper.pdf#page=3"
+        },
+        {
+          "label": "方法正文 PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Tzimiropoulos_Gauss-Newton_Deformable_Part_2014_CVPR_paper.pdf#page=4"
+        },
+        {
+          "label": "方法正文 PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Tzimiropoulos_Gauss-Newton_Deformable_Part_2014_CVPR_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Tzimiropoulos_Gauss-Newton_Deformable_Part_2014_CVPR_paper.pdf#page=1"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Tzimiropoulos_Gauss-Newton_Deformable_Part_2014_CVPR_paper.pdf#page=1",
+      "figure_number": "Figure 1",
+      "version": "Official 2014 CVPR open-access paper",
+      "caption": "Gauss-Newton Deformable Part Models for Face Alignment in-the-Wild：原文方法图 / 算法定位。",
+      "note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     }
   },
   {
@@ -11190,10 +12172,12 @@
       "method": "研究级联回归人脸对齐模型的增量更新，将通用模型在线适配到具体人物和成像条件，面向需要高精度的跟踪与行为分析。",
       "limitations": "在线增量适配利用连续人物观测；不能把个性化后的结果与完全不适配的通用模型直接比较。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2014/html/Asthana_Incremental_Face_Alignment_2014_CVPR_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2014/html/Asthana_Incremental_Face_Alignment_2014_CVPR_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2014/papers/Asthana_Incremental_Face_Alignment_2014_CVPR_paper.pdf",
+        "https://openaccess.thecvf.com/content_cvpr_2014/papers/Asthana_Incremental_Face_Alignment_2014_CVPR_paper.pdf#page=4"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2014 CVPR open-access paper 的方法相关正文（2, 3, 4, 5, 6）、图号或算法位置；未完成全文逐节精读或独立复现。",
       "verified_at": "2026-11-17",
       "problem": "通用人脸对齐模型难以满足行为分析与动作捕捉对特定人物的高精度要求。",
       "inputs_outputs": "连续到来的人脸观测用于增量更新，输出适应人物和成像条件的关键点模型。",
@@ -11206,6 +12190,69 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "离线阶段误差统计 → 各级独立采样训练 → 新样本递归最小二乘更新级联 → 顺序运行形状回归。",
+      "steps": [
+        {
+          "title": "以参数化形状定义回归目标",
+          "description": "采用含尺度、旋转、平移及非刚性系数的三维形状表示，提取当前投影地标附近 SIFT/HoG，将外观映射为参数增量。"
+        },
+        {
+          "title": "统计每级剩余误差",
+          "description": "先从离线顺序级联收集各阶段参数扰动的分布，用这些统计量描述该级应该处理的初始化误差范围。"
+        },
+        {
+          "title": "各级直接采样而不传播样本",
+          "description": "Par-CLR 在每级直接按相应误差分布采样训练扰动，使各级训练或增量更新相互独立，避免前一级变化后重跑全部旧样本。"
+        },
+        {
+          "title": "新样本更新回归充分统计",
+          "description": "iPar-CLR 保存回归矩阵与相应逆矩阵，用新样本的小规模矩阵更新得到等价线性最小二乘解，无需存储并重新训练所有旧数据。"
+        },
+        {
+          "title": "预测与在线适配分开执行",
+          "description": "预测仍按级联顺序更新形状；视频可用前帧结果初始化，并仅在全局 SVM 与局部 patch 专家都认为拟合可靠时加入在线更新。"
+        }
+      ],
+      "training": "初始模型及每级扰动统计来自标注数据，新标注可直接增量加入。视频自动适配使用失败检查抑制错误更新；论文重点更新外观到形状的回归器，而非持续更新 PCA 形状子空间。",
+      "inference": "“并行”描述训练/更新各级的独立性，不能据此把测试级联改成各级同时预测。在线自适应额外依赖可靠性门控，错误拟合可能导致漂移。",
+      "figure_reading": "图 2 对比 Par-CLR 初始训练与加入新样本后的更新；图 1 是顺序级联增量化的困难。应区分训练依赖箭头与测试时的迭代顺序。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法正文 PDF 第 2 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Asthana_Incremental_Face_Alignment_2014_CVPR_paper.pdf#page=2"
+        },
+        {
+          "label": "方法正文 PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Asthana_Incremental_Face_Alignment_2014_CVPR_paper.pdf#page=3"
+        },
+        {
+          "label": "方法正文 PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Asthana_Incremental_Face_Alignment_2014_CVPR_paper.pdf#page=4"
+        },
+        {
+          "label": "方法正文 PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Asthana_Incremental_Face_Alignment_2014_CVPR_paper.pdf#page=5"
+        },
+        {
+          "label": "方法正文 PDF 第 6 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Asthana_Incremental_Face_Alignment_2014_CVPR_paper.pdf#page=6"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Asthana_Incremental_Face_Alignment_2014_CVPR_paper.pdf#page=4"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2014/papers/Asthana_Incremental_Face_Alignment_2014_CVPR_paper.pdf#page=4",
+      "figure_number": "Figure 2",
+      "version": "Official 2014 CVPR open-access paper",
+      "caption": "Incremental Face Alignment in the Wild：原文方法图 / 算法定位。",
+      "note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     }
   },
   {
@@ -11231,10 +12278,12 @@
       "method": "PO-CR 从训练数据学习平均 Jacobian、Hessian 与下降方向，并在外观变化的正交子空间中进行级联回归，连接学习式对齐与结构化优化。",
       "limitations": "投影子空间及平均下降信息来自训练数据；测试外观与训练子空间的偏差需单独考察。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2015/html/Tzimiropoulos_Project-Out_Cascaded_Regression_2015_CVPR_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2015/html/Tzimiropoulos_Project-Out_Cascaded_Regression_2015_CVPR_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2015/papers/Tzimiropoulos_Project-Out_Cascaded_Regression_2015_CVPR_paper.pdf",
+        "https://openaccess.thecvf.com/content_cvpr_2015/papers/Tzimiropoulos_Project-Out_Cascaded_Regression_2015_CVPR_paper.pdf#page=1"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2015 CVPR open-access paper 的方法相关正文（3, 4, 5）、图号或算法位置；未完成全文逐节精读或独立复现。",
       "verified_at": "2026-11-17",
       "problem": "传统级联回归通常仅学习特征到参数的映射，未充分利用形变拟合问题的优化结构。",
       "inputs_outputs": "人脸图像输入，通过学习的级联下降方向输出对齐形状。",
@@ -11247,6 +12296,61 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "形状/外观 PCA → 投影掉外观变化 → 学习平均 Jacobian 与下降方向 → 级联更新形状系数。",
+      "steps": [
+        {
+          "title": "准备形状与局部外观模型",
+          "description": "地标经对齐后建立 PCA 形状空间；地标周围描述子拼接建立独立 PCA 外观空间，保留平均外观作为比较基准。"
+        },
+        {
+          "title": "把外观变化从误差中投影掉",
+          "description": "在与外观子空间正交的空间中处理局部观测与平均外观差，使形状更新不必每次同时搜索外观系数。"
+        },
+        {
+          "title": "从训练扰动学习平均 Jacobian",
+          "description": "对标注图像的扰动形状，在投影空间求回归问题，学习该阶段的平均投影 Jacobian，而非测试时计算图像专用导数。"
+        },
+        {
+          "title": "预计算阶段下降矩阵",
+          "description": "由平均 Jacobian 构造 Hessian 与下降方向；每阶段训练更新形状，生成下一阶段的特征及扰动样本。"
+        },
+        {
+          "title": "拟合时反复取特征并更新",
+          "description": "测试以当前形状提取局部特征，与平均外观构成误差，经阶段回归矩阵得到形状参数增量，最后解码二维地标。"
+        }
+      ],
+      "training": "先学习生成式 PCA 子空间，再从训练扰动逐级学习投影空间中的平均 Jacobian/Hessian 和下降方向；这使 PO-CR 与直接回归坐标位移的 SDM 有不同训练目标。",
+      "inference": "使用已学阶段矩阵，不为每张测试脸反复求图像 Jacobian 和 Hessian 逆；project-out 是排除外观子空间变化，并非将三维脸投影成二维的意思。",
+      "figure_reading": "图 1 对比 PO-CR 与 Gauss–Newton 的训练/拟合计算路径。学习平均导数和在线解析求导是两种不同做法，完整步骤见 §3.3。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法正文 PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Tzimiropoulos_Project-Out_Cascaded_Regression_2015_CVPR_paper.pdf#page=3"
+        },
+        {
+          "label": "方法正文 PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Tzimiropoulos_Project-Out_Cascaded_Regression_2015_CVPR_paper.pdf#page=4"
+        },
+        {
+          "label": "方法正文 PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Tzimiropoulos_Project-Out_Cascaded_Regression_2015_CVPR_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Tzimiropoulos_Project-Out_Cascaded_Regression_2015_CVPR_paper.pdf#page=1"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Tzimiropoulos_Project-Out_Cascaded_Regression_2015_CVPR_paper.pdf#page=1",
+      "figure_number": "Figure 1",
+      "version": "Official 2015 CVPR open-access paper",
+      "caption": "Project-Out Cascaded Regression With an Application to Face Alignment：原文方法图 / 算法定位。",
+      "note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     }
   },
   {
@@ -11272,10 +12376,12 @@
       "method": "以回归树定义高斯过程核，构成级联高斯过程回归树；配合形状索引的 DoG 特征，改善传统级联回归树的泛化能力。",
       "limitations": "核与树结构建立在形状索引 DoG 特征上；比较时应固定特征提取及级联深度，不能仅归因于回归器名称。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2015/html/Lee_Face_Alignment_Using_2015_CVPR_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2015/html/Lee_Face_Alignment_Using_2015_CVPR_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2015/papers/Lee_Face_Alignment_Using_2015_CVPR_paper.pdf",
+        "https://openaccess.thecvf.com/content_cvpr_2015/papers/Lee_Face_Alignment_Using_2015_CVPR_paper.pdf#page=4"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2015 CVPR open-access paper 的方法相关正文（2, 3, 4, 5）、图号或算法位置；未完成全文逐节精读或独立复现。",
       "verified_at": "2026-11-17",
       "problem": "级联回归树的泛化与对几何变化的稳定性仍需改善。",
       "inputs_outputs": "人脸图像的形状索引 DoG 特征输入，输出二维对齐关键点。",
@@ -11288,6 +12394,65 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "形状索引 DoG → 树叶相似核的高斯过程回归 → 预计算叶输出 → 级联残差更新二维形状。",
+      "steps": [
+        {
+          "title": "按当前形状提取多尺度 DoG",
+          "description": "预先生成高斯平滑图，在各点局部视网膜式采样模式中读取不同尺度响应并求差；随形状变换采样坐标，而非整图形变。"
+        },
+        {
+          "title": "以树叶共现定义相似核",
+          "description": "两个样本在多少棵树中落到相同叶节点，决定高斯过程核的相似度，把树的快速分区与 GP 的统计回归结合。"
+        },
+        {
+          "title": "优化回归与噪声尺度",
+          "description": "逐阶段对当前残差建模，通过边际似然估计核/噪声参数，并利用叶编码的低秩结构降低训练矩阵求解开销。"
+        },
+        {
+          "title": "把 GP 预测压缩到叶输出",
+          "description": "将训练样本的核加权系数聚合到每棵树叶，可将预测均值写成抵达叶输出之和；还利用预测不确定性调整相应权重。"
+        },
+        {
+          "title": "重复树查询与形状更新",
+          "description": "每阶段重新提取 DoG、遍历树、累加预计算输出，更新整体形状。测试不需对每个查询遍历全部训练样本执行通用 GP 核求和。"
+        }
+      ],
+      "training": "贪心分阶段学习残差，树分裂先以单地标误差选择，叶输出再由 GPRT 学得；阶段组合的概率建模与方差形成重加权，不是普通树叶残差均值。",
+      "inference": "使用 Algorithm 2 的级联均值预测，保持树查询式计算；多尺度平滑图可预先计算一次，随级联变化的是采样位置和选择的特征。",
+      "figure_reading": "第 4 页 Algorithms 1/2 分开给出学习和预测；图 2 是 DoG 采样机制。第 2 页图 1 只展示各阶段定位结果，不替代模型流程。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法正文 PDF 第 2 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Lee_Face_Alignment_Using_2015_CVPR_paper.pdf#page=2"
+        },
+        {
+          "label": "方法正文 PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Lee_Face_Alignment_Using_2015_CVPR_paper.pdf#page=3"
+        },
+        {
+          "label": "方法正文 PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Lee_Face_Alignment_Using_2015_CVPR_paper.pdf#page=4"
+        },
+        {
+          "label": "方法正文 PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Lee_Face_Alignment_Using_2015_CVPR_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Lee_Face_Alignment_Using_2015_CVPR_paper.pdf#page=4"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Lee_Face_Alignment_Using_2015_CVPR_paper.pdf#page=4",
+      "figure_number": "Algorithms 1–2",
+      "version": "Official 2015 CVPR open-access paper",
+      "caption": "Face Alignment Using Cascade Gaussian Process Regression Trees：原文方法图 / 算法定位。",
+      "note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     }
   },
   {
@@ -11313,10 +12478,12 @@
       "method": "仅依据三维人脸几何而不依赖纹理，以水平集种子点、局部弯曲能量对应和可变形模型拟合定位大量三维人体测量关键点。",
       "limitations": "输入是三维人脸表面而非普通照片；纹理无关不意味着无需几何完整度或扫描质量条件。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2015/html/Gilani_Shape-Based_Automatic_Detection_2015_CVPR_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2015/html/Gilani_Shape-Based_Automatic_Detection_2015_CVPR_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2015/papers/Gilani_Shape-Based_Automatic_Detection_2015_CVPR_paper.pdf",
+        "https://openaccess.thecvf.com/content_cvpr_2015/papers/Gilani_Shape-Based_Automatic_Detection_2015_CVPR_paper.pdf#page=3"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2015 CVPR open-access paper 的方法相关正文（2, 3, 4, 5）、图号或算法位置；未完成全文逐节精读或独立复现。",
       "verified_at": "2026-11-17",
       "problem": "需要从三维人脸几何中自动定位大量具有形态学意义、甚至难以人工标注的关键点。",
       "inputs_outputs": "三维人脸表面输入，不使用纹理；输出预定义三维关键点及稠密对应。",
@@ -11329,6 +12496,65 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "三维扫描预处理 → level-set 自适应采样 → 弯曲能量匹配/稠密对应 → 统计形状模型 → 查询脸拟合并转移地标。",
+      "steps": [
+        {
+          "title": "输入是三维人脸扫描",
+          "description": "先检测鼻尖、裁出脸部并通过模板配准统一姿态，使后续局部曲面具有可比较的坐标；不是从普通 RGB 直接预测三维坐标。"
+        },
+        {
+          "title": "用两类水平集采样种子",
+          "description": "以曲率相关和均匀速度演化 level-set 曲线，结合最远点采样分别覆盖有辨识度的高曲率部位及平坦区域。"
+        },
+        {
+          "title": "粗到细匹配局部曲面",
+          "description": "在参考脸与目标脸上对比种子周围曲面，以薄板样条弯曲能量衡量非刚性差异，先在较大区域寻找对应，再局部细化。"
+        },
+        {
+          "title": "传播对应并建立统计模型",
+          "description": "借较可靠曲率点注册两张脸，将对应传播到均匀采样区域，形成稠密对应训练脸，再对这些对应几何建立统计形状模型。"
+        },
+        {
+          "title": "拟合新扫描并转移标签",
+          "description": "新脸经最近邻初始化、刚性配准及模型形变迭代，与平均脸建立稠密对应；在平均脸只需标注一次所需地标，随后传给查询脸。"
+        }
+      ],
+      "training": "模型构建需一组三维扫描及稠密对应估计；地标语义可在平均脸上一次标注。用户可增加希望转移的点，但这不表示所有点都能无误或无需任何参考标注。",
+      "inference": "输入已预处理的三维扫描，运行模型拟合和对应转移，输出指定数量的三维地标。其几何输入和离线构模开销应与 RGB 定位方法分开比较。",
+      "figure_reading": "图 2 从 level-set 种子、曲面匹配到 deformable model 与查询标签转移，清楚分开模型建立和测试拟合；图 3/4 分别为预处理和采样实例。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法正文 PDF 第 2 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Gilani_Shape-Based_Automatic_Detection_2015_CVPR_paper.pdf#page=2"
+        },
+        {
+          "label": "方法正文 PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Gilani_Shape-Based_Automatic_Detection_2015_CVPR_paper.pdf#page=3"
+        },
+        {
+          "label": "方法正文 PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Gilani_Shape-Based_Automatic_Detection_2015_CVPR_paper.pdf#page=4"
+        },
+        {
+          "label": "方法正文 PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Gilani_Shape-Based_Automatic_Detection_2015_CVPR_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Gilani_Shape-Based_Automatic_Detection_2015_CVPR_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Gilani_Shape-Based_Automatic_Detection_2015_CVPR_paper.pdf#page=3",
+      "figure_number": "Figure 2",
+      "version": "Official 2015 CVPR open-access paper",
+      "caption": "Shape-Based Automatic Detection of a Large Number of 3D Facial Landmarks：原文方法图 / 算法定位。",
+      "note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     }
   },
   {
@@ -11355,10 +12581,12 @@
       "method": "从深度图提取视角不变的三角表面片描述子，与合成头部模型匹配；通过多次投票联合估计三维头姿与人脸关键点。",
       "limitations": "需要深度相机表面片特征；合成头部匹配与投票的结果不可直接作为单 RGB 条件的成绩。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2015/html/Papazov_Real-Time_3D_Head_2015_CVPR_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2015/html/Papazov_Real-Time_3D_Head_2015_CVPR_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2015/papers/Papazov_Real-Time_3D_Head_2015_CVPR_paper.pdf",
+        "https://openaccess.thecvf.com/content_cvpr_2015/papers/Papazov_Real-Time_3D_Head_2015_CVPR_paper.pdf#page=4"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2015 CVPR open-access paper 的方法相关正文（2, 3, 4, 5, 6）、图号或算法位置；未完成全文逐节精读或独立复现。",
       "verified_at": "2026-11-17",
       "problem": "深度数据的噪声、分辨率和视角变化影响实时头姿及关键点估计。",
       "inputs_outputs": "深度相机的人脸深度图输入，输出三维头部姿态与人脸关键点位置。",
@@ -11371,6 +12599,69 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "深度图转点云 → 三角曲面片描述子 → 合成头部样例检索 → 朝向/中心联合投票 → 三维地标。",
+      "steps": [
+        {
+          "title": "采样三角形定义局部坐标",
+          "description": "从深度图反投影点云，采样近似等边基三角形，取其棱柱及外接球内的脸部曲面点作为 TSP，减少无关远处表面。"
+        },
+        {
+          "title": "构建平均高度描述子",
+          "description": "把基三角形细分为小三角形，以各子区域点到基面的平均高度组成向量。空区域由邻域传播后平滑，降低噪声与密度变化影响。"
+        },
+        {
+          "title": "从合成样例库检索近邻",
+          "description": "离线在 BFM 生成的头部网格上存 TSP、局部坐标系及到头中心/地标的向量；测试以描述子近似最近邻检索匹配样例。"
+        },
+        {
+          "title": "匹配样例投票朝向和位置",
+          "description": "将库基三角形刚性对齐测试基三角形，由旋转形成头朝向投票，同时将局部中心向量变到测试点云系投票头位置。"
+        },
+        {
+          "title": "联合筛选后估计地标",
+          "description": "要求旋转与头中心两个空间都邻近才能属于同一投票簇，保留最大共识集合。平均其旋转，并变换对应地标向量后平均得到位置。"
+        }
+      ],
+      "training": "离线库从合成三维头模密集采样建立，语义地标在共享拓扑上标注一次即可；描述子尺度等参数另用标注数据选择。不存在需要深度 CNN 优化的网络骨干。",
+      "inference": "在线输入深度，提取 TSP、检索及联合投票，每帧可独立估计。姿态与中心共识先确定可靠样例，再计算地标，不能把所有地标空间各自任意聚类。",
+      "figure_reading": "图 1/2 定义三角曲面片及高度编码；图 3 展示离线样例与中心/地标向量。它们解释表示与投票机制，而不是神经网络结构图。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法正文 PDF 第 2 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Papazov_Real-Time_3D_Head_2015_CVPR_paper.pdf#page=2"
+        },
+        {
+          "label": "方法正文 PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Papazov_Real-Time_3D_Head_2015_CVPR_paper.pdf#page=3"
+        },
+        {
+          "label": "方法正文 PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Papazov_Real-Time_3D_Head_2015_CVPR_paper.pdf#page=4"
+        },
+        {
+          "label": "方法正文 PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Papazov_Real-Time_3D_Head_2015_CVPR_paper.pdf#page=5"
+        },
+        {
+          "label": "方法正文 PDF 第 6 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Papazov_Real-Time_3D_Head_2015_CVPR_paper.pdf#page=6"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Papazov_Real-Time_3D_Head_2015_CVPR_paper.pdf#page=4"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Papazov_Real-Time_3D_Head_2015_CVPR_paper.pdf#page=4",
+      "figure_number": "Figure 3",
+      "version": "Official 2015 CVPR open-access paper",
+      "caption": "Real-Time 3D Head Pose and Facial Landmark Estimation From Depth Images Using Triangular Surface Patch Features：原文方法图 / 算法定位。",
+      "note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     }
   },
   {
@@ -11396,10 +12687,12 @@
       "method": "CFSS 从包含多种候选形状的空间开始，由粗到细收缩搜索范围，减少单一初始化导致的局部最优问题并应对大姿态。",
       "limitations": "粗到细搜索缓解单一初始化问题，仍需交代候选规模与搜索开销；并非无成本的全局求解保证。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2015/html/Zhu_Face_Alignment_by_2015_CVPR_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2015/html/Zhu_Face_Alignment_by_2015_CVPR_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2015/papers/Zhu_Face_Alignment_by_2015_CVPR_paper.pdf",
+        "https://openaccess.thecvf.com/content_cvpr_2015/papers/Zhu_Face_Alignment_by_2015_CVPR_paper.pdf#page=2"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2015 CVPR open-access paper 的方法相关正文（3, 4, 5）、图号或算法位置；未完成全文逐节精读或独立复现。",
       "verified_at": "2026-11-17",
       "problem": "从单一初始形状出发的级联回归容易因初始化不佳而陷入局部最优。",
       "inputs_outputs": "人脸图像输入，在多样形状空间内搜索并输出二维关键点配置。",
@@ -11412,6 +12705,61 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "固定候选形状空间 → 当前分布采样 → 局部回归多个候选 → 共识中心 → 学得分布缩小搜索范围。",
+      "steps": [
+        {
+          "title": "建立固定形状候选集",
+          "description": "从训练地标经 Procrustes 处理形成候选空间，最初在全部候选上均匀采样；后续逐阶段改变采样概率而不是只维护一条形状轨迹。"
+        },
+        {
+          "title": "多初始形状各自短程回归",
+          "description": "按当前分布抽取若干初始形状，用该阶段少量回归器把每个候选拉向更好的位置，允许早期结果仍较粗。"
+        },
+        {
+          "title": "以 dominant set 计算中心",
+          "description": "建立回归后候选之间的相似图，给相互一致的候选更高权重、离群候选低权重，加权得到当前搜索子区域中心。"
+        },
+        {
+          "title": "估计下一阶段候选分布",
+          "description": "结合形状调整先验及分部位的特征相似似然，估计围绕中心的新分布；随着阶段前进缩小候选范围并重新采样。"
+        },
+        {
+          "title": "收敛后输出最细区域中心",
+          "description": "多阶段交替搜索和中心更新，最终中心作为地标估计。CFSS-Practical 可先用快 BRIEF 特征，最后切换 SIFT，区别于全部阶段 SIFT 配置。"
+        }
+      ],
+      "training": "学习各阶段回归器及分布模型，前者拟合地标残差，后者从中心与真值误差统计及局部外观学习。dominant-set 权重计算不需真值，是每个样本的共识步骤。",
+      "inference": "测试仍要采样多候选、短程回归、共识加权及更新分布；不能把 coarse-to-fine 简写为单一人脸图像分辨率逐级放大。",
+      "figure_reading": "图 1(a) 是形状空间搜索，(b)(c) 比较多候选搜索与单轨迹回归；Algorithm 1 给出训练，其中学习步骤不会在每个测试样本重新执行。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法正文 PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Zhu_Face_Alignment_by_2015_CVPR_paper.pdf#page=3"
+        },
+        {
+          "label": "方法正文 PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Zhu_Face_Alignment_by_2015_CVPR_paper.pdf#page=4"
+        },
+        {
+          "label": "方法正文 PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Zhu_Face_Alignment_by_2015_CVPR_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Zhu_Face_Alignment_by_2015_CVPR_paper.pdf#page=2"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2015/papers/Zhu_Face_Alignment_by_2015_CVPR_paper.pdf#page=2",
+      "figure_number": "Figure 1",
+      "version": "Official 2015 CVPR open-access paper",
+      "caption": "Face Alignment by Coarse-to-Fine Shape Searching：原文方法图 / 算法定位。",
+      "note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     }
   },
   {
@@ -11437,10 +12785,12 @@
       "method": "CJCRF 将面部动作单元与脸部形状的关系作为约束，在级联过程中交替更新关键点位置和动作单元激活概率。",
       "limitations": "动作单元标签与关键点标签共同参与建模；多任务收益需区分额外监督带来的影响。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2016/html/Wu_Constrained_Joint_Cascade_CVPR_2016_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2016/html/Wu_Constrained_Joint_Cascade_CVPR_2016_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2016/papers/Wu_Constrained_Joint_Cascade_CVPR_2016_paper.pdf",
+        "https://openaccess.thecvf.com/content_cvpr_2016/papers/Wu_Constrained_Joint_Cascade_CVPR_2016_paper.pdf#page=1"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2016 CVPR open-access paper 的方法相关正文（3, 4, 5）、图号或算法位置；未完成全文逐节精读或独立复现。",
       "verified_at": "2026-11-17",
       "problem": "动作单元识别与关键点定位有关联，却通常分别建模。",
       "inputs_outputs": "人脸图像输入，联合输出关键点位置和动作单元激活概率。",
@@ -11453,6 +12803,61 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "预学 AU—形状关系 → 初始化地标/AU 概率 → 受约束地标更新 → 受约束 AU 更新 → 交替级联。",
+      "steps": [
+        {
+          "title": "RBM 学习联合先验",
+          "description": "用同时标注的地标与动作单元标签学习 RBM，隐藏节点表达全局脸形、AU 关系及两者依赖，而不是把 AU 当成普通附加类别。"
+        },
+        {
+          "title": "初始化两个任务状态",
+          "description": "人脸地标从平均形状开始，各 AU 初始激活概率置 0.5；后续每轮都保留当前坐标与概率。"
+        },
+        {
+          "title": "外观与 AU 约束更新地标",
+          "description": "在当前点附近提取 SIFT，由线性回归预测形状增量，同时让新形状接近 RBM 结合当前 AU 概率推得的期望形状。"
+        },
+        {
+          "title": "新地标帮助更新 AU",
+          "description": "重新读取更新后形状的局部外观，预测 AU 概率增量，再用 RBM 的形状条件 AU 概率作约束，并限制概率范围。"
+        },
+        {
+          "title": "交替至最终输出",
+          "description": "将更新后的两种状态带入下一轮，最终同时返回地标与 AU 激活概率。两个任务在测试中互相影响，不只是训练时辅助监督。"
+        }
+      ],
+      "training": "先以 Contrastive Divergence 学 RBM，再以标注的形状与 AU 残差学习阶段线性回归器。约束推理经拉格朗日松弛形成最小二乘求解。",
+      "inference": "输入人脸图像即可交替估计两个任务，无需提供真值 AU；使用学好的关系模型计算约束。输出 AU 激活与地标，不是表情类别到地标的一次映射。",
+      "figure_reading": "图 1 是整体交替框架，图 2 展示 RBM 的 AU/地标可见节点及共享隐藏节点；图 3/4 解释两个方向的条件关系，不能当作独立预测器。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法正文 PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2016/papers/Wu_Constrained_Joint_Cascade_CVPR_2016_paper.pdf#page=3"
+        },
+        {
+          "label": "方法正文 PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2016/papers/Wu_Constrained_Joint_Cascade_CVPR_2016_paper.pdf#page=4"
+        },
+        {
+          "label": "方法正文 PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2016/papers/Wu_Constrained_Joint_Cascade_CVPR_2016_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2016/papers/Wu_Constrained_Joint_Cascade_CVPR_2016_paper.pdf#page=1"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2016/papers/Wu_Constrained_Joint_Cascade_CVPR_2016_paper.pdf#page=1",
+      "figure_number": "Figure 1",
+      "version": "Official 2016 CVPR open-access paper",
+      "caption": "Constrained Joint Cascade Regression Framework for Simultaneous Facial Action Unit Recognition and Facial Landmark Detection：原文方法图 / 算法定位。",
+      "note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     }
   },
   {
@@ -11478,10 +12883,12 @@
       "method": "将优化空间划分为多个具有相近下降行为的区域，组合区域专属回归器的形状估计，以处理大姿态和复杂外观形变。",
       "limitations": "区域专属回归器组合依赖训练形状覆盖；不同区域划分及组合数量会改变计算与表达能力。",
       "sources": [
-        "https://openaccess.thecvf.com/content_cvpr_2016/html/Zhu_Unconstrained_Face_Alignment_CVPR_2016_paper.html"
+        "https://openaccess.thecvf.com/content_cvpr_2016/html/Zhu_Unconstrained_Face_Alignment_CVPR_2016_paper.html",
+        "https://openaccess.thecvf.com/content_cvpr_2016/papers/Zhu_Unconstrained_Face_Alignment_CVPR_2016_paper.pdf",
+        "https://openaccess.thecvf.com/content_cvpr_2016/papers/Zhu_Unconstrained_Face_Alignment_CVPR_2016_paper.pdf#page=3"
       ],
-      "evidence_level": "primary_abstract",
-      "evidence_scope": "已核对 CVF 官方会议记录的标题、年份、会场和摘要；尚未逐节核查实验协议、消融与失败案例，未复现。不将摘要中的领先性声明扩展为跨数据集全面领先。",
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "已核对摘要及 Official 2016 CVPR open-access paper 的方法相关正文（3, 4, 5）、图号或算法位置；未完成全文逐节精读或独立复现。",
       "verified_at": "2026-11-17",
       "problem": "极端姿态和复杂形变导致全局形状变化与不规则的外观—形状关系。",
       "inputs_outputs": "单张人脸图像输入，输出多个区域专属回归器组合得到的对齐形状。",
@@ -11494,6 +12901,61 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
       "version": "2026 第七版（目录原文转载）",
       "venue": "CVPR"
+    },
+    "pipeline": {
+      "overview": "形状索引鲁棒编码 → 多域局部回归 → 组合权重估计 → 加权形状 → 排除不兼容域并继续级联。",
+      "steps": [
+        {
+          "title": "划分多种局部下降域",
+          "description": "根据形状与局部外观的主成分划分训练数据，每域学习局部回归器；域不仅由 yaw 定义，也可反映表情、形变或遮挡。"
+        },
+        {
+          "title": "构造可见性增强的局部编码",
+          "description": "在 LBF 基础上加入负样本与局部可见性目标，以 Hough Forest 同时组织位移和可见性信息，避免背景采样产生误导。"
+        },
+        {
+          "title": "各域提出候选形状",
+          "description": "对未排除的域用当前形状索引特征预测残差，得到域候选，再在各候选位置提取用于判断组合的压缩可见性特征。"
+        },
+        {
+          "title": "以形状误差学习组合",
+          "description": "森林引导选择相关训练样本，再解带非负及和为 1 约束的组合权重，将各域候选加权为当前形状；不是普通域分类器只选一个类别。"
+        },
+        {
+          "title": "在线排除零权重域",
+          "description": "权重为零的域后续不再计算新的候选和特征，以减少不兼容预测及开销；重复级联得到最终地标。"
+        }
+      ],
+      "training": "先学习特征映射，再学习各域岭回归与直接优化组合形状误差的森林；可见性指当前局部区域能否看到该点，也包括点已偏出局部范围的负例。",
+      "inference": "首轮各域从自己的平均形状开始，之后顺序更新并排除域。测试中的权重求解使用森林检索的训练信息，不使用待测图像真值坐标。",
+      "figure_reading": "图 2 展示一次测试迭代的三个模块与域排除；图 3 对比原 LBF 与可见性增强编码。将组合写成一般 softmax 分类会遗漏本文的形状约束求解。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法正文 PDF 第 3 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2016/papers/Zhu_Unconstrained_Face_Alignment_CVPR_2016_paper.pdf#page=3"
+        },
+        {
+          "label": "方法正文 PDF 第 4 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2016/papers/Zhu_Unconstrained_Face_Alignment_CVPR_2016_paper.pdf#page=4"
+        },
+        {
+          "label": "方法正文 PDF 第 5 页",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2016/papers/Zhu_Unconstrained_Face_Alignment_CVPR_2016_paper.pdf#page=5"
+        },
+        {
+          "label": "原图 / 方法流程定位",
+          "url": "https://openaccess.thecvf.com/content_cvpr_2016/papers/Zhu_Unconstrained_Face_Alignment_CVPR_2016_paper.pdf#page=3"
+        }
+      ],
+      "reviewed_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://openaccess.thecvf.com/content_cvpr_2016/papers/Zhu_Unconstrained_Face_Alignment_CVPR_2016_paper.pdf#page=3",
+      "figure_number": "Figure 2",
+      "version": "Official 2016 CVPR open-access paper",
+      "caption": "Unconstrained Face Alignment via Cascaded Compositional Learning：原文方法图 / 算法定位。",
+      "note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     }
   },
   {

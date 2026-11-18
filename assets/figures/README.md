@@ -291,3 +291,35 @@ Zhongang Cai, Wanqi Yin, Ailing Zeng, Chen Wei, Qingping Sun, Yanjun Wang, Hui E
 - License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 - License evidence: https://arxiv.org/abs/2309.17448v3
 - SHA-256: `6b144fb3ab67060499cb4dd222df7aea111e40f78afaf6739b2ea9fcd7206313`
+
+## Landmark-group head pose originals — 2026-11-18
+
+### assets/figures/stagnet-architecture.svg
+
+Asiri Gawesha Lindamulage, Sanka Mohottala, Dharshana Kasthurirathna, Nuwan Kodagoda. STAG-Net: Structure-Aware Attention over Landmark Groups for Lightweight Head Pose Estimation, Figure 9(a), arXiv:2611.07828v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2611.07828v1#S3.F9.sf1
+- Unmodified original file: https://arxiv.org/html/2611.07828v1/stagnet_fig9a_system.svg
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2611.07828v1
+- SHA-256: `ab2fa5c727da9e7f7b0bdb040311e4053e244625e662605a5ff5fb2dd8e9c2d2`
+
+### assets/figures/stagnet-deepset.svg
+
+Asiri Gawesha Lindamulage, Sanka Mohottala, Dharshana Kasthurirathna, Nuwan Kodagoda. STAG-Net: Structure-Aware Attention over Landmark Groups for Lightweight Head Pose Estimation, Figure 9(b), arXiv:2611.07828v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2611.07828v1#S3.F9.sf2
+- Unmodified original file: https://arxiv.org/html/2611.07828v1/stagnet_fig9b_deepset.svg
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2611.07828v1
+- SHA-256: `8659ef021dee3461d0d500af06c1087f0e3e79d6d71d8278f2b1740a1b72de30`
+
+### assets/figures/stagnet-pipeline.png
+
+Asiri Gawesha Lindamulage, Sanka Mohottala, Dharshana Kasthurirathna, Nuwan Kodagoda. STAG-Net: Structure-Aware Attention over Landmark Groups for Lightweight Head Pose Estimation, Figure 1, arXiv:2611.07828v1. CC BY 4.0.
+
+- Original source: https://arxiv.org/html/2611.07828v1#S2.F1
+- Unmodified original file: https://arxiv.org/html/2611.07828v1/stag_pipeline.png
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- License evidence: https://arxiv.org/abs/2611.07828v1
+- SHA-256: `640a2b3856def9811c9fe555087d9fdf2dd109afed6a710a0ea2a2891bcf6532`

@@ -2,9 +2,9 @@
   "updated_at": "2026-11-18",
   "total": 371,
   "counts": {
-    "complete": 21,
-    "figure_pending": 87,
-    "pending": 263
+    "complete": 22,
+    "figure_pending": 110,
+    "pending": 239
   },
   "completion_standard": "Source-checked module-level pipeline, separate training/inference, figure guide, and a verified local architecture/process figure. Summaries and applicability notes do not count.",
   "entries": [
@@ -67,12 +67,12 @@
       "id": "uld-headpose",
       "category": "Head",
       "title": "Unsupervised Discovery of Facial Landmarks and Head Pose",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2025/html/Tourani_Unsupervised_Discovery_of_Facial_Landmarks_and_Head_Pose_CVPR_2025_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "facexformer",
@@ -111,78 +111,78 @@
       "id": "vggt-hpe",
       "category": "Head",
       "title": "VGGT-HPE: Reframing Head Pose Estimation as Relative Pose Prediction",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2604.10106",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "reva-hpe",
       "category": "Head",
       "title": "ReVA-HPE: Relative 6DoF Head Pose Estimation with Synthetic Pose Supervision and Personalized Virtual Anchors",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2611.03283",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "stag-net",
       "category": "Head",
       "title": "STAG-Net: Structure-Aware Attention over Landmark Groups for Lightweight Head Pose Estimation",
-      "status": "pending",
+      "status": "complete",
       "paper_url": "https://arxiv.org/abs/2611.07828",
-      "reading_level": "primary_abstract",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-18",
       "figure_note": ""
     },
     {
       "id": "sdm",
       "category": "Head",
       "title": "Supervised Descent Method and Its Applications to Face Alignment",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2013/html/Xiong_Supervised_Descent_Method_2013_CVPR_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "ert",
       "category": "Head",
       "title": "One Millisecond Face Alignment with an Ensemble of Regression Trees",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2014/html/Kazemi_One_Millisecond_Face_2014_CVPR_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "主文未提供独立完整结构图，保留原始算法流程链接；阶段结果图不作为树结构图。"
     },
     {
       "id": "lbf",
       "category": "Head",
       "title": "Face Alignment at 3000 FPS via Regressing Local Binary Features",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2014/html/Ren_Face_Alignment_at_2014_CVPR_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "3ddfa",
       "category": "Head",
       "title": "Face Alignment Across Large Poses: A 3D Solution",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2016/html/Zhu_Face_Alignment_Across_CVPR_2016_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "fan",
@@ -243,12 +243,12 @@
       "id": "fsa-net",
       "category": "Head",
       "title": "FSA-Net: Learning Fine-Grained Structure Aggregation for Head Pose Estimation From a Single Image",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_CVPR_2019/html/Yang_FSA-Net_Learning_Fine-Grained_Structure_Aggregation_for_Head_Pose_Estimation_From_CVPR_2019_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "adaptive-wing",
@@ -320,12 +320,12 @@
       "id": "img2pose",
       "category": "Head",
       "title": "img2pose: Face Alignment and Detection via 6DoF, Face Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Albiero_img2pose_Face_Alignment_and_Detection_via_6DoF_Face_Pose_Estimation_CVPR_2021_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "pipnet",
@@ -353,12 +353,12 @@
       "id": "hih",
       "category": "Head",
       "title": "Revisting Quantization Error in Face Alignment",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/ICCV2021W/MFR/html/Lan_Revisting_Quantization_Error_in_Face_Alignment_ICCVW_2021_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "6drepnet",
@@ -408,12 +408,12 @@
       "id": "tokenhpe",
       "category": "Head",
       "title": "TokenHPE: Learning Orientation Tokens for Efficient Head Pose Estimation via Transformers",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Zhang_TokenHPE_Learning_Orientation_Tokens_for_Efficient_Head_Pose_Estimation_via_CVPR_2023_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "star-loss",
@@ -1409,133 +1409,133 @@
       "id": "head-nonparametric-context-modeling-of-local-appearance-for-pose-and-expression-robust-facial-landmark-localiz-2014",
       "category": "Head",
       "title": "Nonparametric Context Modeling of Local Appearance for Pose- and Expression-Robust Facial Landmark Localization",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2014/html/Smith_Nonparametric_Context_Modeling_2014_CVPR_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "head-towards-multi-view-and-partially-occluded-face-alignment-2014",
       "category": "Head",
       "title": "Towards Multi-view and Partially-Occluded Face Alignment",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2014/html/Xing_Towards_Multi-view_and_2014_CVPR_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "head-head-pose-estimation-based-on-multivariate-label-distribution-2014",
       "category": "Head",
       "title": "Head Pose Estimation Based on Multivariate Label Distribution",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2014/html/Geng_Head_Pose_Estimation_2014_CVPR_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "head-gauss-newton-deformable-part-models-for-face-alignment-in-the-wild-2014",
       "category": "Head",
       "title": "Gauss-Newton Deformable Part Models for Face Alignment in-the-Wild",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2014/html/Tzimiropoulos_Gauss-Newton_Deformable_Part_2014_CVPR_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "head-incremental-face-alignment-in-the-wild-2014",
       "category": "Head",
       "title": "Incremental Face Alignment in the Wild",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2014/html/Asthana_Incremental_Face_Alignment_2014_CVPR_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "head-project-out-cascaded-regression-with-an-application-to-face-alignment-2015",
       "category": "Head",
       "title": "Project-Out Cascaded Regression With an Application to Face Alignment",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2015/html/Tzimiropoulos_Project-Out_Cascaded_Regression_2015_CVPR_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "head-face-alignment-using-cascade-gaussian-process-regression-trees-2015",
       "category": "Head",
       "title": "Face Alignment Using Cascade Gaussian Process Regression Trees",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2015/html/Lee_Face_Alignment_Using_2015_CVPR_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "head-shape-based-automatic-detection-of-a-large-number-of-3d-facial-landmarks-2015",
       "category": "Head",
       "title": "Shape-Based Automatic Detection of a Large Number of 3D Facial Landmarks",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2015/html/Gilani_Shape-Based_Automatic_Detection_2015_CVPR_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "head-real-time-3d-head-pose-and-facial-landmark-estimation-from-depth-images-using-triangular-surface-patch-fe-2015",
       "category": "Head",
       "title": "Real-Time 3D Head Pose and Facial Landmark Estimation From Depth Images Using Triangular Surface Patch Features",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2015/html/Papazov_Real-Time_3D_Head_2015_CVPR_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "head-face-alignment-by-coarse-to-fine-shape-searching-2015",
       "category": "Head",
       "title": "Face Alignment by Coarse-to-Fine Shape Searching",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2015/html/Zhu_Face_Alignment_by_2015_CVPR_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "head-constrained-joint-cascade-regression-framework-for-simultaneous-facial-action-unit-recognition-and-facial-2016",
       "category": "Head",
       "title": "Constrained Joint Cascade Regression Framework for Simultaneous Facial Action Unit Recognition and Facial Landmark Detection",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2016/html/Wu_Constrained_Joint_Cascade_CVPR_2016_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "head-unconstrained-face-alignment-via-cascaded-compositional-learning-2016",
       "category": "Head",
       "title": "Unconstrained Face Alignment via Cascaded Compositional Learning",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://openaccess.thecvf.com/content_cvpr_2016/html/Zhu_Unconstrained_Face_Alignment_CVPR_2016_paper.html",
-      "reading_level": "primary_abstract",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "reviewed_at": "2026-11-18",
+      "figure_note": "仅保留原始来源链接；本次未确认可转载许可，暂不收录本地图像。"
     },
     {
       "id": "head-occlusion-free-face-alignment-deep-regression-networks-coupled-with-de-corrupt-autoencoders-2016",
