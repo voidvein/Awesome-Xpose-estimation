@@ -904,10 +904,10 @@
     "dimensions": [
       "3D"
     ],
-    "venue": "CVPR Workshops (author-reported)",
+    "venue": "CVPR 2026 ABAW Workshop",
     "status": "Published",
     "summary": "将绝对头姿回归改写为相对于已知姿态参考图像的几何变换预测；以合成数据微调几何基础模型。",
-    "url": "https://arxiv.org/abs/2604.10106",
+    "url": "https://openaccess.thecvf.com/content/CVPR2026W/ABAW/html/Vasileiou_VGGT-HPE_Reframing_Head_Pose_Estimation_as_Relative_Pose_Prediction_CVPRW_2026_paper.html",
     "tags": [
       "relative-pose",
       "workshop"
@@ -919,13 +919,14 @@
       "contribution": "将任务改成显式参考下的几何比较，锚点可在测试时选择；通过不同难度图像对检验相对预测的作用。",
       "limitations": "推理依赖具有已知位姿的锚点图像；该条件由论文的任务定义明确给出。",
       "sources": [
+        "https://openaccess.thecvf.com/content/CVPR2026W/ABAW/html/Vasileiou_VGGT-HPE_Reframing_Head_Pose_Estimation_as_Relative_Pose_Prediction_CVPRW_2026_paper.html",
         "https://arxiv.org/abs/2604.10106",
         "https://arxiv.org/html/2604.10106v1",
         "https://arxiv.org/html/2604.10106v1#S2.F2",
         "https://github.com/VasilikiVas/vggt-hpe"
       ],
       "evidence_level": "primary_abstract_and_targeted_fulltext",
-      "verification_note": "依据所列版本摘要、方法相关正文及图示或算法整理；未进行全文实验复核或独立复现，不将未核实的局限写成论文结论。",
+      "verification_note": "CVF 已归档 CVPR 2026 ABAW workshop 论文（5464–5473 页），不是 CVPR 主会，不继承 CCF A。",
       "verified_at": "2026-11-17",
       "evidence_scope": "已核对摘要及 2604.10106v1 的方法相关正文（S3, S5）、图号或算法位置；未完成全文逐节精读或独立复现。"
     },
@@ -39077,5 +39078,174 @@
     "venue": "arXiv",
     "status": "Preprint",
     "submitted_at": "2026-11-16"
+  },
+  {
+    "id": "ray-lateral-agreement",
+    "title": "Trust the Ray, Not the Depth: Ray-Lateral Agreement for Multi-View 3D Human Pose Fusion",
+    "authors": [
+      "Farnoosh Koleini",
+      "Ahmed Helmy",
+      "Pu Wang",
+      "Xiwu Cao"
+    ],
+    "url": "https://arxiv.org/abs/2611.23513",
+    "version": "2611.23513v1",
+    "summary": "利用标定相机的视线几何，抑制单目深度偏差与异常视角，融合多视角人体关节。",
+    "tags": [
+      "multi-view",
+      "triangulation",
+      "geometry"
+    ],
+    "analysis": {
+      "problem": "各相机独立单目重建使用的假定焦距不同，导致不同观察方向上的深度偏差。",
+      "method": "先校正沿射线的深度偏差，再做各向异性闭式融合，以射线横向残差衡量各视角一致性。",
+      "inputs_outputs": "输入校准相机和逐视角单目三维估计；输出统一坐标系的三维关节。",
+      "contribution": "原稿表 1 的 Panoptic 样本中，同输入下各自最差相机对的 MPJPE 为 56.0 mm 与 DLT 的 284.3 mm，中位数为 29.4 与 30.0 mm。",
+      "limitations": "依赖已标定相机及逐视角估计；最差对优势不等于普遍同幅提升，且未评估多人关联。",
+      "sources": [
+        "https://arxiv.org/abs/2611.23513",
+        "https://arxiv.org/html/2611.23513v1#S3",
+        "https://arxiv.org/html/2611.23513v1#S4"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "核对原稿摘要、方法、实验及局限；非独立复现。",
+      "verified_at": "2026-11-20"
+    },
+    "pipeline": {
+      "kind": "method",
+      "overview": "利用标定相机的视线几何，抑制单目深度偏差与异常视角，融合多视角人体关节。",
+      "steps": [
+        {
+          "title": "对齐输入观测",
+          "description": "逐视角运行单目估计器，以外参将估计关节和射线放到全局坐标系。"
+        },
+        {
+          "title": "偏差校正",
+          "description": "利用已知相机焦距重新定位各视角重建的深度，不重新塑造人体。"
+        },
+        {
+          "title": "各向异性融合",
+          "description": "对每个关节区分射线横向和纵向的精度，用闭式求解融合。"
+        },
+        {
+          "title": "鲁棒重加权",
+          "description": "按各观察方向的横向残差评估不一致点，避免把正常深度分歧当成坏视角。"
+        }
+      ],
+      "training": "融合本身无需面向目标相机布局训练，仍使用既有单目模型。",
+      "inference": "在同一坐标系按关节处理校准后的多视角估计。",
+      "figure_reading": "图 1 从跨视角深度错位到校正融合；结合第 3 节区分深度校正、各向异性精度和横向残差。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "原稿方法",
+          "url": "https://arxiv.org/html/2611.23513v1#S3"
+        },
+        {
+          "label": "评测协议",
+          "url": "https://arxiv.org/html/2611.23513v1#S4"
+        }
+      ],
+      "reviewed_at": "2026-11-20"
+    },
+    "year": 2026,
+    "category": "Human",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "arXiv",
+    "status": "Preprint",
+    "submitted_at": "2026-11-17",
+    "figure": {
+      "source": "https://arxiv.org/html/2611.23513v1#S1.F1",
+      "figure_number": "Figure 1",
+      "version": "2611.23513v1",
+      "caption": "原文图 1：观测几何与方法动机。",
+      "status": "link_only"
+    }
+  },
+  {
+    "id": "mmtherm",
+    "title": "mmTherm: Absolute 3D Human Pose Estimation from Low-Resolution Thermal Images and mmWave Radar",
+    "authors": [
+      "Zhaoxin Chang",
+      "Badii Jouaber",
+      "Daqing Zhang"
+    ],
+    "url": "https://arxiv.org/abs/2611.23477",
+    "version": "2611.23477v1",
+    "summary": "用低分辨率热图提供人体方向、毫米波提供距离，联合恢复全局位置和三维关节。",
+    "tags": [
+      "thermal",
+      "radar",
+      "multimodal"
+    ],
+    "analysis": {
+      "problem": "热图缺深度，稀疏雷达点又难覆盖完整身体；直接融合特征在新用户上可能失去优势。",
+      "method": "先结合热成像方向和雷达距离定位根关节，再用方向引导局部雷达注意力并做时空细化。",
+      "inputs_outputs": "标定后的 32×24 热图和毫米波雷达点云输入，输出绝对三维根位置及骨架。",
+      "contribution": "OctoNet 留出用户 9–10：绝对 MPJPE 118.7 mm、根误差 95.1 mm、根对齐 MPJPE 98.8 mm，勿混用三种指标。",
+      "limitations": "评测来自单一 OctoNet 基准，稀疏、遮挡和多径回波仍会影响距离估计；不据此推断任意场景泛化。",
+      "sources": [
+        "https://arxiv.org/abs/2611.23477",
+        "https://arxiv.org/html/2611.23477v1#S3",
+        "https://arxiv.org/html/2611.23477v1#S4"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "核对原稿摘要、方法、实验及局限；非独立复现。",
+      "verified_at": "2026-11-20"
+    },
+    "pipeline": {
+      "kind": "method",
+      "overview": "用低分辨率热图提供人体方向、毫米波提供距离，联合恢复全局位置和三维关节。",
+      "steps": [
+        {
+          "title": "对齐输入观测",
+          "description": "将同步热图和毫米波点云映射至已标定的共享坐标系，保留热像像素对应的空间射线。"
+        },
+        {
+          "title": "热图定方向",
+          "description": "利用标定的热成像方向约束人体区域，雷达点执行根位置投票。"
+        },
+        {
+          "title": "几何约束融合",
+          "description": "组合热图方向与雷达距离求根位置。"
+        },
+        {
+          "title": "骨架细化",
+          "description": "热图预测关节方向并引导雷达注意力，先构造方向—距离初始化，再进行时空细化。"
+        }
+      ],
+      "training": "分阶段优化根定位与姿态重建，训练含姿态损失和输入增强。",
+      "inference": "同步热图和雷达进入两级模型，输出绝对位置与关节。",
+      "figure_reading": "图 1 对照两个模态提供的不同线索；第 3 节说明如何把根位置传给第二阶段。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "原稿方法",
+          "url": "https://arxiv.org/html/2611.23477v1#S3"
+        },
+        {
+          "label": "评测协议",
+          "url": "https://arxiv.org/html/2611.23477v1#S4"
+        }
+      ],
+      "reviewed_at": "2026-11-20"
+    },
+    "year": 2026,
+    "category": "Human",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "arXiv",
+    "status": "Preprint",
+    "submitted_at": "2026-11-17",
+    "figure": {
+      "source": "https://arxiv.org/html/2611.23477v1#S1.F1",
+      "figure_number": "Figure 1",
+      "version": "2611.23477v1",
+      "caption": "原文图 1：观测几何与方法动机。",
+      "status": "link_only"
+    }
   }
 ]

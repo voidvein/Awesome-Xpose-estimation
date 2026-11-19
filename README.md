@@ -15,7 +15,7 @@ Serve the repository root with `python -m http.server 8000`.
 - [code](https://github.com/hnuzhy/SemiUHPE) **[Semi-Supervised Unconstrained Head Pose Estimation in the Wild](https://doi.org/10.1109/TPAMI.2025.3631642)** — TPAMI 2026 · Published · 3D. 利用未标注野外头部图像进行半监督全范围旋转估计；预印本首发于 2024 年，正式发表于 TPAMI 2026 年第 48 卷第 3 期。
 - [code](https://github.com/VasilikiVas/ReVA-HPE) **[ReVA-HPE: Relative 6DoF Head Pose Estimation with Synthetic Pose Supervision and Personalized Virtual Anchors](https://arxiv.org/abs/2611.03283)** — arXiv; accepted WACV 2027 (author-reported) 2026 · Preprint · 3D. 利用个性化虚拟参考图像进行相对 6DoF 估计，减少对真实参考图像已知姿态的依赖。
 - [code](https://github.com/asirigawesha/STAGNet) **[STAG-Net: Structure-Aware Attention over Landmark Groups for Lightweight Head Pose Estimation](https://arxiv.org/abs/2611.07828)** — arXiv 2026 · Preprint · 3D. 基于关键点分组和结构注意力进行轻量头姿回归，面向低计算成本部署。
-- [code](https://github.com/VasilikiVas/vggt-hpe) **[VGGT-HPE: Reframing Head Pose Estimation as Relative Pose Prediction](https://arxiv.org/abs/2604.10106)** — CVPR Workshops (author-reported) 2026 · Published · 3D. 将绝对头姿回归改写为相对于已知姿态参考图像的几何变换预测；以合成数据微调几何基础模型。
+- [code](https://github.com/VasilikiVas/vggt-hpe) **[VGGT-HPE: Reframing Head Pose Estimation as Relative Pose Prediction](https://openaccess.thecvf.com/content/CVPR2026W/ABAW/html/Vasileiou_VGGT-HPE_Reframing_Head_Pose_Estimation_as_Relative_Pose_Prediction_CVPRW_2026_paper.html)** — CVPR 2026 ABAW Workshop · Published · 3D. 将绝对头姿回归改写为相对于已知姿态参考图像的几何变换预测；以合成数据微调几何基础模型。
 - [code](https://github.com/Kartik-3004/facexformer) **[FaceXFormer: A Unified Transformer for Facial Analysis](https://openaccess.thecvf.com/content/ICCV2025/html/Narayan_FaceXFormer_A_Unified_Transformer_for_Facial_Analysis_ICCV_2025_paper.html)** — ICCV 2025 · Published · 2D / 3D. 统一人脸分析 Transformer，覆盖关键点、头姿、人脸解析及属性等多任务。
 - [code](https://github.com/ca-joe-yang/regression-without-softarg) **[Heatmap Regression without Soft-Argmax for Facial Landmark Detection](https://openaccess.thecvf.com/content/ICCV2025/html/Yang_Heatmap_Regression_without_Soft-Argmax_for_Facial_Landmark_Detection_ICCV_2025_paper.html)** — ICCV 2025 · Published · 2D. 重新审视热图关键点检测中 Soft-argmax 的必要性，以经典结构化预测目标替代该近似，在保持热图建模的同时改变训练方式。
 - **[PossLoss: A Reliable and Sensitive Facial Landmark Detection Loss Function](https://openaccess.thecvf.com/content/ICCV2025/html/Zhu_PossLoss_A_Reliable_and_Sensitive_Facial_Landmark_Detection_Loss_Function_ICCV_2025_paper.html)** — ICCV 2025 · Published · 2D. PossLoss 面向关键点热图的前景背景不均衡与峰值偏差，采用自加权和样本敏感机制，将学习重点自适应分配到较难定位的关键点。
@@ -261,6 +261,8 @@ Serve the repository root with `python -m http.server 8000`.
 
 ### Human
 
+- **[Trust the Ray, Not the Depth: Ray-Lateral Agreement for Multi-View 3D Human Pose Fusion](https://arxiv.org/abs/2611.23513)** — arXiv 2026 · Preprint · 3D. 利用标定相机的视线几何，抑制单目深度偏差与异常视角，融合多视角人体关节。
+- **[mmTherm: Absolute 3D Human Pose Estimation from Low-Resolution Thermal Images and mmWave Radar](https://arxiv.org/abs/2611.23477)** — arXiv 2026 · Preprint · 3D. 用低分辨率热图提供人体方向、毫米波提供距离，联合恢复全局位置和三维关节。
 - **[Body of Evidence: Triangulating 3D Human Pose with Geometry-Conditioned Depth](https://arxiv.org/abs/2611.21044)** — arXiv 2026 · Preprint · 3D. 在稀疏多相机和关节遮挡条件下，将预测深度加入三角化以补足单个有效视图的几何约束。
 - **[Structure-Guided Multi-Granularity Spatiotemporal Transformer for Efficient Monocular 3D Human Pose Estimation](https://arxiv.org/abs/2611.20361)** — arXiv 2026 · Preprint · 3D. 利用关节、骨骼、肢体多粒度结构和关键帧选择，提高二维序列提升到三维姿态的效率。
 

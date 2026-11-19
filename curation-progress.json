@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-11-19",
-  "total": 376,
+  "updated_at": "2026-11-20",
+  "total": 378,
   "counts": {
     "complete": 66,
-    "figure_pending": 305,
+    "figure_pending": 307,
     "pending": 5
   },
   "completion_standard": "Source-checked module-level pipeline or survey classification, separate use contexts, and a figure guide. Embed paper originals when reuse permission is clear, otherwise link to the original figure or method section. Summaries alone do not count.",
@@ -112,7 +112,7 @@
       "category": "Head",
       "title": "VGGT-HPE: Reframing Head Pose Estimation as Relative Pose Prediction",
       "status": "figure_pending",
-      "paper_url": "https://arxiv.org/abs/2604.10106",
+      "paper_url": "https://openaccess.thecvf.com/content/CVPR2026W/ABAW/html/Vasileiou_VGGT-HPE_Reframing_Head_Pose_Estimation_as_Relative_Pose_Prediction_CVPRW_2026_paper.html",
       "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "original_link_only",
       "reviewed_at": "2026-11-18",
@@ -4142,6 +4142,28 @@
       "reading_level": "primary_abstract_and_targeted_fulltext",
       "figure_status": "not_yet_verified",
       "reviewed_at": null,
+      "figure_note": ""
+    },
+    {
+      "id": "ray-lateral-agreement",
+      "category": "Human",
+      "title": "Trust the Ray, Not the Depth: Ray-Lateral Agreement for Multi-View 3D Human Pose Fusion",
+      "status": "figure_pending",
+      "paper_url": "https://arxiv.org/abs/2611.23513",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-20",
+      "figure_note": ""
+    },
+    {
+      "id": "mmtherm",
+      "category": "Human",
+      "title": "mmTherm: Absolute 3D Human Pose Estimation from Low-Resolution Thermal Images and mmWave Radar",
+      "status": "figure_pending",
+      "paper_url": "https://arxiv.org/abs/2611.23477",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-20",
       "figure_note": ""
     }
   ]
