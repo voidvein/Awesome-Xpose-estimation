@@ -4,7 +4,13 @@ A curated, non-exhaustive index of 2D and 3D head, hand and human pose estimatio
 
 [Browse the site](https://voidvein.github.io/Awesome-Xpose-estimation/) · [Sources and curation notes](SOURCES.md) · [Detail-page progress](CURATION.md)
 
-## 最近更新 · 2026-11-20（UTC+8）
+## 最近更新 · 2026-11-21（UTC+8）
+
+- **新增 4 篇：** [FAB](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=fab) · [FAH](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=fah) · [SAM 3D Body](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=sam-3d-body) · [Fast SAM 3D Body](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=fast-sam-3d-body)。
+- **收录总数：** 382 篇。FAB 与 FAH 为预印本；SAM 3D Body 为 CVPR，Fast SAM 3D Body 为 ECCV 的独立后续工作。
+
+### 2026-11-20
+
 
 - **本次补充：** 5 篇论文详情新增中文方法流程、原文图解读与复现注意事项：[WinDEX](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=windex) · [MetricHand](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=metrichand) · [HandRSI](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=handrsi) · [Body of Evidence](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=body-of-evidence) · [Structure-Guided](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=structure-guided-multi-granularity-transformer)。
 - **同日凌晨新增收录：** [Ray-Lateral Agreement](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=ray-lateral-agreement) · [mmTherm](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=mmtherm)。
@@ -129,6 +135,7 @@ Serve the repository root with `python -m http.server 8000`.
 
 ### Hand
 
+- [code](https://github.com/noahcao/FAH) **[Fast and Accurate Hand Estimation in Pixels, Interaction and World Space](https://arxiv.org/abs/2611.07711)** — arXiv 2026 · Preprint · 2D / 3D. 用关节和表面点拟合 MANO 或 MHR-Hand，可选部位、接触、因果视频细化和世界定位。
 - **[WinDEX: Metric 3D Hand Motion Reconstruction in the Wild for Dexterous Teleoperation and Policy Learning](https://arxiv.org/abs/2611.21143)** — arXiv 2026 · Preprint · 3D. 以标定双目、惯性里程计和时序建模恢复米制手部运动，区分离线重建与因果遥操作。
 - **[MetricHand: Geometry-Aware Flow Matching for 4D Hand Reconstruction in Metric World Space](https://arxiv.org/abs/2611.21060)** — arXiv 2026 · Preprint · 3D. 把手物交互区域的深度几何持续注入流匹配，以改善世界坐标下手部位置和时序一致性。
 
@@ -267,6 +274,9 @@ Serve the repository root with `python -m http.server 8000`.
 
 ### Human
 
+- [code](https://github.com/noahcao/FAB) **[Fast and Accurate Body Estimation in Pixels, World Space and Scenes](https://arxiv.org/abs/2611.25801)** — arXiv 2026 · Preprint · 2D / 3D. 先估计二维/三维关节与稠密表面点，再拟合 SMPL；视频路径另处理世界坐标和人体—场景接触。
+- [code](https://github.com/facebookresearch/sam-3d-body) **[SAM 3D Body: Robust Full-Body Human Mesh Recovery](https://openaccess.thecvf.com/content/CVPR2026/html/Yang_SAM_3D_Body_Robust_Full-Body_Human_Mesh_Recovery_CVPR_2026_paper.html)** — CVPR 2026 · Published · 3D. 从一张 RGB 恢复身体、足与双手的全身 MHR 网格，并可用掩膜与二维关键点提示。
+- [code](https://github.com/yangtiming/Fast-SAM-3D-Body) **[Fast SAM 3D Body: Accelerating SAM 3D Body for Real-Time Full-Body Human Mesh Recovery](https://link.springer.com/chapter/10.1007/978-3-032-37044-0_15)** — ECCV 2026 · Published · 3D. 将 SAM 3D Body 的串行裁剪与解码改为批处理和剪枝，并另加 MHR 至 SMPL 的前馈映射。
 - **[Trust the Ray, Not the Depth: Ray-Lateral Agreement for Multi-View 3D Human Pose Fusion](https://arxiv.org/abs/2611.23513)** — arXiv 2026 · Preprint · 3D. 利用标定相机的视线几何，抑制单目深度偏差与异常视角，融合多视角人体关节。
 - **[mmTherm: Absolute 3D Human Pose Estimation from Low-Resolution Thermal Images and mmWave Radar](https://arxiv.org/abs/2611.23477)** — arXiv 2026 · Preprint · 3D. 用低分辨率热图提供人体方向、毫米波提供距离，联合恢复全局位置和三维关节。
 - **[Body of Evidence: Triangulating 3D Human Pose with Geometry-Conditioned Depth](https://arxiv.org/abs/2611.21044)** — arXiv 2026 · Preprint · 3D. 在稀疏多相机和关节遮挡条件下，将预测深度加入三角化以补足单个有效视图的几何约束。

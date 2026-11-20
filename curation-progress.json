@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-11-20",
-  "total": 378,
+  "updated_at": "2026-11-21",
+  "total": 382,
   "counts": {
     "complete": 66,
-    "figure_pending": 312,
+    "figure_pending": 316,
     "pending": 0
   },
   "completion_standard": "Source-checked module-level pipeline or survey classification, separate use contexts, and a figure guide. Embed paper originals when reuse permission is clear, otherwise link to the original figure or method section. Summaries alone do not count.",
@@ -4165,6 +4165,50 @@
       "figure_status": "original_link_only",
       "reviewed_at": "2026-11-20",
       "figure_note": ""
+    },
+    {
+      "id": "fab",
+      "category": "Human",
+      "title": "Fast and Accurate Body Estimation in Pixels, World Space and Scenes",
+      "status": "figure_pending",
+      "paper_url": "https://arxiv.org/abs/2611.25801",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-20",
+      "figure_note": "只链接至原始论文版本，不转载原图。"
+    },
+    {
+      "id": "fah",
+      "category": "Hand",
+      "title": "Fast and Accurate Hand Estimation in Pixels, Interaction and World Space",
+      "status": "figure_pending",
+      "paper_url": "https://arxiv.org/abs/2611.07711",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-20",
+      "figure_note": "只链接至原始论文版本，不转载原图。"
+    },
+    {
+      "id": "sam-3d-body",
+      "category": "Human",
+      "title": "SAM 3D Body: Robust Full-Body Human Mesh Recovery",
+      "status": "figure_pending",
+      "paper_url": "https://openaccess.thecvf.com/content/CVPR2026/html/Yang_SAM_3D_Body_Robust_Full-Body_Human_Mesh_Recovery_CVPR_2026_paper.html",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-20",
+      "figure_note": "只链接至原始论文版本，不转载原图。"
+    },
+    {
+      "id": "fast-sam-3d-body",
+      "category": "Human",
+      "title": "Fast SAM 3D Body: Accelerating SAM 3D Body for Real-Time Full-Body Human Mesh Recovery",
+      "status": "figure_pending",
+      "paper_url": "https://link.springer.com/chapter/10.1007/978-3-032-37044-0_15",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-20",
+      "figure_note": "只链接至原始论文版本，不转载原图。"
     }
   ]
 }

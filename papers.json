@@ -38893,11 +38893,12 @@
       "method": "编码代理改写推理流程，以十项指标的验证门控筛选；再按信息来源选择蒸馏信号，更新网络并重新验证推理流程。",
       "inputs_outputs": "第一人称视频及已有 ACE-Ego-Hand 估计器；输出手部存在性与三维姿态。",
       "contribution": "把代码层面的后处理和网络更新置于同一循环，在 HOT3D、ARCTIC 上进行多轮系统级比较。",
-      "limitations": "反复查询验证集存在自适应过拟合风险；作者限制查询并封存测试集。不同推理档位的速度不能脱离硬件与协议比较。",
+      "limitations": "反复查询验证集有自适应过拟合风险。智能体只直接使用开发集，验证反馈经门控返回，且没有看到验证真值或测试数据。原文 §4.5 披露，前两轮人工操作者查阅测试分数，用于选定一次蒸馏方案及两条评估规则（ARCTIC 退化不阻止通过门控；HOT3D 无真值的手部槽位不计分）。第 3–5 轮、部署档位选择及经典基线只使用开发集、验证集和计时。不同档位的速度须结合硬件与协议比较。",
       "sources": [
         "https://arxiv.org/abs/2611.22164",
         "https://arxiv.org/html/2611.22164v1",
-        "https://github.com/GinKenneth/Hand_RSI"
+        "https://github.com/GinKenneth/Hand_RSI",
+        "https://arxiv.org/html/2611.22164v1#S4.SS5"
       ],
       "evidence_level": "primary_abstract_and_targeted_fulltext",
       "evidence_scope": "arXiv v1 摘要、方法 3.2–3.3 与验证集复用说明，作者代码入口；未运行代码或逐表复核",
@@ -39501,6 +39502,417 @@
       "version": "2611.23477v1",
       "caption": "原文图 1：观测几何与方法动机。",
       "status": "link_only"
+    }
+  },
+  {
+    "id": "fab",
+    "title": "Fast and Accurate Body Estimation in Pixels, World Space and Scenes",
+    "authors": [
+      "Jinkun Cao"
+    ],
+    "year": 2026,
+    "category": "Human",
+    "dimensions": [
+      "2D",
+      "3D"
+    ],
+    "venue": "arXiv",
+    "status": "Preprint",
+    "url": "https://arxiv.org/abs/2611.25801",
+    "version": "2611.25801v1",
+    "summary": "先估计二维/三维关节与稠密表面点，再拟合 SMPL；视频路径另处理世界坐标和人体—场景接触。",
+    "tags": [
+      "fab",
+      "mesh recovery",
+      "Human"
+    ],
+    "code": "https://github.com/noahcao/FAB",
+    "code_provenance": {
+      "url": "https://github.com/noahcao/FAB",
+      "verified_at": "2026-11-20",
+      "basis": "作者原文与项目链接官方实现；已核对图像、视频、世界入口与权重说明，未下载权重、未运行模型。预印本不标 CCF。"
+    },
+    "analysis": {
+      "problem": "把快速单帧关键点与参数网格、跨帧世界轨迹和场景接触作为不同阶段处理。",
+      "method": "以人体裁剪预测 2D/3D 关节、稠密表面点及可选部位和接触；由学习式拟合初值及两步 Gauss–Newton 求 SMPL，视频另估计相机和场景。",
+      "inputs_outputs": "单张 RGB 或单目片段；输出图像/相机坐标预测、SMPL 网格及可选世界轨迹和场景对齐。",
+      "contribution": "FAB-L 在 3DPW test 准确度协议报告 32.7 mm PA-MPJPE（14 个 Human3.6M 关节、真值框和内参）；RTX 4070 Ti SUPER + TensorRT 的独立计时含检测与拟合，单人 39.2 fps、二人 25.7、四人 15.4。",
+      "limitations": "不要把精度和吞吐当作同一套输入条件，不把单帧速度外推到视频世界与场景支路；G1 地形跟踪示例是仿真。",
+      "sources": [
+        "https://arxiv.org/abs/2611.25801",
+        "https://arxiv.org/html/2611.25801v1#S3",
+        "https://arxiv.org/html/2611.25801v1#S3.T1",
+        "https://arxiv.org/html/2611.25801v1#A3.T12",
+        "https://github.com/noahcao/FAB",
+        "https://www.jinkuncao.com/FAB/#method",
+        "https://www.jinkuncao.com/FAB/",
+        "https://github.com/leolyliu/CORE4D-Instructions"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "定向核对论文记录、方法、图示及指定实验；未独立运行模型。",
+      "verification_note": "作者原文与项目链接官方实现；已核对图像、视频、世界入口与权重说明，未下载权重、未运行模型。预印本不标 CCF。 项目页 FAB + FAH 同步示例使用 CORE4D-Real 20231002/007。",
+      "verified_at": "2026-11-20"
+    },
+    "pipeline": {
+      "kind": "method",
+      "overview": "以人体裁剪预测 2D/3D 关节、稠密表面点及可选部位和接触；由学习式拟合初值及两步 Gauss–Newton 求 SMPL，视频另估计相机和场景。",
+      "steps": [
+        {
+          "title": "裁剪并预测点",
+          "description": "按检测框对人逐个预测二维和三维关节及密集体表点。"
+        },
+        {
+          "title": "拟合参数网格",
+          "description": "用学习式初值和两步 Gauss–Newton 拟合 SMPL。"
+        },
+        {
+          "title": "建立世界坐标",
+          "description": "视频分支估计相机运动并构建重力对齐世界；融合场景深度。"
+        },
+        {
+          "title": "对齐人与场景",
+          "description": "利用预测接触联合处理人体与场景；G1 重定向是另一路。"
+        }
+      ],
+      "training": "FAB-L 是速度导向的学生模型；身体点和拟合分别对应学习式预测与显式优化。不同模型大小与训练数据细节见附录 A。",
+      "inference": "先跑图像/视频/世界入口中的对应路径；SMPL、MHR 与权重分别按作者说明准备。检查所需相机信息与世界坐标定义。",
+      "figure_reading": "上方是逐人逐帧的点和 SMPL，下方才是世界坐标、场景接触与仿真重定向。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法",
+          "url": "https://arxiv.org/html/2611.25801v1#S3"
+        },
+        {
+          "label": "3DPW 精度表",
+          "url": "https://arxiv.org/html/2611.25801v1#S3.T1"
+        },
+        {
+          "label": "计时附录",
+          "url": "https://arxiv.org/html/2611.25801v1#A3.T12"
+        }
+      ],
+      "reviewed_at": "2026-11-20"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2611.25801v1#S0.F2",
+      "figure_number": "Figure 2",
+      "version": "2611.25801v1",
+      "caption": "原文图 2：上方是逐人逐帧的点和 SMPL，下方才是世界坐标、场景接触与仿真重定向。",
+      "note": "只链接至原始论文版本，不转载原图。"
+    },
+    "submitted_at": "2026-11-19"
+  },
+  {
+    "id": "fah",
+    "title": "Fast and Accurate Hand Estimation in Pixels, Interaction and World Space",
+    "authors": [
+      "Jinkun Cao"
+    ],
+    "year": 2026,
+    "category": "Hand",
+    "dimensions": [
+      "2D",
+      "3D"
+    ],
+    "venue": "arXiv",
+    "status": "Preprint",
+    "url": "https://arxiv.org/abs/2611.07711",
+    "version": "2611.07711v1",
+    "summary": "用关节和表面点拟合 MANO 或 MHR-Hand，可选部位、接触、因果视频细化和世界定位。",
+    "tags": [
+      "fah",
+      "mesh recovery",
+      "Hand"
+    ],
+    "code": "https://github.com/noahcao/FAH",
+    "code_provenance": {
+      "url": "https://github.com/noahcao/FAH",
+      "verified_at": "2026-11-20",
+      "basis": "arXiv 与作者项目链接官方代码及权重卡，未下载或运行；未确认正式发表，不标 CCF。"
+    },
+    "analysis": {
+      "problem": "稠密网格、接触、视频稳定性与世界位置是不同输出，不能由单一对齐关节分数代表。",
+      "method": "检测提供框、左右手与掩膜，热图头预测关节与表面点，拟合器转换为手网格；视频模型以历史帧细化运动。",
+      "inputs_outputs": "RGB 图像或视频；二维关节、根相对三维关节、网格及可选接触与世界轨迹。",
+      "contribution": "HOT3D 上 FAH-L 表 1 逐帧的 PA-MPJPE 4.31 mm，因果细化后 4.16 mm；作者另报告带网格拟合 65 fps，加部位和接触后 49 fps。",
+      "limitations": "对齐后的关节误差不能与 WinDEX 世界误差或 HandRSI 计漏检的协议直接比较；视频使 EgoStandard 的 PA-MPJPE 略升。",
+      "sources": [
+        "https://arxiv.org/abs/2611.07711",
+        "https://arxiv.org/html/2611.07711v1#S3",
+        "https://arxiv.org/html/2611.07711v1#S4.T1",
+        "https://arxiv.org/html/2611.07711v1#S4.T3",
+        "https://github.com/noahcao/FAH",
+        "https://huggingface.co/noahcao/FAH"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "定向核对论文记录、方法、图示及指定实验；未独立运行模型。",
+      "verification_note": "arXiv 与作者项目链接官方代码及权重卡，未下载或运行；未确认正式发表，不标 CCF。",
+      "verified_at": "2026-11-20"
+    },
+    "pipeline": {
+      "kind": "method",
+      "overview": "检测提供框、左右手与掩膜，热图头预测关节与表面点，拟合器转换为手网格；视频模型以历史帧细化运动。",
+      "steps": [
+        {
+          "title": "定位双手",
+          "description": "一阶段检测回归框、手侧与实例掩膜。"
+        },
+        {
+          "title": "预测稠密点",
+          "description": "热图头给出二维和根相对三维关节与表面样本。"
+        },
+        {
+          "title": "显式拟合",
+          "description": "以已知几何对应关系拟合 MANO 或 MHR-Hand，另可输出部位和接触。"
+        },
+        {
+          "title": "细化与放置",
+          "description": "因果视频模型利用历史观测细化；相机模型负责世界坐标放置。"
+        }
+      ],
+      "training": "利用 SAM 3D Body 手部分支监督，分阶段训练检测、密集姿态、拟合和视频细化；各阶段的标注与数据见附录 A。",
+      "inference": "图像可单独运行；视频逐步加入时序与相机路径，区分因果与离线选项。",
+      "figure_reading": "图中虚线是参数网格拟合；下方的指尖轨迹示意先细化、再放入世界坐标。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法",
+          "url": "https://arxiv.org/html/2611.07711v1#S3"
+        },
+        {
+          "label": "HOT3D 表 1",
+          "url": "https://arxiv.org/html/2611.07711v1#S4.T1"
+        },
+        {
+          "label": "世界坐标表 3",
+          "url": "https://arxiv.org/html/2611.07711v1#S4.T3"
+        }
+      ],
+      "reviewed_at": "2026-11-20"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2611.07711v1#S3.F2",
+      "figure_number": "Figure 2",
+      "version": "2611.07711v1",
+      "caption": "原文图 2：图中虚线是参数网格拟合；下方的指尖轨迹示意先细化、再放入世界坐标。",
+      "note": "只链接至原始论文版本，不转载原图。"
+    },
+    "submitted_at": "2026-11-05"
+  },
+  {
+    "id": "sam-3d-body",
+    "title": "SAM 3D Body: Robust Full-Body Human Mesh Recovery",
+    "authors": [
+      "Xitong Yang",
+      "Devansh Kukreja",
+      "Don Pinkus",
+      "Taosha Fan",
+      "Jinhyung Park",
+      "Soyong Shin",
+      "Jinkun Cao",
+      "Jia-Wei Liu",
+      "Nicolás Ugrinovic",
+      "Anushka Sagar",
+      "Jitendra Malik",
+      "Matt Feiszli",
+      "Piotr Dollár",
+      "Kris Kitani"
+    ],
+    "year": 2026,
+    "category": "Human",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "CVPR",
+    "status": "Published",
+    "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Yang_SAM_3D_Body_Robust_Full-Body_Human_Mesh_Recovery_CVPR_2026_paper.html",
+    "version": "2602.15989v1",
+    "summary": "从一张 RGB 恢复身体、足与双手的全身 MHR 网格，并可用掩膜与二维关键点提示。",
+    "tags": [
+      "sam-3d-body",
+      "mesh recovery",
+      "Human"
+    ],
+    "code": "https://github.com/facebookresearch/sam-3d-body",
+    "code_provenance": {
+      "url": "https://github.com/facebookresearch/sam-3d-body",
+      "verified_at": "2026-11-20",
+      "basis": "CVF CVPR 2026 主会论文，仓库提供官方推理、示例与权重入口；未运行实现。"
+    },
+    "analysis": {
+      "problem": "普通人体网格回归难覆盖罕见姿势和成像条件；全身包含手足，不等于同时建模面部表情。",
+      "method": "图像编码器加提示感知解码器；MHR 分离骨骼姿势与体表形状，并以手部细化改善全身局部。",
+      "inputs_outputs": "RGB 图片或人体裁剪、可选二维提示；输出 MHR 参数、骨架和全身表面。",
+      "contribution": "将多阶段数据筛选/标注、MHR 参数化与可提示的人体网格模型连接；评测包含分姿势和成像条件的切片。",
+      "limitations": "单目深度依然存在歧义；不把相机坐标网格直接视为标定的世界轨迹。",
+      "sources": [
+        "https://openaccess.thecvf.com/content/CVPR2026/html/Yang_SAM_3D_Body_Robust_Full-Body_Human_Mesh_Recovery_CVPR_2026_paper.html",
+        "https://arxiv.org/html/2602.15989v1#S3",
+        "https://arxiv.org/html/2602.15989v1#S4",
+        "https://arxiv.org/html/2602.15989v1#S8",
+        "https://github.com/facebookresearch/sam-3d-body"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "定向核对论文记录、方法、图示及指定实验；未独立运行模型。",
+      "verification_note": "CVF CVPR 2026 主会论文，仓库提供官方推理、示例与权重入口；未运行实现。",
+      "verified_at": "2026-11-20"
+    },
+    "pipeline": {
+      "kind": "method",
+      "overview": "图像编码器加提示感知解码器；MHR 分离骨骼姿势与体表形状，并以手部细化改善全身局部。",
+      "steps": [
+        {
+          "title": "编码人物影像",
+          "description": "按人体区域准备图像特征，向解码器输入图像信息。"
+        },
+        {
+          "title": "编码可选提示",
+          "description": "把掩膜和二维关键点等用户线索与解码表示结合。"
+        },
+        {
+          "title": "恢复网格并细化",
+          "description": "解码 MHR 姿势、体形等参数，。"
+        },
+        {
+          "title": "局部细化",
+          "description": "共享编码器配合分开的身体与手部解码器，细化左右手后整合至对应身体位置。"
+        }
+      ],
+      "training": "训练资料来自人工关键点、可微网格拟合、多视角几何与密集检测；另使用数据引擎覆盖困难样本。",
+      "inference": "官方仓库有单图推理及权重入口；需遵守模型条款。它是 Fast SAM 3D Body 加速所用底座，不是后者的同一篇。",
+      "figure_reading": "沿图像编码、提示 token 与 MHR 解码区分图像线索、提示和输出参数。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "预印本架构",
+          "url": "https://arxiv.org/html/2602.15989v1#S3"
+        },
+        {
+          "label": "训练与推理",
+          "url": "https://arxiv.org/html/2602.15989v1#S4"
+        },
+        {
+          "label": "评估",
+          "url": "https://arxiv.org/html/2602.15989v1#S8"
+        }
+      ],
+      "reviewed_at": "2026-11-20"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2602.15989v1#S2.F2",
+      "figure_number": "Figure 2",
+      "version": "2602.15989v1",
+      "caption": "原文图 2：沿图像编码、提示 token 与 MHR 解码区分图像线索、提示和输出参数。",
+      "note": "只链接至原始论文版本，不转载原图。"
+    },
+    "ccf": {
+      "tier": "A",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=57",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "CVPR"
+    }
+  },
+  {
+    "id": "fast-sam-3d-body",
+    "title": "Fast SAM 3D Body: Accelerating SAM 3D Body for Real-Time Full-Body Human Mesh Recovery",
+    "authors": [
+      "Timing Yang",
+      "Sicheng He",
+      "Hongyi Jing",
+      "Jiawei Yang",
+      "Zhijian Liu",
+      "Chuhang Zou",
+      "Yue Wang"
+    ],
+    "year": 2026,
+    "category": "Human",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "ECCV",
+    "status": "Published",
+    "url": "https://link.springer.com/chapter/10.1007/978-3-032-37044-0_15",
+    "version": "2603.15603v1",
+    "summary": "将 SAM 3D Body 的串行裁剪与解码改为批处理和剪枝，并另加 MHR 至 SMPL 的前馈映射。",
+    "tags": [
+      "fast-sam-3d-body",
+      "mesh recovery",
+      "Human"
+    ],
+    "code": "https://github.com/yangtiming/Fast-SAM-3D-Body",
+    "code_provenance": {
+      "url": "https://github.com/yangtiming/Fast-SAM-3D-Body",
+      "verified_at": "2026-11-20",
+      "basis": "Springer ECCV 2026 正式论文及作者代码；性能倍数采用正式稿，不沿用预印本的 10.9×。未运行实现。"
+    },
+    "analysis": {
+      "problem": "原版身体、手部裁剪和解码串行，传统 MHR 到 SMPL 的迭代拟合也消耗延迟。",
+      "method": "解除部分空间依赖，批处理身体和手部裁剪，去除部分中间预测和提示细化；用单独训练的前馈投影替代迭代 SMPL 拟合。",
+      "inputs_outputs": "单目 RGB 与人物/手部裁剪；输出 MHR 网格及可选用于下游的 SMPL 表示。",
+      "contribution": "ECCV 正式稿在作者设置下报告最高 10.25× 端到端加速；MHR→SMPL 子步骤的加速比不是全系统速度。",
+      "limitations": "裁掉提示细化意味着不保留原版全部交互路径；速度受硬件、配置、输入与对照实现影响，亦不等于 FAB 的整链速率。",
+      "sources": [
+        "https://link.springer.com/chapter/10.1007/978-3-032-37044-0_15",
+        "https://arxiv.org/html/2603.15603v1#S3",
+        "https://arxiv.org/html/2603.15603v1#S4",
+        "https://github.com/yangtiming/Fast-SAM-3D-Body",
+        "https://yangtiming.github.io/Fast-SAM-3D-Body-Page/"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "定向核对论文记录、方法、图示及指定实验；未独立运行模型。",
+      "verification_note": "Springer ECCV 2026 正式论文及作者代码；性能倍数采用正式稿，不沿用预印本的 10.9×。未运行实现。",
+      "verified_at": "2026-11-20"
+    },
+    "pipeline": {
+      "kind": "method",
+      "overview": "解除部分空间依赖，批处理身体和手部裁剪，去除部分中间预测和提示细化；用单独训练的前馈投影替代迭代 SMPL 拟合。",
+      "steps": [
+        {
+          "title": "解耦裁剪",
+          "description": "去掉原有串行空间依赖，准备身体和手部区域。"
+        },
+        {
+          "title": "合并并剪枝",
+          "description": "用 GPU 批处理裁剪与编码，剪去部分预测与细化。"
+        },
+        {
+          "title": "合并到统一人体",
+          "description": "合并身体和手部解码结果以重建 MHR 网格。"
+        },
+        {
+          "title": "转换骨架表示",
+          "description": "用学习式前馈映射把 MHR 转为 SMPL 运动学表示。"
+        }
+      ],
+      "training": "不重训 SAM 3D Body 加速主链；MHR→SMPL 映射本身单独训练，故不能把所有组件称作无需训练。",
+      "inference": "适合需要交互速率的单目链路；开启转换或机械臂/仿真下游时应重新测总时延并检查关节规范。",
+      "figure_reading": "对照串行和并行路径，分别追踪身体/手部批处理、剪枝与独立的运动学投影。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "预印本方法",
+          "url": "https://arxiv.org/html/2603.15603v1#S3"
+        },
+        {
+          "label": "预印本实验",
+          "url": "https://arxiv.org/html/2603.15603v1#S4"
+        }
+      ],
+      "reviewed_at": "2026-11-20"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2603.15603v1#S3.F3",
+      "figure_number": "Figure 3",
+      "version": "2603.15603v1",
+      "caption": "原文图 3：对照串行和并行路径，分别追踪身体/手部批处理、剪枝与独立的运动学投影。",
+      "note": "只链接至原始论文版本，不转载原图。"
+    },
+    "ccf": {
+      "tier": "B",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ECCV"
     }
   }
 ]
