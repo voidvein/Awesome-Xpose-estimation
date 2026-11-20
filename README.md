@@ -4,6 +4,12 @@ A curated, non-exhaustive index of 2D and 3D head, hand and human pose estimatio
 
 [Browse the site](https://voidvein.github.io/Awesome-Xpose-estimation/) · [Sources and curation notes](SOURCES.md) · [Detail-page progress](CURATION.md)
 
+## 最近更新 · 2026-11-20（UTC+8）
+
+- **本次补充：** 5 篇论文详情新增中文方法流程、原文图解读与复现注意事项：[WinDEX](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=windex) · [MetricHand](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=metrichand) · [HandRSI](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=handrsi) · [Body of Evidence](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=body-of-evidence) · [Structure-Guided](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=structure-guided-multi-granularity-transformer)。
+- **同日凌晨新增收录：** [Ray-Lateral Agreement](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=ray-lateral-agreement) · [mmTherm](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=mmtherm)。
+- **当前进度：** 目录仍为 378 篇。本次完善已有条目，不计作新增论文。原图能否在站内展示与图解进度分开统计，见[策展进度](CURATION.md)。
+
 ## Run locally
 
 Serve the repository root with `python -m http.server 8000`.

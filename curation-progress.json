@@ -3,8 +3,8 @@
   "total": 378,
   "counts": {
     "complete": 66,
-    "figure_pending": 307,
-    "pending": 5
+    "figure_pending": 312,
+    "pending": 0
   },
   "completion_standard": "Source-checked module-level pipeline or survey classification, separate use contexts, and a figure guide. Embed paper originals when reuse permission is clear, otherwise link to the original figure or method section. Summaries alone do not count.",
   "entries": [
@@ -4093,56 +4093,56 @@
       "id": "handrsi",
       "category": "Hand",
       "title": "HandRSI: Recursive Self-Improvement for Hand Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2611.22164",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-20",
+      "figure_note": "仅链接原始版本，不复制或重绘。"
     },
     {
       "id": "body-of-evidence",
       "category": "Human",
       "title": "Body of Evidence: Triangulating 3D Human Pose with Geometry-Conditioned Depth",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2611.21044",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-20",
+      "figure_note": "仅链接原始版本，不复制或重绘。"
     },
     {
       "id": "structure-guided-multi-granularity-transformer",
       "category": "Human",
       "title": "Structure-Guided Multi-Granularity Spatiotemporal Transformer for Efficient Monocular 3D Human Pose Estimation",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2611.20361",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-20",
+      "figure_note": "仅链接原始版本，不复制或重绘。"
     },
     {
       "id": "windex",
       "category": "Hand",
       "title": "WinDEX: Metric 3D Hand Motion Reconstruction in the Wild for Dexterous Teleoperation and Policy Learning",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2611.21143",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-20",
+      "figure_note": "仅链接原始版本，不复制或重绘。"
     },
     {
       "id": "metrichand",
       "category": "Hand",
       "title": "MetricHand: Geometry-Aware Flow Matching for 4D Hand Reconstruction in Metric World Space",
-      "status": "pending",
+      "status": "figure_pending",
       "paper_url": "https://arxiv.org/abs/2611.21060",
       "reading_level": "primary_abstract_and_targeted_fulltext",
-      "figure_status": "not_yet_verified",
-      "reviewed_at": null,
-      "figure_note": ""
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-20",
+      "figure_note": "仅链接原始版本，不复制或重绘。"
     },
     {
       "id": "ray-lateral-agreement",

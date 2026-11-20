@@ -38903,6 +38903,55 @@
       "evidence_scope": "arXiv v1 摘要、方法 3.2–3.3 与验证集复用说明，作者代码入口；未运行代码或逐表复核",
       "verification_note": "仅确认 arXiv 预印本状态，不赋予会议或期刊 CCF 评级；结果为作者报告，未独立复现。",
       "verified_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2611.22164v1/fig/overview_handrsi.png",
+      "caption": "原文图 2：门控推理链、蒸馏和反思",
+      "figure_number": "Figure 2",
+      "version": "2611.22164v1",
+      "note": "仅链接原始版本，不复制或重绘。"
+    },
+    "figures": [
+      {
+        "source": "https://arxiv.org/html/2611.22164v1/fig/revalidation_handrsi.png",
+        "caption": "原文图 3：换网后的逐模块复验",
+        "figure_number": "Figure 3",
+        "version": "2611.22164v1",
+        "note": "仅链接原始版本，不复制或重绘。"
+      }
+    ],
+    "pipeline": {
+      "kind": "method",
+      "overview": "交替改进推理流程和手部估计器，由隔离的验证门控控制是否采用候选修改。",
+      "steps": [
+        {
+          "title": "A：先固定估计器",
+          "description": "编码代理按开发集反馈改写后处理链，在验证门控通过后才接纳候选。"
+        },
+        {
+          "title": "B：再改估计器",
+          "description": "以人工标签和教师信号训练候选网络，由验证数据决定是否换网。"
+        },
+        {
+          "title": "换网后重新验证",
+          "description": "固定片段逐个对照移除原后处理模块，并联合检验裁剪后的整条链；网络不变则跳过这一步。"
+        },
+        {
+          "title": "C：整理试验记录",
+          "description": "将保留、拒绝及原因写成下一轮提示，不用封存测试集调参。"
+        }
+      ],
+      "training": "候选学生接受真实标签和教师信号监督。每轮不一定更换模型；作者代码注明后几轮的改进来自推理链。",
+      "inference": "使用已选定的模型和后处理链给第一视角视频估计手；运行作者实现另需基础模型等依赖，权重可获取性未验证。轻量和完整档的吞吐不可直接当作跨机器速度。",
+      "figure_reading": "图 2 按 A/B/C 区分改推理、蒸馏和记录；图 3 看换网时如何在同一片段中进行逐模块消融，并检验联合裁剪结果。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法与门控",
+          "url": "https://arxiv.org/html/2611.22164v1#S3"
+        }
+      ],
+      "reviewed_at": "2026-11-20"
     }
   },
   {
@@ -38945,6 +38994,59 @@
       "evidence_scope": "arXiv v1 摘要、3.1–3.4 方法与附录 Shelf/Campus 失败案例；未独立复现",
       "verification_note": "仅确认 arXiv 预印本状态，不赋予会议或期刊 CCF 评级；结果为作者报告，未独立复现。",
       "verified_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2611.21044v1/first_pager6.png",
+      "caption": "原文图 1：逐层 2.5D 与深度感知三角化",
+      "figure_number": "Figure 1",
+      "version": "2611.21044v1",
+      "note": "仅链接原始版本，不复制或重绘。"
+    },
+    "figures": [
+      {
+        "source": "https://arxiv.org/html/2611.21044v1#S3",
+        "caption": "原文图 2：解码层和目标深度遮掩（方法章节）",
+        "figure_number": "Figure 2",
+        "version": "2611.21044v1",
+        "note": "仅链接原始版本，不复制或重绘。"
+      }
+    ],
+    "pipeline": {
+      "kind": "method",
+      "overview": "用同一人的其他关节为弱观测关节估计深度，再联合多个标定视角估计多人三维姿态。",
+      "steps": [
+        {
+          "title": "从世界坐标向相机投影",
+          "description": "以同步标定的相机组输入，每个三维候选关节投到各视角并提取邻域图像特征。"
+        },
+        {
+          "title": "按视角估计 2.5D 观测",
+          "description": "预测二维关节位置及置信度，并使用姿态上下文估计相机坐标深度和深度门控。"
+        },
+        {
+          "title": "遮去目标深度",
+          "description": "保留目标关节的图像特征，但遮掉其自身参考深度，让其他关节提供深度上下文。"
+        },
+        {
+          "title": "逐层更新世界坐标",
+          "description": "LDAT 融合图像位置和深度约束，新三维关节及外观特征反馈给下一解码层。"
+        }
+      ],
+      "training": "训练前四轮先监督深度分支但不将其送入 LDAT，同时不启用 DropView；预热后再联合使用。",
+      "inference": "当场景中某关节只剩一个有效视角时，预测深度仍可约束射线上位置。这是标定多机位系统的退化情形，不是通用无标定单目方法。",
+      "figure_reading": "图 1 看整体的投影、2.5D 预测和三角化循环；图 2(a) 看解码层，(b)(c) 区分目标深度遮掩和同人姿态上下文。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法与图 2",
+          "url": "https://arxiv.org/html/2611.21044v1#S3"
+        },
+        {
+          "label": "评估协议与消融",
+          "url": "https://arxiv.org/html/2611.21044v1#S4"
+        }
+      ],
+      "reviewed_at": "2026-11-20"
     }
   },
   {
@@ -38983,6 +39085,59 @@
       "evidence_scope": "arXiv v1 摘要、方法概览、4.1–4.3 实验设置与表格、Discussion；未独立复现",
       "verification_note": "仅确认 arXiv 预印本状态，不赋予会议或期刊 CCF 评级；结果为作者报告，未独立复现。",
       "verified_at": "2026-11-18"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2611.20361v1/figures/fig2-1.png",
+      "caption": "原文图 1：三粒度姿态估计的时空架构",
+      "figure_number": "Figure 1",
+      "version": "2611.20361v1",
+      "note": "仅链接原始版本，不复制或重绘。"
+    },
+    "figures": [
+      {
+        "source": "https://arxiv.org/html/2611.20361v1/figures/fig1-1.png",
+        "caption": "原文图 2：17、11、6 点骨架分组",
+        "figure_number": "Figure 2",
+        "version": "2611.20361v1",
+        "note": "仅链接原始版本，不复制或重绘。"
+      }
+    ],
+    "pipeline": {
+      "kind": "method",
+      "overview": "在关节、骨骼、肢体三级表示上建模，并有选择地处理时间片段，从二维关节提升到三维。",
+      "steps": [
+        {
+          "title": "构建三路骨架",
+          "description": "由单目视频的二维关节序列经分组池化得到 17、11 和 6 点骨架表示。"
+        },
+        {
+          "title": "更新各粒度的空间关系",
+          "description": "空间门控注意力加入人体结构约束，多粒度增强融合局部关节细节和整体肢体信息。"
+        },
+        {
+          "title": "融合时间并选择关键块",
+          "description": "先进行多尺度时间分段融合，再按评分从池化后的时间块选择 top-k，而非在原视频均匀抽帧。"
+        },
+        {
+          "title": "交换尺度再恢复关节",
+          "description": "分层交叉注意力让各粒度交互，以反池化逐级恢复细关节，再回归三维坐标。"
+        }
+      ],
+      "training": "使用二维到三维的姿态监督。原稿的 Human3.6M Protocol 1 以 CPN 的二维关节点作为测试输入，使用 27 帧并在 S9 和 S11 上评价。",
+      "inference": "模型输入是二维关键点，不直接处理 RGB。作者报告的 43.40M FLOPs 对应 lifting 部分，不包括 CPN 或视频上游的开销。",
+      "figure_reading": "图 1 沿空间和时间两路追踪跨尺度融合与细关节恢复；图 2 对照 17、11、6 点的分组，理解骨架池化，而非将三个粒度误读为三种输出格式。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "空间与时间模块",
+          "url": "https://arxiv.org/html/2611.20361v1#S3"
+        },
+        {
+          "label": "实验设置与消融",
+          "url": "https://arxiv.org/html/2611.20361v1#S4"
+        }
+      ],
+      "reviewed_at": "2026-11-20"
     }
   },
   {
@@ -39016,11 +39171,16 @@
       "sources": [
         "https://arxiv.org/abs/2611.21143",
         "https://arxiv.org/html/2611.21143v1#S7",
-        "https://arxiv.org/html/2611.21143v1#S8"
+        "https://arxiv.org/html/2611.21143v1#S8",
+        "https://fruitrabbit.github.io/WinDEX/",
+        {
+          "label": "延伸阅读：Dexterous World Models 作者示例",
+          "url": "https://github.com/snuvclab/dwm"
+        }
       ],
       "evidence_level": "primary_abstract_and_targeted_fulltext",
       "evidence_scope": "定向核对 v1 摘要、方法概览、实验协议/表格与局限；非全文审稿或独立复现。",
-      "verification_note": "2026-11-19 例行补漏，不标为本轮新发表；未确认正式录用，不授予 CCF 评级。作者项目页当前无法访问，未声称代码或数据已发布。",
+      "verification_note": "未确认正式录用，不授予 CCF 评级。作者演示可访问；不把演示站点当作可运行估计器，代码、权重和数据开放情况另行核验。",
       "verified_at": "2026-11-19"
     },
     "year": 2026,
@@ -39030,7 +39190,56 @@
     ],
     "venue": "arXiv",
     "status": "Preprint",
-    "submitted_at": "2026-11-16"
+    "submitted_at": "2026-11-16",
+    "figure": {
+      "source": "https://arxiv.org/html/2611.21143v1/pipeline_real_teleoperation.png",
+      "caption": "原文图 2：几何标注与迭代扩库",
+      "figure_number": "Figure 2",
+      "version": "2611.21143v1",
+      "note": "仅链接原始版本，不复制或重绘。"
+    },
+    "figures": [
+      {
+        "source": "https://arxiv.org/html/2611.21143v1/teacher_arch.png",
+        "caption": "原文图 3：双目时序估计器与重投影闭环",
+        "figure_number": "Figure 3",
+        "version": "2611.21143v1",
+        "note": "仅链接原始版本，不复制或重绘。"
+      }
+    ],
+    "pipeline": {
+      "kind": "method",
+      "overview": "用标定的头戴双目视频恢复米制手部姿态，并为离线数据采集和在线控制分别部署。",
+      "steps": [
+        {
+          "title": "从图像生成三维监督",
+          "description": "复核二维关节，使用双目重投影约束拟合 MANO，并按重投影误差筛选。"
+        },
+        {
+          "title": "用模型扩充训练数据",
+          "description": "已有模型为新序列的几何优化提供初值；通过筛选的结果加入下一轮训练。"
+        },
+        {
+          "title": "联合双目、局部裁剪和时间信息",
+          "description": "跨眼注意力关联两幅鱼眼图像，局部手部裁剪保留手指细节，时序模块聚合运动。"
+        },
+        {
+          "title": "输出 MANO 与世界轨迹",
+          "description": "预测手形、手指姿势和腕部平移并重投影以更新后续裁剪，再用 SLAM 位姿转换到世界坐标。"
+        }
+      ],
+      "training": "原稿区分几何标注、半自动数据扩充和模型蒸馏。约千小时指供训练使用的优化标注，不是独立光学评测真值。",
+      "inference": "重叠窗口 Window 可利用双向时序上下文；因果 Stream 为在线反馈只使用可用历史。论文的 FPS 是模型吞吐，不等同于含采集、SLAM 和控制的端到端延迟。",
+      "figure_reading": "图 2 从左侧双目标注读到右侧迭代扩库；图 3 追踪双目鱼眼、视线与标定到跨眼匹配、时序融合、MANO 输出与回投更新裁剪。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法与相关研究",
+          "url": "https://arxiv.org/html/2611.21143v1#S2"
+        }
+      ],
+      "reviewed_at": "2026-11-20"
+    }
   },
   {
     "id": "metrichand",
@@ -39063,11 +39272,12 @@
         "https://arxiv.org/abs/2611.21060",
         "https://arxiv.org/html/2611.21060v1#S3",
         "https://arxiv.org/html/2611.21060v1#S4",
-        "https://arxiv.org/html/2611.21060v1#S5"
+        "https://arxiv.org/html/2611.21060v1#S5",
+        "https://bieber1205.github.io/MetricHand/"
       ],
       "evidence_level": "primary_abstract_and_targeted_fulltext",
       "evidence_scope": "定向核对 v1 摘要、方法概览、实验协议/表格与局限；非全文审稿或独立复现。",
-      "verification_note": "2026-11-19 例行补漏，不标为本轮新发表；未确认正式录用，不授予 CCF 评级。作者项目页当前无法访问，未声称代码或数据已发布。",
+      "verification_note": "未确认正式录用，不授予 CCF 评级。作者演示可访问；不把演示站点当作可运行估计器，代码、权重和数据开放情况另行核验。",
       "verified_at": "2026-11-19"
     },
     "year": 2026,
@@ -39077,7 +39287,52 @@
     ],
     "venue": "arXiv",
     "status": "Preprint",
-    "submitted_at": "2026-11-16"
+    "submitted_at": "2026-11-16",
+    "figure": {
+      "source": "https://arxiv.org/html/2611.21060v1/model_overview3.png",
+      "caption": "原文图 2：单目深度、拓扑采样与条件流匹配",
+      "figure_number": "Figure 2",
+      "version": "2611.21060v1",
+      "note": "仅链接原始版本，不复制或重绘。"
+    },
+    "figures": [],
+    "pipeline": {
+      "kind": "method",
+      "overview": "融合单目度量深度与 RGB，在相机运动下生成手的时序 MANO 参数与世界坐标位置。",
+      "steps": [
+        {
+          "title": "分解相机和手的观测",
+          "description": "由冻结模型从同一 RGB 视频估计度量深度和相机轨迹；输入不是实测深度。"
+        },
+        {
+          "title": "获得粗手部状态",
+          "description": "门控融合手部 RGB 与对齐后的深度，估计粗 MANO 和腕部位置。"
+        },
+        {
+          "title": "采样关节并组织跨窗记忆",
+          "description": "由粗关节投影定多尺度采样锚点，把质量较好的观测留在跨窗口队列。"
+        },
+        {
+          "title": "以流匹配联合细化",
+          "description": "在生成的各步加入条件信息，联合细化平移、朝向、关节旋转与手形。"
+        }
+      ],
+      "training": "训练条件流匹配模型，使各时间步的状态生成受拓扑特征及跨窗口记忆约束。RGB 深度与相机运动来自另行预训练的冻结模型。",
+      "inference": "以单目视频和相机内参为输入。世界轨迹依赖单目深度和 SLAM；其绝对世界指标的参考系处理与 WinDEX 分段相似变换不同。",
+      "figure_reading": "图 2 先找冻结的度量深度和 SLAM 两路，再沿粗关节锚点、跨窗记忆到条件流匹配。看清深度是 RGB 推断，不是独立传感器测量。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "方法",
+          "url": "https://arxiv.org/html/2611.21060v1#S3"
+        },
+        {
+          "label": "实验与消融",
+          "url": "https://arxiv.org/html/2611.21060v1#S4"
+        }
+      ],
+      "reviewed_at": "2026-11-20"
+    }
   },
   {
     "id": "ray-lateral-agreement",
