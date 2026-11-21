@@ -159,6 +159,7 @@ for(const p of pipelinePapers){
   /^https:\/\/people\.ict\.usc\.edu\/~gratch\/CSCI534\/Old-Readings\/Head%20Pose%20estimation\.pdf#page=\d+$/.test(s.url)||
   (p.id==='headdiff'&&/^https:\/\/(?:ieeexplore\.ieee\.org\/document\/10462910|www\.nxu\.edu\.cn\/(?:info\/1590\/31709\.htm|__local\/3\/AF\/BD\/10E5B14A0EC54DD6CA74765A293_AF945962_61CB5\.png\?e=\.png))$/.test(s.url))||
   (p.id==='quatnet'&&/^https:\/\/(?:ieeexplore\.ieee\.org\/document\/8444061(?:\/figures#fig3)?|scholar\.nycu\.edu\.tw\/zh\/publications\/quatnet-quaternion-based-head-pose-estimation-with-multiregressio\/)$/.test(s.url))||
+  (p.id==='instanthmr'&&/^https:\/\/arxiv\.org\/pdf\/2611\.09195v2#page=(?:3|4|5|21)$/.test(s.url))||
   verifiedAuthorPdf.test(s.url)||publisherPreviews.get(p.id)?.has(s.url)||
   (p.id==='a2j-transformer-plus'&&/^https:\/\/(?:changlongjianggit\.github\.io\/A2J-Transformer-Plus\/(?:static\/images\/method_figure[23]\.png)?|github\.com\/ChanglongJiangGit\/A2J-Transformer-Plus\/blob\/main\/main\/model\.py#L188-L272)$/.test(s.url))
  ),`${p.id}: versioned section or primary PDF page anchors`);
