@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-11-21",
-  "total": 382,
+  "updated_at": "2026-11-22",
+  "total": 383,
   "counts": {
     "complete": 66,
-    "figure_pending": 316,
+    "figure_pending": 317,
     "pending": 0
   },
   "completion_standard": "Source-checked module-level pipeline or survey classification, separate use contexts, and a figure guide. Embed paper originals when reuse permission is clear, otherwise link to the original figure or method section. Summaries alone do not count.",
@@ -4209,6 +4209,17 @@
       "figure_status": "original_link_only",
       "reviewed_at": "2026-11-20",
       "figure_note": "只链接至原始论文版本，不转载原图。"
+    },
+    {
+      "id": "instanthmr",
+      "category": "Human",
+      "title": "InstantHMR: Real-Time Human Mesh Recovery on Your Phone",
+      "status": "figure_pending",
+      "paper_url": "https://arxiv.org/abs/2611.09195v2",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-20",
+      "figure_note": "只链接原文，不复制图像。"
     }
   ]
 }

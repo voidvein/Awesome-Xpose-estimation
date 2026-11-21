@@ -9510,13 +9510,14 @@
       "method": "在预训练全身估计器上加入可选深度和环境几何模块，结合 RGB 先验、测量深度与地面接触约束细化距离和身体预测。",
       "inputs_outputs": "支持 RGB、RGB 加地面几何、RGB-D 三种输入模式，输出相机坐标系下具有实际尺度的三维关节位置。",
       "contribution": "将评价重点从相对姿态推进到相机坐标中的绝对定位，并用共享参数兼容不同传感条件；当前来源标注为 ICRA 投稿而非已录用。",
-      "limitations": "RGB、地面几何与 RGB-D 是不同输入模式；实际尺度定位需说明所用深度和地面约束，不能混合报告。",
+      "limitations": "RGB、地面几何与 RGB-D 是不同输入模式；实际尺度定位需说明所用深度和地面约束，不能混合报告。 评测例子：表 II 的 HuMMan 测试在配对样本、相同真值人物框和相机内参下比较共享权重的 RGB 与 RGB-D 模式。加入数据集配准深度后，不作对齐的相机坐标 MPJPE 从 81.2 降至 39.7 mm；Procrustes 对齐后的 PA-MPJPE 仅从 31.4 降至 30.4 mm。这表明在该协议下，深度主要改善度量尺度和相机相对定位，而非大幅改善对齐后的关节姿态。表 I 的 3DPW、EMDB 和 RICH 深度来自数据集人体网格渲染；跨数据集的 RGB-D 汇总含该设置，不能直接当作真实传感器深度的效果。",
       "sources": [
         "https://arxiv.org/abs/2611.08954",
         "https://arxiv.org/html/2611.08954v1",
-        "https://arxiv.org/html/2611.08954v1#S2.F2"
+        "https://arxiv.org/html/2611.08954v1#S2.F2",
+        "https://arxiv.org/html/2611.08954v1#S4.SS2"
       ],
-      "evidence_scope": "已核对摘要及 2611.08954v1 的方法相关正文（S3）、图号与流程；未完成全文逐节精读或独立复现。",
+      "evidence_scope": "已核对摘要及 2611.08954v1 的方法相关正文（S3）、图号与流程；未完成全文逐节精读或独立复现。另核对 §IV-A/B 的评测协议和表 I、II。",
       "evidence_level": "primary_abstract_and_targeted_fulltext",
       "limitations_kind": "editorial_scope",
       "scope_reviewed_at": "2026-11-18"
@@ -39751,10 +39752,11 @@
         "https://arxiv.org/html/2602.15989v1#S3",
         "https://arxiv.org/html/2602.15989v1#S4",
         "https://arxiv.org/html/2602.15989v1#S8",
-        "https://github.com/facebookresearch/sam-3d-body"
+        "https://github.com/facebookresearch/sam-3d-body",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC13413046/"
       ],
       "evidence_level": "primary_abstract_and_targeted_fulltext",
-      "evidence_scope": "定向核对论文记录、方法、图示及指定实验；未独立运行模型。",
+      "evidence_scope": "定向核对论文记录、方法、图示及指定实验；未独立运行模型。 外部评测：Fieraru（2026）在统一的 Fit3D 公共单目测试采样帧复跑 19 种方法。SAM 3D Body 使用数据集提供的相机内参，在 Human3.6M 17 关节配置上为 70.65 mm MPJPE、37.89 mm PA-MPJPE；表 3 标为未使用 Fit3D 训练。此为独立测量而非 Meta 自报，研究未评估 Fast 变体，也不同于以 2D 关键点为输入的 Fit3D lifting 协议。",
       "verification_note": "CVF CVPR 2026 主会论文，仓库提供官方推理、示例与权重入口；未运行实现。",
       "verified_at": "2026-11-20"
     },
@@ -39913,6 +39915,108 @@
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
       "version": "2026 第七版（目录原文转载）",
       "venue": "ECCV"
+    }
+  },
+  {
+    "id": "instanthmr",
+    "title": "InstantHMR: Real-Time Human Mesh Recovery on Your Phone",
+    "authors": [
+      "Mohamed Adjel",
+      "Kahina Chalabi",
+      "Vincent Bonnet"
+    ],
+    "year": 2026,
+    "category": "Human",
+    "dimensions": [
+      "2D",
+      "3D"
+    ],
+    "venue": "arXiv",
+    "status": "Preprint",
+    "url": "https://arxiv.org/abs/2611.09195v2",
+    "version": "2611.09195v2",
+    "summary": "面向手机 NPU 的单目人体网格恢复，在每人裁剪上预测二维关键点和 MHR 参数，并可用重投影拟合改善一致性。",
+    "tags": [
+      "mobile",
+      "mesh recovery",
+      "MHR",
+      "NPU"
+    ],
+    "code": "https://github.com/Naturalpad-studio/InstantHMR",
+    "code_provenance": {
+      "url": "https://github.com/Naturalpad-studio/InstantHMR",
+      "verified_at": "2026-11-20",
+      "basis": "核对作者、固定原文版本、图 2、表 2 与附录表 16，以及仓库和模型文件；没有下载权重或独立运行模型。"
+    },
+    "analysis": {
+      "problem": "在手机上同时恢复二维关键点、相机坐标三维关节和人体网格，并区分模型速度与实际应用帧耗时。",
+      "method": "人物裁剪经 HGNetV2 编码为 9×9 token。轻量解码器用人体查询估计 MHR 和相机位移，用关键点查询估计图像坐标；可选的置信度加权 Levenberg–Marquardt 更新用预测的 2D 点约束网格重投影。",
+      "inputs_outputs": "单目 RGB 和人体框；输出二维/三维关节、相机平移和 MHR 网格。",
+      "contribution": "默认 Medium 的 5.49 ms 是 Galaxy S23 NPU 上每人仅模型耗时，单裁剪拟合版本 6.40 ms。不同的单人 Android 回放固定 595 顶点输出、每秒检测一次，普通跟踪帧 12.73 ms，含检测的帧 31.4 ms；不要和 FAB 的桌面检测至拟合吞吐直接比较。",
+      "limitations": "3DPW 的 40.0 mm PA-MPJPE 使用真值框、已校准焦距、14 个关节且每十帧抽样，不是上述 Android 端到端测试的精度。普通权重因源图范围为非商业；medium-commercial 仍受 SAM License 条件。代码主仓 Apache-2.0，但派生训练文件例外。",
+      "sources": [
+        "https://arxiv.org/abs/2611.09195v2",
+        "https://arxiv.org/pdf/2611.09195v2",
+        "https://github.com/Naturalpad-studio/InstantHMR",
+        "https://huggingface.co/momolesang/InstantHMR/tree/main",
+        "https://huggingface.co/datasets/facebook/sam-3d-body-dataset"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "核对作者、固定原文版本、图 2、表 2 与附录表 16，以及仓库和模型文件；没有下载权重或独立运行模型。",
+      "verification_note": "作者来自 NaturalPad / LAAS-CNRS，不是 Meta 的 SAM 3D Body 团队。核对作者、固定原文版本、图 2、表 2 与附录表 16，以及仓库和模型文件；没有下载权重或独立运行模型。",
+      "verified_at": "2026-11-20"
+    },
+    "pipeline": {
+      "kind": "method",
+      "overview": "人物裁剪经 HGNetV2 编码为 9×9 token。轻量解码器用人体查询估计 MHR 和相机位移，用关键点查询估计图像坐标；可选的置信度加权 Levenberg–Marquardt 更新用预测的 2D 点约束网格重投影。",
+      "steps": [
+        {
+          "title": "人物裁剪编码",
+          "description": "将人物框裁剪到 288 像素，HGNetV2 压缩为 9×9 图像 token。"
+        },
+        {
+          "title": "分开解码",
+          "description": "人体与关键点查询分别给出参数化人体、相机平移和图像关键点。"
+        },
+        {
+          "title": "可选重投影拟合",
+          "description": "以自预测的关键点与置信度作为目标做运动学更新。"
+        },
+        {
+          "title": "实际部署",
+          "description": "跟踪帧复用人体框；检测帧另计检测和应用开销。"
+        }
+      ],
+      "training": "完整训练配方使用 Meta SAM 3D Body 注释衍生约 420 万个人体裁剪，不等于 Meta 的全训练图像数；商业型另用受限子集。",
+      "inference": "默认 Medium 的 5.49 ms 是 Galaxy S23 NPU 上每人仅模型耗时，单裁剪拟合版本 6.40 ms。不同的单人 Android 回放固定 595 顶点输出、每秒检测一次，普通跟踪帧 12.73 ms，含检测的帧 31.4 ms；不要和 FAB 的桌面检测至拟合吞吐直接比较。",
+      "figure_reading": "原文 PDF 第 3 页图 2：按人体框裁剪后经过共享图像编码器；留意人体参数分支与二维关键点分支如何通过可选拟合衔接。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "图 2 · 模型结构",
+          "url": "https://arxiv.org/pdf/2611.09195v2#page=3"
+        },
+        {
+          "label": "训练裁剪与拟合",
+          "url": "https://arxiv.org/pdf/2611.09195v2#page=4"
+        },
+        {
+          "label": "表 2 · 精度与模型耗时",
+          "url": "https://arxiv.org/pdf/2611.09195v2#page=5"
+        },
+        {
+          "label": "表 16 · Android 应用",
+          "url": "https://arxiv.org/pdf/2611.09195v2#page=21"
+        }
+      ],
+      "reviewed_at": "2026-11-20"
+    },
+    "figure": {
+      "source": "https://arxiv.org/pdf/2611.09195v2#page=3",
+      "figure_number": "Figure 2",
+      "version": "2611.09195v2",
+      "caption": "原文 PDF 第 3 页图 2：按人体框裁剪后经过共享图像编码器；留意人体参数分支与二维关键点分支如何通过可选拟合衔接。",
+      "note": "只链接原文，不复制图像。"
     }
   }
 ]
