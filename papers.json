@@ -40018,5 +40018,309 @@
       "caption": "原文 PDF 第 3 页图 2：按人体框裁剪后经过共享图像编码器；留意人体参数分支与二维关键点分支如何通过可选拟合衔接。",
       "note": "只链接原文，不复制图像。"
     }
+  },
+  {
+    "id": "hand4whole-plus-plus",
+    "title": "Enhancing Hands in 3D Whole-Body Pose Estimation with Conditional Hands Modulator",
+    "authors": [
+      "Gyeongsik Moon"
+    ],
+    "year": 2026,
+    "category": "Human",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "CVPR",
+    "status": "Published",
+    "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Moon_Enhancing_Hands_in_3D_Whole-Body_Pose_Estimation_with_Conditional_Hands_CVPR_2026_paper.html",
+    "version": "CVPR 2026; arXiv:2603.14726v1",
+    "summary": "Hand4Whole++ 用手部模型的特征修正全身模型的腕部姿态，再将精细手指关节与手形接回三维全身网格。",
+    "tags": [
+      "Hand4Whole++",
+      "CHAM",
+      "whole-body",
+      "hand pose",
+      "wrist orientation",
+      "SMPL-X",
+      "MANO",
+      "WiLoR",
+      "mesh recovery"
+    ],
+    "code": "https://github.com/mks0601/Hand4Whole-plus-plus_RELEASE",
+    "code_provenance": {
+      "url": "https://github.com/mks0601/Hand4Whole-plus-plus_RELEASE",
+      "verified_at": "2026-11-22",
+      "basis": "作者项目页指向公开仓库，README 提供演示、训练、评测流程和独立的预训练权重入口；另外需 WiLoR、DWPose 和人体模型资产。本次未下载权重或运行模型。"
+    },
+    "analysis": {
+      "problem": "全身数据缺乏细致手部监督，而手部专用模型不见上肢运动链；直接复制其腕旋转可能将手以不合理的姿势接到身体上。",
+      "method": "冻结 WiLoR 与 SMPLer-X-L32。CHAM 用左右手特征分别处理、映射回全身图像坐标，并逐层调制全身 ViT 特征，让全身分支保留对肩、肘、腕的联合建模。指关节和手形由 WiLoR 估计，在腕部及四个掌指关节约束下刚性对齐后替换 SMPL-X 网格上的手部顶点。",
+      "inputs_outputs": "单张 RGB 图像及检测得到的手部区域；输出含精细手指和手形的三维全身网格。属于已观测图像的重建，不是未来动作预测。",
+      "contribution": "AGORA 表 2 各组均关闭手形迁移；参考组的腕相对手部 MPVPE 为 52.31 mm，直接复制腕旋转为 100.59 mm，使用 CHAM 为 50.56 mm。该顶点误差只对齐腕的平移，不消除旋转误差，也不是关节 MPJPE。",
+      "limitations": "手部专用数据未直接监督非手关节，手准确时躯干仍可能偏离图像。补充材料在单张 RTX A6000 上报告约 0.10 秒/图，其中手部模型约 0.05 秒、CHAM 约 0.01 秒，不能当作其他硬件上的端到端帧率。",
+      "sources": [
+        "https://openaccess.thecvf.com/content/CVPR2026/html/Moon_Enhancing_Hands_in_3D_Whole-Body_Pose_Estimation_with_Conditional_Hands_CVPR_2026_paper.html",
+        "https://arxiv.org/html/2603.14726v1",
+        "https://mks0601.github.io/Hand4Whole-plus-plus/",
+        "https://github.com/mks0601/Hand4Whole-plus-plus_RELEASE#readme"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "核对 CVPR 2026 主会正式论文、arXiv v1 图 2–4、§4.1–4.2 表 2、局限与补充材料表 S3，以及作者源码与权重说明；未下载权重或独立复现。",
+      "verification_note": "方法名 Hand4Whole++，并非早期 Hand4Whole（后者的面部回归分支在本作中作为组件使用）。",
+      "verified_at": "2026-11-22"
+    },
+    "pipeline": {
+      "kind": "method",
+      "overview": "分开处理全身运动链与手部细节：CHAM 把手部特征注入全身分支，由全身分支定腕位姿；WiLoR 只负责手指与手形，刚性对齐后并回全身网格。",
+      "steps": [
+        {
+          "title": "区域检测和手部编码",
+          "description": "以检测框裁剪双手，输入冻结的 WiLoR，提取手部特征并预测 MANO 参数。"
+        },
+        {
+          "title": "条件调制全身特征",
+          "description": "左右手分支建模双手关联；逆仿射映射回全身图像坐标，合并后逐层注入 SMPLer-X-L32 的空间 token。"
+        },
+        {
+          "title": "由全身分支估计腕部",
+          "description": "用调制后的身体特征预测全身运动链和腕位姿，不照搬手部模型独立预测的腕旋转。"
+        },
+        {
+          "title": "接合指关节与网格",
+          "description": "用腕和食指至小指的四个掌指关节将 MANO 手网格对齐到 SMPL-X，再替换手部顶点并平滑接缝。"
+        }
+      ],
+      "training": "冻结两个预训练估计器，仅优化 CHAM。全身数据监督全身旋转与形状，手部专用数据监督腕方向及关键点，并对缺乏标注的身体根方向加直立约束。",
+      "inference": "单图前向，不需要逐样本迭代优化；手部定位和两套预训练估计器仍会增加耗时。作者提供代码与权重入口，须另外准备人体模型资产。",
+      "figure_reading": "图 2 从输入图向右读：手分支给 CHAM 提供特征，也给末端模块提供手指与形状。区分送入全身分支的特征路径与直接对齐到身体的网格路径；图 3 和图 4 分别展开这两条路径。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "图 2 · 整体架构",
+          "url": "https://arxiv.org/html/2603.14726v1#S2.F2"
+        },
+        {
+          "label": "图 3 · CHAM 模块",
+          "url": "https://arxiv.org/html/2603.14726v1#S3.F3"
+        },
+        {
+          "label": "表 2 · AGORA 腕部消融",
+          "url": "https://arxiv.org/html/2603.14726v1#S4.T2"
+        }
+      ],
+      "reviewed_at": "2026-11-22"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2603.14726v1#S2.F2",
+      "figure_number": "Figure 2",
+      "version": "arXiv:2603.14726v1",
+      "caption": "全身模型给出腕位姿，手部模型提供手指与形状；两条路径在末端对齐成全身网格。",
+      "note": "仅链接至 arXiv v1 原文图 2；预印本标注 CC BY-NC-SA 4.0，不将其中的实拍输入示例与出版商版本视作同一授权。"
+    }
+  },
+  {
+    "id": "s2hand",
+    "title": "S2HAND: Accuracy-Preservation Trade-Offs for Hand Specialization in Whole-Body Pose Models",
+    "authors": [
+      "Singyu Muk",
+      "Xuanren Song",
+      "Kalin Stefanov"
+    ],
+    "year": 2026,
+    "category": "Hand",
+    "dimensions": [
+      "2D"
+    ],
+    "venue": "arXiv",
+    "status": "Preprint",
+    "url": "https://arxiv.org/abs/2611.10416v1",
+    "version": "2611.10416v1",
+    "summary": "在 Sapiens2 的 308 点全身二维接口内加强手指定位：MT 只替换 40 张手指热图，Pose 进一步微调主干的三个块，以更强的手部表现交换严格的输出保留。",
+    "tags": [
+      "whole-body pose",
+      "Sapiens2",
+      "heatmaps",
+      "parameter-efficient adaptation",
+      "Pose2Mesh"
+    ],
+    "code": "https://github.com/ronggong000/S2HAND",
+    "code_provenance": {
+      "url": "https://github.com/ronggong000/S2HAND",
+      "verified_at": "2026-11-22",
+      "basis": "原文链接作者仓库；核对 v0.1.0-rc3 研究候选版、源代码目录和 Hugging Face 增量权重发布页。作者未镜像 Meta 基座，加载依赖固定版本的官方 Sapiens2。按仓库的 Sapiens2 License 核查使用条件；未下载权重或运行代码。"
+    },
+    "analysis": {
+      "problem": "统一的全身二维模型容易漏掉小、模糊或遭遮挡的手；外接手部专家又要处理检测、坐标映射及手腕与前臂衔接。本文比较在统一接口内强化手指时，哪些原模型输出可严格保留。",
+      "method": "从 Sapiens2-5B 的稠密特征分出轻量手指热图支路。MT 冻结共享主干和原输出支路，按通道只替换不含手腕的 40 张热图（训练 0.867M）；Pose 保留相同通道接口，但再更新训练集 Fisher 探针选出的第 38–40 块（含解码器共 267.13M），因此非手指输出不再保证逐值一致。",
+      "inputs_outputs": "输入是单张 RGB 人体框裁剪，输出按原 Sapiens2 顺序的 308 个二维关键点。三维重建实验把 21 个二维手点交给冻结的 Pose2Mesh，S2HAND 自身不输出三维关节或网格。",
+      "contribution": "原文表 5 中，相对公开基座，Pose 的 COCO 手部 AP 由 51.92 增至 64.81，身体与脚 AP 由 79.09 增至 79.28。门槛不同的面部指标有升有降；512 张 COCO 图的 99.60% 前景分割一致率是对照原模型，不是对真值的精度。表 6 的冻结迁移在 FreiHAND 把 PA-MPJPE 从 11.746 降至 8.424 mm；DexYCB 上仍不及 Hand5 驱动。",
+      "limitations": "MT 的严格保留针对相同裁剪且关闭 TailGuard 的原生路线；触发二次裁剪时会换掉整只手的 21 个二维点，包含手腕。5B 主干仍昂贵；少量新增参数不等于轻量推理。Native Pipeline 计漏检，与共享真值或检测框的裁剪协议不可混用；H2O 原生评测中专门训练的 EffHandEgoNet 仍更高。冻结三维迁移仅比较共同有效样本，不反映检测覆盖，也不是端到端三维精度。",
+      "sources": [
+        "https://arxiv.org/abs/2611.10416v1",
+        "https://arxiv.org/html/2611.10416v1#S3.F1",
+        "https://arxiv.org/html/2611.10416v1#S5.T5",
+        "https://arxiv.org/html/2611.10416v1#S5.SS5",
+        "https://github.com/ronggong000/S2HAND",
+        "https://huggingface.co/mage0001/S2HAND"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "核对 arXiv v1 摘要、图 1、方法与实验协议（§III–IV）、表 1/5/6 及 TailGuard 消融（§V-F），并确认作者代码、候选发行和模型卡；未独立复现。",
+      "verification_note": "2026-11-07 首发为 arXiv 预印本，未核实正式发表及 CCF。H2SMV-FPV 在作者实验中为合成测试集，不等同于实拍手部数据。",
+      "verified_at": "2026-11-22"
+    },
+    "pipeline": {
+      "kind": "method",
+      "overview": "人物裁剪 → Sapiens2 主干与原上采样 → 原支路和手指适配支路按通道合并 → UDP/DARK 二维解码；MT 可选对低置信度手二次裁剪。",
+      "steps": [
+        {
+          "title": "提取全身共享特征",
+          "description": "人物框中的 RGB 经块嵌入、56 块 Transformer 与原模型上采样，得到供姿态头解码的稠密特征。"
+        },
+        {
+          "title": "MT 只路由手指输出",
+          "description": "复制轻量解码器和投影层，适配支路与原支路各产生 308 张热图，合并时只取适配的 40 个非手腕手指通道；另外 268 个通道仍走原支路。"
+        },
+        {
+          "title": "Pose 更新共享主干的局部",
+          "description": "用相同训练批次的手部损失梯度平方范数选择第 38–40 块，与手指解码器一起微调。原支路权重不变，但输入特征改变；同一关键点顺序不代表相同预测值。"
+        },
+        {
+          "title": "解码并可选地挽救低置信度手",
+          "description": "原生路径用 UDP 与 DARK 解码。若在 MT 开启 TailGuard 且单侧低置信度手有 WiLoR-YOLO 检测框，放大框后以相同权重重新推理，回填该手 21 点。"
+        }
+      ],
+      "training": "以 NewDays TRAIN 和 EPICK TRAIN 的均衡样本适配；共用热图 MSE、训练期软解码的坐标损失及二维骨向量损失，手腕不回传梯度。Pose 的块选择只用训练批次，不使用验证或测试反馈；TailGuard 阈值单独在 EPICK VAL 选定。",
+      "inference": "默认一次人物裁剪推理，不需要额外手部专家。TailGuard 是可选二次裁剪，不是另一个关键点模型；作者报告 NewDays 严重错误率从 13.45% 降到 10.43%，但单独的 A100 审计也显示延迟上升。对照冻结 Pose2Mesh 的三维测试只替换输入二维点。",
+      "figure_reading": "看图 1 时先沿 40 张手指热图与其余 268 张原热图的两条路线走，再看 Pose 解冻共享主干后为何原头也会变化；右侧 TailGuard 是另一次推理，不属于默认路线。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "图 1 · 系统结构",
+          "url": "https://arxiv.org/html/2611.10416v1#S3.F1"
+        },
+        {
+          "label": "表 1 · 原生流程评测",
+          "url": "https://arxiv.org/html/2611.10416v1#S3.T1"
+        },
+        {
+          "label": "表 5 · 全身与多任务保留",
+          "url": "https://arxiv.org/html/2611.10416v1#S5.T5"
+        },
+        {
+          "label": "表 6 · 冻结 Pose2Mesh 迁移",
+          "url": "https://arxiv.org/html/2611.10416v1#S5.T6"
+        },
+        {
+          "label": "§V-F · 耗时与可选二次裁剪",
+          "url": "https://arxiv.org/html/2611.10416v1#S5.SS6"
+        }
+      ],
+      "reviewed_at": "2026-11-22"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2611.10416v1#S3.F1",
+      "figure_number": "Figure 1",
+      "version": "2611.10416v1",
+      "caption": "S2HAND 系统结构：手指热图路由、Pose 解冻的共享块与可选 TailGuard。",
+      "note": "arXiv 版本列出永久非独占发布许可；未确认第三方转载权，仅链接原图。"
+    }
+  },
+  {
+    "id": "dreamhmr",
+    "title": "DreamHMR: From Video Generation to Human Motion Modeling via Structural Focusing",
+    "authors": [
+      "Zhengjie Xu",
+      "Ruihao Gong",
+      "Xianglong Liu"
+    ],
+    "year": 2026,
+    "category": "Human",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "arXiv",
+    "status": "Preprint",
+    "url": "https://arxiv.org/abs/2610.20124v1",
+    "version": "2610.20124v1",
+    "summary": "将视频生成骨干转用于已观测视频的三维人体与双手网格重建；利用完整人体渲染监督和关节证据门控减轻遮挡干扰。",
+    "tags": [
+      "video mesh recovery",
+      "SMPL-X",
+      "occlusion",
+      "hand articulation",
+      "DiT",
+      "flow matching"
+    ],
+    "analysis": {
+      "problem": "已拍到的帧可能只露出部分人体或手指。普通视频生成特征能关联前后帧，但缺乏明确的三维人体约束；在遮挡物附近直接采样也可能把背景当作目标人的证据。",
+      "method": "先用完整 SMPL-X 渲染把预训练视频 DiT 调整到人体表面对应与姿态几何；再用关节查询从各帧局部取样，由可见证据分数加权更新，最后汇入骨盆、身体、左手和右手四类部位状态。",
+      "inputs_outputs": "输入已观测的单目 RGB 序列、二值观测区域掩码和固定检测跟踪器给出的人体框轨迹；输出逐帧 SMPL-X 根部朝向、身体与双手关节旋转、相机坐标系下的骨盆位置和目标是否出现，以及窗口共享体形。不是从前缀预测未来帧。",
+      "contribution": "原文表 2 在作者构造的 BEDLAM/EgoBody 独立遮挡留出集上，DreamHMR/Wan-5B 的骨盆相对身体 MPJPE 为 107.1 mm、腕相对手部 MPJPE 为 55.1 mm；同表 Hand4Whole++ 为 118.3 / 63.1 mm。两者使用相同观测 RGB 和目标轨迹，视频方法读取整段窗口，图像方法逐帧用框裁剪，不额外平滑。这是 DreamHMR 论文内的复测，不是 Hand4Whole++ 原文的 AGORA 网格顶点 MPVPE。",
+      "limitations": "表 2 总数按 BEDLAM/EgoBody 75%/25% 和静态/动态遮挡各半加权，不是官方数据集排行榜。模型依赖目标人物跟踪和观测区域；跟踪失败或双手长时不可见时，结果更多依赖上下文。邻帧辅助当前帧重建不等于因果实时推理。正文提到补充材料代码，摘要承诺公开；未核实可公开获取的作者实现或权重。",
+      "sources": [
+        "https://arxiv.org/abs/2610.20124v1",
+        "https://arxiv.org/html/2610.20124v1#S3",
+        "https://arxiv.org/html/2610.20124v1#S4.T2",
+        "https://arxiv.org/html/2610.20124v1#A2",
+        "https://iclr.cc/Conferences/2027/Dates",
+        "https://openaccess.thecvf.com/content/CVPR2026/html/Moon_Enhancing_Hands_in_3D_Whole-Body_Pose_Estimation_with_Conditional_Hands_CVPR_2026_paper.html"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "核对 arXiv v1 摘要、图 1、§3、表 2、表 4、附录 B、PDF 页眉、许可入口、ICLR 官方日程和基线的 CVF 出版记录；未独立复现。",
+      "verification_note": "arXiv 2026-10-14 v1。PDF 页眉称 ICLR 2027 已发表，但会议官网列 2026-12-16 才公布最终决定，尚无独立核实的录用记录。故只按 arXiv 预印本收录，不标 CCF。论文 CC BY 4.0；图 1 内的输入画面及 RGB 合成缩略图权属未单独核实，保留原文链接；论文许可不覆盖未发布代码或权重。",
+      "verified_at": "2026-11-22"
+    },
+    "pipeline": {
+      "kind": "method",
+      "overview": "骨干先学会表达完整三维人体在画面上的投影，再让关节附近可靠的信息修正各人体部位的上下文预测。",
+      "steps": [
+        {
+          "title": "完整渲染监督",
+          "description": "用模板坐标为 SMPL-X 顶点固定上色，按姿态法线做明暗渲染；即使部分超出观测掩码，也保留目标画布中的完整人体投影。"
+        },
+        {
+          "title": "视频特征转移",
+          "description": "冻结 VAE 与文字编码器，用观测 RGB、掩码、人物框和固定文字上下文作条件，以渲染潜变量上的流匹配微调视频 DiT。"
+        },
+        {
+          "title": "局部证据加权",
+          "description": "四类部位查询提供整体状态，52 个关节查询定位局部特征；用训练得到的证据分数抑制不可靠修正，再将修正汇入所属部位状态。"
+        },
+        {
+          "title": "回归人体与双手",
+          "description": "回归姿态、共享体形、骨盆位置和人物存在分数，再把潜在时序端点恢复到全部观测帧。"
+        }
+      ],
+      "training": "先训练渲染视频潜变量上的流匹配，再联合训练 DiT 与结构化解码器。证据标签要求关节投影同时落在观测区域和该人物的可见实例掩码内；输出分数不是经校准的后验不确定性。",
+      "inference": "适配后的 DiT 只在零噪声条件下前向一次，之后直接由解码器恢复已观测帧；无需迭代生成视频或输入真值 SMPL-X 渲染。长视频采用重叠的 81 帧窗口和最近窗口中心输出。",
+      "figure_reading": "图 1 上部右侧虚线区域只用于训练，从 SMPL-X 生成完整渲染监督；左侧是观测视频编码。下部从部位/关节查询出发，经过局部采样及证据门控，再汇入骨盆、身体和双手状态。不要把训练用渲染或流匹配误读为部署时先生成视频。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "图 1 · 整体结构",
+          "url": "https://arxiv.org/html/2610.20124v1#S3.F1"
+        },
+        {
+          "label": "图 2 · 完整渲染构造",
+          "url": "https://arxiv.org/html/2610.20124v1#S3.F2"
+        },
+        {
+          "label": "表 2 · 遮挡对照",
+          "url": "https://arxiv.org/html/2610.20124v1#S4.T2"
+        },
+        {
+          "label": "附录 B · 掩码、划分与对齐协议",
+          "url": "https://arxiv.org/html/2610.20124v1#A2"
+        }
+      ],
+      "reviewed_at": "2026-11-22"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2610.20124v1#S3.F1",
+      "figure_number": "Figure 1",
+      "version": "2610.20124v1",
+      "caption": "训练时用完整人体渲染适配视频骨干，随后用局部关节证据修正全身与双手状态。",
+      "note": "arXiv 论文标注 CC BY 4.0；图 1 含画面与合成缩略图，素材来源未逐一确认，仅链接原文。"
+    }
   }
 ]

@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-11-22",
-  "total": 383,
+  "updated_at": "2026-11-23",
+  "total": 386,
   "counts": {
     "complete": 66,
-    "figure_pending": 317,
+    "figure_pending": 320,
     "pending": 0
   },
   "completion_standard": "Source-checked module-level pipeline or survey classification, separate use contexts, and a figure guide. Embed paper originals when reuse permission is clear, otherwise link to the original figure or method section. Summaries alone do not count.",
@@ -4220,6 +4220,39 @@
       "figure_status": "original_link_only",
       "reviewed_at": "2026-11-20",
       "figure_note": "只链接原文，不复制图像。"
+    },
+    {
+      "id": "hand4whole-plus-plus",
+      "category": "Human",
+      "title": "Enhancing Hands in 3D Whole-Body Pose Estimation with Conditional Hands Modulator",
+      "status": "figure_pending",
+      "paper_url": "https://openaccess.thecvf.com/content/CVPR2026/html/Moon_Enhancing_Hands_in_3D_Whole-Body_Pose_Estimation_with_Conditional_Hands_CVPR_2026_paper.html",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-22",
+      "figure_note": "仅链接至 arXiv v1 原文图 2；预印本标注 CC BY-NC-SA 4.0，不将其中的实拍输入示例与出版商版本视作同一授权。"
+    },
+    {
+      "id": "s2hand",
+      "category": "Hand",
+      "title": "S2HAND: Accuracy-Preservation Trade-Offs for Hand Specialization in Whole-Body Pose Models",
+      "status": "figure_pending",
+      "paper_url": "https://arxiv.org/abs/2611.10416v1",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-22",
+      "figure_note": "arXiv 版本列出永久非独占发布许可；未确认第三方转载权，仅链接原图。"
+    },
+    {
+      "id": "dreamhmr",
+      "category": "Human",
+      "title": "DreamHMR: From Video Generation to Human Motion Modeling via Structural Focusing",
+      "status": "figure_pending",
+      "paper_url": "https://arxiv.org/abs/2610.20124v1",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-22",
+      "figure_note": "arXiv 论文标注 CC BY 4.0；图 1 含画面与合成缩略图，素材来源未逐一确认，仅链接原文。"
     }
   ]
 }

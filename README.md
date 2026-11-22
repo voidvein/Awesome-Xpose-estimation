@@ -4,7 +4,12 @@ A curated, non-exhaustive index of 2D and 3D head, hand and human pose estimatio
 
 [Browse the site](https://voidvein.github.io/Awesome-Xpose-estimation/) · [Sources and curation notes](SOURCES.md) · [Detail-page progress](CURATION.md)
 
-## 最近更新 · 2026-11-22（UTC+8）
+## 最近更新 · 2026-11-23（UTC+8）
+
+- **新增 3 篇：** [Hand4Whole++](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand4whole-plus-plus) · [S2HAND](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=s2hand) · [DreamHMR](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=dreamhmr)。从手腕与全身的一致性、全身模型的二维手部专精，到遮挡视频中的三维人体重建。当前共 386 篇。
+- **研究资源：** [SGIP 人体动作预测阅读卡](https://voidvein.github.io/Awesome-Xpose-estimation/#sgip-reading)，区分训练期的文字意图和推理所需输入，不计入姿态估计论文总数。
+
+### 2026-11-22
 
 - **新增 1 篇：** [InstantHMR](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=instanthmr)，区分手机模型推理与包含检测的应用测量。当前共 383 篇。
 - **补充 2 篇已有详情：** [SAM 3D Body](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=sam-3d-body) 的独立 Fit3D 评测；[MetricPose](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=metricpose) 的 HuMMan 深度对照。
@@ -140,6 +145,7 @@ Serve the repository root with `python -m http.server 8000`.
 
 ### Hand
 
+- [code](https://github.com/ronggong000/S2HAND) **[S2HAND: Accuracy-Preservation Trade-Offs for Hand Specialization in Whole-Body Pose Models](https://arxiv.org/abs/2611.10416v1)** — arXiv 2026 · Preprint · 2D. 在 Sapiens2 的 308 点全身二维接口内加强手指定位：MT 只替换 40 张手指热图，Pose 进一步微调主干的三个块，以更强的手部表现交换严格的输出保留。
 - [code](https://github.com/noahcao/FAH) **[Fast and Accurate Hand Estimation in Pixels, Interaction and World Space](https://arxiv.org/abs/2611.07711)** — arXiv 2026 · Preprint · 2D / 3D. 用关节和表面点拟合 MANO 或 MHR-Hand，可选部位、接触、因果视频细化和世界定位。
 - **[WinDEX: Metric 3D Hand Motion Reconstruction in the Wild for Dexterous Teleoperation and Policy Learning](https://arxiv.org/abs/2611.21143)** — arXiv 2026 · Preprint · 3D. 以标定双目、惯性里程计和时序建模恢复米制手部运动，区分离线重建与因果遥操作。
 - **[MetricHand: Geometry-Aware Flow Matching for 4D Hand Reconstruction in Metric World Space](https://arxiv.org/abs/2611.21060)** — arXiv 2026 · Preprint · 3D. 把手物交互区域的深度几何持续注入流匹配，以改善世界坐标下手部位置和时序一致性。
@@ -279,6 +285,8 @@ Serve the repository root with `python -m http.server 8000`.
 
 ### Human
 
+- [code](https://github.com/mks0601/Hand4Whole-plus-plus_RELEASE) **[Enhancing Hands in 3D Whole-Body Pose Estimation with Conditional Hands Modulator](https://openaccess.thecvf.com/content/CVPR2026/html/Moon_Enhancing_Hands_in_3D_Whole-Body_Pose_Estimation_with_Conditional_Hands_CVPR_2026_paper.html)** — CVPR 2026 · Published · 3D. Hand4Whole++ 用手部模型的特征修正全身模型的腕部姿态，再将精细手指关节与手形接回三维全身网格。
+- **[DreamHMR: From Video Generation to Human Motion Modeling via Structural Focusing](https://arxiv.org/abs/2610.20124v1)** — arXiv 2026 · Preprint · 3D. 将视频生成骨干转用于已观测视频的三维人体与双手网格重建；利用完整人体渲染监督和关节证据门控减轻遮挡干扰。
 - [code](https://github.com/Naturalpad-studio/InstantHMR) **[InstantHMR: Real-Time Human Mesh Recovery on Your Phone](https://arxiv.org/abs/2611.09195v2)** — arXiv 2026 · Preprint · 2D / 3D. 面向手机 NPU 的单目人体网格恢复，在每人裁剪上预测二维关键点和 MHR 参数，并可用重投影拟合改善一致性。
 - [code](https://github.com/noahcao/FAB) **[Fast and Accurate Body Estimation in Pixels, World Space and Scenes](https://arxiv.org/abs/2611.25801)** — arXiv 2026 · Preprint · 2D / 3D. 先估计二维/三维关节与稠密表面点，再拟合 SMPL；视频路径另处理世界坐标和人体—场景接触。
 - [code](https://github.com/facebookresearch/sam-3d-body) **[SAM 3D Body: Robust Full-Body Human Mesh Recovery](https://openaccess.thecvf.com/content/CVPR2026/html/Yang_SAM_3D_Body_Robust_Full-Body_Human_Mesh_Recovery_CVPR_2026_paper.html)** — CVPR 2026 · Published · 3D. 从一张 RGB 恢复身体、足与双手的全身 MHR 网格，并可用掩膜与二维关键点提示。
