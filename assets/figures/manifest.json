@@ -2611,5 +2611,28 @@
     "width": 3879,
     "height": 1712,
     "sha256": "ecd459f4c08013271f90a4c7525da201ff0f2bf2cb63ae67d99428edd25c83ce"
+  },
+  {
+    "paper_id": "oa-skeleton-st",
+    "status": "verified",
+    "src": "assets/figures/oa-skeleton-st-fig4.png",
+    "alt": "OA-Skeleton ST：可见关节直通，线性插值初值经三层时空注意力与双残差头补全缺失关节；运动学锚点仅用于变体。",
+    "caption": "图 4 · 时空 Transformer 仅修正缺失关节；虚线锚点不是论文主模型的一部分。",
+    "figure_number": "Figure 4",
+    "paper_title": "Reconstructing Occluded Joints in 3D Human Pose Sequences: A Real-Occlusion Benchmark and an Interpolation-Initialised Spatio-Temporal Transformer",
+    "authors": "Duncan Kibet, Min Seop So, Seong-Joon Kim, Jong-Ho Shin",
+    "source_url": "https://www.mdpi.com/1424-8220/26/22/7283#sensors-26-07283-f004",
+    "original_asset_url": "https://mdpi-res.com/sensors/sensors-26-07283/article_deploy/html/images/sensors-26-07283-g004.png",
+    "paper_version": "Sensors 26(22), 7283 · 正式发表版（2026-11-18）",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence_url": "https://www.mdpi.com/1424-8220/26/22/7283",
+    "license_evidence": "Sensors 出版方正式文章页末载作者版权和 CC BY 4.0 链接；已直接核验图 4 PNG 纯流程框图且图注没有排除或第三方素材署名。",
+    "attribution": "Duncan Kibet, Min Seop So, Seong-Joon Kim, Jong-Ho Shin. Reconstructing Occluded Joints in 3D Human Pose Sequences: A Real-Occlusion Benchmark and an Interpolation-Initialised Spatio-Temporal Transformer, Figure 4, Sensors 26(22), 7283 (2026), DOI: 10.3390/s26227283. CC BY 4.0.",
+    "modifications": "出版方原始 PNG，未裁剪、未重编码、未修改；网页按容器缩放。",
+    "reviewed_at": "2026-11-22",
+    "width": 1901,
+    "height": 772,
+    "sha256": "a809d5a1de050c0f15c5092deb8c6fc118c23908b77abb986a8b23d7df33bfc2"
   }
 ]
