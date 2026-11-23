@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-11-23",
-  "total": 386,
+  "updated_at": "2026-11-24",
+  "total": 391,
   "counts": {
-    "complete": 66,
-    "figure_pending": 320,
+    "complete": 67,
+    "figure_pending": 324,
     "pending": 0
   },
   "completion_standard": "Source-checked module-level pipeline or survey classification, separate use contexts, and a figure guide. Embed paper originals when reuse permission is clear, otherwise link to the original figure or method section. Summaries alone do not count.",
@@ -4253,6 +4253,61 @@
       "figure_status": "original_link_only",
       "reviewed_at": "2026-11-22",
       "figure_note": "arXiv 论文标注 CC BY 4.0；图 1 含画面与合成缩略图，素材来源未逐一确认，仅链接原文。"
+    },
+    {
+      "id": "rrl-head-pose",
+      "category": "Head",
+      "title": "RRL: reciprocity relationship learning with rotation-adaptive transformers for accurate head pose estimation",
+      "status": "figure_pending",
+      "paper_url": "https://doi.org/10.1016/j.ins.2026.124033",
+      "reading_level": "primary_publisher_preview",
+      "figure_status": "architecture_not_located",
+      "reviewed_at": "2026-11-22",
+      "figure_note": "出版商预览给出图号，图像及许可均未核验，不转载。"
+    },
+    {
+      "id": "coordinate-singularities-conformal-head-pose",
+      "category": "Head",
+      "title": "Coordinate Singularities Break Conformal Coverage for Gaze and Head Pose",
+      "status": "figure_pending",
+      "paper_url": "https://link.springer.com/chapter/10.1007/978-3-032-37252-9_17",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-22",
+      "figure_note": "仅链接 arXiv 原文。Essex 接受稿的 CC BY 许可不用于 arXiv 图像。"
+    },
+    {
+      "id": "oa-skeleton-st",
+      "category": "Human",
+      "title": "Reconstructing Occluded Joints in 3D Human Pose Sequences: A Real-Occlusion Benchmark and an Interpolation-Initialised Spatio-Temporal Transformer",
+      "status": "complete",
+      "paper_url": "https://www.mdpi.com/1424-8220/26/22/7283",
+      "reading_level": "primary_full_text",
+      "figure_status": "verified_local",
+      "reviewed_at": "2026-11-22",
+      "figure_note": "出版方正式发表版方案框图，仅含流程框、箭头及张量尺寸，无照片或第三方图源署名。"
+    },
+    {
+      "id": "cisyn-hmr",
+      "category": "Human",
+      "title": "CISyn: Human Mesh Recovery in Close Interactions with Physics-Simulated Synthetic Data",
+      "status": "figure_pending",
+      "paper_url": "https://arxiv.org/abs/2611.18894v1",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-22",
+      "figure_note": "原稿仅授予 arXiv 非独占分发权；保留图版链接、不转载。"
+    },
+    {
+      "id": "physdynpose",
+      "category": "Human",
+      "title": "Physics-based Human Pose Estimation from a Single Moving RGB Camera",
+      "status": "figure_pending",
+      "paper_url": "https://openaccess.thecvf.com/content/CVPR2025W/RHOBIN/html/Aytekin_Physics-based_Human_Pose_Estimation_from_a_Single_Moving_RGB_Camera_CVPRW_2025_paper.html",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-22",
+      "figure_note": "arXiv v1 标注 CC BY 4.0，图 2 内实拍人物画面的独立再发布许可未核实；仅链接原文。"
     }
   ]
 }

@@ -40322,5 +40322,537 @@
       "caption": "训练时用完整人体渲染适配视频骨干，随后用局部关节证据修正全身与双手状态。",
       "note": "arXiv 论文标注 CC BY 4.0；图 1 含画面与合成缩略图，素材来源未逐一确认，仅链接原文。"
     }
+  },
+  {
+    "id": "rrl-head-pose",
+    "title": "RRL: reciprocity relationship learning with rotation-adaptive transformers for accurate head pose estimation",
+    "year": 2027,
+    "category": "Head",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "Information Sciences",
+    "status": "Published",
+    "authors": [
+      "Shijia Qian",
+      "Tingting Liu",
+      "Hai Liu",
+      "Jianping Ju",
+      "Zhaoli Zhang",
+      "Youfu Li"
+    ],
+    "doi": "10.1016/j.ins.2026.124033",
+    "volume": "759",
+    "article_number": "124033",
+    "publication_date": "2027-01-15",
+    "online_publication_date": "2026-08-20",
+    "summary": "RRL 通过自适应训练特征融合和面部结构互易性建模，利用不同脸部区域在转头时的联动线索估计三维头部朝向。",
+    "url": "https://doi.org/10.1016/j.ins.2026.124033",
+    "primary_sources": [
+      "https://www.sciencedirect.com/science/article/pii/S0020025526009643",
+      "https://scholars.cityu.edu.hk/en/publications/rrl-reciprocity-relationship-learning-with-rotation-adaptive-tran/"
+    ],
+    "tags": [
+      "Head orientation",
+      "Transformer",
+      "Cross-modal attention",
+      "Anatomical priors",
+      "AFF",
+      "RRI"
+    ],
+    "ccf": {
+      "tier": "B",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=33",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "Information Sciences"
+    },
+    "analysis": {
+      "problem": "大幅转头、光线变化或配饰遮挡会使部分局部外观不可靠。作者用面部区域随头部旋转而联动的几何关系，作为辅助估计线索。",
+      "method": "训练时用 AFF（自适应特征融合）做几何引导的样本插值；RRI（互易关系推断）将几何引导的图像块采样得到的视觉 token，与七个预定义解剖区域通过注意力池化得到的结构 token 进行跨模态注意力建模，随头部朝向调整不同区域联动线索的权重。",
+      "inputs_outputs": "输入头部图像，输出三维头部朝向；公开预览未核实旋转参数化及输出是否包含平移，因此不标作 6DoF。",
+      "contribution": "公开预览列出 BIWI、AFLW2000 和 300W-LP；消融默认采用协议 I，即 300W-LP 训练、AFLW2000 测试，以 MAE 为主要指标。论文于 2026-08-20 在线发表；目录年份按出版商卷期 759 的 2027-01-15。",
+      "limitations": "公开预览未展示全部评价表格或网络结构原图，不复述性能排名、完整损失或检出条件。论文所列代码/数据地址在 2026-11-22 匿名查询为 404，无法核实公开可用性，也无法辨别私有、改名或未发布。",
+      "limitations_kind": "editorial_scope",
+      "scope_reviewed_at": "2026-11-22",
+      "evidence_level": "primary_publisher_preview",
+      "evidence_scope": "核对出版商公开摘要、引言、架构和实现片段、消融协议片段；未审读完整实验表格或图像。",
+      "verification_note": "CityUHK 机构记录给出 2026-08-20 在线发表，Elsevier 标为 2027-01-15 卷期。匿名 GitHub API 返回 404，仓库不计入有代码。",
+      "verified_at": "2026-11-22",
+      "sources": [
+        "https://www.sciencedirect.com/science/article/pii/S0020025526009643",
+        "https://doi.org/10.1016/j.ins.2026.124033",
+        "https://scholars.cityu.edu.hk/en/publications/rrl-reciprocity-relationship-learning-with-rotation-adaptive-tran/"
+      ]
+    },
+    "pipeline": {
+      "overview": "用标注几何引导训练插值，再以面部结构 token 与外观 token 的交互估计头部朝向。",
+      "steps": [
+        {
+          "title": "用几何线索构造插值训练样本",
+          "description": "AFF 在训练阶段用几何引导插值覆盖连续的姿态变化；预览记载混合系数来自 Beta(0.5, 0.5)。"
+        },
+        {
+          "title": "采样局部外观",
+          "description": "对图像块进行几何引导的采样，形成视觉 token，保留用于角度估计的局部外观线索。"
+        },
+        {
+          "title": "汇聚面部结构关系",
+          "description": "使用注意力池化从七个预定义面部解剖区域构成可学习的互易 token，为跨区域约束提供表示。"
+        },
+        {
+          "title": "跨模态注意力后估计头姿",
+          "description": "RRI 连接外观和结构 token，并根据头部朝向突出更有区分度的互易区域线索；例如接近侧脸时，不同眼、耳线索的重要性可变化。"
+        }
+      ],
+      "training": "出版商预览说明 AFF 插值用于训练，并记载随机裁剪、224×224 输入、批量 64、100 个 epoch；损失和完整训练数据细节未从预览核实。",
+      "inference": "以头部图像估计朝向；不将训练用样本插值当作测试时需要的配对图像。预览没有完整部署配置或可复现的公开代码。",
+      "figure_reading": "出版商的 Overall architecture 片段将图 2 标为整体架构，并说明头部图像输入与 AFF、RRI 两个主要模块。链接为论文预览入口，并非可直接公开查看的图 2 图像；未核实图内布局或转载权。",
+      "sources": [
+        {
+          "label": "出版商：摘要、Overall architecture、Implementation details 与 Ablation study 片段",
+          "url": "https://www.sciencedirect.com/science/article/pii/S0020025526009643"
+        },
+        {
+          "label": "正式论文入口（图 2 由方法预览引出）",
+          "url": "https://doi.org/10.1016/j.ins.2026.124033"
+        }
+      ],
+      "reviewed_at": "2026-11-22",
+      "figure_status": "architecture_not_located"
+    },
+    "figure": {
+      "source": "https://www.sciencedirect.com/science/article/pii/S0020025526009643",
+      "caption": "Figure 2 · RRL 整体架构（原文入口）",
+      "note": "出版商预览给出图号，图像及许可均未核验，不转载。"
+    }
+  },
+  {
+    "id": "coordinate-singularities-conformal-head-pose",
+    "title": "Coordinate Singularities Break Conformal Coverage for Gaze and Head Pose",
+    "authors": [
+      "Mohammadreza Jamalifard",
+      "Yaxiong Lei",
+      "Parastoo Azizinezhad",
+      "Javier Andreu-Perez"
+    ],
+    "year": 2026,
+    "category": "Head",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "ECCV",
+    "status": "Published",
+    "url": "https://link.springer.com/chapter/10.1007/978-3-032-37252-9_17",
+    "preprint_url": "https://arxiv.org/abs/2607.02565v1",
+    "version": "ECCV 2026 proceedings; guide checked against arXiv v1",
+    "summary": "校准已有视线与头姿模型的三维预测集合。以流形测地距离代替欧拉角残差，可减少高俯仰区域被整体覆盖率掩盖的漏覆盖。",
+    "tags": [
+      "head pose",
+      "gaze estimation",
+      "conformal prediction",
+      "uncertainty",
+      "SO(3)",
+      "BIWI",
+      "AFLW2000-3D"
+    ],
+    "primary_sources": [
+      "https://link.springer.com/chapter/10.1007/978-3-032-37252-9_17",
+      "https://arxiv.org/html/2607.02565v1",
+      "https://repository.essex.ac.uk/43466/"
+    ],
+    "analysis": {
+      "problem": "整体覆盖率接近 90% 时，高俯仰头姿的真实旋转仍可能频繁落在预测集合之外。研究分离坐标打分畸变和基础模型在极端姿态下的误差。",
+      "method": "固定已有点估计器，在有标注的校准集上比较欧拉坐标 L2 与旋转流形 SO(3) 的测地非符合度。用校准分数的有限样本分位数形成集合，按俯仰切片检查覆盖，并用黎曼体积密度诊断临近坐标奇点的位置。对模型误差随姿态变化的情形，再比较归一化测地分数和分箱校准。",
+      "inputs_outputs": "输入是视线方向或头部旋转的点预测，以及配对标注的校准样本；输出是方向球面 S² 或旋转流形 SO(3) 上的预测集合，而非新的关键点、点姿态网络或头部平移。",
+      "contribution": "90% 目标下，表 2 在 BIWI 真值旋转上人为注入等方性噪声，|俯仰| > 60° 时欧拉与测地覆盖分别为 57.5% 和 89.5%。表 5 用真实 SixDRepNet 推理，在 AFLW2000-3D 的 1,969 个样本中同切片占 278 个；欧拉、测地和归一化测地覆盖分别为 55.2%、75.1% 和 80.3%，三箱测地 Mondrian 校准为 90.1%。",
+      "limitations": "这些是特定切片的实测覆盖率，不是逐点覆盖保证或新模型的点估计精度。BIWI 的人工噪声控制实验不等于真实 RGB 估计评测；文中写为 24 名被试，而数据加载器将 24 段映射到 20 名独立参与者，实验的重复身份处理未核实。未找到可核验的作者实现。",
+      "sources": [
+        "https://link.springer.com/chapter/10.1007/978-3-032-37252-9_17",
+        "https://arxiv.org/html/2607.02565v1#S3.F2",
+        "https://arxiv.org/html/2607.02565v1#S4.T2",
+        "https://arxiv.org/html/2607.02565v1#S4.T5",
+        "https://huggingface.co/datasets/ETHZurich/biwi_kinect_head_pose/blob/main/biwi_kinect_head_pose.py",
+        "https://repository.essex.ac.uk/43466/"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "核对正式论文、arXiv v1 方法、图 2/3、表 2/5 与 BIWI 数据加载映射；未独立复现实验。",
+      "verification_note": "Essex 元数据说明其接受稿为 CC BY 4.0，但未能从该库取到 PDF 核对图 2；arXiv v1 是不同版本。本条仅链接原图。",
+      "verified_at": "2026-11-22"
+    },
+    "pipeline": {
+      "kind": "method",
+      "overview": "论文改变的是非符合度评分与校准，不是重训姿态网络。图 2 把点预测、打分、阈值和预测集合串起来。",
+      "steps": [
+        {
+          "title": "保留点估计",
+          "description": "在球面 S² 表示视线、在旋转流形 SO(3) 表示头姿，以已有模型的输出为中心。"
+        },
+        {
+          "title": "比较两种残差",
+          "description": "比较欧拉坐标差与旋转测地角。靠近万向节锁时，欧拉残差夸大部分方向的距离，简单放缩阈值不能修复集合的方向比例。"
+        },
+        {
+          "title": "分割校准",
+          "description": "以独立校准样本的分数定分位阈值；在新样本上保留与点预测距离不超过阈值的姿态。"
+        },
+        {
+          "title": "分切片诊断",
+          "description": "用体积密度定位坐标失真区，再分俯仰角检查经验覆盖。对于仍受模型误差影响的区域，另比较局部尺度与分箱校准。"
+        }
+      ],
+      "training": "更换打分无需重训头姿模型；split conformal 仍需有标注校准集。BIWI 控制实验从真值旋转注入噪声，和用 SixDRepNet 的 AFLW2000-3D 实验分开。",
+      "inference": "固定分数和校准阈值，由点预测生成流形上的姿态集合。在交换性条件下，标准 split conformal 保障边际覆盖，不应由此推断高俯仰样本的逐点覆盖。",
+      "figure_reading": "图 2 是评分和校准流程，而非网络结构；先看图坐标分数与测地分数的分流，再看图 3 各俯仰区间的覆盖分化。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "图 2 · 校准与评分流程",
+          "url": "https://arxiv.org/html/2607.02565v1#S3.F2"
+        },
+        {
+          "label": "图 3 · 各数据集覆盖率",
+          "url": "https://arxiv.org/html/2607.02565v1#S4.F3"
+        },
+        {
+          "label": "表 2 · BIWI 控制实验",
+          "url": "https://arxiv.org/html/2607.02565v1#S4.T2"
+        },
+        {
+          "label": "表 5 · AFLW2000-3D 真实模型",
+          "url": "https://arxiv.org/html/2607.02565v1#S4.T5"
+        }
+      ],
+      "reviewed_at": "2026-11-22"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2607.02565v1#S3.F2",
+      "figure_number": "Figure 2",
+      "version": "arXiv 2607.02565v1",
+      "caption": "原文图 2：对比坐标打分与测地打分，再以校准阈值构造预测集合。",
+      "note": "仅链接 arXiv 原文。Essex 接受稿的 CC BY 许可不用于 arXiv 图像。"
+    },
+    "ccf": {
+      "tier": "B",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=58",
+      "version": "2026 第七版（目录原文转载）",
+      "venue": "ECCV"
+    }
+  },
+  {
+    "id": "oa-skeleton-st",
+    "title": "Reconstructing Occluded Joints in 3D Human Pose Sequences: A Real-Occlusion Benchmark and an Interpolation-Initialised Spatio-Temporal Transformer",
+    "authors": [
+      "Duncan Kibet",
+      "Min Seop So",
+      "Seong-Joon Kim",
+      "Jong-Ho Shin"
+    ],
+    "year": 2026,
+    "category": "Human",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "Sensors",
+    "status": "Published",
+    "url": "https://www.mdpi.com/1424-8220/26/22/7283",
+    "doi": "10.3390/s26227283",
+    "summary": "OA-Skeleton ST 用双向时空窗口和插值残差填补三维骨架中已知缺失的关节；可见关节原样保留，并对照参考三维输入与单目估计输入。",
+    "tags": [
+      "OA-Skeleton ST",
+      "3DPW",
+      "occlusion",
+      "skeleton completion",
+      "spatiotemporal attention",
+      "offline reconstruction",
+      "missing joints"
+    ],
+    "analysis": {
+      "problem": "视频姿态检测漏掉腕、踝等关节时，后续分析缺少这些关节的三维轨迹。该方法在已知缺失位置的前提下做骨架补全，不直接从图像估计三维姿态，也不是预测未来动作。",
+      "method": "以时间线性插值作初值，显式编码关节是否曾在窗口内出现和缺失区间长度。三层分解式注意力交替沿骨架和时间维度计算，引入可见性相关的骨架跳数偏置与隐藏帧偏置；用两个零初始化的头为窗口内曾见与从未见的关节预测残差。",
+      "inputs_outputs": "主模型读取双向 30 帧窗口、14 关节三维坐标、缺失与坐标系有效标志；以可见双肩和双髋定义每帧人体坐标系。输出缺失关节修正后的三维坐标；输入的可见关节直接传递，不做去噪。四个躯干基准关节不计入补全指标。",
+      "contribution": "在 3DPW 的 24 个测试视频，OpenPose 置信度低于 0.3 的目标关节记为缺失，其余输入取 IMU 辅助的 SMPL 三维参考坐标。表 3 的缺失关节 MPJPE：OA-Skeleton ST 79.1 mm，插值加运动学回退 92.8 mm，去掉 AMASS 预训练 93.9 mm。表 8 改用 OpenPose 经 VideoPose3D 得到的三维输入，提升器输出专项训练版与同一结构启发式的未对齐 MPJPE 分别为 267.8 和 274.0 mm；Procrustes 对齐后分别为 139.7 和 139.4 mm，不能解读为补全精度的稳定提升。",
+      "limitations": "主结果是给定缺失掩码且剩余三维关节为参考测量的补全评估，不是标准 3DPW 端到端误差。检测置信度低还可来自画面截断、模糊等，不等于人工验证的物理遮挡；7.4% 的缺失关节帧因躯干坐标系无效未纳入主评测。双向窗口依赖后续观测，不等同于因果实时。出版方补充 ZIP 内核实有复现 notebook，未执行；未核实独立代码仓库或发布权重。",
+      "sources": [
+        "https://www.mdpi.com/1424-8220/26/22/7283",
+        "https://www.mdpi.com/1424-8220/26/22/7283#sec3dot5-sensors-26-07283",
+        "https://www.mdpi.com/1424-8220/26/22/7283#sensors-26-07283-t003",
+        "https://www.mdpi.com/1424-8220/26/22/7283#sensors-26-07283-t008",
+        "https://www.mdpi.com/article/10.3390/s26227283/s1"
+      ],
+      "evidence_level": "primary_full_text",
+      "evidence_scope": "核对正式刊文、方法 §§3.2–3.7、图 4、表 3/4/8、场景限制及补充包的 S3 notebook 路径与文件内容；未执行代码或复算结果。",
+      "verification_note": "Sensors 正式发表于 2026-11-18。馆藏同期 CCF 映射无对应已核验项，不标评级。Supplement S3 提供 notebook；正式论文表格为已发表结果，不把附件的开发命名当作最终论文配置名。",
+      "verified_at": "2026-11-22"
+    },
+    "pipeline": {
+      "kind": "method",
+      "overview": "用已有三维骨架和缺失掩码做视频关节补全：可见点直通，缺失点在插值初值上加小幅学习修正。",
+      "steps": [
+        {
+          "title": "构建人体局部坐标",
+          "description": "用可见双肩、双髋定义每帧身体坐标系并按躯干长度归一化。隐藏坐标置零，保留缺失和帧有效标志。"
+        },
+        {
+          "title": "插值与缺失特征",
+          "description": "形成时间线性插值初值，并加入到最近可见帧的距离、缺失跨度及该关节在整个窗口是否曾可见。运动学锚点只在变体中替换窗口内从未出现关节的初值。"
+        },
+        {
+          "title": "交替计算时空注意力",
+          "description": "每层先处理同帧的 14 个关节，再处理同一关节的 30 帧；骨架跳数偏置区分可见与隐藏键，时间注意力另加入隐藏帧偏置。"
+        },
+        {
+          "title": "残差补全",
+          "description": "两支零初始化输出头对应曾见和从未见的关节；仅对隐藏关节将预测残差加到初值，其余坐标原样输出。"
+        }
+      ],
+      "training": "先用 AMASS 动捕与仿真掩码预训练，再在 3DPW 微调；真实漏检掩码与随机等多种模拟形状结合。损失包含缺失位置、速度及骨长等约束；文中主模型在输入可见关节上直通。",
+      "inference": "在已观测序列的 30 帧双向窗口上补全，最难的窗口内从未看见关节由独立残差头处理；实测关节不变，不用该输出宣称自动检测到被遮挡关节。",
+      "figure_reading": "图 4 左侧从窗口输入形成插值猜测；中间蓝色框内的空间、时间交替注意力重复三次；右侧预测残差。下方点线表示可见关节直通，虚线运动学锚点仅为变体。",
+      "figure_status": "verified_local",
+      "sources": [
+        {
+          "label": "图 4 · 架构",
+          "url": "https://www.mdpi.com/1424-8220/26/22/7283#sensors-26-07283-f004"
+        },
+        {
+          "label": "§3.5 · 主模型与锚点变体",
+          "url": "https://www.mdpi.com/1424-8220/26/22/7283#sec3dot5-sensors-26-07283"
+        },
+        {
+          "label": "表 3 · 参考三维输入",
+          "url": "https://www.mdpi.com/1424-8220/26/22/7283#sensors-26-07283-t003"
+        },
+        {
+          "label": "表 8 · 单目提升输入",
+          "url": "https://www.mdpi.com/1424-8220/26/22/7283#sensors-26-07283-t008"
+        }
+      ],
+      "reviewed_at": "2026-11-22"
+    },
+    "figure": {
+      "src": "assets/figures/oa-skeleton-st-fig4.png",
+      "source": "https://www.mdpi.com/1424-8220/26/22/7283#sensors-26-07283-f004",
+      "alt": "OA-Skeleton ST：可见关节直通，线性插值初值经三层时空注意力与双残差头补全缺失关节；运动学锚点仅用于变体。",
+      "caption": "图 4 · 时空 Transformer 仅修正缺失关节；虚线锚点不是论文主模型的一部分。",
+      "figure_number": "Figure 4",
+      "version": "Sensors 26(22), 7283 · 正式发表版（2026-11-18）",
+      "authors": [
+        "Duncan Kibet",
+        "Min Seop So",
+        "Seong-Joon Kim",
+        "Jong-Ho Shin"
+      ],
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Duncan Kibet, Min Seop So, Seong-Joon Kim, Jong-Ho Shin. Reconstructing Occluded Joints in 3D Human Pose Sequences: A Real-Occlusion Benchmark and an Interpolation-Initialised Spatio-Temporal Transformer, Figure 4, Sensors 26(22), 7283 (2026), DOI: 10.3390/s26227283. CC BY 4.0.",
+      "modifications": "出版方原始 PNG，未裁剪、未重编码、未修改；网页按容器缩放。",
+      "note": "出版方正式发表版方案框图，仅含流程框、箭头及张量尺寸，无照片或第三方图源署名。"
+    }
+  },
+  {
+    "id": "cisyn-hmr",
+    "title": "CISyn: Human Mesh Recovery in Close Interactions with Physics-Simulated Synthetic Data",
+    "authors": [
+      "Yufan Deng",
+      "Lorenza Prospero",
+      "Christian Rupprecht"
+    ],
+    "year": 2026,
+    "category": "Human",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "arXiv",
+    "status": "Preprint",
+    "url": "https://arxiv.org/abs/2611.18894v1",
+    "version": "2611.18894v1",
+    "code": "https://github.com/yfde/CISyn",
+    "summary": "以物理仿真生成双人近身接触和互遮挡样本，并给单图多人网格重建加入关节遮挡权重与不确定性训练。",
+    "tags": [
+      "multi-person HMR",
+      "mutual occlusion",
+      "synthetic data",
+      "SMPL",
+      "SMPL-X",
+      "uncertainty"
+    ],
+    "analysis": {
+      "problem": "拥抱、对抗等近身互动中，遮挡和深度歧义使多人姿态与形状难以分离；普通合成多人数据的独立摆放难以产生真实接触。",
+      "method": "先以 Genesis 刚体仿真让两位 SMPL-X 角色相互碰撞，再用 Blender 渲染并记录参数与相机。模型沿用 MA-HMR，引入遮挡权重和逐关节 Laplace 负对数似然。",
+      "inputs_outputs": "模型接收单张 RGB，输出多人 SMPL 姿态和形状、检测框、分数及相机视场估计；合成数据包含 SMPL-X 和 SMPL，而模型输出并非 SMPL-X。模型不以视频序列为输入。",
+      "contribution": "表 2 从同一 MA-HMR 检查点、相同续训日程出发，Base 为 AGORA、BEDLAM 和 DTO-Humans；只加 CISyn 时，同一 MA-HMR 在 Hi4D 指定对子集上的根相对 MPJPE 从 61.2 降到 54.8 mm。数据和训练目标同时改变时为 52.3 mm，不能把后一数字全归于数据。",
+      "limitations": "Hi4D 只用指定的 12、15、32 三对；CHI3D 官方测试标注未公开，作者改用其公开训练划分的 16 倍时间降采样子集进行评测。根相对 MPJPE 按匹配到的人计算，不反映漏检或两人全局间距。碰撞角色无目标动作控制，模型预测网格仍可互穿；合成归档没有接触法向或冲量标签。",
+      "sources": [
+        "https://arxiv.org/abs/2611.18894v1",
+        "https://arxiv.org/html/2611.18894v1#S3.T2",
+        "https://arxiv.org/html/2611.18894v1#S4.SS1",
+        "https://arxiv.org/html/2611.18894v1#A6",
+        "https://github.com/yfde/CISyn/blob/main/CISyn-HMR/README.md",
+        "https://huggingface.co/cisyn/hmr/tree/main"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "核对 arXiv v1 摘要、图 2 与 4、§3–4、表 2、附录 E–F，以及作者代码文档和权重文件列表；未训练、运行或下载。",
+      "verification_note": "2026-11-13 提交的 arXiv v1，未核实正式发表，不标 CCF。作者发布生成和 HMR 代码及权重入口，HMR 代码与权重按作者 README 为 CC BY-NC 4.0，外部 SMPL 权重另计；不推及合成数据或图版。论文标 arXiv 非独占分发许可，图版仅链接。",
+      "verified_at": "2026-11-22"
+    },
+    "pipeline": {
+      "kind": "method",
+      "overview": "训练数据产生接触和身体互遮挡；学习端对几何上不可见的关节少施加监督，而不是在推理时加入物理仿真。",
+      "steps": [
+        {
+          "title": "仿真接触",
+          "description": "采样初始体形、姿态和速度，使两位 SMPL-X 角色向同一区域移动，并计算碰撞响应。"
+        },
+        {
+          "title": "渲染与对齐",
+          "description": "以随机场景、光照和相机渲染，生成与图像对齐的 SMPL(-X) 和相机标注。"
+        },
+        {
+          "title": "单图多人检测和回归",
+          "description": "DINOv2 提取不同尺度的图像令牌，经 DAB-DETR 查询解码；逐人回归 SMPL 及检测框，另从全局令牌估计视场。"
+        },
+        {
+          "title": "训练用局部不确定性",
+          "description": "在更近人物轮廓内的关节用 0.1 权重，其他关节用 1；每关节的对数标准差再调节二维与根相对三维关节的 Laplace 损失。"
+        }
+      ],
+      "training": "从作者 MA-HMR 检查点初始化（新增不确定性头除外），用 Base + CISyn 续训六轮；维持检测、形状和相机等原损失，只改关节损失。",
+      "inference": "仅需单张 RGB，去掉不确定性头，不需要真值遮挡掩码、网格接触约束或仿真；不要把训练时的尺度参数当作随预测发布的校准置信区间。",
+      "figure_reading": "图 4 中 SAT 编码和查询解码是 MA-HMR 主干；虚线指向的不确定性加权关节损失仅用于训练。图 2 则是独立的数据制造流程。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "图 4 · 单图 HMR 结构",
+          "url": "https://arxiv.org/html/2611.18894v1#S3.F4"
+        },
+        {
+          "label": "图 2 · 合成数据流程",
+          "url": "https://arxiv.org/html/2611.18894v1#S2.F2"
+        },
+        {
+          "label": "表 2 · 受控比较",
+          "url": "https://arxiv.org/html/2611.18894v1#S3.T2"
+        }
+      ],
+      "reviewed_at": "2026-11-22"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2611.18894v1#S3.F4",
+      "figure_number": "Figure 4",
+      "version": "2611.18894v1",
+      "caption": "MA-HMR 主干与训练用逐关节不确定性分支。",
+      "note": "原稿仅授予 arXiv 非独占分发权；保留图版链接、不转载。"
+    }
+  },
+  {
+    "id": "physdynpose",
+    "title": "Physics-based Human Pose Estimation from a Single Moving RGB Camera",
+    "authors": [
+      "Ayce Idil Aytekin",
+      "Chuqiao Li",
+      "Diogo Luvizon",
+      "Rishabh Dabral",
+      "Martin Oswald",
+      "Marc Habermann",
+      "Christian Theobalt"
+    ],
+    "year": 2025,
+    "category": "Human",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "CVPR 2025 RHOBIN Workshop",
+    "status": "Published",
+    "url": "https://openaccess.thecvf.com/content/CVPR2025W/RHOBIN/html/Aytekin_Physics-based_Human_Pose_Estimation_from_a_Single_Moving_RGB_Camera_CVPRW_2025_paper.html",
+    "project": "https://aidilayce.github.io/PhysDynPose/",
+    "code": "https://github.com/aidilayce/PhysDynPose",
+    "version": "2507.17406v1",
+    "summary": "在单目移动相机中恢复已观测帧的三维人体动作；结合场景高度图和足部接触约束减少非平地脚滑，局部关节误差不一定降低。",
+    "tags": [
+      "PhysDynPose",
+      "MoviCam",
+      "4DHumans",
+      "DROID-SLAM",
+      "moving camera",
+      "world coordinate",
+      "physics optimization",
+      "foot contact"
+    ],
+    "code_provenance": {
+      "url": "https://github.com/aidilayce/PhysDynPose",
+      "verified_at": "2026-11-22",
+      "basis": "作者项目链接到官方实现，仓库提供相机对齐、物理优化、转换和可视化脚本。运行另需 4DHumans、DROID-SLAM 检查点、RBDL 和受独立许可约束的 SMPL 模型；序列输入归档与代码分离，未下载或运行。"
+    },
+    "analysis": {
+      "problem": "移动相机的视角变化会与人体运动混在一起。仅估计人体局部姿态再变换到世界坐标，容易在台阶等非平面场景中出现脚滑、穿透或上下漂移；关节误差低并不等于接触合理。",
+      "method": "4DHumans 恢复身体运动和形状，DROID-SLAM 估计相机轨迹；两者合成世界系骨架。此后将场景网格转换为高度图，以扩展的 PIP 双比例微分控制器跟随参考关节角与位置，并在动力学、摩擦锥和接触条件下求解修正动作。",
+      "inputs_outputs": "输入已拍摄的单目 RGB 序列、静态场景网格和足部接触标签；论文用相机真值轨迹的前两帧对齐 SLAM。输出世界坐标中的根节点平移和 SMPL 身体关节姿态，物理模块还给出估计的关节力矩与地面反作用力。",
+      "contribution": "MoviCam 非平地分组，按论文表 2、3 与同文经 DROID-SLAM 转换到世界系的 4DHumans 基线相比，足趾在接触期的平均位移从 13.99 降到 3.22 mm，按开头若干预测帧对齐后的 W-MPJPE 从 833.57 降到 779.60 mm，普通 MPJPE 却从 128.01 升到 162.09 mm。并非所有物理指标都改善，非平地一组的抖动和平均离地高度高于该基线。",
+      "limitations": "初始相机真值、预先扫描的场景及接触标签不是纯 RGB 输入的一部分；参考根轨迹的抗漂移约束也利用后续参考帧，不能直接理解为严格在线推理。原文只覆盖单人、静态场景及足地接触，且上游姿态与 SLAM 的误差仍会传递。力矩与地面反作用力为优化输出，不是该评测表中的直接测量真值。",
+      "sources": [
+        "https://openaccess.thecvf.com/CVPR2025_workshops/RHOBIN",
+        "https://arxiv.org/abs/2507.17406v1",
+        "https://arxiv.org/html/2507.17406v1#S4",
+        "https://arxiv.org/html/2507.17406v1#S5.T2",
+        "https://arxiv.org/html/2507.17406v1#S5.T3",
+        "https://github.com/aidilayce/PhysDynPose#readme"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "核对 CVF 与 RHOBIN 官方记录、arXiv v1 第 3–6 节、图 2 和表 2–3、作者项目与代码说明；未运行实现或下载数据。",
+      "verification_note": "CVPR 2025 RHOBIN Workshop 正式论文，不是 CVPR 主会、不继承 CCF。arXiv v1 标注 CC BY 4.0；图 2 内有实拍人物帧，参与者影像的独立再发布许可未核实，保留原文链接。",
+      "verified_at": "2026-11-22"
+    },
+    "pipeline": {
+      "kind": "method",
+      "overview": "先消除移动相机的坐标系影响，再用场景几何与足地接触条件约束世界系的动作。",
+      "steps": [
+        {
+          "title": "运动与相机初始化",
+          "description": "4DHumans 输出相机相对的身体姿态、形状及平移；DROID-SLAM 从同段视频估计相机运动，用真值相机轨迹前两帧解尺度歧义。"
+        },
+        {
+          "title": "转换到世界系",
+          "description": "用相机外参变换根朝向和平移，用 One-Euro 滤波平滑世界系姿态与平移，取参考关节角和关节位置。"
+        },
+        {
+          "title": "非平地接触优化",
+          "description": "将场景网格转为高度图，结合足部接触标注和 PIP 双 PD 控制器；用地形高程代替默认平地，在优化中限制脚滑并约束根轨迹。"
+        },
+        {
+          "title": "仿真更新姿态",
+          "description": "求解广义加速度、力矩及接触力，再用加速度更新浮动基座人体，输出世界坐标姿态与物理量。"
+        }
+      ],
+      "training": "论文方法为现成运动估计、SLAM 和逐帧物理优化的组合，没有单独训练 PhysDynPose 端到端网络；控制器增益经手工设定。",
+      "inference": "用标注接触、场景几何和对齐后的参考轨迹重建已观测的视频帧。复制论文条件需真值起始相机位姿；代码还提供使用已有相机外参的选项，不能与只给 RGB 的测试设置混用。",
+      "figure_reading": "图 2 左侧的同段视频的两条估计支路分别用 4DHumans 和 SLAM 估计人体与相机，在中间合成世界坐标参考动作；下方网格先转为局部高度。右边优化器分别输出姿态更新用的加速度，以及关节力矩与接触力。图内没有画出第 4 节明确要求的接触标签和相机起始对齐。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "图 2 · 双阶段流程",
+          "url": "https://arxiv.org/html/2507.17406v1#S4.F2"
+        },
+        {
+          "label": "第 4 节 · 初始化与物理模型",
+          "url": "https://arxiv.org/html/2507.17406v1#S4"
+        },
+        {
+          "label": "表 2 · 世界系与关节误差",
+          "url": "https://arxiv.org/html/2507.17406v1#S5.T2"
+        },
+        {
+          "label": "表 3 · 接触与场景指标",
+          "url": "https://arxiv.org/html/2507.17406v1#S5.T3"
+        }
+      ],
+      "reviewed_at": "2026-11-22"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2507.17406v1#S4.F2",
+      "figure_number": "Figure 2",
+      "version": "2507.17406v1",
+      "caption": "PhysDynPose 将相机与人体运动初始化转换到世界坐标，再约束足地接触并更新姿态。",
+      "note": "arXiv v1 标注 CC BY 4.0，图 2 内实拍人物画面的独立再发布许可未核实；仅链接原文。"
+    }
   }
 ]

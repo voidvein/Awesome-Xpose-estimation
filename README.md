@@ -4,7 +4,12 @@ A curated, non-exhaustive index of 2D and 3D head, hand and human pose estimatio
 
 [Browse the site](https://voidvein.github.io/Awesome-Xpose-estimation/) · [Sources and curation notes](SOURCES.md) · [Detail-page progress](CURATION.md)
 
-## 最近更新 · 2026-11-23（UTC+8）
+## 最近更新 · 2026-11-24（UTC+8）
+
+- **新增 5 篇：** [RRL](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=rrl-head-pose) · [Coordinate Singularities](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=coordinate-singularities-conformal-head-pose) · [OA-Skeleton ST](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=oa-skeleton-st) · [CISyn-HMR](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=cisyn-hmr) · [PhysDynPose](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=physdynpose)。当前共 391 篇。
+- **原图：** OA-Skeleton ST 详情页按 CC BY 4.0 原样展示正式发表版图 4；其余新增条目保留论文或图源链接。
+
+### 2026-11-23
 
 - **新增 3 篇：** [Hand4Whole++](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand4whole-plus-plus) · [S2HAND](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=s2hand) · [DreamHMR](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=dreamhmr)。从手腕与全身的一致性、全身模型的二维手部专精，到遮挡视频中的三维人体重建。当前共 386 篇。
 - **研究资源：** [SGIP 人体动作预测阅读卡](https://voidvein.github.io/Awesome-Xpose-estimation/#sgip-reading)，区分训练期的文字意图和推理所需输入，不计入姿态估计论文总数。
@@ -34,7 +39,9 @@ Serve the repository root with `python -m http.server 8000`.
 
 ### Head
 
+- **[RRL: reciprocity relationship learning with rotation-adaptive transformers for accurate head pose estimation](https://doi.org/10.1016/j.ins.2026.124033)** — Information Sciences 2027 · Published · 3D. RRL 通过自适应训练特征融合和面部结构互易性建模，利用不同脸部区域在转头时的联动线索估计三维头部朝向。
 - [code](https://github.com/hnuzhy/SemiUHPE) **[Semi-Supervised Unconstrained Head Pose Estimation in the Wild](https://doi.org/10.1109/TPAMI.2025.3631642)** — TPAMI 2026 · Published · 3D. 利用未标注野外头部图像进行半监督全范围旋转估计；预印本首发于 2024 年，正式发表于 TPAMI 2026 年第 48 卷第 3 期。
+- **[Coordinate Singularities Break Conformal Coverage for Gaze and Head Pose](https://link.springer.com/chapter/10.1007/978-3-032-37252-9_17)** — ECCV 2026 · Published · 3D. 校准已有视线与头姿模型的三维预测集合。以流形测地距离代替欧拉角残差，可减少高俯仰区域被整体覆盖率掩盖的漏覆盖。
 - [code](https://github.com/VasilikiVas/ReVA-HPE) **[ReVA-HPE: Relative 6DoF Head Pose Estimation with Synthetic Pose Supervision and Personalized Virtual Anchors](https://arxiv.org/abs/2611.03283)** — arXiv; accepted WACV 2027 (author-reported) 2026 · Preprint · 3D. 利用个性化虚拟参考图像进行相对 6DoF 估计，减少对真实参考图像已知姿态的依赖。
 - [code](https://github.com/asirigawesha/STAGNet) **[STAG-Net: Structure-Aware Attention over Landmark Groups for Lightweight Head Pose Estimation](https://arxiv.org/abs/2611.07828)** — arXiv 2026 · Preprint · 3D. 基于关键点分组和结构注意力进行轻量头姿回归，面向低计算成本部署。
 - [code](https://github.com/VasilikiVas/vggt-hpe) **[VGGT-HPE: Reframing Head Pose Estimation as Relative Pose Prediction](https://openaccess.thecvf.com/content/CVPR2026W/ABAW/html/Vasileiou_VGGT-HPE_Reframing_Head_Pose_Estimation_as_Relative_Pose_Prediction_CVPRW_2026_paper.html)** — CVPR 2026 ABAW Workshop · Published · 3D. 将绝对头姿回归改写为相对于已知姿态参考图像的几何变换预测；以合成数据微调几何基础模型。
@@ -286,6 +293,8 @@ Serve the repository root with `python -m http.server 8000`.
 ### Human
 
 - [code](https://github.com/mks0601/Hand4Whole-plus-plus_RELEASE) **[Enhancing Hands in 3D Whole-Body Pose Estimation with Conditional Hands Modulator](https://openaccess.thecvf.com/content/CVPR2026/html/Moon_Enhancing_Hands_in_3D_Whole-Body_Pose_Estimation_with_Conditional_Hands_CVPR_2026_paper.html)** — CVPR 2026 · Published · 3D. Hand4Whole++ 用手部模型的特征修正全身模型的腕部姿态，再将精细手指关节与手形接回三维全身网格。
+- **[Reconstructing Occluded Joints in 3D Human Pose Sequences: A Real-Occlusion Benchmark and an Interpolation-Initialised Spatio-Temporal Transformer](https://www.mdpi.com/1424-8220/26/22/7283)** — Sensors 2026 · Published · 3D. OA-Skeleton ST 用双向时空窗口和插值残差填补三维骨架中已知缺失的关节；可见关节原样保留，并对照参考三维输入与单目估计输入。
+- [code](https://github.com/yfde/CISyn) **[CISyn: Human Mesh Recovery in Close Interactions with Physics-Simulated Synthetic Data](https://arxiv.org/abs/2611.18894v1)** — arXiv 2026 · Preprint · 3D. 以物理仿真生成双人近身接触和互遮挡样本，并给单图多人网格重建加入关节遮挡权重与不确定性训练。
 - **[DreamHMR: From Video Generation to Human Motion Modeling via Structural Focusing](https://arxiv.org/abs/2610.20124v1)** — arXiv 2026 · Preprint · 3D. 将视频生成骨干转用于已观测视频的三维人体与双手网格重建；利用完整人体渲染监督和关节证据门控减轻遮挡干扰。
 - [code](https://github.com/Naturalpad-studio/InstantHMR) **[InstantHMR: Real-Time Human Mesh Recovery on Your Phone](https://arxiv.org/abs/2611.09195v2)** — arXiv 2026 · Preprint · 2D / 3D. 面向手机 NPU 的单目人体网格恢复，在每人裁剪上预测二维关键点和 MHR 参数，并可用重投影拟合改善一致性。
 - [code](https://github.com/noahcao/FAB) **[Fast and Accurate Body Estimation in Pixels, World Space and Scenes](https://arxiv.org/abs/2611.25801)** — arXiv 2026 · Preprint · 2D / 3D. 先估计二维/三维关节与稠密表面点，再拟合 SMPL；视频路径另处理世界坐标和人体—场景接触。
@@ -300,6 +309,7 @@ Serve the repository root with `python -m http.server 8000`.
 - **[LangPose: Language-Aligned Motion for Robust 3D Human Pose Estimation](https://openaccess.thecvf.com/content/WACV2026/html/Liao_LangPose_Language-Aligned_Motion_for_Robust_3D_Human_Pose_Estimation_WACV_2026_paper.html)** — WACV 2026 · Published · 3D. LangPose 将动作嵌入与细粒度动作标签的文本嵌入对齐，为二维到三维人体姿态提升提供语义信息。
 - [code](https://github.com/kaustesseract/DexAvatar) **[DexAvatar: 3D Sign Language Reconstruction with Hand and Body Pose Priors](https://openaccess.thecvf.com/content/WACV2026/html/Kundu_DexAvatar_3D_Sign_Language_Reconstruction_with_Hand_and_Body_Pose_WACV_2026_paper.html)** — WACV 2026 · Published · 3D. DexAvatar 使用学习到的手部与身体三维姿态先验，从单目手语视频重建精细手指关节和身体运动。
 - **[Hierarchical language description knowledge base for LLM-based human pose estimation](https://doi.org/10.1016/j.neucom.2025.130336)** — Neurocomputing 2025 · Published · 2D. HLanD-Pose 将分层姿态语言知识库作为大语言模型的外部引导，用于图像中的人体关键点定位。
+- [code](https://github.com/aidilayce/PhysDynPose) **[Physics-based Human Pose Estimation from a Single Moving RGB Camera](https://openaccess.thecvf.com/content/CVPR2025W/RHOBIN/html/Aytekin_Physics-based_Human_Pose_Estimation_from_a_Single_Moving_RGB_Camera_CVPRW_2025_paper.html)** — CVPR 2025 RHOBIN Workshop 2025 · Published · 3D. 在单目移动相机中恢复已观测帧的三维人体动作；结合场景高度图和足部接触约束减少非平地脚滑，局部关节误差不一定降低。
 - **[Egocentric Visibility-Aware Human Pose Estimation](https://openaccess.thecvf.com/content/CVPR2026/html/Dai_Egocentric_Visibility-Aware_Human_Pose_Estimation_CVPR_2026_paper.html)** — CVPR 2026 · Published · 3D. 第一人称视角下考虑可见性的人体姿态估计。
 - [code](https://github.com/MotrixLab/SMPLest-X) **[SMPLest-X: Ultimate Scaling for Expressive Human Pose and Shape Estimation](https://doi.org/10.1109/TPAMI.2025.3618174)** — TPAMI 2026 · Published · 3D. 大规模全身姿态与形状估计，覆盖身体、手与面部；2025 年接收，正式卷期为 2026 年 48(2)。
 - **[MetricPose: Flexible 3D Human Pose Estimation with Depth and Geometric Cues](https://arxiv.org/abs/2611.08954)** — arXiv 2026 · Preprint · 3D. 融合 RGB 先验、可选深度与环境几何，预测相机坐标系中有尺度的关节位置；2026-11-06 发布，ICRA 投稿，未核实接收。

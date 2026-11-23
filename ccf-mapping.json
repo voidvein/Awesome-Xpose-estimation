@@ -39,7 +39,7 @@
     },
     "ECCV": {
       "rank": "B",
-      "count": 22,
+      "count": 24,
       "status": "verified",
       "label": "CCF B",
       "reason": "按 2026 第七版载体等级标注，非论文质量评价；不是发表年份的历史评级。",
@@ -110,7 +110,7 @@
     },
     "arXiv": {
       "rank": null,
-      "count": 10,
+      "count": 23,
       "status": "preprint",
       "label": "arXiv",
       "reason": "预印本平台，不是 CCF 期刊或会议等级。"
@@ -249,6 +249,16 @@
       "canonicalVenue": "FG",
       "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=59",
       "sourcePage": 59
+    },
+    "Information Sciences": {
+      "rank": "B",
+      "count": 1,
+      "status": "verified",
+      "label": "CCF B",
+      "reason": "按 2026 第七版载体等级标注，非论文质量评价；不是发表年份的历史评级。",
+      "canonicalVenue": "Information Sciences",
+      "source": "https://kyc.lsu.edu.cn/_upload/article/files/20/77/2cbaa3754eb9aff9ed74cafed8ff/23a8de02-594c-445f-b084-69b0193c05b3.pdf#page=33",
+      "sourcePage": 33
     }
   }
 }

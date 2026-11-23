@@ -1,6 +1,6 @@
 # 详情页构建进度
 
-更新于 2026-11-23。共 386 篇，已展开 386 篇，其中 66 篇嵌入原图。待展开 0 篇。
+更新于 2026-11-24。共 391 篇，已展开 391 篇，其中 67 篇嵌入原图。待展开 0 篇。
 
 方法页按原文说明数据流、模块、训练与推理。数据集和综述分别说明采集与评测或分类与比较。原图按许可收录，未确认许可的保留原图链接。论文无独立结构图时，链接至对应的算法或方法正文。已在各页注明可核对的原文范围。
 
@@ -74,6 +74,7 @@
 - [Fusing Visual and Inertial Sensors with Semantics for 3D Human Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=visual-inertial-semantics)
 - [Deep Learning for Head Pose Estimation: A Survey](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hpe-deep-survey-2023)
 - [Deep learning and machine learning techniques for head pose estimation: a survey](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hpe-ml-survey-2024)
+- [Reconstructing Occluded Joints in 3D Human Pose Sequences: A Real-Occlusion Benchmark and an Interpolation-Initialised Spatio-Temporal Transformer](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=oa-skeleton-st)
 
 ## 已展开并提供原文链接
 
@@ -397,3 +398,7 @@
 - [Enhancing Hands in 3D Whole-Body Pose Estimation with Conditional Hands Modulator](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=hand4whole-plus-plus)
 - [S2HAND: Accuracy-Preservation Trade-Offs for Hand Specialization in Whole-Body Pose Models](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=s2hand)
 - [DreamHMR: From Video Generation to Human Motion Modeling via Structural Focusing](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=dreamhmr)
+- [RRL: reciprocity relationship learning with rotation-adaptive transformers for accurate head pose estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=rrl-head-pose)
+- [Coordinate Singularities Break Conformal Coverage for Gaze and Head Pose](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=coordinate-singularities-conformal-head-pose)
+- [CISyn: Human Mesh Recovery in Close Interactions with Physics-Simulated Synthetic Data](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=cisyn-hmr)
+- [Physics-based Human Pose Estimation from a Single Moving RGB Camera](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=physdynpose)
