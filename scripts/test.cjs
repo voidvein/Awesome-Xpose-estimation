@@ -143,6 +143,7 @@ const verifiedAuthorPdf=/^https:\/\/(?:faculty\.cc\.gatech\.edu\/~hic\/CS7616\/P
 const publisherPreviews=new Map([
  ['hland-pose',new Set(['https://www.sciencedirect.com/science/article/abs/pii/S0925231225010082','https://doi.org/10.1016/j.neucom.2025.130336'])],
  ['hand-survey-cameras-2019',new Set(['https://www.sciencedirect.com/science/article/abs/pii/S0031320319301724','https://doi.org/10.1016/j.patcog.2019.04.026'])],
+ ['rrl-head-pose',new Set(['https://www.sciencedirect.com/science/article/pii/S0020025526009643','https://doi.org/10.1016/j.ins.2026.124033'])],
 ]);
 for(const p of pipelinePapers){
  const pipeline=paperPipeline(p);
@@ -160,6 +161,7 @@ for(const p of pipelinePapers){
   (p.id==='headdiff'&&/^https:\/\/(?:ieeexplore\.ieee\.org\/document\/10462910|www\.nxu\.edu\.cn\/(?:info\/1590\/31709\.htm|__local\/3\/AF\/BD\/10E5B14A0EC54DD6CA74765A293_AF945962_61CB5\.png\?e=\.png))$/.test(s.url))||
   (p.id==='quatnet'&&/^https:\/\/(?:ieeexplore\.ieee\.org\/document\/8444061(?:\/figures#fig3)?|scholar\.nycu\.edu\.tw\/zh\/publications\/quatnet-quaternion-based-head-pose-estimation-with-multiregressio\/)$/.test(s.url))||
   (p.id==='instanthmr'&&/^https:\/\/arxiv\.org\/pdf\/2611\.09195v2#page=(?:3|4|5|21)$/.test(s.url))||
+  (p.id==='oa-skeleton-st'&&new Set(["https://www.mdpi.com/1424-8220/26/22/7283#sensors-26-07283-f004", "https://www.mdpi.com/1424-8220/26/22/7283#sec3dot5-sensors-26-07283", "https://www.mdpi.com/1424-8220/26/22/7283#sensors-26-07283-t003", "https://www.mdpi.com/1424-8220/26/22/7283#sensors-26-07283-t008"] ).has(s.url))||
   verifiedAuthorPdf.test(s.url)||publisherPreviews.get(p.id)?.has(s.url)||
   (p.id==='a2j-transformer-plus'&&/^https:\/\/(?:changlongjianggit\.github\.io\/A2J-Transformer-Plus\/(?:static\/images\/method_figure[23]\.png)?|github\.com\/ChanglongJiangGit\/A2J-Transformer-Plus\/blob\/main\/main\/model\.py#L188-L272)$/.test(s.url))
  ),`${p.id}: versioned section or primary PDF page anchors`);
