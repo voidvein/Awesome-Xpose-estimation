@@ -20,12 +20,16 @@ for(const p of papers){
 const markdown=fs.readFileSync(path.join(__dirname,root,'README.md'),'utf8');
 for(const p of papers.filter(p=>p.code))assert.ok(markdown.includes(`- [code](${p.code}) **[${p.title}]`),`${p.id}: README badge precedes method`);
 console.log('PASS: complete sourced detail fields, explicit reading scope, implementation provenance, safe code links and matching Markdown badges.');
-for(const p of papers){for(const key of ['id','title','category','venue','status','summary','url'])assert.ok(typeof p[key]==='string'&&p[key],`${p.id}: ${key}`);assert.ok(['Head','Hand','Human'].includes(p.category));assert.ok(['Published','Preprint'].includes(p.status));assert.ok(p.year>=1990&&p.year<=new Date().getFullYear()+1);assert.ok(p.dimensions.length&&p.dimensions.every(d=>['2D','3D'].includes(d)));assert.equal(new URL(p.url).protocol,'https:');if(p.code)assert.equal(new URL(p.code).protocol,'https:');}
+for(const p of papers){for(const key of ['id','title','category','venue','status','summary','url'])assert.ok(typeof p[key]==='string'&&p[key],`${p.id}: ${key}`);assert.ok(['Head','Hand','Human'].includes(p.category));assert.ok(['Published','Accepted','Preprint'].includes(p.status));assert.ok(p.year>=1990&&p.year<=new Date().getFullYear()+1);assert.ok(p.dimensions.length&&p.dimensions.every(d=>['2D','3D'].includes(d)));assert.equal(new URL(p.url).protocol,'https:');if(p.code)assert.equal(new URL(p.code).protocol,'https:');}
 assert.equal(filterPapers(papers,{}).length,papers.length);
 for(const category of ['Head','Hand','Human'])assert.ok(filterPapers(papers,{category}).every(p=>p.category===category));
 assert.ok(filterPapers(papers,{dimension:'2D'}).every(p=>p.dimensions.includes('2D')));
 assert.ok(filterPapers(papers,{code:true}).every(p=>p.code));
 assert.ok(filterPapers(papers,{status:'Preprint'}).every(p=>p.status==='Preprint'));
+assert.ok(filterPapers(papers,{status:'Accepted',category:'Hand',dimension:'3D'}).some(p=>p.id==='handf'));
+assert.ok(!filterPapers(papers,{status:'Published'}).some(p=>p.id==='handf'));
+assert.ok(filterPapers(papers,{status:'Accepted',category:'Hand',dimension:'3D'}).some(p=>p.id==='stablehand'));
+assert.ok(!filterPapers(papers,{status:'Published'}).some(p=>p.id==='stablehand'));
 assert.equal(filterPapers(papers,{query:'zzzz_NONEXISTENT_zzzz'}).length,0);
 assert.ok(filterPapers(papers,{query:papers[0].id}).some(p=>p.id===papers[0].id));
 assert.ok(filterPapers(papers,{year:'2024'}).every(p=>p.year===2024));
@@ -162,6 +166,7 @@ for(const p of pipelinePapers){
   (p.id==='quatnet'&&/^https:\/\/(?:ieeexplore\.ieee\.org\/document\/8444061(?:\/figures#fig3)?|scholar\.nycu\.edu\.tw\/zh\/publications\/quatnet-quaternion-based-head-pose-estimation-with-multiregressio\/)$/.test(s.url))||
   (p.id==='instanthmr'&&/^https:\/\/arxiv\.org\/pdf\/2611\.09195v2#page=(?:3|4|5|21)$/.test(s.url))||
   (p.id==='oa-skeleton-st'&&new Set(["https://www.mdpi.com/1424-8220/26/22/7283#sensors-26-07283-f004", "https://www.mdpi.com/1424-8220/26/22/7283#sec3dot5-sensors-26-07283", "https://www.mdpi.com/1424-8220/26/22/7283#sensors-26-07283-t003", "https://www.mdpi.com/1424-8220/26/22/7283#sensors-26-07283-t008"] ).has(s.url))||
+  (p.id==='head-pose-diffusion-augmentation-herjuno'&&new Set(['https://www.mdpi.com/2076-3417/16/21/10839#applsci-16-10839-f002','https://www.mdpi.com/2076-3417/16/21/10839#applsci-16-10839-t003','https://www.mdpi.com/2076-3417/16/21/10839#applsci-16-10839-f009']).has(s.url))||
   verifiedAuthorPdf.test(s.url)||publisherPreviews.get(p.id)?.has(s.url)||
   (p.id==='a2j-transformer-plus'&&/^https:\/\/(?:changlongjianggit\.github\.io\/A2J-Transformer-Plus\/(?:static\/images\/method_figure[23]\.png)?|github\.com\/ChanglongJiangGit\/A2J-Transformer-Plus\/blob\/main\/main\/model\.py#L188-L272)$/.test(s.url))
  ),`${p.id}: versioned section or primary PDF page anchors`);

@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-11-24",
-  "total": 391,
+  "updated_at": "2026-11-25",
+  "total": 394,
   "counts": {
     "complete": 67,
-    "figure_pending": 324,
+    "figure_pending": 327,
     "pending": 0
   },
   "completion_standard": "Source-checked module-level pipeline or survey classification, separate use contexts, and a figure guide. Embed paper originals when reuse permission is clear, otherwise link to the original figure or method section. Summaries alone do not count.",
@@ -4308,6 +4308,39 @@
       "figure_status": "original_link_only",
       "reviewed_at": "2026-11-22",
       "figure_note": "arXiv v1 标注 CC BY 4.0，图 2 内实拍人物画面的独立再发布许可未核实；仅链接原文。"
+    },
+    {
+      "id": "stablehand",
+      "category": "Hand",
+      "title": "StableHand: Quality-Aware Flow Matching for World-Space Dual-Hand Motion Estimation from Egocentric Video",
+      "status": "figure_pending",
+      "paper_url": "https://arxiv.org/html/2605.18553v2",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-24",
+      "figure_note": "预印本 v2 标注 CC BY 4.0。现仅链接原图；如后续内嵌，复审版面内素材，优先使用已排除左侧视频和几何示例的模型子图并标注裁剪、作者、原始链接及许可。"
+    },
+    {
+      "id": "handf",
+      "category": "Hand",
+      "title": "HaNDF: Object-Conditioned Geometric Neural Hand Distance Fields",
+      "status": "figure_pending",
+      "paper_url": "https://arxiv.org/html/2611.08578v1",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-24",
+      "figure_note": "arXiv v1 显示永久非独占存档许可，不等于再发布许可；仅链接。代码仓库许可与论文图许可分别核对。"
+    },
+    {
+      "id": "head-pose-diffusion-augmentation-herjuno",
+      "category": "Head",
+      "title": "Mitigating Data Imbalance in Head Pose Estimation Through Diffusion Model Generated Synthetic Data with Pose Reference",
+      "status": "figure_pending",
+      "paper_url": "https://doi.org/10.3390/app162110839",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-24",
+      "figure_note": "正式论文标注 CC BY 4.0；图中身份或示例素材未单独做再发布审图，保留出版方图源锚点。"
     }
   ]
 }

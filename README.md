@@ -1,10 +1,14 @@
 # Awesome Xpose Estimation
 
-A curated, non-exhaustive index of 2D and 3D head, hand and human pose estimation research, including historical and recent work. Publication, preprint, and workshop status are distinguished where known.
+A curated, non-exhaustive index of 2D and 3D head, hand and human pose estimation research, including historical and recent work. Formal publication, acceptance, preprint, and workshop status are distinguished where known.
 
 [Browse the site](https://voidvein.github.io/Awesome-Xpose-estimation/) · [Sources and curation notes](SOURCES.md) · [Detail-page progress](CURATION.md)
 
-## 最近更新 · 2026-11-24（UTC+8）
+## 最近更新 · 2026-11-25（UTC+8）
+
+- **新增 3 篇：** [StableHand](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=stablehand) · [HaNDF](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=handf) · [Herjuno–Horio 头姿增强](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-pose-diffusion-augmentation-herjuno)。当前共 394 篇。StableHand 与 HaNDF 标注为已接收，正式论文集版本尚未核实。
+
+### 2026-11-24
 
 - **新增 5 篇：** [RRL](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=rrl-head-pose) · [Coordinate Singularities](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=coordinate-singularities-conformal-head-pose) · [OA-Skeleton ST](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=oa-skeleton-st) · [CISyn-HMR](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=cisyn-hmr) · [PhysDynPose](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=physdynpose)。当前共 391 篇。
 - **原图：** OA-Skeleton ST 详情页按 CC BY 4.0 原样展示正式发表版图 4；其余新增条目保留论文或图源链接。
@@ -38,6 +42,8 @@ Serve the repository root with `python -m http.server 8000`.
 ## Index
 
 ### Head
+
+- **[Mitigating Data Imbalance in Head Pose Estimation Through Diffusion Model Generated Synthetic Data with Pose Reference](https://doi.org/10.3390/app162110839)** — Applied Sciences 2026 · Published · 3D. 用姿态参考控制人脸图像生成，补充少见头部朝向，再由已有模型为合成图重新标注并训练头部旋转估计器。收益随真实测试域和训练组合变化。
 
 - **[RRL: reciprocity relationship learning with rotation-adaptive transformers for accurate head pose estimation](https://doi.org/10.1016/j.ins.2026.124033)** — Information Sciences 2027 · Published · 3D. RRL 通过自适应训练特征融合和面部结构互易性建模，利用不同脸部区域在转头时的联动线索估计三维头部朝向。
 - [code](https://github.com/hnuzhy/SemiUHPE) **[Semi-Supervised Unconstrained Head Pose Estimation in the Wild](https://doi.org/10.1109/TPAMI.2025.3631642)** — TPAMI 2026 · Published · 3D. 利用未标注野外头部图像进行半监督全范围旋转估计；预印本首发于 2024 年，正式发表于 TPAMI 2026 年第 48 卷第 3 期。
@@ -151,6 +157,11 @@ Serve the repository root with `python -m http.server 8000`.
 - **[Head Pose Estimation in Computer Vision: A Survey](https://doi.org/10.1109/TPAMI.2008.106)** — TPAMI 2009 · Published · 3D. 提供非约束头姿估计的历史脉络与方法比较，可作为深度学习前研究的入口。
 
 ### Hand
+
+- [code](https://github.com/circle-group/HaNDF) **[HaNDF: Object-Conditioned Geometric Neural Hand Distance Fields](https://arxiv.org/html/2611.08578v1)** · NeurIPS 2026 已接收 · 3D。HaNDF 学习物体条件下的手部关节旋转先验，可接在单图手物重建器之后，修正不合理的关节姿态，也可补全缺失关节。
+
+- [code](https://github.com/huajian-zeng/stablehand) **[StableHand: Quality-Aware Flow Matching for World-Space Dual-Hand Motion Estimation from Egocentric Video](https://arxiv.org/html/2605.18553v2)** · NeurIPS 2026 已接收 · 3D。StableHand 从第一视角视频重建左右手在世界坐标中的三维运动。它分别估计双手腕部位置与手指姿态的可靠性，保留可信观测，再用双手运动先验补全遮挡或出画片段。
+
 
 - [code](https://github.com/ronggong000/S2HAND) **[S2HAND: Accuracy-Preservation Trade-Offs for Hand Specialization in Whole-Body Pose Models](https://arxiv.org/abs/2611.10416v1)** — arXiv 2026 · Preprint · 2D. 在 Sapiens2 的 308 点全身二维接口内加强手指定位：MT 只替换 40 张手指热图，Pose 进一步微调主干的三个块，以更强的手部表现交换严格的输出保留。
 - [code](https://github.com/noahcao/FAH) **[Fast and Accurate Hand Estimation in Pixels, Interaction and World Space](https://arxiv.org/abs/2611.07711)** — arXiv 2026 · Preprint · 2D / 3D. 用关节和表面点拟合 MANO 或 MHR-Hand，可选部位、接触、因果视频细化和世界定位。

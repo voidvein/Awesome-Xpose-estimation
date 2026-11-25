@@ -40854,5 +40854,321 @@
       "caption": "PhysDynPose 将相机与人体运动初始化转换到世界坐标，再约束足地接触并更新姿态。",
       "note": "arXiv v1 标注 CC BY 4.0，图 2 内实拍人物画面的独立再发布许可未核实；仅链接原文。"
     }
+  },
+  {
+    "id": "stablehand",
+    "title": "StableHand: Quality-Aware Flow Matching for World-Space Dual-Hand Motion Estimation from Egocentric Video",
+    "authors": [
+      "Huajian Zeng",
+      "Chaohua Yao",
+      "Yuantai Zhang",
+      "Jiaqi Yang",
+      "Rolandos Alexandros Potamias",
+      "Xingxing Zuo"
+    ],
+    "year": 2026,
+    "category": "Hand",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "NeurIPS",
+    "status": "Accepted",
+    "url": "https://arxiv.org/html/2605.18553v2",
+    "version": "NeurIPS 2026 已接收；arXiv:2605.18553v2（2026-10-26）；未核实正式论文集版本",
+    "summary": "StableHand 从第一视角视频重建左右手在世界坐标中的三维运动。它分别估计双手腕部位置与手指姿态的可靠性，保留可信观测，再用双手运动先验补全遮挡或出画片段。",
+    "tags": [
+      "StableHand",
+      "egocentric",
+      "bimanual",
+      "world-space",
+      "3D hand motion",
+      "flow matching",
+      "occlusion",
+      "HOT3D",
+      "ARCTIC"
+    ],
+    "code": "https://github.com/huajian-zeng/stablehand",
+    "code_provenance": {
+      "url": "https://github.com/huajian-zeng/stablehand",
+      "verified_at": "2026-11-24",
+      "basis": "作者 MIT 代码仓库提供的是增强版，另有两个数据集专用运动先验、共享质量网络、评测缓存和演示入口；MANO 模型需按其条款另行获取。未下载权重或运行推理。"
+    },
+    "analysis": {
+      "problem": "第一视角视频常因头动或手物接触丢失观测，同一帧中腕部平移与手指关节的可信度也不同。对所有观测一视同仁，会把错误传播到最终轨迹。",
+      "method": "原论文冻结 WiLoR 和 Depth Anything 3 提取 MANO 拟合、相机及几何线索。质量网络预测左右手各自腕部平移与手指姿态的误差，经校准转为四路置信度；这些置信度同时控制噪声日程、速度目标、DiT 条件调制及 ODE 起点。",
+      "inputs_outputs": "输入为一段已观测的第一视角 RGB 视频，论文评测的片段为 150 帧；输出双手腕轨迹和手指姿态组成的世界坐标三维运动序列。不预测视频窗口之后的未来动作。",
+      "contribution": "论文 v2 表 1：HOT3D 244 个测试片段上，W-MPJPE 为 57.83 mm，HaWoR 为 71.89 mm。表 2：ARCTIC P2 验证集 s05（34 段切为 155 个片段）上，W-MPJPE 为 124.59 mm，HMP-SLAM 为 166.21 mm；双手同时有效帧的腕间相对误差 MRRPE 为 93.71 mm，HaWoR 为 112.36 mm。W-MPJPE 不拟合对齐，评测包括检测失败但真值有效的帧。",
+      "limitations": "长时间遮挡可能使输出偏向合理但无法由画面证实的运动。HOT3D 中把上游 WiLoR 改为 HaMeR 后，W-MPJPE 为 104.81 mm，仅重校准为 103.84 mm，在 HaMeR 上重训为 62.16 mm。ARCTIC 的 s03 是私有榜单测试集，不能把 s05 数字当作榜单结果。",
+      "sources": [
+        "https://neurips.cc/Downloads/2026",
+        "https://neurips.cc/virtual/2026/poster/155198",
+        "https://arxiv.org/html/2605.18553v2#S3.F2",
+        "https://arxiv.org/html/2605.18553v2#S4",
+        "https://arxiv.org/html/2605.18553v2#A2",
+        "https://arxiv.org/html/2605.18553v2#A5",
+        "https://arxiv.org/html/2605.18553v2#A7",
+        "https://arxiv.org/html/2605.18553v2#A8",
+        "https://huajian-zeng.github.io/projects/stablehand/",
+        "https://github.com/huajian-zeng/stablehand/blob/main/docs/enhanced_version.md",
+        "https://huggingface.co/huajian-zeng/stablehand"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "核对官方 NeurIPS 目录的 poster 155198、作者接收公告、arXiv v2 图 2、实验表 1–2 与补充附录、作者增强版说明和演示入口。未独立复现，也未确认正式论文集版本。",
+      "verification_note": "作者公开增强版将 Depth Anything 3 换为 VGGT-Omega，并一并调整腕部残差、视觉/深度条件与时序监督；作者分别报告 HOT3D/ARCTIC W-MPJPE 为 45.19/92.52 mm。这是增强版的整套结果，不是论文图 2 的原方法结果，也不能把增益单归因于几何骨干。",
+      "verified_at": "2026-11-24"
+    },
+    "pipeline": {
+      "kind": "method",
+      "overview": "先把逐帧双手观测放到共同坐标系，分别估计腕部与手指可靠性，再由条件流匹配补齐不可靠的时间段。",
+      "steps": [
+        {
+          "title": "获得双手与相机观测",
+          "description": "用 WiLoR 提取逐帧左右手 MANO 候选；原论文使用 Depth Anything 3 获取相机和几何线索。"
+        },
+        {
+          "title": "估计四路置信度",
+          "description": "质量网络分别估计左右手腕平移和手指姿态误差，再用校准后的径向基函数转换成质量值。"
+        },
+        {
+          "title": "调节流匹配过程",
+          "description": "每帧用四类 token 表示双手，以质量信号调节加噪日程、目标速度和 DiT 的 AdaLN 条件，使可信部分保留观测。"
+        },
+        {
+          "title": "补全并恢复世界坐标轨迹",
+          "description": "质量感知的初值进入 ODE 求解，利用整段运动和双手关联补全遮挡部分；低置信度补全不等于新观测。"
+        }
+      ],
+      "training": "先学习对 WiLoR 观测误差的质量预测，再训练有四路质量条件的运动先验。ARCTIC 的 s05 未进入论文所述多数据集质量网络预训练。",
+      "inference": "原论文 H100 单卡上每 150 帧约 27.29 秒，包含前端，20 步 Euler ODE 求解约 0.23 秒；不要把 v2 计时当作增强版速度。公开增强版可用作者 HOT3D 样例 clip-002736 检查流程。",
+      "figure_reading": "图 2 左侧是外部估计器，右上青灰色时序网络读出四路误差并转成质量条件；下方的流匹配分支用这些信号保留高质量观测、填补低质量片段。区别针对观测误差学习的质量网络与针对运动学习的去噪网络。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "图 2 · StableHand 原论文架构",
+          "url": "https://arxiv.org/html/2605.18553v2#S3.F2"
+        },
+        {
+          "label": "§4 · HOT3D 和 ARCTIC 主实验",
+          "url": "https://arxiv.org/html/2605.18553v2#S4"
+        },
+        {
+          "label": "附录 E · 原论文计时",
+          "url": "https://arxiv.org/html/2605.18553v2#A5"
+        },
+        {
+          "label": "附录 H · 世界坐标指标定义",
+          "url": "https://arxiv.org/html/2605.18553v2#A8"
+        }
+      ],
+      "reviewed_at": "2026-11-24"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2605.18553v2#S3.F2",
+      "figure_number": "Figure 2",
+      "version": "arXiv:2605.18553v2",
+      "caption": "质量网络为双手腕部与手指分别估计置信度；流匹配分支据此保留可信观测并补全不可靠片段。",
+      "note": "预印本 v2 标注 CC BY 4.0。现仅链接原图；如后续内嵌，复审版面内素材，优先使用已排除左侧视频和几何示例的模型子图并标注裁剪、作者、原始链接及许可。"
+    }
+  },
+  {
+    "id": "handf",
+    "title": "HaNDF: Object-Conditioned Geometric Neural Hand Distance Fields",
+    "authors": [
+      "Zuhao Liu",
+      "Melih Darcan",
+      "Zhengdi Yu",
+      "Riza Alp Guler",
+      "Tolga Birdal"
+    ],
+    "year": 2026,
+    "category": "Hand",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "NeurIPS",
+    "status": "Accepted",
+    "url": "https://arxiv.org/html/2611.08578v1",
+    "version": "NeurIPS 2026 已接收，官方节目 poster 149700；arXiv:2611.08578v1（2026-11-05），未核实正式论文集版本",
+    "summary": "HaNDF 学习物体条件下的手部关节旋转先验，可接在单图手物重建器之后，修正不合理的关节姿态，也可补全缺失关节。",
+    "tags": [
+      "HaNDF",
+      "hand-object interaction",
+      "3D hand pose",
+      "MANO",
+      "Riemannian gradient",
+      "HOI4D",
+      "OakInk",
+      "DexYCB"
+    ],
+    "code": "https://github.com/circle-group/HaNDF",
+    "code_provenance": {
+      "url": "https://github.com/circle-group/HaNDF",
+      "verified_at": "2026-11-24",
+      "basis": "作者仓库提供 CC BY-NC 4.0 代码、权重、固定物体编码的快速示例与 30 个留出物体实例的 3,000 个噪声姿态；示例不是完整重建协议。MANO 网格指标所需模型另行获取；作者仍将 DeepSDF 权重及为新网格拟合的处理代码列为待发布。未运行推理。"
+    },
+    "analysis": {
+      "problem": "手与物互相遮挡时，由单图恢复的关节可能不符合该物体允许的抓握，通用手部先验也不知道接触的物体是什么。",
+      "method": "把 MANO 关节角表示为单位四元数组成的乘积流形，将物体编码与关节 token 交给条件网络，预测到合理关节构型的距离；在流形上求梯度并作指数映射，逐步修正初始姿态。",
+      "inputs_outputs": "输入为上游得到的手部初始关节旋转及物体几何编码，可附观测约束；输出修正后的旋转与对应 MANO 手部。不是独立从像素预测手物的模型。",
+      "contribution": "表 2 给所有方法真值物体几何。AlignSDF 加 HaNDF 后，HOI4D、OakInk、DexYCB 的 MPJPE 分别从 10.60→10.43、10.50→10.17、17.19→16.97 mm。表 3 在 HOI4D 使用 AlignSDF 预测的物体，不检索或优化物体时，手部 MPJPE 12.08→11.74 mm。",
+      "limitations": "真值物体对照不代表端到端成绩。表 2 中 OakInk 网格相交体积指标反而从 0.82 增至 0.87；表 3 中检索近邻形状、再优化物体是独立版本，不应并入手部先验自身的增益。",
+      "sources": [
+        "https://neurips.cc/Downloads/2026",
+        "https://neurips.cc/virtual/2026/loc/sydney/poster/149700",
+        "https://arxiv.org/html/2611.08578v1#S4.F3",
+        "https://arxiv.org/html/2611.08578v1#S5.T2",
+        "https://arxiv.org/html/2611.08578v1#S5.T3",
+        "https://github.com/circle-group/HaNDF#quick-start"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "核对官方程序目录、arXiv v1 §4、§5 表 2–3 及作者仓库；未独立复现。",
+      "verification_note": "会议已接收，未确认最终论文集或分轨；不自动继承主会的 CCF A。作者公开的冻结去噪集不等于论文图像重建实验。",
+      "verified_at": "2026-11-24"
+    },
+    "pipeline": {
+      "kind": "method",
+      "overview": "物体条件提供约束，学习的距离场在旋转流形上修正上游手部初值。",
+      "steps": [
+        {
+          "title": "构建手与物表示",
+          "description": "将各个 MANO 手关节表示为单位四元数，将物体表面编码为条件特征。"
+        },
+        {
+          "title": "估计构型距离",
+          "description": "条件网络融合关节 token 与物体编码，预测当前姿态离合理构型有多远。"
+        },
+        {
+          "title": "作流形投影",
+          "description": "用距离场梯度给出方向，以预测距离调整步幅，再用指数映射保持单位四元数。缺失关节任务加入测量约束以保留已观测部分。"
+        },
+        {
+          "title": "接入重建器并区分条件",
+          "description": "将修正的关节交给 MANO。表 2 固定真值物体，表 3 用预测物体并另列检索与优化物体的变体。"
+        }
+      ],
+      "training": "学习物体条件下从扰动关节构型到真实构型集合的距离，不重训用于图像起点的上游主干来替代距离场。",
+      "inference": "可从作者示例检查固定编码下的投影；输入错物体和初值不准会影响修正。未在公开样例中复跑三数据集重建。",
+      "figure_reading": "图 3 重点是物体编码如何改变合理关节构型，而非从原始图像产生物体网格；图 8 是定性重建结果，不是结构图。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "图 3 · 物体条件距离场",
+          "url": "https://arxiv.org/html/2611.08578v1#S4.F3"
+        },
+        {
+          "label": "表 2 · 真值物体",
+          "url": "https://arxiv.org/html/2611.08578v1#S5.T2"
+        },
+        {
+          "label": "表 3 · 预测物体",
+          "url": "https://arxiv.org/html/2611.08578v1#S5.T3"
+        }
+      ],
+      "reviewed_at": "2026-11-24"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2611.08578v1#S4.F3",
+      "figure_number": "Figure 3",
+      "version": "arXiv:2611.08578v1",
+      "caption": "给定物体编码，HaNDF 联合建模可行的手部关节构型。",
+      "note": "arXiv v1 显示永久非独占存档许可，不等于再发布许可；仅链接。代码仓库许可与论文图许可分别核对。"
+    }
+  },
+  {
+    "id": "head-pose-diffusion-augmentation-herjuno",
+    "title": "Mitigating Data Imbalance in Head Pose Estimation Through Diffusion Model Generated Synthetic Data with Pose Reference",
+    "authors": [
+      "Dimas Herjuno",
+      "Keiichi Horio"
+    ],
+    "year": 2026,
+    "category": "Head",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "Applied Sciences",
+    "status": "Published",
+    "url": "https://doi.org/10.3390/app162110839",
+    "doi": "10.3390/app162110839",
+    "volume": 16,
+    "article_number": "10839",
+    "publication_date": "2026-11-02",
+    "summary": "用姿态参考控制人脸图像生成，补充少见头部朝向，再由已有模型为合成图重新标注并训练头部旋转估计器。收益随真实测试域和训练组合变化。",
+    "tags": [
+      "head pose",
+      "3D orientation",
+      "synthetic augmentation",
+      "SDXL",
+      "ControlNet",
+      "6DRepNet",
+      "Hopenet",
+      "300W-LP",
+      "BIWI",
+      "AFLW2000"
+    ],
+    "analysis": {
+      "problem": "训练数据前视样本多，接近侧脸或极端俯视的真值很少；直接让生成器输出请求角度也不能保证最后人脸实际转到了该角度。",
+      "method": "先将所请求的三维角度投影为二维人脸关键点参考，经 OpenPose ControlNet、InstantID 和文字共同约束 SDXL；再用独立 DAD-3DNet 为生成图重新估计姿态，用作伪标签。",
+      "inputs_outputs": "输入为目标头部朝向、合成身份参考及文本提示，得到带旋转伪标签的人脸图；用于训练 6DRepNet 或 Hopenet，推理时仍由原估计器从输入图像预测三维朝向。",
+      "contribution": "表 3 中仅在 300W-LP 上增加合成数据，6DRepNet 在未见 BIWI 测试主体的测地误差 10.60°→8.63°，AFLW2000 则 6.90°→8.30°。在 300W-LP + BIWI 训练集之上加合成数据，AFLW2000 8.68°→7.81°，BIWI 测试 4.59°→4.69°。",
+      "limitations": "图 9 的五个示例请求俯仰 −60°，DAD-3DNet 重估只有 −8° 至 −12°；不应视伪标签为实测真值。合成测试来自同一生成流程，论文未说明按身份或基础渲染分组切分，三域平均不能替代各真实测试域对照。",
+      "sources": [
+        "https://doi.org/10.3390/app162110839",
+        "https://www.mdpi.com/2076-3417/16/21/10839",
+        "https://www.mdpi.com/2076-3417/16/21/10839#applsci-16-10839-f002"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "正式发表版，核对 §3.2–3.5、§4.1 的训练与测试切分、表 3、图 9 和数据可用性声明，未复现。",
+      "verification_note": "作者报告 19,500 张基础图，增强及重标后 77,998 张，训练 70,198、留出 7,800。数据向作者申请，不标为开放下载。",
+      "verified_at": "2026-11-24"
+    },
+    "pipeline": {
+      "kind": "method",
+      "overview": "生成训练补充数据，不改下游的头部姿态估计主干。",
+      "steps": [
+        {
+          "title": "形成姿态参考",
+          "description": "按目标 yaw、pitch 旋转三维关键点模板，再投影成二维关键点图。"
+        },
+        {
+          "title": "条件扩散合成",
+          "description": "让 OpenPose ControlNet 约束结构，InstantID 提供身份条件，文本约束外观，SDXL 生成图片。"
+        },
+        {
+          "title": "重标而非沿用目标角",
+          "description": "对合成和增强后的图片用 DAD-3DNet 测角；请求角是生成条件，重估角才是训练伪标签。"
+        },
+        {
+          "title": "训练并按域评测",
+          "description": "训练 6DRepNet 或 Hopenet，在 AFLW2000、BIWI 的测试主体和合成留出集分别报告测地角误差。"
+        }
+      ],
+      "training": "比较 300W-LP 与加合成图等六组配方；使用 BIWI 训练数据的配方与未使用 BIWI 的配方分别解读。",
+      "inference": "实际头姿估计用训练后的原主干；运行时不需要生成脸、InstantID 或 DAD-3DNet。",
+      "figure_reading": "图 2 分开画了扩散条件与生成后重标分支。施加目标角度的骨架与最终用于监督的标签不是同一信号。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "图 2 · 条件生成和重标",
+          "url": "https://www.mdpi.com/2076-3417/16/21/10839#applsci-16-10839-f002"
+        },
+        {
+          "label": "表 3 · 跨域结果",
+          "url": "https://www.mdpi.com/2076-3417/16/21/10839#applsci-16-10839-t003"
+        },
+        {
+          "label": "图 9 · 大俯角限制",
+          "url": "https://www.mdpi.com/2076-3417/16/21/10839#applsci-16-10839-f009"
+        }
+      ],
+      "reviewed_at": "2026-11-24"
+    },
+    "figure": {
+      "source": "https://www.mdpi.com/2076-3417/16/21/10839#applsci-16-10839-f002",
+      "figure_number": "Figure 2",
+      "version": "Applied Sciences 16(21), 10839 · 2026-11-02",
+      "caption": "目标姿态、身份与文本共同约束扩散生成，渲染后的脸再由独立估计器重标。",
+      "note": "正式论文标注 CC BY 4.0；图中身份或示例素材未单独做再发布审图，保留出版方图源锚点。"
+    }
   }
 ]
