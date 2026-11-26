@@ -41170,5 +41170,519 @@
       "caption": "目标姿态、身份与文本共同约束扩散生成，渲染后的脸再由独立估计器重标。",
       "note": "正式论文标注 CC BY 4.0；图中身份或示例素材未单独做再发布审图，保留出版方图源锚点。"
     }
+  },
+  {
+    "id": "horcrux",
+    "title": "Generalizable Feed-Forward 3D Hand-Object Reconstruction with Coarse-to-Fine Contact Estimation",
+    "authors": [
+      "Seonghwan Park",
+      "Yong-Hoon Kwon",
+      "Min-Gyu Park"
+    ],
+    "year": 2026,
+    "category": "Hand",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "arXiv",
+    "status": "Preprint",
+    "url": "https://arxiv.org/abs/2611.31812v1",
+    "summary": "HORCRUX 用物体网格与手部图像特征联合估计三维姿态，再用重建几何将接触细化到手表面区域。",
+    "tags": [
+      "hand-object",
+      "mesh",
+      "contact",
+      "DexYCB",
+      "OakInk",
+      "HOI4D"
+    ],
+    "publication_date": "2026-11-24",
+    "analysis": {
+      "problem": "抓握时手和物体互相遮挡；已知类别或只从图像猜接触，都会限制对未见物体的泛化与定位。",
+      "method": "冻结编码器读取图像、手部裁剪和物体网格；共享 Transformer 联合处理手和物体，先估计关节接触，再结合重建后的区域距离细化。",
+      "inputs_outputs": "输入为单图及给定或从图像另行重建的网格；输出单手或双手与物体的三维姿态、粗粒度关节接触与细粒度表面接触。",
+      "contribution": "DexYCB S0 抓握帧的原文表 1 报告手部 MJE 10.12 mm、PA-MJE 4.95 mm；表 3 的关节接触在 3 mm 判定下比 HACO 高 6.88 个 F1 点。为不同任务、不同指标。表 4 中联合粗接触与几何的版本在四种设置中三项最佳。",
+      "limitations": "物体推理需要网格，网格可由另一个模型提供；不可将给定网格实验看作完全无先验的 RGB 端到端结果。HO3Dv2 的迁移仍有重合物体类别，未见对象看 OakInk 和 HOI4D。未核验可执行代码。",
+      "sources": [
+        "https://arxiv.org/abs/2611.31812v1",
+        "https://arxiv.org/html/2611.31812v1#S2.F2",
+        "https://arxiv.org/html/2611.31812v1#S4",
+        "https://shpark97.github.io/horcrux/"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "预印本 §3–4、表 1/3–5；未复现。",
+      "verified_at": "2026-11-25"
+    },
+    "pipeline": {
+      "kind": "method",
+      "overview": "HORCRUX 用物体网格与手部图像特征联合估计三维姿态，再用重建几何将接触细化到手表面区域。",
+      "steps": [
+        {
+          "title": "编码图像与网格",
+          "description": "编码场景图与单手或双手裁剪，并从物体网格取得冻结特征。"
+        },
+        {
+          "title": "联合估计",
+          "description": "共享 Transformer 预测手姿和物体变换，并输出 21 个关节的接触概率。"
+        },
+        {
+          "title": "细化表面接触",
+          "description": "结合粗接触、重建网格的局部距离，细化到手部区域。"
+        },
+        {
+          "title": "判断评测条件",
+          "description": "分别看同域、跨数据集与物体网格来源；接触阈值决定 F1 的含义。"
+        }
+      ],
+      "training": "先训练联合姿态与关节接触，再学习区域细化；单手与双手实验使用各自训练设置。",
+      "inference": "给定图像和网格走前馈推理；网格来源不同的结果单独看。",
+      "figure_reading": "左侧以共享特征保持手物相对位置；右侧从关节概率走到几何约束的区域接触。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "图 2 · 方法总览",
+          "url": "https://arxiv.org/html/2611.31812v1#S2.F2"
+        },
+        {
+          "label": "评测与迁移",
+          "url": "https://arxiv.org/html/2611.31812v1#S4"
+        },
+        {
+          "label": "作者项目",
+          "url": "https://shpark97.github.io/horcrux/"
+        }
+      ],
+      "reviewed_at": "2026-11-25"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2611.31812v1#S2.F2",
+      "figure_number": "Figure 2",
+      "version": "arXiv v1",
+      "caption": "左侧以共享特征保持手物相对位置；右侧从关节概率走到几何约束的区域接触。",
+      "note": "保留原文图源链接；未将原图、示例影像或第三方素材重新发布。"
+    },
+    "arxiv": "2611.31812"
+  },
+  {
+    "id": "cadence-whole-body",
+    "title": "CADENCE: Temporally Coherent Whole-Body Human Mesh Recovery that Preserves Expressive Hand Motion",
+    "authors": [
+      "Keniel Peart",
+      "Jagmohan Chauhan",
+      "Indu P. Bodala",
+      "Shelly Vishwakarma"
+    ],
+    "year": 2026,
+    "category": "Human",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "arXiv",
+    "status": "Preprint",
+    "url": "https://arxiv.org/abs/2611.26783v1",
+    "summary": "CADENCE 在整身网格恢复中使用高分辨率手部特征，再按关节与帧学习时序滤波，减少抖动并尽量保留快速手势。",
+    "tags": [
+      "SMPL-X",
+      "temporal smoothing",
+      "expressive hands",
+      "3DPW",
+      "SignAvatars"
+    ],
+    "publication_date": "2026-11-19",
+    "code": "https://github.com/keniel123/cadence",
+    "code_provenance": {
+      "url": "https://github.com/keniel123/cadence",
+      "source": "https://github.com/keniel123/cadence",
+      "verified_at": "2026-11-25",
+      "note": "作者仓库与可用性说明已核对，未运行。"
+    },
+    "analysis": {
+      "problem": "对整个姿态统一平滑容易把快速但真实的指部动作一并抹去；逐帧预测又容易抖动。",
+      "method": "共享 C-RADIOv4 主干和结构化解码器恢复逐帧 SMPL-X；高清手部分支只更新手指旋转。离线时序模块沿运动链与时间学习按关节和帧变化的对称滤波器混合。",
+      "inputs_outputs": "输入单目视频及每人跟踪框，输出时序一致的 SMPL-X；滤波阶段保留形状、表情和相机参数。",
+      "contribution": "原文在相同 3DPW 输入上平滑前后，加速度误差 17.4→5.4 mm/s²、PA-MPJPE 41.9→40.2 mm。SignAvatars/How2Sign 峰值速度幅度比 0.98，重训的全向量 SmoothNet-WB 为 0.35，但 H-MPJPE 分别为 18.68 和 17.82 mm。",
+      "limitations": "3DPW 只给 14 个身体关节的该对照，不是手或世界坐标得分。手语参照是拟合伪真值，幅度比不是峰值召回。视频 demo 选择最大人体，不是多人身份追踪。",
+      "sources": [
+        "https://arxiv.org/abs/2611.26783v1",
+        "https://arxiv.org/html/2611.26783v1#S3.F1",
+        "https://arxiv.org/html/2611.26783v1#S4.SS2",
+        "https://arxiv.org/html/2611.26783v1#S4.SS6",
+        "https://github.com/keniel123/cadence#license"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "预印本 §3–4、作者代码和权重条款；未运行。",
+      "verified_at": "2026-11-25"
+    },
+    "pipeline": {
+      "kind": "method",
+      "overview": "CADENCE 在整身网格恢复中使用高分辨率手部特征，再按关节与帧学习时序滤波，减少抖动并尽量保留快速手势。",
+      "steps": [
+        {
+          "title": "逐帧网格",
+          "description": "共享图像主干解码逐帧身体参数。"
+        },
+        {
+          "title": "手指更新",
+          "description": "高清手框按二维关节采样特征，只覆盖手指旋转。"
+        },
+        {
+          "title": "窗口平滑",
+          "description": "32 帧窗、16 帧步长，用 Hann 混合相邻窗口。"
+        },
+        {
+          "title": "拼接输出",
+          "description": "对重叠窗口加权混合，恢复完整姿态序列并沿用原相机、形状与表情。"
+        }
+      ],
+      "training": "分别进行基础、手部、基于已存预测的时序训练，再做最终 LoRA。",
+      "inference": "离线窗口用前后文；保留相机、形状与表情。MIT 适用于代码，权重仅非商用研究，SMPL-X 另行获取。",
+      "figure_reading": "留意手部分支修订逐帧手指参数、时序模块平滑整段旋转是两个步骤。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "图 1 · 逐帧与时序模块",
+          "url": "https://arxiv.org/html/2611.26783v1#S3.F1"
+        },
+        {
+          "label": "3DPW 及手语结果",
+          "url": "https://arxiv.org/html/2611.26783v1#S4.SS2"
+        },
+        {
+          "label": "ARCTIC 独立实验",
+          "url": "https://arxiv.org/html/2611.26783v1#S4.SS6"
+        },
+        {
+          "label": "实现与许可",
+          "url": "https://github.com/keniel123/cadence#license"
+        }
+      ],
+      "reviewed_at": "2026-11-25"
+    },
+    "figure": {
+      "source": "https://arxiv.org/html/2611.26783v1#S3.F1",
+      "figure_number": "Figure 1",
+      "version": "arXiv v1",
+      "caption": "留意手部分支修订逐帧手指参数、时序模块平滑整段旋转是两个步骤。",
+      "note": "保留原文图源链接；未将原图、示例影像或第三方素材重新发布。"
+    },
+    "arxiv": "2611.26783"
+  },
+  {
+    "id": "bboxmaskpose-v2",
+    "title": "BBoxMaskPose v2: Expanding Mutual Conditioning to 3D",
+    "authors": [
+      "Miroslav Purkrabek",
+      "Constantin Kolomiiets",
+      "Jiří Matas"
+    ],
+    "year": 2026,
+    "category": "Human",
+    "dimensions": [
+      "2D"
+    ],
+    "venue": "IJCV",
+    "status": "Published",
+    "url": "https://doi.org/10.1007/s11263-026-03113-6",
+    "summary": "通过人体检测、二维关键点和实例掩码的迭代互相提示，拆分拥挤场景中的遮挡人物，并把掩码传给下游三维模型。",
+    "tags": [
+      "2D pose",
+      "person instance segmentation",
+      "occlusion",
+      "OCHuman",
+      "PMPose",
+      "SAM 3D Body"
+    ],
+    "ccf": {
+      "tier": "A",
+      "source": "https://www.ccf.org.cn/Academic_Evaluation/AI/",
+      "version": "CCF 第七版",
+      "canonicalVenue": "IJCV"
+    },
+    "doi": "10.1007/s11263-026-03113-6",
+    "publication_date": "2026-11-01",
+    "code": "https://github.com/MiraPurkrabek/BBoxMaskPose",
+    "code_provenance": {
+      "url": "https://github.com/MiraPurkrabek/BBoxMaskPose",
+      "source": "https://github.com/MiraPurkrabek/BBoxMaskPose",
+      "verified_at": "2026-11-25",
+      "note": "作者仓库与可用性说明已核对，未运行。"
+    },
+    "analysis": {
+      "problem": "相邻人物的检测框大面积重叠，单人关键点模型容易混入其它人的关节，严重遮挡又会漏检。",
+      "method": "全图遮黑已处理的实例以再检测；PMPose 用掩码和 ProbPose 线索估计人体关键点，挑选可信关键点提示 SAM-pose2seg 细化该实例。",
+      "inputs_outputs": "输入多人图像，输出检测框、二维关键点、实例掩码；掩码可另行提示已有的 SAM 3D Body。",
+      "contribution": "IJCV 作者稿表 9：原始 OCHuman 与 OCHuman-Pose 两套标注下，BMPv2 掩码提示 SAM 3D Body 的重投影二维 AP 分别为 54.8、85.2，RTMDet-L 掩码分别为 40.0、69.5。同一标注内差值为 14.8、15.7 点。",
+      "limitations": "54.8 与 85.2 不是同一标注标准下的算法增益；这也不是深度或公制 3D 精度。应区别 ICCV 的第一版与本期刊版。",
+      "sources": [
+        "https://doi.org/10.1007/s11263-026-03113-6",
+        "https://mirapurkrabek.github.io/BBox-Mask-Pose/static/pdfs/IJCV26-BBoxMaskPose-v2.pdf#page=5",
+        "https://mirapurkrabek.github.io/BBox-Mask-Pose/static/pdfs/IJCV26-BBoxMaskPose-v2.pdf#page=15",
+        "https://huggingface.co/datasets/vrg-prague/OCHuman-Pose"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "期刊元数据、作者 29 页稿及附录、标注文件列表；未运行。",
+      "verified_at": "2026-11-25"
+    },
+    "pipeline": {
+      "kind": "method",
+      "overview": "通过人体检测、二维关键点和实例掩码的迭代互相提示，拆分拥挤场景中的遮挡人物，并把掩码传给下游三维模型。",
+      "steps": [
+        {
+          "title": "找未处理实例",
+          "description": "在遮掉已处理区域后重新检测。"
+        },
+        {
+          "title": "估计二维姿态",
+          "description": "在压暗背景的单人裁剪上用 PMPose 预测关节、存在、可见性与置信度。"
+        },
+        {
+          "title": "细化掩码",
+          "description": "选择关节提示 SAM-pose2seg；新掩码反馈给下一轮检测。"
+        },
+        {
+          "title": "停止或再检测",
+          "description": "把掩码更新回全图，再检查是否找到新实例；下游三维恢复另行运行。"
+        }
+      ],
+      "training": "检测、二维姿态、分割模块互相提供提示，并非重训一个三维模型。",
+      "inference": "迭代到达上限或未发现新实例即停；3D 下游 demo 需单独获得 Meta 权重。",
+      "figure_reading": "按全图检测、单人姿态、原图掩码三块追踪反馈；图含 OCHuman 示例。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "图 2 · 检测、姿态与分割",
+          "url": "https://mirapurkrabek.github.io/BBox-Mask-Pose/static/pdfs/IJCV26-BBoxMaskPose-v2.pdf#page=5"
+        },
+        {
+          "label": "表 9 · 下游重投影结果",
+          "url": "https://mirapurkrabek.github.io/BBox-Mask-Pose/static/pdfs/IJCV26-BBoxMaskPose-v2.pdf#page=15"
+        },
+        {
+          "label": "OCHuman-Pose 标注",
+          "url": "https://huggingface.co/datasets/vrg-prague/OCHuman-Pose"
+        }
+      ],
+      "reviewed_at": "2026-11-25"
+    },
+    "figure": {
+      "source": "https://mirapurkrabek.github.io/BBox-Mask-Pose/static/pdfs/IJCV26-BBoxMaskPose-v2.pdf#page=5",
+      "figure_number": "Figure 2",
+      "version": "IJCV 作者稿，2026",
+      "caption": "按全图检测、单人姿态、原图掩码三块追踪反馈；图含 OCHuman 示例。",
+      "note": "保留原文图源链接；未将原图、示例影像或第三方素材重新发布。"
+    },
+    "volume": 134,
+    "article_number": "506",
+    "arxiv": "2601.15200"
+  },
+  {
+    "id": "abdhpe",
+    "title": "AbdHPE: Learning Abductive Relationships for Human Pose Estimation via Syntactic Holistic Perception",
+    "authors": [
+      "Hai Liu",
+      "Ziyi Zhao",
+      "Tingting Liu",
+      "Chongxin Zheng",
+      "Zhaoli Zhang",
+      "You-Fu Li"
+    ],
+    "year": 2026,
+    "category": "Human",
+    "dimensions": [
+      "2D"
+    ],
+    "venue": "TCSVT",
+    "status": "Published",
+    "url": "https://doi.org/10.1109/TCSVT.2026.3716416",
+    "summary": "利用骨架约束下的关节与肢体关系，为遮挡图像补足局部视觉证据并估计二维人体关键点。",
+    "tags": [
+      "2D pose",
+      "occlusion",
+      "skeletal topology",
+      "CrowdPose",
+      "OCHuman",
+      "COCO"
+    ],
+    "ccf": {
+      "tier": "B",
+      "source": "https://www.ccf.org.cn/Academic_Evaluation/CGAndMT/",
+      "version": "CCF 第七版",
+      "canonicalVenue": "TCSVT"
+    },
+    "doi": "10.1109/TCSVT.2026.3716416",
+    "publication_date": "2026-07-23",
+    "analysis": {
+      "problem": "严重遮挡会截断直接的纹理匹配线索；不是每块可见区域都对待估关键点有用。",
+      "method": "以多层关系挖掘连接局部证据，再用整体感知模块选择与目标关节相关的线索并约束骨架拓扑。",
+      "inputs_outputs": "图像中的局部证据作为输入，输出二维关键点；本文人体与动物数据分开评估。",
+      "contribution": "人体基准包括 COCO、MPII、CrowdPose、OCHuman；AP-10K 属动物实验。与 RRL 共有用其他区域补足局部线索的动机，但 RRL 是三维头部朝向。",
+      "limitations": "机构记录可核实在线发表和摘要；未核验正式卷页、可执行代码和实验表，故不转录具体分数。",
+      "sources": [
+        "https://doi.org/10.1109/TCSVT.2026.3716416",
+        "https://scholars.cityu.edu.hk/en/publications/abdhpe-learning-abductive-relationships-for-human-pose-estimation/",
+        "https://github.com/mezyZhao/AbdHPE",
+        "https://voidvein.github.io/Awesome-Xpose-estimation/#paper=rrl-head-pose"
+      ],
+      "evidence_level": "primary_abstract",
+      "evidence_scope": "机构出版记录、摘要和作者 README，不宣称已审阅完整图表。",
+      "verified_at": "2026-11-25"
+    },
+    "pipeline": {
+      "kind": "method",
+      "overview": "利用骨架约束下的关节与肢体关系，为遮挡图像补足局部视觉证据并估计二维人体关键点。",
+      "steps": [
+        {
+          "title": "从局部取证",
+          "description": "保留可见区域对关键点预测的线索。"
+        },
+        {
+          "title": "挖掘肢体关系",
+          "description": "利用多级关节与肢体关系联结因遮挡中断的证据。"
+        },
+        {
+          "title": "约束全局骨架",
+          "description": "结合关系与骨架拓扑感知目标关键点位置。"
+        },
+        {
+          "title": "按任务评估",
+          "description": "人体二维姿态使用四套人体数据；动物 AP-10K 是另一个实验。"
+        }
+      ],
+      "training": "摘要说明拓扑约束施加于特征空间，训练细节不从摘要反推。",
+      "inference": "用于二维关键点推断；作者项目不等于可运行实现。",
+      "figure_reading": "公开机构摘要说明关系挖掘与骨架约束两个主要模块；目前提供正文入口，不转载结构图。",
+      "figure_status": "architecture_not_located",
+      "sources": [
+        {
+          "label": "机构记录与摘要",
+          "url": "https://scholars.cityu.edu.hk/en/publications/abdhpe-learning-abductive-relationships-for-human-pose-estimation/"
+        },
+        {
+          "label": "作者项目（当前 README）",
+          "url": "https://github.com/mezyZhao/AbdHPE"
+        },
+        {
+          "label": "相关阅读 · RRL 的三维头姿",
+          "url": "https://voidvein.github.io/Awesome-Xpose-estimation/#paper=rrl-head-pose"
+        }
+      ],
+      "reviewed_at": "2026-11-25"
+    },
+    "figure": {
+      "source": "https://scholars.cityu.edu.hk/en/publications/abdhpe-learning-abductive-relationships-for-human-pose-estimation/",
+      "caption": "阅读机构摘要的多层关系和骨架拓扑约束。",
+      "note": "未核实论文图号；此链接为机构出版记录与方法摘要，不是转载架构图。"
+    }
+  },
+  {
+    "id": "worldpose",
+    "title": "WorldPose: A World Cup Dataset for Global 3D Human Pose Estimation",
+    "authors": [
+      "Tianjian Jiang",
+      "Johsan Billingham",
+      "Sebastian Müksch",
+      "Juan J. Zarate",
+      "Nicolas Evans",
+      "Martin R. Oswald",
+      "Marc Pollefeys",
+      "Otmar Hilliges",
+      "Manuel Kaufmann",
+      "Jie Song"
+    ],
+    "year": 2024,
+    "category": "Human",
+    "dimensions": [
+      "3D"
+    ],
+    "venue": "ECCV",
+    "status": "Published",
+    "url": "https://www.ecva.net/papers/eccv_2024/papers_ECCV/html/2927_ECCV_2024_paper.php",
+    "summary": "利用世界杯的固定多视角构建球员三维参考，再校准移动转播相机，评测单目多人全局姿态与轨迹。",
+    "tags": [
+      "global pose",
+      "multi-person",
+      "SMPL",
+      "sports",
+      "camera motion",
+      "benchmark",
+      "dataset"
+    ],
+    "ccf": {
+      "tier": "B",
+      "source": "https://www.ccf.org.cn/Academic_Evaluation/AI/",
+      "version": "CCF 第七版",
+      "canonicalVenue": "ECCV"
+    },
+    "doi": "10.1007/978-3-031-72655-2_20",
+    "analysis": {
+      "problem": "移动转播镜头与球员都在运动；局部每帧骨架正确，并不意味着多人轨迹在同一球场坐标系内正确。",
+      "method": "固定多视角三角化、关联并拟合 SMPL，再把球员轨迹与场地标线用于移动转播相机校准。",
+      "inputs_outputs": "参考来自固定多视角，评测输入为单目转播视频。发布说明涵盖拟合姿态与相机参数；视频授权独立。",
+      "contribution": "第 3 表 SLAHMR 改用参考相机后，共享对齐的 G-MPJPE 8,334.1→5,837.2 mm、漂移 17.6→10.7 cm/m，但逐帧 PA-MPJPE 163.9→199.6 mm。两种对齐关注不同误差。",
+      "limitations": "88 是片段数；超过 250 万为拟合的人体姿态，不是视频帧数。独立 Vicon 试验不代表世界杯每帧的真值精度。",
+      "sources": [
+        "https://www.ecva.net/papers/eccv_2024/papers_ECCV/html/2927_ECCV_2024_paper.php",
+        "https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/02927.pdf",
+        "https://eth-ait.github.io/WorldPoseDataset/#download",
+        "https://voidvein.github.io/Awesome-Xpose-Datasets/#dataset=worldpose",
+        "https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/02927.pdf#page=6",
+        "https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/02927.pdf#page=13"
+      ],
+      "evidence_level": "primary_abstract_and_targeted_fulltext",
+      "evidence_scope": "正式 ECCV 正文、参考误差、基准表和访问说明；未申请数据。",
+      "verified_at": "2026-11-25"
+    },
+    "pipeline": {
+      "kind": "method",
+      "overview": "利用世界杯的固定多视角构建球员三维参考，再校准移动转播相机，评测单目多人全局姿态与轨迹。",
+      "steps": [
+        {
+          "title": "固定机位建参考",
+          "description": "校准后重建关节、跟踪多个球员并拟合身体网格。"
+        },
+        {
+          "title": "转播相机标定",
+          "description": "用拟合人体轨迹与球场标记估计移动相机。"
+        },
+        {
+          "title": "单目基准",
+          "description": "比较全局共用对齐、逐人轨迹对齐与逐帧局部姿态。"
+        },
+        {
+          "title": "分开参考验证",
+          "description": "用范围较小的 Vicon 试验检查多视角拟合误差，不与世界杯基准汇总。"
+        }
+      ],
+      "training": "这是一套数据构建及评测流程，不把 Vicon 试验描述成整套训练捕捉。",
+      "inference": "基准方法读取转播；参考相机的消融是额外输入，非默认配置。",
+      "figure_reading": "图 3 把构建参考与转播机位标定分开，说明两个输入分支为何用途不同。",
+      "figure_status": "original_link_only",
+      "sources": [
+        {
+          "label": "图 3 · 采集与拟合",
+          "url": "https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/02927.pdf#page=6"
+        },
+        {
+          "label": "表 3 · 全局基准",
+          "url": "https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/02927.pdf#page=13"
+        },
+        {
+          "label": "官方项目与申请",
+          "url": "https://eth-ait.github.io/WorldPoseDataset/#download"
+        },
+        {
+          "label": "配套数据集",
+          "url": "https://voidvein.github.io/Awesome-Xpose-Datasets/#dataset=worldpose"
+        }
+      ],
+      "reviewed_at": "2026-11-25"
+    },
+    "figure": {
+      "source": "https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/02927.pdf#page=6",
+      "figure_number": "Figure 3",
+      "version": "ECCV 2024",
+      "caption": "图 3 把构建参考与转播机位标定分开，说明两个输入分支为何用途不同。",
+      "note": "保留原文图源链接；未将原图、示例影像或第三方素材重新发布。"
+    }
   }
 ]

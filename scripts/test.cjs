@@ -145,6 +145,11 @@ assert.equal(paperPipeline({pipeline:{steps:[{title:'one',description:'text'},{t
 const pipelinePapers=papers.filter(p=>p.pipeline);
 const verifiedAuthorPdf=/^https:\/\/(?:faculty\.cc\.gatech\.edu\/~hic\/CS7616\/Papers\/Yang-Ramanan-2013|www\.cs\.toronto\.edu\/~fleet\/research\/Papers\/handTrackerPAMI|www\.ece\.ualberta\.ca\/~lcheng5\/papers\/XuEtAl_IJCV16|collomosse\.com\/pubs\/Gilbert-IJCV-2019|vision\.imar\.ro\/human3\.6m\/pami-h36m|www\.microsoft\.com\/en-us\/research\/wp-content\/uploads\/2016\/(?:02\/BodyPartRecognition|04\/iccv_2015_camready))\.pdf#page=\d+$/;
 const publisherPreviews=new Map([
+ ["horcrux",new Set(["https://shpark97.github.io/horcrux/"])],
+ ["cadence-whole-body",new Set(["https://github.com/keniel123/cadence#license"])],
+ ["bboxmaskpose-v2",new Set(["https://mirapurkrabek.github.io/BBox-Mask-Pose/static/pdfs/IJCV26-BBoxMaskPose-v2.pdf#page=5", "https://mirapurkrabek.github.io/BBox-Mask-Pose/static/pdfs/IJCV26-BBoxMaskPose-v2.pdf#page=15", "https://huggingface.co/datasets/vrg-prague/OCHuman-Pose"])],
+ ["abdhpe",new Set(["https://scholars.cityu.edu.hk/en/publications/abdhpe-learning-abductive-relationships-for-human-pose-estimation/", "https://github.com/mezyZhao/AbdHPE", "https://voidvein.github.io/Awesome-Xpose-estimation/#paper=rrl-head-pose"])],
+ ["worldpose",new Set(["https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/02927.pdf#page=6", "https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/02927.pdf#page=13", "https://eth-ait.github.io/WorldPoseDataset/#download", "https://voidvein.github.io/Awesome-Xpose-Datasets/#dataset=worldpose"])],
  ['hland-pose',new Set(['https://www.sciencedirect.com/science/article/abs/pii/S0925231225010082','https://doi.org/10.1016/j.neucom.2025.130336'])],
  ['hand-survey-cameras-2019',new Set(['https://www.sciencedirect.com/science/article/abs/pii/S0031320319301724','https://doi.org/10.1016/j.patcog.2019.04.026'])],
  ['rrl-head-pose',new Set(['https://www.sciencedirect.com/science/article/pii/S0020025526009643','https://doi.org/10.1016/j.ins.2026.124033'])],
@@ -196,3 +201,17 @@ for(const entry of progress.entries){
  if(entry.status==='pending')assert.ok(!p.pipeline);
 }
 console.log('PASS: full catalogue queue matches actual pipeline and original-figure completion; pending pages are never counted as complete.');
+
+const fresh = Object.fromEntries(papers.map(p=>[p.id,p]));
+for (const id of ['horcrux','cadence-whole-body']) {
+ assert.equal(fresh[id].status,'Preprint'); assert.equal(ccfTier(fresh[id]),'');
+}
+assert.equal(ccfTier(fresh['bboxmaskpose-v2']),'A');
+assert.equal(ccfTier(fresh.abdhpe),'B');
+assert.equal(ccfTier(fresh.worldpose),'B');
+assert.equal(fresh.worldpose.year,2024);
+const nov26Home=fs.readFileSync(path.join(__dirname,root,'index.html'),'utf8');
+for (const id of ['horcrux','cadence-whole-body','bboxmaskpose-v2','abdhpe','worldpose']) {
+ assert.ok(nov26Home.includes('href="#paper='+id+'"'));
+ assert.ok(markdown.includes('#paper='+id));
+}

@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-11-25",
-  "total": 394,
+  "updated_at": "2026-11-26",
+  "total": 399,
   "counts": {
     "complete": 67,
-    "figure_pending": 327,
+    "figure_pending": 332,
     "pending": 0
   },
   "completion_standard": "Source-checked module-level pipeline or survey classification, separate use contexts, and a figure guide. Embed paper originals when reuse permission is clear, otherwise link to the original figure or method section. Summaries alone do not count.",
@@ -4341,6 +4341,61 @@
       "figure_status": "original_link_only",
       "reviewed_at": "2026-11-24",
       "figure_note": "正式论文标注 CC BY 4.0；图中身份或示例素材未单独做再发布审图，保留出版方图源锚点。"
+    },
+    {
+      "id": "horcrux",
+      "category": "Hand",
+      "title": "Generalizable Feed-Forward 3D Hand-Object Reconstruction with Coarse-to-Fine Contact Estimation",
+      "status": "figure_pending",
+      "paper_url": "https://arxiv.org/abs/2611.31812v1",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-25",
+      "figure_note": "保留原文图源链接；未将原图、示例影像或第三方素材重新发布。"
+    },
+    {
+      "id": "cadence-whole-body",
+      "category": "Human",
+      "title": "CADENCE: Temporally Coherent Whole-Body Human Mesh Recovery that Preserves Expressive Hand Motion",
+      "status": "figure_pending",
+      "paper_url": "https://arxiv.org/abs/2611.26783v1",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-25",
+      "figure_note": "保留原文图源链接；未将原图、示例影像或第三方素材重新发布。"
+    },
+    {
+      "id": "bboxmaskpose-v2",
+      "category": "Human",
+      "title": "BBoxMaskPose v2: Expanding Mutual Conditioning to 3D",
+      "status": "figure_pending",
+      "paper_url": "https://doi.org/10.1007/s11263-026-03113-6",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-25",
+      "figure_note": "保留原文图源链接；未将原图、示例影像或第三方素材重新发布。"
+    },
+    {
+      "id": "abdhpe",
+      "category": "Human",
+      "title": "AbdHPE: Learning Abductive Relationships for Human Pose Estimation via Syntactic Holistic Perception",
+      "status": "figure_pending",
+      "paper_url": "https://doi.org/10.1109/TCSVT.2026.3716416",
+      "reading_level": "primary_abstract",
+      "figure_status": "architecture_not_located",
+      "reviewed_at": "2026-11-25",
+      "figure_note": "未核实论文图号；此链接为机构出版记录与方法摘要，不是转载架构图。"
+    },
+    {
+      "id": "worldpose",
+      "category": "Human",
+      "title": "WorldPose: A World Cup Dataset for Global 3D Human Pose Estimation",
+      "status": "figure_pending",
+      "paper_url": "https://www.ecva.net/papers/eccv_2024/papers_ECCV/html/2927_ECCV_2024_paper.php",
+      "reading_level": "primary_abstract_and_targeted_fulltext",
+      "figure_status": "original_link_only",
+      "reviewed_at": "2026-11-25",
+      "figure_note": "保留原文图源链接；未将原图、示例影像或第三方素材重新发布。"
     }
   ]
 }

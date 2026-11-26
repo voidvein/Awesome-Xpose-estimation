@@ -1,6 +1,6 @@
 # 详情页构建进度
 
-更新于 2026-11-25。共 394 篇，已展开 394 篇，其中 67 篇嵌入原图。待展开 0 篇。
+更新于 2026-11-26。共 399 篇，已展开 399 篇，其中 67 篇嵌入原图。待展开 0 篇。
 
 方法页按原文说明数据流、模块、训练与推理。数据集和综述分别说明采集与评测或分类与比较。原图按许可收录，未确认许可的保留原图链接。论文无独立结构图时，链接至对应的算法或方法正文。已在各页注明可核对的原文范围。
 
@@ -405,3 +405,8 @@
 - [StableHand: Quality-Aware Flow Matching for World-Space Dual-Hand Motion Estimation from Egocentric Video](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=stablehand)
 - [HaNDF: Object-Conditioned Geometric Neural Hand Distance Fields](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=handf)
 - [Mitigating Data Imbalance in Head Pose Estimation Through Diffusion Model Generated Synthetic Data with Pose Reference](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-pose-diffusion-augmentation-herjuno)
+- [Generalizable Feed-Forward 3D Hand-Object Reconstruction with Coarse-to-Fine Contact Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=horcrux)
+- [CADENCE: Temporally Coherent Whole-Body Human Mesh Recovery that Preserves Expressive Hand Motion](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=cadence-whole-body)
+- [BBoxMaskPose v2: Expanding Mutual Conditioning to 3D](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=bboxmaskpose-v2)
+- [AbdHPE: Learning Abductive Relationships for Human Pose Estimation via Syntactic Holistic Perception](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=abdhpe)
+- [WorldPose: A World Cup Dataset for Global 3D Human Pose Estimation](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=worldpose)

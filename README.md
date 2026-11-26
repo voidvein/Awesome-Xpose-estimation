@@ -4,7 +4,11 @@ A curated, non-exhaustive index of 2D and 3D head, hand and human pose estimatio
 
 [Browse the site](https://voidvein.github.io/Awesome-Xpose-estimation/) · [Sources and curation notes](SOURCES.md) · [Detail-page progress](CURATION.md)
 
-## 最近更新 · 2026-11-25（UTC+8）
+## 最近更新 · 2026-11-26（UTC+8）
+
+- **新增 5 篇：** [BBoxMaskPose v2](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=bboxmaskpose-v2) · [AbdHPE](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=abdhpe) · [HORCRUX](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=horcrux) · [CADENCE](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=cadence-whole-body) · [WorldPose](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=worldpose)。当前共 399 篇。HORCRUX 与 CADENCE 是预印本；WorldPose 是 ECCV 历史补录。
+
+### 2026-11-25
 
 - **新增 3 篇：** [StableHand](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=stablehand) · [HaNDF](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=handf) · [Herjuno–Horio 头姿增强](https://voidvein.github.io/Awesome-Xpose-estimation/#paper=head-pose-diffusion-augmentation-herjuno)。当前共 394 篇。StableHand 与 HaNDF 标注为已接收，正式论文集版本尚未核实。
 
@@ -158,6 +162,8 @@ Serve the repository root with `python -m http.server 8000`.
 
 ### Hand
 
+- **[Generalizable Feed-Forward 3D Hand-Object Reconstruction with Coarse-to-Fine Contact Estimation](https://arxiv.org/abs/2611.31812v1)** — arXiv 2026 · Preprint · 3D. HORCRUX 用物体网格与手部图像特征联合估计三维姿态，再用重建几何将接触细化到手表面区域。
+
 - [code](https://github.com/circle-group/HaNDF) **[HaNDF: Object-Conditioned Geometric Neural Hand Distance Fields](https://arxiv.org/html/2611.08578v1)** · NeurIPS 2026 已接收 · 3D。HaNDF 学习物体条件下的手部关节旋转先验，可接在单图手物重建器之后，修正不合理的关节姿态，也可补全缺失关节。
 
 - [code](https://github.com/huajian-zeng/stablehand) **[StableHand: Quality-Aware Flow Matching for World-Space Dual-Hand Motion Estimation from Egocentric Video](https://arxiv.org/html/2605.18553v2)** · NeurIPS 2026 已接收 · 3D。StableHand 从第一视角视频重建左右手在世界坐标中的三维运动。它分别估计双手腕部位置与手指姿态的可靠性，保留可信观测，再用双手运动先验补全遮挡或出画片段。
@@ -302,6 +308,11 @@ Serve the repository root with `python -m http.server 8000`.
 - **[Model-Based 3D Hand Pose Estimation from Monocular Video](https://doi.org/10.1109/TPAMI.2011.33)** — TPAMI 2011 · Published · 3D. 展示利用明暗和时序纹理连续性进行生成式手跟踪的路径，强调遮挡边界项的重要性。
 
 ### Human
+
+- [code](https://github.com/keniel123/cadence) **[CADENCE: Temporally Coherent Whole-Body Human Mesh Recovery that Preserves Expressive Hand Motion](https://arxiv.org/abs/2611.26783v1)** — arXiv 2026 · Preprint · 3D. CADENCE 在整身网格恢复中使用高分辨率手部特征，再按关节与帧学习时序滤波，减少抖动并尽量保留快速手势。
+- [code](https://github.com/MiraPurkrabek/BBoxMaskPose) **[BBoxMaskPose v2: Expanding Mutual Conditioning to 3D](https://doi.org/10.1007/s11263-026-03113-6)** — IJCV 2026 · Published · 2D. 通过人体检测、二维关键点和实例掩码的迭代互相提示，拆分拥挤场景中的遮挡人物，并把掩码传给下游三维模型。
+- **[AbdHPE: Learning Abductive Relationships for Human Pose Estimation via Syntactic Holistic Perception](https://doi.org/10.1109/TCSVT.2026.3716416)** — TCSVT 2026 · Published · 2D. 利用骨架约束下的关节与肢体关系，为遮挡图像补足局部视觉证据并估计二维人体关键点。
+- **[WorldPose: A World Cup Dataset for Global 3D Human Pose Estimation](https://www.ecva.net/papers/eccv_2024/papers_ECCV/html/2927_ECCV_2024_paper.php)** — ECCV 2024 · Published · 3D. 利用世界杯的固定多视角构建球员三维参考，再校准移动转播相机，评测单目多人全局姿态与轨迹。
 
 - [code](https://github.com/mks0601/Hand4Whole-plus-plus_RELEASE) **[Enhancing Hands in 3D Whole-Body Pose Estimation with Conditional Hands Modulator](https://openaccess.thecvf.com/content/CVPR2026/html/Moon_Enhancing_Hands_in_3D_Whole-Body_Pose_Estimation_with_Conditional_Hands_CVPR_2026_paper.html)** — CVPR 2026 · Published · 3D. Hand4Whole++ 用手部模型的特征修正全身模型的腕部姿态，再将精细手指关节与手形接回三维全身网格。
 - **[Reconstructing Occluded Joints in 3D Human Pose Sequences: A Real-Occlusion Benchmark and an Interpolation-Initialised Spatio-Temporal Transformer](https://www.mdpi.com/1424-8220/26/22/7283)** — Sensors 2026 · Published · 3D. OA-Skeleton ST 用双向时空窗口和插值残差填补三维骨架中已知缺失的关节；可见关节原样保留，并对照参考三维输入与单目估计输入。
